@@ -1,0 +1,22 @@
+---
+galaxy_info:
+  role_name: androidstudio
+  name: Android Studio
+  author: ProfessorManhattan
+  description: Ansible role that installs Android Studio on nearly any OS
+  company: Megabyte Labs
+  license: license (MIT)
+
+  min_ansible_version: 2.10
+
+  platforms:
+    - name: Ubuntu
+      versions:
+        - focal
+
+  galaxy_tags:
+    - android
+    - androidstudio
+    - ide
+    - desktop
+    - google
