@@ -12,7 +12,6 @@
     "postinstall": "husky install && bash .update.sh",
     "lint": "run-s lint:*",
     "lint:prettier": "prettier \"{**/*.yml,files/*.sh}\" --list-different",
-    "lint:spelling": "cspell \"{README.md,CONTRIBUTING.md,CHANGELOG.md,.github/*.md,.gitlab/*.md,blueprint.json,**/*.yml}\"",
     "prepare-release": "run-s update lint test version",
     "test": "molecule test",
     "test:archlinux": "molecule converge -s archlinux-desktop",
