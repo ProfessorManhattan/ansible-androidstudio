@@ -10,7 +10,7 @@ echo "Validating Python files.."
 check-ast
 echo "Checking for Python files that do not use literal syntax when initializing empty or zero Python builtin types.."
 check-builtin-literals
-echo "Checking for file names that could possibly cause issues on case-insensitive filesystems.."
+echo "Checking for file names that could possibly cause issues on case-insensitive file systems.."
 check-case-conflict
 echo "Checking for files that place the docstring after code.."
 check-docstring-first
@@ -40,3 +40,6 @@ echo "Linting Python files with black"
 black .
 echo "Running 'npm run lint'"
 npm run lint
+echo "Checking for spelling errors"
+files=$(git diff --cached --name-only)
+exec npx cspell -- --no-summary $files
