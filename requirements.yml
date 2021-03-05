@@ -1,6 +1,5 @@
 ---
 roles:
-  - name: professormanhattan.java
   - name: professormanhattan.snapd
 
 collections:

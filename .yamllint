@@ -3,8 +3,10 @@ ignore: |
   venv
   .github/
   .gitlab/
+  .modules/
   .tox
   .travis.yml
+  node_modules/
 
 extends: default
 
