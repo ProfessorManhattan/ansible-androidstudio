@@ -45,7 +45,7 @@
     "standard-version": "^9.0.0"
   },
   "lint-staged": {
-    "{**/*.yml,*.json,!package.json}": [
+    "{**/*.yml,*.json}": [
       "prettier --write"
     ],
     "files/*.sh": [
