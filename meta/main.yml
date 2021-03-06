@@ -1,9 +1,8 @@
 ---
 galaxy_info:
   role_name: androidstudio
-  name: Android Studio
   author: ProfessorManhattan
-  description: Ansible role that installs Android Studio on nearly any OS
+  description: Installs Android Studio on nearly any OS
   company: Megabyte Labs
   license: license (MIT)
 
@@ -19,6 +18,11 @@ galaxy_info:
     - androidstudio
     - ide
     - desktop
+    - java
     - google
+    - apps
+    - development
 
-dependencies: []
+dependencies:
+  - name: professormanhattan.snapd
+    when: ansible_system == 'Linux'
