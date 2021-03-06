@@ -58,7 +58,7 @@
   },
   "prettier": "@megabytelabs/prettier-config",
   "scripts-info": {
-    "commit": "The preferred way of running git commit (instead of git commit, we prefer running 'npm run commit' in the repository's root directory)",
+    "commit": "IMPORTANT: Whenever committing code run 'git-cz' or 'npm run commit'",
     "fix": "Automatically fix formatting errors",
     "info": "Displays descriptions of all the npm tasks",
     "lint": "Report linting errors",
