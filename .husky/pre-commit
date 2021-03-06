@@ -42,4 +42,4 @@ echo "Running 'npm run lint'"
 npm run lint
 echo "Checking for spelling errors"
 files=$(git diff --cached --name-only)
-npx cspell -- --no-summary --config ./.modules/shared/.cspell.json $files || echo "Review the list of possible misspelled words above and correct anything that needs changing."
+npx cspell --no-summary --config ./.modules/shared/.cspell.json $files || echo "Review the list of possible misspelled words above and correct anything that needs changing."
