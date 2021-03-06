@@ -310,7 +310,7 @@ autokey_dependencies:
 
 ### Dependency Variables
 
-In most cases, a role will require that software package dependencies are met before installing the software the role is intended for. These dependencies are usually an array of packages that need to be installed. These dependencies should be seperated out into an array.
+In most cases, a role will require that software package dependencies are met before installing the software the role is intended for. These dependencies are usually an array of packages that need to be installed. These dependencies should be separated out into an array.
 
 For example, say the application being installed is Android Studio. The dependency array should be assigned to a variable titled `androidstudio_dependencies` and placed in `vars/main.yml`.
 
@@ -344,7 +344,7 @@ If there are dependencies that are specific to a certain OS, then the dependency
 
 ### DRY
 
-DRY stands for "Don't Repeat Yourself." Whenever there is code that is duplicated across multiple task files, you should seperate it into a different file and then include it:
+DRY stands for "Don't Repeat Yourself." Whenever there is code that is duplicated across multiple task files, you should separate it into a different file and then include it:
 
 **GOOD**
 
@@ -365,7 +365,7 @@ You can test all of the operating systems we support by running the following co
 molecule test
 ```
 
-The command `molecule test` will spin up VirtualBox VMs for all the OSes we support and run the role(s). *Do this before committing code.* If you are committing code for only one OS and can not create the fix/feature for the other operating systems then please [file a seperate issue](https://gitlab.com/ProfessorManhattan/Playbooks/-/issues/new) to track the unworking OSes.
+The command `molecule test` will spin up VirtualBox VMs for all the OSes we support and run the role(s). *Do this before committing code.* If you are committing code for only one OS and can not create the fix or feature for the other operating systems then please [file an issue](https://gitlab.com/ProfessorManhattan/Playbooks/-/issues/new) so someone else can pick it up.
 
 ### Idempotence
 
