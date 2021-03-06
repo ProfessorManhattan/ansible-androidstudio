@@ -4,4 +4,4 @@
   vars:
     ansible_user: vagrant
   roles:
-    - role: androidstudio
+    - role: professormanhattan.androidstudio
