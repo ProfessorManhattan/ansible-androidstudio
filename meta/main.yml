@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   role_name: androidstudio
-  author: ProfessorManhattan
+  author: professormanhattan
   description: Installs Android Studio on nearly any OS
   company: Megabyte Labs
   license: license (MIT)
