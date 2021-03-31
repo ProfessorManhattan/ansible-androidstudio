@@ -1,11 +1,13 @@
 ---
 ignore: |
   venv
+  .cache/
   .github/
   .gitlab/
   .modules/
   .tox
   .travis.yml
+  environments/prod/
   node_modules/
 
 extends: default
