@@ -1,4 +1,4 @@
-<h1 align="center" style="text-align:center;">Contributor Covenant Code of Conduct</h1>
+<h1>Contributor Covenant Code of Conduct</h1>
 
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#our-pledge)

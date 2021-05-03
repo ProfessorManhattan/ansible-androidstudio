@@ -1,19 +1,20 @@
-<!-- ⚠️ This README has been generated from the file(s) "./.modules/docs/blueprint-readme.md" ⚠️--><h1 align="center" style="text-align:center;">Ansible Role: Android Studio</h1>
+<!-- ⚠️ This README has been generated from the file(s) "./.modules/docs/blueprint-readme.md" ⚠️-->
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#ansible-role--role_pretty_name-)
 
-<div align="center">
-  <h4>
-    <a href="https://gitlab.com/ProfessorManhattan/Playbooks">Main Playbook</a>
-    <span> | </span>
-    <a href="https://galaxy.ansible.com/professormanhattan/androidstudio">Galaxy</a>
-    <span> | </span>
-    <a href="https://gitlab.com/megabyte-space/ansible-roles/androidstudio/-/blob/master/CONTRIBUTING.md">Contributing</a>
-    <span> | </span>
-    <a href="https://app.slack.com/client/T01ABCG4NK1/C01NN74H0LW/details/">Chat</a>
-    <span> | </span>
-    <a href="https://megabyte.space">Website</a>
-  </h4>
-</div>
-<p style="text-align:center;">
+# ➤ Ansible Role: Android Studio
+
+<h4>
+  <a href="https://gitlab.com/ProfessorManhattan/Playbooks">Main Playbook</a>
+  <span> | </span>
+  <a href="https://galaxy.ansible.com/professormanhattan/androidstudio">Galaxy</a>
+  <span> | </span>
+  <a href="https://gitlab.com/megabyte-space/ansible-roles/androidstudio/-/blob/master/CONTRIBUTING.md">Contributing</a>
+  <span> | </span>
+  <a href="https://app.slack.com/client/T01ABCG4NK1/C01NN74H0LW/details/">Chat</a>
+  <span> | </span>
+  <a href="https://megabyte.space">Website</a>
+</h4>
+<p>
   <a href="https://gitlab.com/megabyte-space/ansible-roles/androidstudio">
     <img alt="Version" src="https://img.shields.io/badge/version-0.0.1-blue.svg?cacheSeconds=2592000" />
   </a>
@@ -26,24 +27,32 @@
   <a href="https://twitter.com/PrfssrManhattan" target="_blank">
     <img alt="Twitter: PrfssrManhattan" src="https://img.shields.io/twitter/follow/PrfssrManhattan.svg?style=social" />
   </a>
+  <a href="">
+    <img alt="macOS build status" src="https://img.shields.io/github/checks-status/MegabyteLabs/github_link/master?color=cyan&label=macOS%20Build%20Status&logo=apple&style=for-the-badge">
+  </a>
+  <a href="">
+    <img alt="Windows 10 build status" src="https://img.shields.io/github/checks-status/MegabyteLabs/github_link/master?color=cyan&label=Windows%20Build%20Status&logo=windows&style=for-the-badge">
+  </a>
+  <a href="">
+    <img alt="Linux build status" src="https://img.shields.io/github/checks-status/MegabyteLabs/github_link/master?color=cyan&label=Windows%20Build%20Status&logo=windows&style=for-the-badge">
+  </a>
 </p>
 
-<p align="center" style="text-align:center;">
-  <b>An Ansible role that installs Android Studio on nearly any OS</b></br>
-</p>
+> </br>**An Ansible role that installs Android Studio on nearly any OS**</br></br>
 
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#table-of-contents)
 
 ## ➤ Table of Contents
 
-* [➤ Overview](#-overview)
-* [➤ Supported Operating Systems](#-supported-operating-systems)
-* [➤ Dependencies](#-dependencies)
-	* [Galaxy Roles](#galaxy-roles)
-* [➤ Example Playbook](#-example-playbook)
-* [➤ Contributing](#-contributing)
-* [➤ License](#-license)
+* [➤ Ansible Role: Android Studio](#ansible-role-android-studio)
+	* [➤ Overview](#overview)
+	* [➤ Supported Operating Systems](#supported-operating-systems)
+	* [➤ Dependencies](#dependencies)
+		* [Galaxy Roles](#galaxy-roles)
+	* [➤ Example Playbook](#example-playbook)
+	* [➤ Contributing](#contributing)
+	* [➤ License](#license)
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#overview)
 
@@ -56,7 +65,7 @@ This repository contains an Ansible role that will install Android Studio on nea
 
 ## ➤ Supported Operating Systems
 
-The following chart shows the operating systems that have been tested for compatibility. This chart is automatically generated using the Ansible Molecule tests you can view in the `molecule/default/` folder. We currently have logic in place to automatically handle the testing of Archlinux, CentOS, Debian, Fedora, Ubuntu, and Windows. If your operating system is not listed but is a variant of one of the systems we test then it might still work.
+The following chart shows the operating systems that have been tested for compatibility using the `environments/dev/` environment. This chart is automatically generated using the Ansible Molecule tests you can view in the `molecule/default/` folder. We currently have logic in place to automatically handle the testing of Windows, Mac OS X, Ubuntu, Fedora, CentOS, Debian, and Archlinux. If your operating system is not listed but is a variant of one of the systems we test (i.e. a Debian-flavored system or a RedHat-flavored system) then it might still work.
 
 
 | OS Family | OS Version | Status | Idempotent |
@@ -70,9 +79,10 @@ The following chart shows the operating systems that have been tested for compat
 
 ## ➤ Dependencies
 
-Most of our roles rely on [Ansible Galaxy](https://galaxy.ansible.com/) collections. Some of our projects are also dependent on other roles and collections that are published on Ansible Galaxy. Before you run this role, you will need to install the collection and role dependencies by running:
+Most of our roles rely on [Ansible Galaxy](https://galaxy.ansible.com/) collections. Some of our projects are also dependent on other roles and collections that are published on Ansible Galaxy. Before you run this role, you will need to install the collection and role dependencies (as well as the Python requirements) by running:
 
 ```
+pip3 install -r requirements.txt
 ansible-galaxy install -r requirements.yml
 ```
 
