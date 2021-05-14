@@ -36,6 +36,10 @@ requirements-txt-fixer requirements.txt
 log "Running 'npm run lint'"
 npm run lint
 log "Checking for spelling errors"
-files=$(git diff --cached --name-only)
-npx cspell --no-summary --config ./.modules/shared/.cspell.json $files || warn "Possible spelling errors were found. Review the list of possible misspelled words above and correct anything that needs changing."
+FILES=$(git diff --cached --name-only)
+if [ "$FILES" ]; then
+  npx cspell --no-summary --config ./.modules/shared/.cspell.json $FILES || warn "Possible spelling errors were found. Review the list of possible misspelled words above and correct anything that needs changing."
+else
+  info "No files staged for spell checking"
+fi
 success "Successfully passed all validation checks"

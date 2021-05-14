@@ -23,6 +23,4 @@ galaxy_info:
     - apps
     - development
 
-dependencies:
-  - name: professormanhattan.snapd
-    when: ansible_system == 'Linux'
+dependencies: []

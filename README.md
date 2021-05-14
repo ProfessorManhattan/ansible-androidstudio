@@ -1,4 +1,5 @@
 <!-- ⚠️ This README has been generated from the file(s) "./.modules/docs/blueprint-readme.md" ⚠️-->
+
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#ansible-role--role_pretty_name-)
 
 # ➤ Ansible Role: Android Studio
@@ -40,19 +41,20 @@
 
 > </br>**An Ansible role that installs Android Studio on nearly any OS**</br></br>
 
+![terminalizer_title](https://gitlab.com/megabyte-space/ansible-roles/androidstudio/-/raw/master/.demo.gif)
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#table-of-contents)
 
 ## ➤ Table of Contents
 
-* [➤ Ansible Role: Android Studio](#ansible-role-android-studio)
-	* [➤ Overview](#overview)
-	* [➤ Supported Operating Systems](#supported-operating-systems)
-	* [➤ Dependencies](#dependencies)
-		* [Galaxy Roles](#galaxy-roles)
-	* [➤ Example Playbook](#example-playbook)
-	* [➤ Contributing](#contributing)
-	* [➤ License](#license)
+- [➤ Ansible Role: Android Studio](#-ansible-role-android-studio)
+  - [➤ Overview](#-overview)
+  - [➤ Supported Operating Systems](#-supported-operating-systems)
+  - [➤ Dependencies](#-dependencies)
+    - [Galaxy Roles](#galaxy-roles)
+  - [➤ Example Playbook](#-example-playbook)
+  - [➤ Contributing](#-contributing)
+  - [➤ License](#-license)
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#overview)
 
@@ -60,20 +62,16 @@
 
 This repository contains an Ansible role that will install Android Studio on nearly any OS. Android Studio is the official integrated development environment for Google's Android operating system, built on JetBrains' IntelliJ IDEA software and designed specifically for Android development.
 
-
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#supported-operating-systems)
 
 ## ➤ Supported Operating Systems
 
 The following chart shows the operating systems that have been tested for compatibility using the `environments/dev/` environment. This chart is automatically generated using the Ansible Molecule tests you can view in the `molecule/default/` folder. We currently have logic in place to automatically handle the testing of Windows, Mac OS X, Ubuntu, Fedora, CentOS, Debian, and Archlinux. If your operating system is not listed but is a variant of one of the systems we test (i.e. a Debian-flavored system or a RedHat-flavored system) then it might still work.
 
-
 | OS Family | OS Version | Status | Idempotent |
-|-----------|------------|--------|------------|
-| Fedora    | 33         | ❌      | ❌          |
-| Ubuntu    | focal      | ✅      | ❌          |
-
-
+| --------- | ---------- | ------ | ---------- |
+| Fedora    | 33         | ❌     | ❌         |
+| Ubuntu    | focal      | ✅     | ❌         |
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#dependencies)
 
@@ -90,14 +88,10 @@ ansible-galaxy install -r requirements.yml
 
 At the beginning of the play, the galaxy role dependencies listed in `meta/main.yml` will run. These dependencies are configured to only run once per playbook. If you include more than one of our roles in your playbook that have dependencies in common then the dependency installation will be skipped after the first run. Some of our roles also utilize helper roles which help keep our [main playbook](https://gitlab.com/ProfessorManhattan/Playbooks) DRY. A full list of the dependencies along with quick descriptions is below:
 
- 
-| Role Dependency                                  | Description                                |
-|--------------------------------------------------|--------------------------------------------|
+| Role Dependency                                          | Description                                |
+| -------------------------------------------------------- | ------------------------------------------ |
 | <a href='https://google.com'>professormanhattan.java</a> | Installs Java on nearly any OS             |
-| <a href='https://bing.com'>professormanhattan.snapd</a> | Ensures Snap is installed on Linux systems |
-
-
-
+| <a href='https://bing.com'>professormanhattan.snapd</a>  | Ensures Snap is installed on Linux systems |
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#example-playbook)
 
@@ -110,7 +104,6 @@ With the dependencies installed, all you have to do is add the role to your main
   roles:
     - professormanhattan.androidstudio
 ```
-
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#contributing)
 
@@ -126,7 +119,8 @@ Contributions, issues, and feature requests are welcome! Feel free to check the 
 I create open source projects out of love. Although I have a job, shelter, and as much fast food as I can handle, it would still be pretty cool to be appreciated by the community for something I have spent a lot of time and money on. Please consider sponsoring me! Who knows? Maybe I will be able to quit my job and publish open source full time.
 <br/><br/>Sincerely,<br/><br/>
 
-***Brian Zalewski***<br/><br/>
+**_Brian Zalewski_**<br/><br/>
+
 </blockquote>
 
 <a href="profile.patreon">
@@ -135,10 +129,8 @@ I create open source projects out of love. Although I have a job, shelter, and a
 
 </details>
 
-
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#license)
 
 ## ➤ License
 
 Copyright © 2021 [Megabyte LLC](https://megabyte.space). This project is [MIT](repository.gitlab_ansible_roles_group/androidstudio/-/raw/master/LICENSE) licensed.
-
