@@ -385,7 +385,7 @@ Each variable in `defaults/main.yml` should be added and documented using the fo
 ```yaml
 # @var variable_name: default_value
 # The description of the variable which should be no longer than 160 characters per line.
-# You can seperate the description into new lines so you do not pass the 160 character
+# You can separate the description into new lines so you do not pass the 160 character
 # limit
 variable_name: default_value
 ```
@@ -395,7 +395,7 @@ There are cases where you may want include an example or you can not fit the def
 ```yaml
 # @var variable_name: []
 # The description of the variable which should be no longer than 160 characters per line.
-# You can seperate the description into new lines so you do not pass the 160 character
+# You can separate the description into new lines so you do not pass the 160 character
 # limit
 variable_name: []
 # @example #
@@ -406,7 +406,7 @@ variable_name: []
 # @end
 ```
 
-Each variable/comment block in `defaults/main.yml` should be seperated by a line return. You can see an example of a `defaults/main.yml` file using this special [variable syntax in the Docker role](https://gitlab.com/ProfessorManhattan/Playbooks/-/blob/master/roles/virtualization/docker/defaults/main.yml).
+Each variable/comment block in `defaults/main.yml` should be separated by a line return. You can see an example of a `defaults/main.yml` file using this special [variable syntax in the Docker role](https://gitlab.com/ProfessorManhattan/Playbooks/-/blob/master/roles/virtualization/docker/defaults/main.yml).
 
 ### Action Comments
 
