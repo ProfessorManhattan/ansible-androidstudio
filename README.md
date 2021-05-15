@@ -26,7 +26,7 @@
     <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
   </a>
   <a href="https://twitter.com/PrfssrManhattan" target="_blank">
-    <img alt="Twitter: PrfssrManhattan" src="https://img.shields.io/twitter/follow/PrfssrManhattan.svg?style=social" />
+    <img alt="Twitter: PrfssrManhattan" src="https://img.shields.io/twitter/url/https/twitter.com/PrfssrManhattan.svg?style=social&label=Follow%20%40PrfssrManhattan" />
   </a>
   <a href="">
     <img alt="macOS build status" src="https://img.shields.io/github/checks-status/MegabyteLabs/github_link/master?color=cyan&label=macOS%20Build%20Status&logo=apple&style=for-the-badge">

@@ -26,7 +26,7 @@
     "test:archlinux": "molecule converge -s archlinux-desktop",
     "test:centos": "molecule converge -s centos-desktop",
     "test:debian": "molecule converge -s debian-desktop",
-    "test:docker": "molecule test -s docker",
+    "test:docker": "SNAP_REFERENCES=$(grep -Ril \"community.general.snap:\" ./tasks) && if [ \"$SNAP_REFERENCES\" ]; then molecule test -s docker-snap; else molecule test -s docker; fi",
     "test:fedora": "molecule converge -s fedora-desktop",
     "test:local": "ansible-playbook --ask-sudo-pass --connection=local tests/test.yml",
     "test:macos": "molecule converge -s macos-desktop",
