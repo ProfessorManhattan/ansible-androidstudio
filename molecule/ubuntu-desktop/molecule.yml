@@ -13,7 +13,7 @@ lint: |
   ansible-lint
   flake8
 platforms:
-  - name: Ubuntu-20.04-Desktop
+  - name: Ubuntu-20.04
     box: Megabyte/Ubuntu-Desktop
     memory: 4096
     cpus: 2

@@ -13,7 +13,7 @@ lint: |
   ansible-lint
   flake8
 platforms:
-  - name: Windows-10-Desktop
+  - name: Windows-10
     box: Megabyte/Windows-Desktop
     memory: 4096
     cpus: 2

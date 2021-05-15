@@ -13,7 +13,7 @@ lint: |
   ansible-lint
   flake8
 platforms:
-  - name: CentOS-8-Desktop
+  - name: CentOS-8
     box: Megabyte/CentOS-Desktop
     memory: 4096
     cpus: 2
