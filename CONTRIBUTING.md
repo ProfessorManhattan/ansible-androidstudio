@@ -212,7 +212,7 @@ source venv/bin/activate
 
 ## ➤ Pull Requests
 
-All pull requests should be associated with issues. You can find the [issues board on GitLab](https://gitlab.com/ProfessorManhattan/Playbooks). The pull requests should be made to [the GitLab repository](https://gitlab.com/megabyte-space/ansible-roles/androidstudio) instead of the [GitHub repository](https://github.com/MegabyteLabs/ansible-androidstudio). This is because we use GitLab as our primary repository and mirror the changes to GitHub for the community.
+All pull requests should be associated with issues. You can find the [issues board on GitLab](https://gitlab.com/ProfessorManhattan/Playbooks). The pull requests should be made to [the GitLab repository](https://gitlab.com/megabyte-space/ansible-roles/androidstudio) instead of the [GitHub repository](https://github.com/megabyte-labs/ansible-androidstudio). This is because we use GitLab as our primary repository and mirror the changes to GitHub for the community.
 
 ### How to Commit Code
 
