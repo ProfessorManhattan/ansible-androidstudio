@@ -1,7 +1,7 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-source "./.modules/shared/update.lib.sh"
+. "./.modules/shared/update.lib.sh"
 
 log "Running lint-staged"
 npx lint-staged

@@ -1,5 +1,9 @@
 <!-- ⚠️ This README has been generated from the file(s) "./.modules/docs/blueprint-readme.md" ⚠️--><div align="center">
-  <center><img alt="Android Studio logo" src="./logo.png" /></center>
+  <center>
+    <a href="https://gitlab.com/megabyte-space/ansible-roles/androidstudio">
+      <img alt="Android Studio logo" src="https://gitlab.com/megabyte-space/ansible-roles/androidstudio/-/raw/master/logo.png" />
+    </a>
+  </center>
 </div>
 <div align="center">
   <center><h1 align="center">Ansible Role: Android Studio</h1></center>
@@ -11,7 +15,7 @@
       <img src="https://gitlab.com/megabyte-labs/assets/-/raw/master/svg/home-solid.svg" />
     </a>
     <a href="https://galaxy.ansible.com/professormanhattan/androidstudio" title="Android Studio role on Ansible Galaxy" target="_blank">
-      <img height="50" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/ansible-galaxy.png" />
+      <img height="50" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/svg/ansible-galaxy.svg" />
     </a>
     <a href="https://gitlab.com/megabyte-space/ansible-roles/androidstudio/-/blob/master/CONTRIBUTING.md" title="Learn about contributing" target="_blank">
       <img src="https://gitlab.com/megabyte-labs/assets/-/raw/master/svg/contributing-solid.svg" />
@@ -58,7 +62,10 @@
       <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg?style=flat" />
     </a>
     <a href="https://opencollective.com/megabytelabs" title="Support us on Open Collective" target="_blank">
-      <img alt="Open Collective sponsors" src="https://img.shields.io/opencollective/sponsors/megabytelabs?logo=opencollective&style=flat" />
+      <img alt="Open Collective sponsors" src="https://img.shields.io/opencollective/sponsors/megabytelabs?label=Open%20Collective%20sponsors&logo=opencollective&style=flat" />
+    </a>
+    <a href="https://github.com/megabyte-labs" title="Support us on GitHub" target="_blank">
+      <img alt="GitHub sponsors" src="https://img.shields.io/github/sponsors/ProfessorManhattan?label=GitHub%20sponsors&logo=github&style=flat" />
     </a>
     <a href="https://github.com/megabyte-labs" target="_blank">
       <img alt="GitHub: Megabyte Labs" src="https://img.shields.io/github/followers/megabyte-labs?style=social" target="_blank" />
@@ -89,7 +96,7 @@
 
 ## ➤ Overview
 
-This repository contains an Ansible role that installs Android Studio on nearly any OS. Android Studio is the official integrated development environment for Google's Android operating system, built on JetBrains' IntelliJ IDEA software and designed specifically for Android development.
+This repository is the home of an Ansible role that installs Android Studio on nearly any OS. Android Studio is the official integrated development environment for Google's Android operating system, built on JetBrains' IntelliJ IDEA software and designed specifically for Android development.
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#supported-operating-systems)
 
