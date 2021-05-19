@@ -1,7 +1,7 @@
 <!-- ⚠️ This README has been generated from the file(s) "./.modules/docs/blueprint-readme.md" ⚠️--><div align="center">
   <center>
     <a href="https://gitlab.com/megabyte-space/ansible-roles/androidstudio">
-      <img alt="Android Studio logo" src="https://gitlab.com/megabyte-space/ansible-roles/androidstudio/-/raw/master/logo.png" />
+      <img width="140" height="140" alt="Android Studio logo" src="https://gitlab.com/megabyte-space/ansible-roles/androidstudio/-/raw/master/logo.png" />
     </a>
   </center>
 </div>
