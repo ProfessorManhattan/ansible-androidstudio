@@ -35,7 +35,7 @@
   </h4>
   <p align="center">
     <a href="https://galaxy.ansible.com/professormanhattan/androidstudio" target="_blank">
-      <img alt="Ansible Galaxy role: professormanhattan.androidstudio" src="https://img.shields.io/ansible/role/53381?logo=ansible&style=flat" />
+      <img alt="Ansible Galaxy role: professormanhattan.androidstudio" src="https://img.shields.io/ansible/role/54848?logo=ansible&style=flat" />
     </a>
     <a href="https://gitlab.com/megabyte-space/ansible-roles/androidstudio" target="_blank">
       <img alt="Version: 1.0.0" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
@@ -59,10 +59,10 @@
       <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg?logo=readthedocs&style=flat" />
     </a>
     <a href="repository.gitlab_ansible_roles_group/androidstudio/-/raw/master/LICENSE" target="_blank">
-      <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg?style=flat" />
+      <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-yellow.svg?style=flat" />
     </a>
     <a href="https://opencollective.com/megabytelabs" title="Support us on Open Collective" target="_blank">
-      <img alt="Open Collective sponsors" src="https://img.shields.io/opencollective/sponsors/megabytelabs?label=Open%20Collective%20sponsors&logo=opencollective&style=flat" />
+      <img alt="Open Collective sponsors" src="https://img.shields.io/opencollective/sponsors/megabytelabs?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAElBMVEUAAACvzfmFsft4pfD////w+P9tuc5RAAAABHRSTlMAFBERkdVu1AAAAFxJREFUKM9jgAAXIGBAABYXMHBA4yNEXGBAAU2BMz4FIIYTNhtFgRjZPkagFAuyAhGgHAuKAlQBCBtZB4gzQALoDsN0Oobn0L2PEUCoQYgZyOjRQFiJA67IRrEbAJImNwFBySjCAAAAAElFTkSuQmCC&label=Open%20Collective%20sponsors&logo=opencollective&style=flat" />
     </a>
     <a href="https://github.com/megabyte-labs" title="Support us on GitHub" target="_blank">
       <img alt="GitHub sponsors" src="https://img.shields.io/github/sponsors/ProfessorManhattan?label=GitHub%20sponsors&logo=github&style=flat" />
@@ -70,8 +70,8 @@
     <a href="https://github.com/megabyte-labs" target="_blank">
       <img alt="GitHub: Megabyte Labs" src="https://img.shields.io/github/followers/megabyte-labs?style=social" target="_blank" />
     </a>
-    <a href="https://twitter.com/PrfssrManhattan" target="_blank">
-      <img alt="Twitter: PrfssrManhattan" src="https://img.shields.io/twitter/url/https/twitter.com/PrfssrManhattan.svg?style=social&label=Follow%20%40PrfssrManhattan" />
+    <a href="https://twitter.com/MegabyteLabs" target="_blank">
+      <img alt="Twitter: MegabyteLabs" src="https://img.shields.io/twitter/url/https/twitter.com/MegabyteLabs.svg?style=social&label=Follow%20%40MegabyteLabs" />
     </a>
   </p>
 </div>

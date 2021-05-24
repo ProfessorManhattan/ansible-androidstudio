@@ -14,6 +14,5 @@
   "role_description_full_overview": "Android Studio is the official integrated development environment for Google's Android operating system, built on JetBrains' IntelliJ IDEA software and designed specifically for Android development.",
   "role_name": "androidstudio",
   "role_pretty_name": "Android Studio",
-  "version": "0.0.1",
   "ansible_galaxy_project_id": "54848"
 }
