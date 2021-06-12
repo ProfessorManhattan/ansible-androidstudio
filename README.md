@@ -76,7 +76,7 @@
   </p>
 </div>
 
-> </br><h3 align="center">**An Ansible role that installs Android Studio on nearly any OS**</h3></br>
+> </br><h3 align="center">**An Ansible role that installs Android Studio and sets up Android SDKs on nearly any OS**</h3></br>
 
 <!--TERMINALIZER![terminalizer_title](https://gitlab.com/megabyte-space/ansible-roles/androidstudio/-/raw/master/.demo.gif)TERMINALIZER-->
 
@@ -96,7 +96,7 @@
 
 ## ➤ Overview
 
-This repository is the home of an Ansible role that installs Android Studio on nearly any OS. Android Studio is the official integrated development environment for Google's Android operating system, built on JetBrains' IntelliJ IDEA software and designed specifically for Android development.
+This repository is the home of an Ansible role that installs Android Studio and sets up Android SDKs on nearly any OS. [Android Studio](https://developer.android.com/studio) is the official integrated development environment for Google's Android operating system, built on JetBrains' IntelliJ IDEA software and designed specifically for Android development.
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#supported-operating-systems)
 
