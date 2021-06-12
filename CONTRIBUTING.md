@@ -510,7 +510,7 @@ Since we have hundreds of Ansible roles to maintain, the majority of the files i
 
 ### `.blueprint.json` and @appnest/readme
 
-In the root of all of our Ansible repositories, we include a file named `.blueprint.json`. This file stores variables that are used in our `.start.sh` script. Most of the variables stored in `.blueprint.json` are used for generating documentation. All of our documentation is generated using variables and document partials that we feed into a project called [@appnest/readme](https://github.com/andreasbm/readme) (which is in charge of generating the final README/CONTRIBUTING guides). When @appnest/readme is run, it includes the variables stored in `.blueprint.json` in the context that it uses to inject variables in the documentation. You can view the documentation partials by checking out the `./.modules/docs` folder which is actually a submodule that is shared across all of our Ansible projects.
+In the root of all of our Ansible repositories, we include a file named `.blueprint.json`. This file stores variables that are used in our `.start.sh` script. Most of the variables stored in `.blueprint.json` are used for generating documentation. All of our documentation is generated using variables and document partials that we feed into a project called [@appnest/readme](https://github.com/andreasbm/readme) (which is in charge of generating the final README/CONTRIBUTING guides). When @appnest/readme is run, it includes the variables stored in `.blueprint.json` in the context that it uses to inject variables in the documentation. You can view the documentation partials by checking out the `./.modules/docs` folder which is a submodule that is shared across all of our Ansible projects.
 
 For every role that is included in our eco-system, we require certain fields to be filled out in the `.blueprint.json` file. Lucky for you, most of the fields in the file are auto-generated. The fields that need to be filled out as well as descriptions of what they should contain are listed in the chart below:
 
@@ -521,7 +521,7 @@ For every role that is included in our eco-system, we require certain fields to 
 
 ### `meta/main.yml` Description
 
-The most important piece of text in each of our Ansible projects is the galaxy_info description located in `meta/main.yml`. This text is used in search results on Ansible Galaxy and GitHub. It is also spun to generate multiple variants so it has to be worded in a way that makes sense with our different variants. Take the following as an example:
+The most important piece of text in each of our Ansible projects is the [Ansible Galaxy](https://galaxy.ansible.com/) description located in `meta/main.yml`. This text is used in search results on Ansible Galaxy and GitHub. It is also spun to generate multiple variants so it has to be worded in a way that makes sense with our different variants. Take the following as an example:
 
 **The `meta/main.yml` description example:**
 
