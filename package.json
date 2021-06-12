@@ -108,7 +108,7 @@
     "lint:yaml": "Runs yamllint which is a general purpose linter for YAML files",
     "misc:symlink-role": "Adds role to ~/.ansible/roles/professormanhattan.role_name - you can use this when ansible-lint complains about role not being found",
     "prepare-release": "Prepares the repository for a release",
-    "shell:OS_NAME": "Open a Docker shell session for debugging (OS_NAME can be archlinux, centos-7, centos-8, debian-9, debian-10, fedora-33, ubuntu-18.04, or ubuntu-20.04",
+    "shell:OS_NAME": "Open a Docker shell session for debugging (OS_NAME can be archlinux, centos-7, centos-8, debian-9, debian-10, fedora-33, fedora-34, ubuntu-18.04, ubuntu-20.04, or ubuntu-21.04)",
     "test": "Runs molecule tests for all the supported operating systems using VirtualBox (this is RAM intensive)",
     "test:docker": "Runs molecule tests on all supported Linux environments using Docker (if the role contains a snap installation, then only flavors that support snap are tested)",
     "test:local": "Installs the role on your local machine",
