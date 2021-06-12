@@ -43,6 +43,10 @@ First of all, thanks for visiting this page 😊 ❤️ ! We are totally ecstati
       - [Example TODO Comment Implementation](#example-todo-comment-implementation)
       - [Example TODO Comment Generated Output](#example-todo-comment-generated-output)
       - [TODO Comment Guidelines](#todo-comment-guidelines)
+  - [➤ Updating Meta Files and Documentation](#-updating-meta-files-and-documentation)
+    - [`.blueprint.json` and @appnest/readme](#blueprintjson-and-appnestreadme)
+    - [`meta/main.yml` Description](#metamainyml-description)
+    - [`logo.png`](#logopng)
   - [➤ Testing](#-testing)
     - [Idempotence](#idempotence)
     - [Debugging](#debugging)
@@ -497,6 +501,49 @@ The above code will output something that looks like this:
   - feature
   - improvement
   - test
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#updating-meta-files-and-documentation)
+
+## ➤ Updating Meta Files and Documentation
+
+Since we have hundreds of Ansible roles to maintain, the majority of the files inside each role are shared across all our Ansible projects. We synchronize these common files across all our repositories with the `.start.sh` file. This file is automatically called when you run `npm i`. If you would like to update the project without running `npm i`, you can also just directly call the script by running `bash .start.sh`. You might want to do this to get the latest upstream changes or if you make an edit to the `.blueprint.json` file.
+
+### `.blueprint.json` and @appnest/readme
+
+In the root of all of our Ansible repositories, we include a file named `.blueprint.json`. This file stores variables that are used in our `.start.sh` script. Most of the variables stored in `.blueprint.json` are used for generating documentation. All of our documentation is generated using variables and document partials that we feed into a project called [@appnest/readme](https://github.com/andreasbm/readme) (which is in charge of generating the final README/CONTRIBUTING guides). When @appnest/readme is run, it includes the variables stored in `.blueprint.json` in the context that it uses to inject variables in the documentation. You can view the documentation partials by checking out the `./.modules/docs` folder which is actually a submodule that is shared across all of our Ansible projects.
+
+For every role that is included in our eco-system, we require certain fields to be filled out in the `.blueprint.json` file. Lucky for you, most of the fields in the file are auto-generated. The fields that need to be filled out as well as descriptions of what they should contain are listed in the chart below:
+
+| Variable Name                    | Variable Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `role_description_full_overview` | This variable should be a description of what the role installs. You can usually find a good description by Googling, "What is Android Studio," for example if you were populating this variable for the [Android Studio role](https://gitlab.com/megabyte-labs/ansible-roles/androidstudio). This text is shown at the top of the README, right below the header section and before the table of contents. Whenever possible, key products/terms should be linked to using markdown. You can see an example of us hyperlinking in this variable by checking out the [Android Studio role](https://gitlab.com/megabyte-labs/ansible-roles/androidstudio). The idea is to make it as easy as possible for our users to figure out exactly what the role does. |
+| `role_pretty_name`               | This should be the official name for the product that the role installs/configures. It is used in the title of the README and throughout the documentation to refer to the product.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+
+### `meta/main.yml` Description
+
+The most important piece of text in each of our Ansible projects is the galaxy_info description located in `meta/main.yml`. This text is used in search results on Ansible Galaxy and GitHub. It is also spun to generate multiple variants so it has to be worded in a way that makes sense with our different variants. Take the following as an example:
+
+**The `meta/main.yml` description example:**
+
+- Installs Android Studio and sets up Android SDKs on nearly any OS
+
+**Gets spun and used by our automated documentation framework in the following formats:**
+
+- Installs Android Studio and sets up Android SDKs on nearly any OS
+- An Ansible role that installs Android Studio and sets up Android SDKs on nearly any OS
+- This repository is the home of an Ansible role that installs Ansible Studio and sets up Android SDKs on nearly any OS.
+
+It is important that all three variants of the `meta/main.yml` description make sense and be proper English. The `meta/main.yml` description should succinctly describe what the role does and possibly even describe what the product does if it is not well-known like Android Studio. An example of a description that includes an overview of the product would be something like "Installs HTTPie (a user-friendly, command-line HTTP client) on nearly any platform" for the [HTTPie role](https://gitlab.com/megabyte-labs/ansible-roles/httpie) or "Installs Packer (an automation tool for building machine images) on nearly any platform" for the [Packer role](https://gitlab.com/megabyte-labs/ansible-roles/packer).
+
+### `logo.png`
+
+We include a `logo.png` file in all of our Ansible projects. This image is automatically integrated with GitLab so that a thumbnail appears next to the project. It is also shown in the README to give the user a better idea of what the role does. All roles should include the `logo.png` file. When adding a `logo.png` file please _strictly_ adhere to the steps below:
+
+1. Use Google image search to find a logo that best represents the product. Ensure the image is a `.png` file and that it has a transparent background, if possible. Ideally, the image should be the official logo for software that the Ansible role/project installs. The image should be at least 200x200 pixels.
+2. After downloading the image, ensure you have the sharp-cli installed by running `npm install -g sharp-cli`.
+3. Resize the image to 200x200 pixels by running `sharp -i file_location.png -o logo.png resize 200 200`.
+4. Compress the resized image by dragging and dropping the resized image into the [TinyPNG web application](https://tinypng.com/).
+5. Download the compressed image and add it to the root of the Ansible project. Make sure it is named `logo.png`.
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#testing)
 
