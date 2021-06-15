@@ -35,40 +35,14 @@ First of all, thanks for visiting this page 😊 ❤️ ! We are totally ecstati
     - [DRY](#dry)
   - [➤ Commenting](#-commenting)
     - [Variable Comments](#variable-comments)
-- [➤ @var variable_name: default_value](#-var-variable_name-default_value)
-- [➤ The description of the variable which should be no longer than 160 characters per line.](#-the-description-of-the-variable-which-should-be-no-longer-than-160-characters-per-line)
-- [➤ You can separate the description into new lines so you do not pass the 160 character](#-you-can-separate-the-description-into-new-lines-so-you-do-not-pass-the-160-character)
-- [➤ limit](#-limit)
-- [➤ @var variable_name: []](#-var-variable_name-)
-- [➤ The description of the variable which should be no longer than 160 characters per line.](#-the-description-of-the-variable-which-should-be-no-longer-than-160-characters-per-line-1)
-- [➤ You can separate the description into new lines so you do not pass the 160 character](#-you-can-separate-the-description-into-new-lines-so-you-do-not-pass-the-160-character-1)
-- [➤ limit](#-limit-1)
-  - [➤ @example #](#-example-)
-- [➤ variable_name:](#-variable_name)
-- [➤ - name: jimmy](#-----name-jimmy)
-- [➤ param: henry](#-----param-henry)
-- [➤ - name: albert](#-----name-albert)
-- [➤ @end](#-end)
-  _ [Action Comments](#action-comments)
-  _ [Example Action Comment Implementation](#example-action-comment-implementation)
-- [➤ @action Ensures Docker is installed](#-action-ensures-docker-is-installed)
-- [➤ Installs Docker on the target machine.](#-installs-docker-on-the-target-machine)
-- [➤ @action Ensures Docker is installed](#-action-ensures-docker-is-installed-1)
-- [➤ Ensures Docker is started on boot.](#-ensures-docker-is-started-on-boot)
-- [➤ @action Ensures Docker is installed](#-action-ensures-docker-is-installed-2)
-- [➤ If the target Docker host is a Linux machine and the `docker_snap_install` variable](#-if-the-target-docker-host-is-a-linux-machine-and-the-docker_snap_install-variable)
-- [➤ is set to true, then Docker will be installed as a snap package.](#-is-set-to-true-then-docker-will-be-installed-as-a-snap-package)
-- [➤ @action Installs Docker Compose](#-action-installs-docker-compose)
-- [➤ Installs Docker Compose if the `docker_install_compose` variable is set to true.](#-installs-docker-compose-if-the-docker*install_compose-variable-is-set-to-true)
-  * [Example Action Comment Generated Output](#example-action-comment-generated-output)
-  _ [Action Comment Guidelines](#action-comment-guidelines)
-  _ [TODO Comments](#todo-comments)
-  \_ [Example TODO Comment Implementation](#example-todo-comment-implementation)
-- [➤ @todo bug: bug description](#-todo-bug-bug-description)
-- [➤ @todo improvement: improvement description](#-todo-improvement-improvement-description)
-- [➤ @todo bug: another bug description](#-todo-bug-another-bug-description)
-  _ [Example TODO Comment Generated Output](#example-todo-comment-generated-output)
-  _ [TODO Comment Guidelines](#todo-comment-guidelines)
+    - [Action Comments](#action-comments)
+      - [Example Action Comment Implementation](#example-action-comment-implementation)
+      - [Example Action Comment Generated Output](#example-action-comment-generated-output)
+      - [Action Comment Guidelines](#action-comment-guidelines)
+    - [TODO Comments](#todo-comments)
+      - [Example TODO Comment Implementation](#example-todo-comment-implementation)
+      - [Example TODO Comment Generated Output](#example-todo-comment-generated-output)
+      - [TODO Comment Guidelines](#todo-comment-guidelines)
   - [➤ Updating Meta Files and Documentation](#-updating-meta-files-and-documentation)
     - [`.blueprint.json` and @appnest/readme](#blueprintjson-and-appnestreadme)
     - [`meta/main.yml` Description](#metamainyml-description)
@@ -412,71 +386,33 @@ It is usually not necessary to add full-fledged comments to anything in the `var
 
 Each variable in `defaults/main.yml` should be added and documented using the following format:
 
+<!-- prettier-ignore-start -->
 ```yaml
-
-<a href="#var-variable_name-default_value)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
-
-# ➤ @var variable_name: default_value
-
-<a href="#the-description-of-the-variable-which-should-be-no-longer-than-160-characters-per-line)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
-
-# ➤ The description of the variable which should be no longer than 160 characters per line.
-
-<a href="#you-can-separate-the-description-into-new-lines-so-you-do-not-pass-the-160-character)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
-
-# ➤ You can separate the description into new lines so you do not pass the 160 character
-
-<a href="#limit)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
-
-# ➤ limit
-variable_name: default_value
+  # @var variable_name: default_value
+  # The description of the variable which should be no longer than 160 characters per line.
+  # You can separate the description into new lines so you do not pass the 160 character
+  # limit
+  variable_name: default_value
 ```
+<!-- prettier-ignore-end -->
 
 There are cases where you may want include an example or you can not fit the default_value on one line. In cases like this, use the following format:
 
+<!-- prettier-ignore-start -->
 ```yaml
-
-<a href="#var-variable_name-)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
-
-# ➤ @var variable_name: []
-
-<a href="#the-description-of-the-variable-which-should-be-no-longer-than-160-characters-per-line)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
-
-# ➤ The description of the variable which should be no longer than 160 characters per line.
-
-<a href="#you-can-separate-the-description-into-new-lines-so-you-do-not-pass-the-160-character)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
-
-# ➤ You can separate the description into new lines so you do not pass the 160 character
-
-<a href="#limit)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
-
-# ➤ limit
-variable_name: []
-
-<a href="#example-)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
-
-# ➤ @example #
-
-<a href="#variable_name)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
-
-# ➤ variable_name:
-
-<a href="#----name-jimmy)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
-
-# ➤   - name: jimmy
-
-<a href="#----param-henry)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
-
-# ➤     param: henry
-
-<a href="#----name-albert)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
-
-# ➤   - name: albert
-
-<a href="#end)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
-
-# ➤ @end
+  # @var variable_name: []
+  # The description of the variable which should be no longer than 160 characters per line.
+  # You can separate the description into new lines so you do not pass the 160 character
+  # limit
+  variable_name: []
+  # @example #
+  # variable_name:
+  #   - name: jimmy
+  #     param: henry
+  #   - name: albert
+  # @end
 ```
+<!-- prettier-ignore-end -->
 
 Each variable/comment block in `defaults/main.yml` should be separated by a line return. You can see an example of a `defaults/main.yml` file using this special [variable syntax in the Docker role](https://gitlab.com/ProfessorManhattan/Playbooks/-/blob/master/roles/virtualization/docker/defaults/main.yml).
 
@@ -488,60 +424,35 @@ Action comments allow us to describe what the role does. Each action comment sho
 
 The following is an example of the implementation of action comments. You can find the [source here](https://gitlab.com/ProfessorManhattan/Playbooks/-/blob/master/roles/virtualization/docker/tasks/main.yml) as well as an example of why and how you would include an [action comment outside of the `tasks/main.yml` file here](https://gitlab.com/ProfessorManhattan/Playbooks/-/blob/master/roles/virtualization/docker/tasks/compose-Darwin.yml).
 
+<!-- prettier-ignore-start -->
 ```yaml
+  # @action Ensures Docker is installed
+  # Installs Docker on the target machine.
+  # @action Ensures Docker is installed
+  # Ensures Docker is started on boot.
+  - name: Include tasks based on the operating system
+    block:
+      - include_tasks: 'install-ansible_os_family.yml'
+    when: not docker_snap_install
 
-<a href="#action-ensures-docker-is-installed)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
+  # @action Ensures Docker is installed
+  # If the target Docker host is a Linux machine and the `docker_snap_install` variable
+  # is set to true, then Docker will be installed as a snap package.
+  - name: Install Docker via snap
+    community.general.snap:
+      name: docker
+    when:
+      - ansible_os_family not in ('Windows', 'Darwin')
+      - docker_snap_install
 
-# ➤ @action Ensures Docker is installed
-
-<a href="#installs-docker-on-the-target-machine)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
-
-# ➤ Installs Docker on the target machine.
-
-<a href="#action-ensures-docker-is-installed)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
-
-# ➤ @action Ensures Docker is installed
-
-<a href="#ensures-docker-is-started-on-boot)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
-
-# ➤ Ensures Docker is started on boot.
-- name: Include tasks based on the operating system
-  block:
-    - include_tasks: 'install-ansible_os_family.yml'
-  when: not docker_snap_install
-
-
-<a href="#action-ensures-docker-is-installed)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
-
-# ➤ @action Ensures Docker is installed
-
-<a href="#if-the-target-docker-host-is-a-linux-machine-and-the-docker_snap_install-variable)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
-
-# ➤ If the target Docker host is a Linux machine and the `docker_snap_install` variable
-
-<a href="#is-set-to-true-then-docker-will-be-installed-as-a-snap-package)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
-
-# ➤ is set to true, then Docker will be installed as a snap package.
-- name: Install Docker via snap
-  community.general.snap:
-    name: docker
-  when:
-    - ansible_os_family not in ('Windows', 'Darwin')
-    - docker_snap_install
-
-
-<a href="#action-installs-docker-compose)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
-
-# ➤ @action Installs Docker Compose
-
-<a href="#installs-docker-compose-if-the-docker_install_compose-variable-is-set-to-true)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
-
-# ➤ Installs Docker Compose if the `docker_install_compose` variable is set to true.
-- name: Install Docker Compose (based on OS)
-  block:
-    - include_tasks: 'compose-ansible_os_family.yml'
-  when: docker_install_compose | bool
+  # @action Installs Docker Compose
+  # Installs Docker Compose if the `docker_install_compose` variable is set to true.
+  - name: Install Docker Compose (based on OS)
+    block:
+      - include_tasks: 'compose-ansible_os_family.yml'
+    when: docker_install_compose | bool
 ```
+<!-- prettier-ignore-end -->
 
 #### Example Action Comment Generated Output
 
@@ -569,26 +480,19 @@ TODO comments are similar to action comments in the sense that through automatio
 
 #### Example TODO Comment Implementation
 
+<!-- prettier-ignore-start -->
 ```yaml
-
-<a href="#todo-bug-bug-description)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
-
-# ➤ @todo bug: bug description
-
-<a href="#todo-improvement-improvement-description)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
-
-# ➤ @todo improvement: improvement description
-
-<a href="#todo-bug-another-bug-description)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
-
-# ➤ @todo bug: another bug description
+  # @todo Bug: bug description
+  # @todo improvement: improvement description
+  # @todo Bug: another bug description
 ```
+<!-- prettier-ignore-end -->
 
 #### Example TODO Comment Generated Output
 
 The above code will output something that looks like this:
 
-**bug**
+**Bug**
 
 - bug description
 - another bug description
@@ -596,6 +500,8 @@ The above code will output something that looks like this:
 **improvement**
 
 - improvement description
+
+Notice how the title for _improvement_ is not capitalized. It should be capitalized so make sure you pay attention to that detail.
 
 #### TODO Comment Guidelines
 
