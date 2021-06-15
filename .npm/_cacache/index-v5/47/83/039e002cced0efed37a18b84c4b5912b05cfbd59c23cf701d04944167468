@@ -1,0 +1,2 @@
+
+c2c1764284cd4b683c2b47757b72e0c76dc847e3	{"key":"make-fetch-happen:request-cache:https://registry.npmjs.org/redent/-/redent-2.0.0.tgz","integrity":"sha1-wbIAe0LVfrE4kHmzyDM2OdXhzKo=","time":1623738085318,"size":1606,"metadata":{"url":"https://registry.npmjs.org/redent/-/redent-2.0.0.tgz","reqHeaders":{},"resHeaders":{"cache-control":"public, immutable, max-age=31557600","content-type":"application/octet-stream","date":"Tue, 15 Jun 2021 06:21:24 GMT","etag":"\"fb60264ed51d09095b0ed2895e2c6a41\"","last-modified":"Sun, 27 May 2018 15:32:21 GMT","vary":"Accept-Encoding"}}}

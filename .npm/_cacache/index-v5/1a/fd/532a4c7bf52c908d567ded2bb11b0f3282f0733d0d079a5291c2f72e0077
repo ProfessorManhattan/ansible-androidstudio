@@ -1,0 +1,2 @@
+
+daa167512540b9ce05868136ca4d98207a461a7e	{"key":"make-fetch-happen:request-cache:https://registry.npmjs.org/wrappy/-/wrappy-1.0.2.tgz","integrity":"sha1-tSQ9jz7BqjXxNkYFvA0QNuMKtp8=","time":1623738084997,"size":1676,"metadata":{"url":"https://registry.npmjs.org/wrappy/-/wrappy-1.0.2.tgz","reqHeaders":{},"resHeaders":{"cache-control":"public, immutable, max-age=31557600","content-type":"application/octet-stream","date":"Tue, 15 Jun 2021 06:21:23 GMT","etag":"\"567b1699cfae49cb20f598571a6c90c7\"","last-modified":"Sun, 27 May 2018 22:18:40 GMT","vary":"Accept-Encoding"}}}
