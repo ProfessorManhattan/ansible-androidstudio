@@ -1,4 +1,6 @@
 ---
+# @action Ensures Android Studio is installed
+# Installs Android Studio on Windows using chocolatey
 - name: "Ensure {{ app_name }} is installed"
   chocolatey.chocolatey.win_chocolatey:
     name: androidstudio
