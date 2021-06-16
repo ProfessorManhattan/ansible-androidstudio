@@ -1,4 +1,13 @@
 .cache
+.cache/**
+**/*.cache/**
 .git
 .modules
 misc
+.husky/_/husky.sh
+.gitmodules
+.modules
+Dockerfile
+**/Dockerfile
+venv
+scripts/*.symlink.sh
