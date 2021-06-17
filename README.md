@@ -85,11 +85,15 @@
 ## ➤ Table of Contents
 
 - [➤ Overview](#-overview)
+- [➤ Features](#-features)
+  - [Ensures Android Studio is installed](#ensures-android-studio-is-installed)
+  - [Ensures configured Android SDKs are present](#ensures-configured-android-sdks-are-present)
 - [➤ Supported Operating Systems](#-supported-operating-systems)
 - [➤ Dependencies](#-dependencies)
   - [Galaxy Roles](#galaxy-roles)
 - [➤ Example Playbook](#-example-playbook)
 - [➤ Contributing](#-contributing)
+  - [TODO](#todo)
 - [➤ License](#-license)
 
 <a href="#overview)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
@@ -98,7 +102,22 @@
 
 This repository is the home of an Ansible role that installs Android Studio and sets up Android SDKs on nearly any OS. [Android Studio](https://developer.android.com/studio) is the official integrated development environment for Google's Android operating system, built on JetBrains' IntelliJ IDEA software and designed specifically for Android development.
 
-{{ load:.modules/docs/readme/variables.md }}
+<a href="#features)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
+
+## ➤ Features
+
+### Ensures Android Studio is installed
+
+- Installs Android Studio on macOS using Homebrew
+- Installs Android Studio on Linux using snap
+- Installs Android Studio on Windows using chocolatey
+- Installs Android Studio on Archlinux, CentOS, Debian, Fedora, macOS, Ubuntu, and Windows
+
+### Ensures configured Android SDKs are present
+
+- Downloads a configurable list of Android SDKs
+- Ensures Android SDK tools like `adb` are present in the PATH
+  {{ load:.modules/docs/readme/variables.md }}
 
 <a href="#supported-operating-systems)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
 
@@ -166,6 +185,10 @@ I create open source projects out of love. Although I have a job, shelter, and a
 </a>
 
 </details>
+
+### TODO
+
+- **Improvement:** Add logic that installs a configurable list of Android SDKs
 
 <a href="#license)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
 
