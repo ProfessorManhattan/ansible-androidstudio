@@ -7,7 +7,7 @@
 </div>
 <div align="center">
   <center><h1 align="center">Ansible Role: Android Studio</h1></center>
-  <center><h4 style="color: #18c3d1;">An open-source Ansible role / Brought to you by <a href="https://megabyte.space" target="_blank">Megabyte Labs</a></h4></center>
+  <center><h4 style="color: #18c3d1;">An open-source Ansible role brought to you by <a href="https://megabyte.space" target="_blank">Megabyte Labs</a></h4></center>
 </div>
 
 <div align="center">
@@ -81,9 +81,9 @@
 
 <!--TERMINALIZER![terminalizer_title](https://gitlab.com/megabyte-space/ansible-roles/androidstudio/-/raw/master/.demo.gif)TERMINALIZER-->
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#quick--role_pretty_name--install-method)
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#one-line-install-method)
 
-## ➤ Quick Android Studio Install Method
+## ➤ One-Line Install Method
 
 Looking to install Android Studio without having to deal with [Ansible](https://www.ansible.com/)? Simply run the following command that correlates to your operating system:
 
@@ -101,13 +101,13 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 
 And there you go. Installing androidstudio can be as easy as that. If, however, you would like to incorporate this into an Ansible playbook (and customize settings) then please continue reading below.
 
-**Note:** Before running the commands above you should probably directly access the URL to make sure the code is legit. We already know it is safe but, before running any script on your computer, you should know what it is and what it is doing.
+**Important Note:** _Before running the commands above you should probably directly access the URL to make sure the code is legit. We already know it is safe but, before running any script on your computer, you should inspect it._
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#table-of-contents)
 
 ## ➤ Table of Contents
 
-- [➤ Quick Android Studio Install Method](#-quick-android-studio-install-method)
+- [➤ One-Line Install Method](#-one-line-install-method)
 - [➤ Overview](#-overview)
 - [➤ Features](#-features)
   - [Ensures Android Studio is installed](#ensures-android-studio-is-installed)
