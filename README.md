@@ -132,12 +132,9 @@ This repository is the home of an Ansible role that installs Android Studio and 
 
 ### Ensures Android Studio is installed
 
-<<<<<<< HEAD
-=======
-- Installs Android Studio on macOS using Homebrew
 - Installs Android Studio on Linux using snap
 - Installs Android Studio on Windows using chocolatey
->>>>>>> 9c37187efad783c5ccbcd89977aa66b02db4925b
+- Installs Android Studio on macOS using Homebrew
 - Installs Android Studio on Archlinux, CentOS, Debian, Fedora, macOS, Ubuntu, and Windows
 
 ### Ensures configured Android SDKs are present
@@ -220,13 +217,10 @@ I create open source projects out of love. Although I have a job, shelter, and a
 
 </details>
 
-<<<<<<< HEAD
-=======
 ### TODO
 
 - **Improvement:** Add logic that installs a configurable list of Android SDKs
 
->>>>>>> 9c37187efad783c5ccbcd89977aa66b02db4925b
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#license)
 
 ## ➤ License
