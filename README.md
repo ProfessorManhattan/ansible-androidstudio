@@ -80,22 +80,21 @@
 
 <!--TERMINALIZER![terminalizer_title](https://gitlab.com/megabyte-space/ansible-roles/androidstudio/-/raw/master/.demo.gif)TERMINALIZER-->
 
-
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#table-of-contents)
 
 ## ➤ Table of Contents
 
-* [➤ Overview](#-overview)
-* [➤ Features](#-features)
-	* [Ensures Android Studio is installed](#ensures-android-studio-is-installed)
-	* [Ensures configured Android SDKs are present](#ensures-configured-android-sdks-are-present)
-* [➤ Supported Operating Systems](#-supported-operating-systems)
-* [➤ Dependencies](#-dependencies)
-	* [Galaxy Roles](#galaxy-roles)
-* [➤ Example Playbook](#-example-playbook)
-* [➤ Contributing](#-contributing)
-	* [TODO](#todo)
-* [➤ License](#-license)
+- [➤ Overview](#-overview)
+- [➤ Features](#-features)
+  - [Ensures Android Studio is installed](#ensures-android-studio-is-installed)
+  - [Ensures configured Android SDKs are present](#ensures-configured-android-sdks-are-present)
+- [➤ Supported Operating Systems](#-supported-operating-systems)
+- [➤ Dependencies](#-dependencies)
+  - [Galaxy Roles](#galaxy-roles)
+- [➤ Example Playbook](#-example-playbook)
+- [➤ Contributing](#-contributing)
+  - [TODO](#todo)
+- [➤ License](#-license)
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#overview)
 
@@ -103,20 +102,22 @@
 
 This repository is the home of an Ansible role that installs Android Studio and sets up Android SDKs on nearly any OS. [Android Studio](https://developer.android.com/studio) is the official integrated development environment for Google's Android operating system, built on JetBrains' IntelliJ IDEA software and designed specifically for Android development.
 
-
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#features)
 
 ## ➤ Features
-### Ensures Android Studio is installed
-* Installs Android Studio on macOS using Homebrew 
-* Installs Android Studio on Linux using snap 
-* Installs Android Studio on Windows using chocolatey 
-* Installs Android Studio on Archlinux, CentOS, Debian, Fedora, macOS, Ubuntu, and Windows
-### Ensures configured Android SDKs are present
-* Downloads a configurable list of Android SDKs 
-* Ensures Android SDK tools like `adb` are present in the PATH
-{{ load:.modules/docs/readme/variables.md }}
 
+### Ensures Android Studio is installed
+
+- Installs Android Studio on macOS using Homebrew
+- Installs Android Studio on Linux using snap
+- Installs Android Studio on Windows using chocolatey
+- Installs Android Studio on Archlinux, CentOS, Debian, Fedora, macOS, Ubuntu, and Windows
+
+### Ensures configured Android SDKs are present
+
+- Downloads a configurable list of Android SDKs
+- Ensures Android SDK tools like `adb` are present in the PATH
+  {{ load:.modules/docs/readme/variables.md }}
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#supported-operating-systems)
 
@@ -124,13 +125,10 @@ This repository is the home of an Ansible role that installs Android Studio and 
 
 The chart below shows the operating systems that we have tested this role on. It is automatically generated using the Ansible Molecule tests located in the `molecule/default/` folder. There is logic in place to automatically handle the testing of Windows, macOS, Ubuntu, Fedora, CentOS, Debian, and Archlinux. If your operating system is not listed but is a variant of one of the systems we test (i.e. a Debian-flavored system or a RedHat-flavored system) then it is possible that the role will still work.
 
-
 | OS Family | OS Version | Status | Idempotent |
-|-----------|------------|--------|------------|
-| Fedora    | 33         | ❌      | ❌          |
-| Ubuntu    | focal      | ✅      | ❌          |
-
-
+| --------- | ---------- | ------ | ---------- |
+| Fedora    | 33         | ❌     | ❌         |
+| Ubuntu    | focal      | ✅     | ❌         |
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#dependencies)
 
@@ -147,13 +145,10 @@ ansible-galaxy install -r requirements.yml
 
 At the beginning of the play, the Ansible Galaxy role dependencies listed in `meta/main.yml` will run. These dependencies are configured to only run once per playbook. If you include more than one of our roles in your playbook that have dependencies in common then the dependency installation will be skipped after the first run. Some of our roles also utilize helper roles which help keep our [main playbook](https://gitlab.com/ProfessorManhattan/Playbooks) DRY. A full list of the dependencies along with quick descriptions is below:
 
-
-| Role Dependency                                  | Description                                |
-|--------------------------------------------------|--------------------------------------------|
+| Role Dependency                                          | Description                                |
+| -------------------------------------------------------- | ------------------------------------------ |
 | <a href='https://google.com'>professormanhattan.java</a> | Installs Java on nearly any OS             |
-| <a href='https://bing.com'>professormanhattan.snapd</a> | Ensures Snap is installed on Linux systems |
-
-
+| <a href='https://bing.com'>professormanhattan.snapd</a>  | Ensures Snap is installed on Linux systems |
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#example-playbook)
 
@@ -166,8 +161,6 @@ With the dependencies installed, all you have to do is add the role to your main
   roles:
     - professormanhattan.androidstudio
 ```
-
-
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#contributing)
 
@@ -194,11 +187,11 @@ I create open source projects out of love. Although I have a job, shelter, and a
 </details>
 
 ### TODO
-* **Improvement:** Add logic that installs a configurable list of Android SDKs
+
+- **Improvement:** Add logic that installs a configurable list of Android SDKs
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#license)
 
 ## ➤ License
 
 Copyright © 2021 [Megabyte LLC](https://megabyte.space). This project is [MIT](repository.gitlab_ansible_roles_group/androidstudio/-/raw/master/LICENSE) licensed.
-
