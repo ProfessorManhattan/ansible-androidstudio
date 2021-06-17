@@ -5,7 +5,8 @@
 .modules
 .modules
 .nyc_output
-**/*.cache/**
+**/.cache
+**/.husky/_/husky.sh
 **/Dockerfile
 build
 Dockerfile
