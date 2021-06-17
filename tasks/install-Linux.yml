@@ -1,6 +1,6 @@
 ---
 # @action Ensures Android Studio is installed
-# Installs Android Studio on Linux using snap
+# Installs Android Studio on Linux using [snap](https://gitlab.com/megabyte-labs/ansible-roles/snapd)
 - name: "Ensure {{ app_name }} is installed"
   community.general.snap:
     name: android-studio
