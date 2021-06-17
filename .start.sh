@@ -12,8 +12,8 @@ if [ "$container" != 'docker' ]; then
 fi
 
 export REPO_TYPE=ansible
-git pull origin master --ff-only
-if [ -d .git ]; then
+if [ -d "./.git" ]; then
+  git pull origin master --ff-only
   git submodule update --init --recursive
 fi
 if [ ! -d "./.modules/${REPO_TYPE}" ]; then
