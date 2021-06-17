@@ -7,6 +7,7 @@
 </div>
 <div align="center">
   <center><h1 align="center">Ansible Role: Android Studio</h1></center>
+  <center><h4 style="color: #18c3d1;">An open-source Ansible role / Brought to you by <a href="https://megabyte.space">Megabyte Labs</a></h4></center>
 </div>
 
 <div align="center">
@@ -117,7 +118,6 @@ This repository is the home of an Ansible role that installs Android Studio and 
 
 - Downloads a configurable list of Android SDKs
 - Ensures Android SDK tools like `adb` are present in the PATH
-  {{ load:.modules/docs/readme/variables.md }}
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#supported-operating-systems)
 
