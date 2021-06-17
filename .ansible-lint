@@ -4,5 +4,6 @@ exclude_paths:
   - .modules/
   - molecule/
   - node_modules/
+  - roles/
 
 skip_list: []
