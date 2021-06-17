@@ -1,12 +1,12 @@
 <!-- ⚠️ This README has been generated from the file(s) "./.modules/docs/blueprint-contributing.md" ⚠️-->
 
-<a href="#contributing)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#contributing)
 
 # ➤ Contributing
 
 First of all, thanks for visiting this page 😊 ❤️ ! We are totally ecstatic that you may be considering contributing to this project. You should read this guide if you are considering creating a pull request.
 
-<a href="#table-of-contents)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#table-of-contents)
 
 ## ➤ Table of Contents
 
@@ -35,40 +35,14 @@ First of all, thanks for visiting this page 😊 ❤️ ! We are totally ecstati
     - [DRY](#dry)
   - [➤ Commenting](#-commenting)
     - [Variable Comments](#variable-comments)
-- [➤ @var variable_name: default_value](#-var-variable_name-default_value)
-- [➤ The description of the variable which should be no longer than 160 characters per line.](#-the-description-of-the-variable-which-should-be-no-longer-than-160-characters-per-line)
-- [➤ You can separate the description into new lines so you do not pass the 160 character](#-you-can-separate-the-description-into-new-lines-so-you-do-not-pass-the-160-character)
-- [➤ limit](#-limit)
-- [➤ @var variable_name: []](#-var-variable_name-)
-- [➤ The description of the variable which should be no longer than 160 characters per line.](#-the-description-of-the-variable-which-should-be-no-longer-than-160-characters-per-line-1)
-- [➤ You can separate the description into new lines so you do not pass the 160 character](#-you-can-separate-the-description-into-new-lines-so-you-do-not-pass-the-160-character-1)
-- [➤ limit](#-limit-1)
-  - [➤ @example #](#-example-)
-- [➤ variable_name:](#-variable_name)
-- [➤ - name: jimmy](#-----name-jimmy)
-- [➤ param: henry](#-----param-henry)
-- [➤ - name: albert](#-----name-albert)
-- [➤ @end](#-end)
-  _ [Action Comments](#action-comments)
-  _ [Example Action Comment Implementation](#example-action-comment-implementation)
-- [➤ @action Ensures Docker is installed](#-action-ensures-docker-is-installed)
-- [➤ Installs Docker on the target machine.](#-installs-docker-on-the-target-machine)
-- [➤ @action Ensures Docker is installed](#-action-ensures-docker-is-installed-1)
-- [➤ Ensures Docker is started on boot.](#-ensures-docker-is-started-on-boot)
-- [➤ @action Ensures Docker is installed](#-action-ensures-docker-is-installed-2)
-- [➤ If the target Docker host is a Linux machine and the `docker_snap_install` variable](#-if-the-target-docker-host-is-a-linux-machine-and-the-docker_snap_install-variable)
-- [➤ is set to true, then Docker will be installed as a snap package.](#-is-set-to-true-then-docker-will-be-installed-as-a-snap-package)
-- [➤ @action Installs Docker Compose](#-action-installs-docker-compose)
-- [➤ Installs Docker Compose if the `docker_install_compose` variable is set to true.](#-installs-docker-compose-if-the-docker*install_compose-variable-is-set-to-true)
-  * [Example Action Comment Generated Output](#example-action-comment-generated-output)
-  _ [Action Comment Guidelines](#action-comment-guidelines)
-  _ [TODO Comments](#todo-comments)
-  \_ [Example TODO Comment Implementation](#example-todo-comment-implementation)
-- [➤ @todo bug: bug description](#-todo-bug-bug-description)
-- [➤ @todo improvement: improvement description](#-todo-improvement-improvement-description)
-- [➤ @todo bug: another bug description](#-todo-bug-another-bug-description)
-  _ [Example TODO Comment Generated Output](#example-todo-comment-generated-output)
-  _ [TODO Comment Guidelines](#todo-comment-guidelines)
+    - [Action Comments](#action-comments)
+      - [Example Action Comment Implementation](#example-action-comment-implementation)
+      - [Example Action Comment Generated Output](#example-action-comment-generated-output)
+      - [Action Comment Guidelines](#action-comment-guidelines)
+    - [TODO Comments](#todo-comments)
+      - [Example TODO Comment Implementation](#example-todo-comment-implementation)
+      - [Example TODO Comment Generated Output](#example-todo-comment-generated-output)
+      - [TODO Comment Guidelines](#todo-comment-guidelines)
   - [➤ Updating Meta Files and Documentation](#-updating-meta-files-and-documentation)
     - [`.blueprint.json` and @appnest/readme](#blueprintjson-and-appnestreadme)
     - [`meta/main.yml` Description](#metamainyml-description)
@@ -84,13 +58,13 @@ First of all, thanks for visiting this page 😊 ❤️ ! We are totally ecstati
       - [[301] Command should not change things if nothing needs doing](#301-command-should-not-change-things-if-nothing-needs-doing)
       - [[305] Use shell only when shell functionality is required](#305-use-shell-only-when-shell-functionality-is-required)
 
-<a href="#code-of-conduct)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#code-of-conduct)
 
 ## ➤ Code of Conduct
 
 This project and everyone participating in it is governed by the [Code of Conduct](https://gitlab.com/megabyte-space/ansible-roles/androidstudio/-/blob/master/CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to [help@megabyte.space](mailto:help@megabyte.space).
 
-<a href="#philosophy)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#philosophy)
 
 ## ➤ Philosophy
 
@@ -104,7 +78,7 @@ When you are working with one of our Ansible projects, try asking yourself, "**H
 
 Ideally, you should use the software installed by the main playbook. This is really the only way of testing whether or not the software was installed properly and has all the common settings automated. The software installed by the main playbook is all widely-acclaimed, cross-platform software that many people find useful.
 
-<a href="#supported-operating-systems)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#supported-operating-systems)
 
 ## ➤ Supported Operating Systems
 
@@ -151,7 +125,7 @@ If you have a role that only installs software made for Windows 10 then ensure t
 
 We currently support installing applications with both homebrew casks and mas. Since mas does not allow automated logins to the App Store (and requires that the application was already installed by the account signed into the App Store GUI), we prefer the use of homebrew casks for installing applications.
 
-<a href="#setting-up-development-environment)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#setting-up-development-environment)
 
 ## ➤ Setting Up Development Environment
 
@@ -238,11 +212,11 @@ python3 -m venv venv
 source venv/bin/activate
 ```
 
-<a href="#pull-requests)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#pull-requests)
 
 ## ➤ Pull Requests
 
-All pull requests should be associated with issues. You can find the [issues board on GitLab](https://gitlab.com/ProfessorManhattan/Playbooks). The pull requests should be made to [the GitLab repository](https://gitlab.com/megabyte-space/ansible-roles/androidstudio) instead of the [GitHub repository](https://github.com/megabyte-labs/ansible-androidstudio). This is because we use GitLab as our primary repository and mirror the changes to GitHub for the community.
+All pull requests should be associated with issues. You can find the [issues board on GitLab](https://gitlab.com/ProfessorManhattan/Playbooks). The pull requests should be made to [the GitLab repository](https://gitlab.com/megabyte-space/ansible-roles/androidstudio) instead of the [GitHub repository](https://github.com/ProfessorManhattan/ansible-androidstudio). This is because we use GitLab as our primary repository and mirror the changes to GitHub for the community.
 
 ### How to Commit Code
 
@@ -252,7 +226,7 @@ Instead of using `git commit`, we prefer that you use `npm run commit`. You will
 
 Even if you decide not to use `npm run commit`, you will see that `git commit` behaves differently since the pre-commit hook is installed when you run `npm i`. This pre-commit hook is there to test your code before committing. If you need to bypass the pre-commit hook, then you will have to add the `--no-verify` tag at the end of your `git commit` command (e.g. `git commit -m "Commit" --no-verify`).
 
-<a href="#code-format)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#code-format)
 
 ## ➤ Code Format
 
@@ -298,7 +272,7 @@ If you have a role that only installs software made for Windows 10 then ensure t
   when: ansible_os_family == 'Windows'
 ```
 
-<a href="#code-style)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#code-style)
 
 ## ➤ Code Style
 
@@ -396,7 +370,7 @@ DRY stands for "Don't Repeat Yourself." Whenever there is code that is duplicate
   include_tasks: install-Linux.yml
 ```
 
-<a href="#commenting)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#commenting)
 
 ## ➤ Commenting
 
@@ -412,71 +386,33 @@ It is usually not necessary to add full-fledged comments to anything in the `var
 
 Each variable in `defaults/main.yml` should be added and documented using the following format:
 
+<!-- prettier-ignore-start -->
 ```yaml
-
-<a href="#var-variable_name-default_value)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
-
-# ➤ @var variable_name: default_value
-
-<a href="#the-description-of-the-variable-which-should-be-no-longer-than-160-characters-per-line)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
-
-# ➤ The description of the variable which should be no longer than 160 characters per line.
-
-<a href="#you-can-separate-the-description-into-new-lines-so-you-do-not-pass-the-160-character)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
-
-# ➤ You can separate the description into new lines so you do not pass the 160 character
-
-<a href="#limit)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
-
-# ➤ limit
-variable_name: default_value
+  # @var variable_name: default_value
+  # The description of the variable which should be no longer than 160 characters per line.
+  # You can separate the description into new lines so you do not pass the 160 character
+  # limit
+  variable_name: default_value
 ```
+<!-- prettier-ignore-end -->
 
 There are cases where you may want include an example or you can not fit the default_value on one line. In cases like this, use the following format:
 
+<!-- prettier-ignore-start -->
 ```yaml
-
-<a href="#var-variable_name-)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
-
-# ➤ @var variable_name: []
-
-<a href="#the-description-of-the-variable-which-should-be-no-longer-than-160-characters-per-line)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
-
-# ➤ The description of the variable which should be no longer than 160 characters per line.
-
-<a href="#you-can-separate-the-description-into-new-lines-so-you-do-not-pass-the-160-character)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
-
-# ➤ You can separate the description into new lines so you do not pass the 160 character
-
-<a href="#limit)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
-
-# ➤ limit
-variable_name: []
-
-<a href="#example-)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
-
-# ➤ @example #
-
-<a href="#variable_name)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
-
-# ➤ variable_name:
-
-<a href="#----name-jimmy)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
-
-# ➤   - name: jimmy
-
-<a href="#----param-henry)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
-
-# ➤     param: henry
-
-<a href="#----name-albert)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
-
-# ➤   - name: albert
-
-<a href="#end)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
-
-# ➤ @end
+  # @var variable_name: []
+  # The description of the variable which should be no longer than 160 characters per line.
+  # You can separate the description into new lines so you do not pass the 160 character
+  # limit
+  variable_name: []
+  # @example #
+  # variable_name:
+  #   - name: jimmy
+  #     param: henry
+  #   - name: albert
+  # @end
 ```
+<!-- prettier-ignore-end -->
 
 Each variable/comment block in `defaults/main.yml` should be separated by a line return. You can see an example of a `defaults/main.yml` file using this special [variable syntax in the Docker role](https://gitlab.com/ProfessorManhattan/Playbooks/-/blob/master/roles/virtualization/docker/defaults/main.yml).
 
@@ -488,60 +424,35 @@ Action comments allow us to describe what the role does. Each action comment sho
 
 The following is an example of the implementation of action comments. You can find the [source here](https://gitlab.com/ProfessorManhattan/Playbooks/-/blob/master/roles/virtualization/docker/tasks/main.yml) as well as an example of why and how you would include an [action comment outside of the `tasks/main.yml` file here](https://gitlab.com/ProfessorManhattan/Playbooks/-/blob/master/roles/virtualization/docker/tasks/compose-Darwin.yml).
 
+<!-- prettier-ignore-start -->
 ```yaml
+  # @action Ensures Docker is installed
+  # Installs Docker on the target machine.
+  # @action Ensures Docker is installed
+  # Ensures Docker is started on boot.
+  - name: Include tasks based on the operating system
+    block:
+      - include_tasks: 'install-ansible_os_family.yml'
+    when: not docker_snap_install
 
-<a href="#action-ensures-docker-is-installed)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
+  # @action Ensures Docker is installed
+  # If the target Docker host is a Linux machine and the `docker_snap_install` variable
+  # is set to true, then Docker will be installed as a snap package.
+  - name: Install Docker via snap
+    community.general.snap:
+      name: docker
+    when:
+      - ansible_os_family not in ('Windows', 'Darwin')
+      - docker_snap_install
 
-# ➤ @action Ensures Docker is installed
-
-<a href="#installs-docker-on-the-target-machine)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
-
-# ➤ Installs Docker on the target machine.
-
-<a href="#action-ensures-docker-is-installed)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
-
-# ➤ @action Ensures Docker is installed
-
-<a href="#ensures-docker-is-started-on-boot)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
-
-# ➤ Ensures Docker is started on boot.
-- name: Include tasks based on the operating system
-  block:
-    - include_tasks: 'install-ansible_os_family.yml'
-  when: not docker_snap_install
-
-
-<a href="#action-ensures-docker-is-installed)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
-
-# ➤ @action Ensures Docker is installed
-
-<a href="#if-the-target-docker-host-is-a-linux-machine-and-the-docker_snap_install-variable)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
-
-# ➤ If the target Docker host is a Linux machine and the `docker_snap_install` variable
-
-<a href="#is-set-to-true-then-docker-will-be-installed-as-a-snap-package)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
-
-# ➤ is set to true, then Docker will be installed as a snap package.
-- name: Install Docker via snap
-  community.general.snap:
-    name: docker
-  when:
-    - ansible_os_family not in ('Windows', 'Darwin')
-    - docker_snap_install
-
-
-<a href="#action-installs-docker-compose)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
-
-# ➤ @action Installs Docker Compose
-
-<a href="#installs-docker-compose-if-the-docker_install_compose-variable-is-set-to-true)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
-
-# ➤ Installs Docker Compose if the `docker_install_compose` variable is set to true.
-- name: Install Docker Compose (based on OS)
-  block:
-    - include_tasks: 'compose-ansible_os_family.yml'
-  when: docker_install_compose | bool
+  # @action Installs Docker Compose
+  # Installs Docker Compose if the `docker_install_compose` variable is set to true.
+  - name: Install Docker Compose (based on OS)
+    block:
+      - include_tasks: 'compose-ansible_os_family.yml'
+    when: docker_install_compose | bool
 ```
+<!-- prettier-ignore-end -->
 
 #### Example Action Comment Generated Output
 
@@ -569,26 +480,19 @@ TODO comments are similar to action comments in the sense that through automatio
 
 #### Example TODO Comment Implementation
 
+<!-- prettier-ignore-start -->
 ```yaml
-
-<a href="#todo-bug-bug-description)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
-
-# ➤ @todo bug: bug description
-
-<a href="#todo-improvement-improvement-description)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
-
-# ➤ @todo improvement: improvement description
-
-<a href="#todo-bug-another-bug-description)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
-
-# ➤ @todo bug: another bug description
+  # @todo Bug: bug description
+  # @todo improvement: improvement description
+  # @todo Bug: another bug description
 ```
+<!-- prettier-ignore-end -->
 
 #### Example TODO Comment Generated Output
 
 The above code will output something that looks like this:
 
-**bug**
+**Bug**
 
 - bug description
 - another bug description
@@ -596,6 +500,8 @@ The above code will output something that looks like this:
 **improvement**
 
 - improvement description
+
+Notice how the title for _improvement_ is not capitalized. It should be capitalized so make sure you pay attention to that detail.
 
 #### TODO Comment Guidelines
 
@@ -606,7 +512,7 @@ The above code will output something that looks like this:
   - improvement
   - test
 
-<a href="#updating-meta-files-and-documentation)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#updating-meta-files-and-documentation)
 
 ## ➤ Updating Meta Files and Documentation
 
@@ -649,7 +555,7 @@ We include a `logo.png` file in all of our Ansible projects. This image is autom
 4. Compress the resized image by dragging and dropping the resized image into the [TinyPNG web application](https://tinypng.com/).
 5. Download the compressed image and add it to the root of the Ansible project. Make sure it is named `logo.png`.
 
-<a href="#testing)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#testing)
 
 ## ➤ Testing
 
@@ -701,7 +607,7 @@ By default, the `molecule test` command will destroy the VM after the test is co
 
 You can obtain a list of all possible scenarios by looking in the `molecule/` folder. The `molecule/default/` folder is run when you do not pass a scenario. All the other scenarios can be run by manually specifying the scenario (i.e. folder name).
 
-<a href="#linting)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#linting)
 
 ## ➤ Linting
 

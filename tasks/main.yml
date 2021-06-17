@@ -2,6 +2,12 @@
 - name: Include variables based on the operating system
   include_vars: "{{ ansible_os_family }}.yml"
 
+# @action Ensures Android Studio is installed
+# Installs Android Studio on Archlinux, CentOS, Debian, Fedora, macOS, Ubuntu, and Windows
+# @action Ensures configured Android SDKs are present
+# Downloads a configurable list of Android SDKs
+# @action Ensures configured Android SDKs are present
+# Ensures Android SDK tools like `adb` are present in the PATH
 - name: Include tasks based on the operating system
   become: true
   block:

@@ -7,6 +7,7 @@
 </div>
 <div align="center">
   <center><h1 align="center">Ansible Role: Android Studio</h1></center>
+  <center><h4 style="color: #18c3d1;">An open-source Ansible role brought to you by <a href="https://megabyte.space" target="_blank">Megabyte Labs</a></h4></center>
 </div>
 
 <div align="center">
@@ -26,7 +27,7 @@
     <a href="https://app.slack.com/client/T01ABCG4NK1/C01NN74H0LW/details/" title="Slack chat room" target="_blank">
       <img src="https://gitlab.com/megabyte-labs/assets/-/raw/master/svg/chat-solid.svg" />
     </a>
-    <a href="https://github.com/megabyte-labs/ansible-androidstudio" title="GitHub mirror" target="_blank">
+    <a href="https://github.com/ProfessorManhattan/ansible-androidstudio" title="GitHub mirror" target="_blank">
       <img src="https://gitlab.com/megabyte-labs/assets/-/raw/master/svg/github-solid.svg" />
     </a>
     <a href="https://gitlab.com/megabyte-space/ansible-roles/androidstudio" title="GitLab repository" target="_blank">
@@ -40,11 +41,11 @@
     <a href="https://gitlab.com/megabyte-space/ansible-roles/androidstudio" target="_blank">
       <img alt="Version: 1.0.0" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
     </a>
-    <a href="https://github.com/megabyte-labs/ansible-androidstudio/actions/Windows.yml" target="_blank">
-      <img alt="Windows 10 build status" src="https://img.shields.io/github/workflow/status/megabyte-labs/ansible-androidstudio/Windows/master?color=cyan&label=Windows%20build&logo=windows&style=flat">
+    <a href="https://github.com/ProfessorManhattan/ansible-androidstudio/actions/Windows.yml" target="_blank">
+      <img alt="Windows 10 build status" src="https://img.shields.io/github/workflow/status/ProfessorManhattan/ansible-androidstudio/Windows/master?color=cyan&label=Windows%20build&logo=windows&style=flat">
     </a>
-    <a href="https://github.com/megabyte-labs/ansible-androidstudio/actions/macOS.yml" target="_blank">
-      <img alt="macOS build status" src="https://img.shields.io/github/workflow/status/megabyte-labs/ansible-androidstudio/macOS/master?label=macOS%20build&logo=apple&style=flat">
+    <a href="https://github.com/ProfessorManhattan/ansible-androidstudio/actions/macOS.yml" target="_blank">
+      <img alt="macOS build status" src="https://img.shields.io/github/workflow/status/ProfessorManhattan/ansible-androidstudio/macOS/master?label=macOS%20build&logo=apple&style=flat">
     </a>
     <a href="https://gitlab.com/megabyte-space/ansible-roles/androidstudio/commits/master" target="_blank">
       <img alt="Linux build status" src="https://gitlab.com/megabyte-space/ansible-roles/androidstudio/badges/master/pipeline.svg">
@@ -64,11 +65,11 @@
     <a href="https://opencollective.com/megabytelabs" title="Support us on Open Collective" target="_blank">
       <img alt="Open Collective sponsors" src="https://img.shields.io/opencollective/sponsors/megabytelabs?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAElBMVEUAAACvzfmFsft4pfD////w+P9tuc5RAAAABHRSTlMAFBERkdVu1AAAAFxJREFUKM9jgAAXIGBAABYXMHBA4yNEXGBAAU2BMz4FIIYTNhtFgRjZPkagFAuyAhGgHAuKAlQBCBtZB4gzQALoDsN0Oobn0L2PEUCoQYgZyOjRQFiJA67IRrEbAJImNwFBySjCAAAAAElFTkSuQmCC&label=Open%20Collective%20sponsors&logo=opencollective&style=flat" />
     </a>
-    <a href="https://github.com/megabyte-labs" title="Support us on GitHub" target="_blank">
+    <a href="https://github.com/ProfessorManhattan" title="Support us on GitHub" target="_blank">
       <img alt="GitHub sponsors" src="https://img.shields.io/github/sponsors/ProfessorManhattan?label=GitHub%20sponsors&logo=github&style=flat" />
     </a>
-    <a href="https://github.com/megabyte-labs" target="_blank">
-      <img alt="GitHub: Megabyte Labs" src="https://img.shields.io/github/followers/megabyte-labs?style=social" target="_blank" />
+    <a href="https://github.com/ProfessorManhattan" target="_blank">
+      <img alt="GitHub: Megabyte Labs" src="https://img.shields.io/github/followers/ProfessorManhattan?style=social" target="_blank" />
     </a>
     <a href="https://twitter.com/MegabyteLabs" target="_blank">
       <img alt="Twitter: MegabyteLabs" src="https://img.shields.io/twitter/url/https/twitter.com/MegabyteLabs.svg?style=social&label=Follow%20%40MegabyteLabs" />
@@ -80,11 +81,37 @@
 
 <!--TERMINALIZER![terminalizer_title](https://gitlab.com/megabyte-space/ansible-roles/androidstudio/-/raw/master/.demo.gif)TERMINALIZER-->
 
-<a href="#table-of-contents)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#one-line-install-method)
+
+## ➤ One-Line Install Method
+
+Looking to install Android Studio without having to deal with [Ansible](https://www.ansible.com/)? Simply run the following command that correlates to your operating system:
+
+**Linux/macOS:**
+
+```shell
+curl -sS https://install.doctor/androidstudio | bash
+```
+
+**Windows:**
+
+```powershell
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://win.install.doctor/androidstudio'))
+```
+
+And there you go. Installing androidstudio can be as easy as that. If, however, you would like to incorporate this into an Ansible playbook (and customize settings) then please continue reading below.
+
+**Important Note:** _Before running the commands above you should probably directly access the URL to make sure the code is legit. We already know it is safe but, before running any script on your computer, you should inspect it._
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#table-of-contents)
 
 ## ➤ Table of Contents
 
+- [➤ One-Line Install Method](#-one-line-install-method)
 - [➤ Overview](#-overview)
+- [➤ Features](#-features)
+  - [Ensures Android Studio is installed](#ensures-android-studio-is-installed)
+  - [Ensures configured Android SDKs are present](#ensures-configured-android-sdks-are-present)
 - [➤ Supported Operating Systems](#-supported-operating-systems)
 - [➤ Dependencies](#-dependencies)
   - [Galaxy Roles](#galaxy-roles)
@@ -92,13 +119,26 @@
 - [➤ Contributing](#-contributing)
 - [➤ License](#-license)
 
-<a href="#overview)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#overview)
 
 ## ➤ Overview
 
 This repository is the home of an Ansible role that installs Android Studio and sets up Android SDKs on nearly any OS. [Android Studio](https://developer.android.com/studio) is the official integrated development environment for Google's Android operating system, built on JetBrains' IntelliJ IDEA software and designed specifically for Android development.
 
-<a href="#supported-operating-systems)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#features)
+
+## ➤ Features
+
+### Ensures Android Studio is installed
+
+- Installs Android Studio on Archlinux, CentOS, Debian, Fedora, macOS, Ubuntu, and Windows
+
+### Ensures configured Android SDKs are present
+
+- Downloads a configurable list of Android SDKs
+- Ensures Android SDK tools like `adb` are present in the PATH
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#supported-operating-systems)
 
 ## ➤ Supported Operating Systems
 
@@ -109,7 +149,11 @@ The chart below shows the operating systems that we have tested this role on. It
 | Fedora    | 33         | ❌     | ❌         |
 | Ubuntu    | focal      | ✅     | ❌         |
 
-<a href="#dependencies)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
+_The compatibility chart above was last generated on compatibility_date._
+
+**_What does idempotent mean?_** Idempotent means that if you run this role twice in row then there will be no changes to the system the second time around.
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#dependencies)
 
 ## ➤ Dependencies
 
@@ -122,14 +166,16 @@ ansible-galaxy install -r requirements.yml
 
 ### Galaxy Roles
 
-At the beginning of the play, the galaxy role dependencies listed in `meta/main.yml` will run. These dependencies are configured to only run once per playbook. If you include more than one of our roles in your playbook that have dependencies in common then the dependency installation will be skipped after the first run. Some of our roles also utilize helper roles which help keep our [main playbook](https://gitlab.com/ProfessorManhattan/Playbooks) DRY. A full list of the dependencies along with quick descriptions is below:
+Although most of our roles do not have dependencies, there are some cases where another role has to be installed before the logic can continue. At the beginning of the play, the Ansible Galaxy role dependencies listed in `meta/main.yml` will run. These dependencies are configured to only run once per playbook. If you include more than one of our roles in your playbook that have dependencies in common then the dependency installation will be skipped after the first run. Some of our roles also utilize helper roles which help keep our [main playbook](https://gitlab.com/ProfessorManhattan/Playbooks) DRY.
+
+The `requirements.yml` file contains a full list of the dependencies required by this role (i.e. `meta/main.yml` dependencies, helper roles, and collections). For your convenience, the full list of the dependencies along with quick descriptions is below:
 
 | Role Dependency                                          | Description                                |
 | -------------------------------------------------------- | ------------------------------------------ |
 | <a href='https://google.com'>professormanhattan.java</a> | Installs Java on nearly any OS             |
 | <a href='https://bing.com'>professormanhattan.snapd</a>  | Ensures Snap is installed on Linux systems |
 
-<a href="#example-playbook)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#example-playbook)
 
 ## ➤ Example Playbook
 
@@ -141,7 +187,9 @@ With the dependencies installed, all you have to do is add the role to your main
     - professormanhattan.androidstudio
 ```
 
-<a href="#contributing)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
+If you are incorporating this role into a pre-existing playbook, then it might be prudent to copy the requirements in `requirements.txt` and `requirements.yml` to their corresponding files in the root of your playbook.
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#contributing)
 
 ## ➤ Contributing
 
@@ -165,7 +213,7 @@ I create open source projects out of love. Although I have a job, shelter, and a
 
 </details>
 
-<a href="#license)" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png"></div>
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#license)
 
 ## ➤ License
 
