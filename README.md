@@ -81,10 +81,33 @@
 
 <!--TERMINALIZER![terminalizer_title](https://gitlab.com/megabyte-space/ansible-roles/androidstudio/-/raw/master/.demo.gif)TERMINALIZER-->
 
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#quick--role_pretty_name--install-method)
+
+## ➤ Quick Android Studio Install Method
+
+Looking to install Android Studio without having to deal with [Ansible](https://www.ansible.com/)? Simply run the following command that correlates to your operating system:
+
+**Linux/macOS:**
+
+```shell
+curl -sS https://install.doctor/androidstudio | bash
+```
+
+**Windows:**
+
+```powershell
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://win.install.doctor/androidstudio'))
+```
+
+And there you go. Installing androidstudio can be as easy as that. If, however, you would like to incorporate this into an Ansible playbook (and customize settings) then please continue reading below.
+
+**Note:** Before running the commands above you should probably directly access the URL to make sure the code is legit. We already know it is safe but, before running any script on your computer, you should know what it is and what it is doing.
+
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#table-of-contents)
 
 ## ➤ Table of Contents
 
+- [➤ Quick Android Studio Install Method](#-quick-android-studio-install-method)
 - [➤ Overview](#-overview)
 - [➤ Features](#-features)
   - [Ensures Android Studio is installed](#ensures-android-studio-is-installed)
