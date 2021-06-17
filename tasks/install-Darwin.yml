@@ -1,4 +1,6 @@
 ---
+# @action Ensures Android Studio is installed
+# Installs Android Studio on macOS using Homebrew
 - name: "Ensure {{ app_name }} is installed"
   become: false
   community.general.homebrew_cask:
