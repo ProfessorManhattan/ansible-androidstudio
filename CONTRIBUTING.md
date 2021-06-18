@@ -1,86 +1,73 @@
-<!-- ⚠️ This README has been generated from the file(s) "./.modules/docs/blueprint-contributing.md" ⚠️-->
+<!-- ⚠️ This README has been generated from the file(s) "./.modules/docs/blueprint-contributing.md" ⚠️-->{{ load:.modules/docs/contributing/header.md }}
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#contributing)
-
-# ➤ Contributing
-
-First of all, thanks for visiting this page 😊 ❤️ ! We are totally ecstatic that you may be considering contributing to this project. You should read this guide if you are considering creating a pull request.
-
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#table-of-contents)
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#table-of-contents)
 
 ## ➤ Table of Contents
 
-- [➤ Contributing](#-contributing)
-  - [➤ Code of Conduct](#-code-of-conduct)
-  - [➤ Philosophy](#-philosophy)
-  - [➤ Supported Operating Systems](#-supported-operating-systems)
-    - [Other Operating Systems](#other-operating-systems)
-    - [Code Style for Platform-Specific Roles](#code-style-for-platform-specific-roles)
-    - [Preferred Installation Method for Mac OS X](#preferred-installation-method-for-mac-os-x)
-  - [➤ Setting Up Development Environment](#-setting-up-development-environment)
-    - [Requirements](#requirements)
-    - [Getting Started](#getting-started)
-    - [NPM Tasks Available](#npm-tasks-available)
-    - [Troubleshooting Python Issues](#troubleshooting-python-issues)
-  - [➤ Pull Requests](#-pull-requests)
-    - [How to Commit Code](#how-to-commit-code)
-    - [Pre-Commit Hook](#pre-commit-hook)
-  - [➤ Code Format](#-code-format)
-    - [Code Format Example](#code-format-example)
-    - [Platform-Specific Roles](#platform-specific-roles)
-  - [➤ Code Style](#-code-style)
-    - [Arrays](#arrays)
-    - [Alphabetical Order](#alphabetical-order)
-    - [Dependency Variables](#dependency-variables)
-    - [DRY](#dry)
-  - [➤ Commenting](#-commenting)
-    - [Variable Comments](#variable-comments)
-    - [Action Comments](#action-comments)
-      - [Example Action Comment Implementation](#example-action-comment-implementation)
-      - [Example Action Comment Generated Output](#example-action-comment-generated-output)
-      - [Action Comment Guidelines](#action-comment-guidelines)
-    - [TODO Comments](#todo-comments)
-      - [Example TODO Comment Implementation](#example-todo-comment-implementation)
-      - [Example TODO Comment Generated Output](#example-todo-comment-generated-output)
-      - [TODO Comment Guidelines](#todo-comment-guidelines)
-  - [➤ Updating Meta Files and Documentation](#-updating-meta-files-and-documentation)
-    - [`.blueprint.json` and @appnest/readme](#blueprintjson-and-appnestreadme)
-    - [`meta/main.yml` Description](#metamainyml-description)
-    - [`logo.png`](#logopng)
-  - [➤ Testing](#-testing)
-    - [Idempotence](#idempotence)
-    - [Debugging](#debugging)
-    - [Molecule Documentation](#molecule-documentation)
-    - [Testing Desktop Environments](#testing-desktop-environments)
-    - [Molecule Scenario Descriptions](#molecule-scenario-descriptions)
-    - [Continuous Integration (CI)](#continuous-integration-ci)
-  - [➤ Linting](#-linting)
-    - [Fixing ansible-lint Errors](#fixing-ansible-lint-errors)
-      - [[208] File permissions unset or incorrect](#208-file-permissions-unset-or-incorrect)
-      - [[301] Command should not change things if nothing needs doing](#301-command-should-not-change-things-if-nothing-needs-doing)
-      - [[305] Use shell only when shell functionality is required](#305-use-shell-only-when-shell-functionality-is-required)
+- [➤ Philosophy](#-philosophy)
+- [➤ Supported Operating Systems](#-supported-operating-systems)
+  - [Other Operating Systems](#other-operating-systems)
+  - [Code Style for Platform-Specific Roles](#code-style-for-platform-specific-roles)
+  - [Preferred Installation Method for Mac OS X](#preferred-installation-method-for-mac-os-x)
+- [➤ Setting Up Development Environment](#-setting-up-development-environment)
+  - [Requirements](#requirements)
+  - [Getting Started](#getting-started)
+  - [NPM Tasks Available](#npm-tasks-available)
+  - [Troubleshooting Python Issues](#troubleshooting-python-issues)
+- [➤ Pull Requests](#-pull-requests)
+  - [How to Commit Code](#how-to-commit-code)
+  - [Pre-Commit Hook](#pre-commit-hook)
+- [➤ Code Format](#-code-format)
+  - [Code Format Example](#code-format-example)
+  - [Platform-Specific Roles](#platform-specific-roles)
+- [➤ Code Style](#-code-style)
+  - [Arrays](#arrays)
+  - [Alphabetical Order](#alphabetical-order)
+  - [Dependency Variables](#dependency-variables)
+  - [DRY](#dry)
+- [➤ Commenting](#-commenting)
+  - [Variable Comments](#variable-comments)
+  - [Action Comments](#action-comments)
+    - [Example Action Comment Implementation](#example-action-comment-implementation)
+    - [Example Action Comment Generated Output](#example-action-comment-generated-output)
+    - [Action Comment Guidelines](#action-comment-guidelines)
+  - [TODO Comments](#todo-comments)
+    - [Example TODO Comment Implementation](#example-todo-comment-implementation)
+    - [Example TODO Comment Generated Output](#example-todo-comment-generated-output)
+    - [TODO Comment Guidelines](#todo-comment-guidelines)
+- [➤ Updating Meta Files and Documentation](#-updating-meta-files-and-documentation)
+  - [The `"blueprint" package.json` Field and `@appnest/readme`](#the-blueprint-packagejson-field-and-appnestreadme)
+  - [`meta/main.yml` Description](#metamainyml-description)
+  - [`logo.png`](#logopng)
+- [➤ Testing](#-testing)
+  - [Idempotence](#idempotence)
+  - [Debugging](#debugging)
+  - [Molecule Documentation](#molecule-documentation)
+  - [Testing Desktop Environments](#testing-desktop-environments)
+  - [Molecule Scenario Descriptions](#molecule-scenario-descriptions)
+  - [Continuous Integration (CI)](#continuous-integration-ci)
+- [➤ Linting](#-linting)
+  _ [Fixing ansible-lint Errors](#fixing-ansible-lint-errors)
+  _ [[208] File permissions unset or incorrect](#208-file-permissions-unset-or-incorrect)
+  _ [[301] Command should not change things if nothing needs doing](#301-command-should-not-change-things-if-nothing-needs-doing)
+  _ [[305] Use shell only when shell functionality is required](#305-use-shell-only-when-shell-functionality-is-required)
+  {{ load:.modules/docs/contributing/code-of-conduct.md }}
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#code-of-conduct)
-
-## ➤ Code of Conduct
-
-This project and everyone participating in it is governed by the [Code of Conduct](https://gitlab.com/megabyte-space/ansible-roles/androidstudio/-/blob/master/CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to [help@megabyte.space](mailto:help@megabyte.space).
-
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#philosophy)
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#philosophy)
 
 ## ➤ Philosophy
 
-When you are working with one of our Ansible projects, try asking yourself, "**How can this be improved?**" For example, in the case of the [Android Studio role](https://github.com/ProfessorManhattan/ansible-androidstudio), the role installs Android Studio but there may be additional tasks that should be automated. Consider the following examples:
+When you are working with one of our Ansible projects, try asking yourself, "**How can this be improved?**" For example, in the case of the [Android Studio role](profile_link.github/profile.github/ansible-androidstudio), the role installs Android Studio but there may be additional tasks that should be automated. Consider the following examples:
 
 - _The software is installed but is asking for a license key._ - In this case, we should provide an option for automatically installing the license key using a CLI command.
 - _The software supports plugins_ - We should provide an option for specifying the plugins that are automatically installed.
 - _In the case of Android Studio, many users have to install SDKs before using the software._ - We should offer the capability to automatically install user-specified SDKs.
 - _The software has configuration files with commonly tweaked settings._ - We should provide the ability to change these settings.
-- _The software has the capability to integrate with another piece of software in the [main playbook](https://gitlab.com/ProfessorManhattan/Playbooks)_. - This integration should be automated.
+- _The software has the capability to integrate with another piece of software in the [main playbook](repository.playbooks)_. - This integration should be automated.
 
 Ideally, you should use the software installed by the main playbook. This is really the only way of testing whether or not the software was installed properly and has all the common settings automated. The software installed by the main playbook is all widely-acclaimed, cross-platform software that many people find useful.
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#supported-operating-systems)
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#supported-operating-systems)
 
 ## ➤ Supported Operating Systems
 
@@ -127,7 +114,7 @@ If you have a role that only installs software made for Windows 10 then ensure t
 
 We currently support installing applications with both homebrew casks and mas. Since mas does not allow automated logins to the App Store (and requires that the application was already installed by the account signed into the App Store GUI), we prefer the use of homebrew casks for installing applications.
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#setting-up-development-environment)
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#setting-up-development-environment)
 
 ## ➤ Setting Up Development Environment
 
@@ -138,24 +125,30 @@ Before contributing to this project, you will have to make sure you have the too
 - **Ansible** >=2.10
 - **Python 3**, along with the `python3-netaddr` and `python3-pip` libraries (i.e. `sudo apt-get install python3 python3-netaddr python3-pip`)
 - **Docker**
+- **Go**
 - **Node.js** >=12 which is used for the development environment which includes a pre-commit hook
 - **VirtualBox** which is used for running Molecule tests
 
+Most of these dependencies will automatically install (rootlessly) if they are missing from your system when you initialize the project by running `bash .start.sh`. Docker and VirtualBox must be installed with root priviledges. If they are missing from your system, running `bash .start.sh` will prompt you for your password and automatically install them. Otherwise, you can follow [directions for installing Docker](https://docs.docker.com/get-docker/) and/or [directions for installing VirtualBox](https://www.virtualbox.org/manual/ch02.html).
+
 ### Getting Started
 
-With all the requirements installed, navigate to the root directory and run the following commands to set up the development environment which includes installing the Python dependencies and installing the Ansible Galaxy dependencies:
+With all the requirements installed, navigate to the root directory and run the following command to set up the development environment which includes installing the Python dependencies and installing the Ansible Galaxy dependencies:
 
 ```terminal
-npm i
+bash .start.sh
 ```
 
-This will install all the dependencies and automatically register a pre-commit hook. More specifically, `npm i` will:
+This will install all the dependencies and automatically register a pre-commit hook. More specifically, `bash .start.sh` will:
 
-1. Install the Node.js development environment dependencies
-2. Install a pre-commit hook using [husky](https://www.npmjs.com/package/husky)
-3. Ensure that meta files and documentation are up-to-date
-4. Install the Python 3 requirements
-5. Install the Ansible Galaxy requirements
+1. Install missing development tools like Node.js and Python
+2. Install the Node.js development environment dependencies
+3. Install a pre-commit hook using [husky](misc.husky)
+4. Ensure that meta files and documentation are up-to-date
+5. Install the Python 3 requirements
+6. Install the Ansible Galaxy requirements
+7. Install a Go task runner which provides an easy-to-use interface for performing common tasks
+8. Re-generate documentation using the latest sources
 
 ### NPM Tasks Available
 
@@ -214,29 +207,29 @@ python3 -m venv venv
 source venv/bin/activate
 ```
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#pull-requests)
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#pull-requests)
 
 ## ➤ Pull Requests
 
-All pull requests should be associated with issues. You can find the [issues board on GitLab](https://gitlab.com/ProfessorManhattan/Playbooks). The pull requests should be made to [the GitLab repository](https://gitlab.com/megabyte-space/ansible-roles/androidstudio) instead of the [GitHub repository](https://github.com/ProfessorManhattan/ansible-androidstudio). This is because we use GitLab as our primary repository and mirror the changes to GitHub for the community.
+All pull requests should be associated with issues. Although not strictly required, the pull requests should be made to [the GitLab repository issues board](repository.group.ansible_roles/galaxy_info.role_namerepository.location.issues) instead of the [GitHub mirror repository](profile_link.github/profile.github/ansible-galaxy_info.role_name). This is because we use GitLab as our primary repository and mirror the changes to GitHub for the community.
 
 ### How to Commit Code
 
-Instead of using `git commit`, we prefer that you use `npm run commit`. You will understand why when you try it but basically it streamlines the commit process and helps us generate better `CHANGELOG.md` files.
+Instead of using `git commit`, we prefer that you use `task commit`. You will understand why when you try it but basically it streamlines the commit process and helps us generate better `CHANGELOG.md` files.
 
 ### Pre-Commit Hook
 
-Even if you decide not to use `npm run commit`, you will see that `git commit` behaves differently since the pre-commit hook is installed when you run `npm i`. This pre-commit hook is there to test your code before committing. If you need to bypass the pre-commit hook, then you will have to add the `--no-verify` tag at the end of your `git commit` command (e.g. `git commit -m "Commit" --no-verify`).
+Even if you decide not to use `task commit`, you will see that `git commit` behaves differently since the pre-commit hook is installed when `npm i` during various build steps. This pre-commit hook is there to test your code before committing. If you need to bypass the pre-commit hook, then you will have to add the `--no-verify` tag at the end of your `git commit` command (e.g. `git commit -m "Commit" --no-verify`).
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#code-format)
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#code-format)
 
 ## ➤ Code Format
 
-We try to structure our Ansible task and variable files similarly across all our Ansible projects. This allows us to do things like use RegEx to make ecosystem wide changes. A good way of making sure that your code follows the format we are using is to clone the [main playbook repository](https://gitlab.com/ProfessorManhattan/Playbooks) and use Visual Studio Code to search for code examples of how we are performing similar tasks. For example:
+We try to structure our Ansible task and variable files similarly across all [our Ansible projects](repository.group.ansible_roles). This allows us to do things like use RegEx to make ecosystem wide changes. A good way of making sure that your code follows the format we are using is to clone the [main playbook repository](project.playbooks) (a.k.a. [Install Doctor](link.installdoctor)) and use Visual Studio Code to search for code examples of how we are performing similar tasks. For example:
 
 - All of our roles use a similar pattern for the `tasks/main.yml` file
 - The file names and variable names are consistent across our roles
-- Contributors automatically format some parts of their code by leveraging our pre-commit hook (which is installed when you run `npm i` in the root of a project)
+- Contributors automatically format some parts of their code by leveraging our pre-commit hook (which is installed when you run `bash .start.sh` in the root of a project)
 
 ### Code Format Example
 
@@ -253,9 +246,9 @@ To dive a little deeper, take the following block of code that was retrieved fro
     - include_tasks: "install-{{ ansible_os_family }}.yml"
 ```
 
-Now, if you compare the block of code above to other `tasks/main.yml` files in other roles (which you can find in our [GitLab Ansible Roles group](https://gitlab.com/megabyte-space/ansible-roles) or our [main playbook](https://gitlab.com/ProfessorManhattan/Playbooks)), you will see that the files are either identical or nearly identical. However, some roles will exclude the first task titled "Include variables based on the operating system" when variables are not required for the role. Our goal is to be consistent but not to the point where we are degrading the functionality of our code.
+Now, if you compare the block of code above to other `tasks/main.yml` files in other roles (which you can find in our [GitLab Ansible Roles group](repository.group.ansible_roles) or our [main playbook](project.playbooks)) (a.k.a. [Install Doctor](link.installdoctor)), you will see that the files are either identical or nearly identical. However, some roles will exclude the first task titled "Include variables based on the operating system" when variables are not required for the role. Our goal is to be consistent but not to the point where we are degrading the functionality of our code or including code that is unnecessary.
 
-In general, it is up to the developer to browse through our projects to get a feel for the code format we use. A good idea is to clone the main playbook, then search for how Ansible modules are used, and then mimic the format. For instance, if you are adding a task that installs a snap package, then you would search for `community.general.snap:` in the main playbook to see the format we are using.
+In general, it is up to the developer to browse through our projects to get a feel for the code format we use. A good idea is to clone Install Doctor, then search for how Ansible modules are used, and then mimic the format. For instance, if you are adding a task that installs a snap package, then you would search for `community.general.snap:` in the main playbook to see the format we are using.
 
 ### Platform-Specific Roles
 
@@ -274,11 +267,11 @@ If you have a role that only installs software made for Windows 10 then ensure t
   when: ansible_os_family == 'Windows'
 ```
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#code-style)
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#code-style)
 
 ## ➤ Code Style
 
-To elaborate again, we try to follow the same code style across all our Ansible repositories. If something is done one way somewhere, then it should be done the same way elsewhere. It is up to you to [browse through our roles](https://gitlab.com/ProfessorManhattan/Playbooks/-/tree/master/roles) to get a feel for how everything should be styled. You should clone [the main Playbooks repository](https://gitlab.com/ProfessorManhattan/Playbooks), initialize all the submodules either via `npm i` or `git submodule update --init --recursive`, and search through the code base to see how we are _styling_ different task types. Below are some examples:
+To elaborate again, we try to follow the same code style across all our Ansible repositories. If something is done one way somewhere, then it should be done the same way elsewhere. It is up to you to [browse through our roles](project.playbooks/-/tree/master/roles) to get a feel for how everything should be styled. You should clone [the main playbooks repository](project.playbooks) (a.k.a. [Install Doctor](link.installdoctor)), initialize all the submodules either via `bash .start.sh` or `git submodule update --init --recursive`, and search through the code base to see how we are _styling_ different task types. Below are some examples:
 
 ### Arrays
 
@@ -333,7 +326,17 @@ In most cases, a role will require that software package dependencies are met be
 
 For example, say the application being installed is Android Studio. The dependency array should be assigned to a variable titled `androidstudio_dependencies` and placed in `vars/main.yml`.
 
-**BAD**
+**GOOD example of defining the variable in the `vars/main.yml` file**
+
+```yaml
+---
+androidstudio_dependencies:
+  - ffmpeg
+  - coolpackage
+  - anotherpackage
+```
+
+**BAD example of integrating the variable into a task file:**
 
 ```yaml
 - name: "Ensure {{ app_name }}'s dependencies are installed"
@@ -342,7 +345,7 @@ For example, say the application being installed is Android Studio. The dependen
     state: present
 ```
 
-**GOOD**
+**GOOD example of integrating the variable into a task file:**
 
 ```yaml
 - name: "Ensure {{ app_name }}'s dependencies are installed"
@@ -372,11 +375,11 @@ DRY stands for "Don't Repeat Yourself." Whenever there is code that is duplicate
   include_tasks: install-Linux.yml
 ```
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#commenting)
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#commenting)
 
 ## ➤ Commenting
 
-We strive to make our roles easy to understand. Commenting is a major part of making our roles easier to grasp. Several types of comments are supported in such a way that they tie into our automated documentation generation system. This project uses [ansible-autodoc](https://github.com/AndresBott/ansible-autodoc) to scan through specially marked up comments and generate documentation out of them. The module also allows the use of markdown in comments so feel free to bold, italicize, and `code_block` as necessary. Although it is perfectly acceptable to use regular comments, in most cases, you should use one of the following types of _special_ comments:
+We strive to make our roles easy to understand. Commenting is a major part of making our roles easier to grasp. Several types of comments are supported in such a way that they tie into our automated documentation generation system. This project uses [ansible-autodoc](project.autodoc) to scan through specially marked up comments and generate documentation out of them. The module also allows the use of markdown in comments so feel free to bold, italicize, and `code_block` as necessary. Although it is perfectly acceptable to use regular comments, in most cases, you should use one of the following types of _special_ comments:
 
 - [Variable comments](#variable-comments)
 - [Action comments](#action-comments)
@@ -390,11 +393,11 @@ Each variable in `defaults/main.yml` should be added and documented using the fo
 
 <!-- prettier-ignore-start -->
 ```yaml
-  # @var variable_name: default_value
-  # The description of the variable which should be no longer than 160 characters per line.
-  # You can separate the description into new lines so you do not pass the 160 character
-  # limit
-  variable_name: default_value
+ # @var variable_name: default_value
+ # The description of the variable which should be no longer than 160 characters per line.
+ # You can separate the description into new lines so you do not pass the 160 character
+ # limit
+ variable_name: default_value
 ```
 <!-- prettier-ignore-end -->
 
@@ -402,21 +405,21 @@ There are cases where you may want include an example or you can not fit the def
 
 <!-- prettier-ignore-start -->
 ```yaml
-  # @var variable_name: []
-  # The description of the variable which should be no longer than 160 characters per line.
-  # You can separate the description into new lines so you do not pass the 160 character
-  # limit
-  variable_name: []
-  # @example #
-  # variable_name:
-  #   - name: jimmy
-  #     param: henry
-  #   - name: albert
-  # @end
+ # @var variable_name: []
+ # The description of the variable which should be no longer than 160 characters per line.
+ # You can separate the description into new lines so you do not pass the 160 character
+ # limit
+ variable_name: []
+ # @example #
+ # variable_name:
+ #   - name: jimmy
+ #     param: henry
+ #   - name: albert
+ # @end
 ```
 <!-- prettier-ignore-end -->
 
-Each variable/comment block in `defaults/main.yml` should be separated by a line return. You can see an example of a `defaults/main.yml` file using this special [variable syntax in the Docker role](https://gitlab.com/ProfessorManhattan/Playbooks/-/blob/master/roles/virtualization/docker/defaults/main.yml).
+Each variable/comment block in `defaults/main.yml` should be separated by a line return. You can see an example of a `defaults/main.yml` file using this special [variable syntax in the Docker role](repository.group.ansible_roles/docker/defaults/main.yml).
 
 ### Action Comments
 
@@ -424,35 +427,35 @@ Action comments allow us to describe what the role does. Each action comment sho
 
 #### Example Action Comment Implementation
 
-The following is an example of the implementation of action comments. You can find the [source here](https://gitlab.com/ProfessorManhattan/Playbooks/-/blob/master/roles/virtualization/docker/tasks/main.yml) as well as an example of why and how you would include an [action comment outside of the `tasks/main.yml` file here](https://gitlab.com/ProfessorManhattan/Playbooks/-/blob/master/roles/virtualization/docker/tasks/compose-Darwin.yml).
+The following is an example of the implementation of action comments. You can find the [source here](repository.group.ansible_roles/docker/tasks/main.yml) as well as an example of why and how you would include an [action comment outside of the `tasks/main.yml` file here](repository.group.ansible_roles/docker/tasks/compose-Darwin.yml).
 
 <!-- prettier-ignore-start -->
 ```yaml
-  # @action Ensures Docker is installed
-  # Installs Docker on the target machine.
-  # @action Ensures Docker is installed
-  # Ensures Docker is started on boot.
-  - name: Include tasks based on the operating system
-    block:
-      - include_tasks: 'install-ansible_os_family.yml'
-    when: not docker_snap_install
+ # @action Ensures Docker is installed
+ # Installs Docker on the target machine.
+ # @action Ensures Docker is installed
+ # Ensures Docker is started on boot.
+ - name: Include tasks based on the operating system
+   block:
+     - include_tasks: 'install-{{ ansible_os_family }}.yml'
+   when: not docker_snap_install
 
-  # @action Ensures Docker is installed
-  # If the target Docker host is a Linux machine and the `docker_snap_install` variable
-  # is set to true, then Docker will be installed as a snap package.
-  - name: Install Docker via snap
-    community.general.snap:
-      name: docker
-    when:
-      - ansible_os_family not in ('Windows', 'Darwin')
-      - docker_snap_install
+ # @action Ensures Docker is installed
+ # If the target Docker host is a Linux machine and the `docker_snap_install` variable
+ # is set to true, then Docker will be installed as a snap package.
+ - name: Install Docker via snap
+   community.general.snap:
+     name: docker
+   when:
+     - ansible_os_family not in ('Windows', 'Darwin')
+     - docker_snap_install
 
-  # @action Installs Docker Compose
-  # Installs Docker Compose if the `docker_install_compose` variable is set to true.
-  - name: Install Docker Compose (based on OS)
-    block:
-      - include_tasks: 'compose-ansible_os_family.yml'
-    when: docker_install_compose | bool
+ # @action Installs Docker Compose
+ # Installs Docker Compose if the `docker_install_compose` variable is set to true.
+ - name: Install Docker Compose (based on OS)
+   block:
+     - include_tasks: 'compose-{{ ansible_os_family }}.yml'
+   when: docker_install_compose | bool
 ```
 <!-- prettier-ignore-end -->
 
@@ -514,38 +517,38 @@ Notice how the title for _improvement_ is not capitalized. It should be capitali
   - improvement
   - test
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#updating-meta-files-and-documentation)
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#updating-meta-files-and-documentation)
 
 ## ➤ Updating Meta Files and Documentation
 
-Since we have hundreds of Ansible roles to maintain, the majority of the files inside each role are shared across all our Ansible projects. We synchronize these common files across all our repositories with the `.start.sh` file. This file is automatically called when you run `npm i`. If you would like to update the project without running `npm i`, you can also just directly call the script by running `bash .start.sh`. You might want to do this to get the latest upstream changes or if you make an edit to the `.blueprint.json` file.
+Since we have hundreds of Ansible roles to maintain, the majority of the files inside each role are shared across all our Ansible projects. We synchronize these common files across all our repositories with various build tools. When you clone a new repository, the first command you should run is `bash .start.sh`. This will run the full build sequence and ensure everything is up-to-date. To synchronize the project at a later point in time, you should leverage the `task -l` command which will show you a list of available tasks.
 
-### `.blueprint.json` and @appnest/readme
+### The `"blueprint" package.json` Field and `@appnest/readme`
 
-In the root of all of our Ansible repositories, we include a file named `.blueprint.json`. This file stores variables that are used in our `.start.sh` script. Most of the variables stored in `.blueprint.json` are used for generating documentation. All of our documentation is generated using variables and document partials that we feed into a project called [@appnest/readme](https://github.com/andreasbm/readme) (which is in charge of generating the final README/CONTRIBUTING guides). When @appnest/readme is run, it includes the variables stored in `.blueprint.json` in the context that it uses to inject variables in the documentation. You can view the documentation partials by checking out the `./.modules/docs` folder which is a submodule that is shared across all of our Ansible projects.
+In the root of all of our Ansible repositories, we include a file named `package.json`. In the key named `"blueprint"`, there are variables that are used in our build tools. Most of the variables stored in `"blueprint"` are used for generating documentation. All of our documentation is generated using variables and document partials that we feed into a project called `[@appnest/readme](misc.appnest)` (which is in charge of generating the final README/CONTRIBUTING guides). When `@appnest/readme` is run, it includes the variables stored in `"blueprint"` in the context that it uses to inject variables in the documentation. You can view the documentation partials by checking out the `./.common` folder which is a submodule that is shared across all of our Ansible projects.
 
-For every role that is included in our eco-system, we require certain fields to be filled out in the `.blueprint.json` file. Lucky for you, most of the fields in the file are auto-generated. The fields that need to be filled out as well as descriptions of what they should contain are listed in the chart below:
+For every role that is included in our eco-system, we require certain fields to be filled out in the `"blueprint"` section of the `package.json` file. Lucky for you, most of the fields in the file are auto-generated. The fields that need to be filled out as well as descriptions of what they should contain are listed in the chart below:
 
-| Variable Name                    | Variable Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `role_description_full_overview` | This variable should be a description of what the role installs. You can usually find a good description by Googling, "What is Android Studio," for example if you were populating this variable for the [Android Studio role](https://gitlab.com/megabyte-labs/ansible-roles/androidstudio). This text is shown at the top of the README, right below the header section and before the table of contents. Whenever possible, key products/terms should be linked to using markdown. You can see an example of us hyperlinking in this variable by checking out the [Android Studio role](https://gitlab.com/megabyte-labs/ansible-roles/androidstudio). The idea is to make it as easy as possible for our users to figure out exactly what the role does. |
-| `role_pretty_name`               | This should be the official name for the product that the role installs/configures. It is used in the title of the README and throughout the documentation to refer to the product.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| Variable Name                    | Variable Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `role_description_full_overview` | This variable should be a description of what the role installs. You can usually find a good description by Googling, "What is Android Studio," for example if you were populating this variable for the [Android Studio role]({{ repository.group.ansible_roles }}/androidstudio). This text is shown at the top of the README, right below the header section and before the table of contents. Whenever possible, key products/terms should be linked to using markdown. You can see an example of us hyperlinking in this variable by checking out the [Android Studio role]({{ repository.group.ansible_roles }}/androidstudio). The idea is to make it as easy as possible for our users to figure out exactly what the role does. |
+| `role_pretty_name`               | This should be the official name for the product that the role installs/configures. It is used in the title of the README and throughout the documentation to refer to the product.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 
 ### `meta/main.yml` Description
 
-The most important piece of text in each of our Ansible projects is the [Ansible Galaxy](https://galaxy.ansible.com/) description located in `meta/main.yml`. This text is used in search results on Ansible Galaxy and GitHub. It is also spun to generate multiple variants so it has to be worded in a way that makes sense with our different variants. Take the following as an example:
+The most important piece of text in each of our Ansible projects is the [Ansible Galaxy](profile_link.galaxy) description located in `meta/main.yml`. This text is used in search results on Ansible Galaxy and GitHub. It is also spun to generate multiple variants so it has to be worded in a way that makes sense with our different variants. Take the following as an example:
 
 **The `meta/main.yml` description example:**
 
-- Installs Android Studio and sets up Android SDKs on nearly any OS
+- _Installs Android Studio and sets up Android SDKs on nearly any OS_
 
 **Gets spun and used by our automated documentation framework in the following formats:**
 
-- Installs Android Studio and sets up Android SDKs on nearly any OS
-- An Ansible role that installs Android Studio and sets up Android SDKs on nearly any OS
-- This repository is the home of an Ansible role that installs Ansible Studio and sets up Android SDKs on nearly any OS.
+- _Installs Android Studio and sets up Android SDKs on nearly any OS_
+- An Ansible role that _installs Android Studio and sets up Android SDKs on nearly any OS_
+- This repository is the home of an Ansible role that _installs Ansible Studio and sets up Android SDKs on nearly any OS_.
 
-It is important that all three variants of the `meta/main.yml` description make sense and be proper English. The `meta/main.yml` description should succinctly describe what the role does and possibly even describe what the product does if it is not well-known like Android Studio. An example of a description that includes an overview of the product would be something like "Installs HTTPie (a user-friendly, command-line HTTP client) on nearly any platform" for the [HTTPie role](https://gitlab.com/megabyte-labs/ansible-roles/httpie) or "Installs Packer (an automation tool for building machine images) on nearly any platform" for the [Packer role](https://gitlab.com/megabyte-labs/ansible-roles/packer).
+It is important that all three variants of the `meta/main.yml` description make sense and be proper English. The `meta/main.yml` description should succinctly describe what the role does and possibly even describe what the product does if it is not well-known like Android Studio. An example of a description that includes an overview of the product would be something like, "Installs HTTPie (a user-friendly, command-line HTTP client) on nearly any platform," for the [HTTPie role](profile_link.github/profile.github/ansible-httpie) or "Installs Packer (an automation tool for building machine images) on nearly any platform" for the [Packer role](profile_link.github/profile.github/ansible-packer).
 
 ### `logo.png`
 
@@ -554,10 +557,10 @@ We include a `logo.png` file in all of our Ansible projects. This image is autom
 1. Use Google image search to find a logo that best represents the product. Ensure the image is a `.png` file and that it has a transparent background, if possible. Ideally, the image should be the official logo for software that the Ansible role/project installs. The image should be at least 200x200 pixels.
 2. After downloading the image, ensure you have the sharp-cli installed by running `npm install -g sharp-cli`.
 3. Resize the image to 200x200 pixels by running `sharp -i file_location.png -o logo.png resize 200 200`.
-4. Compress the resized image by dragging and dropping the resized image into the [TinyPNG web application](https://tinypng.com/).
+4. Compress the resized image by dragging and dropping the resized image into the [TinyPNG web application](misc.tinypng).
 5. Download the compressed image and add it to the root of the Ansible project. Make sure it is named `logo.png`.
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#testing)
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#testing)
 
 ## ➤ Testing
 
@@ -567,7 +570,7 @@ You can test all of the operating systems we support by running the following co
 molecule test
 ```
 
-The command `molecule test` will spin up VirtualBox VMs for all the OSes we support and run the role(s). _Do this before committing code._ If you are committing code for only one OS and can not create the fix or feature for the other operating systems then please, at the very minimum, [file an issue](https://gitlab.com/ProfessorManhattan/Playbooks/-/issues/new) so someone else can pick it up.
+The command `molecule test` will spin up VirtualBox VMs for all the OSes we support and run the role(s). _Do this before committing code._ If you are committing code for only one OS and can not create the fix or feature for the other operating systems then please, at the very minimum, [file an issue](repository.group.ansible_roles/galaxy_info.role_namerepository.location.issues) so someone else can pick it up.
 
 ### Idempotence
 
@@ -636,12 +639,12 @@ The chart below provides a list of the scenarios we include in all of our Ansibl
 
 You might have noticed that there are no CI tests in the chart above for macOS and Windows. Due to the limitations of Docker, we use other methods to test macOS and Windows automatically with CI. After a project has passed various linting tests on GitLab CI, the following methods are used to test the project/role:
 
-- Linux platforms are tested using Molecule and Docker on GitLab CI in parallel. ([Link to GitLab CI configuration](https://gitlab.com/megabyte-labs/ci/gitlab-ci-templates/-/blob/master/molecule.gitlab-ci.yml))
-- Windows is tested using GitLab CI without Molecule. ([Link to GitLab CI configuration](https://gitlab.com/megabyte-labs/ci/gitlab-ci-templates/-/blob/master/windows-ansible-test.gitlab-ci.yml))
-- macOS is tested using GitHub Actions after the code is automatically synchronized between GitLab and GitHub. ([Link to sample GitHub Action configuration](https://gitlab.com/megabyte-labs/ansible-roles/androidstudio/-/blob/master/.github/workflows/macOS.yml))
+- Linux platforms are tested using Molecule and Docker on GitLab CI in parallel. ([Link to GitLab CI configuration](repository.group.ci/-/blob/master/molecule.gitlab-ci.yml))
+- Windows is tested using GitLab CI without Molecule. ([Link to GitLab CI configuration](repository.group.ci/-/blob/master/windows-ansible-test.gitlab-ci.yml))
+- macOS is tested using GitHub Actions after the code is automatically synchronized between GitLab and GitHub. ([Link to the macOS GitHub Action configuration](repo/-/blob/master/.github/workflows/macOS.yml))
 - If all the GitLab tests succeed (i.e. Linux/Windows), then a final E2E test that includes all the platforms is run using the `default` scenario with VirtualBox. In this stage, the compatibility matrix is generated. This test is also run on a cron to ensure our compatibility matrixes are up-to-date.
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)](#linting)
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#linting)
 
 ## ➤ Linting
 
@@ -679,4 +682,4 @@ Here is an example of code that will remove the error:
 
 #### [305] Use shell only when shell functionality is required
 
-Only use the Ansible `shell:` task when absolutely necessary. If you get this error then test if replacing `shell:` with `command:` resolves the error. If that does not work and you can not figure out how to properly configure the environment for `command:` to work, then you can add `# noqa 305` at the end of the line that includes the `name:` property. The same is true for other linting errors - `# noqa` followed by the reported lint error code will instruct ansible-lint to ignore the error.
+Only use the Ansible `shell:` task when absolutely necessary. If you get this error then test if replacing `shell:` with `command:` resolves the error. If that does not work and you can not figure out how to properly configure the environment for `command:` to work, then you can add `# noqa 305` at the end of the line that includes the `name:` property. The same is true for other linting errors - `# noqa` followed by the reported lint error code will instruct `ansible-lint` to ignore the error.
