@@ -1,0 +1,1 @@
+windows-docker ansible_user=packer_user ansible_password=Password ansible_connection=winrm ansible_winrm_transport=basic
