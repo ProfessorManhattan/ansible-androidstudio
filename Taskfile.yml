@@ -1,0 +1,26 @@
+---
+version: '3'
+
+env:
+  GALAXY_NAMESPACE:
+    sh: yq e '.galaxy_info.namespace' meta/main.yml
+  GALAXY_ROLE_NAME:
+    sh: yq e '.galaxy_info.role_name' meta/main.yml
+  REPOSITORY_SUBTYPE:
+    sh: if [ -d environments ]; then echo playbook; else echo role; fi
+  REPOSITORY_TYPE: ansible
+
+includes:
+  system: ./.common/taskfiles-{{.REPOSITORY_SUBTYPE}}/Taskfile-{{OS}}.yml
+  lint: ./.common/taskfiles-{{.REPOSITORY_SUBTYPE}}/Taskfile-lint.yml
+  fix: ./.common/taskfiles-{{.REPOSITORY_SUBTYPE}}/Taskfile-lint.yml
+  common: ./.common/taskfiles-{{.REPOSITORY_SUBTYPE}}/Taskfile-common.yml
+  ansible: ./.common/taskfiles/Taskfile-{{.REPOSITORY_SUBTYPE}}.yml
+
+tasks:
+  fix:
+    desc: Apply automatic code formatting techniques
+    deps: [fix-formatting, fix-python, fix-scripts]
+  lint:
+    desc: Lint the project by running all the linters in parallel
+    deps: [lint-ansible, lint-dockerfiles, lint-python, lint-yaml]
