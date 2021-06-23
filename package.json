@@ -57,6 +57,16 @@
     "update": "bash .start.sh && cp ./.modules/ansible/.start.sh .start.sh",
     "version": "standard-version --no-verify"
   },
+  "blueprint": {
+    "ansible_galaxy_project_id": "",
+    "compatibility_date": "",
+    "compatibility_matrix": [],
+    "name": "Android Studio",
+    "overview": "[Android Studio](https://developer.android.com/studio) is the official integrated development environment for Google's Android operating system, built on JetBrains' IntelliJ IDEA software and designed specifically for Android development.",
+    "repo": "https://gitlab.com/megabyte-labs/ansible-roles/androidstudio",
+    "role_descriptions": [],
+    "title": "Android Studio - An IDE for Android Development"
+  },
   "config": {
     "commitizen": {
       "path": "cz-conventional-changelog"
