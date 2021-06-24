@@ -1,2 +1,0 @@
-
-43b090deb47f28a229e044c56132e46261951365	{"key":"make-fetch-happen:request-cache:https://registry.npmjs.org/arrify/-/arrify-1.0.1.tgz","integrity":"sha1-iYUI2iIm84DfkEcoRWhJwVAaSw0=","time":1623738092763,"size":1452,"metadata":{"url":"https://registry.npmjs.org/arrify/-/arrify-1.0.1.tgz","reqHeaders":{},"resHeaders":{"cache-control":"public, immutable, max-age=31557600","content-type":"application/octet-stream","date":"Tue, 15 Jun 2021 06:21:30 GMT","etag":"\"dd458aff4c13c9ec001ac1477ec3e7a2\"","last-modified":"Sat, 26 May 2018 17:22:59 GMT","vary":"Accept-Encoding"}}}

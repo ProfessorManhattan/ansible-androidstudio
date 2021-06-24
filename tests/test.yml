@@ -1,4 +1,0 @@
----
-- hosts: localhost:windows-docker
-  roles:
-    - role: androidstudio
