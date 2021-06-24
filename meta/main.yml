@@ -1,6 +1,7 @@
 ---
 galaxy_info:
   role_name: androidstudio
+  namespace: professormanhattan
   author: professormanhattan
   description: Installs Android Studio and sets up Android SDKs on nearly any OS
   company: Megabyte Labs

@@ -1,0 +1,8 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+. "./.common/scripts/log.sh"
+
+npm run lint-staged
+task spelling
+success "Successfully validated the commit"

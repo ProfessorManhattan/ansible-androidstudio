@@ -1,0 +1,4 @@
+---
+- hosts: localhost:windows-docker
+  roles:
+    - role: { { PROJECT_FOLDER_NAME } }

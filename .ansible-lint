@@ -1,0 +1,9 @@
+exclude_paths:
+  - .github/
+  - .gitlab/
+  - .modules/
+  - molecule/
+  - node_modules/
+  - roles/
+
+skip_list: []
