@@ -1,6 +1,6 @@
 <!-- ⚠️ This README has been generated from the file(s) ".common/docs/blueprint-readme-role.md" ⚠️--><div align="center">
   <center>
-    <a href="https://github.com/ProfessorManhattan/ansible-galaxy_info.role_name">
+    <a href="https://github.com/ProfessorManhattan/ansible-androidstudio">
       <img width="140" height="140" alt="Android Studio logo" src="https://gitlab.com/megabyte-labs/ansible-roles/androidstudio/-/raw/master/logo.png" />
     </a>
   </center>
@@ -15,10 +15,10 @@
     <a href="https://megabyte.space" title="Megabyte Labs homepage" target="_blank">
       <img src="project.assets/svg/home-solid.svg" />
     </a>
-    <a href="https://galaxy.ansible.com/professormanhattan/galaxy_info.role_name" title="Android Studio role on Ansible Galaxy" target="_blank">
+    <a href="https://galaxy.ansible.com/professormanhattan/androidstudio" title="Android Studio role on Ansible Galaxy" target="_blank">
       <img height="50" src="project.assets/svg/ansible-galaxy.svg" />
     </a>
-    <a href="https://gitlab.com/megabyte-labs/ansible-roles/galaxy_info.role_name/-/blob/master/CONTRIBUTING.md" title="Learn about contributing" target="_blank">
+    <a href="https://gitlab.com/megabyte-labs/ansible-roles/androidstudio/-/blob/master/CONTRIBUTING.md" title="Learn about contributing" target="_blank">
       <img src="project.assets/svg/contributing-solid.svg" />
     </a>
     <a href="https://www.patreon.com/ProfessorManhattan" title="Support us on Patreon" target="_blank">
@@ -27,39 +27,39 @@
     <a href="https://app.slack.com/client/T01ABCG4NK1/C01NN74H0LW/details/" title="Slack chat room" target="_blank">
       <img src="project.assets/svg/chat-solid.svg" />
     </a>
-    <a href="https://github.com/ProfessorManhattan/ansible-galaxy_info.role_name" title="GitHub mirror" target="_blank">
+    <a href="https://github.com/ProfessorManhattan/ansible-androidstudio" title="GitHub mirror" target="_blank">
       <img src="project.assets/svg/github-solid.svg" />
     </a>
-    <a href="https://gitlab.com/megabyte-labs/ansible-roles/galaxy_info.role_name" title="GitLab repository" target="_blank">
+    <a href="https://gitlab.com/megabyte-labs/ansible-roles/androidstudio" title="GitLab repository" target="_blank">
       <img src="project.assets/svg/gitlab-solid.svg" />
     </a>
   </h4>
   <p align="center">
-    <a href="https://galaxy.ansible.com/professormanhattan/galaxy_info.role_name" target="_blank">
-      <img alt="Ansible Galaxy role: professormanhattan.galaxy_info.role_name" src="https://img.shields.io/ansible/role/ansible_galaxy_project_id?logo=ansible&style=flat" />
+    <a href="https://galaxy.ansible.com/professormanhattan/androidstudio" target="_blank">
+      <img alt="Ansible Galaxy role: professormanhattan.androidstudio" src="https://img.shields.io/ansible/role/ansible_galaxy_project_id?logo=ansible&style=flat" />
     </a>
-    <a href="https://github.com/ProfessorManhattan/ansible-galaxy_info.role_name" target="_blank">
+    <a href="https://github.com/ProfessorManhattan/ansible-androidstudio" target="_blank">
       <img alt="Version: 1.0.4" src="https://img.shields.io/badge/version-1.0.4-blue.svg?cacheSeconds=2592000" />
     </a>
-    <a href="{{ https://github.com/ProfessorManhattan/ansible-galaxy_info.role_name/actions/Windows.yml" target="_blank">
-      <img alt="Windows 10 build status" src="https://img.shields.io/github/workflow/status/ProfessorManhattan/ansible-galaxy_info.role_name/Windows/master?color=cyan&label=Windows%20build&logo=windows&style=flat">
+    <a href="{{ https://github.com/ProfessorManhattan/ansible-androidstudio/actions/Windows.yml" target="_blank">
+      <img alt="Windows 10 build status" src="https://img.shields.io/github/workflow/status/ProfessorManhattan/ansible-androidstudio/Windows/master?color=cyan&label=Windows%20build&logo=windows&style=flat">
     </a>
-    <a href="https://github.com/ProfessorManhattan/ansible-galaxy_info.role_name/actions/macOS.yml" target="_blank">
+    <a href="https://github.com/ProfessorManhattan/ansible-androidstudio/actions/macOS.yml" target="_blank">
       <img alt="macOS build status" src="https://img.shields.io/github/workflow/status/ProfessorManhattan/ansible-role_name/macOS/master?label=macOS%20build&logo=apple&style=flat">
     </a>
-    <a href="https://gitlab.com/megabyte-labs/ansible-roles/galaxy_info.role_name/commits/master" target="_blank">
+    <a href="https://gitlab.com/megabyte-labs/ansible-roles/androidstudio/commits/master" target="_blank">
       <img alt="Linux build status" src="https://gitlab.com/megabyte-labs/ansible-roles/role_name/badges/master/pipeline.svg">
     </a>
-    <a href="https://galaxy.ansible.com/professormanhattan/galaxy_info.role_name" target="_blank" title="Ansible Galaxy quality score (out of 5)">
+    <a href="https://galaxy.ansible.com/professormanhattan/androidstudio" target="_blank" title="Ansible Galaxy quality score (out of 5)">
       <img alt="Ansible Galaxy quality score" src="https://img.shields.io/ansible/quality/ansible_galaxy_project_id?logo=ansible&style=flat" />
     </a>
-    <a href="https://galaxy.ansible.com/professormanhattan/galaxy_info.role_name" target="_blank">
+    <a href="https://galaxy.ansible.com/professormanhattan/androidstudio" target="_blank">
       <img alt="Ansible Galaxy downloads" src="https://img.shields.io/ansible/role/d/53381?logo=ansible&style=flat">
     </a>
     <a href="https://megabyte.space/docs/ansible" target="_blank">
       <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg?logo=readthedocs&style=flat" />
     </a>
-    <a href="https://gitlab.com/megabyte-labs/ansible-roles/galaxy_info.role_name/-/raw/master/LICENSE" target="_blank">
+    <a href="https://gitlab.com/megabyte-labs/ansible-roles/androidstudio/-/raw/master/LICENSE" target="_blank">
       <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-yellow.svg?style=flat" />
     </a>
     <a href="https://opencollective.com/megabytelabs" title="Support us on Open Collective" target="_blank">
@@ -77,9 +77,9 @@
   </p>
 </div>
 
-> </br><h3 align="center">**galaxy_info.description**</h3></br>
+> </br><h3 align="center">**Installs Android Studio and sets up Android SDKs on nearly any OS**</h3></br>
 
-<!--TERMINALIZE![terminalizer_title](https://gitlab.com/megabyte-labs/ansible-roles/galaxy_info.role_name/-/raw/master/.demo.gif)TERMINALIZE-->
+<!--TERMINALIZE![terminalizer_title](https://gitlab.com/megabyte-labs/ansible-roles/androidstudio/-/raw/master/.demo.gif)TERMINALIZE-->
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#one-line-install-method)
 
@@ -90,13 +90,13 @@ Looking to install Android Studio without having to deal with [Ansible](https://
 **Linux/macOS:**
 
 ```shell
-curl -sS https://install.doctor/galaxy_info.role_name | bash
+curl -sS https://install.doctor/androidstudio | bash
 ```
 
 **Windows:**
 
 ```powershell
-Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://win.install.doctor/galaxy_info.role_name'))
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://win.install.doctor/androidstudio'))
 ```
 
 **Important Note:** _Before running the commands above you should probably directly access the URL to make sure the code is legit. We already know it is safe but, before running any script on your computer, you should inspect it._
@@ -132,9 +132,9 @@ alternative_description [Android Studio](https://developer.android.com/studio) i
 
 ### Ensures Android Studio is installed:
 
+- Installs Android Studio on macOS using Homebrew
 - Installs Android Studio on Linux using [snap](https://gitlab.com/megabyte-labs/ansible-roles/snapd)
 - Installs Android Studio on Windows using chocolatey
-- Installs Android Studio on macOS using Homebrew
 - Installs Android Studio on Archlinux, CentOS, Debian, Fedora, macOS, Ubuntu, and Windows
 
 ### Ensures configured Android SDKs are present:

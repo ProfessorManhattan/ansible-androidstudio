@@ -31,6 +31,7 @@ __pycache__/
 .Trash-*
 .Trashes
 .vagrant/
+.variables.json
 .vault_pass
 .venv
 .VolumeIcon.icns

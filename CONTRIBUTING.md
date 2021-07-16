@@ -224,7 +224,7 @@ source venv/bin/activate
 
 ## ➤ Pull Requests
 
-All pull requests should be associated with issues. Although not strictly required, the pull requests should be made to [the GitLab repository issues board](https://gitlab.com/megabyte-labs/ansible-roles/galaxy_info.role_name/-/issues) instead of the [GitHub mirror repository](https://github.com/ProfessorManhattan/ansible-galaxy_info.role_name). This is because we use GitLab as our primary repository and mirror the changes to GitHub for the community.
+All pull requests should be associated with issues. Although not strictly required, the pull requests should be made to [the GitLab repository issues board](https://gitlab.com/megabyte-labs/ansible-roles/androidstudio/-/issues) instead of the [GitHub mirror repository](https://github.com/ProfessorManhattan/ansible-androidstudio). This is because we use GitLab as our primary repository and mirror the changes to GitHub for the community.
 
 ### How to Commit Code
 
@@ -584,7 +584,7 @@ You can test all of the operating systems we support by running the following co
 molecule test
 ```
 
-The command `molecule test` will spin up VirtualBox VMs for all the OSes we support and run the role(s). _Do this before committing code._ If you are committing code for only one OS and can not create the fix or feature for the other operating systems then please, at the very minimum, [file an issue](https://gitlab.com/megabyte-labs/ansible-roles/galaxy_info.role_name/-/issues) so someone else can pick it up.
+The command `molecule test` will spin up VirtualBox VMs for all the OSes we support and run the role(s). _Do this before committing code._ If you are committing code for only one OS and can not create the fix or feature for the other operating systems then please, at the very minimum, [file an issue](https://gitlab.com/megabyte-labs/ansible-roles/androidstudio/-/issues) so someone else can pick it up.
 
 ### Idempotence
 
