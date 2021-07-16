@@ -1,15 +1,3 @@
-[submodule ".modules/ansible"]
-  path = .modules/ansible
-  url = https://gitlab.com/megabyte-space/common/ansible.git
-  branch = master
-[submodule ".modules/docs"]
-  path = .modules/docs
-  url = https://gitlab.com/megabyte-space/documentation/ansible.git
-  branch = master
-[submodule ".modules/shared"]
-  path = .modules/shared
-  url = https://gitlab.com/megabyte-space/common/shared.git
-  branch = master
 [submodule ".common"]
   path = .common
   url = https://gitlab.com/megabyte-labs/common/ansible.git
