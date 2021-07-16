@@ -2,6 +2,7 @@ ansible-base
 ansible-lint<5.0.0
 black
 flake8
+mod-ansible-autodoc
 molecule-docker
 molecule-vagrant
 pre-commit-hooks

@@ -4,4 +4,4 @@
   vars:
     ansible_user: vagrant
   roles:
-    - role: { { PROJECT_FOLDER_NAME } }
+    - role: '.'

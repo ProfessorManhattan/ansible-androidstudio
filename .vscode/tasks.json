@@ -1,0 +1,44 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Update: Update/initialize the project",
+      "type": "shell",
+      "command": "task update"
+    },
+    {
+      "label": "Fix: Automatically apply code formatting adjustments",
+      "type": "shell",
+      "command": "task fix"
+    },
+    {
+      "label": "Lint: Run all the linters in parallel",
+      "type": "shell",
+      "command": "task lint"
+    },
+    {
+      "label": "Setup: Ensure all project dependencies are installed",
+      "type": "shell",
+      "command": "ADDITIONAL_PACKAGES=packer,python,taskfile,jq,wget,yq curl -sS https://install.doctor/node | bash",
+      "windows": {
+        "command": "Set-Variables -Name \"ADDITIONAL_PACKAGES\" -Value \"packer,taskfile,jq,yq\"; Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://win.install.doctor/node'))"
+      }
+    },
+    {
+      "label": "Setup: Ensure Docker is installed (requires elevated permissions)",
+      "type": "shell",
+      "command": "curl -sS https://install.doctor/docker | bash",
+      "windows": {
+        "command": "Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://win.install.doctor/docker'))"
+      }
+    },
+    {
+      "label": "Setup: Ensure VirtualBox is installed (requires elevated permissions)",
+      "type": "shell",
+      "command": "curl -sS https://install.doctor/virtualbox | bash",
+      "windows": {
+        "command": "Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://win.install.doctor/virtualbox'))"
+      }
+    }
+  ]
+}

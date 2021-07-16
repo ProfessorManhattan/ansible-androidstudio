@@ -1,10 +1,7 @@
 __pycache__/
-!.vscode/extensions.json
-!.vscode/launch.json
-!.vscode/settings.json
-!.vscode/tasks.json
 ._*
 .apdisk
+.autodoc/
 .AppleDB
 .AppleDesktop
 .AppleDouble
@@ -28,6 +25,7 @@ __pycache__/
 .nyc_output/
 .pytest_cache/
 .Spotlight-V100
+.task/
 .TemporaryItems
 .tox/
 .Trash-*
@@ -36,7 +34,6 @@ __pycache__/
 .vault_pass
 .venv
 .VolumeIcon.icns
-.vscode/*
 *.box
 *.code-workspace
 *.cover

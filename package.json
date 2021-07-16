@@ -1,10 +1,10 @@
 {
-  "name": "@megabytelabs/ansible-androidstudio",
-  "version": "1.0.0",
-  "description": "An Ansible role that installs Android Studio and sets up Android SDKs on nearly any OS",
+  "name": "@megabytelabs/ansible-",
+  "version": "1.0.4",
+  "description": "",
   "license": "MIT",
   "author": "Brian Zalewski <brian@megabyte.space> (https://megabyte.space)",
-  "homepage": "https://install.doctor",
+  "homepage": "https://megabyte.space",
   "repository": {
     "type": "git",
     "url": "git+https://gitlab.com/megabyte-labs/ansible-roles/androidstudio.git"
@@ -13,7 +13,17 @@
     "email": "help@megabyte.space",
     "url": "https://gitlab.com/megabyte-labs/ansible-roles/androidstudio/-/issues"
   },
+  "type": "module",
   "scripts": {
+    "commit": "git-cz",
+    "fix:prettier": "prettier --write . && prettier-package-json --write package.json",
+    "fix:shellcheck": "find . -type d \\( -name .cache -o -name .git -o -name .modules  -o -name node_modules -o -name .husky -o -name venv \\) -prune -o -type f \\( -name \\*.sh -o -name \\*.sh.j2 \\) -print0 | xargs -0 shellcheck -f diff | git apply",
+    "info": "npm-scripts-info",
+    "postinstall": "if [ -d .git ]; then husky install; fi && if [ -f .husky/pre-commit ]; then chmod 755 .husky/pre-commit; fi",
+    "lint-staged": "lint-staged",
+    "lint:prettier": "prettier --list-different .",
+    "lint:shellcheck": "find . -type d \\( -name .cache -o -name .git -o -name .modules  -o -name node_modules -o -name .husky -o -name venv \\) -prune -o -type f \\( -name \\*.sh -o -name \\*.sh.j2 \\) -print0 | xargs -0 -r -n1 shellcheck",
+    "misc:markdown-links": "find . -type d \\( -name .cache -o -name .git -o -name .github -o -name .gitlab -o -name .modules  -o -name node_modules \\) -prune -o -type f \\( -name \\*.md \\) -print0 | xargs -0 -r -n1 markdown-link-check",
     "version": "standard-version --no-verify"
   },
   "config": {
@@ -22,22 +32,42 @@
     }
   },
   "dependencies": {},
-  "devDependencies": {},
+  "devDependencies": {
+    "@megabytelabs/prettier-config": "^1.0.0",
+    "cspell": "^5.6.6",
+    "cz-conventional-changelog": "^3.3.0",
+    "husky": "^6.0.0",
+    "inquirer": "^6.5.2",
+    "lint-staged": "^11.0.0",
+    "markdown-link-check": "^3.8.7",
+    "prettier": "^2.3.1",
+    "prettier-package-json": "^2.6.0",
+    "prettier-plugin-sh": "^0.6.1",
+    "shellcheck": "^1.0.0",
+    "signale": "^1.4.0",
+    "standard-version": "^9.3.0"
+  },
   "keywords": [
-    "androidstudio",
+    "",
     "ansible",
     "archlinux",
     "centos",
     "debian",
+    "doctor",
     "fedora",
+    "install",
+    "installdoctor",
     "macos",
     "megabytelabs",
     "molecule",
-    "playbook",
     "professormanhattan",
+    "role",
     "ubuntu",
     "windows"
   ],
+  "engines": {
+    "node": ">=10"
+  },
   "blueprint": {
     "ansible_galaxy_project_id": "",
     "compatibility_date": "",
@@ -48,16 +78,61 @@
     "role_descriptions": [],
     "title": "Android Studio - An IDE for Android Development"
   },
+  "funding": [
+    {
+      "type": "opencollective",
+      "url": "https://opencollective.com/megabytelabs"
+    },
+    {
+      "type": "patreon",
+      "url": "https://www.patreon.com/ProfessorManhattan"
+    }
+  ],
   "lint-staged": {
+    "**/*": [
+      "check-merge-conflict",
+      "check-added-large-files",
+      "check-case-conflict",
+      "check-docstring-first",
+      "check-executables-have-shebangs",
+      "check-symlinks",
+      "detect-private-key"
+    ],
+    "**/*.{js,json,md,ts,yml}": [
+      "prettier --write"
+    ],
+    "**/*.{js}": [
+      "npx standard --fix"
+    ],
+    "**/*.{sh,sh.j2}": [
+      "prettier --write",
+      "shellcheck"
+    ],
+    "**/*.xml": [
+      "check-xml"
+    ],
+    "**/*.yml": [
+      "check-yaml",
+      "yamllint -s"
+    ],
     "package.json": [
       "prettier-package-json --write"
     ],
-    "{**/*.sh,**/*.sh.j2": [
-      "prettier --write",
-      "docker run -v \"$PWD:/mnt\" koalaman/shellcheck"
+    "requirements.txt": [
+      "requirements-txt-fixer"
     ],
-    "{**/*.yml,**/*.json}": [
-      "prettier --write"
+    ".gitlab-ci.yml": [
+      "npx gitlab-ci-lint"
+    ],
+    "**/*.{py}": [
+      "black",
+      "flake8"
     ]
+  },
+  "prettier": "@megabytelabs/prettier-config-ansible",
+  "standard-version": {
+    "scripts": {
+      "prerelease": "git add --all"
+    }
   }
 }
