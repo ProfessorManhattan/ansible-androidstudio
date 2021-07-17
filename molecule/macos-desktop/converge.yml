@@ -4,4 +4,4 @@
   vars:
     ansible_user: vagrant
   roles:
-    - role: 'professormanhattan.androidstudio'
+    - role: "professormanhattan.androidstudio"

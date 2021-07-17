@@ -1,5 +1,8 @@
 .cache/
+.common/
 .git/
+.github/
+.gitlab/
 .gitmodules
 .husky/_/husky.sh
 .modules/
@@ -12,4 +15,5 @@ build/
 Dockerfile
 scripts/*.symlink.sh
 slim_test/
+Taskfile.yml
 venv/
