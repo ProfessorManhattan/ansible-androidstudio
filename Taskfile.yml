@@ -12,8 +12,8 @@ vars:
   REPOSITORY_TYPE: ansible
 
 includes:
-  software: ./.common/taskfiles-role/Taskfile-{{OS}}.yml
   common: ./.common/taskfiles-role/Taskfile-common.yml
+  ansible: ./.common/taskfiles-role/Taskfile-ansible.yml
   fix: ./.common/taskfiles-role/Taskfile-fix.yml
   lint: ./.common/taskfiles-role/Taskfile-lint.yml
-  ansible: ./.common/taskfiles-role/Taskfile-ansible.yml
+  software: ./.common/taskfiles-role/Taskfile-{{OS}}.yml
