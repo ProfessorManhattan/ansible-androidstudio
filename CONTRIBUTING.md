@@ -1,70 +1,71 @@
 <!-- ⚠️ This README has been generated from the file(s) ".common/docs/blueprint-contributing.md" ⚠️-->
-
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#contributing)
 
 # ➤ Contributing
 
 First of all, thanks for visiting this page 😊 ❤️ ! We are totally ecstatic that you may be considering contributing to this project. You should read this guide if you are considering creating a pull request.
 
+
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#table-of-contents)
 
 ## ➤ Table of Contents
 
-- [➤ Contributing](#-contributing)
-  - [➤ Code of Conduct](#-code-of-conduct)
-  - [➤ Philosophy](#-philosophy)
-  - [➤ Supported Operating Systems](#-supported-operating-systems)
-    - [Other Operating Systems](#other-operating-systems)
-    - [Code Style for Platform-Specific Roles](#code-style-for-platform-specific-roles)
-    - [Preferred Installation Method for Mac OS X](#preferred-installation-method-for-mac-os-x)
-  - [➤ Setting Up Development Environment](#-setting-up-development-environment)
-    - [Requirements](#requirements)
-    - [Getting Started](#getting-started)
-    - [NPM Tasks Available](#npm-tasks-available)
-    - [Troubleshooting Python Issues](#troubleshooting-python-issues)
-  - [➤ Pull Requests](#-pull-requests)
-    - [How to Commit Code](#how-to-commit-code)
-    - [Pre-Commit Hook](#pre-commit-hook)
-  - [➤ Code Format](#-code-format)
-    - [Code Format Example](#code-format-example)
-    - [Platform-Specific Roles](#platform-specific-roles)
-  - [➤ Code Style](#-code-style)
-    - [Arrays](#arrays)
-    - [Alphabetical Order](#alphabetical-order)
-    - [Dependency Variables](#dependency-variables)
-    - [DRY](#dry)
-  - [➤ Commenting](#-commenting)
-    - [Variable Comments](#variable-comments)
-    - [Action Comments](#action-comments)
-      - [Example Action Comment Implementation](#example-action-comment-implementation)
-      - [Example Action Comment Generated Output](#example-action-comment-generated-output)
-      - [Action Comment Guidelines](#action-comment-guidelines)
-    - [TODO Comments](#todo-comments)
-      - [Example TODO Comment Implementation](#example-todo-comment-implementation)
-      - [Example TODO Comment Generated Output](#example-todo-comment-generated-output)
-      - [TODO Comment Guidelines](#todo-comment-guidelines)
-  - [➤ Updating Meta Files and Documentation](#-updating-meta-files-and-documentation)
-    - [The `"blueprint" package.json` Field and `@appnest/readme`](#the-blueprint-packagejson-field-and-appnestreadme)
-    - [`meta/main.yml` Description](#metamainyml-description)
-    - [`logo.png`](#logopng)
-  - [➤ Testing](#-testing)
-    - [Idempotence](#idempotence)
-    - [Debugging](#debugging)
-    - [Molecule Documentation](#molecule-documentation)
-    - [Testing Desktop Environments](#testing-desktop-environments)
-    - [Molecule Scenario Descriptions](#molecule-scenario-descriptions)
-    - [Continuous Integration (CI)](#continuous-integration-ci)
-  - [➤ Linting](#-linting)
-    - [Fixing ansible-lint Errors](#fixing-ansible-lint-errors)
-      - [[208] File permissions unset or incorrect](#208-file-permissions-unset-or-incorrect)
-      - [[301] Command should not change things if nothing needs doing](#301-command-should-not-change-things-if-nothing-needs-doing)
-      - [[305] Use shell only when shell functionality is required](#305-use-shell-only-when-shell-functionality-is-required)
+* [➤ Contributing](#-contributing)
+	* [➤ Code of Conduct](#-code-of-conduct)
+	* [➤ Philosophy](#-philosophy)
+	* [➤ Supported Operating Systems](#-supported-operating-systems)
+		* [Other Operating Systems](#other-operating-systems)
+		* [Code Style for Platform-Specific Roles](#code-style-for-platform-specific-roles)
+		* [Preferred Installation Method for Mac OS X](#preferred-installation-method-for-mac-os-x)
+	* [➤ Setting Up Development Environment](#-setting-up-development-environment)
+		* [Requirements](#requirements)
+		* [Getting Started](#getting-started)
+		* [NPM Tasks Available](#npm-tasks-available)
+		* [Troubleshooting Python Issues](#troubleshooting-python-issues)
+	* [➤ Pull Requests](#-pull-requests)
+		* [How to Commit Code](#how-to-commit-code)
+		* [Pre-Commit Hook](#pre-commit-hook)
+	* [➤ Code Format](#-code-format)
+		* [Code Format Example](#code-format-example)
+		* [Platform-Specific Roles](#platform-specific-roles)
+	* [➤ Code Style](#-code-style)
+		* [Arrays](#arrays)
+		* [Alphabetical Order](#alphabetical-order)
+		* [Dependency Variables](#dependency-variables)
+		* [DRY](#dry)
+	* [➤ Commenting](#-commenting)
+		* [Variable Comments](#variable-comments)
+		* [Action Comments](#action-comments)
+			* [Example Action Comment Implementation](#example-action-comment-implementation)
+			* [Example Action Comment Generated Output](#example-action-comment-generated-output)
+			* [Action Comment Guidelines](#action-comment-guidelines)
+		* [TODO Comments](#todo-comments)
+			* [Example TODO Comment Implementation](#example-todo-comment-implementation)
+			* [Example TODO Comment Generated Output](#example-todo-comment-generated-output)
+			* [TODO Comment Guidelines](#todo-comment-guidelines)
+	* [➤ Updating Meta Files and Documentation](#-updating-meta-files-and-documentation)
+		* [The `"blueprint" package.json` Field and `@appnest/readme`](#the-blueprint-packagejson-field-and-appnestreadme)
+		* [`meta/main.yml` Description](#metamainyml-description)
+		* [`logo.png`](#logopng)
+	* [➤ Testing](#-testing)
+		* [Idempotence](#idempotence)
+		* [Debugging](#debugging)
+		* [Molecule Documentation](#molecule-documentation)
+		* [Testing Desktop Environments](#testing-desktop-environments)
+		* [Molecule Scenario Descriptions](#molecule-scenario-descriptions)
+		* [Continuous Integration (CI)](#continuous-integration-ci)
+	* [➤ Linting](#-linting)
+		* [Fixing ansible-lint Errors](#fixing-ansible-lint-errors)
+			* [[208] File permissions unset or incorrect](#208-file-permissions-unset-or-incorrect)
+			* [[301] Command should not change things if nothing needs doing](#301-command-should-not-change-things-if-nothing-needs-doing)
+			* [[305] Use shell only when shell functionality is required](#305-use-shell-only-when-shell-functionality-is-required)
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#code-of-conduct)
 
 ## ➤ Code of Conduct
 
 This project and everyone participating in it is governed by the [Code of Conduct](https://gitlab.com/megabyte-labs/ansible-roles/androidstudio/-/blob/master/CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to [contact_email](mailto:help@megabyte.space).
+
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#philosophy)
 
@@ -79,6 +80,7 @@ When you are working with one of our Ansible projects, try asking yourself, "**H
 - _The software has the capability to integrate with another piece of software in the [main playbook](repository.playbooks)_. - This integration should be automated.
 
 Ideally, you should use the software installed by the main playbook. This is really the only way of testing whether or not the software was installed properly and has all the common settings automated. The software installed by the main playbook is all widely-acclaimed, cross-platform software that many people find useful.
+
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#supported-operating-systems)
 
@@ -126,6 +128,7 @@ If you have a role that only installs software made for Windows 10 then ensure t
 ### Preferred Installation Method for Mac OS X
 
 We currently support installing applications with both homebrew casks and mas. Since mas does not allow automated logins to the App Store (and requires that the application was already installed by the account signed into the App Store GUI), we prefer the use of homebrew casks for installing applications.
+
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#setting-up-development-environment)
 
@@ -220,6 +223,7 @@ python3 -m venv venv
 source venv/bin/activate
 ```
 
+
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#pull-requests)
 
 ## ➤ Pull Requests
@@ -233,6 +237,7 @@ Instead of using `git commit`, we prefer that you use `task commit`. You will un
 ### Pre-Commit Hook
 
 Even if you decide not to use `task commit`, you will see that `git commit` behaves differently since the pre-commit hook is installed when `npm i` during various build steps. This pre-commit hook is there to test your code before committing. If you need to bypass the pre-commit hook, then you will have to add the `--no-verify` tag at the end of your `git commit` command (e.g. `git commit -m "Commit" --no-verify`).
+
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#code-format)
 
@@ -279,6 +284,7 @@ If you have a role that only installs software made for Windows 10 then ensure t
     - include_tasks: "install-ansible_os_family.yml"
   when: ansible_os_family == 'Windows'
 ```
+
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#code-style)
 
@@ -387,6 +393,7 @@ DRY stands for "Don't Repeat Yourself." Whenever there is code that is duplicate
 - name: Run generic Linux tasks
   include_tasks: install-Linux.yml
 ```
+
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#commenting)
 
@@ -531,6 +538,7 @@ Notice how the title for _improvement_ is not capitalized. It should be capitali
   - Test
 - Ensure you capitalize the category
 
+
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#updating-meta-files-and-documentation)
 
 ## ➤ Updating Meta Files and Documentation
@@ -543,10 +551,12 @@ In the root of all of our Ansible repositories, we include a file named `package
 
 For every role that is included in our eco-system, we require certain fields to be filled out in the `"blueprint"` section of the `package.json` file. Lucky for you, most of the fields in the file are auto-generated. The fields that need to be filled out as well as descriptions of what they should contain are listed in the chart below:
 
-| Variable Name | Variable Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `name`        | This should be the official name for the product that the role installs/configures. It is used in the title of the README and throughout the documentation to refer to the product.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+
+| Variable Name | Variable Description                             |
+|---------------|--------------------------------------------------|
+| `name`        | This should be the official name for the product that the role installs/configures. It is used in the title of the README and throughout the documentation to refer to the product. |
 | `overview`    | This variable should be a description of what the role installs. You can usually find a good description by Googling, "What is Android Studio," for example if you were populating this variable for the [Android Studio role]({{ repository.group.ansible_roles }}/androidstudio). This text is shown at the top of the README, right below the header section and before the table of contents. Whenever possible, key products/terms should be linked to using markdown. You can see an example of us hyperlinking in this variable by checking out the [Android Studio role]({{ repository.group.ansible_roles }}/androidstudio). The idea is to make it as easy as possible for our users to figure out exactly what the role does. |
+
 
 ### `meta/main.yml` Description
 
@@ -573,6 +583,7 @@ We include a `logo.png` file in all of our Ansible projects. This image is autom
 3. Resize the image to 200x200 pixels by running `sharp -i file_location.png -o logo.png resize 200 200`.
 4. Compress the resized image by dragging and dropping the resized image into the [TinyPNG web application](https://tinypng.com/).
 5. Download the compressed image and add it to the root of the Ansible project. Make sure it is named `logo.png`.
+
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#testing)
 
@@ -630,24 +641,26 @@ You can obtain a list of all possible scenarios by looking in the `molecule/` fo
 
 The chart below provides a list of the scenarios we include in all of our Ansible projects along with a brief description of what they are included for.
 
-| Scenario                | Description                                                                                                            |
-| ----------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| `default`               | Uses VirtualBox to run tests for all platforms in parallel.                                                            |
-| `docker`                | Uses Docker to run tests for all Linux platforms and versions in parallel.                                             |
-| `docker-snap`           | The same as the `docker` scenario except it excludes platforms that have trouble installing snap packages on Docker.   |
-| `archlinux-desktop`     | Runs the test on the latest version of Archlinux desktop using VirtualBox.                                             |
-| `centos-desktop`        | Runs the test on the latest version of CentOS desktop using VirtualBox.                                                |
-| `debian-desktop`        | Runs the test on the latest version of Debian desktop using VirtualBox.                                                |
-| `fedora-desktop`        | Runs the test on the latest version of Fedora desktop using VirtualBox.                                                |
-| `macos-desktop`         | Runs the test on the latest version of macOS desktop using VirtualBox.                                                 |
-| `ubuntu-desktop`        | Runs the test on the latest version of Ubuntu desktop using VirtualBox.                                                |
-| `windows-desktop`       | Runs the test on the latest version of Windows desktop using VirtualBox.                                               |
-| `ci-docker-archlinux`   | Uses Docker to test Archlinux.                                                                                         |
-| `ci-docker-centos`      | Uses Docker to test multiple versions of CentOS.                                                                       |
-| `ci-docker-debian`      | Uses Docker to test multiple versions of Debian.                                                                       |
+
+| Scenario                | Description                                      |
+|-------------------------|--------------------------------------------------|
+| `default`               | Uses VirtualBox to run tests for all platforms in parallel. |
+| `docker`                | Uses Docker to run tests for all Linux platforms and versions in parallel. |
+| `docker-snap`           | The same as the `docker` scenario except it excludes platforms that have trouble installing snap packages on Docker. |
+| `archlinux-desktop`     | Runs the test on the latest version of Archlinux desktop using VirtualBox. |
+| `centos-desktop`        | Runs the test on the latest version of CentOS desktop using VirtualBox. |
+| `debian-desktop`        | Runs the test on the latest version of Debian desktop using VirtualBox. |
+| `fedora-desktop`        | Runs the test on the latest version of Fedora desktop using VirtualBox. |
+| `macos-desktop`         | Runs the test on the latest version of macOS desktop using VirtualBox. |
+| `ubuntu-desktop`        | Runs the test on the latest version of Ubuntu desktop using VirtualBox. |
+| `windows-desktop`       | Runs the test on the latest version of Windows desktop using VirtualBox. |
+| `ci-docker-archlinux`   | Uses Docker to test Archlinux.                   |
+| `ci-docker-centos`      | Uses Docker to test multiple versions of CentOS. |
+| `ci-docker-debian`      | Uses Docker to test multiple versions of Debian. |
 | `ci-docker-debian-snap` | Uses Docker to test Debian just like `ci-docker-debian` except it excludes versions that cannot install snap packages. |
-| `ci-docker-fedora`      | Uses Docker to test multiple versions of Fedora.                                                                       |
-| `ci-docker-ubuntu`      | Uses Docker to test multiple versions of Ubuntu.                                                                       |
+| `ci-docker-fedora`      | Uses Docker to test multiple versions of Fedora. |
+| `ci-docker-ubuntu`      | Uses Docker to test multiple versions of Ubuntu. |
+
 
 ### Continuous Integration (CI)
 
@@ -657,6 +670,7 @@ You might have noticed that there are no CI tests in the chart above for macOS a
 - Windows is tested using GitLab CI without Molecule. ([Link to GitLab CI configuration](https://gitlab.com/megabyte-labs/ci/-/blob/master/windows-ansible-test.gitlab-ci.yml))
 - macOS is tested using GitHub Actions after the code is automatically synchronized between GitLab and GitHub. ([Link to the macOS GitHub Action configuration](https://gitlab.com/megabyte-labs/ansible-roles/androidstudio/-/blob/master/.github/workflows/macOS.yml))
 - If all the GitLab tests succeed (i.e. Linux/Windows), then a final E2E test that includes all the platforms is run using the `default` scenario with VirtualBox. In this stage, the compatibility matrix is generated. This test is also run on a cron to ensure our compatibility matrixes are up-to-date.
+
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#linting)
 
@@ -697,3 +711,4 @@ Here is an example of code that will remove the error:
 #### [305] Use shell only when shell functionality is required
 
 Only use the Ansible `shell:` task when absolutely necessary. If you get this error then test if replacing `shell:` with `command:` resolves the error. If that does not work and you can not figure out how to properly configure the environment for `command:` to work, then you can add `# noqa 305` at the end of the line that includes the `name:` property. The same is true for other linting errors - `# noqa` followed by the reported lint error code will instruct `ansible-lint` to ignore the error.
+
