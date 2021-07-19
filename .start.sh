@@ -9,7 +9,12 @@
 #   script calls the script in `.common/update.sh` which will make sure the project is
 #   bootstrapped. `bash .start.sh` is the first command you should run when working with this project.
 
-set -e
+if [ "${container:=}" != 'docker' ]; then
+  set -e
+else
+  set -ex
+fi
+
 export REPO_TYPE=ansible
 
 if [ -d .git ]; then
