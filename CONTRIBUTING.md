@@ -1,12 +1,12 @@
 <!-- ⚠️ This README has been generated from the file(s) ".common/docs/blueprint-contributing.md" ⚠️-->
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#contributing)
+<a href="#contributing" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
 # ➤ Contributing
 
 First of all, thanks for visiting this page 😊 ❤️ ! We are totally ecstatic that you may be considering contributing to this project. You should read this guide if you are considering creating a pull request.
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#table-of-contents)
+<a href="#table-of-contents" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
 ## ➤ Table of Contents
 
@@ -60,13 +60,13 @@ First of all, thanks for visiting this page 😊 ❤️ ! We are totally ecstati
       - [[301] Command should not change things if nothing needs doing](#301-command-should-not-change-things-if-nothing-needs-doing)
       - [[305] Use shell only when shell functionality is required](#305-use-shell-only-when-shell-functionality-is-required)
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#code-of-conduct)
+<a href="#code-of-conduct" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
 ## ➤ Code of Conduct
 
 This project and everyone participating in it is governed by the [Code of Conduct](https://gitlab.com/megabyte-labs/ansible-roles/androidstudio/-/blob/master/CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to [contact_email](mailto:help@megabyte.space).
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#philosophy)
+<a href="#philosophy" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
 ## ➤ Philosophy
 
@@ -80,7 +80,7 @@ When you are working with one of our Ansible projects, try asking yourself, "**H
 
 Ideally, you should use the software installed by the main playbook. This is really the only way of testing whether or not the software was installed properly and has all the common settings automated. The software installed by the main playbook is all widely-acclaimed, cross-platform software that many people find useful.
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#supported-operating-systems)
+<a href="#supported-operating-systems" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
 ## ➤ Supported Operating Systems
 
@@ -127,7 +127,7 @@ If you have a role that only installs software made for Windows 10 then ensure t
 
 We currently support installing applications with both homebrew casks and mas. Since mas does not allow automated logins to the App Store (and requires that the application was already installed by the account signed into the App Store GUI), we prefer the use of homebrew casks for installing applications.
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#setting-up-development-environment)
+<a href="#setting-up-development-environment" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
 ## ➤ Setting Up Development Environment
 
@@ -220,7 +220,7 @@ python3 -m venv venv
 source venv/bin/activate
 ```
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#pull-requests)
+<a href="#pull-requests" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
 ## ➤ Pull Requests
 
@@ -234,7 +234,7 @@ Instead of using `git commit`, we prefer that you use `task commit`. You will un
 
 Even if you decide not to use `task commit`, you will see that `git commit` behaves differently since the pre-commit hook is installed when `npm i` during various build steps. This pre-commit hook is there to test your code before committing. If you need to bypass the pre-commit hook, then you will have to add the `--no-verify` tag at the end of your `git commit` command (e.g. `git commit -m "Commit" --no-verify`).
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#code-format)
+<a href="#code-format" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
 ## ➤ Code Format
 
@@ -280,7 +280,7 @@ If you have a role that only installs software made for Windows 10 then ensure t
   when: ansible_os_family == 'Windows'
 ```
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#code-style)
+<a href="#code-style" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
 ## ➤ Code Style
 
@@ -388,7 +388,7 @@ DRY stands for "Don't Repeat Yourself." Whenever there is code that is duplicate
   include_tasks: install-Linux.yml
 ```
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#commenting)
+<a href="#commenting" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
 ## ➤ Commenting
 
@@ -531,7 +531,7 @@ Notice how the title for _improvement_ is not capitalized. It should be capitali
   - Test
 - Ensure you capitalize the category
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#updating-meta-files-and-documentation)
+<a href="#updating-meta-files-and-documentation" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
 ## ➤ Updating Meta Files and Documentation
 
@@ -574,7 +574,7 @@ We include a `logo.png` file in all of our Ansible projects. This image is autom
 4. Compress the resized image by dragging and dropping the resized image into the [TinyPNG web application](https://tinypng.com/).
 5. Download the compressed image and add it to the root of the Ansible project. Make sure it is named `logo.png`.
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#testing)
+<a href="#testing" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
 ## ➤ Testing
 
@@ -658,7 +658,7 @@ You might have noticed that there are no CI tests in the chart above for macOS a
 - macOS is tested using GitHub Actions after the code is automatically synchronized between GitLab and GitHub. ([Link to the macOS GitHub Action configuration](https://gitlab.com/megabyte-labs/ansible-roles/androidstudio/-/blob/master/.github/workflows/macOS.yml))
 - If all the GitLab tests succeed (i.e. Linux/Windows), then a final E2E test that includes all the platforms is run using the `default` scenario with VirtualBox. In this stage, the compatibility matrix is generated. This test is also run on a cron to ensure our compatibility matrixes are up-to-date.
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#linting)
+<a href="#linting" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
 ## ➤ Linting
 

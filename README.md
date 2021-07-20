@@ -81,7 +81,7 @@
 
 <!--TERMINALIZE![terminalizer_title](https://gitlab.com/megabyte-labs/ansible-roles/androidstudio/-/raw/master/.demo.gif)TERMINALIZE-->
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#one-line-install-method)
+<a href="#one-line-install-method" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
 ## ➤ One-Line Install Method
 
@@ -103,7 +103,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 
 And there you go. Installing Android Studio can be as easy as that. You can also check out the [Install Doctor](https://install.doctor) homepage to learn how to install any Ansible role with a one-liner. If, however, you would like to incorporate this role into an Ansible playbook (and customize settings) then please continue reading below.
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#table-of-contents)
+<a href="#table-of-contents" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
 ## ➤ Table of Contents
 
@@ -120,13 +120,13 @@ And there you go. Installing Android Studio can be as easy as that. You can also
   - [TODO](#todo)
 - [➤ License](#-license)
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#overview)
+<a href="#overview" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
 ## ➤ Overview
 
 alternative_description [Android Studio](https://developer.android.com/studio) is the official integrated development environment for Google's Android operating system, built on JetBrains' IntelliJ IDEA software and designed specifically for Android development.
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#features)
+<a href="#features" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
 ## ➤ Features
 
@@ -142,7 +142,7 @@ alternative_description [Android Studio](https://developer.android.com/studio) i
 - Downloads a configurable list of Android SDKs
 - Ensures Android SDK tools like `adb` are present in the PATH
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#supported-operating-systems)
+<a href="#supported-operating-systems" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
 ## ➤ Supported Operating Systems
 
@@ -154,7 +154,7 @@ _The compatibility chart above was last generated on compatibility_date._
 
 **_What does idempotent mean?_** Idempotent means that if you run this role twice in row then there will be no changes to the system the second time around.
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#dependencies)
+<a href="#dependencies" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
 ## ➤ Dependencies
 
@@ -173,7 +173,7 @@ The `requirements.yml` file contains a full list of the dependencies required by
 
 role_descriptions
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#example-playbook)
+<a href="#example-playbook" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
 ## ➤ Example Playbook
 
@@ -187,7 +187,7 @@ With the dependencies installed, all you have to do is add the role to your main
 
 If you are incorporating this role into a pre-existing playbook, then it might be prudent to copy the requirements in `requirements.txt` and `requirements.yml` to their corresponding files in the root of your playbook.
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#contributing)
+<a href="#contributing" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
 ## ➤ Contributing
 
@@ -215,7 +215,7 @@ I create open source projects out of love. Although I have a job, shelter, and a
 
 - **Improvement:** Add logic that installs a configurable list of Android SDKs
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#license)
+<a href="#license" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
 ## ➤ License
 
