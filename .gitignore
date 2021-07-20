@@ -39,8 +39,6 @@ __pycache__/
 *.code-workspace
 *.cover
 *.log
-*.py
-*.py[cod]
 *.retry
 *.so
 *~

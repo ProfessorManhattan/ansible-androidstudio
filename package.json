@@ -17,13 +17,13 @@
   "scripts": {
     "commit": "git-cz",
     "fix:prettier": "prettier --write . && prettier-package-json --write package.json",
-    "fix:shellcheck": "find . -type d \\( -name .cache -o -name .git -o -name .modules  -o -name node_modules -o -name .husky -o -name venv \\) -prune -o -type f \\( -name \\*.sh -o -name \\*.sh.j2 \\) -print0 | xargs -0 shellcheck -f diff | git apply",
+    "fix:shellcheck": "find . -type d \\( -name .autodoc -o -name .cache -o -name .common -o -name .git -o -name .husky -o -name .modules -o -name .task -o -name node_modules -o -name venv \\) -prune -o -type f \\( -name \\*.sh -o -name \\*.sh.j2 \\) -print0 | xargs -0 shellcheck -f diff | git apply",
     "info": "npm-scripts-info",
     "postinstall": "if [ -d .git ]; then husky install; fi && if [ -f .husky/pre-commit ]; then chmod 755 .husky/pre-commit; fi",
     "lint-staged": "lint-staged",
     "lint:prettier": "prettier --list-different .",
-    "lint:shellcheck": "find . -type d \\( -name .cache -o -name .git -o -name .modules  -o -name node_modules -o -name .husky -o -name venv \\) -prune -o -type f \\( -name \\*.sh -o -name \\*.sh.j2 \\) -print0 | xargs -0 -r -n1 shellcheck",
-    "misc:markdown-links": "find . -type d \\( -name .cache -o -name .git -o -name .github -o -name .gitlab -o -name .modules  -o -name node_modules \\) -prune -o -type f \\( -name \\*.md \\) -print0 | xargs -0 -r -n1 markdown-link-check",
+    "lint:shellcheck": "find . -type d \\( -name .autodoc -o -name .cache -o -name .common -o -name .git -o -name .husky -o -name .modules -o -name .task -o -name node_modules -o -name venv \\) -prune -o -type f \\( -name \\*.sh -o -name \\*.sh.j2 \\) -print0 | xargs -0 -r -n1 shellcheck",
+    "misc:markdown-links": "find . -type d \\( -name .autodoc -o -name .cache -o -name .common -o -name .git -o -name .husky -o -name .modules -o -name .task -o -name node_modules -o -name venv \\) -prune -o -type f \\( -name \\*.md \\) -print0 | xargs -0 -r -n1 markdown-link-check",
     "version": "standard-version --no-verify"
   },
   "config": {
