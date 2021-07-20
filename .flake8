@@ -1,4 +1,4 @@
 [flake8]
-exclude = .autodoc, .cache, .common, .git, .husky, .modules, .task, node_modules, roles, venv
+exclude = .autodoc, .cache, .common, .git, .husky, .modules, .task, node_modules, .venv, roles, venv
 ignore = E402
 max-line-length = 120
