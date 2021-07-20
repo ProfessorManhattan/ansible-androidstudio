@@ -1,9 +1,17 @@
 exclude_paths:
+  - .autodoc/
+  - .cache/
+  - .common/
+  - .git/
   - .github/
   - .gitlab/
+  - .husky/
   - .modules/
+  - .task/
+  - .venv/
   - molecule/
   - node_modules/
   - roles/
+  - venv/
 
 skip_list: []
