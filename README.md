@@ -133,8 +133,8 @@ This repository is the home of an [Ansible](https://www.ansible.com/) role that 
 ### Ensures Android Studio is installed:
 
 - Installs Android Studio on macOS using Homebrew
-- Installs Android Studio on Windows using chocolatey
 - Installs Android Studio on Linux using [snap](https://gitlab.com/megabyte-labs/ansible-roles/snapd)
+- Installs Android Studio on Windows using chocolatey
 - Installs Android Studio on Archlinux, CentOS, Debian, Fedora, macOS, Ubuntu, and Windows
 
 ### Ensures configured Android SDKs are present:
