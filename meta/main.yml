@@ -1,4 +1,5 @@
 ---
+---
 galaxy_info:
   role_name: androidstudio
   namespace: professormanhattan
@@ -25,5 +26,7 @@ galaxy_info:
 dependencies:
   - role: professormanhattan.snapd
     when: ansible_system == 'Linux'
+  - role: professormanhattan.homebrew
+    when: ansible_os_family == "Darwin"
   - role: professormanhattan.homebrew
     when: ansible_os_family == "Darwin"
