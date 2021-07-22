@@ -17,3 +17,4 @@ includes:
   fix: ./.common/taskfiles-role/Taskfile-fix.yml
   lint: ./.common/taskfiles-role/Taskfile-lint.yml
   software: ./.common/taskfiles-role/Taskfile-{{OS}}.yml
+  test: ./.common/taskfiles-role/Taskfile-test.yml
