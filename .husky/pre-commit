@@ -5,5 +5,5 @@
 
 info "Validating the commit"
 npm run lint-staged
-task spelling
+task common:spelling
 success "Successfully validated the commit"
