@@ -11,7 +11,6 @@ First of all, thanks for visiting this page 😊 ❤️ ! We are totally ecstati
 ## ➤ Table of Contents
 
 - [➤ Contributing](#-contributing)
-  - [➤ Table of Contents](#-table-of-contents)
   - [➤ Code of Conduct](#-code-of-conduct)
   - [➤ Philosophy](#-philosophy)
   - [➤ Supported Operating Systems](#-supported-operating-systems)

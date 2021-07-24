@@ -16,14 +16,8 @@
   "type": "module",
   "scripts": {
     "commit": "git-cz",
-    "fix:prettier": "prettier --write . && prettier-package-json --write package.json",
-    "fix:shellcheck": "find . -type d \\( -name .autodoc -o -name .cache -o -name .common -o -name .git -o -name .husky -o -name .modules -o -name .task -o -name .venv -o -name node_modules -o -name venv \\) -prune -o -type f \\( -name \\*.sh -o -name \\*.sh.j2 \\) -print0 | xargs -0 shellcheck -f diff | git apply",
-    "info": "npm-scripts-info",
     "postinstall": "if [ -d .git ]; then husky install; fi && if [ -f .husky/pre-commit ]; then chmod 755 .husky/pre-commit; fi",
-    "lint-staged": "lint-staged",
-    "lint:prettier": "prettier --list-different .",
-    "lint:shellcheck": "find . -type d \\( -name .autodoc -o -name .cache -o -name .common -o -name .git -o -name .husky -o -name .modules -o -name .task -o -name .venv -o -name node_modules -o -name venv \\) -prune -o -type f \\( -name \\*.sh -o -name \\*.sh.j2 \\) -print0 | xargs -0 -r -n1 shellcheck",
-    "misc:markdown-links": "find . -type d \\( -name .autodoc -o -name .cache -o -name .common -o -name .git -o -name .husky -o -name .modules -o -name .task -o -name .venv -o -name node_modules -o -name venv \\) -prune -o -type f \\( -name \\*.md \\) -print0 | xargs -0 -r -n1 markdown-link-check",
+    "prepare-release": "task prepare-release",
     "version": "standard-version --no-verify"
   },
   "config": {
@@ -31,20 +25,16 @@
       "path": "cz-conventional-changelog"
     }
   },
+  "dependencies": {},
   "devDependencies": {
     "@megabytelabs/prettier-config": "^1.0.0",
     "@megabytelabs/prettier-config-ansible": "^1.1.4",
-    "cspell": "^5.6.6",
     "cz-conventional-changelog": "^3.3.0",
     "husky": "^6.0.0",
     "inquirer": "^6.5.2",
     "lint-staged": "^11.0.0",
-    "markdown-link-check": "^3.8.7",
-    "prettier-package-json": "^2.6.0",
     "prettier-plugin-sh": "^0.6.1",
-    "shellcheck": "^1.0.0",
-    "signale": "^1.4.0",
-    "standard-version": "^9.3.0"
+    "signale": "^1.4.0"
   },
   "keywords": [
     "androidstudio",
@@ -101,43 +91,39 @@
     "**/*": [
       "check-merge-conflict",
       "check-added-large-files",
-      "check-case-conflict",
-      "check-docstring-first",
-      "check-executables-have-shebangs",
-      "check-symlinks",
-      "detect-private-key"
+      "check-symlinks"
     ],
-    "**/*.{js,json,md,ts,yml}": [
+    "**/*.(css|html|json|less|md|mjml|php|scss|sh|ts)": [
       "prettier --write"
     ],
-    "**/*.{js}": [
-      "npx standard --fix"
+    "**/*.js": [
+      "npx standard --fix",
+      "prettier --write"
     ],
-    "**/*.{sh,sh.j2}": [
-      "prettier --write",
+    "**/(*.json|!package.json)": [
+      "/dev/null > pretty-format-json --autofix"
+    ],
+    "**/*.(sh|sh.j2)": [
       "shellcheck"
     ],
     "**/*.xml": [
-      "check-xml"
+      "check-xml",
+      "prettier --write"
     ],
     "**/*.yml": [
       "check-yaml",
-      "yamllint -s"
-    ],
-    "package.json": [
-      "prettier-package-json --write"
+      "yamllint -s",
+      "prettier --write"
     ],
     "requirements.txt": [
       "requirements-txt-fixer"
     ],
-    ".gitlab-ci.yml": [
-      "npx gitlab-ci-lint"
-    ],
-    "**/*.{py|yml}": [
+    "./**/*.py": [
       "black",
       "flake8"
     ]
   },
+  "prettier": "@megabytelabs/prettier-config-ansible",
   "standard-version": {
     "scripts": {
       "prerelease": "git add --all"

@@ -2,8 +2,27 @@
 . "$(dirname "$0")/_/husky.sh"
 
 . "./.common/scripts/log.sh"
+. ".venv/bin/activate"
 
-info "Validating the commit"
-npm run lint-staged
-task common:spelling
+function precommit() {
+  if [ -f "$1"]; then
+    detect-private-key $1 &
+    fix-byte-order-marker &
+    mixed-line-ending --fix=lf &
+  fi
+}
+
+info "Detecting private keys, fixing byte order marker, and ensuring line endings are all LF"
+STAGED_FILES=$(git diff --cached --name-only)
+for FILE in "$STAGED_FILES"; do
+  precommit "$FILE"
+done
+wait
+
+info "Linting and fixing the staged files"
+lint-staged
+
+info "Reporting possible spelling errors in the staged files"
+task spelling
+
 success "Successfully validated the commit"
