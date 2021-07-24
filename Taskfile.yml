@@ -12,9 +12,12 @@ vars:
   REPOSITORY_TYPE: ansible
 
 includes:
-  common: ./.common/taskfiles-role/Taskfile-common.yml
   ansible: ./.common/taskfiles-role/Taskfile-ansible.yml
+  common: ./.common/taskfiles-role/Taskfile-common.yml
   fix: ./.common/taskfiles-role/Taskfile-fix.yml
   lint: ./.common/taskfiles-role/Taskfile-lint.yml
+  npm: ./.common/taskfiles-role/Taskfile-npm.yml
+  python: ./.common/taskfiles-role/Taskfile-python.yml
+  security: ./.common/taskfiles-role/Taskfile-security.yml
   software: ./.common/taskfiles-role/Taskfile-{{OS}}.yml
   test: ./.common/taskfiles-role/Taskfile-test.yml
