@@ -2,6 +2,7 @@
 roles:
   - name: professormanhattan.snapd
   - name: professormanhattan.homebrew
+  - name: java
 collections:
   - name: chocolatey.chocolatey
     source: https://galaxy.ansible.com
