@@ -31,16 +31,15 @@
       "path": "cz-conventional-changelog"
     }
   },
-  "dependencies": {},
   "devDependencies": {
     "@megabytelabs/prettier-config": "^1.0.0",
+    "@megabytelabs/prettier-config-ansible": "^1.1.4",
     "cspell": "^5.6.6",
     "cz-conventional-changelog": "^3.3.0",
     "husky": "^6.0.0",
     "inquirer": "^6.5.2",
     "lint-staged": "^11.0.0",
     "markdown-link-check": "^3.8.7",
-    "prettier": "^2.3.1",
     "prettier-package-json": "^2.6.0",
     "prettier-plugin-sh": "^0.6.1",
     "shellcheck": "^1.0.0",
@@ -134,12 +133,11 @@
     ".gitlab-ci.yml": [
       "npx gitlab-ci-lint"
     ],
-    "**/*.{py}": [
+    "**/*.{py|yml}": [
       "black",
       "flake8"
     ]
   },
-  "prettier": "@megabytelabs/prettier-config-ansible",
   "standard-version": {
     "scripts": {
       "prerelease": "git add --all"
