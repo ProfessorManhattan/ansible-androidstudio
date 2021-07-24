@@ -1,1 +1,23 @@
 ---
+# @var android_sdks: []
+# The list of SDKs and Tools to install after Android Studion is installed. If no value is
+# provided, the latest version of the SDKs and Tools will be installed. Use the correct
+# format, which can be found by executing `sdkmanage --list` once the commandline-tools is
+# installed; some package need a version to be specified and some do not.
+android_sdks: []
+# @example #
+# android_sdks:
+#   - platform-tools
+#   - emulator
+#   - build-tools;30.0.0
+#   - platforms;android-30
+#   - sources;android-30
+#   - patcher;v4
+# @end
+
+# @var sdk_location: ""
+# The folder to set as the SDK Location
+sdk_location: ~/Android/Sdk
+# @example #
+# sdk_location: ~/Android/Sdk
+# @end
