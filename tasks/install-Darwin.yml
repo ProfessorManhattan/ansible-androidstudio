@@ -1,9 +1,45 @@
 ---
-# @action Ensures Android Studio is installed
-# Installs Android Studio on macOS using Homebrew
 - name: "Ensure {{ app_name }} is installed"
   become: false
   community.general.homebrew_cask:
     name: android-studio
     state: "{{ app_state | default('present') }}"
     accept_external_apps: "{{ allow_external_apps | default(false) }}"
+
+- name: Ensure custom facts directory exists
+  file:
+    mode: 0755
+    path: /etc/ansible/facts.d
+    state: directory
+
+- name: Determine whether or not the latest version of commandline-tools is already installed
+  set_fact:
+    install_cmdlinetools: "{{ (ansible_local.cmdlinetools is not defined) or \
+      ((ansible_local.cmdlinetools is defined) and \
+      (ansible_local['cmdlinetools']['settings']['version'] != cmdline_tools_file_name | regex_replace('commandlinetools-mac-(\\d*).*', '\\1'))) }}"
+
+- name: Ensure commandline-tools archive is downloaded
+  get_url:
+    url: "https://dl.google.com/android/repository/{{ cmdline_tools_file_name }}"
+    dest: "/tmp/{{ cmdline_tools_file_name }}"
+    checksum: "sha256:{{ cmdline_tools_checksum }}"
+  when: install_cmdlinetools
+
+- name: Run generic Linux tasks
+  include_tasks: user-Linux.yml
+  when: (user.system is not defined) or ((user.system is defined) and (not user.system))
+  loop: "{{ user_configs }}"
+  loop_control:
+    label: "{{ user.username }}"
+    loop_var: user
+
+- name: "Save meta information about the version of {{ app_name }} that was installed"
+  community.general.ini_file:
+    path: /etc/ansible/facts.d/cmdlinetools.fact
+    mode: 0644
+    section: settings
+    option: version
+    value: "{{ cmdline_tools_file_name | regex_replace('commandlinetools-mac-(\\d*).*', '\\1') }}"
+    backup: true
+    no_extra_spaces: true
+  when: install_cmdlinetools

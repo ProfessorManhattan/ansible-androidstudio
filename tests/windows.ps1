@@ -5,5 +5,5 @@ $file = "$env:temp\ConfigureRemotingForAnsible.ps1"
 powershell.exe -ExecutionPolicy ByPass -File $file -Verbose -EnableCredSSP -DisableBasicAuth
 
 Write-Host "Changing user password to 'AnsibleTest999'"
-$NewPassword = ConvertTo-SecureString "AnsibleTest999" –AsPlainText –Force
-Set-LocalUser –Name $env:UserName –Password $NewPassword
+$NewPassword = ConvertTo-SecureString "AnsibleTest999" -AsPlainText -Force
+Set-LocalUser -Name $env:UserName -Password $NewPassword
