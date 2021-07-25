@@ -15,9 +15,16 @@
   },
   "type": "module",
   "scripts": {
-    "commit": "git-cz",
+    "clean": "task common:clean",
+    "commit": "task common:commit",
+    "info": "task --list",
     "postinstall": "if [ -d .git ]; then husky install; fi && if [ -f .husky/pre-commit ]; then chmod 755 .husky/pre-commit; fi",
-    "prepare-release": "task prepare-release",
+    "prepare": "bash .common/npm-prepare.js",
+    "prepare-release": "task common:prepare-release",
+    "requirements": "task common:requirements",
+    "reset": "task common:reset",
+    "reset-force": "task common:reset-force",
+    "update": "task common:update",
     "version": "standard-version --no-verify"
   },
   "config": {
@@ -25,6 +32,7 @@
       "path": "cz-conventional-changelog"
     }
   },
+  "dependencies": {},
   "devDependencies": {
     "@commitlint/cli": "^13.1.0",
     "@commitlint/config-conventional": "^13.1.0",
@@ -35,6 +43,7 @@
     "inquirer": "^6.5.2",
     "lint-staged": "^11.0.0",
     "prettier-plugin-sh": "^0.6.1",
+    "remark-preset-lint-recommended": "^5.0.0",
     "signale": "^1.4.0"
   },
   "keywords": [
@@ -90,22 +99,36 @@
   ],
   "lint-staged": {
     "**/*": [
+      "blocklint --wordlist blacklist,slave,whitelist",
       "check-merge-conflict",
       "check-added-large-files",
-      "check-symlinks"
+      "check-symlinks",
+      "destroyed-symlinks"
     ],
-    "**/*.(css|html|json|less|md|mjml|php|scss|sh|ts)": [
+    "**/*.(css|html|json|less|mjml|php|scss|sh|ts)": [
       "prettier --write"
+    ],
+    "**/*.(jpg|png)": [
+      "task image:compress --"
     ],
     "**/*.js": [
       "npx standard --fix",
       "prettier --write"
     ],
+    "**/*.json": [
+      "check-json",
+      "pretty-format-json --autofix"
+    ],
+    "**/*.md": [
+      "prettier --write",
+      "remark",
+      "proselint --config .common/proselint.json"
+    ],
     "**/*.(sh|sh.j2)": [
       "shellcheck"
     ],
-    "**/*vault.yml": [
-      "bash .common/scripts/ansible-vault.sh"
+    "**/*.toml": [
+      "check-toml"
     ],
     "**/*.xml": [
       "check-xml",
@@ -129,9 +152,17 @@
     "./**/*.py": [
       "black",
       "flake8"
+    ],
+    "**/*vault.yml": [
+      "bash .common/scripts/ansible/vault.sh"
     ]
   },
   "prettier": "@megabytelabs/prettier-config-ansible",
+  "remarkConfig": {
+    "plugins": [
+      "remark-preset-lint-recommended"
+    ]
+  },
   "standard-version": {
     "scripts": {
       "prerelease": "git add --all"

@@ -39,7 +39,7 @@
       <img alt="Ansible Galaxy role: professormanhattan.androidstudio" src="https://img.shields.io/ansible/role/ansible_galaxy_project_id?logo=ansible&style=flat" />
     </a>
     <a href="https://github.com/ProfessorManhattan/ansible-androidstudio" target="_blank">
-      <img alt="Version: 0.0.1" src="https://img.shields.io/badge/version-0.0.1-blue.svg?cacheSeconds=2592000" />
+      <img alt="Version: 1.0.4" src="https://img.shields.io/badge/version-1.0.4-blue.svg?cacheSeconds=2592000" />
     </a>
     <a href="{{ https://github.com/ProfessorManhattan/ansible-androidstudio/actions/Windows.yml" target="_blank">
       <img alt="Windows 10 build status" src="https://img.shields.io/github/workflow/status/ProfessorManhattan/ansible-androidstudio/Windows/master?color=cyan&label=Windows%20build&logo=windows&style=flat">
