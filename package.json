@@ -41,6 +41,7 @@
     "signale": "^1.4.0"
   },
   "keywords": [
+    "androidstudio",
     "ansible",
     "archlinux",
     "centos",
@@ -55,22 +56,11 @@
     "professormanhattan",
     "role",
     "ubuntu",
-    "windows",
-    "androidstudio"
+    "windows"
   ],
   "engines": {
     "node": ">=10"
   },
-  "funding": [
-    {
-      "type": "opencollective",
-      "url": "https://opencollective.com/megabytelabs"
-    },
-    {
-      "type": "patreon",
-      "url": "https://www.patreon.com/ProfessorManhattan"
-    }
-  ],
   "blueprint": {
     "ansible_galaxy_project_id": "",
     "compatibility_date": "",
@@ -91,6 +81,16 @@
       ]
     ]
   },
+  "funding": [
+    {
+      "type": "opencollective",
+      "url": "https://opencollective.com/megabytelabs"
+    },
+    {
+      "type": "patreon",
+      "url": "https://www.patreon.com/ProfessorManhattan"
+    }
+  ],
   "lint-staged": {
     "**/*": [
       "blocklint --wordlist blacklist,slave,whitelist",
