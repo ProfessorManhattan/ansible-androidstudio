@@ -39,7 +39,7 @@
       <img alt="Ansible Galaxy role: professormanhattan.androidstudio" src="https://img.shields.io/ansible/role/ansible_galaxy_project_id?logo=ansible&style=flat" />
     </a>
     <a href="https://github.com/ProfessorManhattan/ansible-androidstudio" target="_blank">
-      <img alt="Version: 1.0.4" src="https://img.shields.io/badge/version-1.0.4-blue.svg?cacheSeconds=2592000" />
+      <img alt="Version: 0.0.1" src="https://img.shields.io/badge/version-0.0.1-blue.svg?cacheSeconds=2592000" />
     </a>
     <a href="{{ https://github.com/ProfessorManhattan/ansible-androidstudio/actions/Windows.yml" target="_blank">
       <img alt="Windows 10 build status" src="https://img.shields.io/github/workflow/status/ProfessorManhattan/ansible-androidstudio/Windows/master?color=cyan&label=Windows%20build&logo=windows&style=flat">
@@ -112,12 +112,14 @@ And there you go. Installing Android Studio can be as easy as that. You can also
 - [➤ Features](#-features)
   - [Ensures Android Studio is installed:](#ensures-android-studio-is-installed)
   - [Ensures configured Android SDKs are present:](#ensures-configured-android-sdks-are-present)
+- [➤ Variables](#-variables)
+  - [android_sdks](#android_sdks)
+  - [sdk_location](#sdk_location)
 - [➤ Supported Operating Systems](#-supported-operating-systems)
 - [➤ Dependencies](#-dependencies)
   - [Galaxy Roles](#galaxy-roles)
 - [➤ Example Playbook](#-example-playbook)
 - [➤ Contributing](#-contributing)
-  - [TODO](#todo)
 - [➤ License](#-license)
 
 <a href="#overview" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
@@ -132,15 +134,38 @@ This repository is the home of an [Ansible](https://www.ansible.com/) role that 
 
 ### Ensures Android Studio is installed:
 
-- Installs Android Studio on Linux using [snap](https://gitlab.com/megabyte-labs/ansible-roles/snapd)
-- Installs Android Studio on Windows using chocolatey
-- Installs Android Studio on macOS using Homebrew
 - Installs Android Studio on Archlinux, CentOS, Debian, Fedora, macOS, Ubuntu, and Windows
+- Installs a configurable list of Android SDKs and Tools
 
 ### Ensures configured Android SDKs are present:
 
-- Downloads a configurable list of Android SDKs
-- Ensures Android SDK tools like `adb` are present in the PATH
+- Ensures Android SDK tools like `adb` are present in PATH
+
+<a href="#variables" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
+
+## ➤ Variables
+
+This role contains variables that you can customize. The variables you can customize are located in `defaults/main.yml`. By default, the variables use sensible defaults but you may want to customize the role depending on your use case. The variables, along with descriptions, are listed below:
+
+### android_sdks
+
+```
+android_sdks:
+   - platform-tools
+   - emulator
+   - build-tools;30.0.0
+   - platforms;android-30
+   - sources;android-30
+   - patcher;v4
+`
+```
+
+### sdk_location
+
+```
+sdk_location: ~/Android/Sdk
+`
+```
 
 <a href="#supported-operating-systems" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
@@ -210,10 +235,6 @@ I create open source projects out of love. Although I have a job, shelter, and a
 </a>
 
 </details>
-
-### TODO
-
-- **Improvement:** Add logic that installs a configurable list of Android SDKs
 
 <a href="#license" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
