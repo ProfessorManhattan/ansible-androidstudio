@@ -39,8 +39,8 @@
     platforms_version: ["{{ sdk_list.stdout_lines | regex_findall('platforms;android-\\d{2,}') | last }}"]
     sources_version: ["{{ sdk_list.stdout_lines | regex_findall('sources;android-\\d*') | last }}"]
     patcher_version: ["{{ sdk_list.stdout_lines | regex_findall('patcher;v\\d*') | last }}"]
-    emulator_version: ['emulator']
-    platform_tools_version: ['platform-tools']
+    emulator_version: ["emulator"]
+    platform_tools_version: ["platform-tools"]
   when: android_sdks | length == 0
 
 - name: Ensure SDKs and Tools are installed # noqa 301
@@ -59,8 +59,8 @@
   become_user: "{{ user.username }}"
   ansible.windows.win_path:
     elements:
-    - "{{ sdk_location }}\\cmdline-tools\\latest\\bin"
-    - "{{ sdk_location }}\\platform-tools"
-    - "{{ sdk_location }}\\tools"
-    - "{{ sdk_location }}\\tools\\bin"
+      - "{{ sdk_location }}\\cmdline-tools\\latest\\bin"
+      - "{{ sdk_location }}\\platform-tools"
+      - "{{ sdk_location }}\\tools"
+      - "{{ sdk_location }}\\tools\\bin"
     scope: user

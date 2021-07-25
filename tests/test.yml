@@ -1,4 +1,4 @@
 ---
-- hosts: windows-docker
+- hosts: localhost:windows-docker
   roles:
     - role: "professormanhattan.androidstudio"

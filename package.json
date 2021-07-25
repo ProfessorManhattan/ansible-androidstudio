@@ -25,8 +25,9 @@
       "path": "cz-conventional-changelog"
     }
   },
-  "dependencies": {},
   "devDependencies": {
+    "@commitlint/cli": "^13.1.0",
+    "@commitlint/config-conventional": "^13.1.0",
     "@megabytelabs/prettier-config": "^1.0.0",
     "@megabytelabs/prettier-config-ansible": "^1.1.4",
     "cz-conventional-changelog": "^3.3.0",
@@ -100,11 +101,11 @@
       "npx standard --fix",
       "prettier --write"
     ],
-    "**/(*.json|!package.json)": [
-      "/dev/null > pretty-format-json --autofix"
-    ],
     "**/*.(sh|sh.j2)": [
       "shellcheck"
+    ],
+    "**/*vault.yml": [
+      "bash .common/scripts/ansible-vault.sh"
     ],
     "**/*.xml": [
       "check-xml",
@@ -114,6 +115,9 @@
       "check-yaml",
       "yamllint -s",
       "prettier --write"
+    ],
+    "package.json": [
+      "prettier-package-json --write"
     ],
     "requirements.txt": [
       "requirements-txt-fixer"

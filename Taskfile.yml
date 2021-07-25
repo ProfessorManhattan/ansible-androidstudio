@@ -15,6 +15,7 @@ includes:
   ansible: ./.common/taskfiles-role/Taskfile-ansible.yml
   common: ./.common/taskfiles-role/Taskfile-common.yml
   fix: ./.common/taskfiles-role/Taskfile-fix.yml
+  image: ./.common/taskfiles-role/Taskfile-image.yml
   lint: ./.common/taskfiles-role/Taskfile-lint.yml
   npm: ./.common/taskfiles-role/Taskfile-npm.yml
   python: ./.common/taskfiles-role/Taskfile-python.yml
