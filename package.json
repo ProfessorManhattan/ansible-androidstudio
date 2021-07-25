@@ -1,6 +1,6 @@
 {
   "name": "@megabytelabs/ansible-",
-  "version": "1.0.4",
+  "version": "0.0.1",
   "description": "",
   "license": "MIT",
   "author": "Brian Zalewski <brian@megabyte.space> (https://megabyte.space)",
@@ -15,10 +15,15 @@
   },
   "type": "module",
   "scripts": {
-    "commit": "git-cz",
-    "postinstall": "if [ -d .git ]; then husky install; fi && if [ -f .husky/pre-commit ]; then chmod 755 .husky/pre-commit; fi",
-    "prepare-release": "task prepare-release",
-    "version": "standard-version --no-verify"
+    "clean": "task common:clean",
+    "commit": "task common:commit",
+    "info": "task --list",
+    "prepare": "bash .common/npm-prepare.js",
+    "prepare-release": "task common:prepare-release",
+    "requirements": "task common:requirements",
+    "reset": "task common:reset",
+    "reset-force": "task common:reset-force",
+    "update": "task common:update"
   },
   "config": {
     "commitizen": {
@@ -30,14 +35,12 @@
     "@megabytelabs/prettier-config": "^1.0.0",
     "@megabytelabs/prettier-config-ansible": "^1.1.4",
     "cz-conventional-changelog": "^3.3.0",
-    "husky": "^6.0.0",
     "inquirer": "^6.5.2",
-    "lint-staged": "^11.0.0",
     "prettier-plugin-sh": "^0.6.1",
+    "remark-preset-lint-recommended": "^5.0.0",
     "signale": "^1.4.0"
   },
   "keywords": [
-    "androidstudio",
     "ansible",
     "archlinux",
     "centos",
@@ -52,30 +55,11 @@
     "professormanhattan",
     "role",
     "ubuntu",
-    "windows"
+    "windows",
+    "androidstudio"
   ],
   "engines": {
     "node": ">=10"
-  },
-  "blueprint": {
-    "ansible_galaxy_project_id": "",
-    "compatibility_date": "",
-    "compatibility_matrix": [],
-    "name": "Android Studio",
-    "overview": "[Android Studio](https://developer.android.com/studio) is the official integrated development environment for Google's Android operating system, built on JetBrains' IntelliJ IDEA software and designed specifically for Android development.",
-    "repo": "https://gitlab.com/megabyte-labs/ansible-roles/androidstudio",
-    "role_descriptions": [],
-    "title": "Android Studio - An IDE for Android Development",
-    "requirements": [
-      [
-        "snapd",
-        "Ensures Snap is installed and properly configured on Linux systems"
-      ],
-      [
-        "homebrew",
-        "Installs Homebrew (a package management system) on macOS and Linux systems"
-      ]
-    ]
   },
   "funding": [
     {
@@ -89,22 +73,36 @@
   ],
   "lint-staged": {
     "**/*": [
+      "blocklint --wordlist blacklist,slave,whitelist",
       "check-merge-conflict",
       "check-added-large-files",
-      "check-symlinks"
+      "check-symlinks",
+      "destroyed-symlinks"
     ],
-    "**/*.(css|html|json|less|md|mjml|php|scss|sh|ts)": [
+    "**/*.(css|html|json|less|mjml|php|scss|sh|ts)": [
       "prettier --write"
+    ],
+    "**/*.(jpg|png)": [
+      "task image:compress --"
     ],
     "**/*.js": [
       "npx standard --fix",
       "prettier --write"
     ],
-    "**/(*.json|!package.json)": [
-      "/dev/null > pretty-format-json --autofix"
+    "**/*.json": [
+      "check-json",
+      "pretty-format-json --autofix"
+    ],
+    "**/*.md": [
+      "prettier --write",
+      "remark",
+      "proselint --config .common/proselint.json"
     ],
     "**/*.(sh|sh.j2)": [
       "shellcheck"
+    ],
+    "**/*.toml": [
+      "check-toml"
     ],
     "**/*.xml": [
       "check-xml",
@@ -115,15 +113,26 @@
       "yamllint -s",
       "prettier --write"
     ],
+    "package.json": [
+      "prettier-package-json --write"
+    ],
     "requirements.txt": [
       "requirements-txt-fixer"
     ],
     "./**/*.py": [
       "black",
       "flake8"
+    ],
+    "**/*vault.yml": [
+      "bash .common/scripts/ansible/vault.sh"
     ]
   },
   "prettier": "@megabytelabs/prettier-config-ansible",
+  "remarkConfig": {
+    "plugins": [
+      "remark-preset-lint-recommended"
+    ]
+  },
   "standard-version": {
     "scripts": {
       "prerelease": "git add --all"

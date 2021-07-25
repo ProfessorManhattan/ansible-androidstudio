@@ -1,0 +1,8 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+. "./.common/scripts/init.sh"
+
+info "Validating commit message with 'commitlint'"
+commitlint --config .common/commitlint.config.js --edit "$1"
+# task lint:commit -- "$1"
