@@ -139,6 +139,10 @@
     "requirements.txt": [
       "requirements-txt-fixer"
     ],
+    "logo.png": [
+      "task image:resize -- 200 240",
+      "task image:compress --"
+    ],
     "./**/*.py": [
       "black",
       "flake8"
