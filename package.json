@@ -72,6 +72,26 @@
       "url": "https://www.patreon.com/ProfessorManhattan"
     }
   ],
+  "blueprint": {
+    "ansible_galaxy_project_id": "",
+    "compatibility_date": "",
+    "compatibility_matrix": [],
+    "name": "Android Studio",
+    "overview": "[Android Studio](https://developer.android.com/studio) is the official integrated development environment for Google's Android operating system, built on JetBrains' IntelliJ IDEA software and designed specifically for Android development.",
+    "repo": "https://gitlab.com/megabyte-labs/ansible-roles/androidstudio",
+    "role_descriptions": [],
+    "title": "Android Studio - An IDE for Android Development",
+    "requirements": [
+      [
+        "snapd",
+        "Ensures Snap is installed and properly configured on Linux systems"
+      ],
+      [
+        "homebrew",
+        "Installs Homebrew (a package management system) on macOS and Linux systems"
+      ]
+    ]
+  },
   "lint-staged": {
     "**/*": [
       "blocklint --wordlist blacklist,slave,whitelist",
