@@ -1,10 +1,10 @@
 ---
 - name: Include variables based on the operating system
-  include_vars: "{{ ansible_os_family }}.yml"
+  include_vars: '{{ ansible_os_family }}.yml'
 
 - name: "Fetch {{ app_name }}'s Downloads page"
   uri:
-    url: "https://developer.android.com/studio"
+    url: 'https://developer.android.com/studio'
     return_content: true
   register: android_studio_download_page
   when: ansible_os_family != 'Windows'
@@ -30,4 +30,4 @@
   become_method: "{{ 'runas' if ansible_os_family == 'Windows' else 'sudo' }}"
   become_user: "{{ ansible_user if ansible_os_family == 'Windows' else omit }}"
   block:
-    - include_tasks: "install-{{ ansible_os_family }}.yml"
+    - include_tasks: 'install-{{ ansible_os_family }}.yml'

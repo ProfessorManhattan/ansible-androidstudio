@@ -157,7 +157,7 @@
       "bash .common/scripts/ansible/vault.sh"
     ]
   },
-  "prettier": "@megabytelabs/prettier-config-ansible",
+  "prettier": "@megabytelabs/prettier-config",
   "remarkConfig": {
     "plugins": [
       "remark-preset-lint-recommended"

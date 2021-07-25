@@ -113,13 +113,13 @@ If you have a role that only installs software made for Windows 10 then ensure t
 ```yaml
 ---
 - name: Include variables based on the operating system
-  include_vars: "ansible_os_family.yml"
+  include_vars: 'ansible_os_family.yml'
   when: ansible_os_family == 'Windows'
 
 - name: Include tasks based on the operating system
   become: true
   block:
-    - include_tasks: "install-ansible_os_family.yml"
+    - include_tasks: 'install-ansible_os_family.yml'
   when: ansible_os_family == 'Windows'
 ```
 
@@ -251,12 +251,12 @@ To dive a little deeper, take the following block of code that was retrieved fro
 ```yaml
 ---
 - name: Include variables based on the operating system
-  include_vars: "{{ ansible_os_family }}.yml"
+  include_vars: '{{ ansible_os_family }}.yml'
 
 - name: Include tasks based on the operating system
   become: true
   block:
-    - include_tasks: "install-{{ ansible_os_family }}.yml"
+    - include_tasks: 'install-{{ ansible_os_family }}.yml'
 ```
 
 Now, if you compare the block of code above to other `tasks/main.yml` files in other roles (which you can find in our [GitLab Ansible Roles group](https://gitlab.com/megabyte-labs/ansible-roles) or our [main playbook](project.playbooks)) (a.k.a. [Install Doctor](https://install.doctor)), you will see that the files are either identical or nearly identical. However, some roles will exclude the first task titled "Include variables based on the operating system" when variables are not required for the role. Our goal is to be consistent but not to the point where we are degrading the functionality of our code or including code that is unnecessary.
@@ -270,13 +270,13 @@ If you have a role that only installs software made for Windows 10 then ensure t
 ```yaml
 ---
 - name: Include variables based on the operating system
-  include_vars: "ansible_os_family.yml"
+  include_vars: 'ansible_os_family.yml'
   when: ansible_os_family == 'Windows'
 
 - name: Include tasks based on the operating system
   become: true
   block:
-    - include_tasks: "install-ansible_os_family.yml"
+    - include_tasks: 'install-ansible_os_family.yml'
   when: ansible_os_family == 'Windows'
 ```
 
@@ -354,7 +354,7 @@ androidstudio_dependencies:
 ```yaml
 - name: "Ensure {{ app_name }}'s dependencies are installed"
   community.general.pacman:
-    name: "{{ android_studio_deps }}"
+    name: '{{ android_studio_deps }}'
     state: present
 ```
 
@@ -363,7 +363,7 @@ androidstudio_dependencies:
 ```yaml
 - name: "Ensure {{ app_name }}'s dependencies are installed"
   community.general.pacman:
-    name: "{{ androidstudio_dependencies }}"
+    name: '{{ androidstudio_dependencies }}'
     state: present
 ```
 
@@ -372,7 +372,7 @@ If there are dependencies that are specific to a certain OS, then the dependency
 ```yaml
 - name: "Ensure {{ app_name }}'s dependencies are installed (Fedora)"
   dnf:
-    name: "{{ androidstudio_dependencies_fedora }}"
+    name: '{{ androidstudio_dependencies_fedora }}'
     state: present
   when: ansible_distribution == 'Fedora'
 ```

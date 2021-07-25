@@ -7,7 +7,7 @@ on:
     branches:
       - master
   schedule:
-    - cron: "0 5 * * 2" # At 5AM on Tuesdays
+    - cron: '0 5 * * 2' # At 5AM on Tuesdays
 
 jobs:
   integration:
@@ -24,6 +24,6 @@ jobs:
 
       - name: Test the role.
         env:
-          ANSIBLE_FORCE_COLOR: "1"
+          ANSIBLE_FORCE_COLOR: '1'
         run: |
           bash tests/test.sh
