@@ -4,5 +4,5 @@
 . "./.common/scripts/init.sh"
 
 info "Validating commit message with 'commitlint'"
-commitlint --config .common/commitlint.config.js --edit "$1"
+commitlint --config .common/commitlint.config.ejs --edit "$1"
 # task lint:commit -- "$1"
