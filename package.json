@@ -115,14 +115,14 @@
       "npx standard --fix",
       "prettier --write"
     ],
-    "**/*.json": [
+    "**/!(package).json": [
       "check-json",
       "pretty-format-json --autofix"
     ],
     "**/*.md": [
       "prettier --write",
       "remark",
-      "proselint --config .common/proselint.json"
+      "task lint:prose --"
     ],
     "**/*.(sh|sh.j2)": [
       "shellcheck"
