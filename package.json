@@ -1,5 +1,5 @@
 {
-  "name": "@installdoc/",
+  "name": "@installdoc/androidstudio",
   "version": "1.0.4",
   "description": "",
   "license": "MIT",
@@ -86,7 +86,8 @@
         "homebrew",
         "Installs Homebrew (a package management system) on macOS and Linux systems"
       ]
-    ]
+    ],
+    "slug": "androidstudio"
   },
   "funding": [
     {
