@@ -70,7 +70,7 @@ This project and everyone participating in it is governed by the [Code of Conduc
 
 ## ➤ Philosophy
 
-When you are working with one of our Ansible projects, try asking yourself, "**How can this be improved?**" For example, in the case of the [Android Studio role](https://github.com/ProfessorManhattan/ansible-androidstudio), the role installs Android Studio but there may be additional tasks that should be automated. Consider the following examples:
+When you are working with one of our Ansible projects, try asking yourself, "**How can this be improved?**" For example, in the case of the [Android Studio role](https://github.com/ProfessorManhattan/github_prefixandroidstudio), the role installs Android Studio but there may be additional tasks that should be automated. Consider the following examples:
 
 - _The software is installed but is asking for a license key._ - In this case, we should provide an option for automatically installing the license key using a CLI command.
 - _The software supports plugins_ - We should provide an option for specifying the plugins that are automatically installed.
@@ -224,7 +224,7 @@ source venv/bin/activate
 
 ## ➤ Pull Requests
 
-All pull requests should be associated with issues. Although not strictly required, the pull requests should be made to [the GitLab repository issues board](https://gitlab.com/megabyte-labs/ansible-roles/androidstudio/-/issues) instead of the [GitHub mirror repository](https://github.com/ProfessorManhattan/ansible-androidstudio). This is because we use GitLab as our primary repository and mirror the changes to GitHub for the community.
+All pull requests should be associated with issues. Although not strictly required, the pull requests should be made to [the GitLab repository issues board](https://gitlab.com/megabyte-labs/ansible-roles/androidstudio/-/issues) instead of the [GitHub mirror repository](https://github.com/ProfessorManhattan/github_prefixandroidstudio). This is because we use GitLab as our primary repository and mirror the changes to GitHub for the community.
 
 ### How to Commit Code
 
@@ -562,7 +562,7 @@ The most important piece of text in each of our Ansible projects is the [Ansible
 - An Ansible role that _installs Android Studio and sets up Android SDKs on nearly any OS_
 - This repository is the home of an Ansible role that _installs Ansible Studio and sets up Android SDKs on nearly any OS_.
 
-It is important that all three variants of the `meta/main.yml` description make sense and be proper English. The `meta/main.yml` description should succinctly describe what the role does and possibly even describe what the product does if it is not well-known like Android Studio. An example of a description that includes an overview of the product would be something like, "Installs HTTPie (a user-friendly, command-line HTTP client) on nearly any platform," for the [HTTPie role](https://github.com/ProfessorManhattan/ansible-httpie) or "Installs Packer (an automation tool for building machine images) on nearly any platform" for the [Packer role](https://github.com/ProfessorManhattan/ansible-packer).
+It is important that all three variants of the `meta/main.yml` description make sense and be proper English. The `meta/main.yml` description should succinctly describe what the role does and possibly even describe what the product does if it is not well-known like Android Studio. An example of a description that includes an overview of the product would be something like, "Installs HTTPie (a user-friendly, command-line HTTP client) on nearly any platform," for the [HTTPie role](https://github.com/ProfessorManhattan/github_prefixhttpie) or "Installs Packer (an automation tool for building machine images) on nearly any platform" for the [Packer role](https://github.com/ProfessorManhattan/github_prefixpacker).
 
 ### `logo.png`
 
