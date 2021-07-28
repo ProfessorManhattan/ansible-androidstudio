@@ -19,7 +19,7 @@
     "commit": "task common:commit",
     "info": "task --list",
     "postinstall": "if [ -d .git ]; then husky install; fi && if [ -f .husky/pre-commit ]; then chmod 755 .husky/pre-commit; fi",
-    "prepare": "bash .common/npm-prepare.js",
+    "prepare": "bash .common/scripts/npm-prepare.js",
     "prepare-release": "task common:prepare-release",
     "requirements": "task common:requirements",
     "reset": "task common:reset",
