@@ -6,32 +6,32 @@
   </center>
 </div>
 <div align="center">
-  <center><h1 align="center"><i></i>[[ package.json .blueprint.title - See CONTRIBUTING.md ]]<i></i></h1></center>
-  <center><h4 style="color: #18c3d1;"><i></i><a href="https://megabyte.space" target="_blank">Megabyte Labs</a></h4><i></i></center>
+  <center><h1 align="center">Ansible Role: [[ package.json .blueprint.title - See CONTRIBUTING.md ]]<i></i></h1></center>
+  <center><h4 style="color: #18c3d1;">An Ansible role brought to you by <a href="https://megabyte.space" target="_blank">Megabyte Labs</a></h4><i></i></center>
 </div>
 
 <div align="center">
   <h4 align="center">
     <a href="https://megabyte.space" title="Megabyte Labs homepage" target="_blank">
-      <img src="project.assets/svg/home-solid.svg" />
+      <img src="https://gitlab.com/megabyte-labs/assets/-/raw/master/svg/home-solid.svg" />
     </a>
     <a href="https://galaxy.ansible.com/professormanhattan/androidstudio" title="[[ package.json .blueprint.name - See CONTRIBUTING.md ]] role on Ansible Galaxy" target="_blank">
-      <img height="50" src="project.assets/svg/ansible-galaxy.svg" />
+      <img height="50" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/svg/ansible-galaxy.svg" />
     </a>
     <a href="repository.github/blob/master/CONTRIBUTING.md" title="Learn about contributing" target="_blank">
-      <img src="project.assets/svg/contributing-solid.svg" />
+      <img src="https://gitlab.com/megabyte-labs/assets/-/raw/master/svg/contributing-solid.svg" />
     </a>
     <a href="https://www.patreon.com/ProfessorManhattan" title="Support us on Patreon" target="_blank">
-      <img src="project.assets/svg/support-solid.svg" />
+      <img src="https://gitlab.com/megabyte-labs/assets/-/raw/master/svg/support-solid.svg" />
     </a>
     <a href="https://app.slack.com/client/T01ABCG4NK1/C01NN74H0LW/details/" title="Slack chat room" target="_blank">
-      <img src="project.assets/svg/chat-solid.svg" />
+      <img src="https://gitlab.com/megabyte-labs/assets/-/raw/master/svg/chat-solid.svg" />
     </a>
     <a href="repository.github" title="GitHub mirror" target="_blank">
-      <img src="project.assets/svg/github-solid.svg" />
+      <img src="https://gitlab.com/megabyte-labs/assets/-/raw/master/svg/github-solid.svg" />
     </a>
     <a href="repository.gitlab" title="GitLab repository" target="_blank">
-      <img src="project.assets/svg/gitlab-solid.svg" />
+      <img src="https://gitlab.com/megabyte-labs/assets/-/raw/master/svg/gitlab-solid.svg" />
     </a>
   </h4>
   <p align="center">
