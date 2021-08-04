@@ -1,12 +1,12 @@
 <!-- ⚠️ This README has been generated from the file(s) ".common/docs/blueprint-readme-role.md" ⚠️--><div align="center">
   <center>
     <a href="repository.github">
-      <img width="140" height="140" alt="Android Studio logo" src="repository.gitlab/-/raw/master/logo.png" />
+      <img width="140" height="140" alt="[[ package.json .blueprint.name - See CONTRIBUTING.md ]] logo" src="repository.gitlab/-/raw/master/logo.png" />
     </a>
   </center>
 </div>
 <div align="center">
-  <center><h1 align="center"><i></i>Android Studio - An IDE for Android Development<i></i></h1></center>
+  <center><h1 align="center"><i></i>[[ package.json .blueprint.title - See CONTRIBUTING.md ]]<i></i></h1></center>
   <center><h4 style="color: #18c3d1;"><i></i><a href="https://megabyte.space" target="_blank">Megabyte Labs</a></h4><i></i></center>
 </div>
 
@@ -15,7 +15,7 @@
     <a href="https://megabyte.space" title="Megabyte Labs homepage" target="_blank">
       <img src="project.assets/svg/home-solid.svg" />
     </a>
-    <a href="https://galaxy.ansible.com/professormanhattan/androidstudio" title="Android Studio role on Ansible Galaxy" target="_blank">
+    <a href="https://galaxy.ansible.com/professormanhattan/androidstudio" title="[[ package.json .blueprint.name - See CONTRIBUTING.md ]] role on Ansible Galaxy" target="_blank">
       <img height="50" src="project.assets/svg/ansible-galaxy.svg" />
     </a>
     <a href="repository.github/blob/master/CONTRIBUTING.md" title="Learn about contributing" target="_blank">
@@ -39,7 +39,7 @@
       <img alt="Ansible Galaxy role: professormanhattan.androidstudio" src="https://img.shields.io/ansible/role/ansible_galaxy_project_id?logo=ansible&style=flat" />
     </a>
     <a href="repository.github" target="_blank">
-      <img alt="Version: 1.0.4" src="https://img.shields.io/badge/version-1.0.4-blue.svg?cacheSeconds=2592000" />
+      <img alt="Version: pkg.version" src="https://img.shields.io/badge/version-pkg.version-blue.svg?cacheSeconds=2592000" />
     </a>
     <a href="{{ repository.github/actions/Windows.yml" target="_blank">
       <img alt="Windows 10 build status" src="https://img.shields.io/github/workflow/status/ProfessorManhattan/ansible-androidstudio/Windows/master?color=cyan&label=Windows%20build&logo=windows&style=flat">
@@ -86,7 +86,7 @@
 
 ## ➤ One-Line Install Method
 
-Looking to install Android Studio without having to deal with [Ansible](https://www.ansible.com/)? Simply run the following command that correlates to your operating system:
+Looking to install [[package.json .blueprint.name - See CONTRIBUTING.md]] without having to deal with [Ansible](https://www.ansible.com/)? Simply run the following command that correlates to your operating system:
 
 **Linux/macOS:**
 
@@ -102,7 +102,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 
 **Important Note:** _Before running the commands above you should probably directly access the URL to make sure the code is legit. We already know it is safe but, before running any script on your computer, you should inspect it._
 
-And there you go. Installing Android Studio can be as easy as that. You can also check out the [Install Doctor](https://install.doctor) homepage to learn how to install any Ansible role with a one-liner. If, however, you would like to incorporate this role into an Ansible playbook (and customize settings) then please continue reading below.
+And there you go. Installing [[package.json .blueprint.name - See CONTRIBUTING.md]] can be as easy as that. You can also check out the [Install Doctor](https://install.doctor) homepage to learn how to install any Ansible role with a one-liner. If, however, you would like to incorporate this role into an Ansible playbook (and customize settings) then please continue reading below.
 
 <a href="#table-of-contents" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
@@ -128,7 +128,7 @@ And there you go. Installing Android Studio can be as easy as that. You can also
 
 ## ➤ Overview
 
-This repository is the home of an [Ansible](https://www.ansible.com/) role that . [Android Studio](https://developer.android.com/studio) is the official integrated development environment for Google's Android operating system, built on JetBrains' IntelliJ IDEA software and designed specifically for Android development.
+This repository is the home of an [Ansible](https://www.ansible.com/) role that . [[This is a new repository without the details filled in yet. Look for the section about blueprint data in the CONTRIBUTING.md to set up the project.]]
 
 <a href="#features" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 

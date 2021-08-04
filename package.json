@@ -1,10 +1,154 @@
 {
-  "0": {
-    "role": "professormanhattan.snapd",
-    "when": "ansible_system == 'Linux'"
+  "name": "@installdoc/androidstudio",
+  "version": "null",
+  "description": "Installs Android Studio and sets up Android SDKs on nearly any OS",
+  "license": "MIT",
+  "author": "Brian Zalewski <brian@megabyte.space> (https://megabyte.space)",
+  "homepage": "https://megabyte.space",
+  "repository": {
+    "type": "git",
+    "url": "git+[[ package.json .blueprint.repo - See CONTRIBUTING.md ]].git"
   },
-  "1": {
-    "role": "professormanhattan.homebrew",
-    "when": "ansible_os_family == \"Darwin\""
+  "bugs": {
+    "email": "help@megabyte.space",
+    "url": "[[ package.json .blueprint.repo - See CONTRIBUTING.md ]][object Object]"
+  },
+  "type": "module",
+  "scripts": {
+    "clean": "task common:clean",
+    "commit": "task common:commit",
+    "info": "task --list",
+    "prepare": "bash .common/scripts/npm-prepare.sh",
+    "prepare-release": "task common:prepare-release",
+    "requirements": "task common:requirements",
+    "reset": "task common:reset",
+    "reset-force": "task common:reset-force",
+    "update": "task common:update"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@megabytelabs/prettier-config": "^2.0.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "inquirer": "^6.5.2",
+    "prettier-plugin-sh": "^0.6.1",
+    "remark-preset-lint-recommended": "^5.0.0",
+    "signale": "^1.4.0"
+  },
+  "keywords": [
+    "androidstudio",
+    "ansible",
+    "archlinux",
+    "centos",
+    "debian",
+    "doctor",
+    "fedora",
+    "install",
+    "installdoc",
+    "installdoctor",
+    "macos",
+    "megabytelabs",
+    "molecule",
+    "professormanhattan",
+    "role",
+    "ubuntu",
+    "windows"
+  ],
+  "engines": {
+    "node": ">=10"
+  },
+  "blueprint": {
+    "description": "Installs Android Studio and sets up Android SDKs on nearly any OS",
+    "slug": "androidstudio"
+  },
+  "funding": [
+    {
+      "type": "opencollective",
+      "url": "https://opencollective.com/megabytelabs"
+    },
+    {
+      "type": "patreon",
+      "url": "https://www.patreon.com/ProfessorManhattan"
+    }
+  ],
+  "lint-staged": {
+    "**/*": [
+      "blocklint --wordlist blacklist,slave,whitelist",
+      "check-merge-conflict",
+      "check-added-large-files",
+      "check-symlinks",
+      "destroyed-symlinks"
+    ],
+    "**/*.(css|html|json|less|mjml|php|scss|sh|ts)": [
+      "prettier --write"
+    ],
+    "**/*.(jpg|png)": [
+      "task image:compress --"
+    ],
+    "**/*.js": [
+      "npx standard --fix",
+      "prettier --write"
+    ],
+    "**/!(package).json": [
+      "check-json",
+      "task fix:json --",
+      "prettier --write"
+    ],
+    "**/*.md": [
+      "remark",
+      "prettier --write"
+    ],
+    "**/*.(sh|sh.j2)": [
+      "shellcheck",
+      "prettier --write"
+    ],
+    "**/*.toml": [
+      "check-toml"
+    ],
+    "**/*.xml": [
+      "check-xml",
+      "prettier --write"
+    ],
+    "**/*.yml": [
+      "check-yaml",
+      "yamllint -s",
+      "task fix:yml-dashes --",
+      "prettier --write"
+    ],
+    "logo.png": [
+      "task image:resize -- 200 200",
+      "task image:compress --"
+    ],
+    "package.json": [
+      "check-json",
+      "task fix:json --",
+      "prettier-package-json --write"
+    ],
+    "requirements.txt": [
+      "requirements-txt-fixer",
+      "prettier --write"
+    ],
+    "**/*.py": [
+      "black",
+      "flake8"
+    ],
+    "**/*vault.yml": [
+      "bash .common/scripts/ansible/vault.sh"
+    ]
+  },
+  "prettier": "@megabytelabs/prettier-config",
+  "remarkConfig": {
+    "plugins": [
+      "remark-preset-lint-recommended"
+    ]
+  },
+  "standard-version": {
+    "scripts": {
+      "prerelease": "git add --all"
+    }
   }
 }
