@@ -41,8 +41,8 @@
     <a title="Version: null" href="repository.github" target="_blank">
       <img alt="Version: null" src="https://img.shields.io/badge/version-null-blue.svg?cacheSeconds=2592000" />
     </a>
-    <a title="Windows 10 build status on GitHub" href="{{ repository.github/actions/Windows.yml" target="_blank">
-      <img alt="Windows 10 build status" src="https://img.shields.io/github/workflow/status/ProfessorManhattan/ansible-androidstudio/Windows/master?color=cyan&label=Windows%20build&logo=windows&style=flat">
+    <a title="Windows 11 build status on GitHub" href="{{ repository.github/actions/Windows.yml" target="_blank">
+      <img alt="Windows 11 build status" src="https://img.shields.io/github/workflow/status/ProfessorManhattan/ansible-androidstudio/Windows/master?color=cyan&label=Windows%20build&logo=windows&style=flat">
     </a>
     <a title="macOS build status on GitHub" href="repository.github/actions/macOS.yml" target="_blank">
       <img alt="macOS build status" src="https://img.shields.io/github/workflow/status/ProfessorManhattan/ansible-androidstudio/macOS/master?label=macOS%20build&logo=apple&style=flat">
