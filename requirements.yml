@@ -1,6 +1,10 @@
 roles:
   - name: professormanhattan.snapd
   - name: professormanhattan.homebrew
+<<<<<<< HEAD
+=======
+  - name: null
+>>>>>>> ddb70e8b506b888b895cf9869f06fe170e999593
 collections:
   - name: chocolatey.chocolatey
     source: https://galaxy.ansible.com
