@@ -1,13 +1,13 @@
 <!-- ⚠️ This README has been generated from the file(s) ".common/docs/blueprint-readme-role.md" ⚠️--><div align="center">
   <center>
-    <a href="https://github.com/ProfessorManhattan/github_prefixandroidstudio">
-      <img width="140" height="140" alt="Android Studio logo" src="https://gitlab.com/megabyte-labs/ansible-roles/androidstudio/-/raw/master/logo.png" />
+    <a href="repository.github">
+      <img width="140" height="140" alt="Android Studio logo" src="repository.gitlab/-/raw/master/logo.png" />
     </a>
   </center>
 </div>
 <div align="center">
-  <center><h1 align="center">Ansible Role: Android Studio - An IDE for Android Developmentheader_title_post</h1></center>
-  <center><h4 style="color: #18c3d1;">An Ansible role brought to you by <a href="https://megabyte.space" target="_blank">Megabyte Labs</a></h4>header_description_post</center>
+  <center><h1 align="center"><i></i>Android Studio - An IDE for Android Development<i></i></h1></center>
+  <center><h4 style="color: #18c3d1;"><i></i><a href="https://megabyte.space" target="_blank">Megabyte Labs</a></h4><i></i></center>
 </div>
 
 <div align="center">
@@ -18,7 +18,7 @@
     <a href="https://galaxy.ansible.com/professormanhattan/androidstudio" title="Android Studio role on Ansible Galaxy" target="_blank">
       <img height="50" src="project.assets/svg/ansible-galaxy.svg" />
     </a>
-    <a href="https://gitlab.com/megabyte-labs/ansible-roles/androidstudio/-/blob/master/CONTRIBUTING.md" title="Learn about contributing" target="_blank">
+    <a href="repository.github/blob/master/CONTRIBUTING.md" title="Learn about contributing" target="_blank">
       <img src="project.assets/svg/contributing-solid.svg" />
     </a>
     <a href="https://www.patreon.com/ProfessorManhattan" title="Support us on Patreon" target="_blank">
@@ -27,10 +27,10 @@
     <a href="https://app.slack.com/client/T01ABCG4NK1/C01NN74H0LW/details/" title="Slack chat room" target="_blank">
       <img src="project.assets/svg/chat-solid.svg" />
     </a>
-    <a href="https://github.com/ProfessorManhattan/github_prefixandroidstudio" title="GitHub mirror" target="_blank">
+    <a href="repository.github" title="GitHub mirror" target="_blank">
       <img src="project.assets/svg/github-solid.svg" />
     </a>
-    <a href="https://gitlab.com/megabyte-labs/ansible-roles/androidstudio" title="GitLab repository" target="_blank">
+    <a href="repository.gitlab" title="GitLab repository" target="_blank">
       <img src="project.assets/svg/gitlab-solid.svg" />
     </a>
   </h4>
@@ -38,16 +38,16 @@
     <a href="https://galaxy.ansible.com/professormanhattan/androidstudio" target="_blank">
       <img alt="Ansible Galaxy role: professormanhattan.androidstudio" src="https://img.shields.io/ansible/role/ansible_galaxy_project_id?logo=ansible&style=flat" />
     </a>
-    <a href="https://github.com/ProfessorManhattan/github_prefixandroidstudio" target="_blank">
+    <a href="repository.github" target="_blank">
       <img alt="Version: 1.0.4" src="https://img.shields.io/badge/version-1.0.4-blue.svg?cacheSeconds=2592000" />
     </a>
-    <a href="{{ https://github.com/ProfessorManhattan/github_prefixandroidstudio/actions/Windows.yml" target="_blank">
+    <a href="{{ repository.github/actions/Windows.yml" target="_blank">
       <img alt="Windows 10 build status" src="https://img.shields.io/github/workflow/status/ProfessorManhattan/ansible-androidstudio/Windows/master?color=cyan&label=Windows%20build&logo=windows&style=flat">
     </a>
-    <a href="https://github.com/ProfessorManhattan/github_prefixandroidstudio/actions/macOS.yml" target="_blank">
+    <a href="repository.github/actions/macOS.yml" target="_blank">
       <img alt="macOS build status" src="https://img.shields.io/github/workflow/status/ProfessorManhattan/ansible-role_name/macOS/master?label=macOS%20build&logo=apple&style=flat">
     </a>
-    <a href="https://gitlab.com/megabyte-labs/ansible-roles/androidstudio/commits/master" target="_blank">
+    <a href="repository.gitlab/-/commits/master" target="_blank">
       <img alt="Linux build status" src="https://gitlab.com/megabyte-labs/ansible-roles/role_name/badges/master/pipeline.svg">
     </a>
     <a href="https://galaxy.ansible.com/professormanhattan/androidstudio" target="_blank" title="Ansible Galaxy quality score (out of 5)">
@@ -59,13 +59,13 @@
     <a href="https://megabyte.space/docs/ansible" target="_blank">
       <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg?logo=readthedocs&style=flat" />
     </a>
-    <a href="https://gitlab.com/megabyte-labs/ansible-roles/androidstudio/-/raw/master/LICENSE" target="_blank">
+    <a href="repository.github/blob/master/LICENSE" target="_blank">
       <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-yellow.svg?style=flat" />
     </a>
     <a href="https://opencollective.com/megabytelabs" title="Support us on Open Collective" target="_blank">
       <img alt="Open Collective sponsors" src="https://img.shields.io/opencollective/sponsors/megabytelabs?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAElBMVEUAAACvzfmFsft4pfD////w+P9tuc5RAAAABHRSTlMAFBERkdVu1AAAAFxJREFUKM9jgAAXIGBAABYXMHBA4yNEXGBAAU2BMz4FIIYTNhtFgRjZPkagFAuyAhGgHAuKAlQBCBtZB4gzQALoDsN0Oobn0L2PEUCoQYgZyOjRQFiJA67IRrEbAJImNwFBySjCAAAAAElFTkSuQmCC&label=Open%20Collective%20sponsors&logo=opencollective&style=flat" />
     </a>
-    <a href="https://github.com/ProfessorManhattan" title="Support us on GitHub" target="_blank">
+    <a href="ProfessorManhattan" title="Support us on GitHub" target="_blank">
       <img alt="GitHub sponsors" src="https://img.shields.io/github/sponsors/ProfessorManhattan?label=GitHub%20sponsors&logo=github&style=flat" />
     </a>
     <a href="ProfessorManhattan" target="_blank">
@@ -79,7 +79,8 @@
 
 > </br><h3 align="center">**Installs Android Studio and sets up Android SDKs on nearly any OS**</h3></br>
 
-<!--TERMINALIZE![terminalizer_title](https://gitlab.com/megabyte-labs/ansible-roles/androidstudio/-/raw/master/.demo.gif)TERMINALIZE-->
+<!--TERMINALIZE![terminalizer_title](https://gitlab.com/megabyte-labs/ansible-roles/androidstudio* **github**: /raw/master/.demo.gif
+* **gitlab**: /-/raw/master/.demo.gif)TERMINALIZE-->
 
 <a href="#one-line-install-method" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
@@ -96,7 +97,7 @@ curl -sS https://install.doctor/androidstudio | bash
 **Windows:**
 
 ```powershell
-Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://win.install.doctor/androidstudio'))
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://install.doctor/androidstudio?os=win'))
 ```
 
 **Important Note:** _Before running the commands above you should probably directly access the URL to make sure the code is legit. We already know it is safe but, before running any script on your computer, you should inspect it._
@@ -172,11 +173,9 @@ sdk_location: ~/Android/Sdk
 
 ## ➤ Supported Operating Systems
 
-The chart below shows the operating systems that we have tested this role on. It is automatically generated using the Ansible Molecule tests located in the `molecule/default/` folder. There is logic in place to automatically handle the testing of Windows, macOS, Ubuntu, Fedora, CentOS, Debian, and Archlinux. If your operating system is not listed but is a variant of one of the systems we test (i.e. a Debian-flavored system or a RedHat-flavored system) then it is possible that the role will still work.
+The chart below shows the operating systems that we have tested this role on. It is automatically generated using the Ansible Molecule tests located in the `molecule/` folder. There is logic in place to automatically handle the testing of Windows, macOS, Ubuntu, Fedora, CentOS, Debian, and Archlinux. If your operating system is not listed but is a variant of one of the systems we test (i.e. a Debian-flavored system or a RedHat-flavored system) then it is possible that the role will still work.
 
 compatibility_matrix
-
-_The compatibility chart above was last generated on compatibility_date._
 
 **_What does idempotent mean?_** Idempotent means that if you run this role twice in row then there will be no changes to the system the second time around.
 
@@ -190,6 +189,8 @@ Most of our roles rely on [Ansible Galaxy](https://galaxy.ansible.com) collectio
 pip3 install -r requirements.txt
 ansible-galaxy install -r requirements.yml
 ```
+
+Alternatively, you can simply run `bash .start.sh` if you are new to Ansible and do not mind the development requirements also being installed.
 
 ### Galaxy Roles
 
@@ -217,7 +218,7 @@ If you are incorporating this role into a pre-existing playbook, then it might b
 
 ## ➤ Contributing
 
-Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://gitlab.com/megabyte-labs/ansible-roles/androidstudio/-/issues). If you would like to contribute, please take a look at the [contributing guide](https://gitlab.com/megabyte-labs/ansible-roles/androidstudio/-/blob/master/CONTRIBUTING.md).
+Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](repository.github/issues). If you would like to contribute, please take a look at the [contributing guide](repository.github/blob/master/CONTRIBUTING.md).
 
 <details>
 <summary>Sponsorship</summary>
@@ -245,4 +246,4 @@ I create open source projects out of love. Although I have a job, shelter, and a
 
 ## ➤ License
 
-Copyright © 2020-2021 [Megabyte LLC](https://megabyte.space). This project is [MIT](https://gitlab.com/megabyte-labs/ansible-roles/androidstudio/-/raw/master/LICENSE) licensed.
+Copyright © 2020-2021 [Megabyte LLC](https://megabyte.space). This project is [MIT](repository.gitlab/-/blob/master/LICENSE) licensed.
