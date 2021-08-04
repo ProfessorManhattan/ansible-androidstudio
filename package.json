@@ -84,9 +84,14 @@
         "Installs Homebrew (a package management system) on macOS and Linux systems"
       ]
     ],
+<<<<<<< HEAD
     "role_descriptions": [],
     "slug": "androidstudio",
     "title": "Android Studio - An IDE for Android Development"
+=======
+    "slug": "androidstudio",
+    "description": "Installs Android Studio and sets up Android SDKs on nearly any OS"
+>>>>>>> 5c182b030f33795979e1533094141dc753b509c9
   },
   "funding": [
     {
@@ -123,6 +128,13 @@
       "npx standard --fix",
       "prettier --write"
     ],
+<<<<<<< HEAD
+=======
+    "**/!(package).json": [
+      "check-json",
+      "task fix:json --"
+    ],
+>>>>>>> 5c182b030f33795979e1533094141dc753b509c9
     "**/*.md": [
       "prettier --write",
       "remark"
@@ -143,6 +155,7 @@
       "yamllint -s",
       "prettier --write"
     ],
+<<<<<<< HEAD
     "**/*vault.yml": [
       "bash .common/scripts/ansible/vault.sh"
     ],
@@ -152,6 +165,23 @@
     ],
     "package.json": [
       "prettier-package-json --write"
+=======
+    "logo.png": [
+      "task image:resize -- 200 200",
+      "task image:compress --"
+    ],
+    "package.json": [
+      "check-json",
+      "task fix:json --",
+      "prettier-package-json --write"
+    ],
+    "requirements.txt": [
+      "requirements-txt-fixer"
+    ],
+    "**/*.py": [
+      "black",
+      "flake8"
+>>>>>>> 5c182b030f33795979e1533094141dc753b509c9
     ],
     "requirements.txt": [
       "requirements-txt-fixer"
