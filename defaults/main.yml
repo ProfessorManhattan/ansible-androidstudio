@@ -15,6 +15,9 @@ android_sdks: []
 #   - patcher;v4
 # @end
 
+# @todo Documentation: Provide sensible default for `user_configs` and add a full example in comments
+user_configs: []
+
 # @var sdk_location: ""
 # The folder to set as the SDK Location
 sdk_location: ~/Android/Sdk
