@@ -129,8 +129,7 @@
       "prettier-package-json --write"
     ],
     "requirements.txt": [
-      "requirements-txt-fixer",
-      "prettier --write"
+      "requirements-txt-fixer"
     ],
     "**/*.py": [
       "black",
