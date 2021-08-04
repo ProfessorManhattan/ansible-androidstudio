@@ -7,11 +7,11 @@
   "homepage": "https://megabyte.space",
   "repository": {
     "type": "git",
-    "url": "git+[[ package.json .blueprint.repo - See CONTRIBUTING.md ]].git"
+    "url": "git+.git"
   },
   "bugs": {
     "email": "help@megabyte.space",
-    "url": "[[ package.json .blueprint.repo - See CONTRIBUTING.md ]][object Object]"
+    "url": "/-/issues"
   },
   "type": "module",
   "scripts": {
