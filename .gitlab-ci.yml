@@ -13,6 +13,7 @@ include:
   - remote: https://gitlab.com/megabyte-labs/ci/gitlab-ci-templates/-/raw/master/lint/hadolint.gitlab-ci.yml
   - remote: https://gitlab.com/megabyte-labs/ci/gitlab-ci-templates/-/raw/master/lint/prettier.gitlab-ci.yml
   - remote: https://gitlab.com/megabyte-labs/ci/gitlab-ci-templates/-/raw/master/lint/shellcheck.gitlab-ci.yml
+  - remote: https://gitlab.com/megabyte-labs/ci/gitlab-ci-templates/-/raw/master/lint/sonarcloud.gitlab-ci.yml
   - remote: https://gitlab.com/megabyte-labs/ci/gitlab-ci-templates/-/raw/master/lint/yamllint.gitlab-ci.yml
   - remote: https://gitlab.com/megabyte-labs/ci/gitlab-ci-templates/-/raw/master/test/molecule.gitlab-ci.yml
   - remote: https://gitlab.com/megabyte-labs/ci/gitlab-ci-templates/-/raw/master/test/windows-ansible-test.gitlab-ci.yml
