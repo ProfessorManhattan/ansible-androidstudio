@@ -1,6 +1,6 @@
 <!-- ⚠️ This README has been generated from the file(s) ".common/docs/blueprint-readme-role.md" ⚠️--><div align="center">
   <center>
-    <a href="https://github.com/ProfessorManhattan/ansible-androidstudio">
+    <a href="https://github.com/ProfessorManhattan/github_prefixandroidstudio">
       <img width="140" height="140" alt="Android Studio logo" src="https://gitlab.com/megabyte-labs/ansible-roles/androidstudio/-/raw/master/logo.png" />
     </a>
   </center>
@@ -27,7 +27,7 @@
     <a href="https://app.slack.com/client/T01ABCG4NK1/C01NN74H0LW/details/" title="Slack chat room" target="_blank">
       <img src="project.assets/svg/chat-solid.svg" />
     </a>
-    <a href="https://github.com/ProfessorManhattan/ansible-androidstudio" title="GitHub mirror" target="_blank">
+    <a href="https://github.com/ProfessorManhattan/github_prefixandroidstudio" title="GitHub mirror" target="_blank">
       <img src="project.assets/svg/github-solid.svg" />
     </a>
     <a href="https://gitlab.com/megabyte-labs/ansible-roles/androidstudio" title="GitLab repository" target="_blank">
@@ -38,13 +38,13 @@
     <a href="https://galaxy.ansible.com/professormanhattan/androidstudio" target="_blank">
       <img alt="Ansible Galaxy role: professormanhattan.androidstudio" src="https://img.shields.io/ansible/role/ansible_galaxy_project_id?logo=ansible&style=flat" />
     </a>
-    <a href="https://github.com/ProfessorManhattan/ansible-androidstudio" target="_blank">
+    <a href="https://github.com/ProfessorManhattan/github_prefixandroidstudio" target="_blank">
       <img alt="Version: 1.0.4" src="https://img.shields.io/badge/version-1.0.4-blue.svg?cacheSeconds=2592000" />
     </a>
-    <a href="{{ https://github.com/ProfessorManhattan/ansible-androidstudio/actions/Windows.yml" target="_blank">
+    <a href="{{ https://github.com/ProfessorManhattan/github_prefixandroidstudio/actions/Windows.yml" target="_blank">
       <img alt="Windows 10 build status" src="https://img.shields.io/github/workflow/status/ProfessorManhattan/ansible-androidstudio/Windows/master?color=cyan&label=Windows%20build&logo=windows&style=flat">
     </a>
-    <a href="https://github.com/ProfessorManhattan/ansible-androidstudio/actions/macOS.yml" target="_blank">
+    <a href="https://github.com/ProfessorManhattan/github_prefixandroidstudio/actions/macOS.yml" target="_blank">
       <img alt="macOS build status" src="https://img.shields.io/github/workflow/status/ProfessorManhattan/ansible-role_name/macOS/master?label=macOS%20build&logo=apple&style=flat">
     </a>
     <a href="https://gitlab.com/megabyte-labs/ansible-roles/androidstudio/commits/master" target="_blank">
@@ -110,8 +110,8 @@ And there you go. Installing Android Studio can be as easy as that. You can also
 - [➤ One-Line Install Method](#-one-line-install-method)
 - [➤ Overview](#-overview)
 - [➤ Features](#-features)
-  - [Ensures Android Studio is installed:](#ensures-android-studio-is-installed)
-  - [Ensures configured Android SDKs are present:](#ensures-configured-android-sdks-are-present)
+  - [Ensures android studio is installed:](#ensures-android-studio-is-installed)
+  - [Ensures configured android sdks are present:](#ensures-configured-android-sdks-are-present)
 - [➤ Variables](#-variables)
   - [android_sdks](#android_sdks)
   - [sdk_location](#sdk_location)
@@ -132,12 +132,12 @@ This repository is the home of an [Ansible](https://www.ansible.com/) role that 
 
 ## ➤ Features
 
-### Ensures Android Studio is installed:
+### Ensures android studio is installed:
 
 - Installs Android Studio on Archlinux, CentOS, Debian, Fedora, macOS, Ubuntu, and Windows
 - Installs a configurable list of Android SDKs and Tools
 
-### Ensures configured Android SDKs are present:
+### Ensures configured android sdks are present:
 
 - Ensures Android SDK tools like `adb` are present in PATH
 

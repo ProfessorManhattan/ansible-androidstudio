@@ -1,7 +1,7 @@
 {
-  "name": "@megabytelabs/ansible-",
+  "name": "@installdoc/androidstudio",
   "version": "1.0.4",
-  "description": "",
+  "description": "Installs Android Studio and sets up Android SDKs on nearly any OS",
   "license": "MIT",
   "author": "Brian Zalewski <brian@megabyte.space> (https://megabyte.space)",
   "homepage": "https://megabyte.space",
@@ -18,8 +18,7 @@
     "clean": "task common:clean",
     "commit": "task common:commit",
     "info": "task --list",
-    "postinstall": "if [ -d .git ]; then husky install; fi && if [ -f .husky/pre-commit ]; then chmod 755 .husky/pre-commit; fi",
-    "prepare": "bash .common/scripts/npm-prepare.js",
+    "prepare": "bash .common/scripts/npm-prepare.sh",
     "prepare-release": "task common:prepare-release",
     "requirements": "task common:requirements",
     "reset": "task common:reset",
@@ -55,6 +54,7 @@
     "doctor",
     "fedora",
     "install",
+    "installdoc",
     "installdoctor",
     "macos",
     "megabytelabs",
@@ -69,13 +69,11 @@
   },
   "blueprint": {
     "ansible_galaxy_project_id": "",
-    "compatibility_date": "",
     "compatibility_matrix": [],
+    "description": "Installs Android Studio and sets up Android SDKs on nearly any OS",
     "name": "Android Studio",
     "overview": "[Android Studio](https://developer.android.com/studio) is the official integrated development environment for Google's Android operating system, built on JetBrains' IntelliJ IDEA software and designed specifically for Android development.",
     "repo": "https://gitlab.com/megabyte-labs/ansible-roles/androidstudio",
-    "role_descriptions": [],
-    "title": "Android Studio - An IDE for Android Development",
     "requirements": [
       [
         "snapd",
@@ -85,7 +83,10 @@
         "homebrew",
         "Installs Homebrew (a package management system) on macOS and Linux systems"
       ]
-    ]
+    ],
+    "role_descriptions": [],
+    "slug": "androidstudio",
+    "title": "Android Studio - An IDE for Android Development"
   },
   "funding": [
     {
@@ -98,6 +99,10 @@
     }
   ],
   "lint-staged": {
+    "**/!(package).json": [
+      "check-json",
+      "task fix:json --"
+    ],
     "**/*": [
       "blocklint --wordlist blacklist,slave,whitelist",
       "check-merge-conflict",
@@ -111,21 +116,20 @@
     "**/*.(jpg|png)": [
       "task image:compress --"
     ],
+    "**/*.(sh|sh.j2)": [
+      "shellcheck"
+    ],
     "**/*.js": [
       "npx standard --fix",
       "prettier --write"
     ],
-    "**/!(package).json": [
-      "check-json",
-      "pretty-format-json --autofix"
-    ],
     "**/*.md": [
       "prettier --write",
-      "remark",
-      "task lint:prose --"
+      "remark"
     ],
-    "**/*.(sh|sh.j2)": [
-      "shellcheck"
+    "**/*.py": [
+      "black",
+      "flake8"
     ],
     "**/*.toml": [
       "check-toml"
@@ -139,22 +143,18 @@
       "yamllint -s",
       "prettier --write"
     ],
+    "**/*vault.yml": [
+      "bash .common/scripts/ansible/vault.sh"
+    ],
+    "logo.png": [
+      "task image:resize -- 200 200",
+      "task image:compress --"
+    ],
     "package.json": [
       "prettier-package-json --write"
     ],
     "requirements.txt": [
       "requirements-txt-fixer"
-    ],
-    "logo.png": [
-      "task image:resize -- 200 240",
-      "task image:compress --"
-    ],
-    "./**/*.py": [
-      "black",
-      "flake8"
-    ],
-    "**/*vault.yml": [
-      "bash .common/scripts/ansible/vault.sh"
     ]
   },
   "prettier": "@megabytelabs/prettier-config",
