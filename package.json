@@ -7,11 +7,11 @@
   "homepage": "https://megabyte.space",
   "repository": {
     "type": "git",
-    "url": "git+https://gitlab.com/megabyte-labs/ansible-roles/androidstudio.git"
+    "url": "git+[[ package.json .blueprint.repo - See CONTRIBUTING.md ]].git"
   },
   "bugs": {
     "email": "help@megabyte.space",
-    "url": "https://gitlab.com/megabyte-labs/ansible-roles/androidstudio/-/issues"
+    "url": "[[ package.json .blueprint.repo - See CONTRIBUTING.md ]][object Object]"
   },
   "type": "module",
   "scripts": {
@@ -73,7 +73,10 @@
     "description": "Installs Android Studio and sets up Android SDKs on nearly any OS",
     "name": "Android Studio",
     "overview": "[Android Studio](https://developer.android.com/studio) is the official integrated development environment for Google's Android operating system, built on JetBrains' IntelliJ IDEA software and designed specifically for Android development.",
-    "repo": "https://gitlab.com/megabyte-labs/ansible-roles/androidstudio",
+    "repository": {
+      "github": "https://gitlab.com/ProfessorManhattan/ansible-androidstudio",
+      "gitlab": "https://gitlab.com/megabyte-labs/ansible-roles/androidstudio"
+    },
     "requirements": [
       [
         "snapd",
@@ -118,14 +121,16 @@
     ],
     "**/!(package).json": [
       "check-json",
-      "task fix:json --"
+      "task fix:json --",
+      "prettier --write"
     ],
     "**/*.md": [
-      "prettier --write",
-      "remark"
+      "remark",
+      "prettier --write"
     ],
     "**/*.(sh|sh.j2)": [
-      "shellcheck"
+      "shellcheck",
+      "prettier --write"
     ],
     "**/*.toml": [
       "check-toml"
@@ -137,6 +142,7 @@
     "**/*.yml": [
       "check-yaml",
       "yamllint -s",
+      "task fix:yml-dashes --",
       "prettier --write"
     ],
     "logo.png": [
