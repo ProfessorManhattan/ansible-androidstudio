@@ -1,5 +1,6 @@
 ansible-base
 ansible-lint<5.0.0
+ansibler
 black
 blocklint
 flake8
@@ -9,4 +10,5 @@ molecule-vagrant
 pre-commit-hooks
 proselint
 python-vagrant
+pywinrm>=0.3.0
 yamllint

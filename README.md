@@ -110,8 +110,8 @@ And there you go. Installing Android Studio can be as easy as that. You can also
 - [➤ One-Line Install Method](#-one-line-install-method)
 - [➤ Overview](#-overview)
 - [➤ Features](#-features)
-  - [Ensures android studio is installed:](#ensures-android-studio-is-installed)
-  - [Ensures configured android sdks are present:](#ensures-configured-android-sdks-are-present)
+  - [Ensures Android Studio is installed:](#ensures-android-studio-is-installed)
+  - [Ensures configured Android SDKs are present:](#ensures-configured-android-sdks-are-present)
 - [➤ Variables](#-variables)
   - [android_sdks](#android_sdks)
   - [sdk_location](#sdk_location)
@@ -120,6 +120,7 @@ And there you go. Installing Android Studio can be as easy as that. You can also
   - [Galaxy Roles](#galaxy-roles)
 - [➤ Example Playbook](#-example-playbook)
 - [➤ Contributing](#-contributing)
+  - [TODO](#todo)
 - [➤ License](#-license)
 
 <a href="#overview" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
@@ -132,12 +133,12 @@ This repository is the home of an [Ansible](https://www.ansible.com/) role that 
 
 ## ➤ Features
 
-### Ensures android studio is installed:
+### Ensures Android Studio is installed:
 
 - Installs Android Studio on Archlinux, CentOS, Debian, Fedora, macOS, Ubuntu, and Windows
 - Installs a configurable list of Android SDKs and Tools
 
-### Ensures configured android sdks are present:
+### Ensures configured Android SDKs are present:
 
 - Ensures Android SDK tools like `adb` are present in PATH
 
@@ -235,6 +236,10 @@ I create open source projects out of love. Although I have a job, shelter, and a
 </a>
 
 </details>
+
+### TODO
+
+- **Documentation:** Provide sensible default for `user_configs` and add a full example in comments
 
 <a href="#license" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
