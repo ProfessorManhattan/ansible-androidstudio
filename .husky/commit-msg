@@ -1,6 +1,9 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
+# @file .husky/commit-msg
+# @brief A git hook script for the `commit-msg` hook
+
 . "./.common/scripts/init.sh"
 
 info "Validating commit message with 'commitlint'"

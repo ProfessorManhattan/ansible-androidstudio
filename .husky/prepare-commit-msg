@@ -1,9 +1,12 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-echo "1: $1"
-echo "2: $2"
-echo "3: $3"
+# @file .husky/prepare-commit-msg
+# @brief A git hook script for the `prepare-commit-msg` hook
+# @arg $1 string The full path to the MERGE_MSG
+# @arg $2 string The type of the `prepare-commit-msg` event. For a `git pull origin master`
+# command, the event type is 'merge'.
+
 if [ "$2" != 'merge' ]; then
   . "./.common/scripts/init.sh"
 

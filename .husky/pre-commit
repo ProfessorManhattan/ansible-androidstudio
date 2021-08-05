@@ -1,6 +1,9 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
+# @file .husky/pre-commit
+# @brief A git hook script for the `pre-commit` hook
+
 . "./.common/scripts/init.sh"
 
 info "Performing various pre-commit tasks on staged files (like autofixing, detecting private keys, etc.)"
