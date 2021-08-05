@@ -1,5 +1,5 @@
 {
-  "name": "@installdoc/&lt;i&gt;&lt;/i&gt;androidstudio",
+  "name": "@megabytelabs/ansible-androidstudio",
   "version": "null",
   "description": "Installs Android Studio and sets up Android SDKs on nearly any OS",
   "license": "MIT",
@@ -32,6 +32,7 @@
   },
   "dependencies": {},
   "devDependencies": {
+    "@commitlint/config-conventional": "^13.1.0",
     "@megabytelabs/prettier-config": "^2.0.0",
     "cz-conventional-changelog": "^3.3.0",
     "inquirer": "^6.5.2",
