@@ -1,6 +1,6 @@
 {
   "name": "@megabytelabs/ansible-androidstudio",
-  "version": "null",
+  "version": "1.1.1",
   "description": "Installs Android Studio and sets up Android SDKs on nearly any OS",
   "license": "MIT",
   "author": "Brian Zalewski <brian@megabyte.space> (https://megabyte.space)",
