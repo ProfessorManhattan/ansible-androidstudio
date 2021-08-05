@@ -8,6 +8,7 @@
 .husky/_/husky.sh
 .modules/
 .nyc_output/
+.variables.json
 .venv/
 **/.cache/
 **/.husky/_/husky.sh
