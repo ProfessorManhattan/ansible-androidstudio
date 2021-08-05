@@ -94,11 +94,6 @@
     }
   ],
   "lint-staged": {
-    "**/!(package).json": [
-      "check-json",
-      "task fix:json --",
-      "prettier --write"
-    ],
     "**/*": [
       "blocklint --wordlist blacklist,slave,whitelist",
       "check-merge-conflict",
@@ -112,21 +107,22 @@
     "**/*.(jpg|png)": [
       "task image:compress --"
     ],
-    "**/*.(sh|sh.j2)": [
-      "shellcheck",
-      "prettier --write"
-    ],
     "**/*.js": [
       "npx standard --fix",
+      "prettier --write"
+    ],
+    "**/!(package).json": [
+      "check-json",
+      "task fix:json --",
       "prettier --write"
     ],
     "**/*.md": [
       "remark",
       "prettier --write"
     ],
-    "**/*.py": [
-      "black",
-      "flake8"
+    "**/*.(sh|sh.j2)": [
+      "shellcheck",
+      "prettier --write"
     ],
     "**/*.toml": [
       "check-toml"
@@ -141,9 +137,6 @@
       "task fix:yml-dashes --",
       "prettier --write"
     ],
-    "**/*vault.yml": [
-      "bash .common/scripts/ansible/vault.sh"
-    ],
     "logo.png": [
       "task image:resize -- 200 200",
       "task image:compress --"
@@ -155,6 +148,13 @@
     ],
     "requirements.txt": [
       "requirements-txt-fixer"
+    ],
+    "**/*.py": [
+      "black",
+      "flake8"
+    ],
+    "**/*vault.yml": [
+      "bash .common/scripts/ansible/vault.sh"
     ]
   },
   "prettier": "@megabytelabs/prettier-config",
