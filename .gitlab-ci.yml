@@ -1,6 +1,6 @@
 ---
 variables:
-  ANSIBLE_CONFIG: "${CI_PROJECT_DIR}/ansible.cfg"
+  ANSIBLE_CONFIG: ${CI_PROJECT_DIR}/ansible.cfg
 
 stages:
   - update
@@ -17,4 +17,3 @@ include:
   - remote: https://gitlab.com/megabyte-labs/ci/gitlab-ci-templates/-/raw/master/test/molecule.gitlab-ci.yml
   - remote: https://gitlab.com/megabyte-labs/ci/gitlab-ci-templates/-/raw/master/test/windows-ansible-test.gitlab-ci.yml
   - remote: https://gitlab.com/megabyte-labs/ci/gitlab-ci-templates/-/raw/master/update/update-project.gitlab-ci.yml
-  - template: Dependency-Scanning.gitlab-ci.yml

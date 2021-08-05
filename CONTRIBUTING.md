@@ -2,35 +2,35 @@
 
 <a href="#contributing" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
-# ➤ Contributing
+# }Contributing
 
 First of all, thanks for visiting this page 😊 ❤️ ! We are totally ecstatic that you may be considering contributing to this project. You should read this guide if you are considering creating a pull request.
 
 <a href="#table-of-contents" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
-## ➤ Table of Contents
+## Table of Contents
 
-- [➤ Contributing](#-contributing)
-  - [➤ Code of Conduct](#-code-of-conduct)
-  - [➤ Philosophy](#-philosophy)
-  - [➤ Supported Operating Systems](#-supported-operating-systems)
+- [}Contributing](#contributing)
+  - [Code of Conduct](#code-of-conduct)
+  - [Philosophy](#philosophy)
+  - [Supported Operating Systems](#supported-operating-systems)
     - [Other Operating Systems](#other-operating-systems)
     - [Code Style for Platform-Specific Roles](#code-style-for-platform-specific-roles)
     - [Preferred Installation Method for Mac OS X](#preferred-installation-method-for-mac-os-x)
-  - [➤ Setting Up Development Environment](#-setting-up-development-environment)
+  - [Setting Up Development Environment](#setting-up-development-environment)
     - [Requirements](#requirements)
     - [Getting Started](#getting-started)
     - [Tasks Available](#tasks-available)
-  - [➤ Pull Requests](#-pull-requests)
-  - [➤ Code Format](#-code-format)
+  - [Pull Requests](#pull-requests)
+  - [Code Format](#code-format)
     - [Code Format Example](#code-format-example)
     - [Platform-Specific Roles](#platform-specific-roles)
-  - [➤ Code Style](#-code-style)
+  - [Code Style](#code-style)
     - [Arrays](#arrays)
     - [Alphabetical Order](#alphabetical-order)
     - [Dependency Variables](#dependency-variables)
     - [DRY](#dry)
-  - [➤ Commenting](#-commenting)
+  - [Commenting](#commenting)
     - [Variable Comments](#variable-comments)
     - [Action Comments](#action-comments)
       - [Example Action Comment Implementation](#example-action-comment-implementation)
@@ -40,18 +40,18 @@ First of all, thanks for visiting this page 😊 ❤️ ! We are totally ecstati
       - [Example TODO Comment Implementation](#example-todo-comment-implementation)
       - [Example TODO Comment Generated Output](#example-todo-comment-generated-output)
       - [TODO Comment Guidelines](#todo-comment-guidelines)
-  - [➤ Updating Meta Files and Documentation](#-updating-meta-files-and-documentation)
+  - [Updating Meta Files and Documentation](#updating-meta-files-and-documentation)
     - [The `"blueprint" package.json` Field and `@appnest/readme`](#the-blueprint-packagejson-field-and-appnestreadme)
     - [`meta/main.yml` Description](#metamainyml-description)
     - [`logo.png`](#logopng)
-  - [➤ Testing](#-testing)
+  - [Testing](#testing)
     - [Idempotence](#idempotence)
     - [Debugging](#debugging)
     - [Molecule Documentation](#molecule-documentation)
     - [Testing Desktop Environments](#testing-desktop-environments)
     - [Molecule Scenario Descriptions](#molecule-scenario-descriptions)
     - [Continuous Integration (CI)](#continuous-integration-ci)
-  - [➤ Linting](#-linting)
+  - [Linting](#linting)
     - [Fixing Ansible Lint Errors](#fixing-ansible-lint-errors)
       - [[208] File permissions unset or incorrect](#208-file-permissions-unset-or-incorrect)
       - [[301] Command should not change things if nothing needs doing](#301-command-should-not-change-things-if-nothing-needs-doing)
@@ -59,13 +59,13 @@ First of all, thanks for visiting this page 😊 ❤️ ! We are totally ecstati
 
 <a href="#code-of-conduct" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
-## ➤ Code of Conduct
+## Code of Conduct
 
 This project and everyone participating in it is governed by the [Code of Conduct](https://gitlab.com/ProfessorManhattan/ansible-androidstudio/blob/master/CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to [contact_email](mailto:help@megabyte.space).
 
 <a href="#philosophy" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
-## ➤ Philosophy
+## Philosophy
 
 When you are working with one of our Ansible projects, try asking yourself, "**How can this be improved?**" For example, in the case of the [Android Studio role](https://github.com/ProfessorManhattan/ansible-androidstudio), the role installs Android Studio but there may be additional tasks that should be automated. Consider the following examples:
 
@@ -79,7 +79,7 @@ Ideally, you should use the software installed by the [main playbook](repository
 
 <a href="#supported-operating-systems" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
-## ➤ Supported Operating Systems
+## Supported Operating Systems
 
 All of our roles should run without error on the following operating systems:
 
@@ -126,7 +126,7 @@ We currently support installing applications with both [Homebrew](https://brew.s
 
 <a href="#setting-up-development-environment" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
-## ➤ Setting Up Development Environment
+## Setting Up Development Environment
 
 Before contributing to this project, you will have to make sure you have the tools that are utilized. We have made it incredibly easy to get started - just run `bash .start.sh` in the root of the repository. Most of the requirements (listed below) will automatically install (rootlessly) if they are missing from your system when you initialize the project by running `bash .start.sh`.
 
@@ -174,13 +174,13 @@ Using the information provided above by running `task --list`, we can see that t
 
 <a href="#pull-requests" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
-## ➤ Pull Requests
+## Pull Requests
 
 All pull requests should be associated with issues. Although not strictly required, the pull requests should be made to [the GitLab repository issues board](https://gitlab.com/megabyte-labs/ansible-roles/androidstudio/-/issues) instead of the [GitHub mirror repository](https://gitlab.com/ProfessorManhattan/ansible-androidstudio/issues). This is because we use GitLab as our primary repository and mirror the changes to GitHub for the community.
 
 <a href="#code-format" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
-## ➤ Code Format
+## Code Format
 
 We try to structure our Ansible task and variable files consistently across all [our Ansible projects](https://gitlab.com/megabyte-labs/ansible-roles). This allows us to do things like use RegEx to make ecosystem wide changes. A good way of making sure that your code follows the format we are using is to:
 
@@ -231,7 +231,7 @@ If you have a role that only installs software made for Windows 10 then ensure t
 
 <a href="#code-style" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
-## ➤ Code Style
+## Code Style
 
 We try to follow the same code style across all our Ansible repositories. If something is done one way somewhere, then it should be done the same way elsewhere. It is up to you to [browse through our roles](https://gitlab.com/megabyte-labs/ansible-roles) to get a feel for how everything should be styled. You should clone [the main playbooks repository](project.playbooks) (a.k.a. [Install Doctor](https://install.doctor)), initialize all the submodules either via `bash .start.sh` or `git submodule update --init --recursive`, and search through the code base to see how we are _styling_ different task types. Below are some examples:
 
@@ -339,7 +339,7 @@ DRY stands for "Don't Repeat Yourself." Whenever there is code that is duplicate
 
 <a href="#commenting" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
-## ➤ Commenting
+## Commenting
 
 We strive to make our roles easy to understand. Commenting is a major part of making our roles easier to grasp. Several types of comments are supported in such a way that they are extracted and injected into our documentation. This project uses [mod-ansible-autodoc](https://pypi.org/project/mod-ansible-autodoc/) (a pet project of ours and a fork of [ansible-autodoc](https://pypi.org/project/ansible-autodoc/)) to scan through specially marked up comments and generate documentation out of them. The module also allows the use of markdown in comments so feel free to **bold**, _italicize_, and `code_block` as necessary. Although it is perfectly acceptable to use regular comments, in most cases you should use one of the following types of _special_ comments:
 
@@ -482,7 +482,7 @@ Notice how the title for _improvement_ is not capitalized. It should be capitali
 
 <a href="#updating-meta-files-and-documentation" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
-## ➤ Updating Meta Files and Documentation
+## Updating Meta Files and Documentation
 
 Since we have hundreds of Ansible roles to maintain, the majority of the files inside each role are shared across all our Ansible projects. We synchronize these common files across all our repositories with various build tools. When you clone a new repository, the first command you should run is `bash .start.sh`. This will install missing software requirements, run the full update sequence, and ensure everything is up-to-date. To synchronize the project at a later point in time, you can run `task common:update` which runs most of the logic executed by running `bash .start.sh`.
 
@@ -527,7 +527,7 @@ Alternatively, you can use our pre-commit hook to automatically take care of ste
 
 <a href="#testing" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
-## ➤ Testing
+## Testing
 
 You can test all of the operating systems we support by running the following command in the root of the project:
 
@@ -611,7 +611,7 @@ You might have noticed that there are no CI tests in the chart above for macOS a
 
 <a href="#linting" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
-## ➤ Linting
+## Linting
 
 The process of running linters is mostly automated. Molecule is configured to lint so you will see linting errors when you run `molecule test` (note that not all Molecule scenarios include automatic linting). There is also a pre-commit hook that lints your code and performs other validations before allowing a `git commit` to go through. If you followed the [Setting Up Development Environment](#setting-up-development-environment) section, you should be all set to have your code automatically linted before pushing changes to the repository.
 
