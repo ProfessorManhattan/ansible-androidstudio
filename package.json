@@ -30,6 +30,7 @@
       "path": "cz-conventional-changelog"
     }
   },
+  "dependencies": {},
   "devDependencies": {
     "@commitlint/config-conventional": "^13.1.0",
     "@megabytelabs/prettier-config": "^2.0.0",
