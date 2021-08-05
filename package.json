@@ -1,5 +1,5 @@
 {
-  "name": "@installdoc/&lt;i&gt;&lt;/i&gt;androidstudio",
+  "name": "@megabytelabs/ansible-androidstudio",
   "version": "null",
   "description": "Installs Android Studio and sets up Android SDKs on nearly any OS",
   "license": "MIT",
