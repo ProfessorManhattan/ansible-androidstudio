@@ -4,4 +4,9 @@
 . "./.common/scripts/init.sh"
 
 info "Validating commit message with 'commitlint'"
-task lint:commit -- "$1"
+echo $1
+echo "---"
+echo $2
+echo "----"
+echo $3
+task lint:commit -- "$2"
