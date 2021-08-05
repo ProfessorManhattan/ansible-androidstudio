@@ -40,8 +40,6 @@
     "signale": "^1.4.0"
   },
   "keywords": [
-    "adb",
-    "androidsdk",
     "androidstudio",
     "ansible",
     "archlinux",
@@ -55,10 +53,8 @@
     "macos",
     "megabytelabs",
     "molecule",
-    "platformtools",
     "professormanhattan",
     "role",
-    "snap",
     "ubuntu",
     "windows"
   ],
@@ -73,13 +69,10 @@
       "github": "https://gitlab.com/ProfessorManhattan/ansible-androidstudio",
       "gitlab": "https://gitlab.com/megabyte-labs/ansible-roles/androidstudio"
     },
+    "slug": "androidstudio",
+    "title": "Android Studio - An IDE for Android Development",
     "role_dependencies": [
-      [
-        "Role Dependency",
-        "Description",
-        "Supported OSes",
-        "Status"
-      ],
+      ["Role Dependency", "Description", "Supported OSes", "Status"],
       [
         "<a href=\"https://galaxy.ansible.com/professormanhattan/snapd\" title=\"professormanhattan.snapd on Ansible Galaxy\" target=\"_blank\">professormanhattan.snapd</a>",
         "Ensures Snap is installed and properly configured on Linux",
@@ -92,9 +85,7 @@
         "❔",
         "❔"
       ]
-    ],
-    "slug": "androidstudio",
-    "title": "Android Studio - An IDE for Android Development"
+    ]
   },
   "funding": [
     {
@@ -107,11 +98,6 @@
     }
   ],
   "lint-staged": {
-    "**/!(package).json": [
-      "check-json",
-      "task fix:json --",
-      "prettier --write"
-    ],
     "**/*": [
       "blocklint --wordlist blacklist,slave,whitelist",
       "check-merge-conflict",
@@ -119,62 +105,24 @@
       "check-symlinks",
       "destroyed-symlinks"
     ],
-    "**/*.(css|html|json|less|mjml|php|scss|sh|ts)": [
-      "prettier --write"
-    ],
-    "**/*.(jpg|png)": [
-      "task image:compress --"
-    ],
-    "**/*.(sh|sh.j2)": [
-      "shellcheck",
-      "prettier --write"
-    ],
-    "**/*.js": [
-      "npx standard --fix",
-      "prettier --write"
-    ],
-    "**/*.md": [
-      "remark",
-      "prettier --write"
-    ],
-    "**/*.py": [
-      "black",
-      "flake8"
-    ],
-    "**/*.toml": [
-      "check-toml"
-    ],
-    "**/*.xml": [
-      "check-xml",
-      "prettier --write"
-    ],
-    "**/*.yml": [
-      "check-yaml",
-      "yamllint -s",
-      "task fix:yml-dashes --",
-      "prettier --write"
-    ],
-    "**/*vault.yml": [
-      "bash .common/scripts/ansible/vault.sh"
-    ],
-    "logo.png": [
-      "task image:resize -- 200 200",
-      "task image:compress --"
-    ],
-    "package.json": [
-      "check-json",
-      "task fix:json --",
-      "prettier-package-json --write"
-    ],
-    "requirements.txt": [
-      "requirements-txt-fixer"
-    ]
+    "**/*.(css|html|json|less|mjml|php|scss|sh|ts)": ["prettier --write"],
+    "**/*.(jpg|png)": ["task image:compress --"],
+    "**/*.js": ["npx standard --fix", "prettier --write"],
+    "**/!(package).json": ["check-json", "task fix:json --", "prettier --write"],
+    "**/*.md": ["remark", "prettier --write"],
+    "**/*.(sh|sh.j2)": ["shellcheck", "prettier --write"],
+    "**/*.toml": ["check-toml"],
+    "**/*.xml": ["check-xml", "prettier --write"],
+    "**/*.yml": ["check-yaml", "yamllint -s", "task fix:yml-dashes --", "prettier --write"],
+    "logo.png": ["task image:resize -- 200 200", "task image:compress --"],
+    "package.json": ["check-json", "task fix:json --", "prettier-package-json --write"],
+    "requirements.txt": ["requirements-txt-fixer"],
+    "**/*.py": ["black", "flake8"],
+    "**/*vault.yml": ["bash .common/scripts/ansible/vault.sh"]
   },
   "prettier": "@megabytelabs/prettier-config",
   "remarkConfig": {
-    "plugins": [
-      "remark-preset-lint-recommended"
-    ]
+    "plugins": ["remark-preset-lint-recommended"]
   },
   "standard-version": {
     "scripts": {
