@@ -1,5 +1,5 @@
 {
-  "name": "@installdoc/androidstudio",
+  "name": "@installdoc/&lt;i&gt;&lt;/i&gt;androidstudio",
   "version": "null",
   "description": "Installs Android Studio and sets up Android SDKs on nearly any OS",
   "license": "MIT",
@@ -7,11 +7,11 @@
   "homepage": "https://megabyte.space",
   "repository": {
     "type": "git",
-    "url": "git+.git"
+    "url": "git+https://gitlab.com/ProfessorManhattan/ansible-androidstudio.git"
   },
   "bugs": {
     "email": "help@megabyte.space",
-    "url": "/-/issues"
+    "url": "https://gitlab.com/megabyte-labs/ansible-roles/androidstudio/-/issues"
   },
   "type": "module",
   "scripts": {
@@ -94,6 +94,11 @@
     }
   ],
   "lint-staged": {
+    "**/!(package).json": [
+      "check-json",
+      "task fix:json --",
+      "prettier --write"
+    ],
     "**/*": [
       "blocklint --wordlist blacklist,slave,whitelist",
       "check-merge-conflict",
@@ -107,22 +112,21 @@
     "**/*.(jpg|png)": [
       "task image:compress --"
     ],
-    "**/*.js": [
-      "npx standard --fix",
+    "**/*.(sh|sh.j2)": [
+      "shellcheck",
       "prettier --write"
     ],
-    "**/!(package).json": [
-      "check-json",
-      "task fix:json --",
+    "**/*.js": [
+      "npx standard --fix",
       "prettier --write"
     ],
     "**/*.md": [
       "remark",
       "prettier --write"
     ],
-    "**/*.(sh|sh.j2)": [
-      "shellcheck",
-      "prettier --write"
+    "**/*.py": [
+      "black",
+      "flake8"
     ],
     "**/*.toml": [
       "check-toml"
@@ -137,6 +141,9 @@
       "task fix:yml-dashes --",
       "prettier --write"
     ],
+    "**/*vault.yml": [
+      "bash .common/scripts/ansible/vault.sh"
+    ],
     "logo.png": [
       "task image:resize -- 200 200",
       "task image:compress --"
@@ -148,13 +155,6 @@
     ],
     "requirements.txt": [
       "requirements-txt-fixer"
-    ],
-    "**/*.py": [
-      "black",
-      "flake8"
-    ],
-    "**/*vault.yml": [
-      "bash .common/scripts/ansible/vault.sh"
     ]
   },
   "prettier": "@megabytelabs/prettier-config",

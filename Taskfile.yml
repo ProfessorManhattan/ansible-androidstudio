@@ -22,3 +22,4 @@ includes:
   security: ./.common/taskfiles-role/Taskfile-security.yml
   software: ./.common/taskfiles-role/Taskfile-{{OS}}.yml
   test: ./.common/taskfiles-role/Taskfile-test.yml
+  vscode: ./.common/taskfiles-role/Taskfile-vscode.yml
