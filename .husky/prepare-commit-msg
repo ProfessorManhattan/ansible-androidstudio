@@ -1,8 +1,12 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
-
+echo $1
+echo $2
+echo $3
+if [ "$2" != 'merge' ]; then
 . "./.common/scripts/init.sh"
 
 info "Opening a 'git commit' dialog"
 exec < /dev/tty && git cz --hook || true
 # task common:commit
+fi
