@@ -9,24 +9,4 @@ stages:
   - security
 
 include:
-  - remote: https://gitlab.com/megabyte-labs/ci/gitlab-ci-templates/-/raw/master/lint/ansible-lint.gitlab-ci.yml
-  - remote: https://gitlab.com/megabyte-labs/ci/gitlab-ci-templates/-/raw/master/lint/flake8.gitlab-ci.yml
-  - remote: https://gitlab.com/megabyte-labs/ci/gitlab-ci-templates/-/raw/master/lint/hadolint.gitlab-ci.yml
-  - remote: https://gitlab.com/megabyte-labs/ci/gitlab-ci-templates/-/raw/master/lint/prettier.gitlab-ci.yml
-  - remote: https://gitlab.com/megabyte-labs/ci/gitlab-ci-templates/-/raw/master/lint/shellcheck.gitlab-ci.yml
-  - remote: https://gitlab.com/megabyte-labs/ci/gitlab-ci-templates/-/raw/master/lint/yamllint.gitlab-ci.yml
-  - remote: https://gitlab.com/megabyte-labs/ci/gitlab-ci-templates/-/raw/master/test/molecule.gitlab-ci.yml
-  - remote: https://gitlab.com/megabyte-labs/ci/gitlab-ci-templates/-/raw/master/test/windows-ansible-test.gitlab-ci.yml
-  - remote: https://gitlab.com/megabyte-labs/ci/gitlab-ci-templates/-/raw/master/update/update-project.gitlab-ci.yml
-  - template: Dependency-Scanning.gitlab-ci.yml
-  - template: Security/License-Scanning.gitlab-ci.yml
-  - template: Security/Secret-Detection.gitlab-ci.yml
-
-dependency_scanning:
-  stage: security
-
-license_scanning:
-  stage: security
-
-.secret-analyzer:
-  stage: security
+  - remote: https://gitlab.com/megabyte-labs/ci/gitlab-ci-templates/-/raw/windows-ci/test/windows-ansible-test.gitlab-ci.yml
