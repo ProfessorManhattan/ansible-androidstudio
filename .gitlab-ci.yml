@@ -6,6 +6,7 @@ stages:
   - update
   - lint
   - test
+  - security
 
 include:
   - remote: https://gitlab.com/megabyte-labs/ci/gitlab-ci-templates/-/raw/master/lint/ansible-lint.gitlab-ci.yml
@@ -20,3 +21,12 @@ include:
   - template: Dependency-Scanning.gitlab-ci.yml
   - template: Security/License-Scanning.gitlab-ci.yml
   - template: Security/Secret-Detection.gitlab-ci.yml
+
+dependency_scanning:
+  stage: security
+
+license_scanning:
+  stage: security
+
+.secret-analyzer:
+  stage: security
