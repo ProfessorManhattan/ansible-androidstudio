@@ -15,6 +15,7 @@ includes:
   ansible: ./.common/taskfiles-role/Taskfile-ansible.yml
   common: ./.common/taskfiles-role/Taskfile-common.yml
   fix: ./.common/taskfiles-role/Taskfile-fix.yml
+  git: ./.common/taskfiles-playbook/Taskfile-git.yml
   image: ./.common/taskfiles-role/Taskfile-image.yml
   lint: ./.common/taskfiles-role/Taskfile-lint.yml
   npm: ./.common/taskfiles-role/Taskfile-npm.yml
@@ -23,3 +24,17 @@ includes:
   software: ./.common/taskfiles-role/Taskfile-{{OS}}.yml
   test: ./.common/taskfiles-role/Taskfile-test.yml
   vscode: ./.common/taskfiles-role/Taskfile-vscode.yml
+
+tasks:
+  start:
+    desc: Set up the project and refresh it with the latest changes
+    summary: |
+      # Set up the project
+
+      This task will scaffold the project with the latest upstream changes
+      and ensure your development environment has all the dependencies installed.
+
+      **Example usage:**
+      `task start`
+    cmds:
+      - task: common:update

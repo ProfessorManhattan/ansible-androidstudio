@@ -57,7 +57,12 @@
       "command": "bash .common/scripts/init.sh && task common:update-modules"
     },
     {
-      "label": "(fix:all): Apply automatic code formatting techniques (Prettier, Black, and Shellcheck)",
+      "label": "(common:update-services): Update elements of the repository that require API access",
+      "type": "shell",
+      "command": "bash .common/scripts/init.sh && task common:update-services"
+    },
+    {
+      "label": "(fix:all): Apply automatic code formatting techniques (Prettier, Black, Shellcheck, and more depending on the environment)",
       "type": "shell",
       "command": "bash .common/scripts/init.sh && task fix:all"
     },
@@ -80,6 +85,16 @@
       "label": "(fix:scripts): (Experimental) Automatically apply fixes to .sh and .sh.j2 files using Shellcheck",
       "type": "shell",
       "command": "bash .common/scripts/init.sh && task fix:scripts"
+    },
+    {
+      "label": "(git:remotes): Configure the git remote `origin` to point to GitLab and the git remote `all` to point to GitLab and GitHub",
+      "type": "shell",
+      "command": "bash .common/scripts/init.sh && task git:remotes"
+    },
+    {
+      "label": "(git:remove-submodules): Remove all submodules in the current directory and optionally filter by RegEx",
+      "type": "shell",
+      "command": "bash .common/scripts/init.sh && task git:remove-submodules"
     },
     {
       "label": "(image:compress): Compress JPG/PNG images via TinyPNG",
@@ -155,6 +170,11 @@
       "label": "(lint:yaml): Lint .yml files using YAML Lint",
       "type": "shell",
       "command": "bash .common/scripts/init.sh && task lint:yaml"
+    },
+    {
+      "label": "(start): Set up the project and refresh it with the latest changes",
+      "type": "shell",
+      "command": "bash .common/scripts/init.sh && task start"
     },
     {
       "label": "(test:local): Run the Ansible play on the local machine",

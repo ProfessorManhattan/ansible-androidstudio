@@ -1,6 +1,5 @@
 ---
 name: Publish to Ansible Galaxy
-# yamllint disable-line rule:truthy
 on:
   - push
 

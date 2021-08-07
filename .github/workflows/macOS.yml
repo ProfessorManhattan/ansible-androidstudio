@@ -1,6 +1,5 @@
 ---
 name: macOS
-# yamllint disable-line rule:truthy
 on:
   pull_request:
   push:
@@ -26,4 +25,4 @@ jobs:
         env:
           ANSIBLE_FORCE_COLOR: '1'
         run: |
-          bash tests/test.sh
+          bash tests/macos/test.sh
