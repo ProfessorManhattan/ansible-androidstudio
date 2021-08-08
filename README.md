@@ -206,7 +206,10 @@ Although most of our roles do not have dependencies, there are some cases where 
 
 The `requirements.yml` file contains a full list of the Ansible Galaxy dependencies required by this role (i.e. `meta/main.yml` role dependencies, helper roles, collections, etc.). For your convenience, a list of the role dependencies along with quick descriptions is below:
 
-role_descriptions
+| Dependency                                                                                                                                                             | Description                                                                | Supported OSes | Status |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------- | ------ |
+| <a href="https://galaxy.ansible.com/professormanhattan/snapd" title="professormanhattan.snapd on Ansible Galaxy" target="_blank">professormanhattan.snapd</a>          | Ensures Snap is installed and properly configured on Linux                 | ❔             | ❔     |
+| <a href="https://galaxy.ansible.com/professormanhattan/homebrew" title="professormanhattan.homebrew on Ansible Galaxy" target="_blank">professormanhattan.homebrew</a> | Installs Homebrew (a package management system) on macOS and Linux systems | ❔             | ❔     |
 
 <a href="#example-playbook" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
