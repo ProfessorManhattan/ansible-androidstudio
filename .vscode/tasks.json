@@ -1,200 +1,200 @@
 {
+  "version": "2.0.0",
   "tasks": [
     {
-      "command": "bash .common/scripts/init.sh && task ansible:populate-dependencies",
       "label": "(ansible:populate-dependencies): Attempt to automatically populate meta/main.yml and requirements.yml",
-      "type": "shell"
+      "type": "shell",
+      "command": "bash .common/scripts/init.sh && task ansible:populate-dependencies"
     },
     {
-      "command": "bash .common/scripts/init.sh && task ansible:symlink",
       "label": "(ansible:symlink): Symlink the current role to ~/.ansible/roles/.",
-      "type": "shell"
+      "type": "shell",
+      "command": "bash .common/scripts/init.sh && task ansible:symlink"
     },
     {
-      "command": "bash .common/scripts/init.sh && task common:clean",
       "label": "(common:clean): Removes optional folders that are cached during various tasks",
-      "type": "shell"
+      "type": "shell",
+      "command": "bash .common/scripts/init.sh && task common:clean"
     },
     {
-      "command": "bash .common/scripts/init.sh && task common:commit",
       "label": "(common:commit): Lint staged files, report spelling errors, and open a _required_ commit dialoge",
-      "type": "shell"
+      "type": "shell",
+      "command": "bash .common/scripts/init.sh && task common:commit"
     },
     {
-      "command": "bash .common/scripts/init.sh && task common:prepare-release",
       "label": "(common:prepare-release): Ensure the project has upstream changes, lint, and then update the version",
-      "type": "shell"
+      "type": "shell",
+      "command": "bash .common/scripts/init.sh && task common:prepare-release"
     },
     {
-      "command": "bash .common/scripts/init.sh && task common:requirements",
       "label": "(common:requirements): Ensure all the dependencies are installed (Node.js, Python, etc.)",
-      "type": "shell"
+      "type": "shell",
+      "command": "bash .common/scripts/init.sh && task common:requirements"
     },
     {
-      "command": "bash .common/scripts/init.sh && task common:reset",
       "label": "(common:reset): Resets the project by removing all caches and updating the project",
-      "type": "shell"
+      "type": "shell",
+      "command": "bash .common/scripts/init.sh && task common:reset"
     },
     {
-      "command": "bash .common/scripts/init.sh && task common:reset-force",
       "label": "(common:reset-force): Aggressively reset the project (WARNING: This will wipe uncommitted work)",
-      "type": "shell"
+      "type": "shell",
+      "command": "bash .common/scripts/init.sh && task common:reset-force"
     },
     {
-      "command": "bash .common/scripts/init.sh && task common:shell",
       "label": "(common:shell): Start a terminal session using Docker with any Linux operating system",
-      "type": "shell"
+      "type": "shell",
+      "command": "bash .common/scripts/init.sh && task common:shell"
     },
     {
-      "command": "bash .common/scripts/init.sh && task common:update",
       "label": "(common:update): Refresh the project with the latest upstream code and ensure blueprint data has propagated",
-      "type": "shell"
+      "type": "shell",
+      "command": "bash .common/scripts/init.sh && task common:update"
     },
     {
-      "command": "bash .common/scripts/init.sh && task common:update-modules",
       "label": "(common:update-modules): Ensure all submodules in the `.modules/` folder are updated",
-      "type": "shell"
+      "type": "shell",
+      "command": "bash .common/scripts/init.sh && task common:update-modules"
     },
     {
-      "command": "bash .common/scripts/init.sh && task common:update-services",
       "label": "(common:update-services): Update elements of the repository that require API access",
-      "type": "shell"
+      "type": "shell",
+      "command": "bash .common/scripts/init.sh && task common:update-services"
     },
     {
-      "command": "bash .common/scripts/init.sh && task fix:all",
       "label": "(fix:all): Apply automatic code formatting techniques (Prettier, Black, Shellcheck, and more depending on the environment)",
-      "type": "shell"
+      "type": "shell",
+      "command": "bash .common/scripts/init.sh && task fix:all"
     },
     {
-      "command": "bash .common/scripts/init.sh && task fix:formatting",
       "label": "(fix:formatting): Automatically format most files using Prettier",
-      "type": "shell"
+      "type": "shell",
+      "command": "bash .common/scripts/init.sh && task fix:formatting"
     },
     {
-      "command": "bash .common/scripts/init.sh && task fix:json",
       "label": "(fix:json): Alphabetically sort JSON",
-      "type": "shell"
+      "type": "shell",
+      "command": "bash .common/scripts/init.sh && task fix:json"
     },
     {
-      "command": "bash .common/scripts/init.sh && task fix:python",
       "label": "(fix:python): Automatically format Python files using Black",
-      "type": "shell"
+      "type": "shell",
+      "command": "bash .common/scripts/init.sh && task fix:python"
     },
     {
-      "command": "bash .common/scripts/init.sh && task fix:scripts",
       "label": "(fix:scripts): (Experimental) Automatically apply fixes to .sh and .sh.j2 files using Shellcheck",
-      "type": "shell"
+      "type": "shell",
+      "command": "bash .common/scripts/init.sh && task fix:scripts"
     },
     {
-      "command": "bash .common/scripts/init.sh && task git:remotes",
       "label": "(git:remotes): Configure the git remote `origin` to point to GitLab and the git remote `all` to point to GitLab and GitHub",
-      "type": "shell"
+      "type": "shell",
+      "command": "bash .common/scripts/init.sh && task git:remotes"
     },
     {
-      "command": "bash .common/scripts/init.sh && task git:remove-submodules",
       "label": "(git:remove-submodules): Remove all submodules in the current directory and optionally filter by RegEx",
-      "type": "shell"
+      "type": "shell",
+      "command": "bash .common/scripts/init.sh && task git:remove-submodules"
     },
     {
-      "command": "bash .common/scripts/init.sh && task image:compress",
       "label": "(image:compress): Compress JPG/PNG images via TinyPNG",
-      "type": "shell"
+      "type": "shell",
+      "command": "bash .common/scripts/init.sh && task image:compress"
     },
     {
-      "command": "bash .common/scripts/init.sh && task image:resize",
       "label": "(image:resize): Resize an image",
-      "type": "shell"
+      "type": "shell",
+      "command": "bash .common/scripts/init.sh && task image:resize"
     },
     {
-      "command": "bash .common/scripts/init.sh && task lint:all",
       "label": "(lint:all): Lint the project by running all the linters in parallel",
-      "type": "shell"
+      "type": "shell",
+      "command": "bash .common/scripts/init.sh && task lint:all"
     },
     {
-      "command": "bash .common/scripts/init.sh && task lint:ansible",
       "label": "(lint:ansible): Lint Ansible projects using Ansible Lint",
-      "type": "shell"
+      "type": "shell",
+      "command": "bash .common/scripts/init.sh && task lint:ansible"
     },
     {
-      "command": "bash .common/scripts/init.sh && task lint:docker",
       "label": "(lint:docker): Lint Dockerfiles using Hadolint (requires Docker)",
-      "type": "shell"
+      "type": "shell",
+      "command": "bash .common/scripts/init.sh && task lint:docker"
     },
     {
-      "command": "bash .common/scripts/init.sh && task lint:formatting",
       "label": "(lint:formatting): Lint formatting using Prettier",
-      "type": "shell"
+      "type": "shell",
+      "command": "bash .common/scripts/init.sh && task lint:formatting"
     },
     {
-      "command": "bash .common/scripts/init.sh && task lint:gitleaks",
       "label": "(lint:gitleaks): Scans repository (including git history) for possible leaked keys",
-      "type": "shell"
+      "type": "shell",
+      "command": "bash .common/scripts/init.sh && task lint:gitleaks"
     },
     {
-      "command": "bash .common/scripts/init.sh && task lint:markdown",
       "label": "(lint:markdown): Lint markdown files",
-      "type": "shell"
+      "type": "shell",
+      "command": "bash .common/scripts/init.sh && task lint:markdown"
     },
     {
-      "command": "bash .common/scripts/init.sh && task lint:markdown-broken-links",
       "label": "(lint:markdown-broken-links): Scan markdown files for broken links",
-      "type": "shell"
+      "type": "shell",
+      "command": "bash .common/scripts/init.sh && task lint:markdown-broken-links"
     },
     {
-      "command": "bash .common/scripts/init.sh && task lint:private-keys",
       "label": "(lint:private-keys): Scan for private keys",
-      "type": "shell"
+      "type": "shell",
+      "command": "bash .common/scripts/init.sh && task lint:private-keys"
     },
     {
-      "command": "bash .common/scripts/init.sh && task lint:prose",
       "label": "(lint:prose): Lint for English prose",
-      "type": "shell"
+      "type": "shell",
+      "command": "bash .common/scripts/init.sh && task lint:prose"
     },
     {
-      "command": "bash .common/scripts/init.sh && task lint:python",
       "label": "(lint:python): Lint Python files using Flake8",
-      "type": "shell"
+      "type": "shell",
+      "command": "bash .common/scripts/init.sh && task lint:python"
     },
     {
-      "command": "bash .common/scripts/init.sh && task lint:scripts",
       "label": "(lint:scripts): Report possible errors in shell scripts",
-      "type": "shell"
+      "type": "shell",
+      "command": "bash .common/scripts/init.sh && task lint:scripts"
     },
     {
-      "command": "bash .common/scripts/init.sh && task lint:spelling",
       "label": "(lint:spelling): Checks for spelling errors in staged files",
-      "type": "shell"
+      "type": "shell",
+      "command": "bash .common/scripts/init.sh && task lint:spelling"
     },
     {
-      "command": "bash .common/scripts/init.sh && task lint:yaml",
       "label": "(lint:yaml): Lint .yml files using YAML Lint",
-      "type": "shell"
+      "type": "shell",
+      "command": "bash .common/scripts/init.sh && task lint:yaml"
     },
     {
-      "command": "bash .common/scripts/init.sh && task start",
       "label": "(start): Set up the project and refresh it with the latest changes",
-      "type": "shell"
+      "type": "shell",
+      "command": "bash .common/scripts/init.sh && task start"
     },
     {
-      "command": "bash .common/scripts/init.sh && task test:local",
       "label": "(test:local): Run the Ansible play on the local machine",
-      "type": "shell"
+      "type": "shell",
+      "command": "bash .common/scripts/init.sh && task test:local"
     },
     {
-      "command": "bash .common/scripts/init.sh && task test:molecule-desktop",
       "label": "(test:molecule-desktop): Provisions a desktop VirtualBox VM and then runs a Molecule test",
-      "type": "shell"
+      "type": "shell",
+      "command": "bash .common/scripts/init.sh && task test:molecule-desktop"
     },
     {
-      "command": "bash .common/scripts/init.sh && task test:molecule-docker",
       "label": "(test:molecule-docker): Performs a full test, including a test for idempotency, on all available Linux systems using Docker",
-      "type": "shell"
+      "type": "shell",
+      "command": "bash .common/scripts/init.sh && task test:molecule-docker"
     },
     {
-      "command": "bash .common/scripts/init.sh && task test:molecule-e2e",
       "label": "(test:molecule-e2e): Runs a full E2E Molecule test for all supported operating systems",
-      "type": "shell"
+      "type": "shell",
+      "command": "bash .common/scripts/init.sh && task test:molecule-e2e"
     }
-  ],
-  "version": "2.0.0"
+  ]
 }

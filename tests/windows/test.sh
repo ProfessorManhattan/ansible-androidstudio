@@ -10,7 +10,7 @@
 # [PowerShell script that launches Docker which, in turn, calls this script](https://gitlab.com/megabyte-labs/common/ansible/-/blob/master/files-role/tests/windows/test.ps1).
 
 # Ensure Ansible is installed
-if ! type ansible &>/dev/null; then
+if ! type ansible &> /dev/null; then
   pip3 install ansible pywinrm
 fi
 

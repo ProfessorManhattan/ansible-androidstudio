@@ -4,7 +4,7 @@
 # @brief A script that is used to test the role's macOS compatibility via a [GitHub action](https://gitlab.com/megabyte-labs/common/ansible/-/blob/master/files-role/.github/workflows/macOS.yml).
 
 # Ensure Ansible is installed
-if ! type ansible &>/dev/null; then
+if ! type ansible &> /dev/null; then
   pip3 install ansible
 fi
 
