@@ -1,8 +1,8 @@
 ---
 # @var android_sdks: []
-# The list of SDKs and Tools to install after Android Studion is installed. If no value is
-# provided, the latest version of the SDKs and Tools will be installed. Use the correct
-# format, which can be found by executing `sdkmanage --list` once the commandline-tools is
+# The list of SDKs and tools to install after Android Studio is installed. If no value is
+# provided, the latest version of the SDKs and tools will be installed. Use the correct
+# format, which can be found by executing `sdkmanage --list` after the CLI tools are
 # installed; some package need a version to be specified and some do not.
 android_sdks: []
 # @example #
@@ -15,11 +15,11 @@ android_sdks: []
 #   - patcher;v4
 # @end
 
-# @todo Documentation: Provide sensible default for `user_configs` and add a full example in comments
+# @todo Documentation: Add documentation for the `user_configs` variable in `defaults/main.yml`
 user_configs: []
 
 # @var sdk_location: ""
-# The folder to set as the SDK Location
+# The folder to set as the SDK location
 sdk_location: ~/Android/Sdk
 # @example #
 # sdk_location: ~/Android/Sdk

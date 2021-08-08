@@ -1,5 +1,5 @@
 {
-  "name": "@megabytelabs/ansible-androidstudio",
+  "name": "@installdoc/ansible-androidstudio",
   "version": "1.1.1",
   "description": "Installs Android Studio and sets up Android SDKs on nearly any OS",
   "license": "MIT",
@@ -75,26 +75,6 @@
       "github": "https://gitlab.com/ProfessorManhattan/ansible-androidstudio",
       "gitlab": "https://gitlab.com/megabyte-labs/ansible-roles/androidstudio"
     },
-    "role_dependencies": [
-      [
-        "Dependency",
-        "Description",
-        "Supported OSes",
-        "Status"
-      ],
-      [
-        "<a href=\"https://galaxy.ansible.com/professormanhattan/snapd\" title=\"professormanhattan.snapd on Ansible Galaxy\" target=\"_blank\">professormanhattan.snapd</a>",
-        "Ensures Snap is installed and properly configured on Linux",
-        "❔",
-        "❔"
-      ],
-      [
-        "<a href=\"https://galaxy.ansible.com/professormanhattan/homebrew\" title=\"professormanhattan.homebrew on Ansible Galaxy\" target=\"_blank\">professormanhattan.homebrew</a>",
-        "Installs Homebrew (a package management system) on macOS and Linux systems",
-        "❔",
-        "❔"
-      ]
-    ],
     "slug": "androidstudio",
     "title": "Android Studio - An IDE for Android Development"
   },
