@@ -1,7 +1,7 @@
 ---
 version: '3'
 
-output: prefixed
+output: interleaved
 
 vars:
   GALAXY_ROLE_NAME:
