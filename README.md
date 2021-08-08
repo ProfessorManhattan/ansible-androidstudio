@@ -48,7 +48,7 @@
       <img alt="macOS build status" src="https://img.shields.io/github/workflow/status/ProfessorManhattan/ansible-androidstudio/macOS/master?label=macOS%20build&logo=apple&style=flat">
     </a>
     <a title="Linux build status on GitLab" href="https://gitlab.com/megabyte-labs/ansible-roles/androidstudio/-/commits/master" target="_blank">
-      <img alt="Linux build status" src="https://gitlab.com/megabyte-labs/ansible-roles/role_name/badges/master/pipeline.svg">
+      <img alt="Linux build status" src="https://gitlab.com/megabyte-labs/ansible-roles/androidstudio/badges/master/pipeline.svg">
     </a>
     <a title="Ansible Galaxy quality score (out of 5)" href="https://galaxy.ansible.com/professormanhattan/androidstudio" target="_blank">
       <img alt="Ansible Galaxy quality score" src="https://img.shields.io/ansible/quality/ansible_galaxy_project_id?logo=ansible&style=flat" />
@@ -77,11 +77,18 @@
   </p>
 </div>
 
-> </br><h3 align="center">**Installs Android Studio and sets up Android SDKs on nearly any OS**</h3></br>
+<<<<<<< HEAD
+
+> # </br><h3 align="center">**Installs Android Studio and sets up Android SDKs on nearly any OS**</h3></br>
+>
+> </br><h3 align="center">**An Ansible role that **</h3></br>
+>
+> > > > > > > a95ee12528501528330742ac9a6c1b46a21faa03
 
 <!--TERMINALIZE![terminalizer_title](https://gitlab.com/megabyte-labs/ansible-roles/androidstudio* **github**: /raw/master/.demo.gif
 * **gitlab**: /-/raw/master/.demo.gif)TERMINALIZE-->
 
+<<<<<<< HEAD
 <a href="#one-line-install-method" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
 ## One-Line Install Method
@@ -104,9 +111,14 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 
 And there you go. Installing Android Studio can be as easy as that. You can also check out the [Install Doctor](https://install.doctor) homepage to learn how to install any Ansible role with a one-liner. If, however, you would like to incorporate this role into an Ansible playbook (and customize settings) then please continue reading below.
 
-<a href="#table-of-contents" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
+=======
+
+> > > > > > > a95ee12528501528330742ac9a6c1b46a21faa03
+> > > > > > > <a href="#table-of-contents" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
 ## Table of Contents
+
+<<<<<<< HEAD
 
 - [One-Line Install Method](#one-line-install-method)
 - [Table of Contents](#table-of-contents)
@@ -114,20 +126,39 @@ And there you go. Installing Android Studio can be as easy as that. You can also
 - [Features](#features)
   - [Ensures android studio is installed:](#ensures-android-studio-is-installed)
   - [Ensures configured android sdks are present:](#ensures-configured-android-sdks-are-present)
-- [➤ Variables](#-variables)
+- # [➤ Variables](#-variables)
+- [Overview](#overview)
+- [Features](#features)
+  - [Ensures Android Studio is installed:](#ensures-android-studio-is-installed)
+  - [Ensures configured Android SDKs are present:](#ensures-configured-android-sdks-are-present)
+- [Quick Start - Easy Install Method](#quick-start---easy-install-method)
+- [Variables](#variables)
+  > > > > > > > a95ee12528501528330742ac9a6c1b46a21faa03
   - [android_sdks](#android_sdks)
   - [sdk_location](#sdk_location)
 - [Supported Operating Systems](#supported-operating-systems)
 - [Dependencies](#dependencies)
   - [Galaxy Roles](#galaxy-roles)
 - [Example Playbook](#example-playbook)
+  <<<<<<< HEAD
+  =======
+  - [Real World Example](#real-world-example)
+    > > > > > > > a95ee12528501528330742ac9a6c1b46a21faa03
 - [Contributing](#contributing)
   - [TODO](#todo)
 - [License](#license)
 
+<<<<<<< HEAD
 <a href="#-overview" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
 ## ➤ Overview
+
+=======
+<a href="#overview" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
+
+## Overview
+
+> > > > > > > a95ee12528501528330742ac9a6c1b46a21faa03
 
 This repository is the home of an [Ansible](https://www.ansible.com/) role that . [Android Studio](https://developer.android.com/studio) is the official integrated development environment for Google's Android operating system, built on JetBrains' IntelliJ IDEA software and designed specifically for Android development.
 
@@ -135,10 +166,20 @@ This repository is the home of an [Ansible](https://www.ansible.com/) role that 
 
 ## Features
 
+<<<<<<< HEAD
+
 ### Ensures android studio is installed:
+
+=======
+
+### Ensures Android Studio is installed:
+
+> > > > > > > a95ee12528501528330742ac9a6c1b46a21faa03
 
 - Installs Android Studio on Archlinux, CentOS, Debian, Fedora, macOS, Ubuntu, and Windows
 - Installs a configurable list of Android SDKs and Tools
+
+<<<<<<< HEAD
 
 ### Ensures configured android sdks are present:
 
@@ -154,6 +195,47 @@ This role contains variables that you can customize. The variables you can custo
 | ------------------------------- | ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [`android_sdks`](#android_sdks) | `[] `         | The list of SDKs and Tools to install after Android Studion is installed. If no value is provided, the latest version of the SDKs and Tools will be installed. Use the correct format, which can be found by executing `sdkmanage |
 | [sdk_location](#sdk_location)   | ""            | The folder to set as the SDK Location                                                                                                                                                                                             |
+
+=======
+
+### Ensures configured Android SDKs are present:
+
+- Ensures Android SDK tools like `adb` are present in PATH
+
+<a href="#quick-start---easy-install-method" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
+
+## Quick Start - Easy Install Method
+
+Looking to install Android Studio without having to deal with [Ansible](https://www.ansible.com/)? Simply run the following command that correlates to your operating system:
+
+**Linux/macOS:**
+
+```shell
+curl -sS https://install.doctor/androidstudio | bash
+```
+
+**Windows:**
+
+```powershell
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://install.doctor/androidstudio?os=win'))
+```
+
+**Important Note:** _Before running the commands above you should probably directly access the URL to make sure the code is legit. We already know it is safe but, before running any script on your computer, you should inspect it._
+
+And there you go. Installing Android Studio can be as easy as that. You can also check out the [Install Doctor](https://install.doctor) homepage to learn how to install any Ansible role with a one-liner. If, however, you would like to incorporate this role into an Ansible playbook (and customize settings) then please continue reading below.
+
+<a href="#variables" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
+
+## Variables
+
+This role contains variables that you can customize. The variables you can customize are located in `defaults/main.yml`. By default, the variables use sensible defaults but you may want to customize the role depending on your use case. The variables, along with descriptions, are listed below:
+
+| Name                          | Default Value | Description                                                                                                                                                                                                                       |
+| ----------------------------- | ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [android_sdks](#android_sdks) | []            | The list of SDKs and Tools to install after Android Studion is installed. If no value is provided, the latest version of the SDKs and Tools will be installed. Use the correct format, which can be found by executing `sdkmanage |
+| [sdk_location](#sdk_location) | ""            | The folder to set as the SDK Location                                                                                                                                                                                             |
+
+> > > > > > > a95ee12528501528330742ac9a6c1b46a21faa03
 
 ### android_sdks
 
@@ -179,30 +261,52 @@ sdk_location: ~/Android/Sdk
 
 ## Supported Operating Systems
 
+<<<<<<< HEAD
 The chart below shows the operating systems that we have tested this role on. It is automatically generated using the Ansible Molecule tests located in the `molecule/` folder. There is logic in place to automatically handle the testing of Windows, macOS, Ubuntu, Fedora, CentOS, Debian, and Archlinux. If your operating system is not listed but is a variant of one of the systems we test (i.e. a Debian-flavored system or a RedHat-flavored system) then it is possible that the role will still work.
+=======
+The chart below shows the operating systems that we have tested this role on. It is automatically generated using the Ansible Molecule tests located in the `molecule/` folder. There is CI logic in place to automatically handle the testing of Windows, macOS, Ubuntu, Fedora, CentOS, Debian, and Archlinux. If your operating system is not listed but is a variant of one of the systems we test (i.e. a Debian-flavored system or a RedHat-flavored system) then it is possible that the role will still work.
+
+> > > > > > > a95ee12528501528330742ac9a6c1b46a21faa03
 
 compatibility_matrix
 
 **_What does idempotent mean?_** Idempotent means that if you run this role twice in row then there will be no changes to the system the second time around.
 
-<a href="#dependencies" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
+# <<<<<<< HEAD
+
+We spent a lot of time perfecting our CI configurations and build tools. If you are interested in learning more about how we perfected our process then you might find our [Ansible common files](https://gitlab.com/megabyte-labs/common/ansible) and [Ansible documentation](https://gitlab.com/megabyte-labs/documentation/ansible) repositories interesting. There is more documentation in these repositories.
+
+> > > > > > > a95ee12528501528330742ac9a6c1b46a21faa03
+> > > > > > > <a href="#dependencies" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
 ## Dependencies
 
 Most of our roles rely on [Ansible Galaxy](https://galaxy.ansible.com) collections. Some of our projects are also dependent on other roles and collections that are published on Ansible Galaxy. Before you run this role, you will need to install the collection and role dependencies, as well as the Python requirements, by running:
 
-```lang-yml
+<<<<<<< HEAD
+
+````lang-yml
+=======
+```yaml
+>>>>>>> a95ee12528501528330742ac9a6c1b46a21faa03
 pip3 install -r requirements.txt
 ansible-galaxy install -r requirements.yml
-```
+````
 
 Alternatively, you can simply run `bash .start.sh` if you are new to Ansible and do not mind the development requirements also being installed.
 
 ### Galaxy Roles
 
+<<<<<<< HEAD
 Although most of our roles do not have dependencies, there are some cases where another role has to be installed before the logic can continue. At the beginning of the play, the Ansible Galaxy role dependencies listed in `meta/main.yml` will run. These dependencies are configured to only run once per playbook. If you include more than one of our roles in your playbook that have dependencies in common then the dependency installation will be skipped after the first run. Some of our roles also utilize helper roles which help keep our [main playbook](repository.playbooks) DRY.
 
-The `requirements.yml` file contains a full list of the dependencies required by this role (i.e. `meta/main.yml` dependencies, helper roles, and collections). For your convenience, a list of the role dependencies along with quick descriptions is below:
+# The `requirements.yml` file contains a full list of the dependencies required by this role (i.e. `meta/main.yml` dependencies, helper roles, and collections). For your convenience, a list of the role dependencies along with quick descriptions is below:
+
+Although most of our roles do not have dependencies, there are some cases where another role has to be installed before the logic can continue. At the beginning of the play, the Ansible Galaxy role dependencies listed in `meta/main.yml` will run. These dependencies are configured to only run once per playbook. If you include more than one of our roles in your playbook that have dependencies in common then the dependency installation will be skipped after the first run. Some of our roles also utilize helper roles directly from the task files which helps keep our [main playbook](repository.playbooks) DRY.
+
+The `requirements.yml` file contains a full list of the Ansible Galaxy dependencies required by this role (i.e. `meta/main.yml` role dependencies, helper roles, collections, etc.). For your convenience, a list of the role dependencies along with quick descriptions is below:
+
+> > > > > > > a95ee12528501528330742ac9a6c1b46a21faa03
 
 role_descriptions
 
@@ -215,10 +319,22 @@ With the dependencies installed, all you have to do is add the role to your main
 ```lang-yml
 - hosts: all
   roles:
+<<<<<<< HEAD
     - professormanhattan.role_name
 ```
 
-If you are incorporating this role into a pre-existing playbook, then it might be prudent to copy the requirements in `requirements.txt` and `requirements.yml` to their corresponding files in the root of your playbook.
+# If you are incorporating this role into a pre-existing playbook, then it might be prudent to copy the requirements in `requirements.txt` and `requirements.yml` to their corresponding files in the root of your playbook.
+
+    - professormanhattan.androidstudio
+
+```
+
+If you are incorporating this role into a pre-existing playbook, then it might be prudent to copy the requirements in `requirements.txt` and `requirements.yml` to their corresponding files in the root of your playbook so you only have to worry about installing one set of requirements during future use.
+
+### Real World Example
+
+You can find an example of a playbook that incorporates this role in our main playbook (a.k.a. [Windows 12](https://gitlab.com/InstallDoc/ansible-playbook-boilerplate)). The playbook is an excellent example for someone learning how to use Ansible. It also incorporates a lot of well-thought out build tools that more advanced Ansible users can appreciate. And people who could care less about Ansible can also benefit from it because it allows you to more or less turn your computer (and network) into the ultimate development enivornment. The bottom line is that it is an awesome project that developers should know about!
+>>>>>>> a95ee12528501528330742ac9a6c1b46a21faa03
 
 <a href="#contributing" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
@@ -253,3 +369,4 @@ I create open source projects out of love. Although I have a job, shelter, and a
 ## License
 
 Copyright © 2020-2021 [Megabyte LLC](https://megabyte.space). This project is [MIT](https://gitlab.com/megabyte-labs/ansible-roles/androidstudio/-/blob/master/LICENSE) licensed.
+```
