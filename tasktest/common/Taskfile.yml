@@ -1,0 +1,327 @@
+---
+version: "3"
+
+tasks:
+  clean:
+    deps:
+      - :install:software:rsync
+    desc: Removes optional folders that are cached during various tasks
+    summary: |
+      # Clean the project and remove all optional caches
+
+      This task will remove all the unnecessary files that are downloaded, generated, and
+      cached during various build steps. This task is used by the `task common:reset` task
+      which will re-generate the project from scratch. Ideally, this task and the reset task
+      should never be necessary. The `common:update` task should be used instead.
+    vars:
+      CLEAN_TARGETS: .autodoc .task .venv node_modules
+      RANDOM_STRING:
+        sh: openssl rand -hex 14
+    cmds:
+      - mkdir -p '/tmp/{{.RANDOM_STRING}}'
+      - mkdir -p '/tmp/{{.RANDOM_STRING}}-empty'
+      - |
+        for TMP_FILE in {{.CLEAN_TARGETS}}; do
+          if [ -d "$TMP_FILE" ]; then
+            mv "$TMP_FILE" "/tmp/{{.RANDOM_STRING}}/$TMP_FILE" 2> /dev/null
+            (rsync -a --delete '/tmp/{{.RANDOM_STRING}}-empty' "/tmp/{{.RANDOM_STRING}}/$TMP_FILE" && rm -rf "/tmp/{{.RANDOM_STRING}}-$TMP_FILE") &
+          fi
+        done
+        wait
+    log:
+      error: Error encountered while cleaning up the optional folders
+      start: Cleaning up the project by removing caches etc.
+      success: Finished cleaning up optional folders
+
+  commit:
+    deps:
+      - :install:npm:commitizen
+      - :install:npm:commitlint
+      - node:dependencies:local
+      - python:requirements
+    desc: Lint staged files, report spelling errors, and open a _required_ commit dialoge
+    summary: |
+      # Commit code
+
+      This task will perform linting and auto-fixing on the files that have been staged in
+      git (i.e. the files that were added with `git add --all`). It will then report possible
+      spelling errors that you may choose to fix. Then, it opens a _required_ interactive commit
+      questionnaire that will help you make better commits that are compatible with software
+      that generates the CHANGELOG.md.
+
+      It is very important that you use this task to commit rather than the conventional approach
+      using `git commit -m`. However, if you really need to, you can add the flag `--no-verify`
+      to your regular `git commit -m` command to bypass the pre-commit hook.
+    cmds:
+      - . ./.husky/pre-commit
+      - true info "Initiating the commit dialog"
+      - exec < /dev/tty && git cz --hook || true
+
+  husky:
+    deps:
+      - :install:npm:commitizen
+      - :install:npm:commitlint
+      - :install:npm:husky
+      - node:dependencies:local
+    cmds:
+      - task: husky:install
+      - task: husky:permissions
+        vars:
+          FILE: .husky/commit-msg
+      - task: husky:permissions
+        vars:
+          FILE: .husky/pre-commit
+      - task: husky:permissions
+        vars:
+          FILE: .husky/prepare-commit-msg
+    status:
+      - '[ "${container:=}" == "docker" ]'
+
+  husky:install:
+    cmds:
+      - |
+        if [ -d .git ] && [ "${container:=}" != 'docker' ]; then
+          husky install
+        else
+          true warn 'Cannot run `husky install` because there is no `.git/` folder (or this is a Docker container)'
+        fi
+    status:
+      - '[ ! -d .git ] || [[ "${container:=} == "docker" ]]'
+
+  husky:permissions:
+    cmds:
+      - |
+        if [ -f "{{.FILE}}" ]; then
+          chmod 755 "{{.FILE}}"
+        else
+          if [ -f ".common/files-{{.REPOSITORY_SUBTYPE}}/{{.FILE}}" ]; then
+            cp ".common/files-{{.REPOSITORY_SUBTYPE}}/{{.FILE}}" "{{.FILE}}"
+            chmod 755 "{{.FILE}}"
+          else
+            true error "The '{{.FILE}}' is missing from the '.common/files-{{.REPOSITORY_SUBTYPE}}/' folder"
+            exit 1
+          fi
+        fi
+    sources:
+      - ".common/files-{{.REPOSITORY_SUBTYPE}}/{{.FILE}}"
+      - "{{.FILE}}"
+
+  man-page:
+    desc: Build `man` page from the README.md file
+    cmds:
+      - echo "See https://github.com/remarkjs/remark-man"
+
+  node:dependencies:global:
+    deps:
+      - :install:npm:commitizen
+      - :install:npm:commitlint
+      - :install:npm:cspell
+      - :install:npm:hbs
+      - :install:npm:lint-staged
+      - :install:npm:markdown-link-check
+      - :install:npm:prettier
+      - :install:npm:prettier-package-json
+      - :install:npm:readme
+      - :install:npm:remark
+      - :install:npm:shellcheck
+      - :install:npm:standard-version
+    run: once
+    status:
+      - '[[ "${container:=}" == "docker" ]]'
+
+  node:dependencies:local:
+    deps:
+      - :install:software:node
+    run: once
+    cmds:
+      - task: node:dependencies:local:install
+    status:
+      - 'test -d node_modules || [ "${container:=}" == "docker" ]'
+
+  node:dependencies:local:install:
+    cmds:
+      - npm install
+      - npm audit fix --force || true
+    status:
+      - '[[ "${container:=}" == "docker" ]]'
+    sources:
+      - package.json
+      - package-lock.json
+    preconditions:
+      - sh: test -f package.json
+        msg: The package.json file appears to be missing!
+
+  precommit:
+    deps:
+      - :fix:json
+      - :fix:misc
+      - :security:gitleaks
+      - :security:private-keys
+
+  prepare-release:
+    deps:
+      - :install:npm:standard-version
+    desc: Ensure the project has upstream changes, lint, and then update the version
+    summary: |
+      # Prepare a new release
+
+      This task performs the following tasks in order:
+
+      1. Ensures the project is up-to-date with the latest upstream changes
+      2. Lints the project with all available linters
+      3. Updates the version of the project in the `package.json` file
+      4. Add the appropriate details to the CHANGELOG.md file
+    cmds:
+      - task: update
+      - task: :lint:all
+      - standard-version --no-verify
+
+  python:requirements:
+    deps:
+      - :install:software:python
+    run: once
+    cmds:
+      - task: python:requirements:venv
+      - task: python:requirements:venv:activate
+      - task: python:requirements:pip
+      - task: '{{if eq .REPOSITORY_TYPE "ansible"}}:ansible:galaxy:requirements{{end}}'
+    status:
+      - '[[ "${container:=}" == "docker" ]]'
+
+  python:requirements:pip:
+    run: once
+    cmds:
+      - pip3 install -r requirements.txt
+    sources:
+      - requirements.txt
+    preconditions:
+      - sh: test -f requirements.txt
+        msg: The requirements.txt file is missing!
+      - sh: test -f .venv/bin/activate
+        msg: "The Python virtualenv '.venv/bin/activate' file is missing!"
+
+  python:requirements:venv:
+    deps:
+      - :install:python:virtualenv
+      - :install:software:rsync
+    vars:
+      RANDOM_STRING:
+        sh: openssl rand -hex 14
+    run: once
+    cmds:
+      - |
+        if [ -d .venv ] && [ ! -f .venv/bin/activate ]; then
+          mv .venv /tmp/{{.RANDOM_STRING}}-venv2 2> /dev/null
+          mkdir -p /tmp/{{.RANDOM_STRING}}-empty
+          rsync -a --delete /tmp/{{.RANDOM_STRING}}-empty /tmp/{{.RANDOM_STRING}}-venv2 &
+        fi
+      - virtualenv .venv
+    status:
+      - test -f .venv/bin/activate
+
+  python:requirements:venv:activate:
+    cmds:
+      - . .venv/bin/activate
+    preconditions:
+      - sh: test -f .venv/bin/activate
+        msg: "`.venv/bin/activate` is missing!"
+
+  requirements:
+    deps:
+      - node:dependencies:local
+      - node:dependencies:global
+      - python:requirements
+    desc: Ensure all the dependencies are installed (Node.js, Python, etc.)
+    summary: |
+      # Ensure dependencies are installed
+
+      This task ensures that packages in various languages (Node.js, Python, etc.) are installed.
+      At the very minimum, it will install the Node.js requirements by running `npm install` and
+      then install the Python requirements by running `pip3 install -r requirements` after
+      initiating a `virtualenv`. In some types of projects, additional types of requirements are
+      installed (e.g. Ansible projects also install Ansible Galaxy requirements).
+    run: once
+
+  reset:
+    desc: Resets the project by removing all caches and updating the project
+    summary: |
+      # Reset the project and then update it
+
+      This task is intended to be used when the `common:update` task is having trouble
+      or when breaking changes are made to the build tools. Use this task if you are
+      having trouble with other tasks that are dependent on stale caches. Unlike
+      `task common:hard-reset`, this will not remove uncommitted work (assuming your
+      work does not reside in folders ignored by the `.gitignore` file).
+    cmds:
+      - task: clean
+      - task: update
+
+  reset-force:
+    deps:
+      - software:git
+    desc: "Aggressively reset the project (WARNING: This will wipe uncommitted work)"
+    summary: |
+      # Aggressively reset the project
+
+      If using `task common:reset` does not fix your issues, you can run this task
+      to completely wipe out uncommitted work, clear all the caches, and sync
+      with the master branch of both this project and its upstream repositories.
+    cmds:
+      - task: clean
+      - git reset --hard HEAD
+      - git clean -fxd :/
+      - git checkout master
+      - git pull origin master --no-rebase
+      - bash .start.sh
+
+  shell:
+    deps:
+      - :install:software:docker
+    desc: Start a terminal session using Docker with any Linux operating system
+    summary: |
+      # Start a Docker terminal session
+
+      Use Docker to run commands on nearly any operating system. The operating
+      systems are all stock distros with systemd added.
+
+      **Example opening an interactive prompt:**
+      `task shell`
+
+      **Example of directly shelling into a container:**
+      `task shell -- ubuntu-21.04`
+
+      ## Available operating systems (that you can use with the example above):
+
+      * archlinux
+      * centos-7
+      * centos-8
+      * debian-9
+      * debian-10
+      * fedora-33
+      * fedora-34
+      * ubuntu-18.04
+      * ubuntu-20.04
+      * ubuntu-21.04
+    vars:
+      WORKDIR:
+        sh: basename $PWD
+    cmds:
+      - task: shell:{{if .CLI_ARGS}}cli{{else}}prompt{{end}}
+    preconditions:
+      - sh: "type docker &> /dev/null"
+        msg: "Docker is not installed! Install it by running `task software:docker`."
+
+  shell:cli: docker run --cap-drop=ALL -it -v "$PWD:/{{.WORKDIR}}" -w /{{.WORKDIR}} --rm megabytelabs/ansible-molecule-{{.CLI_ARGS}}:latest /bin/bash
+
+  shell:prompt:
+    deps:
+      - :install:software:node
+      - node:dependencies:local
+    cmds:
+      - node .common/scripts/prompts/shell.js
+    status:
+      - '[[ ! -z "{{.CLI_ARGS}}" ]]'
+
+    preconditions:
+      - sh: "type node &> /dev/null"
+        msg: "Node.js is not installed! Install it by running `task install:software:node`."

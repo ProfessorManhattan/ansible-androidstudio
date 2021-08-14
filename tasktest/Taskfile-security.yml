@@ -1,0 +1,186 @@
+---
+version: "3"
+
+vars:
+  DOCKERHUB_PROFILE: megabytelabs
+
+tasks:
+  dockle:
+    deps:
+      - :install:software:dockle
+    desc: Analyze and lint the Docker container using Dockle
+    summary: |
+      # Analyze and lint Docker containers with Dockle
+
+      Dockle is a Docker image linter that reports security tips and conflicts with best practices. It does
+      more than what Hadolint does, according to their GitHub page. Also, instead of linting the Dockerfile,
+      it lints the actual image.
+
+      **Example usage for scanning standard Docker repository (with `slim` build):**
+      `task security:dockle`
+
+      **Example usage for any image:**
+      `task security:dockle -- namespace/image:tag`
+
+      For more information, see [Dockle's GitHub page](https://github.com/goodwithtech/dockle).
+    cmds:
+      - task: dockle:{{if .CLI_ARGS}}cli{{else}}default{{end}}
+
+  dockle:cli: dockle {{.CLI_ARGS}}
+
+  dockle:default:
+    cmds:
+      - task: dockle:default:image
+        vars:
+          TAG: latest
+      - task: dockle:default:image
+        vars:
+          TAG: slim
+
+  dockle:default:image:
+    vars:
+      DOCKER_IMAGE:
+        sh: jq -r '.slug' .variables.json
+    cmds:
+      - dockle {{.DOCKERHUB_PROFILE}}/{{.DOCKER_IMAGE}}:{{.TAG}}
+
+  gitleaks:
+    deps:
+      - :install:software:gitleaks
+    desc: Scans repository (including git history) for possible leaked keys
+    summary: |
+      # Scan repository with Gitleaks
+
+      Find accidentally committed passwords, private keys, and API keys by scanning the repository with
+      Gitleaks.
+
+      **Example of scanning current repository:**
+      `task lint:gitleaks`
+
+      **Example of scanning a public git repository:**
+      `task lint:gitleaks -- https://github.com/ProfessorManhattan/Windows12`
+
+      For more information, see the [Gitleaks GitHub page](https://github.com/zricethezav/gitleaks).
+    cmds:
+      - task: gitleaks:{{if .CLI_ARGS}}cli{{else}}default{{end}}
+
+  gitleaks:cli: gitleaks --repo-url "{{.CLI_ARGS}}" -v
+
+  gitleaks:default: gitleaks -p . -v
+
+  private-keys:
+    deps:
+      - :common:python:requirements
+    desc: Scan for private keys
+    summary: |
+      # Scan for private keys
+
+      This task will scan the project for private keys that might not belong where they are. You
+      can pass this task a single file or let it loop through the project. If you loop through
+      the project, common folders like 'node_modules/' and 'venv/' will be ignored.
+
+      **Example scanning the whole project:**
+      `task lint:private-keys`
+
+      **Example scanning single file:**
+      `task lint:private-keys -- filename.ext`
+    cmds:
+      - task: private-keys:{{if .CLI_ARGS}}cli{{else}}default{{end}}
+
+  private-keys:cli: detect-private-key {{.CLI_ARGS}}
+
+  private-keys:default: find . -type d \( {{.IGNORE_FOLDERS}} \) -prune -o -type f -print0 | xargs -0 -r -n1 detect-private-key
+  snyk:
+    deps:
+      - :install:npm:snyk
+      - :install:software:jq
+    desc: Analyze the Docker container for security vulnerabilities with Snyk (requires login)
+    summary: |
+      # Analyze the Docker container with Snyk
+
+      One of the services Snyk provides is the capability to identify Docker container vulnerabilities. These
+      vulnerabilities can potentially be used by bad actors. Normally, care should be taken to fix
+      the vulnerabilities Snyk reports whenever possible. To use Snyk, you must be authenticated with their
+      service. Signing up is free and easy (albeit, there is a limit to the number of scans you can run for free).
+      All you have to do is run `snyk auth` with the `snyk` NPM package installed.
+
+      **Example usage for scanning standard Docker repository (with `slim` build and Dockerfile in root directory):**
+      `task security:snyk`
+
+      **Example usage for any image:**
+      `task security:snyk -- namespace/image:tag`
+
+      For more information, see [Snyk's website](https://snyk.io/what-is-snyk/).
+    cmds:
+      - task: snyk:login
+      - task: snyk:{{if .CLI_ARGS}}cli{{else}}default{{end}}
+
+  snyk:cli: snyk test --docker {{.CLI_ARGS}}
+
+  snyk:default:
+    cmds:
+      - task: snyk:default:image
+        vars:
+          TAG: latest
+      - task: snyk:default:image
+        vars:
+          TAG: slim
+
+  snyk:default:image:
+    vars:
+      DOCKER_IMAGE:
+        sh: jq -r '.slug' .variables.json
+    cmds:
+      - snyk test --docker {{.DOCKERHUB_PROFILE}}/{{.DOCKER_IMAGE}}:{{.TAG}} --file=Dockerfile
+
+  snyk:login:
+    deps:
+      - :install:npm:snyk
+    env:
+      SNYK_API_TOKEN:
+        sh: snyk config get api
+    cmds:
+      - snyk auth
+    status:
+      - '[ ! -z "$SNYK_API_TOKEN" ]'
+
+  trivy:
+    deps:
+      - :install:software:trivy
+    desc: Analyze the Docker container for security vulnerabilities with Trivy
+    summary: |
+      # Analyze the Docker container with Trivy
+
+      Trivy is a simple and comprehensive vulnerability and misconfiguration scanner for containers
+      and other artifacts. This task leverages Trivy's ability to report possible vulnerabilities in
+      the Docker container.
+
+      **Example usage for scanning both the 'latest' and 'slim' build in a standard Docker repository:**
+      `task security:trivy`
+
+      **Example usage for scanning any image:**
+      `task security:trivy -- alpine:latest`
+
+      For more information, see [Trivy's website](https://aquasecurity.github.io/trivy/).
+    cmds:
+      - task: trivy:{{if .CLI_ARGS}}cli{{else}}default{{end}}
+
+  trivy:cli: trivy image {{.CLI_ARGS}}
+
+  trivy:default:
+    cmds:
+      - task: trivy:default:image
+        vars:
+          TAG: latest
+      - task: trivy:default:image
+        vars:
+          TAG: slim
+
+  trivy:default:image:
+    deps:
+      - :install:software:jq
+    vars:
+      DOCKER_IMAGE:
+        sh: jq -r '.slug' .variables.json
+    cmds:
+      - trivy image {{.DOCKERHUB_PROFILE}}/{{.DOCKER_IMAGE}}:{{.TAG}}

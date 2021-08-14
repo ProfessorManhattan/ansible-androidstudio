@@ -1,0 +1,299 @@
+---
+version: "3"
+
+vars:
+  IGNORE_FOLDERS:
+    -name .autodoc -o -name .cache -o -name .common -o -name .git -o -name .husky
+    -o -name .modules -o -name .npm -o -name .task -o -name .venv -o -name .vscode -o -name node_modules
+    -o -name venv
+
+tasks:
+  json:
+    deps:
+      - :common:python:requirements
+    desc: Alphabetically sort JSON
+    summary: |
+      # Automatically alphabetize JSON
+
+      Scan through the project and alphabetize all the JSON files that are not in `.gitignore` folders
+      like `.venv/`, `node_modules/`, etc. This task will check the `.variables.json` file for a key
+      titled `json_top_keys` and if it exists then those keys will be prioritized during the
+      sorting. You can ensure the `json_top_keys` value is persistent by adding the value in the
+      `blueprint` section of package.json. By default the command will apply the logic in a loop but
+      you can also pass a filename to only sort one JSON file (see example below).
+
+      **Example sorting a single JSON file:**
+      task fix:json -- single.json`
+
+      **Example looping through project:**
+      `task fix:json`
+
+      _Note: The example above ignores files in the following folders:_
+
+      * `.autodoc/`
+      * `.cache/`
+      * `.common/`
+      * `.git/`
+      * `.husky/`
+      * `.modules/`
+      * `.npm/`
+      * `.task/`
+      * `.venv/`
+      * `.vscode/`
+      * `node_modules/`
+      * `venv/`
+    vars:
+      TOP_KEYS:
+        sh: jq -r '.json_top_keys' .variables.json
+    cmds:
+      - task: json:{{if .CLI_ARGS}}cli{{else}}default{{end}}
+
+  json:cli:
+    find . -type d \( {{.IGNORE_FOLDERS}} \) -prune -o -type f \( -name '*.json' \) -print0 |
+    xargs -0 -r -n1 pretty-format-json --autofix{{if .TOP_KEYS}} --top-keys {{.TOP_KEYS}}{{end}}
+
+  json:default: pretty-format-json --autofix{{if .TOP_KEYS}} --top-keys {{.TOP_KEYS}}{{end}} {{.CLI_ARGS}} || true
+
+  misc:
+    deps:
+      - :common:python:requirements
+    desc: Perform miscellaneous fixes such as removing BOM and ensuring LF line endings
+    summary: |
+      # Miscellaneous fixes
+
+      This task allows you to loop through the files in the project and apply miscellaneous
+      fixes. You can also specify a single file. The fixes applied are:
+
+      1. Remove UTF-8 BOM
+      2. Ensure line endings are LF
+
+      **Example applying fixes to all files:**
+      `task fix:misc`
+
+      _Note: The example above ignores files in the following folders:_
+
+      * `.autodoc/`
+      * `.cache/`
+      * `.common/`
+      * `.git/`
+      * `.husky/`
+      * `.modules/`
+      * `.npm/`
+      * `.task/`
+      * `.venv/`
+      * `.vscode/`
+      * `node_modules/`
+      * `venv/`
+
+      **Example applying fixes to single file:**
+      `task fix:misc -- singlefile.js`
+    cmds:
+      - |
+        function misc() {
+          fix-byte-order-marker "$1" &
+          mixed-line-ending --fix=lf "$1" &
+        }
+      - task: misc:{{if .CLI_ARGS}}cli{{else}}default{{end}}
+
+  misc:cli: misc '{{.CLI_ARGS}}'; wait
+
+  misc:default: find . -type d \( {{.IGNORE_FOLDERS}} \) -prune -o -type f -print0 | xargs -0 -r -n1 misc; wait
+
+  packer:
+    deps:
+      - :install:software:packer
+    desc: Automatically fix and format Packer templates
+    summary: |
+      # Automatically fix and format Packer templates
+
+      Packer has the ability to fix old templates that are using outdated methods. This task
+      loops through all the files in the root of this repository that end with `template.json`.
+      For each template, the task runs `packer fix`.
+
+      **Example applying fixes to all files:**
+      `task fix:packer`
+
+      **Example applying fixes to single file:**
+      `task fix:packer -- mytemplate.json`
+
+      For more information on `packer fix`, see [Packer's website](https://www.packer.io/docs/commands/fix).
+    cmds:
+      - mkdir -p .tmp
+      - task: packer:{{if .CLI_ARGS}}cli{{else}}default{{end}}
+      - rm -rf .tmp
+
+  packer:cli: packer fix {{.CLI_ARGS}}" > ".tmp/tmp-{{.CLI_ARGS}}" && mv ".tmp/tmp-{{.CLI_ARGS}}"
+
+  packer:default: |
+    for TEMPLATE in *template.json; do
+      (packer fix "$TEMPLATE" > ".tmp/tmp-$TEMPLATE" && mv ".tmp/tmp-$TEMPLATE" "$TEMPLATE") &
+    done
+    wait
+
+  prettier:
+    deps:
+      - :common:node:dependencies:local
+      - :install:npm:prettier
+      - :install:npm:prettier-package-json
+    desc: Automatically format most files using Prettier
+    summary: |
+      # Automatically format most files using Prettier
+
+      This task will run Prettier on the project. Prettier will automatically fix formatting
+      mistakes like inconsistent indent lengths, trailing spaces, and more. This task is a wrapper
+      for the `npm run fix:prettier` command. It will use the configuration specified in the
+      `package.json` file under the `prettier` key.
+
+      If this command is incompatible with a file then you can add the file to the `.prettierignore`
+      file.
+
+      **Example of bulk fixing:**
+      `task fix:formatting`
+
+      **Example of fixing a single file**
+      `task fix:formatting -- path/filename.ext`
+
+      For more information, see [Prettier's website](https://prettier.io/).
+    cmds:
+      - task: prettier:{{if .CLI_ARGS}}cli{{else}}default{{end}}
+
+  prettier:cli: prettier --write . && prettier-package-json --write package.json
+
+  prettier:default: '{{if eq .CLI_ARGS "package.json" }}prettier-package-json --write package.json{{else}}prettier --write "{{.CLI_ARGS}}"{{end}}'
+
+  python:
+    deps:
+      - :common:python:requirements
+    desc: Automatically format Python files using Black
+    summary: |
+      # Automatically format Python files using Black
+
+      Black is the defacto standard when it comes to autoformatting Python files. This task will
+      automatically format files that end with the `.py` extension. It currently excludes `.py` files
+      that are in the folders with the following names:
+
+      * `.autodoc/`
+      * `.cache/`
+      * `.common/`
+      * `.git/`
+      * `.husky/`
+      * `.modules/`
+      * `.npm/`
+      * `.task/`
+      * `.venv/`
+      * `.vscode/`
+      * `node_modules/`
+      * `venv/`
+
+      **Example applying fixes to all Python files:**
+      `task fix:python`
+
+      **Example applying fixes to single Python file:**
+      `task fix:python -- myfile.py`
+
+      For more information, see [Black's GitHub page](https://github.com/psf/black).
+    cmds:
+      - task: python:{{if .CLI_ARGS}}cli{{else}}default{{end}}
+
+  python:cli: black {{.CLI_ARGS}}
+
+  python:default: find . -type d \( {{.IGNORE_FOLDERS}} \) -prune -o -type f \( -name '*.py' \) -print0 | xargs -0 -r -n1 black
+
+  shellcheck:
+    deps:
+      - :install:npm:shellcheck
+    desc: (Experimental) Automatically apply fixes to .sh and .sh.j2 files using Shellcheck
+    summary: |
+      # Automatically apply fixes to shell scripts using Shellcheck
+
+      Shellcheck is generally used to lint shell scripts. It makes This task is a wrapper for the
+      `npm run fix:shellcheck` command which uses Shellcheck and `git apply` to automatically
+      apply Shellcheck's recommendations. The npm command is configured to apply the fixes to files
+      that end with `.sh` or `.sh.j2` files that are NOT in the following folders:
+
+      * `.autodoc/`
+      * `.cache/`
+      * `.common/`
+      * `.git/`
+      * `.husky/`
+      * `.modules/`
+      * `.npm/`
+      * `.task/`
+      * `.venv/`
+      * `.vscode/`
+      * `node_modules/`
+      * `venv/`
+
+      This task is experimental. It may work to get rid of the Shellcheck lintrue errors but the code
+      should still be tested since it might break things. Ideally, you should apply Shellcheck's
+      recommendations manually.
+
+      **To see what changes Shellcheck will make to a file named `test.sh`, for example, you can run:**
+      `npx shellcheck -f diff test.sh`
+
+      To see the changes Shellcheck will make when you run this task, you can copy the line from
+      the `package.json` file that corresponds to the `npm run fix:shellcheck` task, remove
+      the ` | git apply` ending, and then run the command.
+
+      **Example applying fixes to all shell scripts:**
+      `task fix:scripts`
+
+      **Example applying fixes to a single shell script:**
+      `task fix:scripts -- myfile.sh`
+
+      For more information, see [Shellcheck's GitHub page](https://github.com/koalaman/shellcheck).
+    cmds:
+      - task: shellcheck:{{if .CLI_ARGS}}cli{{else}}default{{end}}
+
+  shellcheck:cli: shellcheck -f diff {{.CLI_ARGS}} | git apply
+
+  shellcheck:default:
+    cmds:
+      - find . -type d \( {{.IGNORE_FOLDERS}} \) -prune -o -type f \( -name '*.sh' -o -name '*.sh.j2' \)
+        -print0 | xargs -0 shellcheck -f diff | git apply
+
+  yaml:dashes:
+    summary: |
+      # Ensures YML files start with a "---"
+
+      This task will add a `---` as the first line of YML files if it is missing. It only works
+      on one YML file at a time. This task is intended to be used with lint-staged (with settings)
+      normally found in the `package.json` file. You must specify the path/filename to the YML
+      file you wish to fix with this task. If the file does not exist or if the file does not end
+      with `.yml` or `yaml` then an error will be reported.
+
+      This task is mainly intended to be used with `lint-staged`.
+
+      **Example usage:**
+      `task fix:yml-dashes -- path/filename.yml`
+    cmds:
+      - task: yaml:dashes:{{if .CLI_ARGS}}cli{{else}}default{{end}}
+
+  yaml:dashes:cli:
+    vars:
+      FILE_TYPE:
+        sh: echo -n "{{.CLI_ARGS}}" | tail -c 4
+      HEADER:
+        sh: head -c 3 {{.CLI_ARGS}}
+    env:
+      TMP:
+        sh: mktemp
+    cmds:
+      - |
+        if [ '{{.HEADER}}' != '---' ]; then
+          echo '---' | cat - '{{.CLI_ARGS}}' > "$TMP"
+          mv "$TMP" '{{.CLI_ARGS}}'
+        fi
+    log:
+      success: "Added `---` to the beginning of `{{.CLI_ARGS}}` since it was missing from the head of the file"
+    status:
+      - '[ "{{.HEADER}}" == "---" ]'
+    preconditions:
+      - sh: '[ "{{.FILE_TYPE}}" == ".yml" ] || [ "{{.FILE_TYPE}}" == "yaml" ]'
+        msg: The file name must end with either `.yml` or `yaml`
+      - sh: test -f '{{.CLI_ARGS}}'
+        msg: "`{{.CLI_ARGS}}` is not a file path."
+
+  yaml:dashes:default:
+    log:
+      start: "Expecting command in the format of `task fix:yaml:dashes -- path/filename.yml`"

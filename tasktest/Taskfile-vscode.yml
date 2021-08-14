@@ -1,0 +1,30 @@
+---
+version: "3"
+
+tasks:
+  tasks:generate:
+    deps:
+      - :install:software:jq
+    vars:
+      TASK_LIST:
+        sh: task --list
+    env:
+      TMP_JSON:
+        sh: mktemp
+    run: when_changed
+    cmds:
+      - |
+        echo '{"version": "2.0.0"}' > "$TMP_JSON"
+      - |
+        TASKS='['
+        while read LINE; do
+          if [ "${LINE:0:1}" == '*' ]; then
+            TASK_NAME=$(echo "$LINE" | sed 's/^\*.\([^\ ]*\):\(.*\)$/\1/g' | xargs)
+            TASK_DESC=$(echo "$LINE" | sed 's/^\*.\([^\ ]*\):\(.*\)$/\2/g' | xargs)
+            LABEL="($TASK_NAME): $TASK_DESC"
+            TYPE="shell"
+            COMMAND="bash .common/scripts/init.sh && task $TASK_NAME"
+            TASKS+="{\"label\": \"$LABEL\", \"type\": \"$TYPE\", \"command\": \"$COMMAND\"},"
+          fi
+        done <<< "{{.TASK_LIST}}"
+        jq --arg tasks "${TASKS%?}]" '.tasks = ($tasks | fromjson)' "$TMP_JSON" > .vscode/tasks.json

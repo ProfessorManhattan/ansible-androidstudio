@@ -1,0 +1,40 @@
+---
+version: "3"
+
+tasks:
+  build:all:
+    deps: [main, module]
+
+  build:main:
+    desc: Build `main` using `tsconfig.json`
+    cmds:
+      - tsc -p tsconfig.json
+
+  build:module:
+    desc: Build `module` using `tsconfig.module.json`
+    cmds:
+      - tsc -p tsconfig.module.json
+
+  clean:
+    deps:
+      - :install:software:rsync
+    desc: Remove temporary folders that might conflicts with builds
+    vars:
+      RANDOM_STRING:
+        sh: openssl rand -hex 14
+    cmds:
+      - mkdir -p '/tmp/{{.RANDOM_STRING}}'
+      - mkdir -p '/tmp/{{.RANDOM_STRING}}-empty'
+      - |
+        for TMP_FILE in build test; do
+          if [ -d "$TMP_FILE" ]; then
+            mv "$TMP_FILE" "/tmp/{{.RANDOM_STRING}}/$TMP_FILE" 2> /dev/null
+            (rsync -a --delete '/tmp/{{.RANDOM_STRING}}-empty' "/tmp/{{.RANDOM_STRING}}/$TMP_FILE" && rm -rf "/tmp/{{.RANDOM_STRING}}-$TMP_FILE") &
+          fi
+        done
+        wait
+  test:unit:
+    deps:
+      - :common:node:dependencies:local
+    cmds:
+      - npm run test:unit

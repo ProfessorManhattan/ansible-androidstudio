@@ -1,0 +1,301 @@
+---
+version: "3"
+
+tasks:
+  update:
+    deps:
+      - '{{if eq .REPOSITORY_TYPE "packer"}}:packer:latestos{{end}}'
+      - '{{if eq .REPOSITORY_SUBTYPE "role"}}:ansible:populate:dependencies{{end}}'
+      - '{{if eq .REPOSITORY_SUBTYPE "role"}}:ansible:populate:meta{{end}}'
+      - '{{if eq .REPOSITORY_SUBTYPE "role"}}:ansible:update:galaxy-id{{end}}'
+      - repositories
+    label: update
+    desc: Refresh the project with the latest upstream code and ensure blueprint data has propagated
+    summary: |
+      # Refresh project with latest upstream code and ensure project files are up-to-date
+
+      This task will pull the latest upstream code and overwrite any files that are out of date.
+      Ideally, you should run this task often to ensure there are no merge conflicts and to
+      ensure you are using the latest production settings. This task is also run by CI so
+      normally if you pull the latest changes, you should already have the updates that this
+      task applies.
+
+      **Example usage:**
+      `task update`
+    run: once
+    cmds:
+      - task: start
+      - task: all
+      - task: '{{if eq .REPOSITORY_TYPE "docker"}}:docker:update-labels{{end}}'
+    log:
+      success: Successfully updated the project with the latest upstream changes
+
+  all:
+    deps:
+      - '{{if eq .REPOSITORY_TYPE "packer"}}:packer:update:descriptions{{end}}'
+      - contributing
+      - files
+      - readme
+
+  common:
+    deps:
+      - :install:software:git
+    cmds:
+      - cd .common && git reset --hard HEAD && git pull origin master --no-rebase || true && cd ..
+    preconditions:
+      - sh: "type git &> /dev/null"
+        msg: "git is not installed! You can install it by running `task software:git`."
+
+  contributing:
+    deps:
+      - :install:npm:prettier
+      - :install:npm:readme
+    vars:
+      CONTRIB_TEMPLATE: .common/docs/blueprint-contributing.md
+    cmds:
+      - readme generate --silent --headingPrefix '{}' --config .variables.json --input "{{.CONTRIB_TEMPLATE}}" --output CONTRIBUTING.md
+      - task: markdown:scrub
+        vars:
+          SCRUB_FILE: CONTRIBUTING.md
+      - prettier --write CONTRIBUTING.md
+    log:
+      error: Failed to generate CONTRIBUTING.md
+      start: Generating CONTRIBUTING.md
+      success: Generated CONTRIBUTING.md
+    sources:
+      - .variables.json
+    preconditions:
+      - sh: test -f .common/docs/blueprint-contributing.md
+        msg: The CONTRIBUTING.md template file is not present at `.common/docs/blueprint-contributing.md`
+      - sh: test -f .variables.json
+        msg: "The .variables.json file is not present. Generate it by running `task common:update`."
+      - sh: type readme &> /dev/null
+        msg: "`@appnest/readme` is not installed globally. Install all the requirements by running `task common:requirements`."
+
+  files:
+    deps:
+      - :install:npm:prettier-package-json
+      - :install:software:git
+      - :install:software:jq
+      - :install:software:rsync
+    vars:
+      FIRST_LINE:
+        sh: if [ -f Dockerfile ]; then head -n 1 Dockerfile; fi
+      PKG_VERSION:
+        sh: jq -r '.version' package.json
+    env:
+      PKG_BLUEPRINT:
+        sh: jq -r '.blueprint' package.json | sed 's/^null$/{}/'
+      PKG_DEPS:
+        sh: jq -r '.dependencies' package.json | sed 's/^null$/{}/'
+      PKG_DEV_DEPS:
+        sh: jq -r '.devDependencies' package.json | sed 's/^null$/{}/'
+      PKG_KEYWORDS:
+        sh: jq -r '.keywords' package.json | sed 's/^null$/[]/'
+      PKG_SCRIPTS:
+        sh: jq -r '.scripts' package.json | sed 's/^null$/{}/'
+      TMP:
+        sh: mktemp
+    cmds:
+      - task: files:handlebars
+      - find .common/files-{{.REPOSITORY_SUBTYPE}} -type f -name '*.handlebars' -delete
+      - |
+        {{if eq .REPOSITORY_SUBTYPE "ci-pipeline"}}
+        if [[ "{{.FIRST_LINE}}" == *"debian"* ]] || [[ "{{.FIRST_LINE}}" == *"ubuntu"* ]]; then
+          cp .common/initctl initctl
+        fi
+        {{end}}
+      - rsync -aPq ".common/files-{{.REPOSITORY_SUBTYPE}}/" ./
+      - task: :common:husky
+      - task: sort
+      # The following command merges upstream package.json dependencies and devDependencies and overwrites them with the upstream versions.
+      # It allows the package.json in each project to include whatever dependencies it needs while at the same time it allows all the
+      # common dependencies to be updated at the same time. It also ensures the version is persistent. It is entirely possible that this
+      # might cause issues if a project relies on an outdated dependency or if the upstream dependencies are out of date.
+      - jq --arg blueprint "$PKG_BLUEPRINT" --arg deps "$PKG_DEPS" --arg devDeps "$PKG_DEV_DEPS" --arg keywords "$PKG_KEYWORDS" --arg scripts
+        "$PKG_SCRIPTS" --arg version "{{.PKG_VERSION}}" '.dependencies = (($deps | fromjson) * .dependencies) |
+        .devDependencies = (($devDeps | fromjson) * .devDependencies) | .keywords = .keywords + ($keywords | fromjson) |
+        .keywords = (.keywords | sort | unique) | .scripts = (($scripts | fromjson) * .scripts) | .blueprint = ($blueprint | fromjson) |
+        .version = $version' package.json > "$TMP"
+      - mv "$TMP" package.json
+      - prettier-package-json --write
+      - cd .common && git reset --hard HEAD && git clean -fd && cd ..
+    sources:
+      - package.json
+      - .variables.json
+    preconditions:
+      - sh: "type rsync &> /dev/null"
+        msg: "`rsync` is not installed!"
+      - sh: "type prettier-package-json &> /dev/null"
+        msg: "`prettier-package-json` is not installed globally. Install all the requirements by running `task common:requirements`."
+
+  files:handlebars:
+    deps:
+      - :install:npm:hbs
+    env:
+      TMP_BASENAME:
+        sh: mktemp
+      TMP_DIRNAME:
+        sh: mktemp
+    cmds:
+      - find ./.common/files-{{.REPOSITORY_SUBTYPE}} -type f -name '*.handlebars' | while
+        read FILE; do hbs --data .variables.json "$FILE" --stdout > "${FILE%.*}"; done
+    sources:
+      - .common/**/*.handlebars
+      - .variables.json
+    preconditions:
+      - sh: "type hbs &> /dev/null"
+        msg: "`hbs-cli` is not installed globally. Install all the requirements by running `task common:requirements`."
+
+  markdown:scrub:
+    vars:
+      DIVIDER_SRC:
+        <a href="\1" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------"
+        src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
+      REGEX: .*https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/.*.png)][(]\(.*\)[)].*$
+    cmds:
+      - task: markdown:scrub:{{OS}}
+
+  markdown:scrub:darwin: sed -i .bak 's^{{.REGEX}}^{{.DIVIDER_SRC}}^g' {{.SCRUB_FILE}} && rm {{.SCRUB_FILE}}.bak
+
+  markdown:scrub:linux: sed -i 's^{{.REGEX}}^{{.DIVIDER_SRC}}^g' {{.SCRUB_FILE}}
+
+  modules:
+    deps:
+      - :install:software:git
+    label: update:modules
+    desc: Ensure all submodules in the `.modules/` folder are updated
+    summary: |
+      # Ensure all submodules in `.modules/` are updated
+
+      Some of our projects include submodules. These submodules are generally
+      stored in the `.modules/` folder in the root of the project. Some projects
+      might symlink files to one of the submodules stored in the `.modules/` folder.
+      If you are ok with the risk, you can use this task to update all the submodules
+      to the latest on the remote's master branch.
+    cmds:
+      - |
+        if ls .modules/*/ > /dev/null 2>&1; then
+          for SUBMODULE_PATH in .modules/*/; do
+            cd $SUBMODULE_PATH
+            DEFAULT_BRANCH=$(git remote show origin | grep 'HEAD branch' | cut -d' ' -f5)
+            git reset --hard HEAD
+            git checkout "$DEFAULT_BRANCH"
+            git pull origin "$DEFAULT_BRANCH" --ff-only || true
+          done
+        fi
+    status:
+      - "! ls .modules/*/ > /dev/null 2>&1"
+
+  project:
+    cmds:
+      - git pull origin master --no-rebase || true
+
+  readme:
+    deps:
+      - '{{if eq .REPOSITORY_TYPE "ansible"}}:ansible:collection-dependencies:markdown{{end}}'
+      - '{{if eq .REPOSITORY_TYPE "ansible"}}:ansible:mod-ansible-autodoc{{end}}'
+      - :install:npm:prettier
+      - :install:npm:readme
+    vars:
+      README_TEMPLATE: blueprint-readme-{{.REPOSITORY_SUBTYPE}}.md
+    cmds:
+      - readme generate --headingPrefix '{}' --silent --config .variables.json --input ".common/docs/{{.README_TEMPLATE}}"
+      - task: markdown:scrub
+        vars:
+          SCRUB_FILE: README.md
+      - task: '{{if eq .REPOSITORY_TYPE "packer"}}:packer:update:readme{{end}}'
+      - prettier --write README.md
+    log:
+      error: Failed to generate README.md
+      start: Generating README.md
+      success: Generated README.md
+    sources:
+      - .autodoc/*
+      - .variables.json
+    preconditions:
+      - sh: "test -f .common/docs/{{.README_TEMPLATE}}"
+        msg: "The README.md template file is not present at `.common/docs/{{.README_TEMPLATE}}`."
+      - sh: test -f .variables.json
+        msg: "The `.variables.json` file is not present. Generate it by running `task common:update`."
+      - sh: type readme &> /dev/null
+        msg: "`@appnest/readme` is not installed globally. Install all the requirements by running `task common:requirements`."
+      - sh: type prettier &> /dev/null
+        msg: "`prettier` is not installed globally. Install all the requirements by running `task common:requirements`."
+
+  repositories:
+    cmds:
+      - task: common
+      - task: modules
+      - task: project
+
+  services:
+    deps:
+      - update
+    label: update:services
+    desc: Update elements of the repository that require API access
+    summary: |
+      # Update elements of the repository that require API access
+
+      This task will ensure that the git repositories and other services related to the
+      project are updated with the configurations.
+
+      **Example usage:**
+      `task common:update:services`
+    cmds:
+      - task: services:repos
+
+  services:repos:
+    deps:
+      - :git:gitlab:update
+      - :git:github:update
+  update:sort:
+    cmds:
+      - if [ -f paths.txt ]; then sort paths.txt -o paths.txt; fi
+      - if [ -f requirements.txt ]; then sort requirements.txt -o requirements.txt; fi
+    sources:
+      - paths.txt
+      - requirements.txt
+
+  start:
+    deps:
+      - requirements
+      - start-sh
+      - taskfile
+      - variables
+
+  start-sh:
+    cmds:
+      - cp .common/.start.sh .start.sh
+    sources:
+      - .common/start.sh
+
+  taskfile:
+    cmds:
+      - cp .common/files-{{.REPOSITORY_SUBTYPE}}/Taskfile.yml Taskfile.yml
+    sources:
+      - .common/files-{{.REPOSITORY_SUBTYPE}}/Taskfile.yml
+
+  variables:
+    deps:
+      - :install:software:jq
+    vars:
+      COMMON_JSON: ".common/common.{{.REPOSITORY_SUBTYPE}}.json"
+    env:
+      BLUEPRINT_DATA:
+        sh: jq -r '.blueprint' package.json
+      TMP:
+        sh: mktemp
+    cmds:
+      - jq -S --arg blueprint "$BLUEPRINT_DATA" '. = . * ($blueprint | fromjson)' ".common/variables.{{.REPOSITORY_SUBTYPE}}.json" > "$TMP"
+      - mv "$TMP" .variables.json
+      - task: '{{if eq .REPOSITORY_TYPE "packer"}}:packer:update:variables{{end}}'
+      - task: '{{if eq .REPOSITORY_SUBTYPE "role"}}:ansible:update-variables{{end}}'
+    sources:
+      - .common/variables.{{.REPOSITORY_SUBTYPE}}.json
+      - package.json
+    preconditions:
+      - sh: "type jq &> /dev/null"
+        msg: "jq is not installed! You can install it by running `task software:jq`."
+      - sh: "type yq &> /dev/null"
+        msg: "yq is not installed! You can install it by running `task software:yq`."

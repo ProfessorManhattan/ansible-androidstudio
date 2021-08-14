@@ -1,0 +1,347 @@
+---
+version: "3"
+
+tasks:
+  install-doctor:
+    cmds:
+      - |
+        if ! type {{.SOFTWARE}} &> /dev/null; then
+          true info "Using https://install.doctor to install '{{.SOFTWARE}}'"
+          curl -sS https://install.doctor/{{.SOFTWARE}} | bash
+        fi
+    status:
+      - '[ "${container:=}" == "docker" ]'
+
+  npm:commitizen:
+    run: once
+
+    cmds:
+      - task: npm:global
+        vars:
+          FORCE_INSTALL: true
+          NPM_PACKAGE: commitizen
+          NPM_PACKAGE_BIN: git-cz
+  npm:commitlint:
+    run: once
+
+    cmds:
+      - task: npm:global
+        vars:
+          NPM_PACKAGE: "@commitlint/cli"
+          NPM_PACKAGE_BIN: commitlint
+  npm:cspell:
+    run: once
+
+    cmds:
+      - task: npm:global
+        vars:
+          NPM_PACKAGE: cspell
+          NPM_PACKAGE_BIN: cspell
+  npm:global:
+    deps:
+      - :install:software:node
+    label: "install-{{.NPM_PACKAGE}}"
+    cmds:
+      - |
+        if [ "${container:=}" != 'docker' ]; then
+          if [ "{{.FORCE_INSTALL}}" ]; then
+            npm install -g {{.NPM_PACKAGE}}@latest --force
+          else
+            npm install -g {{.NPM_PACKAGE}}@latest
+          fi
+          true success "The npm '{{.NPM_PACKAGE}}' package is globally installed"
+        fi
+    status:
+      - '(type {{.NPM_PACKAGE_BIN}} &> /dev/null) || [ "${container:=}" == "docker" ]'
+
+  npm:hbs:
+    run: once
+
+    cmds:
+      - task: npm:global
+        vars:
+          NPM_PACKAGE: hbs-cli
+          NPM_PACKAGE_BIN: hbs
+  npm:husky:
+    run: once
+
+    cmds:
+      - task: npm:global
+        vars:
+          NPM_PACKAGE: husky
+          NPM_PACKAGE_BIN: husky
+  npm:lint-staged:
+    run: once
+
+    cmds:
+      - task: npm:global
+        vars:
+          NPM_PACKAGE: lint-staged
+          NPM_PACKAGE_BIN: lint-staged
+  npm:markdown-link-check:
+    run: once
+
+    cmds:
+      - task: npm:global
+        vars:
+          NPM_PACKAGE: markdown-link-check
+          NPM_PACKAGE_BIN: markdown-link-check
+  npm:prettier:
+    run: once
+
+    cmds:
+      - task: npm:global
+        vars:
+          NPM_PACKAGE: prettier-plugin-sh
+          NPM_PACKAGE_BIN: prettier
+      - task: npm:global
+        vars:
+          NPM_PACKAGE: prettier
+          NPM_PACKAGE_BIN: prettier
+  npm:prettier-package-json:
+    run: once
+
+    cmds:
+      - task: npm:global
+        vars:
+          NPM_PACKAGE: prettier-package-json
+          NPM_PACKAGE_BIN: prettier-package-json
+  npm:readme:
+    run: once
+
+    cmds:
+      - task: npm:global
+        vars:
+          NPM_PACKAGE: "@appnest/readme"
+          NPM_PACKAGE_BIN: readme
+  npm:remark:
+    run: once
+
+    cmds:
+      - task: npm:global
+        vars:
+          NPM_PACKAGE: remark-cli
+          NPM_PACKAGE_BIN: remark
+  npm:sharp:
+    run: once
+
+    cmds:
+      - task: npm:global
+        vars:
+          NPM_PACKAGE: sharp-cli
+          NPM_PACKAGE_BIN: sharp
+  npm:shellcheck:
+    run: once
+
+    cmds:
+      - task: npm:global
+        vars:
+          NPM_PACKAGE: shellcheck
+          NPM_PACKAGE_BIN: shellcheck
+  npm:snyk:
+    run: once
+
+    cmds:
+      - task: npm:global
+        vars:
+          NPM_PACKAGE: snyk
+          NPM_PACKAGE_BIN: snyk
+  npm:standard:
+    run: once
+
+    cmds:
+      - task: npm:global
+        vars:
+          NPM_PACKAGE: standard
+          NPM_PACKAGE_BIN: standard
+  npm:standard-version:
+    run: once
+
+    cmds:
+      - task: npm:global
+        vars:
+          NPM_PACKAGE: standard-version
+          NPM_PACKAGE_BIN: standard-version
+  npm:tinypng:
+    run: once
+    cmds:
+      - task: npm:global
+        vars:
+          NPM_PACKAGE: tinypng-cli
+          NPM_PACKAGE_BIN: tinypng
+  python:virtualenv:
+    deps:
+      - software:python
+    run: once
+    cmds:
+      - pip3 install virtualenv
+    status:
+      - type virtualenv &> /dev/null
+
+  software:docker:
+    run: once
+    cmds:
+      - task: install-doctor
+        vars:
+          SOFTWARE: docker
+    status:
+      - type docker &> /dev/null
+
+  software:dockle:
+    run: once
+    cmds:
+      - task: install-doctor
+        vars:
+          SOFTWARE: dockle
+    status:
+      - type dockle &> /dev/null
+
+  software:exiftool:
+    run: once
+    cmds:
+      - task: exiftool
+        vars:
+          SOFTWARE: exiftool
+    status:
+      - type exiftool &> /dev/null
+
+  software:gh:
+    run: once
+    cmds:
+      - task: install-doctor
+        vars:
+          SOFTWARE: gh
+    status:
+      - type gh &> /dev/null
+
+  software:git:
+    run: once
+    cmds:
+      - task: install-doctor
+        vars:
+          SOFTWARE: git
+    status:
+      - type git &> /dev/null
+
+  software:gitleaks:
+    run: once
+    cmds:
+      - task: install-doctor
+        vars:
+          SOFTWARE: gitleaks
+    status:
+      - type gitleaks &> /dev/null
+
+  software:glab:
+    run: once
+    cmds:
+      - task: install-doctor
+        vars:
+          SOFTWARE: glab
+    status:
+      - type glab &> /dev/null
+
+  software:jq:
+    run: once
+    cmds:
+      - task: install-doctor
+        vars:
+          SOFTWARE: jq
+    status:
+      - type jq &> /dev/null
+
+  software:node:
+    run: once
+    cmds:
+      - task: install-doctor
+        vars:
+          SOFTWARE: node
+    status:
+      - type node &> /dev/null
+      - type npm &> /dev/null
+      - type npx &> /dev/null
+
+  software:python:
+    run: once
+    cmds:
+      - task: software:python:{{OS}}
+    status:
+      - type python3 &> /dev/null
+
+  software:python:darwin:
+    vars:
+      BASH_PROFILE: .bash_profile
+      MINICONDA_DOWNLOAD_CHECKSUM: b3bf77cbb81ee235ec6858146a2a84d20f8ecdeb614678030c39baacb5acbed1
+      MINICONDA_DOWNLOAD_URL: https://repo.anaconda.com/miniconda/Miniconda3-py39_4.9.2-MacOSX-x86_64.sh
+    cmds:
+      - task: software:python:miniconda
+
+  software:python:linux:
+    vars:
+      BASH_PROFILE: .bashrc
+      MINICONDA_DOWNLOAD_CHECKSUM: 536817d1b14cb1ada88900f5be51ce0a5e042bae178b5550e62f61e223deae7c
+      MINICONDA_DOWNLOAD_URL: https://repo.anaconda.com/miniconda/Miniconda3-py39_4.9.2-Linux-x86_64.sh
+    cmds:
+      - task: software:python:miniconda
+
+  software:python:miniconda: |
+    if ! type python3 &> /dev/null; then
+      true warn "Python 3 is missing from your computer"
+      true info "Installing Python 3 rootlessly using Miniconda"
+      curl -sS \{{.MINICONDA_DOWNLOAD_URL}} > miniconda.sh
+      {{if eq OS "darwin"}}echo "\{{.MINICONDA_DOWNLOAD_CHECKSUM}} miniconda.sh" | sha256sum --check{{end}}
+      {{if eq OS "linux"}}echo "miniconda.sh  {{.MINICONDA_DOWNLOAD_CHECKSUM}}" | shasum -s -a 256 -c{{end}}
+      mkdir -p "$HOME/.local"
+      bash miniconda.sh -b -p "$HOME/.local/miniconda"
+      rm miniconda.sh
+      export PATH="$HOME/.local/miniconda/bin:$PATH"
+      if grep -L '.local/miniconda/bin' "$HOME/{{.BASH_PROFILE}}"; then
+        true info 'Updating the `{{.BASH_PROFILE}}` file to include Miniconda Python 3 in the PATH environment variable'
+        echo -e '\nexport PATH=$HOME/.local/miniconda/bin:$PATH' >> "$HOME/{{.BASH_PROFILE}}"
+      fi
+    fi
+
+  software:rsync:
+    run: once
+    cmds:
+      - task: install-doctor
+        vars:
+          SOFTWARE: rsync
+    status:
+      - type rsync &> /dev/null
+
+  software:trivy:
+    run: once
+    cmds:
+      - task: install-doctor
+        vars:
+          SOFTWARE: trivy
+    status:
+      - type trivy &> /dev/null
+
+  software:vagrant:
+    run: once
+    cmds:
+      - task: install-doctor
+        vars:
+          SOFTWARE: vagrant
+    status:
+      - type vagrant &> /dev/null
+
+  software:virtualbox:
+    run: once
+    cmds:
+      - task: install-doctor
+        vars:
+          SOFTWARE: virtualbox
+    status:
+      - type virtualbox &> /dev/null
+
+  software:yq:
+    run: once
+    cmds:
+      - task: install-doctor
+        vars:
+          SOFTWARE: yq
+    status:
+      - type yq &> /dev/null

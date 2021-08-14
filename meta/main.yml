@@ -11,6 +11,9 @@ galaxy_info:
   platforms:
     - name: Ubuntu
       versions:
+        - 18.04
+        - 20.04
+        - 21.04
         - focal
   galaxy_tags:
     - android

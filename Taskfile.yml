@@ -1,29 +1,32 @@
 ---
-version: '3'
-
-output: prefixed
-
-vars:
-  GALAXY_ROLE_NAME:
-    sh: if [ -f meta/main.yml ]; then yq e '.galaxy_info.role_name' meta/main.yml; else jq -r '.name' package.json | sed 's/.*\///'; fi
-  GALAXY_NAMESPACE:
-    sh: if [ -f meta/main.yml ]; then yq e '.galaxy_info.namespace' meta/main.yml; else jq -r '.name' package.json | sed 's/\/.*//' | sed 's/@//'; fi
-  REPOSITORY_SUBTYPE: role
-  REPOSITORY_TYPE: ansible
+version: "3"
 
 includes:
-  ansible: ./.common/taskfiles-role/Taskfile-ansible.yml
-  common: ./.common/taskfiles-role/Taskfile-common.yml
-  fix: ./.common/taskfiles-role/Taskfile-fix.yml
-  git: ./.common/taskfiles-playbook/Taskfile-git.yml
-  image: ./.common/taskfiles-role/Taskfile-image.yml
-  lint: ./.common/taskfiles-role/Taskfile-lint.yml
-  npm: ./.common/taskfiles-role/Taskfile-npm.yml
-  python: ./.common/taskfiles-role/Taskfile-python.yml
-  security: ./.common/taskfiles-role/Taskfile-security.yml
-  software: ./.common/taskfiles-role/Taskfile-{{OS}}.yml
-  test: ./.common/taskfiles-role/Taskfile-test.yml
-  vscode: ./.common/taskfiles-role/Taskfile-vscode.yml
+  ansible: ./tasktest/ansible/Taskfile.yml
+  ansible:ansibler: ./tasktest/ansible/Taskfile-ansibler.yml
+  ansible:test: ./tasktest/ansible/Taskfile-test.yml
+  common: ./tasktest/common/Taskfile.yml
+  common:update: ./tasktest/common/Taskfile-update.yml
+  fix: ./tasktest/Taskfile-fix.yml
+  git: ./tasktest/Taskfile-git.yml
+  image: ./tasktest/Taskfile-image.yml
+  install: ./tasktest/Taskfile-install.yml
+  lint: ./tasktest/Taskfile-lint.yml
+  npm: ./tasktest/Taskfile-npm.yml
+  packer: ./tasktest/Taskfile-packer.yml
+  python: ./tasktest/Taskfile-python.yml
+  security: ./tasktest/Taskfile-security.yml
+  vscode: ./tasktest/Taskfile-vscode.yml
+
+output: interleaved
+
+vars:
+  GALAXY_NAMESPACE:
+    sh: if [ -f meta/main.yml ]; then yq e '.galaxy_info.namespace' meta/main.yml; else jq -r '.name' package.json | sed 's/\/.*//' | sed 's/@//'; fi
+  GALAXY_ROLE_NAME:
+    sh: if [ -f meta/main.yml ]; then yq e '.galaxy_info.role_name' meta/main.yml; else jq -r '.name' package.json | sed 's/.*\///'; fi
+  REPOSITORY_SUBTYPE: role
+  REPOSITORY_TYPE: ansible
 
 tasks:
   start:
