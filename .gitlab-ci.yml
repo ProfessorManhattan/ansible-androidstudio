@@ -9,4 +9,4 @@ stages:
   - security
 
 include:
-  - remote: https://gitlab.com/megabyte-labs/ci/gitlab-ci-templates/-/raw/master/test/windows-ansible-test.gitlab-ci.yml
+  - remote: https://gitlab.com/megabyte-labs/ci/gitlab-ci-templates/-/raw/master/test/windows-ansible.gitlab-ci.yml
