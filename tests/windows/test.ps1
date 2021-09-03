@@ -1,8 +1,9 @@
-winrm get winrm/config
-Get-Service WinRM
-
+#winrm get winrm/config
+#Get-Service WinRM
+docker version
 docker images
 
+dir $env:PROGRAMFILES\Docker\Docker
 #Write-Output "Setting up WinRM"
 #$url = "https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1"
 #$file = "$env:temp\ConfigureRemotingForAnsible.ps1"
@@ -17,6 +18,10 @@ Write-Output "Changed..."
 Write-Output "Running the Ansible play on the local machine via a Docker container with Ansible"
 $CurrentLocation = Get-Location
 $WorkDirectory = Split-Path -leaf -path (Get-Location)
+Write-Output $CurrentLocation
+Write-Output $WorkDirectory
+docker run hello-world
+
 $HostIP = (Get-NetIPConfiguration | Where-Object -Property IPv4DefaultGateway).IPv4Address.IPAddress
 Write-Output $HostIP
 docker run hello-world
