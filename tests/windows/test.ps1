@@ -3,6 +3,10 @@
 docker version
 docker images
 
+Write-Output $PSVersionTable
+
+Get-ComputerInfo
+
 #dir $env:PROGRAMFILES\Docker\Docker
 #Write-Output "Setting up WinRM"
 #$url = "https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1"
@@ -13,15 +17,12 @@ docker images
 Write-Output "Changing user password to 'AnsibleTest999'"
 $NewPassword = ConvertTo-SecureString "AnsibleTest999" -AsPlainText -Force
 Set-LocalUser -Name $env:UserName -Password $NewPassword
-Write-Output "Changed..."
 
 Write-Output "Running the Ansible play on the local machine via a Docker container with Ansible"
-Get-ComputerInfo
 $CurrentLocation = Get-Location
 $WorkDirectory = Split-Path -leaf -path (Get-Location)
 Write-Output $CurrentLocation
 Write-Output $WorkDirectory
-$PSVersionTable
 docker run hello-world
 
 Write-Output "Get Host IP"
