@@ -1,14 +1,14 @@
 #winrm get winrm/config
 #Get-Service WinRM
-choco feature enable -n allowGlobalConfirmation
-choco install docker-desktop
+#choco feature enable -n allowGlobalConfirmation
+#choco install docker-desktop
 
-dir $env:PROGRAMFILES\Docker\Docker
-& $env:PROGRAMFILES\Docker\Docker\DockerCLI.exe -SwitchLinuxEngine
+#dir $env:PROGRAMFILES\Docker\Docker
+#& $env:PROGRAMFILES\Docker\Docker\DockerCLI.exe -SwitchLinuxEngine
 
 docker version
 docker images
-
+reboot
 #Write-Output $PSVersionTable
 
 #Get-ComputerInfo
@@ -34,7 +34,7 @@ Write-Output "Get Host IP"
 Get-NetIPConfiguration
 $HostIP = (Get-NetIPConfiguration | Where-Object -Property IPv4DefaultGateway).IPv4Address.IPAddress
 Write-Output $HostIP
-docker run hello-world
+#docker run hello-world
 
-docker run -it -v $("$($CurrentLocation)"+':/'+$WorkDirectory) -w $('/'+$WorkDirectory) `
+#docker run -it -v $("$($CurrentLocation)"+':/'+$WorkDirectory) -w $('/'+$WorkDirectory) `
 --add-host='windows-docker:'$HostIP --entrypoint /bin/sh megabytelabs/ansible:slim ./tests/windows/test.sh
