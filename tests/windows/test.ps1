@@ -8,7 +8,7 @@
 
 docker version
 docker images
-reboot
+
 #Write-Output $PSVersionTable
 
 #Get-ComputerInfo
