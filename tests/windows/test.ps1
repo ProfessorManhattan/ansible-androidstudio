@@ -1,13 +1,15 @@
 #winrm get winrm/config
 #Get-Service WinRM
+choco install docker-desktop
+
 docker version
 docker images
 
-Write-Output $PSVersionTable
+#Write-Output $PSVersionTable
 
-Get-ComputerInfo
+#Get-ComputerInfo
 
-#dir $env:PROGRAMFILES\Docker\Docker
+dir $env:PROGRAMFILES\Docker\Docker
 #Write-Output "Setting up WinRM"
 #$url = "https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1"
 #$file = "$env:temp\ConfigureRemotingForAnsible.ps1"
