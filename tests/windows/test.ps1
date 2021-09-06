@@ -3,6 +3,9 @@
 choco feature enable -n allowGlobalConfirmation
 choco install docker-desktop
 
+dir $env:PROGRAMFILES\Docker\Docker
+& $env:PROGRAMFILES\Docker\Docker\DockerCLI.exe -SwitchLinuxEngine
+
 docker version
 docker images
 
@@ -10,8 +13,6 @@ docker images
 
 #Get-ComputerInfo
 
-dir $env:PROGRAMFILES\Docker\Docker
-& $env:PROGRAMFILES\Docker\Docker\DockerCLI.exe -SwitchLinuxEngine
 #Write-Output "Setting up WinRM"
 #$url = "https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1"
 #$file = "$env:temp\ConfigureRemotingForAnsible.ps1"
@@ -27,7 +28,7 @@ $CurrentLocation = Get-Location
 $WorkDirectory = Split-Path -leaf -path (Get-Location)
 Write-Output $CurrentLocation
 Write-Output $WorkDirectory
-docker run hello-world
+#docker run hello-world
 
 Write-Output "Get Host IP"
 Get-NetIPConfiguration
