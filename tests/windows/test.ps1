@@ -1,5 +1,6 @@
 #winrm get winrm/config
 #Get-Service WinRM
+choco feature enable -n allowGlobalConfirmation
 choco install docker-desktop
 
 docker version
@@ -10,6 +11,7 @@ docker images
 #Get-ComputerInfo
 
 dir $env:PROGRAMFILES\Docker\Docker
+& $env:PROGRAMFILES\Docker\Docker\DockerCLI.exe -SwitchLinuxEngine
 #Write-Output "Setting up WinRM"
 #$url = "https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1"
 #$file = "$env:temp\ConfigureRemotingForAnsible.ps1"
