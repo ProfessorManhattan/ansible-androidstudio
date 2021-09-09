@@ -1,5 +1,5 @@
 ---
-version: "3"
+version: '3'
 
 tasks:
   update:
@@ -43,8 +43,8 @@ tasks:
     cmds:
       - cd .common && git reset --hard HEAD && git pull origin master --no-rebase || true && cd ..
     preconditions:
-      - sh: "type git &> /dev/null"
-        msg: "git is not installed! You can install it by running `task software:git`."
+      - sh: 'type git &> /dev/null'
+        msg: 'git is not installed! You can install it by running `task software:git`.'
 
   contributing:
     deps:
@@ -68,9 +68,9 @@ tasks:
       - sh: test -f .common/docs/blueprint-contributing.md
         msg: The CONTRIBUTING.md template file is not present at `.common/docs/blueprint-contributing.md`
       - sh: test -f .variables.json
-        msg: "The .variables.json file is not present. Generate it by running `task common:update`."
+        msg: 'The .variables.json file is not present. Generate it by running `task common:update`.'
       - sh: type readme &> /dev/null
-        msg: "`@appnest/readme` is not installed globally. Install all the requirements by running `task common:requirements`."
+        msg: '`@appnest/readme` is not installed globally. Install all the requirements by running `task common:requirements`.'
 
   files:
     deps:
@@ -124,10 +124,10 @@ tasks:
       - package.json
       - .variables.json
     preconditions:
-      - sh: "type rsync &> /dev/null"
-        msg: "`rsync` is not installed!"
-      - sh: "type prettier-package-json &> /dev/null"
-        msg: "`prettier-package-json` is not installed globally. Install all the requirements by running `task common:requirements`."
+      - sh: 'type rsync &> /dev/null'
+        msg: '`rsync` is not installed!'
+      - sh: 'type prettier-package-json &> /dev/null'
+        msg: '`prettier-package-json` is not installed globally. Install all the requirements by running `task common:requirements`.'
 
   files:handlebars:
     deps:
@@ -144,8 +144,8 @@ tasks:
       - .common/**/*.handlebars
       - .variables.json
     preconditions:
-      - sh: "type hbs &> /dev/null"
-        msg: "`hbs-cli` is not installed globally. Install all the requirements by running `task common:requirements`."
+      - sh: 'type hbs &> /dev/null'
+        msg: '`hbs-cli` is not installed globally. Install all the requirements by running `task common:requirements`.'
 
   markdown:scrub:
     vars:
@@ -185,7 +185,7 @@ tasks:
           done
         fi
     status:
-      - "! ls .modules/*/ > /dev/null 2>&1"
+      - '! ls .modules/*/ > /dev/null 2>&1'
 
   project:
     cmds:
@@ -214,14 +214,14 @@ tasks:
       - .autodoc/*
       - .variables.json
     preconditions:
-      - sh: "test -f .common/docs/{{.README_TEMPLATE}}"
-        msg: "The README.md template file is not present at `.common/docs/{{.README_TEMPLATE}}`."
+      - sh: 'test -f .common/docs/{{.README_TEMPLATE}}'
+        msg: 'The README.md template file is not present at `.common/docs/{{.README_TEMPLATE}}`.'
       - sh: test -f .variables.json
-        msg: "The `.variables.json` file is not present. Generate it by running `task common:update`."
+        msg: 'The `.variables.json` file is not present. Generate it by running `task common:update`.'
       - sh: type readme &> /dev/null
-        msg: "`@appnest/readme` is not installed globally. Install all the requirements by running `task common:requirements`."
+        msg: '`@appnest/readme` is not installed globally. Install all the requirements by running `task common:requirements`.'
       - sh: type prettier &> /dev/null
-        msg: "`prettier` is not installed globally. Install all the requirements by running `task common:requirements`."
+        msg: '`prettier` is not installed globally. Install all the requirements by running `task common:requirements`.'
 
   repositories:
     cmds:
@@ -280,7 +280,7 @@ tasks:
     deps:
       - :install:software:jq
     vars:
-      COMMON_JSON: ".common/common.{{.REPOSITORY_SUBTYPE}}.json"
+      COMMON_JSON: '.common/common.{{.REPOSITORY_SUBTYPE}}.json'
     env:
       BLUEPRINT_DATA:
         sh: jq -r '.blueprint' package.json
@@ -295,7 +295,7 @@ tasks:
       - .common/variables.{{.REPOSITORY_SUBTYPE}}.json
       - package.json
     preconditions:
-      - sh: "type jq &> /dev/null"
-        msg: "jq is not installed! You can install it by running `task software:jq`."
-      - sh: "type yq &> /dev/null"
-        msg: "yq is not installed! You can install it by running `task software:yq`."
+      - sh: 'type jq &> /dev/null'
+        msg: 'jq is not installed! You can install it by running `task software:jq`.'
+      - sh: 'type yq &> /dev/null'
+        msg: 'yq is not installed! You can install it by running `task software:yq`.'

@@ -1,5 +1,5 @@
 ---
-version: "3"
+version: '3'
 
 vars:
   TEMPLATE_FILE:
@@ -225,9 +225,9 @@ tasks:
     preconditions:
       - sh: test -f template.json
         msg:
-          "A `template.json` file is not present. This project uses values stored in `template.json` to generate certain
+          'A `template.json` file is not present. This project uses values stored in `template.json` to generate certain
           meta artifacts. Please add a `template.json`. You can find an example of one in
-          [this repository](https://gitlab.com/megabyte-labs/packer/ubuntu-desktop)"
+          [this repository](https://gitlab.com/megabyte-labs/packer/ubuntu-desktop)'
       - sh: test -f .variables.json
         msg: The `.variables.json` file is missing!
 

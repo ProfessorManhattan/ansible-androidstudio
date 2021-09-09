@@ -1,34 +1,33 @@
 ---
-version: "3"
-
-includes:
-  ansible: ./tasktest/ansible/Taskfile.yml
-  ansible:ansibler: ./tasktest/ansible/Taskfile-ansibler.yml
-  ansible:test: ./tasktest/ansible/Taskfile-test.yml
-  common: ./tasktest/common/Taskfile.yml
-  common:update: ./tasktest/common/Taskfile-update.yml
-  fix: ./tasktest/Taskfile-fix.yml
-  git: ./tasktest/Taskfile-git.yml
-  image: ./tasktest/Taskfile-image.yml
-  install: ./tasktest/Taskfile-install.yml
-  lint: ./tasktest/Taskfile-lint.yml
-  npm: ./tasktest/Taskfile-npm.yml
-  packer: ./tasktest/Taskfile-packer.yml
-  python: ./tasktest/Taskfile-python.yml
-  security: ./tasktest/Taskfile-security.yml
-  vscode: ./tasktest/Taskfile-vscode.yml
+version: '3'
 
 output: interleaved
 
 vars:
-  GALAXY_NAMESPACE:
-    sh: if [ -f meta/main.yml ]; then yq e '.galaxy_info.namespace' meta/main.yml; else jq -r '.name' package.json | sed 's/\/.*//' | sed 's/@//'; fi
   GALAXY_ROLE_NAME:
     sh: if [ -f meta/main.yml ]; then yq e '.galaxy_info.role_name' meta/main.yml; else jq -r '.name' package.json | sed 's/.*\///'; fi
+  GALAXY_NAMESPACE:
+    sh: if [ -f meta/main.yml ]; then yq e '.galaxy_info.namespace' meta/main.yml; else jq -r '.name' package.json | sed 's/\/.*//' | sed 's/@//'; fi
   REPOSITORY_SUBTYPE: role
   REPOSITORY_TYPE: ansible
 
+includes:
+  ansible: ./.common/taskfiles/ansible/Taskfile.yml
+  ansible:ansibler: ./.common/taskfiles/ansible/Taskfile-ansibler.yml
+  ansible:test: ./.common/taskfiles/ansible/Taskfile-test.yml
+  common: ./.common/taskfiles/common/Taskfile.yml
+  common:update: ./.common/taskfiles/common/Taskfile-update.yml
+  fix: ./.common/taskfiles/Taskfile-fix.yml
+  git: ./.common/taskfiles/Taskfile-git.yml
+  image: ./.common/taskfiles/Taskfile-image.yml
+  install: ./.common/taskfiles/Taskfile-install.yml
+  lint: ./.common/taskfiles/Taskfile-lint.yml
+  security: ./.common/taskfiles/Taskfile-security.yml
+  vscode: ./.common/taskfiles/Taskfile-vscode.yml
+
 tasks:
+  donothing: 'true'
+
   start:
     desc: Set up the project and refresh it with the latest changes
     summary: |
@@ -40,4 +39,4 @@ tasks:
       **Example usage:**
       `task start`
     cmds:
-      - task: common:update
+      - task: common:update:update

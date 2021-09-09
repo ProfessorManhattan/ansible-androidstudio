@@ -1,9 +1,8 @@
 ---
-version: "3"
+version: '3'
 
 vars:
-  IGNORE_FOLDERS:
-    -name .autodoc -o -name .cache -o -name .common -o -name .git -o -name .husky
+  IGNORE_FOLDERS: -name .autodoc -o -name .cache -o -name .common -o -name .git -o -name .husky
     -o -name .modules -o -name .npm -o -name .task -o -name .venv -o -name .vscode -o -name node_modules
     -o -name venv
 
@@ -48,8 +47,7 @@ tasks:
     cmds:
       - task: json:{{if .CLI_ARGS}}cli{{else}}default{{end}}
 
-  json:cli:
-    find . -type d \( {{.IGNORE_FOLDERS}} \) -prune -o -type f \( -name '*.json' \) -print0 |
+  json:cli: find . -type d \( {{.IGNORE_FOLDERS}} \) -prune -o -type f \( -name '*.json' \) -print0 |
     xargs -0 -r -n1 pretty-format-json --autofix{{if .TOP_KEYS}} --top-keys {{.TOP_KEYS}}{{end}}
 
   json:default: pretty-format-json --autofix{{if .TOP_KEYS}} --top-keys {{.TOP_KEYS}}{{end}} {{.CLI_ARGS}} || true
@@ -285,15 +283,15 @@ tasks:
           mv "$TMP" '{{.CLI_ARGS}}'
         fi
     log:
-      success: "Added `---` to the beginning of `{{.CLI_ARGS}}` since it was missing from the head of the file"
+      success: 'Added `---` to the beginning of `{{.CLI_ARGS}}` since it was missing from the head of the file'
     status:
       - '[ "{{.HEADER}}" == "---" ]'
     preconditions:
       - sh: '[ "{{.FILE_TYPE}}" == ".yml" ] || [ "{{.FILE_TYPE}}" == "yaml" ]'
         msg: The file name must end with either `.yml` or `yaml`
       - sh: test -f '{{.CLI_ARGS}}'
-        msg: "`{{.CLI_ARGS}}` is not a file path."
+        msg: '`{{.CLI_ARGS}}` is not a file path.'
 
   yaml:dashes:default:
     log:
-      start: "Expecting command in the format of `task fix:yaml:dashes -- path/filename.yml`"
+      start: 'Expecting command in the format of `task fix:yaml:dashes -- path/filename.yml`'

@@ -1,4 +1,7 @@
-<h1>Contributor Covenant Code of Conduct</h1>
+<div align="center">
+  <center><h1>Contributor Covenant Code of Conduct</h1></center>
+  <center><h4 style="color: #18c3d1;">A set of guidelines that all all members, contributors, and leaders should follow</h4></center>
+</div>
 
 [![-----------------------------------------------------](https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png)](#our-pledge)
 

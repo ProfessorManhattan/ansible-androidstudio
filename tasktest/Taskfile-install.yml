@@ -1,5 +1,5 @@
 ---
-version: "3"
+version: '3'
 
 tasks:
   install-doctor:
@@ -27,7 +27,7 @@ tasks:
     cmds:
       - task: npm:global
         vars:
-          NPM_PACKAGE: "@commitlint/cli"
+          NPM_PACKAGE: '@commitlint/cli'
           NPM_PACKAGE_BIN: commitlint
   npm:cspell:
     run: once
@@ -40,7 +40,7 @@ tasks:
   npm:global:
     deps:
       - :install:software:node
-    label: "install-{{.NPM_PACKAGE}}"
+    label: 'install-{{.NPM_PACKAGE}}'
     cmds:
       - |
         if [ "${container:=}" != 'docker' ]; then
@@ -112,7 +112,7 @@ tasks:
     cmds:
       - task: npm:global
         vars:
-          NPM_PACKAGE: "@appnest/readme"
+          NPM_PACKAGE: '@appnest/readme'
           NPM_PACKAGE_BIN: readme
   npm:remark:
     run: once

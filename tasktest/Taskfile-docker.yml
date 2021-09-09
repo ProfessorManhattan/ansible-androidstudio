@@ -1,5 +1,5 @@
 ---
-version: "3"
+version: '3'
 
 vars:
   DOCKERHUB_PROFILE: megabytelabs
@@ -71,9 +71,9 @@ tasks:
     cmds:
       - docker-slim build --tag '{{.DOCKERHUB_PROFILE}}/{{.SLUG}}:slim' {{.SLIM_COMMAND}} '{{.DOCKERHUB_PROFILE}}/{{.SLUG}}:latest'
     log:
-      error: "Failed to build `{{.DOCKERHUB_PROFILE}}/{{.SLUG}}:slim`"
-      start: "Building slim image named `{{.DOCKERHUB_PROFILE}}/{{.SLUG}}:slim`"
-      success: "Successfully built `{{.DOCKERHUB_PROFILE}}/{{.SLUG}}:slim`"
+      error: 'Failed to build `{{.DOCKERHUB_PROFILE}}/{{.SLUG}}:slim`'
+      start: 'Building slim image named `{{.DOCKERHUB_PROFILE}}/{{.SLUG}}:slim`'
+      success: 'Successfully built `{{.DOCKERHUB_PROFILE}}/{{.SLUG}}:slim`'
 
   build:slim:finish:
     deps:
@@ -111,7 +111,7 @@ tasks:
       - mv "$TMP" package.json
       - task: :common:update
     log:
-      start: "The slim build was compressed to `{{.SLIM_SIZE}}` (from `{{.REGULAR_SIZE}}` originally)."
+      start: 'The slim build was compressed to `{{.SLIM_SIZE}}` (from `{{.REGULAR_SIZE}}` originally).'
     status:
       - '[[ "{{.PREVIOUS_SLIM_SIZE}}" == "{{.SLIM_SIZE}}" ]]'
 

@@ -1,5 +1,5 @@
 ---
-version: "3"
+version: '3'
 
 tasks:
   local:
@@ -32,7 +32,7 @@ tasks:
       desc:
     preconditions:
       - sh: typeof ansible &> /dev/null
-        msg: "Ansible is not available. Install the dependencies by running `task common:requirements`."
+        msg: 'Ansible is not available. Install the dependencies by running `task common:requirements`.'
 
   molecule:docker:
     deps:
@@ -70,9 +70,9 @@ tasks:
       - mkdir -p molecule/.results
       - PY_COLORS=0 molecule test -s "docker{{if .SNAP_REFS}}-snap{{end}}" > "molecule/.results/{{.MOLECULE_DATE}}-$SCENARIO.txt"
     log:
-      error: "Test returned a non-zero exit code. See `molecule/.results/{{.MOLECULE_DATE}}-$SCENARIO.txt` for more details."
-      start: "Storing Docker test results to `molecule/.results/{{.MOLECULE_DATE}}-$SCENARIO.txt`"
-      success: "Completed the full molecule test! Results are stored in `molecule/.results/{{.MOLECULE_DATE}}-$SCENARIO.txt`"
+      error: 'Test returned a non-zero exit code. See `molecule/.results/{{.MOLECULE_DATE}}-$SCENARIO.txt` for more details.'
+      start: 'Storing Docker test results to `molecule/.results/{{.MOLECULE_DATE}}-$SCENARIO.txt`'
+      success: 'Completed the full molecule test! Results are stored in `molecule/.results/{{.MOLECULE_DATE}}-$SCENARIO.txt`'
 
   molecule:virtualbox:converge:
     deps:
@@ -142,15 +142,15 @@ tasks:
       - mkdir -p molecule/.results
       - PY_COLORS=0 molecule test > molecule/.results/{{.MOLECULE_DATE}}-default.txt
     log:
-      error: "Test finished with error(s). See the log at `molecule/.results/{{.MOLECULE_DATE}}-default.txt`."
-      start: "Storing full E2E test results to `molecule/.results/{{.MOLECULE_DATE}}-default.txt`, this can take awhile.."
-      success: "Successfully completed the `molecule test`. Results are stored in `molecule/.results/{{.MOLECULE_DATE}}-default.txt`."
+      error: 'Test finished with error(s). See the log at `molecule/.results/{{.MOLECULE_DATE}}-default.txt`.'
+      start: 'Storing full E2E test results to `molecule/.results/{{.MOLECULE_DATE}}-default.txt`, this can take awhile..'
+      success: 'Successfully completed the `molecule test`. Results are stored in `molecule/.results/{{.MOLECULE_DATE}}-default.txt`.'
 
   molecule:virtualbox:e2e:default:
     cmds:
       - molecule test
     log:
-      error: "`molecule test` finished with error(s)"
+      error: '`molecule test` finished with error(s)'
       start: This is a full E2E test and can take awhile..
       success: Successfully completed the `molecule test`
 

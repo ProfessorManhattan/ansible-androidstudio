@@ -1,9 +1,8 @@
 ---
-version: "3"
+version: '3'
 
 vars:
-  IGNORE_FOLDERS:
-    -name .autodoc -o -name .cache -o -name .common -o -name .git -o -name .husky
+  IGNORE_FOLDERS: -name .autodoc -o -name .cache -o -name .common -o -name .git -o -name .husky
     -o -name .modules -o -name .npm -o -name .task -o -name .venv -o -name .vscode -o -name node_modules
     -o -name venv
   TINYPNG_API_KEY: z4qhFBLRvNMG9rHmdkSLx1DR1FNZN5gc
@@ -58,7 +57,7 @@ tasks:
           compressImage '{{.CLI_ARGS}}'
         fi
     sources:
-      - "**/*.(jpg|png)"
+      - '**/*.(jpg|png)'
 
   resize:
     deps:

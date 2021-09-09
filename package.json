@@ -35,12 +35,13 @@
     "@commitlint/config-conventional": "^13.1.0",
     "@megabytelabs/prettier-config": "^2.0.0",
     "cz-conventional-changelog": "^3.3.0",
-    "inquirer": "^6.5.2",
-    "prettier-plugin-sh": "^0.6.1",
-    "remark-preset-lint-recommended": "^5.0.0",
+    "inquirer": "^8.1.2",
+    "prettier-plugin-sh": "^0.7.1",
+    "remark-preset-lint-recommended": "^6.0.1",
     "signale": "^1.4.0"
   },
   "keywords": [
+    "[[ The &#x60;meta/main.yml&#x60; file needs to be setup. The &#x60;galaxy_info.role_name&#x60; value is missing. ]]",
     "adb",
     "androidsdk",
     "androidstudio",
@@ -89,11 +90,6 @@
     }
   ],
   "lint-staged": {
-    "**/!(package).json": [
-      "check-json",
-      "task fix:json --",
-      "prettier --write"
-    ],
     "**/*": [
       "blocklint --wordlist blacklist,slave,whitelist",
       "check-merge-conflict",
@@ -107,21 +103,22 @@
     "**/*.(jpg|png)": [
       "task image:compress --"
     ],
-    "**/*.(sh|sh.j2)": [
-      "shellcheck",
-      "prettier --write"
-    ],
     "**/*.js": [
       "npx standard --fix",
+      "prettier --write"
+    ],
+    "**/!(package).json": [
+      "check-json",
+      "task fix:json --",
       "prettier --write"
     ],
     "**/*.md": [
       "remark",
       "prettier --write"
     ],
-    "**/*.py": [
-      "black",
-      "flake8"
+    "**/*.(sh|sh.j2)": [
+      "shellcheck",
+      "prettier --write"
     ],
     "**/*.toml": [
       "check-toml"
@@ -133,11 +130,8 @@
     "**/*.yml": [
       "check-yaml",
       "yamllint -s",
-      "task fix:yml-dashes --",
+      "task fix:yaml:dashes --",
       "prettier --write"
-    ],
-    "**/*vault.yml": [
-      "bash .common/scripts/ansible/vault.sh"
     ],
     "logo.png": [
       "task image:resize -- 200 200",
@@ -150,6 +144,13 @@
     ],
     "requirements.txt": [
       "requirements-txt-fixer"
+    ],
+    "**/*.py": [
+      "black",
+      "flake8"
+    ],
+    "**/*vault.yml": [
+      "bash .common/scripts/ansible/vault.sh"
     ]
   },
   "prettier": "@megabytelabs/prettier-config",

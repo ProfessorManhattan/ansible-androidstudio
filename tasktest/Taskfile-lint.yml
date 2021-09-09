@@ -1,17 +1,16 @@
 ---
-version: "3"
+version: '3'
 
 vars:
   CSPELL_CONFIG: .common/.cspell.json
-  IGNORE_FOLDERS:
-    -name .autodoc -o -name .cache -o -name .common -o -name .git -o -name .husky
+  IGNORE_FOLDERS: -name .autodoc -o -name .cache -o -name .common -o -name .git -o -name .husky
     -o -name .modules -o -name .npm -o -name .task -o -name .venv -o -name .vscode -o -name node_modules
     -o -name venv
 
 tasks:
   all:
     deps:
-      - "{{.REPOSITORY_TYPE}}"
+      - '{{.REPOSITORY_TYPE}}'
       - prettier
       - markdown
       - prose
@@ -84,8 +83,7 @@ tasks:
 
   docker:cli: docker run -v "$PWD:/work" -w /work megabytelabs/hadolint:slim {{.CLI_ARGS}}
 
-  docker:default:
-    find . -type d \( {{.IGNORE_FOLDERS}} \) -prune -o -type f \( -name Dockerfile -o
+  docker:default: find . -type d \( {{.IGNORE_FOLDERS}} \) -prune -o -type f \( -name Dockerfile -o
     -name Dockerfile.j2 \) -print0 | xargs -0 -r -n1 docker run -v "$PWD:/work" -w /work
     megabytelabs/hadolint:slim
 
@@ -121,8 +119,7 @@ tasks:
 
   markdown:cli: remark {{.CLI_ARGS}}
 
-  markdown:default:
-    find . -type d \( {{.IGNORE_FOLDERS}} \) -prune -o -type f \( -name '*.md' \) -print0 |
+  markdown:default: find . -type d \( {{.IGNORE_FOLDERS}} \) -prune -o -type f \( -name '*.md' \) -print0 |
     xargs -0 -r -n1 remark
 
   markdown:links:
@@ -145,12 +142,11 @@ tasks:
     cmds:
       - task: markdown:broken-links:{{if .CLI_ARGS}}cli{{else}}default{{end}}
     sources:
-      - "**/*.md"
+      - '**/*.md'
 
   markdown:links:cli: markdown-link-check {{.CLI_ARGS}}
 
-  markdown:links:default:
-    find . -type d \( {{.IGNORE_FOLDERS}} \) -prune -o -type f \( -name '*.md' \) -print0 |
+  markdown:links:default: find . -type d \( {{.IGNORE_FOLDERS}} \) -prune -o -type f \( -name '*.md' \) -print0 |
     xargs -0 -r -n1 markdown-link-check
 
   packer:
@@ -232,7 +228,7 @@ tasks:
       - mkdir -p ~/.config/proselint
       - cp .common/proselint.json ~/.config/proselint/config
     status:
-      - "! test -f ~/.config/proselint/config"
+      - '! test -f ~/.config/proselint/config'
 
   prose:config:restore:
     cmds:
@@ -242,10 +238,9 @@ tasks:
           mv ~/.config/proselint/config.backup ~/.config/proselint/config
         fi
     status:
-      - "! test -f ~/.config/proselint/config.backup"
+      - '! test -f ~/.config/proselint/config.backup'
 
-  prose:default:
-    find . -type d \( {{.IGNORE_FOLDERS}} \) -prune -o -type f \( -name '*.md' \) -print0 |
+  prose:default: find . -type d \( {{.IGNORE_FOLDERS}} \) -prune -o -type f \( -name '*.md' \) -print0 |
     xargs -0 -r -n1 proselint
 
   python:
@@ -311,7 +306,7 @@ tasks:
       - shellcheck {{.CLI_ARGS}}
     preconditions:
       - sh: test -f {{.CLI_ARGS}}
-        msg: "{{.CLI_ARGS}} does not appear to be a file. Try passing a file path instead."
+        msg: '{{.CLI_ARGS}} does not appear to be a file. Try passing a file path instead.'
 
   shellcheck:default:
     find . -type d \( {{.IGNORE_FOLDERS}} \) -prune -o -type f \( -name '*.sh' -o -name '*.sh.j2' \) -print0 |
