@@ -15,7 +15,7 @@
     <a href="https://megabyte.space" title="Megabyte Labs homepage" target="_blank">
       <img alt="Homepage" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/svg/home-solid.svg" />
     </a>
-    <a href="https://galaxy.ansible.com/professormanhattan/[[ The `meta/main.yml` file needs to be setup. The `galaxy_info.role_name` value is missing. ]]" title="Android Studio role on Ansible Galaxy" target="_blank">
+    <a href="https://galaxy.ansible.com/professormanhattan/androidstudio" title="Android Studio role on Ansible Galaxy" target="_blank">
       <img alt="Ansible Galaxy" height="50" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/svg/ansible-galaxy.svg" />
     </a>
     <a href="https://gitlab.com/ProfessorManhattan/ansible-androidstudio/blob/master/CONTRIBUTING.md" title="Learn about contributing" target="_blank">
@@ -35,25 +35,25 @@
     </a>
   </h4>
   <p align="center">
-    <a title="Ansible Galaxy role: professormanhattan.[[ The `meta/main.yml` file needs to be setup. The `galaxy_info.role_name` value is missing. ]]" href="https://galaxy.ansible.com/professormanhattan/[[ The `meta/main.yml` file needs to be setup. The `galaxy_info.role_name` value is missing. ]]" target="_blank">
-      <img alt="Ansible Galaxy role: professormanhattan.[[ The `meta/main.yml` file needs to be setup. The `galaxy_info.role_name` value is missing. ]]" src="https://img.shields.io/ansible/role/ansible_galaxy_project_id?logo=ansible&style=flat" />
+    <a title="Ansible Galaxy role: professormanhattan.androidstudio" href="https://galaxy.ansible.com/professormanhattan/androidstudio" target="_blank">
+      <img alt="Ansible Galaxy role: professormanhattan.androidstudio" src="https://img.shields.io/ansible/role/ansible_galaxy_project_id?logo=ansible&style=flat" />
     </a>
     <a title="Version: 1.1.1" href="https://gitlab.com/ProfessorManhattan/ansible-androidstudio" target="_blank">
       <img alt="Version: 1.1.1" src="https://img.shields.io/badge/version-1.1.1-blue.svg?cacheSeconds=2592000" />
     </a>
     <a title="Windows 11 build status on GitHub" href="{{ https://gitlab.com/ProfessorManhattan/ansible-androidstudio/actions/Windows.yml" target="_blank">
-      <img alt="Windows 11 build status" src="https://img.shields.io/github/workflow/status/ProfessorManhattan/ansible-[[ The `meta/main.yml` file needs to be setup. The `galaxy_info.role_name` value is missing. ]]/Windows/master?color=cyan&label=Windows%20build&logo=windows&style=flat">
+      <img alt="Windows 11 build status" src="https://img.shields.io/github/workflow/status/ProfessorManhattan/ansible-androidstudio/Windows/master?color=cyan&label=Windows%20build&logo=windows&style=flat">
     </a>
     <a title="macOS build status on GitHub" href="https://gitlab.com/ProfessorManhattan/ansible-androidstudio/actions/macOS.yml" target="_blank">
-      <img alt="macOS build status" src="https://img.shields.io/github/workflow/status/ProfessorManhattan/ansible-[[ The `meta/main.yml` file needs to be setup. The `galaxy_info.role_name` value is missing. ]]/macOS/master?label=macOS%20build&logo=apple&style=flat">
+      <img alt="macOS build status" src="https://img.shields.io/github/workflow/status/ProfessorManhattan/ansible-androidstudio/macOS/master?label=macOS%20build&logo=apple&style=flat">
     </a>
     <a title="Linux build status on GitLab" href="https://gitlab.com/megabyte-labs/ansible-roles/androidstudio/-/commits/master" target="_blank">
-      <img alt="Linux build status" src="https://gitlab.com/megabyte-labs/ansible-roles/[[ The `meta/main.yml` file needs to be setup. The `galaxy_info.role_name` value is missing. ]]/badges/master/pipeline.svg">
+      <img alt="Linux build status" src="https://gitlab.com/megabyte-labs/ansible-roles/androidstudio/badges/master/pipeline.svg">
     </a>
-    <a title="Ansible Galaxy quality score (out of 5)" href="https://galaxy.ansible.com/professormanhattan/[[ The `meta/main.yml` file needs to be setup. The `galaxy_info.role_name` value is missing. ]]" target="_blank">
+    <a title="Ansible Galaxy quality score (out of 5)" href="https://galaxy.ansible.com/professormanhattan/androidstudio" target="_blank">
       <img alt="Ansible Galaxy quality score" src="https://img.shields.io/ansible/quality/ansible_galaxy_project_id?logo=ansible&style=flat" />
     </a>
-    <a title="Ansible Galaxy download count" href="https://galaxy.ansible.com/professormanhattan/[[ The `meta/main.yml` file needs to be setup. The `galaxy_info.role_name` value is missing. ]]" target="_blank">
+    <a title="Ansible Galaxy download count" href="https://galaxy.ansible.com/professormanhattan/androidstudio" target="_blank">
       <img alt="Ansible Galaxy download count" src="https://img.shields.io/ansible/role/d/53381?logo=ansible&style=flat">
     </a>
     <a title="Documentation" href="https://megabyte.space/docs/ansible" target="_blank">
@@ -77,9 +77,9 @@
   </p>
 </div>
 
-> </br><h3 align="center">**subheader_description**</h3></br>
+> </br><h3 align="center">**An Ansible role that installs Android Studio and sets up Android SDKs on nearly any OS**</h3></br>
 
-<!--TERMINALIZE![terminalizer_title](https://gitlab.com/megabyte-labs/ansible-roles/[[ The `meta/main.yml` file needs to be setup. The `galaxy_info.role_name` value is missing. ]]* **github**: /raw/master/.demo.gif
+<!--TERMINALIZE![terminalizer_title](https://gitlab.com/megabyte-labs/ansible-roles/androidstudio* **github**: /raw/master/.demo.gif
 * **gitlab**: /-/raw/master/.demo.gif)TERMINALIZE-->
 
 <a href="#table-of-contents" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
@@ -108,7 +108,7 @@
 
 ## Overview
 
-alternative_description [Android Studio](https://developer.android.com/studio) is the official integrated development environment for Google's Android operating system, built on JetBrains' IntelliJ IDEA software and designed specifically for Android development.
+This repository is the home of an [Ansible](https://www.ansible.com/) role that installs Android Studio and sets up Android SDKs on nearly any OS [Android Studio](https://developer.android.com/studio) is the official integrated development environment for Google's Android operating system, built on JetBrains' IntelliJ IDEA software and designed specifically for Android development.
 
 <a href="#features" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
@@ -132,13 +132,13 @@ Looking to install Android Studio without having to deal with [Ansible](https://
 **Linux/macOS:**
 
 ```shell
-curl -sS https://install.doctor/[[ The $(meta/main.yml) file needs to be setup. The $(galaxy_info.role_name) value is missing. ]] | bash
+curl -sS https://install.doctor/androidstudio | bash
 ```
 
 **Windows:**
 
 ```powershell
-Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://install.doctor/[[ The `meta/main.yml` file needs to be setup. The `galaxy_info.role_name` value is missing. ]]?os=win'))
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://install.doctor/androidstudio?os=win'))
 ```
 
 **Important Note:** _Before running the commands above you should probably directly access the URL to make sure the code is legit. We already know it is safe but, before running any script on your computer, you should inspect it._
@@ -222,7 +222,7 @@ With the dependencies installed, all you have to do is add the role to your main
 ```lang-yml
 - hosts: all
   roles:
-    - professormanhattan.[[ The `meta/main.yml` file needs to be setup. The `galaxy_info.role_name` value is missing. ]]
+    - professormanhattan.androidstudio
 ```
 
 If you are incorporating this role into a pre-existing playbook, then it might be prudent to copy the requirements in `requirements.txt` and `requirements.yml` to their corresponding files in the root of your playbook so you only have to worry about installing one set of requirements during future use.
