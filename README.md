@@ -86,23 +86,25 @@
 
 ## Table of Contents
 
-- [Overview](#overview)
-- [Features](#features)
-  - [Ensures Android Studio is installed:](#ensures-android-studio-is-installed)
-  - [Ensures configured Android SDKs are present:](#ensures-configured-android-sdks-are-present)
-- [Quick Start - Easy Install Method](#quick-start---easy-install-method)
-- [Variables](#variables)
-  - [android_sdks](#android_sdks)
-  - [sdk_location](#sdk_location)
-- [Supported Operating Systems](#supported-operating-systems)
-- [Dependencies](#dependencies)
-  - [Galaxy Roles](#galaxy-roles)
-  - [Galaxy Collections\n\nThis role is dependent on multiple Ansible Galaxy collections. The collections along with a links to their source are listed below.\n\n\* <b<a href="https://galaxy.ansible.com/chocolatey/chocolatey" title="chocolatey.chocolatey collection on Ansible Galaxy" target="blank">chocolatey.chocolatey</a></b>](#galaxy-collectionsnnthis-role-is-dependent-on-multiple-ansible-galaxy-collections-the-collections-along-with-a-links-to-their-source-are-listed-belownn-ba-hrefhttpsgalaxyansiblecomchocolateychocolatey-titlechocolateychocolatey-collection-on-ansible-galaxy-targetblankchocolateychocolateyab)
-- [Example Playbook](#example-playbook)
-  - [Real World Example](#real-world-example)
-- [Contributing](#contributing)
-  - [TODO](#todo)
-- [License](#license)
+    * [Overview](#overview)
+    * [Features](#features)
+    	* [Ensures Android Studio is installed:](#ensures-android-studio-is-installed)
+    	* [Ensures configured Android SDKs are present:](#ensures-configured-android-sdks-are-present)
+    * [Quick Start - Easy Install Method](#quick-start---easy-install-method)
+    * [Variables](#variables)
+    		* [`android_sdks`](#android_sdks)
+
+- [}Example implementation of the android_sdks variable](#example-implementation-of-the-android_sdks-variable) \* [`sdk_location`](#sdk_location)
+- [}Example implementation of the sdk_location variable](#example-implementation-of-the-sdk_location-variable)
+  - [Supported Operating Systems](#supported-operating-systems)
+  - [Dependencies](#dependencies)
+    - [Galaxy Roles](#galaxy-roles)
+    - [Galaxy Collections\n\nThis role is dependent on multiple Ansible Galaxy collections. The collections along with a links to their source are listed below.\n\n\* <b<a href="https://galaxy.ansible.com/chocolatey/chocolatey" title="chocolatey.chocolatey collection on Ansible Galaxy" target="blank">chocolatey.chocolatey</a></b>](#galaxy-collectionsnnthis-role-is-dependent-on-multiple-ansible-galaxy-collections-the-collections-along-with-a-links-to-their-source-are-listed-belownn-ba-hrefhttpsgalaxyansiblecomchocolateychocolatey-titlechocolateychocolatey-collection-on-ansible-galaxy-targetblankchocolateychocolateyab)
+  - [Example Playbook](#example-playbook)
+    - [Real World Example](#real-world-example)
+  - [Contributing](#contributing)
+    - [TODO](#todo)
+  - [License](#license)
 
 <a href="#overview" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
@@ -151,29 +153,32 @@ And there you go. Installing Android Studio can be as easy as that. You can also
 
 This role contains variables that you can customize. The variables you can customize are located in `defaults/main.yml`. By default, the variables use sensible defaults but you may want to customize the role depending on your use case. The variables, along with descriptions, are listed below:
 
-| Name                          | Default Value | Description                                                                                                                                                                                                                      |
-| ----------------------------- | ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [android_sdks](#android_sdks) | []            | The list of SDKs and tools to install after Android Studio is installed. If no value is provided, the latest version of the SDKs and tools will be installed. Use the correct format, which can be found by executing `sdkmanage |
-| [sdk_location](#sdk_location) | ""            | The folder to set as the SDK location                                                                                                                                                                                            |
+role_variables
 
-### android_sdks
+#### `android_sdks`
 
-```
+```yaml
+
+<a href="#example-implementation-of-the-android_sdks-variable" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
+
+# }Example implementation of the android_sdks variable
 android_sdks:
-   - platform-tools
-   - emulator
-   - build-tools;30.0.0
-   - platforms;android-30
-   - sources;android-30
-   - patcher;v4
-`
+  - platform-tools
+  - emulator
+  - build-tools;30.0.0
+  - platforms;android-30
+  - sources;android-30
+  - patcher;v4
 ```
 
-### sdk_location
+#### `sdk_location`
 
-```
+```yaml
+
+<a href="#example-implementation-of-the-sdk_location-variable" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
+
+# }Example implementation of the sdk_location variable
 sdk_location: ~/Android/Sdk
-`
 ```
 
 <a href="#supported-operating-systems" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
@@ -182,7 +187,12 @@ sdk_location: ~/Android/Sdk
 
 The chart below shows the operating systems that we have tested this role on. It is automatically generated using the Ansible Molecule tests located in the `molecule/` folder. There is CI logic in place to automatically handle the testing of Windows, macOS, Ubuntu, Fedora, CentOS, Debian, and Archlinux. If your operating system is not listed but is a variant of one of the systems we test (i.e. a Debian-flavored system or a RedHat-flavored system) then it is possible that the role will still work.
 
-compatibility_matrix
+| OS Family | OS Version | Status | Idempotent | Tested On        |
+| --------- | ---------- | ------ | ---------- | ---------------- |
+| Debian    | 10         | ✅     | ❌         | August 5th, 2021 |
+| Ubuntu    | 18.04      | ✅     | ❌         | August 5th, 2021 |
+| Ubuntu    | 20.04      | ✅     | ❌         | August 5th, 2021 |
+| Ubuntu    | 21.04      | ✅     | ❌         | August 5th, 2021 |
 
 **_What does idempotent mean?_** Idempotent means that if you run this role twice in row then there will be no changes to the system the second time around.
 
@@ -207,7 +217,11 @@ Although most of our roles do not have dependencies, there are some cases where 
 
 The `requirements.yml` file contains a full list of the Ansible Galaxy dependencies required by this role (i.e. `meta/main.yml` role dependencies, helper roles, collections, etc.). For your convenience, a list of the role dependencies along with quick descriptions is below:
 
-role_dependencies
+| Dependency                                                                                                                                                                    | Description                                                                | Supported OSes | Status |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------- | ------ |
+| <b><a href="https://galaxy.ansible.com/professormanhattan/snapd" title="professormanhattan.snapd on Ansible Galaxy" target="_blank">professormanhattan.snapd</a></b>          | Ensures Snap is installed and properly configured on Linux                 | ❔             | ❔     |
+| <b><a href="https://galaxy.ansible.com/professormanhattan/homebrew" title="professormanhattan.homebrew on Ansible Galaxy" target="_blank">professormanhattan.homebrew</a></b> | Installs Homebrew (a package management system) on macOS and Linux systems | ❔             | ❔     |
+| <b><a href="https://galaxy.ansible.com/professormanhattan/java" title="professormanhattan.java on Ansible Galaxy" target="_blank">professormanhattan.java</a></b>             | Installs Java on almost any platform                                       | ❔             | ❔     |
 
 ### Galaxy Collections\n\nThis role is dependent on multiple Ansible Galaxy collections. The collections along with a links to their source are listed below.\n\n\* <b<a href="https://galaxy.ansible.com/chocolatey/chocolatey" title="chocolatey.chocolatey collection on Ansible Galaxy" target="blank">chocolatey.chocolatey</a></b>
 
