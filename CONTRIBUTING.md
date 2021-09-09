@@ -607,7 +607,7 @@ You might have noticed that there are no CI tests in the chart above for macOS a
 
 - Linux platforms are tested using Molecule and Docker on GitLab CI in parallel. ([Link to GitLab CI configuration](https://gitlab.com/megabyte-labs/ci/-/blob/master/test/molecule.gitlab-ci.yml))
 - Windows is tested using GitLab CI without Molecule. ([Link to GitLab CI configuration](https://gitlab.com/megabyte-labs/ci/-/blob/master/test/windows-ansible-test.gitlab-ci.yml))
-- macOS is tested using GitHub Actions after the code is automatically synchronized between GitLab and GitHub. ([Link to the macOS GitHub Action configuration]([[package.json .blueprint.repo - See CONTRIBUTING.md]]/-/blob/master/.github/workflows/macOS.yml))
+- macOS is tested using GitHub Actions after the code is automatically synchronized between GitLab and GitHub. ([Link to the macOS GitHub Action configuration](https://gitlab.com/ProfessorManhattan/ansible-androidstudio/-/blob/master/.github/workflows/macOS.yml))
 
 <a href="#linting" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
