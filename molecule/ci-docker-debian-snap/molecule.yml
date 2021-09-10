@@ -7,7 +7,7 @@ dependency:
 driver:
   name: docker
 platforms:
-  - name: Debian-10
+  - name: Debian-10-Buster
     image: megabytelabs/ansible-molecule-debian-10:latest
     command: /sbin/init
     volumes:

@@ -7,7 +7,7 @@ dependency:
 driver:
   name: docker
 platforms:
-  - name: Ubuntu-18.04
+  - name: Ubuntu-18.04-Bionic-Beaver
     image: megabytelabs/ansible-molecule-ubuntu-18.04:latest
     command: /sbin/init
     tmpfs:
@@ -17,7 +17,7 @@ platforms:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     privileged: true
     pre_build_image: true
-  - name: Ubuntu-20.04
+  - name: Ubuntu-20.04-Focal-Fossa
     image: megabytelabs/ansible-molecule-ubuntu-20.04:latest
     command: /sbin/init
     tmpfs:
@@ -27,7 +27,7 @@ platforms:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     privileged: true
     pre_build_image: true
-  - name: Ubuntu-21.04
+  - name: Ubuntu-21.04-Hirsute-Hippo
     image: megabytelabs/ansible-molecule-ubuntu-21.04:latest
     command: /sbin/init
     tmpfs:

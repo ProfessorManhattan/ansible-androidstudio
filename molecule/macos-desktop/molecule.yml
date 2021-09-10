@@ -13,7 +13,7 @@ lint: |
   ansible-lint
   flake8
 platforms:
-  - name: macOS-Big-Sur-11
+  - name: macOS-11-Big-Sur
     box: Megabyte/macOS-Desktop
     cpus: 2
     memory: 4096

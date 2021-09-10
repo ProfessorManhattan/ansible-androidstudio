@@ -13,7 +13,7 @@ lint: |
   ansible-lint
   flake8
 platforms:
-  - name: Ubuntu-21.04
+  - name: Ubuntu-21.04-Hirsute-Hippo
     box: Megabyte/Ubuntu-Desktop
     cpus: 2
     memory: 4096

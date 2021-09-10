@@ -13,7 +13,7 @@ lint: |
   ansible-lint
   flake8
 platforms:
-  - name: Debian-10
+  - name: Debian-10-Buster
     box: Megabyte/Debian-Desktop
     cpus: 2
     memory: 4096

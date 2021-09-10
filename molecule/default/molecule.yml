@@ -37,13 +37,13 @@ platforms:
     memory: 512
     provider_raw_config_args:
       - "customize [ 'modifyvm', :id, '--natdnshostresolver1', 'on' ]"
-  - name: Debian-9
+  - name: Debian-9-Stretch
     box: bento/debian-9
     cpus: 1
     memory: 512
     provider_raw_config_args:
       - "customize [ 'modifyvm', :id, '--natdnshostresolver1', 'on' ]"
-  - name: Debian-10
+  - name: Debian-10-Buster
     box: bento/debian-10
     cpus: 1
     memory: 512
@@ -61,19 +61,19 @@ platforms:
     memory: 512
     provider_raw_config_args:
       - "customize [ 'modifyvm', :id, '--natdnshostresolver1', 'on' ]"
-  - name: Ubuntu-18.04
+  - name: Ubuntu-18.04-Bionic-Beaver
     box: bento/ubuntu-18.04
     cpus: 1
     memory: 512
     provider_raw_config_args:
       - "customize [ 'modifyvm', :id, '--natdnshostresolver1', 'on' ]"
-  - name: Ubuntu-20.04
+  - name: Ubuntu-20.04-Focal-Fossa
     box: bento/ubuntu-20.04
     cpus: 1
     memory: 512
     provider_raw_config_args:
       - "customize [ 'modifyvm', :id, '--natdnshostresolver1', 'on' ]"
-  - name: Ubuntu-21.04
+  - name: Ubuntu-21.04-Hirsute-Hippo
     box: bento/ubuntu-21.04
     memory: 512
     cpus: 1
