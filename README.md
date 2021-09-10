@@ -90,7 +90,7 @@
 - [Features](#features)
   - [Ensures Android Studio is installed:](#ensures-android-studio-is-installed)
   - [Ensures configured Android SDKs are present:](#ensures-configured-android-sdks-are-present)
-- [Quick Start - Easy Install Method](#quick-start---easy-install-method)
+- [Quick Start](#quick-start)
 - [Variables](#variables)
   - [android_sdks](#android_sdks)
   - [sdk_location](#sdk_location)
@@ -123,9 +123,9 @@ This repository is the home of an [Ansible](https://www.ansible.com/) role that 
 
 - Ensures Android SDK tools like `adb` are present in PATH
 
-<a href="#quick-start---easy-install-method" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
+<a href="#quick-start" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
-## Quick Start - Easy Install Method
+## Quick Start
 
 Looking to install Android Studio without having to deal with [Ansible](https://www.ansible.com/)? Simply run the following command that correlates to your operating system:
 
