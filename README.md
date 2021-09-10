@@ -143,7 +143,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 
 **Important Note:** _Before running the commands above you should probably directly access the URL to make sure the code is legit. We already know it is safe but, before running any script on your computer, you should inspect it._
 
-And there you go. Installing Android Studio can be as easy as that. You can also check out the [Install Doctor](https://install.doctor) homepage to learn how to install any Ansible role with a one-liner. If, however, you would like to incorporate this role into an Ansible playbook (and customize settings) then please continue reading below.
+You can also check out **[Install Doctor](https://install.doctor)**. It is an app we created that can install any Ansible role with a one-liner. It has some other nifty features too. However, if you would like to incorporate this role into an Ansible playbook (and customize settings) then please continue reading below.
 
 <a href="#variables" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
