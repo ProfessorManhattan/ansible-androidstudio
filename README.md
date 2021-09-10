@@ -97,7 +97,7 @@
 - [Supported Operating Systems](#supported-operating-systems)
 - [Dependencies](#dependencies)
   - [Galaxy Roles](#galaxy-roles)
-  - [Galaxy Collections\n\nThis role is dependent on multiple Ansible Galaxy collections. The collections along with a links to their source are listed below.\n\n\* <b<a href="https://galaxy.ansible.com/chocolatey/chocolatey" title="chocolatey.chocolatey collection on Ansible Galaxy" target="blank">chocolatey.chocolatey</a></b>](#galaxy-collectionsnnthis-role-is-dependent-on-multiple-ansible-galaxy-collections-the-collections-along-with-a-links-to-their-source-are-listed-belownn-ba-hrefhttpsgalaxyansiblecomchocolateychocolatey-titlechocolateychocolatey-collection-on-ansible-galaxy-targetblankchocolateychocolateyab)
+  - [Galaxy Collections](#galaxy-collections)
 - [Example Playbook](#example-playbook)
   - [Real World Example](#real-world-example)
 - [Contributing](#contributing)
@@ -209,9 +209,12 @@ The `requirements.yml` file contains a full list of the Ansible Galaxy dependenc
 
 role_dependencies
 
-### Galaxy Collections\n\nThis role is dependent on multiple Ansible Galaxy collections. The collections along with a links to their source are listed below.\n\n\* <b<a href="https://galaxy.ansible.com/chocolatey/chocolatey" title="chocolatey.chocolatey collection on Ansible Galaxy" target="blank">chocolatey.chocolatey</a></b>
+### Galaxy Collections
 
-- <b<a href="https://galaxy.ansible.com/community/general" title="community.general collection on Ansible Galaxy" target="blank">community.general</a></b>
+This role is dependent on multiple Ansible Galaxy collections. The collections along with a links to their source are listed below.
+
+- <b><a href="https://galaxy.ansible.com/chocolatey/chocolatey" title="chocolatey.chocolatey collection on Ansible Galaxy" target="_blank">chocolatey.chocolatey</a></b>
+- <b><a href="https://galaxy.ansible.com/community/general" title="community.general collection on Ansible Galaxy" target="_blank">community.general</a></b>
 
 <a href="#example-playbook" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
@@ -256,8 +259,6 @@ I create open source projects out of love. Although I have a job, shelter, and a
 </details>
 
 ### TODO
-
-$TODO_DESCRIPTION
 
 - **Documentation:** Add documentation for the `user_configs` variable in `defaults/main.yml`
 
