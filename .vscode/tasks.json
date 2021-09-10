@@ -7,7 +7,7 @@
       "command": "bash .common/scripts/init.sh && task ansible:playbook:find-missing"
     },
     {
-      "label": "(ansible:populate:dependencies): Attempt to automatically populate and",
+      "label": "(ansible:populate:dependencies): Attempt to automatically populate `meta/main.yml` and `requirements.yml`",
       "type": "shell",
       "command": "bash .common/scripts/init.sh && task ansible:populate:dependencies"
     },
@@ -57,7 +57,7 @@
       "command": "bash .common/scripts/init.sh && task common:commit"
     },
     {
-      "label": "(common:man-page): Build page from the README.md file",
+      "label": "(common:man-page): Build `man` page from the README.md file",
       "type": "shell",
       "command": "bash .common/scripts/init.sh && task common:man-page"
     },
@@ -87,7 +87,7 @@
       "command": "bash .common/scripts/init.sh && task common:shell"
     },
     {
-      "label": "(update:modules): Ensure all submodules in the folder are updated",
+      "label": "(update:modules): Ensure all submodules in the `.modules/` folder are updated",
       "type": "shell",
       "command": "bash .common/scripts/init.sh && task update:modules"
     },
@@ -132,7 +132,7 @@
       "command": "bash .common/scripts/init.sh && task fix:shellcheck"
     },
     {
-      "label": "(git:remotes): Configure the git remote to point to GitLab and the git remote to point to GitLab and GitHub",
+      "label": "(git:remotes): Configure the git remote `origin` to point to GitLab and the git remote `all` to point to GitLab and GitHub",
       "type": "shell",
       "command": "bash .common/scripts/init.sh && task git:remotes"
     },
@@ -177,7 +177,7 @@
       "command": "bash .common/scripts/init.sh && task lint:markdown:links"
     },
     {
-      "label": "(lint:packer): Validate the Packer templates ending with",
+      "label": "(lint:packer): Validate the Packer templates ending with `template.json`",
       "type": "shell",
       "command": "bash .common/scripts/init.sh && task lint:packer"
     },
