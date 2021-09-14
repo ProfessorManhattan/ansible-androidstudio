@@ -88,12 +88,11 @@
 
 - [Overview](#overview)
 - [Features](#features)
-  - [Ensures Android Studio is installed:](#ensures-android-studio-is-installed)
-  - [Ensures configured Android SDKs are present:](#ensures-configured-android-sdks-are-present)
 - [Quick Start](#quick-start)
-- [Variables](#variables)
-  - [android_sdks](#android_sdks)
-  - [sdk_location](#sdk_location)
+- [Variables](#variables) \* [`android_sdks`](#android_sdks)
+  - [Example implementation of the android_sdks variable](#example-implementation-of-the-android_sdks-variable)
+    - [`sdk_location`](#sdk_location)
+  - [Example implementation of the sdk_location variable](#example-implementation-of-the-sdk_location-variable)
 - [Supported Operating Systems](#supported-operating-systems)
 - [Dependencies](#dependencies)
   - [Galaxy Roles](#galaxy-roles)
@@ -101,7 +100,6 @@
 - [Example Playbook](#example-playbook)
   - [Real World Example](#real-world-example)
 - [Contributing](#contributing)
-  - [TODO](#todo)
 - [License](#license)
 
 <a href="#overview" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
@@ -114,12 +112,12 @@ This repository is the home of an [Ansible](https://www.ansible.com/) role that 
 
 ## Features
 
-### Ensures Android Studio is installed:
+**Ensures Android Studio is installed:**
 
 - Installs Android Studio on Archlinux, CentOS, Debian, Fedora, macOS, Ubuntu, and Windows
 - Installs a configurable list of Android SDKs and Tools
 
-### Ensures configured Android SDKs are present:
+**Ensures configured Android SDKs are present:**
 
 - Ensures Android SDK tools like `adb` are present in PATH
 
@@ -149,24 +147,24 @@ You can also check out **[Install Doctor](https://install.doctor)**. It is an ap
 
 ## Variables
 
-### android_sdks
+#### `android_sdks`
 
-```
+```yaml
+### Example implementation of the android_sdks variable
 android_sdks:
-   - platform-tools
-   - emulator
-   - build-tools;30.0.0
-   - platforms;android-30
-   - sources;android-30
-   - patcher;v4
-`
+  - platform-tools
+  - emulator
+  - build-tools;30.0.0
+  - platforms;android-30
+  - sources;android-30
+  - patcher;v4
 ```
 
-### sdk_location
+#### `sdk_location`
 
-```
+```yaml
+### Example implementation of the sdk_location variable
 sdk_location: ~/Android/Sdk
-`
 ```
 
 <a href="#supported-operating-systems" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
@@ -251,9 +249,9 @@ I create open source projects out of love. Although I have a job, shelter, and a
 
 </details>
 
-### TODO
+**TODO**
 
-- **Documentation:** Add documentation for the `user_configs` variable in `defaults/main.yml`
+- **[Documentation](https://gitlab.com/ProfessorManhattan/ansible-androidstudio/-/blob/master/defaults/main.yml#L19):** Add documentation for the `user_configs` variable in `defaults/main.yml`
 
 <a href="#license" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
