@@ -17,7 +17,4 @@ jobs:
       python:
         - 3.8
       script:
-        - bash tests/test.sh
-
-notifications:
-  webhooks: https://galaxy.ansible.com/api/v1/notifications/
+        - bash tests/ubuntu/test.sh
