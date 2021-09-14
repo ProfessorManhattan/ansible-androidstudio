@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: all
+  vars:
+    ansible_user: ansible
+  roles:
+    - role: '{{galaxy_info.namespace}}.{{galaxy_info.role_name}}'

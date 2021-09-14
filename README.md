@@ -6,8 +6,8 @@
   </center>
 </div>
 <div align="center">
-  <center><h1 align="center">Ansible Role: Android Studio - An IDE for Android Development<i></i></h1></center>
-  <center><h4 style="color: #18c3d1;">An Ansible role brought to you by <a href="https://megabyte.space" target="_blank">Megabyte Labs</a></h4><i></i></center>
+  <center><h1 align="center"><i></i>Android Studio - An IDE for Android Development<i></i></h1></center>
+  <center><h4 style="color: #18c3d1;"><i></i><a href="https://megabyte.space" target="_blank">Megabyte Labs</a></h4><i></i></center>
 </div>
 
 <div align="center">
@@ -42,10 +42,10 @@
       <img alt="Version: 1.1.1" src="https://img.shields.io/badge/version-1.1.1-blue.svg?cacheSeconds=2592000" />
     </a>
     <a title="Windows 11 build status on GitHub" href="{{ https://gitlab.com/ProfessorManhattan/ansible-androidstudio/actions/Windows.yml" target="_blank">
-      <img alt="Windows 11 build status" src="https://img.shields.io/github/workflow/status/ProfessorManhattan/ansible-androidstudio/Windows/master?color=cyan&label=Windows%20build&logo=windows&style=flat">
+      <img alt="Windows 11 build status" src="https://img.shields.io/github/workflow/status/ProfessorManhattan/repository.prefix.githubandroidstudio/Windows/master?color=cyan&label=Windows%20build&logo=windows&style=flat">
     </a>
     <a title="macOS build status on GitHub" href="https://gitlab.com/ProfessorManhattan/ansible-androidstudio/actions/macOS.yml" target="_blank">
-      <img alt="macOS build status" src="https://img.shields.io/github/workflow/status/ProfessorManhattan/ansible-androidstudio/macOS/master?label=macOS%20build&logo=apple&style=flat">
+      <img alt="macOS build status" src="https://img.shields.io/github/workflow/status/ProfessorManhattan/repository.prefix.githubandroidstudio/macOS/master?label=macOS%20build&logo=apple&style=flat">
     </a>
     <a title="Linux build status on GitLab" href="https://gitlab.com/megabyte-labs/ansible-roles/androidstudio/-/commits/master" target="_blank">
       <img alt="Linux build status" src="https://gitlab.com/megabyte-labs/ansible-roles/androidstudio/badges/master/pipeline.svg">
@@ -148,13 +148,6 @@ You can also check out **[Install Doctor](https://install.doctor)**. It is an ap
 <a href="#variables" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
 ## Variables
-
-This role contains variables that you can customize. The variables you can customize are located in `defaults/main.yml`. By default, the variables use sensible defaults but you may want to customize the role depending on your use case. The variables, along with descriptions, are listed below:
-
-| Name                          | Default Value | Description                                                                                                                                                                                                                      |
-| ----------------------------- | ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [android_sdks](#android_sdks) | []            | The list of SDKs and tools to install after Android Studio is installed. If no value is provided, the latest version of the SDKs and tools will be installed. Use the correct format, which can be found by executing `sdkmanage |
-| [sdk_location](#sdk_location) | ""            | The folder to set as the SDK location                                                                                                                                                                                            |
 
 ### android_sdks
 

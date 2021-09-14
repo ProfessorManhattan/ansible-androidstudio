@@ -1,17 +1,17 @@
 {
-  "name": "@installdoc/androidstudio",
-  "version": "1.1.1",
-  "description": "Installs Android Studio and sets up Android SDKs on nearly any OS",
-  "license": "MIT",
-  "author": "Brian Zalewski <brian@megabyte.space> (https://megabyte.space)",
-  "homepage": "https://megabyte.space",
+  "name": "@{{profile.npmjs_organization}}/{{repository.prefix.github}}{{slug}}",
+  "version": "0.0.1",
+  "description": "{{description}}",
+  "license": "{{license}}",
+  "author": "{{author.name}} <{{author.email}}> ({{link.home}})",
+  "homepage": "{{link.home}}",
   "repository": {
     "type": "git",
-    "url": "git+https://gitlab.com/ProfessorManhattan/ansible-androidstudio.git"
+    "url": "git+{{repository.github}}.git"
   },
   "bugs": {
-    "email": "help@megabyte.space",
-    "url": "https://gitlab.com/megabyte-labs/ansible-roles/androidstudio/-/issues"
+    "email": "{{email.help}}",
+    "url": "{{repository.gitlab}}{{repository.location.issues.gitlab}}"
   },
   "type": "module",
   "scripts": {
@@ -40,16 +40,9 @@
     "eslint-formatter-pretty": "^4.1.0",
     "eslint-plugin-jsonc": "^1.6.0",
     "eslint-plugin-yml": "0.10.1",
-    "inquirer": "^8.1.2",
-    "prettier-plugin-sh": "^0.7.1",
-    "remark-preset-lint-recommended": "^6.0.1",
-    "signale": "^1.4.0"
+    "prettier-plugin-sh": "^0.7.1"
   },
   "keywords": [
-    "[[ The &#x60;meta/main.yml&#x60; file needs to be setup. The &#x60;galaxy_info.role_name&#x60; value is missing. ]]",
-    "adb",
-    "androidsdk",
-    "androidstudio",
     "ansible",
     "archlinux",
     "centos",
@@ -62,36 +55,23 @@
     "macos",
     "megabytelabs",
     "molecule",
-    "platformtools",
     "professormanhattan",
     "role",
-    "snap",
     "ubuntu",
-    "windows"
+    "windows",
+    "{{galaxy_info.role_name}}"
   ],
   "engines": {
     "node": ">=10"
   },
-  "blueprint": {
-    "description": "Installs Android Studio and sets up Android SDKs on nearly any OS",
-    "gitlab_path": "megabyte-labs/ansible-roles/androidstudio",
-    "name": "Android Studio",
-    "overview": "[Android Studio](https://developer.android.com/studio) is the official integrated development environment for Google's Android operating system, built on JetBrains' IntelliJ IDEA software and designed specifically for Android development.",
-    "repository": {
-      "github": "https://gitlab.com/ProfessorManhattan/ansible-androidstudio",
-      "gitlab": "https://gitlab.com/megabyte-labs/ansible-roles/androidstudio"
-    },
-    "slug": "androidstudio",
-    "title": "Android Studio - An IDE for Android Development"
-  },
   "funding": [
     {
       "type": "opencollective",
-      "url": "https://opencollective.com/megabytelabs"
+      "url": "{{profile_link.opencollective}}/{{profile.opencollective}}"
     },
     {
       "type": "patreon",
-      "url": "https://www.patreon.com/ProfessorManhattan"
+      "url": "{{profile_link.patreon}}/{{profile.patreon}}"
     }
   ],
   "lint-staged": {
