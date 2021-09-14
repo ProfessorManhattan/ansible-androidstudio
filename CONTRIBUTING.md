@@ -1,12 +1,12 @@
 <!-- ⚠️ This README has been generated from the file(s) ".common/docs/blueprint-contributing.md" ⚠️-->
 
-<a href="#contributing" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
+<a href="#contributing" style="width:100%"><img style="width:100%" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
 # }Contributing
 
 First of all, thanks for visiting this page 😊 ❤️ ! We are totally ecstatic that you may be considering contributing to this project. You should read this guide if you are considering creating a pull request.
 
-<a href="#table-of-contents" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
+<a href="#table-of-contents" style="width:100%"><img style="width:100%" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
 ## Table of Contents
 
@@ -57,13 +57,13 @@ First of all, thanks for visiting this page 😊 ❤️ ! We are totally ecstati
       - [[301] Command should not change things if nothing needs doing](#301-command-should-not-change-things-if-nothing-needs-doing)
       - [[305] Use shell only when shell functionality is required](#305-use-shell-only-when-shell-functionality-is-required)
 
-<a href="#code-of-conduct" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
+<a href="#code-of-conduct" style="width:100%"><img style="width:100%" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
 ## Code of Conduct
 
 This project and everyone participating in it is governed by the [Code of Conduct](https://gitlab.com/ProfessorManhattan/ansible-androidstudio/blob/master/CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to [contact_email](mailto:help@megabyte.space).
 
-<a href="#philosophy" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
+<a href="#philosophy" style="width:100%"><img style="width:100%" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
 ## Philosophy
 
@@ -77,7 +77,7 @@ When you are working with one of our Ansible projects, try asking yourself, "**H
 
 Ideally, you should use the software installed by the [main playbook](repository.playbooks). This is really the only way of testing whether or not the software was installed properly and has all the common settings automated. The software installed by the main playbook is all widely-acclaimed, cross-platform software that many people find useful.
 
-<a href="#supported-operating-systems" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
+<a href="#supported-operating-systems" style="width:100%"><img style="width:100%" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
 ## Supported Operating Systems
 
@@ -124,7 +124,7 @@ If you have a role that only installs software made for Windows 10 then ensure t
 
 We currently support installing applications with both [Homebrew](https://brew.sh/) casks and [mas](https://github.com/mas-cli/mas). Since mas does not allow automated logins to the App Store (and requires that the application was already installed by the account signed into the App Store GUI), we prefer the use of homebrew casks for installing applications.
 
-<a href="#setting-up-development-environment" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
+<a href="#setting-up-development-environment" style="width:100%"><img style="width:100%" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
 ## Setting Up Development Environment
 
@@ -172,13 +172,13 @@ task_list_output
 
 Using the information provided above by running `task --list`, we can see that the `task lint:all` command will lint the project with all the available linters. You can see exactly what each command is doing by checking out the `Taskfile.yml` file (and following the imports). You can also get a detailed summary of any task reported by `task --list` by running `task group:task-name --summary`.
 
-<a href="#pull-requests" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
+<a href="#pull-requests" style="width:100%"><img style="width:100%" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
 ## Pull Requests
 
 All pull requests should be associated with issues. Although not strictly required, the pull requests should be made to [the GitLab repository issues board](https://gitlab.com/megabyte-labs/ansible-roles/androidstudio/-/issues) instead of the [GitHub mirror repository](https://gitlab.com/ProfessorManhattan/ansible-androidstudio/issues). This is because we use GitLab as our primary repository and mirror the changes to GitHub for the community.
 
-<a href="#code-format" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
+<a href="#code-format" style="width:100%"><img style="width:100%" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
 ## Code Format
 
@@ -229,7 +229,7 @@ If you have a role that only installs software made for Windows 10 then ensure t
   when: ansible_os_family == 'Windows'
 ```
 
-<a href="#code-style" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
+<a href="#code-style" style="width:100%"><img style="width:100%" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
 ## Code Style
 
@@ -337,7 +337,7 @@ DRY stands for "Don't Repeat Yourself." Whenever there is code that is duplicate
   include_tasks: install-Linux.yml
 ```
 
-<a href="#commenting" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
+<a href="#commenting" style="width:100%"><img style="width:100%" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
 ## Commenting
 
@@ -480,7 +480,7 @@ Notice how the title for _improvement_ is not capitalized. It should be capitali
   - Test
 - Ensure you capitalize the category
 
-<a href="#updating-meta-files-and-documentation" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
+<a href="#updating-meta-files-and-documentation" style="width:100%"><img style="width:100%" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
 ## Updating Meta Files and Documentation
 
@@ -525,7 +525,7 @@ We include a `logo.png` file in all of our Ansible projects. This image is autom
 
 Alternatively, you can use our pre-commit hook to automatically take care of steps 2-5 when the `logo.png` file is staged with git.
 
-<a href="#testing" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
+<a href="#testing" style="width:100%"><img style="width:100%" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
 ## Testing
 
@@ -609,7 +609,7 @@ You might have noticed that there are no CI tests in the chart above for macOS a
 - Windows is tested using GitLab CI without Molecule. ([Link to GitLab CI configuration](https://gitlab.com/megabyte-labs/ci/-/blob/master/test/windows-ansible-test.gitlab-ci.yml))
 - macOS is tested using GitHub Actions after the code is automatically synchronized between GitLab and GitHub. ([Link to the macOS GitHub Action configuration](https://gitlab.com/ProfessorManhattan/ansible-androidstudio/-/blob/master/.github/workflows/macOS.yml))
 
-<a href="#linting" style="width:100%"><img style="width:100%" alt="-----------------------------------------------------" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
+<a href="#linting" style="width:100%"><img style="width:100%" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
 ## Linting
 
