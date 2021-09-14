@@ -349,7 +349,7 @@ module.exports = {
               "min-cases": 4
             }
           ],
-          "readonly-array": true,
+          'readonly-array': true,
           "readonly-keyword": true,
           "return-undefined": true,
           "static-this": true,
