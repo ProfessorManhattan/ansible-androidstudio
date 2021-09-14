@@ -1,0 +1,8 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# @file .husky/commit-msg
+# @brief A git hook script for the `commit-msg` hook
+
+echo "Validating commit message with 'commitlint'"
+task lint:commit -- "$1"
