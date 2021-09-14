@@ -350,7 +350,7 @@ module.exports = {
             }
           ],
           'readonly-array': true,
-          "readonly-keyword": true,
+          'readonly-keyword': true,
           "return-undefined": true,
           "static-this": true,
           "strict-comparisons": true,
