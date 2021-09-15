@@ -155,7 +155,7 @@
       "flake8"
     ],
     "**/*vault.yml": [
-      "bash .common/scripts/ansible/vault.sh"
+      "task ansible:vault:lint:file --"
     ]
   },
   "prettier": "@megabytelabs/prettier-config",
