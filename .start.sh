@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # @file .start.sh
 # @brief Ensures the project is up-to-date with the latest upstream changes

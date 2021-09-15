@@ -89,7 +89,9 @@
 - [Overview](#overview)
 - [Features](#features)
 - [Quick Start](#quick-start)
-- [Variables](#variables) \* [`android_sdks`](#android_sdks)
+- [Variables](#variables)
+  - [Variable Examples](#variable-examples)
+    - [`android_sdks`](#android_sdks)
   - [Example implementation of the android_sdks variable](#example-implementation-of-the-android_sdks-variable)
     - [`sdk_location`](#sdk_location)
   - [Example implementation of the sdk_location variable](#example-implementation-of-the-sdk_location-variable)
@@ -153,6 +155,8 @@ This role contains variables that you can customize. The variables you can custo
 | ------------------------------- | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [`android_sdks`](#android_sdks) | `[]`          | The list of SDKs and tools to install after Android Studio is installed. If no value is provided, the latest version of the SDKs and tools will be installed. Use the correct format, which can be found by executing `sdkmanage --list` after the CLI tools are installed; some package need a version to be specified and some do not. |
 | [`sdk_location`](#sdk_location) | `""`          | The folder to set as the SDK location                                                                                                                                                                                                                                                                                                    |
+
+### Variable Examples
 
 #### `android_sdks`
 
