@@ -46,7 +46,6 @@
     "prettier-plugin-toml": "^0.3.1"
   },
   "keywords": [
-    "[[ The &#x60;meta/main.yml&#x60; file needs to be setup. The &#x60;galaxy_info.role_name&#x60; value is missing. ]]",
     "adb",
     "androidsdk",
     "androidstudio",
