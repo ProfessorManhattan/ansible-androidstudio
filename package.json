@@ -41,12 +41,9 @@
     "eslint-formatter-pretty": "^4.1.0",
     "eslint-plugin-jsonc": "^1.6.0",
     "eslint-plugin-yml": "0.10.1",
-    "inquirer": "^8.1.2",
     "prettier": "^2.4.0",
     "prettier-plugin-sh": "^0.7.1",
-    "prettier-plugin-toml": "^0.3.1",
-    "remark-preset-lint-recommended": "^6.0.1",
-    "signale": "^1.4.0"
+    "prettier-plugin-toml": "^0.3.1"
   },
   "keywords": [
     "[[ The &#x60;meta/main.yml&#x60; file needs to be setup. The &#x60;galaxy_info.role_name&#x60; value is missing. ]]",
