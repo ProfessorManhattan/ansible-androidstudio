@@ -15,14 +15,29 @@ set -eo pipefail
 export REPO_TYPE="ansible"
 export REPO_SUBTYPE="role"
 
+# @description Set the `BASH_PROFILE` variable to the location of the bash initialization script and
+# set the `SYSTEM` variable equal to a value indicating the type of system we are on.
+if [[ "$OSTYPE" == 'darwin'* ]]; then
+  BASH_PROFILE="$HOME/.bash_profile"
+  SYSTEM="Darwin"
+elif [[ "$OSTYPE" == 'linux-gnu'* ]]; then
+  BASH_PROFILE="$HOME/.bashrc"
+  SYSTEM="Linux"
+elif [[ "$OSTYPE" == 'cygwin' ]]; then
+  SYSTEM="Win64"
+elif [[ "$OSTYPE" == 'msys' ]]; then
+  SYSTEM="Win64"
+elif [[ "$OSTYPE" == 'win32' ]]; then
+  SYSTEM="Win32"
+elif [[ "$OSTYPE" == 'freebsd'* ]]; then
+  SYSTEM="FreeBSD"
+else
+  SYSTEM="Unknown"
+fi
+
 # @description Ensures ~/.local/bin is in the PATH variable
 function ensureLocalPath() {
   if [ "$SYSTEM" == 'Darwin' ] || [ "$SYSTEM" == 'Linux' ]; then
-    if [ "$SYSTEM" == 'Darwin' ]; then
-      BASH_PROFILE="$HOME/.bash_profile"
-    else
-      BASH_PROFILE="$HOME/.bashrc"
-    fi
     export PATH="$HOME/.local/bin:$PATH"
     # shellcheck disable=SC2016
     PATH_STRING='\nexport PATH=$HOME/.local/bin:$PATH'
