@@ -4,5 +4,5 @@
 # @file .husky/commit-msg
 # @brief A git hook script for the `commit-msg` hook
 
-echo "Validating commit message with 'commitlint'"
+echo 'Validating commit message with `commitlint`'
 task lint:commit -- "$1"

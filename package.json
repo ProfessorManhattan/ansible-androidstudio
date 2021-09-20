@@ -39,7 +39,10 @@
     "eslint": "^7.32.0",
     "eslint-config-prettier": "8.3.0",
     "eslint-formatter-pretty": "^4.1.0",
+    "eslint-plugin-editorconfig": "^3.0.2",
+    "eslint-plugin-eslint-comments": "^3.2.0",
     "eslint-plugin-jsonc": "^1.6.0",
+    "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-yml": "0.10.1",
     "prettier": "^2.4.0",
     "prettier-plugin-sh": "^0.7.1",
@@ -109,50 +112,39 @@
       "check-symlinks",
       "destroyed-symlinks"
     ],
-    "**/*.(css|html|json|less|mjml|php|scss|sh|ts)": [
+    "**/*.(css|html|less|md|mjml|php|scss|sh|xml)": [
       "prettier --write"
+    ],
+    "**/!(package).json": [
+      "task fix:json --"
+    ],
+    "package.json": [
+      "task fix:json --",
+      "prettier-package-json --write"
+    ],
+    "**/*.(js|jsx|ts)": [
+      "task fix:js --fix"
+    ],
+    "**/*.(sh|sh.j2)": [
+      "prettier --write",
+      "shellcheck"
+    ],
+    "**/*.toml": [
+      "check-toml"
+    ],
+    "**/*.xml": [
+      "check-xml"
+    ],
+    "**/*.yml": [
+      "task fix:yaml --",
+      "yamllint -s"
     ],
     "**/*.(jpg|png)": [
       "task image:compress --"
     ],
-    "**/*.js": [
-      "npx standard --fix",
-      "prettier --write"
-    ],
-    "**/!(package).json": [
-      "check-json",
-      "task fix:json --",
-      "prettier --write"
-    ],
-    "**/*.md": [
-      "prettier --write"
-    ],
-    "**/*.(sh|sh.j2)": [
-      "shellcheck",
-      "prettier --write"
-    ],
-    "**/*.toml": [
-      "check-toml",
-      "prettier --write"
-    ],
-    "**/*.xml": [
-      "check-xml",
-      "prettier --write"
-    ],
-    "**/*.yml": [
-      "check-yaml",
-      "yamllint -s",
-      "task fix:yaml --",
-      "prettier --write"
-    ],
     "logo.png": [
       "task image:resize -- 200 200",
       "task image:compress --"
-    ],
-    "package.json": [
-      "check-json",
-      "task fix:json --",
-      "prettier-package-json --write"
     ],
     "requirements.txt": [
       "requirements-txt-fixer"

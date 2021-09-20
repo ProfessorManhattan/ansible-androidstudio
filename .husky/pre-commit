@@ -13,10 +13,10 @@ for FILE in "$STAGED_FILES"; do
 done
 wait
 
-echo "Linting and fixing the staged files with 'lint-staged'"
+echo 'Linting and fixing the staged files with `lint-staged`'
 task lint:lint-staged
 
-echo "Reporting possible spelling errors in the staged files with 'cspell'"
+echo 'Reporting possible spelling errors in the staged files with `cspell`'
 task lint:spelling
 
-echo "pre-commit validation complete"
+echo 'Pre-commit validation complete'

@@ -8,6 +8,6 @@
 # command, the event type is 'merge'.
 
 if [ "$2" != 'merge' ]; then
-  echo "Opening a 'git commit' dialog"
+  echo 'Opening a `git commit` dialog'
   exec < /dev/tty && git cz --hook || true
 fi

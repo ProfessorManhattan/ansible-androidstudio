@@ -92,9 +92,7 @@
 - [Variables](#variables)
   - [Variable Examples](#variable-examples)
     - [`android_sdks`](#android_sdks)
-  - [Example implementation of the android_sdks variable](#example-implementation-of-the-android_sdks-variable)
     - [`sdk_location`](#sdk_location)
-  - [Example implementation of the sdk_location variable](#example-implementation-of-the-sdk_location-variable)
 - [Supported Operating Systems](#supported-operating-systems)
 - [Dependencies](#dependencies)
   - [Galaxy Roles](#galaxy-roles)
@@ -102,6 +100,7 @@
 - [Example Playbook](#example-playbook)
   - [Real World Example](#real-world-example)
 - [Contributing](#contributing)
+  - [TODO](#todo)
 - [License](#license)
 
 <a href="#overview" style="width:100%"><img style="width:100%" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
@@ -161,7 +160,7 @@ This role contains variables that you can customize. The variables you can custo
 #### `android_sdks`
 
 ```yaml
-### Example implementation of the android_sdks variable
+#💬 Example implementation of the android_sdks variable
 android_sdks:
   - platform-tools
   - emulator
@@ -174,7 +173,7 @@ android_sdks:
 #### `sdk_location`
 
 ```yaml
-### Example implementation of the sdk_location variable
+#💬 Example implementation of the sdk_location variable
 sdk_location: ~/Android/Sdk
 ```
 
@@ -243,12 +242,11 @@ You can find an example of a playbook that incorporates this role in our main pl
 Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://gitlab.com/ProfessorManhattan/ansible-androidstudio/issues). If you would like to contribute, please take a look at the [contributing guide](https://gitlab.com/ProfessorManhattan/ansible-androidstudio/blob/master/CONTRIBUTING.md).
 
 <details>
-<summary>**Sponsorship**</summary>
+<summary><b>Sponsorship</b></summary>
 <br/>
 <blockquote>
 <br/>
-Dear Lovely Person,
-
+Dear Lovely Person,<br/><br/>
 I create open source projects out of love. Although I have a job, shelter, and as much fast food as I can handle, it would still be pretty cool to be appreciated by the community for something I have spent a lot of time and money on. Please consider sponsoring me! Who knows? Maybe I will be able to quit my job and publish open source full time.
 <br/><br/>Sincerely,<br/><br/>
 
@@ -262,7 +260,7 @@ I create open source projects out of love. Although I have a job, shelter, and a
 
 </details>
 
-**TODO**
+### TODO
 
 - **[Documentation](https://gitlab.com/ProfessorManhattan/ansible-androidstudio/-/blob/master/defaults/main.yml#L19):** Add documentation for the `user_configs` variable in `defaults/main.yml`
 

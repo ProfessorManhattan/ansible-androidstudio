@@ -35,7 +35,7 @@ else
   SYSTEM="Unknown"
 fi
 
-# @description Ensures ~/.local/bin is in the PATH variable
+# @description Ensures ~/.local/bin is in the PATH variable on *nix machines
 function ensureLocalPath() {
   if [ "$SYSTEM" == 'Darwin' ] || [ "$SYSTEM" == 'Linux' ]; then
     export PATH="$HOME/.local/bin:$PATH"

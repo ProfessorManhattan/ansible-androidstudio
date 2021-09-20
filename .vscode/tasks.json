@@ -102,6 +102,11 @@
       "command": "bash .common/scripts/init.sh && task update"
     },
     {
+      "label": "(fix:js): Fix JavaScript/TypeScript errors automatically",
+      "type": "shell",
+      "command": "bash .common/scripts/init.sh && task fix:js"
+    },
+    {
       "label": "(fix:json): Alphabetically sort JSON",
       "type": "shell",
       "command": "bash .common/scripts/init.sh && task fix:json"
