@@ -69,7 +69,7 @@ const getExtends = (type, subType) => {
     case 'npm-library':
       return [...templates.eslint, ...templates.typescript, ...templates.json, ...templates.prettier]
     default:
-      return [...templates.yml, ...templates.prettier]
+      return [...templates.eslint, ...templates.yml, ...templates.json, ...templates.prettier]
   }
 }
 
@@ -114,12 +114,12 @@ module.exports = {
     project: 'tsconfig.json',
     sourceType: 'module'
   },
+  ignorePatterns: ['package.json', 'package-lock.json', 'pnpm-lock.yaml'],
   extends: getExtends(taskfile.vars.REPOSITORY_TYPE, taskfile.vars.REPOSITORY_SUBTYPE),
   plugins: getPlugins(taskfile.vars.REPOSITORY_TYPE, taskfile.vars.REPOSITORY_SUBTYPE),
   overrides: [
     {
       files: ['*.json', '*.json5'],
-      excludedFiles: ['package.json', 'package-lock.json'],
       parser: 'jsonc-eslint-parser',
       rules: {
         'jsonc/sort-keys': [
@@ -383,7 +383,9 @@ module.exports = {
       files: ['*.yaml', '*.yml'],
       parser: 'yaml-eslint-parser',
       rules: {
+        'capitalized-comments': 'off',
         'max-len': ['error', { code: 160 }],
+        'no-inline-comments': 'off',
         'unicorn/filename-case': 'off'
       }
     },
