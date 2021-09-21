@@ -1,6 +1,6 @@
 <!-- ⚠️ This README has been generated from the file(s) ".common/docs/blueprint-readme-role.md" ⚠️--><div align="center">
   <center>
-    <a href="https://gitlab.com/ProfessorManhattan/ansible-androidstudio">
+    <a href="https://github.com/ProfessorManhattan/ansible-androidstudio">
       <img width="140" height="140" alt="Android Studio logo" src="https://gitlab.com/megabyte-labs/ansible-roles/androidstudio/-/raw/master/logo.png" />
     </a>
   </center>
@@ -13,60 +13,60 @@
 <div align="center">
   <h4 align="center">
     <a href="https://megabyte.space" title="Megabyte Labs homepage" target="_blank">
-      <img alt="Homepage" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/svg/home-solid.svg" />
+      <img alt="Homepage" src="https://img.shields.io/website?down_color=%23FF4136&down_message=Down&label=Homepage&logo=home-assistant&logoColor=white&up_color=%232ECC40&up_message=Up&url=https%3A%2F%2Fmegabyte.space&style=for-the-badge" />
     </a>
     <a href="https://galaxy.ansible.com/professormanhattan/androidstudio" title="Android Studio role on Ansible Galaxy" target="_blank">
-      <img alt="Ansible Galaxy" height="50" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/svg/ansible-galaxy.svg" />
+      <img alt="Ansible Galaxy" src="https://img.shields.io/badge/Ansible-Galaxy-000000?logo=ansible&logoColor=white&style=for-the-badge" />
     </a>
-    <a href="https://gitlab.com/ProfessorManhattan/ansible-androidstudio/blob/master/CONTRIBUTING.md" title="Learn about contributing" target="_blank">
-      <img alt="Contributing" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/svg/contributing-solid.svg" />
+    <a href="https://github.com/ProfessorManhattan/ansible-androidstudio/blob/master/CONTRIBUTING.md" title="Learn about contributing" target="_blank">
+      <img alt="Contributing" src="https://img.shields.io/badge/Contributing-Guide-0074D9?logo=github-sponsors&logoColor=white&style=for-the-badge" />
     </a>
     <a href="https://www.patreon.com/ProfessorManhattan" title="Support us on Patreon" target="_blank">
-      <img alt="Patreon" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/svg/support-solid.svg" />
+      <img alt="Patreon" src="https://img.shields.io/badge/Patreon-Support-052d49?logo=patreon&logoColor=white&style=for-the-badge" />
     </a>
     <a href="https://app.slack.com/client/T01ABCG4NK1/C01NN74H0LW/details/" title="Slack chat room" target="_blank">
-      <img alt="Slack" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/svg/chat-solid.svg" />
+      <img alt="Slack" src="https://img.shields.io/badge/Slack-Chat-e01e5a?logo=slack&logoColor=white&style=for-the-badge" />
     </a>
-    <a href="https://gitlab.com/ProfessorManhattan/ansible-androidstudio" title="GitHub mirror" target="_blank">
-      <img alt="GitHub" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/svg/github-solid.svg" />
+    <a href="https://github.com/ProfessorManhattan/ansible-androidstudio" title="GitHub mirror" target="_blank">
+      <img alt="GitHub" src="https://img.shields.io/badge/Mirror-GitHub-333333?logo=github&style=for-the-badge" />
     </a>
     <a href="https://gitlab.com/megabyte-labs/ansible-roles/androidstudio" title="GitLab repository" target="_blank">
-      <img alt="GitLab" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/svg/gitlab-solid.svg" />
+      <img alt="GitLab" src="https://img.shields.io/badge/Repo-GitLab-fc6d26?logo=gitlab&style=for-the-badge" />
     </a>
   </h4>
   <p align="center">
     <a title="Ansible Galaxy role: professormanhattan.androidstudio" href="https://galaxy.ansible.com/professormanhattan/androidstudio" target="_blank">
-      <img alt="Ansible Galaxy role: professormanhattan.androidstudio" src="https://img.shields.io/ansible/role/ansible_galaxy_project_id?logo=ansible&style=flat" />
+      <img alt="Ansible Galaxy role: professormanhattan.androidstudio" src="https://img.shields.io/ansible/role/ansible_galaxy_project_id?logo=ansible&style=for-the-badge" />
     </a>
-    <a title="Version: 1.1.1" href="https://gitlab.com/ProfessorManhattan/ansible-androidstudio" target="_blank">
+    <a title="Version: 1.1.1" href="https://github.com/ProfessorManhattan/ansible-androidstudio" target="_blank">
       <img alt="Version: 1.1.1" src="https://img.shields.io/badge/version-1.1.1-blue.svg?cacheSeconds=2592000" />
     </a>
-    <a title="Windows 11 build status on GitHub" href="{{ https://gitlab.com/ProfessorManhattan/ansible-androidstudio/actions/Windows.yml" target="_blank">
-      <img alt="Windows 11 build status" src="https://img.shields.io/github/workflow/status/ProfessorManhattan/ansible-androidstudio/Windows/master?color=cyan&label=Windows%20build&logo=windows&style=flat">
+    <a title="Windows 11 build status on GitHub" href="{{ https://github.com/ProfessorManhattan/ansible-androidstudio/actions/Windows.yml" target="_blank">
+      <img alt="Windows 11 build status" src="https://img.shields.io/github/workflow/status/ProfessorManhattan/ansible-androidstudio/Windows/master?color=cyan&label=Windows%20build&logo=windows&style=for-the-badge">
     </a>
-    <a title="macOS build status on GitHub" href="https://gitlab.com/ProfessorManhattan/ansible-androidstudio/actions/macOS.yml" target="_blank">
-      <img alt="macOS build status" src="https://img.shields.io/github/workflow/status/ProfessorManhattan/ansible-androidstudio/macOS/master?label=macOS%20build&logo=apple&style=flat">
+    <a title="macOS build status on GitHub" href="https://github.com/ProfessorManhattan/ansible-androidstudio/actions/macOS.yml" target="_blank">
+      <img alt="macOS build status" src="https://img.shields.io/github/workflow/status/ProfessorManhattan/ansible-androidstudio/macOS/master?label=macOS%20build&logo=apple&style=for-the-badge">
     </a>
     <a title="Linux build status on GitLab" href="https://gitlab.com/megabyte-labs/ansible-roles/androidstudio/-/commits/master" target="_blank">
-      <img alt="Linux build status" src="https://gitlab.com/megabyte-labs/ansible-roles/androidstudio/badges/master/pipeline.svg">
+      <img alt="Linux build status" src="https://img.shields.io/badge/dynamic/json?color=ffdc00&label=Linux&query=%24%5B0%5D.status&url=https%3A%2F%2Fgitlab.com%2Fapi%2Fv4%2Fprojects%2Fencoded_gitlab_path%2Fpipelines&style=for-the-badge">
     </a>
     <a title="Ansible Galaxy quality score (out of 5)" href="https://galaxy.ansible.com/professormanhattan/androidstudio" target="_blank">
-      <img alt="Ansible Galaxy quality score" src="https://img.shields.io/ansible/quality/ansible_galaxy_project_id?logo=ansible&style=flat" />
+      <img alt="Ansible Galaxy quality score" src="https://img.shields.io/ansible/quality/ansible_galaxy_project_id?logo=ansible&style=for-the-badge" />
     </a>
     <a title="Ansible Galaxy download count" href="https://galaxy.ansible.com/professormanhattan/androidstudio" target="_blank">
-      <img alt="Ansible Galaxy download count" src="https://img.shields.io/ansible/role/d/53381?logo=ansible&style=flat">
+      <img alt="Ansible Galaxy download count" src="https://img.shields.io/ansible/role/d/53381?logo=ansible&style=for-the-badge">
     </a>
     <a title="Documentation" href="https://megabyte.space/docs/ansible" target="_blank">
-      <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg?logo=readthedocs&style=flat" />
+      <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg?logo=readthedocs&style=for-the-badge" />
     </a>
-    <a title="License: MIT" href="https://gitlab.com/ProfessorManhattan/ansible-androidstudio/blob/master/LICENSE" target="_blank">
-      <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-yellow.svg?style=flat" />
+    <a title="License: MIT" href="https://github.com/ProfessorManhattan/ansible-androidstudio/blob/master/LICENSE" target="_blank">
+      <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-yellow.svg?style=for-the-badge" />
     </a>
     <a title="Support us on Open Collective" href="https://opencollective.com/megabytelabs" target="_blank">
-      <img alt="Open Collective sponsors" src="https://img.shields.io/opencollective/sponsors/megabytelabs?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAElBMVEUAAACvzfmFsft4pfD////w+P9tuc5RAAAABHRSTlMAFBERkdVu1AAAAFxJREFUKM9jgAAXIGBAABYXMHBA4yNEXGBAAU2BMz4FIIYTNhtFgRjZPkagFAuyAhGgHAuKAlQBCBtZB4gzQALoDsN0Oobn0L2PEUCoQYgZyOjRQFiJA67IRrEbAJImNwFBySjCAAAAAElFTkSuQmCC&label=Open%20Collective%20sponsors&logo=opencollective&style=flat" />
+      <img alt="Open Collective sponsors" src="https://img.shields.io/opencollective/sponsors/megabytelabs?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAElBMVEUAAACvzfmFsft4pfD////w+P9tuc5RAAAABHRSTlMAFBERkdVu1AAAAFxJREFUKM9jgAAXIGBAABYXMHBA4yNEXGBAAU2BMz4FIIYTNhtFgRjZPkagFAuyAhGgHAuKAlQBCBtZB4gzQALoDsN0Oobn0L2PEUCoQYgZyOjRQFiJA67IRrEbAJImNwFBySjCAAAAAElFTkSuQmCC&label=Open%20Collective%20sponsors&logo=opencollective&style=for-the-badge" />
     </a>
     <a title="Support us on GitHub" href="https://github.com/ProfessorManhattan" target="_blank">
-      <img alt="GitHub sponsors" src="https://img.shields.io/github/sponsors/ProfessorManhattan?label=GitHub%20sponsors&logo=github&style=flat" />
+      <img alt="GitHub sponsors" src="https://img.shields.io/github/sponsors/ProfessorManhattan?label=GitHub%20sponsors&logo=github&style=for-the-badge" />
     </a>
     <a title="Follow us on GitHub" href="https://github.com/ProfessorManhattan" target="_blank">
       <img alt="GitHub: Megabyte Labs" src="https://img.shields.io/github/followers/ProfessorManhattan?style=social" target="_blank" />
@@ -183,7 +183,12 @@ sdk_location: ~/Android/Sdk
 
 The chart below shows the operating systems that we have tested this role on. It is automatically generated using the Ansible Molecule tests located in the `molecule/` folder. There is CI logic in place to automatically handle the testing of Windows, macOS, Ubuntu, Fedora, CentOS, Debian, and Archlinux. If your operating system is not listed but is a variant of one of the systems we test (i.e. a Debian-flavored system or a RedHat-flavored system) then it is possible that the role will still work.
 
-compatibility_matrix
+| OS Family | OS Version | Status              | Idempotent          | Tested On        |
+| --------- | ---------- | ------------------- | ------------------- | ---------------- |
+| Debian    | 10         | <center>✅</center> | <center>❌</center> | August 5th, 2021 |
+| Ubuntu    | 18.04      | <center>✅</center> | <center>❌</center> | August 5th, 2021 |
+| Ubuntu    | 20.04      | <center>✅</center> | <center>❌</center> | August 5th, 2021 |
+| Ubuntu    | 21.04      | <center>✅</center> | <center>❌</center> | August 5th, 2021 |
 
 **_What does idempotent mean?_** Idempotent means that if you run this role twice in row then there will be no changes to the system the second time around.
 
@@ -239,7 +244,7 @@ You can find an example of a playbook that incorporates this role in our main pl
 
 ## Contributing
 
-Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://gitlab.com/ProfessorManhattan/ansible-androidstudio/issues). If you would like to contribute, please take a look at the [contributing guide](https://gitlab.com/ProfessorManhattan/ansible-androidstudio/blob/master/CONTRIBUTING.md).
+Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/ProfessorManhattan/ansible-androidstudio/issues). If you would like to contribute, please take a look at the [contributing guide](https://github.com/ProfessorManhattan/ansible-androidstudio/blob/master/CONTRIBUTING.md).
 
 <details>
 <summary><b>Sponsorship</b></summary>
@@ -262,7 +267,7 @@ I create open source projects out of love. Although I have a job, shelter, and a
 
 ### TODO
 
-- **[Documentation](https://gitlab.com/ProfessorManhattan/ansible-androidstudio/-/blob/master/defaults/main.yml#L19):** Add documentation for the `user_configs` variable in `defaults/main.yml`
+- **[Documentation](https://github.com/ProfessorManhattan/ansible-androidstudio/-/blob/master/defaults/main.yml#L19):** Add documentation for the `user_configs` variable in `defaults/main.yml`
 
 <a href="#license" style="width:100%"><img style="width:100%" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 

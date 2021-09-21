@@ -177,6 +177,11 @@
       "command": "bash .common/scripts/init.sh && task lint:docker"
     },
     {
+      "label": "(lint:eslint): Lint with `eslint`",
+      "type": "shell",
+      "command": "bash .common/scripts/init.sh && task lint:eslint"
+    },
+    {
       "label": "(lint:markdown): Lint markdown files",
       "type": "shell",
       "command": "bash .common/scripts/init.sh && task lint:markdown"

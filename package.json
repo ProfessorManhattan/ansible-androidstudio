@@ -7,7 +7,7 @@
   "homepage": "https://megabyte.space",
   "repository": {
     "type": "git",
-    "url": "git+https://gitlab.com/ProfessorManhattan/ansible-androidstudio.git"
+    "url": "git+https://github.com/ProfessorManhattan/ansible-androidstudio.git"
   },
   "bugs": {
     "email": "help@megabyte.space",
