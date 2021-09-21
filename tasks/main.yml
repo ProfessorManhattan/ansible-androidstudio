@@ -4,8 +4,8 @@
 
 - name: "Fetch {{ app_name }}'s Downloads page"
   uri:
-    url: 'https://developer.android.com/studio'
     return_content: true
+    url: 'https://developer.android.com/studio'
   register: android_studio_download_page
   when: ansible_os_family != 'Windows'
 
@@ -15,8 +15,8 @@
 
 - name: Find the checksum of the installer
   set_fact:
-    cmdline_tools_file_name: "{{ android_studio_download_page.content | regex_search(cmdline_tools_regex) | regex_replace(cmdline_tools_regex, '\\1') }}"
     cmdline_tools_checksum: "{{ android_studio_download_page.content | regex_search(cmdline_tools_regex) | regex_replace(cmdline_tools_regex, '\\2') }}"
+    cmdline_tools_file_name: "{{ android_studio_download_page.content | regex_search(cmdline_tools_regex) | regex_replace(cmdline_tools_regex, '\\1') }}"
   when: ansible_os_family != 'Windows'
 
 # @action Ensures Android Studio is installed

@@ -16,9 +16,9 @@
 - name: Ensure commandline-tools is up-to-date
   become_user: '{{ user.username }}'
   community.windows.win_unzip:
-    src: '%TEMP%\cmdline-tools.zip'
     dest: '{{ sdk_location }}/cmdline-tools'
     remote_src: true
+    src: '%TEMP%\cmdline-tools.zip'
   when: install_cmdlinetools
 
 - name: Rename commandline-tools directory after extraction
@@ -37,11 +37,11 @@
   set_fact:
     build_tools_version:
       ["{{ sdk_list.stdout_lines | regex_findall('build-tools;\\d*\\.\\d*\\.\\d* ') | last | trim }}"]
+    emulator_version: [emulator]
+    patcher_version: ["{{ sdk_list.stdout_lines | regex_findall('patcher;v\\d*') | last }}"]
+    platform_tools_version: [platform-tools]
     platforms_version: ["{{ sdk_list.stdout_lines | regex_findall('platforms;android-\\d{2,}') | last }}"]
     sources_version: ["{{ sdk_list.stdout_lines | regex_findall('sources;android-\\d*') | last }}"]
-    patcher_version: ["{{ sdk_list.stdout_lines | regex_findall('patcher;v\\d*') | last }}"]
-    emulator_version: [emulator]
-    platform_tools_version: [platform-tools]
   when: android_sdks | length == 0
 
 - name: Ensure SDKs and Tools are installed # noqa 301

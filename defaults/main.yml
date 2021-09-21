@@ -4,7 +4,7 @@
 # provided, the latest version of the SDKs and tools will be installed. Use the correct
 # format, which can be found by executing `sdkmanage --list` after the CLI tools are
 # installed; some package need a version to be specified and some do not.
-# @example
+# @example #
 # android_sdks:
 #   - platform-tools
 #   - emulator
@@ -17,7 +17,7 @@ android_sdks: []
 
 # @var sdk_location: ""
 # The folder to set as the SDK location
-# @example
+# @example #
 # sdk_location: ~/Android/Sdk
 # @end
 sdk_location: ~/Android/Sdk

@@ -1,20 +1,20 @@
 ---
 - name: "Fetch {{ app_name }}'s Downloads page"
   ansible.windows.win_uri:
-    url: 'https://developer.android.com/studio'
     return_content: true
+    url: 'https://developer.android.com/studio'
   register: android_studio_download_page
 
 - name: Find the checksum of the installer
   set_fact:
-    cmdline_tools_file_name: "{{ android_studio_download_page.content | regex_search(cmdline_tools_regex) | regex_replace(cmdline_tools_regex, '\\1') }}"
     cmdline_tools_checksum: "{{ android_studio_download_page.content | regex_search(cmdline_tools_regex) | regex_replace(cmdline_tools_regex, '\\2') }}"
+    cmdline_tools_file_name: "{{ android_studio_download_page.content | regex_search(cmdline_tools_regex) | regex_replace(cmdline_tools_regex, '\\1') }}"
 
 - name: 'Ensure {{ app_name }} is installed'
   chocolatey.chocolatey.win_chocolatey:
     name: androidstudio
-    state: "{{ app_state | default('present') }}"
     params: /PinnedToTaskbar
+    state: "{{ app_state | default('present') }}"
 
 - name: 'Ensure the {{ app_name }} shortcut is at the top level of the Start Menu'
   include_role:
@@ -49,10 +49,10 @@
 
 - name: Ensure commandline-tools archive is downloaded
   ansible.windows.win_get_url:
-    url: 'https://dl.google.com/android/repository/{{ cmdline_tools_file_name }}'
-    dest: '%TEMP%\cmdline-tools.zip'
     checksum: '{{ cmdline_tools_checksum }}'
     checksum_algorithm: sha256
+    dest: '%TEMP%\cmdline-tools.zip'
+    url: 'https://dl.google.com/android/repository/{{ cmdline_tools_file_name }}'
   when: install_cmdlinetools
 
 - name: Run generic Windows tasks
@@ -63,8 +63,8 @@
     loop_var: user
 
   when: (user.system is not defined) or ((user.system is defined) and (not user.system))
-- name: 'Save meta information about the version of {{ app_name }} that was installed'
-  ansible.windows.win_copy:
-    dest: '%USERPROFILE%\.config\megabytelabs\cmdlinetools'
+- ansible.windows.win_copy:
     content: "{{ cmdline_tools_file_name | regex_replace('commandlinetools-win-(\\d*).*', '\\1') }}"
+    dest: '%USERPROFILE%\.config\megabytelabs\cmdlinetools'
+  name: 'Save meta information about the version of {{ app_name }} that was installed'
   when: install_cmdlinetools
