@@ -3,6 +3,27 @@ const YAML = require('yaml')
 
 const taskfile = YAML.parse(fs.readFileSync('./Taskfile.yml', 'utf8'))
 
+const ansibleOrder = [
+  'name',
+  'become',
+  'become_method',
+  'become_user',
+  'changed_when',
+  'hosts',
+  'gather_facts',
+  'vars',
+  'roles',
+  'include_tasks',
+  'include_vars',
+  'tasks',
+  'raw',
+  'args',
+  'loop',
+  'loop_control',
+  'register',
+  'when'
+]
+
 const plugins = {
   eslint: ['editorconfig'],
   html: ['html'],
@@ -114,7 +135,7 @@ module.exports = {
     project: 'tsconfig.json',
     sourceType: 'module'
   },
-  ignorePatterns: ['package.json', 'package-lock.json', 'pnpm-lock.yaml'],
+  ignorePatterns: ['ansible_variables.json', 'package.json', 'package-lock.json', 'pnpm-lock.yaml'],
   extends: getExtends(taskfile.vars.REPOSITORY_TYPE, taskfile.vars.REPOSITORY_SUBTYPE),
   plugins: getPlugins(taskfile.vars.REPOSITORY_TYPE, taskfile.vars.REPOSITORY_SUBTYPE),
   overrides: [
@@ -409,25 +430,32 @@ module.exports = {
         'yml/sort-keys': [
           'error',
           {
-            pathPattern: '.$',
-            order: [
-              'name',
-              'become',
-              'become_method',
-              'become_user',
-              'changed_when',
-              'hosts',
-              'gather_facts',
-              'vars',
-              'roles',
-              'include_tasks',
-              'include_vars',
-              'args',
-              'loop',
-              'loop_control',
-              'register',
-              'when'
-            ]
+            pathPattern: '^.$',
+            order: ansibleOrder
+          }
+        ]
+      }
+    },
+    {
+      files: ['molecule/**/converge.yml', 'molecule/**/prepare.yml', 'tests/**/*.yml', 'tasks/**/*.yml'],
+      rules: {
+        'yml/sort-keys': [
+          'error',
+          {
+            pathPattern: '^.tasks.$', // TODO Add appropriate pathPattern so that arrays assigned to the key `tasks` get sorted with the ansibleOrder instead of the `{ type: 'asc' }` order
+            order: ansibleOrder
+          }
+        ]
+      }
+    },
+    {
+      files: ['molecule/**/converge.yml', 'molecule/**/prepare.yml', 'tests/**/*.yml', 'tasks/**/*.yml'],
+      rules: {
+        'yml/sort-keys': [
+          'error',
+          {
+            pathPattern: '^.([a-zA-Z0-9].+).$',
+            order: { type: 'asc' }
           }
         ]
       }
