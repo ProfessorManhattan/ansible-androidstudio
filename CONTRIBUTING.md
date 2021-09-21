@@ -239,20 +239,20 @@ We try to follow the same code style across all our Ansible repositories. If som
 
 When there is only one parameter, then you should inline it.
 
-**BAD**
+**❌ BAD**
 
 ```yaml
 when:
   - install_minikube
 ```
 
-**GOOD**
+**✅ GOOD**
 
 ```yaml
 when: install_minikube
 ```
 
-**ALSO GOOD**
+**✅ ALSO GOOD**
 
 ```yaml
 when:
@@ -264,7 +264,7 @@ when:
 
 Anywhere an array/list is used, the list should be ordered alphabetically (if possible).
 
-**BAD**
+**❌ BAD**
 
 ```yaml
 autokey_dependencies:
@@ -273,7 +273,7 @@ autokey_dependencies:
   - git
 ```
 
-**GOOD**
+**✅ GOOD**
 
 ```yaml
 autokey_dependencies:
@@ -288,7 +288,7 @@ In many cases, a role will require that specific software package dependencies a
 
 Say the application being installed is Android Studio. The dependency array should be assigned to a variable titled `androidstudio_dependencies` (where "androidstudio" is retrieved from the `.galaxy_info.role_name` field in the `meta/main.yml` file) and placed in `vars/main.yml`.
 
-**GOOD example of defining the variable in the `vars/main.yml` file**
+**✅ GOOD example of defining the variable in the `vars/main.yml` file**
 
 ```yaml
 ---
@@ -298,7 +298,7 @@ androidstudio_dependencies:
   - anotherpackage
 ```
 
-**BAD example of integrating the variable into a task file:**
+**❌ BAD example of integrating the variable into a task file:**
 
 ```yaml
 - name: "Ensure {{ app_name }}'s dependencies are installed"
@@ -307,7 +307,7 @@ androidstudio_dependencies:
     state: present
 ```
 
-**GOOD example of integrating the variable into a task file:**
+**✅ GOOD example of integrating the variable into a task file:**
 
 ```yaml
 - name: "Ensure {{ app_name }}'s dependencies are installed"
@@ -330,7 +330,7 @@ If there are dependencies that are specific to a certain OS, then the dependency
 
 DRY stands for "Don't Repeat Yourself." Whenever there is code that is duplicated across multiple task files, you should separate it into a different file and then include it like in the following example:
 
-**GOOD**
+**✅ GOOD**
 
 ```yaml
 - name: Run generic Linux tasks
