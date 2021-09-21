@@ -1,22 +1,6 @@
 ---
 version: '3'
 
-output: interleaved
-
-vars:
-  GALAXY_ROLE_NAME:
-    sh: if [ -f meta/main.yml ]; then yq e '.galaxy_info.role_name' meta/main.yml; else jq -r '.name' package.json | sed 's/.*\///'; fi
-  GALAXY_NAMESPACE:
-    sh: if [ -f meta/main.yml ]; then yq e '.galaxy_info.namespace' meta/main.yml; else jq -r '.name' package.json | sed 's/\/.*//' | sed 's/@//'; fi
-  GITHUB_ORG: ProfessorManhattan
-  GITHUB_USER: ProfessorManhattan
-  NPM_PROGRAM:
-    sh: 'if [[ "${container:=}" == "docker" ]]; then echo "npm"; else echo "pnpm"; fi'
-  NPX_PACKAGE: pnpx
-  REPOSITORY_SUBTYPE: role
-  REPOSITORY_TYPE: ansible
-  TIMEZONE: America/New_York
-
 includes:
   ansible: ./.common/taskfiles/ansible/Taskfile.yml
   ansible:ansibler: ./.common/taskfiles/ansible/Taskfile-ansibler.yml
@@ -30,6 +14,22 @@ includes:
   lint: ./.common/taskfiles/Taskfile-lint.yml
   security: ./.common/taskfiles/Taskfile-security.yml
   vscode: ./.common/taskfiles/Taskfile-vscode.yml
+
+output: interleaved
+
+vars:
+  GALAXY_NAMESPACE:
+    sh: if [ -f meta/main.yml ]; then yq e '.galaxy_info.namespace' meta/main.yml; else jq -r '.name' package.json | sed 's/\/.*//' | sed 's/@//'; fi
+  GALAXY_ROLE_NAME:
+    sh: if [ -f meta/main.yml ]; then yq e '.galaxy_info.role_name' meta/main.yml; else jq -r '.name' package.json | sed 's/.*\///'; fi
+  GITHUB_ORG: ProfessorManhattan
+  GITHUB_USER: ProfessorManhattan
+  NPM_PROGRAM:
+    sh: 'if [[ "${container:=}" == "docker" ]]; then echo "npm"; else echo "pnpm"; fi'
+  NPX_PACKAGE: pnpx
+  REPOSITORY_SUBTYPE: role
+  REPOSITORY_TYPE: ansible
+  TIMEZONE: America/New_York
 
 tasks:
   donothing: 'true'
