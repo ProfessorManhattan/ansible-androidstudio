@@ -11,7 +11,6 @@
 </div>
 
 <div align="center">
-  <h4 align="center">
     <a href="https://megabyte.space" title="Megabyte Labs homepage" target="_blank">
       <img alt="Homepage" src="https://img.shields.io/website?down_color=%23FF4136&down_message=Down&label=Homepage&logo=home-assistant&logoColor=white&up_color=%232ECC40&up_message=Up&url=https%3A%2F%2Fmegabyte.space&style=for-the-badge" />
     </a>
@@ -33,7 +32,6 @@
     <a href="https://gitlab.com/megabyte-labs/ansible-roles/androidstudio" title="GitLab repository" target="_blank">
       <img alt="GitLab" src="https://img.shields.io/badge/Repo-GitLab-fc6d26?logo=gitlab&style=for-the-badge" />
     </a>
-  </h4>
   <div align="center">
     <a title="Ansible Galaxy role: professormanhattan.androidstudio" href="https://galaxy.ansible.com/professormanhattan/androidstudio" target="_blank">
       <img alt="Ansible Galaxy role: professormanhattan.androidstudio" src="https://img.shields.io/ansible/role/ansible_galaxy_project_id?logo=ansible&style=for-the-badge" />
