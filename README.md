@@ -184,7 +184,7 @@ The chart below shows the operating systems that we have tested this role on. It
 
 | OS Family | OS Version | Status              | Idempotent          | Tested On        |
 | --------- | ---------- | ------------------- | ------------------- | ---------------- |
-| Debian    | 10         | <center>✅</center> | <center>❌</center> | August 5th, 2021 |
+| Debian    | 10         | <div align="center">✅</div> | <center>❌</center> | August 5th, 2021 |
 | Ubuntu    | 18.04      | <center>✅</center> | <center>❌</center> | August 5th, 2021 |
 | Ubuntu    | 20.04      | <center>✅</center> | <center>❌</center> | August 5th, 2021 |
 | Ubuntu    | 21.04      | <center>✅</center> | <center>❌</center> | August 5th, 2021 |
