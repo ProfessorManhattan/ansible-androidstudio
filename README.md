@@ -39,7 +39,7 @@
     <img alt="Ansible Galaxy role: professormanhattan.androidstudio" src="https://img.shields.io/ansible/role/ansible_galaxy_project_id?logo=ansible&style=for-the-badge" />
   </a>
   <a title="Version: 1.1.1" href="https://github.com/ProfessorManhattan/ansible-androidstudio" target="_blank">
-    <img alt="Version: 1.1.1" src="https://img.shields.io/badge/version-1.1.1-blue.svg?cacheSeconds=2592000&style=for-the-badge" />
+    <img alt="Version: 1.1.1" src="https://img.shields.io/badge/version-1.1.1-blue.svg?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgAQMAAABJtOi3AAAABlBMVEUAAAD///+l2Z/dAAAAAXRSTlMAQObYZgAAACNJREFUCNdjIACY//+BEp9hhM3hAzYQwoBIAqEDYQrCZLwAAGlFKxU1nF9cAAAAAElFTkSuQmCC&cacheSeconds=2592000&style=for-the-badge" />
   </a>
   <a title="Windows 11 build status on GitHub" href="{{ https://github.com/ProfessorManhattan/ansible-androidstudio/actions/Windows.yml" target="_blank">
     <img alt="Windows 11 build status" src="https://img.shields.io/github/workflow/status/ProfessorManhattan/ansible-androidstudio/Windows/master?color=cyan&lbel=Windows%20build&logo=windows&style=for-the-badge">
@@ -63,7 +63,7 @@
     <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-yellow.svg?style=for-the-badge" />
   </a>
   <a title="Support us on Open Collective" href="https://opencollective.com/megabytelabs" target="_blank">
-    <img alt="Open Collective sponsors" src="https://img.shields.io/opencollective/sponsors/megabytelabs?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAElBMVEUAAACvzfmFsft4pfD////w+9tuc5RAAAABHRSTlMAFBERkdVu1AAAAFxJREFUKM9jgAAXIGBAABYXMHBA4yNEXGBAAU2BMz4FIIYTNhtFgRjZPkagFAuyAhGgHAuKAlQBCBtZB4gzQALoDsN0Oobn0L2PEUCoQYgZyOjRQFiJA67IRrEbAJImNwFBySjCAAAAAElFTkSuQmCC&lbel=Open%20Collective%20sponsors&logo=opencollective&style=for-the-badge" />
+    <img alt="Open Collective sponsors" src="https://img.shields.io/opencollective/sponsors/megabytelabs?logo=opencollective&logoColor=white&style=for-the-badge" />
   </a>
   <a title="Support us on GitHub" href="https://github.com/ProfessorManhattan" target="_blank">
     <img alt="GitHub sponsors" src="https://img.shields.io/github/sponsors/ProfessorManhattan?label=GitHub%20sponsors&logo=github&style=for-the-badge" />
@@ -184,7 +184,7 @@ The chart below shows the operating systems that we have tested this role on. It
 
 | OS Family | OS Version | Status              | Idempotent          | Tested On        |
 | --------- | ---------- | ------------------- | ------------------- | ---------------- |
-| Debian    | 10         | <div align="center">✅</div> | <center>❌</center> | August 5th, 2021 |
+| Debian    | 10         | <center>✅</center> | <center>❌</center> | August 5th, 2021 |
 | Ubuntu    | 18.04      | <center>✅</center> | <center>❌</center> | August 5th, 2021 |
 | Ubuntu    | 20.04      | <center>✅</center> | <center>❌</center> | August 5th, 2021 |
 | Ubuntu    | 21.04      | <center>✅</center> | <center>❌</center> | August 5th, 2021 |
