@@ -2,6 +2,11 @@
   "version": "2.0.0",
   "tasks": [
     {
+      "label": "(ansible:playbook:environment:cli): Prompts for which environment to use and then symlinks to it",
+      "type": "shell",
+      "command": "bash .common/scripts/init.sh && task ansible:playbook:environment:cli"
+    },
+    {
       "label": "(ansible:playbook:find-missing): Find roles that are missing files",
       "type": "shell",
       "command": "bash .common/scripts/init.sh && task ansible:playbook:find-missing"
@@ -10,16 +15,6 @@
       "label": "(ansible:populate:dependencies): Attempt to automatically populate `meta/main.yml` and `requirements.yml`",
       "type": "shell",
       "command": "bash .common/scripts/init.sh && task ansible:populate:dependencies"
-    },
-    {
-      "label": "(ansible:symlink:playbook): Symlink all the roles in the roles/ folder to ~/.ansible/roles",
-      "type": "shell",
-      "command": "bash .common/scripts/init.sh && task ansible:symlink:playbook"
-    },
-    {
-      "label": "(ansible:symlink:role): Symlink the current role to ~/.ansible/roles/.",
-      "type": "shell",
-      "command": "bash .common/scripts/init.sh && task ansible:symlink:role"
     },
     {
       "label": "(test:local): Run the Ansible play on the local machine",
