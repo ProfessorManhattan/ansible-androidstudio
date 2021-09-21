@@ -27,11 +27,11 @@
 
 - name: Run generic Linux tasks
   include_tasks: user-Linux.yml
-  when: (user.system is not defined) or ((user.system is defined) and (not user.system))
   loop: '{{ user_configs }}'
   loop_control:
     label: '{{ user.username }}'
     loop_var: user
+  when: (user.system is not defined) or ((user.system is defined) and (not user.system))
 
 - name: 'Save meta information about the version of {{ app_name }} that was installed'
   community.general.ini_file:

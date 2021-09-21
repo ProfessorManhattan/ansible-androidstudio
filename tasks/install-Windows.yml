@@ -35,9 +35,9 @@
 
 - name: 'Detect previously installed {{ app_name }} version'
   ansible.windows.win_shell: type cmdlinetools
+  changed_when: false
   args:
     chdir: '%USERPROFILE%\.config\megabytelabs'
-  changed_when: false
   register: current_cmdlinetools_version
   when: cmdlinetools_config.stat.exists
 
@@ -57,12 +57,12 @@
 
 - name: Run generic Windows tasks
   include_tasks: user-Windows.yml
-  when: (user.system is not defined) or ((user.system is defined) and (not user.system))
   loop: '{{ user_configs }}'
   loop_control:
     label: '{{ user.username }}'
     loop_var: user
 
+  when: (user.system is not defined) or ((user.system is defined) and (not user.system))
 - name: 'Save meta information about the version of {{ app_name }} that was installed'
   ansible.windows.win_copy:
     dest: '%USERPROFILE%\.config\megabytelabs\cmdlinetools'

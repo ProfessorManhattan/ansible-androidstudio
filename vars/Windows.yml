@@ -1,5 +1,5 @@
 ---
+cmdline_tools_platform_code: win
+sdk_location: '%LOCALAPPDATA%\Android\Sdk'
 shortcut_folder: Android Studio
 shortcut_link: Android Studio
-sdk_location: '%LOCALAPPDATA%\Android\Sdk'
-cmdline_tools_platform_code: win
