@@ -86,7 +86,7 @@
     "name": "Android Studio",
     "overview": "[Android Studio](https://developer.android.com/studio) is the official integrated development environment for Google's Android operating system, built on JetBrains' IntelliJ IDEA software and designed specifically for Android development.",
     "repository": {
-      "github": "https://gitlab.com/ProfessorManhattan/ansible-androidstudio",
+      "github": "https://github.com/ProfessorManhattan/ansible-androidstudio",
       "gitlab": "https://gitlab.com/megabyte-labs/ansible-roles/androidstudio"
     },
     "slug": "androidstudio",
