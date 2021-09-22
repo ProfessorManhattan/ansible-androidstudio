@@ -103,6 +103,7 @@ if ! type task &> /dev/null; then
   wait
 fi
 
+rm -rf .task
 task start
 
 if [ "$REPO_TYPE" != 'common' ]; then
