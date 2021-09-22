@@ -235,7 +235,6 @@ module.exports = {
             code: 120
           }
         ],
-        'max-lines': ['error', 500],
         'newline-per-chained-call': 'off',
         'no-console': [
           'error',
@@ -539,5 +538,8 @@ module.exports = {
         ]
       }
     }
-  ]
+  ],
+  rules: {
+    'max-lines': ['error', 500]
+  }
 }
