@@ -25,8 +25,8 @@ vars:
   GITHUB_ORG: ProfessorManhattan
   GITHUB_USER: ProfessorManhattan
   NPM_PROGRAM:
-    sh: 'if [[ "${container:=}" == "docker" ]]; then echo "npm"; else echo "pnpm"; fi'
-  NPX_PACKAGE: pnpx
+    sh: 'if [[ "${container:=}" == "docker" ]]; then echo "npm"; else echo "npm"; fi'
+  NPX_PACKAGE: npx
   REPOSITORY_SUBTYPE: role
   REPOSITORY_TYPE: ansible
   TIMEZONE: America/New_York
