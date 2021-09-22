@@ -1,5 +1,5 @@
 ---
-name: macOS Ansible Role Test
+name: Windows Ansible Role Test
 on:
   pull_request:
   push:
@@ -15,14 +15,24 @@ jobs:
     strategy:
       matrix:
         os:
-          - macos-10.15
+          - windows-latest
 
     steps:
       - name: Check out the codebase.
         uses: actions/checkout@v2
 
+      - name: Enable WinRM.
+        run: |
+          ipconfig
+          ./tests/windows/test.ps1
+
+      - name: Setup WSL.
+        uses: Vampire/setup-wsl@v1
+
       - name: Test the role.
         env:
           ANSIBLE_FORCE_COLOR: '1'
+        shell: wsl-bash {0}
         run: |
-          bash tests/macos/test.sh
+          ifconfig
+          bash tests/windows/test.sh
