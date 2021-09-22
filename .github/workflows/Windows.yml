@@ -24,6 +24,7 @@ jobs:
         run: |
           ipconfig
           ./tests/windows/test.ps1
+          ipconfig
 
       - name: Setup WSL.
         uses: Vampire/setup-wsl@v1
