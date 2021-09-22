@@ -16,12 +16,11 @@ jobs:
       matrix:
         os:
           - windows-latest
-
     steps:
       - name: Check out the codebase.
         uses: actions/checkout@v2
 
-      - name: Enable WinRM.
+      - name: Setup WinRM.
         run: |
           ipconfig
           ./tests/windows/test.ps1
