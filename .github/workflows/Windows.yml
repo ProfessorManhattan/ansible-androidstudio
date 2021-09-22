@@ -22,7 +22,6 @@ jobs:
 
       - name: Setup WinRM.
         run: |
-          ipconfig
           ./tests/windows/test.ps1
           ipconfig
 
@@ -34,6 +33,7 @@ jobs:
           ANSIBLE_FORCE_COLOR: '1'
         shell: wsl-bash {0}
         run: |
-          sudo apt install net-tools
+          apt update
+          apt install net-tools
           ifconfig
           bash tests/windows/test.sh
