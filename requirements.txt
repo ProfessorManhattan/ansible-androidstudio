@@ -1,4 +1,4 @@
-ansible-base
+ansible
 ansible-lint<5.0.0
 ansibler
 black
