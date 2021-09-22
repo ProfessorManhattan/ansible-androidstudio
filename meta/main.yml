@@ -11,12 +11,11 @@ galaxy_info:
   platforms:
     - name: Debian
       versions:
-        - 10
+        - buster
     - name: Ubuntu
       versions:
-        - 18.04
-        - 20.04
-        - 21.04
+        - bionic
+        - hirsute
         - focal
   galaxy_tags:
     - adb
