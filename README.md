@@ -106,7 +106,7 @@
 
 ## Overview
 
-This repository is the home of an [Ansible](https://www.ansible.com/) role that installs Android Studio and sets up Android SDKs on nearly any OS [Android Studio](https://developer.android.com/studio) is the official integrated development environment for Google's Android operating system, built on JetBrains' IntelliJ IDEA software and designed specifically for Android development.
+This repository is the home of an [Ansible](https://www.ansible.com/) role that installs Android Studio and sets up Android SDKs on nearly any OS. [Android Studio](https://developer.android.com/studio) is the official integrated development environment for Google's Android operating system, built on JetBrains' IntelliJ IDEA software and designed specifically for Android development.
 
 <a href="#features" style="width:100%"><img style="width:100%" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
