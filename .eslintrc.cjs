@@ -332,62 +332,54 @@ module.exports = {
         ],
         'sort-keys-fix/sort-keys-fix': 'warn',
         'tsdoc/syntax': 'error',
-        'unused-imports/no-unused-imports': 'error'
-        /* "@typescript-eslint/tslint/config": [ // TODO: Make it so this works for both projects that do and do not have a tsconfig.json file
-          // TODO: Ensure these rules are working and eliminate rules that are duplicates of other rules
-          "error",
+        'unused-imports/no-unused-imports': 'error',
+        '@typescript-eslint/tslint/config': [
+          'error',
           {
             rules: {
-              "comment-type": [true, "doc", "singleline", "multiline"],
-              "completed-docs": [
-                true,
-                "enums",
-                "functions",
-                "methods",
-                "classes",
-                "namespaces"
-              ],
+              'comment-type': [true, 'doc', 'singleline', 'multiline'],
+              'completed-docs': [true, 'enums', 'functions', 'methods', 'classes', 'namespaces'],
               encoding: true,
-              "import-spacing": true,
-              "invalid-void": true,
-              "no-delete": true,
-              "no-inferred-empty-object-type": true,
-              "no-let": true,
-              "no-mergeable-namespace": true,
-              "no-method-signature": true,
-              "no-mixed-interface": true,
-              "no-object-mutation": true,
-              "no-promise-as-boolean": true,
-              "no-tautology-expression": true,
-              "no-unnecessary-callback-wrapper": true,
-              "number-literal-format": true,
-              "object-literal-sort-keys": [
+              'import-spacing': true,
+              'invalid-void': true,
+              'no-delete': true,
+              'no-inferred-empty-object-type': true,
+              'no-let': true,
+              'no-mergeable-namespace': true,
+              'no-method-signature': true,
+              'no-mixed-interface': true,
+              'no-object-mutation': true,
+              'no-promise-as-boolean': true,
+              'no-tautology-expression': true,
+              'no-unnecessary-callback-wrapper': true,
+              'number-literal-format': true,
+              'object-literal-sort-keys': [
                 true,
-                "ignore-case",
-                "locale-compare",
-                "match-declaration-order",
-                "shorthand-first"
+                'ignore-case',
+                'locale-compare',
+                'match-declaration-order',
+                'shorthand-first'
               ],
-              "prefer-conditional-expression": true,
-              "prefer-method-signature": true,
-              "prefer-switch": [
+              'prefer-conditional-expression': true,
+              'prefer-method-signature': true,
+              'prefer-switch': [
                 true,
                 {
-                  "min-cases": 4
+                  'min-cases': 4
                 }
               ],
               'readonly-array': true,
               'readonly-keyword': true,
-              "return-undefined": true,
-              "static-this": true,
-              "strict-comparisons": true,
-              "strict-string-expressions": true,
-              "strict-type-predicates": true,
-              typedef: [true, "call-signature"],
-              "unnecessary-else": true
+              'return-undefined': true,
+              'static-this': true,
+              'strict-comparisons': true,
+              'strict-string-expressions': true,
+              'strict-type-predicates': true,
+              typedef: [true, 'call-signature'],
+              'unnecessary-else': true
             }
           }
-        ] */
+        ]
       }
     },
     {
