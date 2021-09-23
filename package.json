@@ -111,31 +111,29 @@
       "destroyed-symlinks"
     ],
     "**/*.(css|html|less|md|mjml|php|scss|sh|xml)": [
-      "prettier --write"
+      "task fix:prettier --"
     ],
-    "**/!(package).json": [
+    "**/*.json": [
       "task fix:json --"
     ],
-    "package.json": [
-      "task fix:json --",
-      "prettier-package-json --write"
-    ],
     "**/*.(js|jsx|ts)": [
-      "task fix:js --fix"
+      "task fix:js --",
+      "task lint:js --"
     ],
-    "**/*.(sh|sh.j2)": [
-      "prettier --write",
-      "shellcheck"
+    "**/*.sh": [
+      "task fix:shell --",
+      "task lint:shell --"
     ],
     "**/*.toml": [
-      "check-toml"
+      "task lint:toml --"
     ],
     "**/*.xml": [
-      "check-xml"
+      "task fix:xml --",
+      "task lint:xml --"
     ],
     "**/*.yml": [
       "task fix:yaml --",
-      "yamllint -s"
+      "task lint:yaml --"
     ],
     "**/*.(jpg|png)": [
       "task image:compress --"
