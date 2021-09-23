@@ -27,14 +27,14 @@
       "command": "bash .common/scripts/init.sh && task test:docker"
     },
     {
-      "label": "(test:virtualbox): Provisions a desktop VirtualBox VM and then runs a Molecule test",
-      "type": "shell",
-      "command": "bash .common/scripts/init.sh && task test:virtualbox"
-    },
-    {
       "label": "(test:e2e): Runs a full E2E Molecule test for all supported operating systems",
       "type": "shell",
       "command": "bash .common/scripts/init.sh && task test:e2e"
+    },
+    {
+      "label": "(test:virtualbox): Provisions a desktop VirtualBox VM and then runs a Molecule test",
+      "type": "shell",
+      "command": "bash .common/scripts/init.sh && task test:virtualbox"
     },
     {
       "label": "(test:vagrant): Runs the playbook using Vagrant",
