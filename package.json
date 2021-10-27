@@ -21,6 +21,7 @@
     "clean": "task common:clean",
     "commit": "task common:commit",
     "info": "task --list",
+    "preinstall": "npx -y only-allow pnpm",
     "prepare": "task common:husky",
     "prepare-release": "task common:prepare-release",
     "requirements": "task common:requirements",
