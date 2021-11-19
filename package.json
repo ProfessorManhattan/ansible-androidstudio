@@ -32,7 +32,7 @@
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^13.1.0",
-    "@mblabs/eslint-config": "^1.0.0",
+    "@mblabs/eslint-config": "^1.0.97",
     "@mblabs/prettier-config": "^14.14.14",
     "@typescript-eslint/eslint-plugin": "^5.2.0",
     "cz-conventional-changelog": "^3.3.0",
@@ -89,7 +89,8 @@
     },
     "slug": "androidstudio",
     "subgroup": "role",
-    "title": "Android Studio - An IDE for Android Development"
+    "title": "Android Studio - An IDE for Android Development",
+    "ansible_galaxy_project_id": "56329"
   },
   "eslintConfig": {
     "extends": "@mblabs/eslint-config"

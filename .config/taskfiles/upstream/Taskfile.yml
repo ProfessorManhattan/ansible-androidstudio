@@ -64,7 +64,9 @@ tasks:
       - |
         function handlebars() {
           FILE="$1"
-          {{.NPX_HANDLE}}hbs --data .variables.json --helper ./.config/hbs.cjs "$FILE" --stdout > "${FILE%.*}"
+          TMP="$(mktemp)"
+          {{.NPX_HANDLE}}hbs --data .variables.json --helper ./.config/hbs.cjs "$FILE" --stdout > "$TMP"
+          mv "$TMP" "${FILE%.*}"
           rm "$FILE"
         }
         find . -type f -not \( {{.ADDITIONAL_IGNORE_FOLDERS}} {{.IGNORE_FOLDERS}} \) -prune -name '*.handlebars' | while read FILE; do
@@ -84,7 +86,9 @@ tasks:
       - |
         function handlebars() {
           FILE="$1"
-          {{.NPX_HANDLE}}hbs --data .variables.json --helper ./.config/hbs.cjs "$FILE" --stdout > "${FILE//.hbs}"
+          TMP="$(mktemp)"
+          {{.NPX_HANDLE}}hbs --data .variables.json --helper ./.config/hbs.cjs "$FILE" --stdout > "$TMP"
+          mv "$TMP" "${FILE//.hbs}"
           rm "$FILE"
         }
         find . -type f -not \( {{.ADDITIONAL_IGNORE_FOLDERS}} {{.IGNORE_FOLDERS}} \) -prune -name '*.hbs.*' | while read FILE; do
@@ -104,7 +108,7 @@ tasks:
         ensureKeywords package.json.bak
       - jq -s -S --arg blueprint "$(jq -r '.blueprint' package.json.bak)"
         --arg keywords "$(jq '.keywords[]' package.json.bak package.json | jq -s '. | unique')"
-        --arg private "$(jq -r '.private' package.json.bak | sed 's/^null$/true/')"
+        --argjson private "$(jq -r '.private' package.json.bak | sed 's/^null$/true/')"
         --arg version "$(jq -r '.version' package.json.bak | sed 's/^null$/0.0.1/')"
         '.[0] * .[1] | .keywords = ($keywords | fromjson) | .blueprint = ($blueprint | fromjson) | .private = $private | .version = $version | .'
         package.json.bak package.json > "$TMP"

@@ -6,3 +6,4 @@
 set -eo pipefail
 
 echo "Update script running.."
+npm install --save-dev @mblabs/eslint-config@latest

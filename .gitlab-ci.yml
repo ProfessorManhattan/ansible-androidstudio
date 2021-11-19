@@ -3,7 +3,6 @@ stages:
   - update
   - lint
   - test
-  - security
   - publish
 
 variables:
@@ -12,7 +11,7 @@ variables:
 include:
   - local: .gitlab/ci/lint/ansible-lint.gitlab-ci.yml
   - local: .gitlab/ci/lint/eslint.gitlab-ci.yml
-  - local: .gitlab/ci/lint/flake8.gitlab-ci.yml
+  - local: .gitlab/ci/lint/python/flake8.gitlab-ci.yml
   - local: .gitlab/ci/lint/hadolint.gitlab-ci.yml
   - local: .gitlab/ci/lint/prettier.gitlab-ci.yml
   - local: .gitlab/ci/lint/shellcheck.gitlab-ci.yml

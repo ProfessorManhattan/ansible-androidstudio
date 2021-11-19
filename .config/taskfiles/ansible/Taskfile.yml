@@ -203,25 +203,18 @@ tasks:
           CLI_ARGS: '{{.REQUIREMENTS_PATH}}'
 
   update:galaxy-id:
-    vars:
-      HAS_PROJECT_ID:
-        sh: jq -e 'has("blueprint.ansible_galaxy_project_id")' package.json || true
     env:
-      PROJECT_ID:
-        sh: '(ansible-galaxy info "{{.GALAXY_ROLE_NAME}}" | grep -E "id: [0-9]" | awk {"print $2"}) 2> /dev/null || true'
       TMP:
         sh: mktemp
     cmds:
       - |
+        PROJECT_ID="$(ansible-galaxy info '{{.ROLE_NAME}}' 2> /dev/null | grep -E 'id: [0-9]' | cut -d ' ' -f2)"
         if [ "$PROJECT_ID" ]; then
-          jq --arg a "${PROJECT_ID}" '.blueprint.ansible_galaxy_project_id = $a' package.json > "$TMP"
+          jq --arg a "$PROJECT_ID" '.blueprint.ansible_galaxy_project_id = $a' package.json > "$TMP"
           mv "$TMP" package.json
         fi
-    # log:
-    #   error: Failed to acquire and inject the `.blueprint.ansible_galaxy_project_id` value into `package.json`
-    #   success: Ensured that the `.blueprint.ansible_galaxy_project_id` variable in `package.json` is accurate
     status:
-      - '[[ "{{.HAS_PROJECT_ID}}" == "true" ]]'
+      - jq -e 'has("blueprint.ansible_galaxy_project_id")' package.json
 
   update:variables:
     deps:

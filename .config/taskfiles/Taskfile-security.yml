@@ -6,6 +6,14 @@ vars:
   TAGS: latest slim
 
 tasks:
+  bandit:
+    deps:
+      - :install:python:dependencies
+    desc: Check for Python code security issues
+    cmds:
+      - poetry run bandit -r run.py
+      - poetry run bandit -r src
+
   dockle:
     deps:
       - :install:software:dockle

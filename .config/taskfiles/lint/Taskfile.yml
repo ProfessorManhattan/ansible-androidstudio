@@ -217,9 +217,9 @@ tasks:
     cmds:
       - |
         {{if .CLI_ARGS}}
-          flake8 --config {{.FLAKE8_CONFIG}} {{.CLI_ARGS}}
+          poetry run flake8 --config {{.FLAKE8_CONFIG}} {{.CLI_ARGS}}
         {{else}}
-          flake8 --config {{.FLAKE8_CONFIG}} .
+          poetry run flake8 --config {{.FLAKE8_CONFIG}} .
         {{end}}
 
   shell:

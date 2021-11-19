@@ -2,8 +2,26 @@
 version: '3'
 
 tasks:
-  default:
-    summary: Coming soon..
+  build:
+    deps:
+      - :install:python:requirements
+    desc: Build the project
+    cmds:
+      - task: clean
+      - poetry build
+
+  build:binary:
+    deps:
+      - :install:python:requirements
+    desc: Build standalone binary
+    cmds:
+      - task: clean
+      - poetry run python -OO -m PyInstaller -F run.py
+
+  clean:
+    cmds:
+      - rm -rf build
+      - rm -rf dist
 
   global:reset:
     cmds:
@@ -11,3 +29,32 @@ tasks:
         ignore_error: true
       - cmd: if type pip3 &> /dev/null; then pip3 uninstall -y -r <(pip3 freeze); fi
         ignore_error: true
+
+  publish:
+    deps:
+      - :install:python:requirements
+    desc: Publish the project to PyPi.org
+    cmds:
+      - poetry publish
+
+  run:
+    deps:
+      - :install:python:requirements
+    desc: Runs the project by calling `run.py`
+    cmds:
+      - poetry run python run.py
+
+  test:
+    deps:
+      - :install:python:requirements
+    desc: Runs tests with `pytest` after fixing and linting
+    cmds:
+      - task: :fix:python
+      - task: :lint:python
+      - task: test:pytest
+
+  test:pytest:
+    deps:
+      - :install:python:requirements
+    cmds:
+      - poetry run pytest

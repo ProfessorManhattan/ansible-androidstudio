@@ -1,6 +1,9 @@
 ---
 version: '3'
 
+vars:
+  ROLE_NAME: '{{.GALAXY_NAMESPACE}}.{{.GALAXY_ROLE_NAME}}'
+
 tasks:
   playbook:
     desc: Symlink all the roles in the roles/ folder to ~/.ansible/roles

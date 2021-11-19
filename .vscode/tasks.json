@@ -437,6 +437,36 @@
       "command": "bash .config/scripts/vscode.sh && task publish:opera:release"
     },
     {
+      "label": "(python:build): Build the project",
+      "type": "shell",
+      "command": "bash .config/scripts/vscode.sh && task python:build"
+    },
+    {
+      "label": "(python:build:binary): Build standalone binary",
+      "type": "shell",
+      "command": "bash .config/scripts/vscode.sh && task python:build:binary"
+    },
+    {
+      "label": "(python:publish): Publish the project to PyPi.org",
+      "type": "shell",
+      "command": "bash .config/scripts/vscode.sh && task python:publish"
+    },
+    {
+      "label": "(python:run): Runs the project by calling `run.py`",
+      "type": "shell",
+      "command": "bash .config/scripts/vscode.sh && task python:run"
+    },
+    {
+      "label": "(python:test): Runs tests with `pytest` after fixing and linting",
+      "type": "shell",
+      "command": "bash .config/scripts/vscode.sh && task python:test"
+    },
+    {
+      "label": "(security:bandit): Check for Python code security issues",
+      "type": "shell",
+      "command": "bash .config/scripts/vscode.sh && task security:bandit"
+    },
+    {
       "label": "(security:dockle): Analyze and lint the Docker container using Dockle",
       "type": "shell",
       "command": "bash .config/scripts/vscode.sh && task security:dockle"

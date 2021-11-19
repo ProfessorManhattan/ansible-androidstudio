@@ -9,6 +9,45 @@ homepage = "https://megabyte.space"
 documentation = "https://megabyte.space/docs/ansible/roles"
 keywords = ["adb", "android", "androidsdk", "androidstudio", "ansible", "ansible-role", "apps", "archlinux", "awesome", "centos", "debian", "desktop", "development", "doctor", "fedora", "google", "ide", "install", "installdoc", "installdoctor", "java", "macos", "megabytelabs", "molecule", "npm", "package", "platformtools", "professormanhattan", "role", "snap", "ubuntu", "windows"]
 include = ["CHANGELOG.md", "LICENSE"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Development Status :: 5 - Production/Stable",
+  "Environment :: Console",
+  "Environment :: MacOS X",
+  "Environment :: Web Environment",
+  "Framework :: Ansible",
+  "Framework :: Flake8",
+  "Intended Audience :: Developers",
+  "Intended Audience :: End Users/Desktop",
+  "Intended Audience :: System Administrators",
+  "License :: OSI Approved :: MIT License",
+  "Natural Language :: English",
+  "Operating System :: MacOS :: MacOS X",
+  "Operating System :: MacOS",
+  "Operating System :: Microsoft :: Windows :: Windows 10",
+  "Operating System :: Microsoft :: Windows",
+  "Operating System :: POSIX :: Linux",
+  "Programming Language :: JavaScript",
+  "Programming Language :: Other Scripting Engines",
+  "Programming Language :: Other",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.7",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python",
+  "Programming Language :: Unix Shell",
+  "Topic :: Desktop Environment",
+  "Topic :: Documentation",
+  "Topic :: Internet",
+  "Topic :: Software Development :: Build Tools",
+  "Topic :: Software Development :: Documentation",
+  "Topic :: Software Development :: Libraries",
+  "Topic :: Software Development",
+  "Topic :: System :: Installation/Setup",
+  "Topic :: Utilities"
+]
 
 [tool.poetry.dependencies]
 python = ">=3.7.0,<4.0.0"

@@ -14,8 +14,8 @@ galaxy_info:
         - buster
     - name: Ubuntu
       versions:
-        - hirsute
         - focal
+        - hirsute
         - bionic
   galaxy_tags:
     - adb
