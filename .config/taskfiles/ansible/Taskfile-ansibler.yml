@@ -21,45 +21,77 @@ tasks:
 
   compatibility-chart:
     deps:
-      - :install:python:requirements
       - :install:software:jq
     env:
       TMP:
         sh: mktemp
     cmds:
-      - ansibler --generate-compatibility-chart --molecule-results-dir '{{.MOLECULE_RESULTS_PATH}}' --json-file '{{.VARIABLES_PATH}}'
-    # log:
-    #   error: 'Failed to generate the compatibility chart JSON using data from `{{.MOLECULE_RESULTS_PATH}}/`'
-    #   success: 'Generated compatibility chart JSON and injected it into the `{{.VARIABLES_PATH}}` file'
+      - task: compatibility-chart:generate
+      - jq -s -S '.[0] + .[1]' '{{.VARIABLES_PATH}}' .cache/compatibility-chart.json > "$TMP"
+      - mv "$TMP" '{{.VARIABLES_PATH}}'
+
+  compatibility-chart:generate:
+    deps:
+      - :install:python:requirements
+    env:
+      TMP:
+        sh: mktemp
+    cmds:
+      - mkdir -p .cache
+      - ansibler --generate-compatibility-chart --molecule-results-dir '{{.MOLECULE_RESULTS_PATH}}' --json-file .cache/compatibility-chart.json
     sources:
       - '{{.MOLECULE_RESULTS_PATH}}/*'
+    generates:
+      - .cache/compatibility-chart.json
 
   populate-platforms:
+    deps:
+      - :install:software:jq
+    env:
+      TMP:
+        sh: mktemp
+    cmds:
+      - task: populate-platforms:generate
+      - jq -s -S '.[0] + .[1]' '{{.VARIABLES_PATH}}' .cache/platforms.json > "$TMP"
+      - mv "$TMP" '{{.VARIABLES_PATH}}'
+
+  populate-platforms:generate:
     deps:
       - :install:python:requirements
       - :install:npm:prettier
     cmds:
-      - ansibler --populate-platforms --json-file '{{.VARIABLES_PATH}}'
+      - mkdir -p .cache
+      - ansibler --populate-platforms --json-file .cache/platforms.json
       - >
         {{.NPX_HANDLE}}prettier --write '{{.META_PATH}}'
-    # log:
-    #   error: 'Error populating the `{{.META_PATH}}` platforms variable with `ansibler.'
-    #   success: 'Populated the platforms variable in `{{.META_PATH}}` using data from `{{.MOLECULE_RESULTS_PATH}}`'
     sources:
       - '{{.MAIN_TASKS_PATH}}'
       - '{{.MOLECULE_RESULTS_PATH}}/*'
+    generates:
+      - .cache/platforms.json
 
   role-dependencies:
     deps:
+      - :install:software:jq
+    env:
+      TMP:
+        sh: mktemp
+    cmds:
+      - task: role-dependencies:generate
+      - jq -s -S '.[0] + .[1]' '{{.VARIABLES_PATH}}' .cache/role-dependencies.json > "$TMP"
+      - mv "$TMP" '{{.VARIABLES_PATH}}'
+
+  role-dependencies:generate:
+    deps:
       - :install:python:requirements
     cmds:
-      - cmd: ansibler --role-dependencies --json-file '{{.VARIABLES_PATH}}'
+      - mkdir -p .cache
+      - cmd: ansibler --role-dependencies --json-file .cache/role-dependencies.json
         ignore_error: true
-    # log:
-    #   error: 'Failed to acquire the `role_dependencies` JSON and inject it into `{{.VARIABLES_PATH}}`'
-    #   success: 'Populated the `role_dependencies` variable in `{{.VARIABLES_PATH}}`'
     sources:
       - '{{.REQUIREMENTS_PATH}}'
+    generates:
+      - .cache/role-dependencies.json
 
   tasks:playbook:
     deps:

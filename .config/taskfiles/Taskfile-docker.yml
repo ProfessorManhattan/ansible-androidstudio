@@ -34,10 +34,6 @@ tasks:
     cmds:
       - docker build --build-arg BUILD_DATE="{{.BUILD_DATE}}" --build-arg REVISION="{{.REVISION}}" --build-arg VERSION="{{.VERSION}}"
         --tag {{.DOCKERHUB_PROFILE}}/{{.SLUG}}:latest --tag {{.DOCKERHUB_PROFILE}}/{{.SLUG}}:{{.VERSION}} .
-    # log:
-    #   error: Failed to build "fat" image
-    #   start: 'Building regular image named `{{.DOCKERHUB_PROFILE}}/{{.SLUG}}`'
-    #   success: Successfully built "fat" image
     sources:
       - Dockerfile
       - package.json
@@ -72,10 +68,6 @@ tasks:
         sh: jq -r '.blueprint.slug' package.json
     cmds:
       - docker-slim build --tag '{{.DOCKERHUB_PROFILE}}/{{.SLUG}}:slim' {{.SLIM_COMMAND}} '{{.DOCKERHUB_PROFILE}}/{{.SLUG}}:latest'
-    # log:
-    #   error: 'Failed to build `{{.DOCKERHUB_PROFILE}}/{{.SLUG}}:slim`'
-    #   start: 'Building slim image named `{{.DOCKERHUB_PROFILE}}/{{.SLUG}}:slim`'
-    #   success: 'Successfully built `{{.DOCKERHUB_PROFILE}}/{{.SLUG}}:slim`'
     sources:
       - Dockerfile
       - package.json
@@ -113,8 +105,6 @@ tasks:
       - jq --arg a "{{.SLIM_SIZE}}" '.blueprint.slim_size = $a' package.json > "$TMP"
       - mv "$TMP" package.json
       - task: :common:update:update
-    # log:
-    #   success: 'The slim build was compressed to `{{.SLIM_SIZE}}` (from `{{.REGULAR_SIZE}}` originally).'
     status:
       - '[[ "{{.PREVIOUS_SLIM_SIZE}}" == "{{.SLIM_SIZE}}" ]]'
 
@@ -169,9 +159,6 @@ tasks:
             fi
           done
         fi
-    # log:
-    #   error: Encountered error while testing the test scenarios in the `slim_test/` folder
-    #   success: The output from both the `latest` and `slim` container are the same for all the test scenarios in `slim_test/`
     status:
       - test ! -d slim_test
     preconditions:

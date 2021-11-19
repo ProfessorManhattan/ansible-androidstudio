@@ -79,6 +79,7 @@
     "access": "public"
   },
   "blueprint": {
+    "ansible_galaxy_project_id": "56329",
     "description": "Installs Android Studio and sets up Android SDKs on nearly any OS",
     "group": "ansible",
     "name": "Android Studio",
@@ -89,8 +90,7 @@
     },
     "slug": "androidstudio",
     "subgroup": "role",
-    "title": "Android Studio - An IDE for Android Development",
-    "ansible_galaxy_project_id": "56329"
+    "title": "Android Studio - An IDE for Android Development"
   },
   "eslintConfig": {
     "extends": "@mblabs/eslint-config"

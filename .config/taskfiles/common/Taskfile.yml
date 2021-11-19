@@ -28,10 +28,6 @@ tasks:
           fi
         done
         wait
-    # log:
-    #   error: Error encountered while cleaning up the optional folders
-    #   start: Cleaning up the project by removing caches etc.
-    #   success: Finished cleaning up optional folders
 
   commit:
     deps:

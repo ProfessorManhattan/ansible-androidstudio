@@ -28,9 +28,6 @@ tasks:
     cmds:
       - jq --arg collections "$COLLECTIONS" '.{{.COLLECTION_DEPS}} = ($collections | fromjson)' '{{.VARIABLES_PATH}}' > "$TMP"
       - mv "$TMP" '{{.VARIABLES_PATH}}'
-    # log:
-    #   error: 'Failed to populate the `{{.COLLECTION_DEPS}}` variable in `{{.VARIABLES_PATH}}`'
-    #   success: 'Populated the `{{.COLLECTION_DEPS}}` variable in `{{.VARIABLES_PATH}}`'
     sources:
       - '{{.VARIABLES_PATH}}'
       - '{{.REQUIREMENTS_PATH}}'
@@ -57,9 +54,6 @@ tasks:
         {{else}}
           echo "$MULTIPLE_COLLECTION_TEXT" > '{{.FILE_PATH}}'
         {{end}}
-    # log:
-    #   error: 'Failed to create `{{.FILE_PATH}}`'
-    #   success: 'Generated `{{.FILE_PATH}}`'
     sources:
       - '{{.FILE_PATH}}'
       - '{{.VARIABLES_PATH}}'
@@ -145,9 +139,6 @@ tasks:
       - task: mod-ansible-autodoc:variables
       - mkdir -p .autodoc
       - mv ansible_actions.md ansible_tags.md ansible_todo.md ansible_variables.json ansible_variables.md .autodoc
-    # log:
-    #   error: Error running `mod-ansible-autodoc`
-    #   success: Generated documentation partials with `mod-ansible-autodoc` and moved them to the `.autodoc` folder
     sources:
       - '{{.VARIABLES_PATH}}'
       - defaults/**/*.yml
@@ -242,9 +233,6 @@ tasks:
       - jq -S --arg alt "$ALT" --arg galaxyinfo "$GALAXY_INFO" --arg subheader "$SUBHEADER" '.alternative_description = $alt |
         .galaxy_info = ($galaxyinfo | fromjson) | .subheader_description = $subheader' '{{.VARIABLES_PATH}}' > "$TMP"
       - mv "$TMP" '{{.VARIABLES_PATH}}'
-    # log:
-    #   error: 'Failed to inject `{{.VARIABLES_PATH}}` with alternative descriptions'
-    #   success: 'Ensured `{{.VARIABLES_PATH}}` has alternative descriptions'
     sources:
       - '.common/variables.{{.REPOSITORY_SUBTYPE}}.json'
       - '{{.META_PATH}}'
