@@ -4,7 +4,7 @@ version: '3'
 tasks:
   esprint:
     deps:
-      - :install:local:modules
+      - :install:modules:local
       - :install:npm:esprint
     desc: Lint with `eslint` across multiple threads
     summary: |
@@ -25,14 +25,14 @@ tasks:
 
   esprint:debug:
     deps:
-      - :install:local:modules
+      - :install:modules:local
       - :install:npm:esprint
     cmds:
       - '{{.NPX_HANDLE}}esprint --esprintDebug'
 
   esprint:stop:
     deps:
-      - :install:local:modules
+      - :install:modules:local
       - :install:npm:esprint
     desc: Stop the `esprint` process that is currently running
     cmds:

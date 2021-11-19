@@ -8,7 +8,7 @@ vars:
 tasks:
   build:
     deps:
-      - :install:local:modules
+      - :install:modules:local
       - :install:npm:esbuild
       - :install:npm:nest
       - clean
@@ -27,14 +27,14 @@ tasks:
 
   build:esbuild:bundled:
     deps:
-      - :install:local:modules
+      - :install:modules:local
       - :install:npm:esbuild
     cmds:
       - node .config/esbuild/bundled.js
 
   build:esbuild:minified:
     deps:
-      - :install:local:modules
+      - :install:modules:local
       - :install:npm:esbuild
     cmds:
       - node .config/esbuild/minified.js
@@ -124,7 +124,7 @@ tasks:
 
   build:nest:
     deps:
-      - :install:local:modules
+      - :install:modules:local
       - :install:npm:nest
     cmds:
       - '{{.NPX_HANDLE}}nest build'
@@ -137,7 +137,7 @@ tasks:
 
   build:pkg:
     deps:
-      - :install:local:modules
+      - :install:modules:local
       - :install:npm:pkg
     cmds:
       - '{{.NPX_HANDLE}}pkg package.json'
@@ -173,7 +173,7 @@ tasks:
 
   start:
     deps:
-      - :install:local:modules
+      - :install:modules:local
       - :install:npm:nest
     desc: Run the application
     cmds:
@@ -181,14 +181,14 @@ tasks:
 
   start:debug:
     deps:
-      - :install:local:modules
+      - :install:modules:local
       - :install:npm:nest
     cmds:
       - '{{.NPX_HANDLE}}nest start --watch'
 
   start:inspect:
     deps:
-      - :install:local:modules
+      - :install:modules:local
       - :install:npm:ndb
       - :install:npm:nodemon
       - :install:npm:ts-node
@@ -198,14 +198,14 @@ tasks:
 
   start:inspect:legacy:
     deps:
-      - :install:local:modules
+      - :install:modules:local
       - :install:npm:nest
     cmds:
       - '{{.NPX_HANDLE}}nest start --debug --watch'
 
   start:prod:
     deps:
-      - :install:local:modules
+      - :install:modules:local
       - :install:npm:nest
     desc: Run the application in `production` mode
     cmds:
@@ -214,7 +214,7 @@ tasks:
 
   start:prod:inspect:
     deps:
-      - :install:local:modules
+      - :install:modules:local
       - :install:npm:nest
     desc: Run the application in `production` and `watch` mode and open DevTools
     cmds:
@@ -222,7 +222,7 @@ tasks:
 
   test:
     deps:
-      - :install:local:modules
+      - :install:modules:local
       - :install:npm:jest
     desc: Run the unit tests for an NPM project
     cmds:
@@ -230,7 +230,7 @@ tasks:
 
   test:coverage:
     deps:
-      - :install:local:modules
+      - :install:modules:local
       - :install:npm:jest
     desc: Generate code coverage assets
     cmds:
@@ -238,7 +238,7 @@ tasks:
 
   test:dashboard:
     deps:
-      - :install:local:modules
+      - :install:modules:local
       - :install:npm:majestic
     desc: Run and manage test cases from a web interface (powered by `majestic`)
     cmds:
@@ -246,7 +246,7 @@ tasks:
 
   test:debug:
     deps:
-      - :install:local:modules
+      - :install:modules:local
       - :install:npm:jest
     desc: Debug tests in `watch` mode
     cmds:
@@ -256,7 +256,7 @@ tasks:
 
   test:inspect:
     deps:
-      - :install:local:modules
+      - :install:modules:local
       - :install:npm:jest
       - :install:npm:ndb
       - :install:npm:nodemon

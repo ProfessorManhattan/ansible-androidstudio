@@ -17,9 +17,9 @@
       "command": "bash .config/scripts/vscode.sh && task ansible:populate:dependencies"
     },
     {
-      "label": "(test:local): Run the Ansible play on the local machine",
+      "label": "(ansible:test:local): Run the Ansible play on the local machine (or via WSL - see task summary)",
       "type": "shell",
-      "command": "bash .config/scripts/vscode.sh && task test:local"
+      "command": "bash .config/scripts/vscode.sh && task ansible:test:local"
     },
     {
       "label": "(test:docker): Performs a full test, including a test for idempotency, on all available Linux systems using Docker",

@@ -16,6 +16,7 @@ update:
       - .pnpm-store/
       - .venv/
   before_script:
+    - curl -s https://gitlab.com/megabyte-labs/common/shared/-/raw/master/common/.gitlab/ci/scripts/update-init.sh | bash
     - task ci:before
   script:
     - task ci:submodules

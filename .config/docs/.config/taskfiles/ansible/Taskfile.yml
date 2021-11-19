@@ -3,10 +3,6 @@ version: '3'
 
 vars:
   COLLECTION_DEPS: collection_dependencies
-  GALAXY_NAMESPACE:
-    sh: if [ -f meta/main.yml ]; then yq e '.galaxy_info.namespace' meta/main.yml; else jq -r '.name' package.json | sed 's/\/.*//' | sed 's/@//'; fi
-  GALAXY_ROLE_NAME:
-    sh: if [ -f meta/main.yml ]; then yq e '.galaxy_info.role_name' meta/main.yml; else jq -r '.name' package.json | sed 's/.*\///'; fi
   MAIN_TASKS_PATH: tasks/main.yml
   META_PATH: meta/main.yml
   MOLECULE_RESULTS_PATH: molecule/.results
@@ -71,7 +67,6 @@ tasks:
   galaxy:requirements:
     run: once
     cmds:
-      - task: :common:python:requirements:venv:activate
       - task: galaxy:requirements:install
     sources:
       - requirements.yml
@@ -131,7 +126,7 @@ tasks:
 
   mod-ansible-autodoc:
     deps:
-      - :common:python:requirements
+      - :install:python:requirements
       - :install:software:jq
     env:
       ACTIONS_DESCRIPTION:
@@ -172,220 +167,22 @@ tasks:
       - jq --arg vars "$ROLE_VARIABLES" '.role_variables = ($vars | fromjson)' '{{.VARIABLES_PATH}}' > "$TMP"
       - mv "$TMP" '{{.VARIABLES_PATH}}'
 
-  playbook:environment:
-    cmds:
-      - task: playbook:environment:{{if .CLI_ARGS}}cli{{else}}prompt{{end}}
-
-  playbook:environment:cli:
-    desc: Prompts for which environment to use and then symlinks to it
-    summary: |
-      # Switch environments using an interactive dialogue
-
-      Ansible does not really provide any great ways to switch between environments (or sets of
-      `host_vars/`, `group_vars/` etc.). If you place all the files and folders you wish to constitute
-      as an environment inside a folder named as the name of the environment then you can use
-      this task to handle the symlinking and switching between environments.
-
-      **Example of opening the interactive prompt:**
-      `task ansible:environment`
-
-      **You can directly switch enironments to `environments/prod/` by running:**
-      `task ansible:environment -- prod`
-    cmds:
-      - |
-        {{if .CLI_ARGS}}
-          for ITEM in environments/{{.CLI_ARGS}}/*; do
-            if [ -d "$ITEM" ] || [ -f "$ITEM" ]; then
-              true info "Skipping environments/{{.CLI_ARGS}}/$ITEM because it already exists as a file/folder in the root of the project."
-            else
-              rm -f $ITEM
-              ln -s "./environments/{{.CLI_ARGS}}/$ITEM" "$ITEM"
-            fi
-          done
-        {{end}}
-
-  playbook:environment:prompt:
+  quickstart:
     deps:
-      - :install:local:modules
-    env:
-      ENVIRONMENT:
-        sh: node .common/scripts/prompts/environment.js
-    cmds:
-      - |
-        if [ ! -z "$ENVIRONMENT" ]; then
-          for ITEM in "environments/$ENVIRONMENT/*"; do
-            if [ -d "$ITEM" ] || [ -f "$ITEM" ]; then
-              true info 'Skipping `environments/'"$ENVIRONMENT/$ITEM"'` because it already exists as a file/folder in the root of the project.'
-            else
-              rm -f $ITEM
-              ln -s "./environments/$ENVIRONMENT/$ITEM" "$ITEM"
-            fi
-          done
-        fi
-    status:
-      - '[[ -z "{{.CLI_ARGS}}" ]]'
-
-    preconditions:
-      - sh: test -d node_modules
-        msg: This task has dependencies in the `node_modules` folder which is missing.
-
-  playbook:find-missing:
-    desc: Find roles that are missing files
-    summary: |
-      # Find roles that are missing any given file
-
-      This task scans through all the folders in the roles/ directory and checks
-      for the presence of a file that you pass in through the CLI.
-
-      **Example usage:**
-      `task find-missing -- logo.png`
-
-      The example above will look through all the folders two levels deep (e.g. `./roles/tools/nmap`,
-      `./roles/system/snapd`) in the roles folder and display any roles that are missing the file.
-    cmds:
-      - |
-        FILES=$(find ./roles -mindepth 2 -maxdepth 2 -type d '!' -exec test -e "{}/{{.CLI_ARGS}}" ';' -print)
-        true log info 'Found '"$(echo "$FILES" | wc -l | xargs)"' roles missing {{.CLI_ARGS}}'
-        echo "$FILES"
-    # log:
-    #   error: 'Failed to search for the file named `{{.CLI_ARGS}}`'
-    preconditions:
-      - sh: test -d roles
-        msg: The `roles/` folder is missing. Is the project set up right?
-
-  populate:collection:
-    deps:
-      - :install:software:yq
-    env:
-      COLLECTIONS:
-        sh: yq eval '.collections' '{{.REQUIREMENTS_PATH}}'
-      REFERENCES:
-        sh: grep -Ril '{{.KEY}}' ./tasks || true
-    cmds:
-      - |
-        if [[ ! "$COLLECTIONS" =~ '{{.KEY}}' ]] && [ "$REFERENCES" ]; then
-          yq eval -i -P '.collections = .collections + {{.VAL}}' '{{.REQUIREMENTS_PATH}}'
-        fi
-      - task: :fix:yaml:dashes
-        vars:
-          CLI_ARGS: '{{.REQUIREMENTS_PATH}}'
-    # log:
-    #   error: 'Failed to populate and/or format the `{{.REQUIREMENTS_PATH}}` with the `{{.KEY}}` collection'
-    #   success: 'Ensured that `{{.REQUIREMENTS_PATH}}` includes the `{{.KEY}}` collection'
-    status:
-      - '[[ "$COLLECTIONS" =~ "{{.KEY}}" ]] || [ ! "$REFERENCES" ]'
-
-  populate:dependencies:
-    desc: 'Attempt to automatically populate `{{.META_PATH}}` and `{{.REQUIREMENTS_PATH}}`'
-    summary: |
-      # Automatically populate `{{.META_PATH}}` and `{{.REQUIREMENTS_PATH}}`
-
-      A role can sometimes have dependencies that need to be installed prior to being run (e.g. most
-      roles in Ansible >2.9 need the `community.general` collection installed). Roles also sometimes
-      need other roles to run before they are run (e.g. a task that installs a Node.js package needs
-      the Node.js installer to run first). This task will scan for common dependencies by doing a text
-      search for a handful of common strings. It will then attempt to automatically populate
-      `{{.META_PATH}}` and the `{{.REQUIREMENTS_PATH}}`.
-
-      Items it attempts to auto-populate for:
-
-      * chocolatey.chocolatey
-      * community.general
-      * community.general.homebrew
-      * community.general.gem
-      * community.general.npm
-      * community.general.snap
-    cmds:
-      - task: populate:collection
-        vars:
-          KEY: chocolatey.chocolatey
-          VAL: '{"name": "chocolatey.chocolatey", "source": "https://galaxy.ansible.com"}'
-      - task: populate:collection
-        vars:
-          KEY: community.general
-          VAL: '{"name": "community.general", "source": "https://galaxy.ansible.com"}'
-      - task: populate:dependency
-        vars:
-          KEY: community.general.homebrew
-          ROLE: professormanhattan.homebrew
-          VAL: '{"role": "professormanhattan.homebrew", "when": "ansible_os_family == \"Darwin\""}'
-      - task: populate:dependency
-        vars:
-          KEY: community.general.npm
-          ROLE: professormanhattan.nodejs
-          VAL: '{"role": "professormanhattan.nodejs"}'
-      - task: populate:dependency
-        vars:
-          KEY: community.general.gem
-          ROLE: professormanhattan.ruby
-          VAL: '{"role": "professormanhattan.ruby"}'
-      - task: populate:dependency
-        vars:
-          KEY: community.general.snap
-          ROLE: professormanhattan.snapd
-          VAL: '{"role": "professormanhattan.snapd", "when": "ansible_system == \"Linux\""}'
-      - task: sync:requirements
-    sources:
-      - '{{.META_PATH}}'
-      - '{{.REQUIREMENTS_PATH}}'
-      - tasks/**/*.yml
-
-  populate:dependency:
-    deps:
-      - :install:software:yq
-    env:
-      DEPENDENCIES:
-        sh: yq eval '.dependencies' '{{.META_PATH}}'
-      REFERENCES:
-        sh: grep -Ril '{{.KEY}}' ./tasks || true
-    cmds:
-      - |
-        if [[ ! "$DEPENDENCIES" =~ '{{.ROLE}}' ]] && [ "$REFERENCES" ]; then
-          if [[ '{{.GALAXY_NAMESPACE}}.{{.GALAXY_ROLE_NAME}}' != '{{.ROLE}}' ]]; then
-            yq eval -i -P '.dependencies = .dependencies + {{.VAL}}' '{{.META_PATH}}'
-          fi
-        fi
-      - task: :fix:yaml:dashes
-        vars:
-          CLI_ARGS: '{{ .META_PATH }}'
-    # log:
-    #   error: 'Failed to ensure `{{.ROLE}}` is included in the `{{.META_PATH}}` `dependencies`'
-    #   success: 'Ensured `{{.ROLE}}` is included in the `{{.META_PATH}}` `dependencies`'
-    status:
-      - '[[ "$DEPENDENCIES" =~ "{{.ROLE}}" ]] || [ ! "$REFERENCES" ]'
-
-  populate:meta:
-    deps:
-      - :install:npm:prettier
-      - :install:software:jq
+      - :ansible:symlink:{{.REPOSITORY_SUBTYPE}}
+      - :install:python:requirements
     vars:
-      DESCRIPTION:
-        sh: yq eval '.galaxy_info.description' '{{.META_PATH}}'
-      REFERENCE_LINK: Take a look at an [example meta/main.yml
-        file](https://gitlab.com/megabyte-labs/ansible-roles/androidstudio/-/blob/master/{{.META_PATH}}).
-    env:
-      TMP:
-        sh: mktemp
+      INSTALLING:
+        sh: if test -f install_in_progress; then echo 'true'; else echo 'false'; fi
     cmds:
-      - jq --arg a '{{.DESCRIPTION}}' --arg b '{{.GALAXY_ROLE_NAME}}' '.blueprint.description = $a | .blueprint.slug = $b' package.json > "$TMP"
-      - mv "$TMP" package.json
-      - '{{.NPX_HANDLE}}prettier --write package.json'
-    # log:
-    #   error: Failed to update the `blueprint` variable in `package.json` with meta information
-    #   success: Ensured the `blueprint` variable in `package.json` is populated with up-to-date meta information
-    sources:
-      - meta/main.yml
-      - package.json
-    preconditions:
-      - sh: 'test -f {{.META_PATH}}'
-        msg: 'The `{{.META_PATH}}` file is missing. A properly filled out `{{.META_PATH}}` file is required for the
-          update process. {{.REFERENCE_LINK}}'
-      - sh: '[[ "{{.DESCRIPTION}}" != "null" ]]'
-        msg: 'The `{{.META_PATH}}` file has a null value for the `galaxy_info.description` key. Ensure the description
-          is populated in `{{.META_PATH}}`. {{.REFERENCE_LINK}}'
-      - sh: '[[ "{{.GALAXY_ROLE_NAME}}" != "null" ]]'
-        msg: 'The `{{.META_PATH}}` file has a null value for the `galaxy_info.role_name` key. Ensure the role name is
-          populated in `{{.META_PATH}}`. {{.REFERENCE_LINK}}'
+      - true info "Running the Ansible play locally"
+      - cp test/{{OS}}/inventory inventory
+      - if [ ! -f ansible.cfg.bak ]; then cp ansible.cfg ansible.cfg.bak; fi
+      - cp test/{{OS}}/ansible.cfg ansible.cfg
+      - touch install_in_progress
+      - ansible-playbook --ask-sudo-pass{{if eq .INSTALLING 'false'}} --skip-tags "skip_on_init" playbooks/init.yml{{else}} main.yml{{end}}
+      - if [ -f ansible.cfg.bak ]; then mv ansible.cfg.bak ansible.cfg; fi
+      - if [ -f inventory ]; then rm inventory; fi
 
   sync:requirements:
     deps:
@@ -428,7 +225,7 @@ tasks:
 
   update:variables:
     deps:
-      - ansibler:ansibler
+      - :ansible:ansibler:ansibler
       - update:variables:descriptions
 
   update:variables:descriptions:

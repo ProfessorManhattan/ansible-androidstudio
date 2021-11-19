@@ -52,18 +52,31 @@ tasks:
             echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> "$1"
           fi
         }
+        case "${SHELL}" in
+          */bash*)
+            if [[ -r "${HOME}/.bash_profile" ]]; then
+              SHELL_PROFILE="${HOME}/.bash_profile"
+            else
+              SHELL_PROFILE="${HOME}/.profile"
+            fi
+            ;;
+          */zsh*)
+            SHELL_PROFILE="${HOME}/.zprofile"
+            ;;
+          *)
+            SHELL_PROFILE="${HOME}/.profile"
+            ;;
+        esac
         if [ -f "~/.local/homebrew/bin/brew" ] && ! type brew &> /dev/null; then
           eval "$(~/.local/homebrew/bin/brew shellenv)"
-          ensureSource "~/.bash_profile"
-          ensureSource "~/.profile"
+          ensureSource "$SHELL_PROFILE"
         elif ! type brew &> /dev/null; then
           rm -rf ~/.local/homebrew
           mkdir -p ~/.local/homebrew
           git clone https://github.com/Homebrew/brew ~/.local/homebrew
           eval "$(~/.local/homebrew/bin/brew shellenv)"
           brew update --force --quiet
-          ensureSource "~/.bash_profile"
-          ensureSource "~/.profile"
+          ensureSource "$SHELL_PROFILE"
         fi
 
   brew:windows:
@@ -90,11 +103,27 @@ tasks:
             echo "debian"
           elif [ -f "/etc/redhat-release" ]; then
             echo "redhat"
+          elif [ -f "/etc/arch-release" ]; then
+            echo "archlinux"
           else
             echo "unknown"
           fi
     cmds:
       - task: common:linux:{{.LINUX_FAMILY}}
+
+  common:linux:archlinux:
+    interactive: true
+    cmds:
+      - true warn "Archlinux support for Homebrew is not very well documented.. if this does not work and you can get it working, please open a PR :)"
+      - |
+        sudo pacman update
+        sudo pacman -S base-devel curl file git procps-ng
+    status:
+      - type curl &> /dev/null || [[ "${container:=}" == "docker" ]]
+      - type git &> /dev/null || [[ "${container:=}" == "docker" ]]
+      - ldconfig -p | grep base-devel || [[ "${container:=}" == "docker" ]]
+      - ldconfig -p | grep file || [[ "${container:=}" == "docker" ]]
+      - ldconfig -p | grep procps-ng || [[ "${container:=}" == "docker" ]]
 
   common:linux:debian:
     interactive: true

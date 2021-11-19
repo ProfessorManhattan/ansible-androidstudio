@@ -19,11 +19,10 @@ molecule-linux:
       when: never
     - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
       changes:
-        - '{defaults,handlers,meta,molecule,tasks,templates,vars}/**/*.yml'
-        - templates/**/*.j2
+        - '{defaults,files,handlers,meta,molecule,tasks,templates,vars}/**'
         - ansible.cfg
-        - files/**/*
-        - requirements.txt
+        - poetry.lock
+        - pyproject.toml
         - requirements.yml
     - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == 'master'
   variables:

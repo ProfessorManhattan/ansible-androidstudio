@@ -1,37 +1,24 @@
 ---
+.shared_macos_runners:
+  tags:
+    - shared-macos-amd64
+
 molecule-macos:
   stage: test
-  image:
-    name: megabytelabs/molecule:slim
-    entrypoint: ['']
-  services:
-    - docker:20.10.7-dind
-  parallel:
-    matrix:
-      - OPERATING_SYSTEM: macos
+  extends:
+    - .shared_macos_runners
   rules:
     - if: $CI_PIPELINE_SOURCE == 'schedule' || $CI_PIPELINE_SOURCE == 'web'
     - if: $CI_COMMIT_TITLE =~ /^(automation|chore).*/
       when: never
     - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
       changes:
-        - '{defaults,handlers,meta,molecule,tasks,templates,vars}/**/*.yml'
-        - templates/**/*.j2
+        - '{defaults,files,handlers,meta,molecule,tasks,templates,vars}/**'
         - ansible.cfg
-        - files/**/*
-        - requirements.txt
+        - poetry.lock
+        - pyproject.toml
         - requirements.yml
     - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == 'master'
-  variables:
-    DOCKER_CERT_PATH: $DOCKER_TLS_CERTDIR/client
-    DOCKER_HOST: tcp://docker:2376
-    DOCKER_TLS_CERTDIR: /certs
-    DOCKER_TLS_VERIFY: 1
-    GIT_DEPTH: 1
   script:
     - set -eo pipefail
-    - SCENARIO="ci-docker-$OPERATING_SYSTEM"
-    - SNAP_REFERENCES=$(grep -Ril "community.general.snap:" ./tasks)
-    - if [ "$SNAP_REFERENCES" ]; then SCENARIO="ci-docker-$OPERATING_SYSTEM-snap"; fi
-    - echo "***Molecule Scenario*** ---> $SCENARIO"
-    - if [ -d "molecule/$SCENARIO" ]; then molecule test -s "$SCENARIO"; fi
+    - bash test/macos/test.sh

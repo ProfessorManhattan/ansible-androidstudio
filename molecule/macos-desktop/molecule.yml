@@ -9,9 +9,7 @@ driver:
   provider:
     name: virtualbox
 lint: |
-  yamllint .
-  ansible-lint
-  flake8
+  task lint:all
 platforms:
   - box: Megabyte/macOS-Desktop
     cpus: 2

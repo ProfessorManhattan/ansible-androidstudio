@@ -12,7 +12,27 @@ tasks:
     status:
       - type {{.SOFTWARE}} &> /dev/null || [[ "${container:=}" == "docker" ]]
 
-  local:modules:
+  modules:global:
+    deps:
+      - :install:npm:{{.NPM_PROGRAM}}
+    run: once
+    cmds:
+      - task: :install:npm:commitizen
+      - task: :install:npm:commitlint
+      - task: :install:npm:cspell
+      - task: :install:npm:eslint
+      - task: :install:npm:hbs
+      - task: :install:npm:husky
+      - task: :install:npm:lint-staged
+      - task: :install:npm:prettier
+      - task: :install:npm:readme
+      - task: :install:npm:remark
+      - task: :install:npm:shellcheck
+      - task: :install:npm:standard-version
+    status:
+      - '[[ "${container:=}" == "docker" ]]'
+
+  modules:local:
     deps:
       - :install:npm:{{.NPM_PROGRAM}}
     vars:

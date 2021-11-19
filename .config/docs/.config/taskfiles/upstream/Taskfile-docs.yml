@@ -70,7 +70,7 @@ tasks:
 
   template:
     deps:
-      - :install:local:modules
+      - :install:modules:local
       - :install:npm:hbs
     cmds:
       - task: template:variables

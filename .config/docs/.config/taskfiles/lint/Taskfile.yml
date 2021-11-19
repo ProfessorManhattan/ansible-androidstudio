@@ -23,7 +23,7 @@ tasks:
   ansible:
     deps:
       - :symlink:{{.REPOSITORY_SUBTYPE}}
-      - :common:python:requirements
+      - :install:python:requirements
     desc: Lint Ansible projects using Ansible Lint
     summary: |
       # Lint an Ansible project using Ansible Lint
@@ -42,7 +42,7 @@ tasks:
 
   commit:
     deps:
-      - :install:local:modules
+      - :install:modules:local
       - :install:npm:commitlint
     summary: |
       # Lint a commit message
@@ -103,7 +103,7 @@ tasks:
 
   eslint:
     deps:
-      - :install:local:modules
+      - :install:modules:local
       - :install:npm:eslint
     desc: Lint with `eslint`
     summary: |
@@ -126,16 +126,16 @@ tasks:
 
   js:
     deps:
-      - :install:local:modules
+      - :install:modules:local
       - :install:npm:eslint
     cmds:
       - '{{.NPX_HANDLE}}eslint --format pretty --ext .js,.jsx,.ts {{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}.{{end}}'
 
   lint-staged:
     deps:
-      - :common:node:dependencies:global
-      - :install:local:modules
-      - :common:python:requirements
+      - :install:modules:global
+      - :install:modules:local
+      - :install:python:requirements
     cmds:
       - '{{.NPX_HANDLE}}lint-staged'
 
@@ -169,7 +169,7 @@ tasks:
 
   prettier:
     deps:
-      - :install:local:modules
+      - :install:modules:local
       - :install:npm:prettier
     desc: Lint formatting using Prettier
     summary: |
@@ -189,7 +189,7 @@ tasks:
 
   python:
     deps:
-      - :common:python:requirements
+      - :install:python:requirements
     label: lint:python
     desc: Lint Python files using Flake8
     summary: |
@@ -301,7 +301,7 @@ tasks:
 
   toml:
     deps:
-      - :common:python:requirements
+      - :install:python:requirements
     desc: Lint TOML files
     summary: |
       # Lint TOML files
@@ -334,7 +334,7 @@ tasks:
 
   xml:
     deps:
-      - :common:python:requirements
+      - :install:python:requirements
     desc: Lint XML files
     summary: |
       # Lint XML files
@@ -352,7 +352,7 @@ tasks:
 
   yaml:
     deps:
-      - :common:python:requirements
+      - :install:python:requirements
     desc: Lint .yml files using YAML Lint
     summary: |
       # Lint YML files using YAML Lint

@@ -4,6 +4,8 @@ version: '3'
 includes:
   ansible: ./.config/taskfiles/ansible/Taskfile.yml
   ansible:ansibler: ./.config/taskfiles/ansible/Taskfile-ansibler.yml
+  ansible:playbook: ./.config/taskfiles/ansible/Taskfile-playbook.yml
+  ansible:populate: ./.config/taskfiles/ansible/Taskfile-populate.yml
   ansible:test: ./.config/taskfiles/ansible/Taskfile-test.yml
   boilr: ./.config/taskfiles/Taskfile-boilr.yml
   ci: ./.config/taskfiles/Taskfile-ci.yml

@@ -111,7 +111,7 @@ tasks:
 
   latestos:
     deps:
-      - :common:python:requirements
+      - :install:python:requirements
       - :install:software:jq
     vars:
       TAG:

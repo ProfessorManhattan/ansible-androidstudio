@@ -78,7 +78,7 @@ tasks:
 
   man-page:
     deps:
-      - :install:local:modules
+      - :install:modules:local
       - :install:npm:remark
       - :install:npm:prettier
       - :install:npm:readme

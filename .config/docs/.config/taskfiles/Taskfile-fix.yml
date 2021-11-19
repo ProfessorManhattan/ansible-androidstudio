@@ -7,7 +7,7 @@ vars:
 tasks:
   eslint:
     deps:
-      - :install:local:modules
+      - :install:modules:local
       - :install:npm:eslint
     desc: Fix JavaScript/TypeScript errors automatically
     summary: |
@@ -27,7 +27,7 @@ tasks:
 
   json:
     deps:
-      - :install:local:modules
+      - :install:modules:local
       - :install:npm:eslint
     desc: Alphabetically sort JSON
     summary: |
@@ -46,7 +46,7 @@ tasks:
 
   misc:
     deps:
-      - :common:python:requirements
+      - :install:python:requirements
     desc: Perform miscellaneous fixes such as removing BOM and ensuring LF line endings
     summary: |
       # Miscellaneous fixes
@@ -111,7 +111,7 @@ tasks:
 
   prettier:
     deps:
-      - :install:local:modules
+      - :install:modules:local
       - :install:npm:prettier
     desc: Automatically format most files using Prettier
     summary: |
@@ -136,7 +136,7 @@ tasks:
 
   python:
     deps:
-      - :common:python:requirements
+      - :install:python:requirements
     desc: Automatically format Python files using Black
     summary: |
       # Automatically format Python files using Black
@@ -274,7 +274,7 @@ tasks:
 
   yaml:order:
     deps:
-      - :install:local:modules
+      - :install:modules:local
       - :install:npm:eslint
     summary: |
       # Ensure YML files are sorted properly

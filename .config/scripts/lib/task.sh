@@ -1,13 +1,12 @@
 #!/usr/bin/env bash
 
-# @file .config/start.sh
-# @brief Ensures Task is installed and up-to-date and then runs `task start`
+# @file .config/scripts/lib/task.sh
+# @brief Ensures Task is installed and up-to-date
 # @description
-#   This script will ensure [Task](https://github.com/go-task/task) is up-to-date
-#   and then run the `start` task which is generally a good entrypoint for any repository
-#   that is using the Megabyte Labs templating/taskfile system. The `start` task will
-#   ensure that the latest upstream changes are retrieved, that the project is
-#   properly generated with them, and that all the development dependencies are installed.
+#   This script ensures that the latest version of [Task](https://github.com/go-task/task)
+#   is installed. If an outdated version of Task is installed, the script will attempt
+#   to overwrite the currently installed `task` binary and exit with an error if the
+#   binary is not writable by the current user.
 
 set -eo pipefail
 
@@ -193,12 +192,5 @@ function sha256() {
   fi
 }
 
-# @description Attempts to pull the latest changes if the folder is a git repository
-if [ -d .git ]; then
-  git pull origin master --ff-only
-  git submodule update --init --recursive
-fi
-
-# @description Ensures Task is installed and properly configured and then runs the `start` task
+# @description Ensures Task is installed and properly configured
 ensureTaskInstalled
-task start

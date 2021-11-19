@@ -126,15 +126,12 @@ tasks:
         wait
 
   merge:variables:
-    deps:
-      - merge:variables:project
+    cmds:
+      - task: merge:variables:project
+      - task: merge:variables:subtype
+
 
   merge:variables:project:
-    cmds:
-      - task: merge:variables:project:project
-      - task: merge:variables:project:subtype
-
-  merge:variables:project:project:
     deps:
       - :install:software:jq
     cmds:
@@ -146,16 +143,16 @@ tasks:
           cp ./{{.COMMON_FOLDER}}/.config/docs/variables.json ./{{.COMMON_FOLDER}}/.config/variables.json
         fi
 
-  merge:variables:project:subtype:
+  merge:variables:subtype:
     deps:
       - :install:software:jq
     cmds:
       - |
-        GROUP="$(jq -r '.blueprint.subgroup' package.json)"
+        GROUP="$(jq -r '.blueprint.group' package.json)"
         if [ "$GROUP" == 'null' ]; then
-          GROUP="$(yq e '.vars.REPOSITORY_SUBTYPE' Taskfile.yml)"
+          GROUP="$(yq e '.vars.REPOSITORY_TYPE' Taskfile.yml)"
           if [ "$GROUP" == 'null' ]; then
-            echo "ERROR '.blueprint.subgroup' did not exist in the package.json and the fallback '.vars.REPOSITORY_SUBTYPE' did not exist in the Taskfile.yml"
+            echo "ERROR '.blueprint.group' did not exist in the package.json and the fallback '.vars.REPOSITORY_TYPE' did not exist in the Taskfile.yml"
           fi
         fi
         function handleSubtype() {
@@ -180,7 +177,10 @@ tasks:
       - :install:modules:local
       - :install:npm:hbs
     cmds:
-      - task: template:variables
+      - task: :upstream:variables
+        vars:
+          INPUT_FILE: ./{{.COMMON_FOLDER}}/.config/docs/variables.json
+          OUTPUT_FILE: ./.variables.json
       - task: template:files
 
   template:files:
@@ -192,57 +192,12 @@ tasks:
     vars:
       IGNORES: -o -path './project*' -o -path './deprecated*' -o
     cmds:
-      - |
-        function handlebars() {
-          FILE="$1"
-          {{.NPX_HANDLE}}hbs --data .variables.json --helper ./.config/hbs.cjs "$FILE" --stdout > "${FILE%.*}"
-          rm "$FILE"
-        }
-        find . -type f -not \( -path './{{.COMMON_FOLDER}}*' {{.IGNORES}} {{.IGNORE_FOLDERS}} \) -prune -name '*.handlebars' | while read FILE; do
-          handlebars "$FILE" &
-        done
-        wait
+      - task: :upstream:template:handlebars
+        vars:
+          ADDITIONAL_IGNORE_FOLDERS: -path './{{.COMMON_FOLDER}}*' -o -path './project*' -o -path './deprecated*' -o
 
   template:files:hbs:
-    env:
-      BLUEPRINT:
-        sh: jq -r '.blueprint' package.json
-      TMP:
-        sh: mktemp
-    vars:
-      IGNORES: -o -path './project*' -o -path './deprecated*' -o
     cmds:
-      - if [ -f "package.hbs.json" ]; then mv package.hbs.json tmp.package.hbs.json; fi
-      - |
-        function handlebars() {
-          FILE="$1"
-          {{.NPX_HANDLE}}hbs --data .variables.json --helper ./.config/hbs.cjs "$FILE" --stdout > "${FILE//.hbs}"
-          rm "$FILE"
-        }
-        find . -type f -not \( -path './{{.COMMON_FOLDER}}*' {{.IGNORES}} {{.IGNORE_FOLDERS}} \) -prune -name '*.hbs.*' | while read FILE; do
-          handlebars "$FILE" &
-        done
-        wait
-      - |
-        function ensureKeywords() {
-          if [ ! -f "$1" ]; then echo "{}" > "$1"; fi
-          KEYWORDS="$(jq -r '.keywords' "$1")"
-          if [ "$KEYWORDS" == 'null' ] || [ "$KEYWORDS" == '' ]; then
-            TMP="$(mktemp)"
-            jq -r '.keywords = [] | .' "$1" > "$TMP"
-            mv "$TMP" "$1"
-          fi
-        }
-        ensureKeywords package.json
-      - jq --arg blueprint "$BLUEPRINT" --arg keywords "$(jq '.keywords[]' package.json tmp.package.json | jq -s '. | unique')"
-        -s -S '.[0] * .[1] | .keywords = ($keywords | fromjson) | .blueprint = ($blueprint | fromjson) | .' package.json
-        tmp.package.json > "$TMP"
-      - mv "$TMP" package.json
-      - rm tmp.package.json
-
-  template:variables:
-    cmds:
-      - task: :upstream:variables
+      - task: :upstream:template:hbs
         vars:
-          INPUT_FILE: ./{{.COMMON_FOLDER}}/.config/docs/variables.json
-          OUTPUT_FILE: ./.variables.json
+          ADDITIONAL_IGNORE_FOLDERS: -path './{{.COMMON_FOLDER}}*' -o -path './project*' -o -path './deprecated*' -o

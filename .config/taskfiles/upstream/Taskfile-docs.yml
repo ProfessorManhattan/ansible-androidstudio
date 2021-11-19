@@ -55,30 +55,14 @@ tasks:
 
   merge:
     deps:
-      - merge:variables
-      - merge:package
-
-  merge:package:
-    cmds:
-      - task: :upstream:project:merge:package:files
-
-  merge:variables:
-    deps:
       - :install:software:jq
     cmds:
       - jq -s -S '.[0] * .[1]' {{.SHARED_FOLDER}}/common.json common.json > variables.json
 
   template:
-    deps:
-      - :install:modules:local
-      - :install:npm:hbs
-    cmds:
-      - task: template:variables
-      - task: :upstream:project:template:files
-
-  template:variables:
     cmds:
       - task: :upstream:variables
         vars:
           INPUT_FILE: variables.json
           OUTPUT_FILE: ./.variables.json
+      - task: :upstream:template

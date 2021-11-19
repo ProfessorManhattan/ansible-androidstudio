@@ -20,21 +20,10 @@ tasks:
       - task: :common:husky:permissions
       - mv {{.COMMON_FOLDER}}/.gitlab-ci.yml .gitlab-ci.yml
 
-  merge:
-    cmds:
-      - task: :upstream:project:merge:package:files
-
   template:
-    deps:
-      - :install:modules:local
-      - :install:npm:hbs
-    cmds:
-      - task: template:variables
-      - task: :upstream:project:template:files
-
-  template:variables:
     cmds:
       - task: :upstream:variables
         vars:
           INPUT_FILE: common.json
           OUTPUT_FILE: ./.variables.json
+      - task: :upstream:template

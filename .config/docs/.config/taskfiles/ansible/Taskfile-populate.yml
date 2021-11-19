@@ -49,37 +49,31 @@ tasks:
       - task: collection
         vars:
           KEY: chocolatey.chocolatey
-          VAL: >-
-            {"name": "chocolatey.chocolatey", "source": "https://galaxy.ansible.com"}
+          VAL: '{"name": "chocolatey.chocolatey", "source": "https://galaxy.ansible.com"}'
       - task: collection
         vars:
           KEY: community.general
-          VAL: >-
-            {"name": "community.general", "source": "https://galaxy.ansible.com"}
+          VAL: '{"name": "community.general", "source": "https://galaxy.ansible.com"}'
       - task: dependency
         vars:
           KEY: community.general.homebrew
           ROLE: professormanhattan.homebrew
-          VAL: >-
-            {"role": "professormanhattan.homebrew", "when": "ansible_os_family == 'Darwin'"}
+          VAL: '{"role": "professormanhattan.homebrew", "when": "ansible_os_family == \"Darwin\""}'
       - task: dependency
         vars:
           KEY: community.general.npm
           ROLE: professormanhattan.nodejs
-          VAL: >-
-            {"role": "professormanhattan.nodejs"}
+          VAL: '{"role": "professormanhattan.nodejs"}'
       - task: dependency
         vars:
           KEY: community.general.gem
           ROLE: professormanhattan.ruby
-          VAL: >-
-            {"role": "professormanhattan.ruby"}
+          VAL: '{"role": "professormanhattan.ruby"}'
       - task: dependency
         vars:
           KEY: community.general.snap
           ROLE: professormanhattan.snapd
-          VAL: >-
-            {"role": "professormanhattan.snapd", "when": "ansible_system == 'Linux'"}
+          VAL: '{"role": "professormanhattan.snapd", "when": "ansible_system == \"Linux\""}'
       - task: :ansible:sync:requirements
     sources:
       - '{{.META_PATH}}'

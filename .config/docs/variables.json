@@ -81,6 +81,11 @@
   "name": "[[ package.json .blueprint.name - See CONTRIBUTING.md ]]",
   "npm_private": false,
   "npm_publish_config_access": "public",
+  "npm_scripts_help": "task --list",
+  "npm_scripts_prepare": "task common:husky",
+  "npm_scripts_start": "bash .config/start.sh",
+  "npm_standard_version_prerelease": "git add --all",
+  "npm_type": "module",
   "organization": "Megabyte Labs",
   "overview": "[[ This is a new repository without the details filled in yet. Look for the section about blueprint data in the CONTRIBUTING.md to set up the project. ]]",
   "profile": {
@@ -182,5 +187,6 @@
     "text": "I create open source projects out of love. Although I have a job, shelter, and as much fast food as I can handle, it would still be pretty cool to be appreciated by the community for something I have spent a lot of time and money on. Please consider sponsoring me! Who knows? Maybe I will be able to quit my job and publish open source full time."
   },
   "subgroup": "[[ Needs to be setup. Set this in the common repository for this type of project ]]",
-  "title": "[[ package.json .blueprint.title - See CONTRIBUTING.md ]]"
+  "title": "[[ package.json .blueprint.title - See CONTRIBUTING.md ]]",
+  "version": "0.0.1"
 }

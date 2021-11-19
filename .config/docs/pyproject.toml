@@ -23,6 +23,7 @@ yamllint = "^1.26.3"
 "Bug Tracker" = "https://gitlab.com/megabyte-labs/documentation/ansible/-/issues"
 "GitHub" = "https://github.com/ProfessorManhattan/docs-ansible"
 "GitLab" = "https://gitlab.com/megabyte-labs/documentation/ansible"
+"Give Directly" = "https://givedirectly.org"
 "Open Collective" = "https://opencollective.com/megabytelabs"
 "Patreon" = "https://www.patreon.com/ProfessorManhattan"
 
