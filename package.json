@@ -78,7 +78,6 @@
   "publishConfig": {
     "access": "public"
   },
-  "autodoc_variables_description": "\nThis role contains variables that you can customize. The variables you can customize are located in `defaults/main.yml`. By default, the variables use sensible defaults but you may want to customize the role depending on your use case. The variables, along with descriptions, are listed below:\n\n\n\n### Variable Examples\n\n",
   "blueprint": {
     "description": "Installs Android Studio and sets up Android SDKs on nearly any OS",
     "group": "ansible",
