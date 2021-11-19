@@ -225,7 +225,7 @@ tasks:
 
   update:variables:
     deps:
-      - ansibler:ansibler
+      - :ansible:ansibler:ansibler
       - update:variables:descriptions
 
   update:variables:descriptions:

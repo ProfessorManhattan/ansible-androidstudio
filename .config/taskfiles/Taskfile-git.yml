@@ -119,7 +119,7 @@ tasks:
           fi
           MINIMIZED_TOPICS="$(jq -n --argjson tags "$RESULT" '$tags | .[]' | xargs | sed 's/ /","/g' | sed 's/^/"/' | sed 's/$/"/')"
           if [[ "$MINIMIZED_TOPICS" != '""' ]]; then
-            curl -X PUT -H "Accept: application/vnd.github.mercy-preview+json" -u "{{.GITHUB_ORG}}:$GITHUB_TOKEN" \
+            curl -s -X PUT -H "Accept: application/vnd.github.mercy-preview+json" -u "{{.GITHUB_ORG}}:$GITHUB_TOKEN" \
               'https://api.github.com/repos/{{.GITHUB_ORG}}/{{.GITHUB_SLUG}}/topics' -d '{"names":['"$MINIMIZED_TOPICS"']}' > /dev/null
           fi
         else
@@ -205,9 +205,9 @@ tasks:
               -f "url=https://{{.GITHUB_USER}}:$GITHUB_TOKEN@github.com/{{.GITHUB_ORG}}/{{.GITHUB_SLUG}}.git" \
               -f 'enabled=true'
           fi
-          curl -H 'Content-Type: application/json' -H "Authorization: Bearer $GITLAB_TOKEN" -X PUT --data \
+          curl -s -H 'Content-Type: application/json' -H "Authorization: Bearer $GITLAB_TOKEN" -X PUT --data \
             "{\"mirror\": true, \"import_url\": \"https://{{.GITHUB_USER}}:$GITHUB_TOKEN@github.com/{{.GITHUB_ORG}}/{{.GITHUB_SLUG}}.git\"}" \
-            'https://gitlab.com/api/v4/projects/{{.GITLAB_REPO_ID}}'
+            'https://gitlab.com/api/v4/projects/{{.GITLAB_REPO_ID}}' > /dev/null
         fi
     sources:
       - package.json
