@@ -177,7 +177,7 @@ tasks:
 
   template:
     deps:
-      - :install:local:modules
+      - :install:modules:local
       - :install:npm:hbs
     cmds:
       - task: template:variables
@@ -204,13 +204,13 @@ tasks:
         wait
 
   template:files:hbs:
-    vars:
-      IGNORES: -o -path './project*' -o -path './deprecated*' -o
     env:
       BLUEPRINT:
         sh: jq -r '.blueprint' package.json
       TMP:
         sh: mktemp
+    vars:
+      IGNORES: -o -path './project*' -o -path './deprecated*' -o
     cmds:
       - if [ -f "package.hbs.json" ]; then mv package.hbs.json tmp.package.hbs.json; fi
       - |

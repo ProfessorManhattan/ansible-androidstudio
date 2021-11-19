@@ -1,42 +1,62 @@
 ## Testing
 
-Testing is an **extremely important** part of contributing to this project. Before opening a merge request, **you must test all common use cases of the Docker image**. This should be relatively straight-forward. You should be able to run all of the commands described by `npm run info` successfully.
+You can test all of the operating systems we support by running the following command in the root of the project:
 
-### Creating Test Cases
-
-`npm run test` will test several elements of the project. It will lint the Dockerfile, lint shell scripts, and run the file in `./slim_test/test.sh`. The test case, defined in `test.sh`, is mainly for testing that slim builds work as expected but should also be utilized across all of our Dockerfile projects. In a standard test for a project with a slim build, you should compare the output of a command run against a regular build and a test build. You can accomplish this by using code similar to the following:
-
-**`./slim_test/test.sh`**
-
-```bash
-#!/bin/bash
-
-cd ./slim_test/example || exit 1
-echo "Testing latest image"
-LATEST_OUTPUT=$(docker run -v "${PWD}:/work" -w /work megabytelabs/ansible-lint:latest ansible-lint)
-echo "Testing slim image"
-SLIM_OUTPUT=$(docker run -v "${PWD}:/work" -w /work megabytelabs/ansible-lint:slim ansible-lint)
-if [ "$LATEST_OUTPUT" == "$SLIM_OUTPUT" ]; then
-  echo "Slim image appears to be working"
-  exit 0
-else
-  echo "Slim image output differs from latest image output"
-  exit 1
-fi
+```shell
+molecule test
 ```
 
-**Note: The test.sh file is now created from a template. To make sure it gets generated, you should create the `slim_test/` folder in the root of the project and then run `bash .start.sh`. The template version of `test.sh` will recursively loop through all of the folders inside the `slim_test/` folder unlike the example above which only tests the `slim_test/example/` scenario.**
+The command `molecule test` will spin up VirtualBox VMs for all the OSes we support and run the role(s). _Do this before committing code._ If you are committing code for only one OS and can not create the fix or feature for the other operating systems then please, at the very minimum, [file an issue]({{ repository.gitlab }}{{ repository.location.issues }}) so someone else can pick it up.
 
-The above script, combined with some dummy data in `slim_test/example/`, will properly validate that the slim build is working the same way the regular build is working. If no `slim_test/` folder exists in the root of the repository, then the test step will be removed from `package.json`. We prefer you create a test that validates that the container is working whenever possible but in some cases it might not be necessary especially when there is no slim version. For a full example of implementing a test, please see the [Ansible Lint repository]({{ repository.project.ansiblelint }}).
+### Idempotence
 
-### Testing DockerSlim Builds
+It is important to note that `molecule test` tests for idempotence. To pass the idempotence test means that if you run the role twice in a row then Ansible should not report any changes the second time around.
 
-It is especially important to test DockerSlim builds. DockerSlim works by removing all the components in a container's operating system that it thinks are unnecessary. This can easily break things.
+### Debugging
 
-For example, if you are testing a DockerSlim build that packages [ansible-lint]({{ repository.project.ansiblelint }}) into a slim container, you might be tempted to simply test it by running `docker exec -it MySlimAnsibleLint ansible-lint`. This will ensure that the ansible-lint command can be accessed but that is not enough. You should also test it by passing in files as a volume and command line arguments. You can see an [example of this in the Ansible Lint repository]({{ repository.project.ansiblelint }}).
+If you would like to shell into a container for debugging, you can do that by running:
 
-It is **important** to test all common use cases. Some people might be using the `ansible-lint` container in CI where the files are injected into the Docker container and some people might be using an inline command to directly access ansible-lint from the host.
+```shell
+task common:shell
+```
 
-### Testing Web Apps
+### Molecule Documentation
 
-When testing Docker-based web applications, ensure that after you destroy the container along with its volumes you can bring the Docker container back up to its previous state using volumes and file mounts. This allows users to periodically update the Docker container while having their settings persist. This requirement is also for disaster recovery.
+For more information about Ansible Molecule, check out [the docs](https://molecule.readthedocs.io/en/latest/).
+
+### Testing Desktop Environments
+
+Some of our roles include applications like [Android Studio](https://github.com/ProfessorManhattan/ansible-androidstudio). You can not fully test Android Studio from a Docker command line. In cases like this, you should use our desktop scenarios to provision a desktop GUI-enabled VM to test things like:
+
+- Making sure the Android Studio shortcut is in the applications menu
+- Opening Android Studio to make sure it is behaving as expected
+- Seeing if there is anything we can automate (e.g. if there is a "Terms of Usage" you have to click OK at then we should automate that process if possible)
+
+You can specify which scenario you want to test by passing the `-s` flag with the name of the scenario you want to run. For instance, if you wanted to test on Ubuntu Desktop, you would run the following command:
+
+```shell
+molecule test -s ubuntu-desktop
+```
+
+This would run the Molecule test on Ubuntu Desktop.
+
+By default, the `molecule test` command will destroy the VM after the test is complete. To run the Ubuntu Desktop test and then open the desktop GUI you would have to:
+
+1. Run `molecule converge -s ubuntu-desktop`
+2. Open the VM through the VirtualBox UI (the username and password are both _vagrant_)
+
+You can obtain a list of all possible scenarios by looking in the `molecule/` folder. The `molecule/default/` folder is run when you do not pass a scenario. All the other scenarios can be run by manually specifying the scenario (e.g. `molecule test -s ubuntu-desktop` will run the test using the scenario in `molecule/ubuntu-desktop/`).
+
+### Molecule Scenario Descriptions
+
+The chart below provides a list of the scenarios we include in all of our Ansible projects along with a brief description of what they are included for.
+
+{{ molecule_descriptions }}
+
+### Continuous Integration (CI)
+
+You might have noticed that there are no CI tests in the chart above for macOS and Windows. Due to the limitations of Docker, we use other methods to test macOS and Windows automatically with CI. After a project has passed various linting tests on GitLab CI, the following methods are used to test the Ansible play:
+
+- Linux platforms are tested using Molecule and Docker on GitLab CI in parallel. ([Link to GitLab CI configuration]({{ repository.group.ci }}/-/blob/master/test/molecule.gitlab-ci.yml))
+- Windows is tested using GitLab CI without Molecule. ([Link to GitLab CI configuration]({{ repository.group.ci }}/-/blob/master/test/windows-ansible-test.gitlab-ci.yml))
+- macOS is tested using GitHub Actions after the code is automatically synchronized between GitLab and GitHub. ([Link to the macOS GitHub Action configuration]({{ repository.github }}/-/blob/master/.github/workflows/macOS.yml))

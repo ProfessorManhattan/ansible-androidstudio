@@ -206,6 +206,11 @@ tasks:
   template:files:hbs:
     vars:
       IGNORES: -o -path './project*' -o -path './deprecated*' -o
+    env:
+      BLUEPRINT:
+        sh: jq -r '.blueprint' package.json
+      TMP:
+        sh: mktemp
     cmds:
       - if [ -f "package.hbs.json" ]; then mv package.hbs.json tmp.package.hbs.json; fi
       - |
@@ -219,10 +224,20 @@ tasks:
         done
         wait
       - |
-        TMP="$(mktemp)"
-        BLUEPRINT="$(jq -r '.blueprint' package.json)"
-        jq --arg blueprint "$BLUEPRINT" -s '.[0] * .[1] | .blueprint = (.blueprint * ($blueprint | fromjson))' "package.json" tmp.package.json > "$TMP"
-        mv "$TMP" package.json
+        function ensureKeywords() {
+          if [ ! -f "$1" ]; then echo "{}" > "$1"; fi
+          KEYWORDS="$(jq -r '.keywords' "$1")"
+          if [ "$KEYWORDS" == 'null' ] || [ "$KEYWORDS" == '' ]; then
+            TMP="$(mktemp)"
+            jq -r '.keywords = [] | .' "$1" > "$TMP"
+            mv "$TMP" "$1"
+          fi
+        }
+        ensureKeywords package.json
+      - jq --arg blueprint "$BLUEPRINT" --arg keywords "$(jq '.keywords[]' package.json tmp.package.json | jq -s '. | unique')"
+        -s -S '.[0] * .[1] | .keywords = ($keywords | fromjson) | .blueprint = ($blueprint | fromjson) | .' package.json
+        tmp.package.json > "$TMP"
+      - mv "$TMP" package.json
       - rm tmp.package.json
 
   template:variables:

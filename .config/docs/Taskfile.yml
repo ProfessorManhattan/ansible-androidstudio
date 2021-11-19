@@ -59,7 +59,7 @@ vars:
   NPM_PROGRAM: npm
   NPX_HANDLE: ''
   NPX_PACKAGE: npx
-  REPOSITORY_SUBTYPE: dockerfile
+  REPOSITORY_SUBTYPE: ansible
   REPOSITORY_TYPE: documentation
   TIMEZONE: America/New_York
 

@@ -10,7 +10,7 @@ tasks:
 
   check:
     deps:
-      - :install:local:modules
+      - :install:modules:local
       - :install:npm:nyc
     cmds:
       - '{{.NPX_HANDLE}}nyc report'
@@ -18,14 +18,14 @@ tasks:
 
   html:
     deps:
-      - :install:local:modules
+      - :install:modules:local
       - :install:npm:nyc
     cmds:
       - '{{.NPX_HANDLE}}nyc report --reporter=html'
 
   lcov:
     deps:
-      - :install:local:modules
+      - :install:modules:local
       - :install:npm:nyc
     cmds:
       - '{{.NPX_HANDLE}}nyc report --reporter=lcov'

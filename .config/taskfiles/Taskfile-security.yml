@@ -63,7 +63,7 @@ tasks:
 
   private-keys:
     deps:
-      - :common:python:requirements
+      - :install:python:requirements
     desc: Scan for private keys
     summary: |
       # Scan for private keys

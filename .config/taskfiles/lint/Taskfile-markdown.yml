@@ -4,7 +4,7 @@ version: '3'
 tasks:
   markdown:
     deps:
-      - :install:local:modules
+      - :install:modules:local
       - :install:npm:remark
     desc: Lint markdown files
     summary: |

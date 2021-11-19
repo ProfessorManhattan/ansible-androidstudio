@@ -13,6 +13,7 @@
     "jsonc",
     "json5",
     "markdown",
+    "toml",
     "typescript",
     "typescriptreact",
     "vue",

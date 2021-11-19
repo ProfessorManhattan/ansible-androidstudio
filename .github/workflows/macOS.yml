@@ -1,7 +1,6 @@
 ---
 name: macOS Ansible Role Test
 on:
-  pull_request:
   push:
     branches:
       - master
@@ -24,4 +23,4 @@ jobs:
         env:
           ANSIBLE_FORCE_COLOR: '1'
         run: |
-          bash tests/macos/test.sh
+          bash test/darwin/test.sh

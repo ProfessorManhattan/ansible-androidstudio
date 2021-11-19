@@ -1,26 +1,42 @@
 {
+  "private": false,
   "name": "@installdoc/ansible-androidstudio",
-  "version": "1.1.1",
+  "version": "0.0.1",
   "description": "Installs Android Studio and sets up Android SDKs on nearly any OS",
   "license": "MIT",
+  "author": "Brian Zalewski <brian@megabyte.space> (https://megabyte.space)",
+  "homepage": "https://megabyte.space",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ProfessorManhattan/ansible-androidstudio.git"
   },
-  "author": "Brian Zalewski <brian@megabyte.space> (https://megabyte.space)",
-  "homepage": "https://megabyte.space",
   "bugs": {
     "email": "help@megabyte.space",
     "url": "https://gitlab.com/megabyte-labs/ansible-roles/androidstudio/-/issues"
   },
   "type": "module",
-  "engines": {
-    "node": ">=10"
-  },
   "scripts": {
+    "help": "task --list",
     "info": "task --list",
     "prepare": "task common:husky",
+    "start": "bash .config/start.sh",
     "test": "git reset --hard HEAD && git clean -fxd && cd .commonshared && git pull origin master && cd .. && cp -rT .commonshared/common/.config .config && task start"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "dependencies": {
+    "tslib": "^2.3.1"
+  },
+  "devDependencies": {
+    "@commitlint/config-conventional": "^13.1.0",
+    "@mblabs/eslint-config": "^1.0.0",
+    "@mblabs/prettier-config": "^14.14.14",
+    "@typescript-eslint/eslint-plugin": "^5.2.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "handlebars-helpers": "^0.10.0"
   },
   "keywords": [
     "adb",
@@ -28,6 +44,7 @@
     "androidsdk",
     "androidstudio",
     "ansible",
+    "ansible-role",
     "apps",
     "archlinux",
     "awesome",
@@ -46,6 +63,8 @@
     "macos",
     "megabytelabs",
     "molecule",
+    "npm",
+    "package",
     "platformtools",
     "professormanhattan",
     "role",
@@ -53,34 +72,28 @@
     "ubuntu",
     "windows"
   ],
-  "dependencies": {
-    "tslib": "^2.3.1"
+  "engines": {
+    "node": ">=14.18.0"
   },
-  "devDependencies": {
-    "@commitlint/config-conventional": "^13.1.0",
-    "@mblabs/eslint-config": "^1.0.0",
-    "@mblabs/prettier-config": "^14.14.14",
-    "@typescript-eslint/eslint-plugin": "^5.2.0",
-    "cz-conventional-changelog": "^3.3.0",
-    "handlebars-helpers": "^0.10.0"
+  "publishConfig": {
+    "access": "public"
   },
+  "autodoc_variables_description": "\nThis role contains variables that you can customize. The variables you can customize are located in `defaults/main.yml`. By default, the variables use sensible defaults but you may want to customize the role depending on your use case. The variables, along with descriptions, are listed below:\n\n\n\n### Variable Examples\n\n",
   "blueprint": {
     "description": "Installs Android Studio and sets up Android SDKs on nearly any OS",
-    "name": "Android Studio",
     "group": "ansible",
+    "name": "Android Studio",
     "overview": "[Android Studio](https://developer.android.com/studio) is the official integrated development environment for Google's Android operating system, built on JetBrains' IntelliJ IDEA software and designed specifically for Android development. This role installs Android Studio on nearly any operating system and also ensures a configurable list of command-line tools and SDKs are installed and seamlessly integrated with the system (i.e. the role adds items to the `PATH`).",
     "repository": {
       "github": "https://github.com/ProfessorManhattan/ansible-androidstudio",
       "gitlab": "https://gitlab.com/megabyte-labs/ansible-roles/androidstudio"
     },
-    "subgroup": "role",
     "slug": "androidstudio",
+    "subgroup": "role",
     "title": "Android Studio - An IDE for Android Development"
   },
-  "config": {
-    "commitizen": {
-      "path": "cz-conventional-changelog"
-    }
+  "eslintConfig": {
+    "extends": "@mblabs/eslint-config"
   },
   "funding": [
     {
@@ -103,12 +116,19 @@
     "**/*.(css|html|less|md|mjml|php|scss|sh|xml)": [
       "task fix:prettier --"
     ],
-    "**/*.json": [
-      "task fix:json --"
+    "**/*.(jpg|png)": [
+      "task image:compress --"
     ],
     "**/*.(js|jsx|ts|tsx)": [
       "task fix:js --",
       "task lint:js --"
+    ],
+    "**/*.json": [
+      "task fix:json --"
+    ],
+    "**/*.py": [
+      "task fix:python --",
+      "task lint:python --"
     ],
     "**/*.sh": [
       "task fix:shell --",
@@ -125,8 +145,8 @@
       "task fix:yaml --",
       "task lint:yaml --"
     ],
-    "**/*.(jpg|png)": [
-      "task image:compress --"
+    "**/*vault.yml": [
+      "task ansible:vault:lint:file --"
     ],
     "logo.png": [
       "task image:resize -- 200 200",

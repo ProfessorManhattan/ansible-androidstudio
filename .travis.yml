@@ -17,4 +17,4 @@ jobs:
       python:
         - 3.8
       script:
-        - bash tests/ubuntu/test.sh
+        - bash test/linux/test.sh

@@ -1,10 +1,36 @@
 ## Linting
 
-We utilize several different linters to ensure that all our Dockerfile projects use similar design patterns. Linting sometimes even helps spot errors as well. The most important linter for Dockerfile projects is called [Haskell Dockerfile Linter]({{ website.hadolint_github_page }}) (or hadolint). You can install it by utilizing our one-line installation method found in our [hadolint Ansible role]({{ repository.project.hadolint }}). In order for a merge request to be accepted, it has to successfully pass hadolint tests. For more information about hadolint, check out the [Haskell Dockerfile Linter GitHub page]({{ website.hadolint_github_page }}).
+The process of running linters is mostly automated. Molecule is configured to lint so you will see linting errors when you run `molecule test` (note that not all Molecule scenarios include automatic linting). There is also a pre-commit hook that lints your code and performs other validations before allowing a `git commit` to go through. If you followed the [Setting Up Development Environment](#setting-up-development-environment) section, you should be all set to have your code automatically linted before pushing changes to the repository.
 
-We also incorporate other linters that are run automatically whenever you commit code (assuming you have run `npm i` in the root of the project). These linters include:
+**Please note that before creating a pull request, all lint errors should be resolved.** If you would like to view all the steps we take to ensure great code then check out `.husky/pre-commit` and the other files in the `.husky/` folder.
 
-- [Prettier]({{ repository.project.prettier }})
-- [Shellcheck]({{ repository.project.shellcheck }})
+### Fixing Ansible Lint Errors
 
-Some of the linters are also baked into the CI pipeline. The pipeline will trigger whenever you post a commit to a branch. All of these pipeline tasks must pass in order for merge requests to be accepted. You can check the status of recently triggered pipelines for this project by going to the [CI/CD pipeline page]({{ repository.group.dockerfile }}/{{ subgroup }}/{{ slug }}/-/pipelines).
+You can manually run Ansible Lint by executing the following command in the project's root:
+
+```shell
+task lint:ansible
+```
+
+Most errors will be self-explanatory and simple to fix. Other errors might require testing and research. Below are some tips on fixing the trickier errors.
+
+#### [208] File permissions unset or incorrect
+
+If you get this error, do research to figure out the minimum permissions necessary for the file. After you change the permission, test the role (since changing permissions can easily break things).
+
+#### [301] Command should not change things if nothing needs doing
+
+This error can be solved by telling Ansible what files the command creates or deletes. When you specify what file a `command:` or `shell:` creates and/or deletes, Ansible will check for the presence or absence of the file to determine if the system is already in the desired state. If it is in the desired state, then Ansible skips the task. Refer to the [documentation for ansible.builtin.command](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/command_module.html) for further details.
+
+Here is an example of code that will remove the error:
+
+```yaml
+- name: Run command if /path/to/database does not exist
+  command: /usr/bin/make_database.sh db_user db_name
+  args:
+    creates: /path/to/database # If the command deletes something, then you can swap out creates with removes
+```
+
+#### [305] Use shell only when shell functionality is required
+
+Only use the Ansible `shell:` task when absolutely necessary. If you get this error then test if replacing `shell:` with `command:` resolves the error. If that does not work and you can not figure out how to properly configure the environment for `command:` to work, then you can add `# noqa 305` at the end of the line that includes the `name:` property. The same is true for other linting errors - `# noqa` followed by the reported lint error code will instruct `ansible-lint` to ignore the error.

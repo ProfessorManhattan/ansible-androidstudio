@@ -1,0 +1,14 @@
+<!-- ⚠️ This README has been generated from the file(s) ".config/docs/blueprint-contributing.md" ⚠️-->{{ load:.common/docs/common/contributing/header.md }}
+
+{{ template:toc }}
+{{ load:.common/docs/common/contributing/code-of-conduct.md }}
+{{ load:.common/docs/contributing/philosophy.md }}
+{{ load:.common/docs/contributing/supported-os.md }}
+{{ load:.common/docs/contributing/dev-environment.md }}
+{{ load:.common/docs/contributing/pull-requests.md }}
+{{ load:.common/docs/contributing/code-format.md }}
+{{ load:.common/docs/contributing/code-style.md }}
+{{ load:.common/docs/contributing/commenting.md }}
+{{ load:.common/docs/contributing/docs.md }}
+{{ load:.common/docs/contributing/testing.md }}
+{{ load:.common/docs/contributing/linting.md }}

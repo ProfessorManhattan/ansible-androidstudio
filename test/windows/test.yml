@@ -1,0 +1,4 @@
+---
+- hosts: windows-docker
+  roles:
+    - role: .

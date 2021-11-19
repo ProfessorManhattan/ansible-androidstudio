@@ -14,6 +14,7 @@ ignore: |
   .vscode/
   .tox
   .travis.yml
+  *.hbs.yml
   build/
   dist/
   node_modules/
@@ -41,3 +42,6 @@ rules:
   line-length:
     level: error
     max: 160
+  truthy:
+    # eslint-disable-next-line yml/plain-scalar
+    allowed-values: ['false', 'on', 'true']

@@ -35,8 +35,7 @@
 - name: Find the latest version of SDKs and Tools
   become_user: '{{ user.username }}'
   set_fact:
-    build_tools_version:
-      ["{{ sdk_list.stdout_lines | regex_findall('build-tools;\\d*\\.\\d*\\.\\d* ') | last | trim }}"]
+    build_tools_version: ["{{ sdk_list.stdout_lines | regex_findall('build-tools;\\d*\\.\\d*\\.\\d* ') | last | trim }}"]
     emulator_version: [emulator]
     patcher_version: ["{{ sdk_list.stdout_lines | regex_findall('patcher;v\\d*') | last }}"]
     platform_tools_version: [platform-tools]

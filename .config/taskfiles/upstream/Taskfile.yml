@@ -43,6 +43,7 @@ tasks:
       - task: :upstream:project:merge
       - task: :upstream:project:clean
       - task: :upstream:project:template
+      - task: :upstream:project:boilerplate
       - task: :vscode:generate
       - task: :upstream:project:merge:package:json-blueprint-overrides
       - task: :common:update:update

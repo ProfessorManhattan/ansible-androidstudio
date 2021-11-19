@@ -18,12 +18,14 @@ __pycache__/
 .fuse_hidden*
 .git/
 .hypothesis/
+.jest-cache/
 .LSOverride
 .nfs*
 .nox/
 .npm/
 .nyc_output/
 .pytest_cache/
+.shared/
 .Spotlight-V100
 .task/
 .TemporaryItems
@@ -33,7 +35,7 @@ __pycache__/
 .vagrant/
 .variables.json
 .vault_pass
-.venv
+.venv/
 .VolumeIcon.icns
 *.box
 *.code-workspace
@@ -41,12 +43,16 @@ __pycache__/
 *.log
 *.retry
 *.so
+*.tsbuildinfo
 *~
 *$py.class
+ansible_variables.json
 build/
+coverage/
 coverage.xml
 db.sqlite3
 db.sqlite3-journal
+dist/
 env.bak/
 env/
 ENV/
@@ -60,5 +66,6 @@ pip-delete-this-directory.txt
 pip-log.txt
 pytestdebug.log
 Temporary Items
+tsconfig.build.tsbuildinfo
 venv.bak/
 venv/

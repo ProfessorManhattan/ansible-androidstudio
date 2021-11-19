@@ -1,17 +1,11 @@
 ## Philosophy
 
-When you are working on one of our Dockerfile projects, try asking yourself, "How can this be improved?" By asking yourself that question, you might decide to take the project a step further by opening a merge request that:
+When you are working with one of our Ansible projects, try asking yourself, "**How can this be improved?**" For example, in the case of the [Android Studio role](https://github.com/ProfessorManhattan/ansible-androidstudio), the role installs Android Studio but there may be additional tasks that should be automated. Consider the following examples:
 
-- Reduces the size of the Docker container by converting it from a Ubuntu image to an Alpine image
-- Improves the security and reduces the size of the Docker container by including a [DockerSlim]({{ website.dockerslim_github_page }}) configuration
-- Lints the Dockerfile to conform with standards set in place by [Haskell Dockerfile Linter]({{ website.hadolint_github_page }})
+- _The software is installed but is asking for a license key._ - In this case, we should provide an option for automatically installing the license key using a CLI command.
+- _The software supports plugins_ - We should provide an option for specifying the plugins that are automatically installed.
+- _In the case of Android Studio, many users have to install SDKs before using the software._ - We should offer the capability to automatically install user-specified SDKs.
+- _The software has configuration files with commonly tweaked settings._ - We should provide the ability to change these settings via variables stored in `defaults/main.yml`.
+- _The software has the capability to integrate with another piece of software in the [main playbook]({{ repository.playbooks }})_. - This integration should be automated.
 
-All of these improvements would be greatly appreciated by us and our community. After all, we want all of our Dockerfiles to be the best at what they do.
-
-### Choosing a Base Image
-
-- Whenever possible, use Alpine as the base image. It has a very small footprint so the container image downloads faster.
-- Whenever possible, choose an image with a `slim` tag. This is beneficial when, say, Alpine is incompatible with the requirements and you must use something besides an Alpine image.
-- Avoid using the latest tag (e.g. `node:latest`). Instead use specific versions like `node:15.4.2`. This makes debugging production issues easier.
-- When choosing a base image version, always choose the most recent update. There are often known vulnerabilities with older versions.
-- If all else fails, feel free to use other base images as long as they come from a trusted provider (i.e. using `ubuntu:latest` is fine but using `bobmighthackme:latest` is not).
+Ideally, you should use the software installed by the [main playbook]({{ repository.playbooks }}). This is really the only way of testing whether or not the software was installed properly and has all the common settings automated. The software installed by the main playbook is all widely-acclaimed, cross-platform software that many people find useful.

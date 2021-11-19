@@ -4,7 +4,7 @@ version: '3'
 tasks:
   prose:
     deps:
-      - :common:python:requirements
+      - :install:python:requirements
     desc: Lint for English prose
     summary: |
       # Lint for English prose

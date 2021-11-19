@@ -1,7 +1,7 @@
 <div align="center">
   <center>
     <a href="{{ repository.github }}">
-      <img width="149" height="149" alt="{{ name }} logo" src="{{ repository.gitlab }}{{ repository.location.logo.gitlab }}" />
+      <img width="148" height="148" alt="{{ name }} logo" src="{{ repository.gitlab }}{{ repository.location.logo.gitlab }}" />
     </a>
   </center>
 </div>

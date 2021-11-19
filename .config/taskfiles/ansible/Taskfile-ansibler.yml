@@ -11,7 +11,7 @@ vars:
 tasks:
   ansibler:
     deps:
-      - :common:python:requirements
+      - :install:python:requirements
     cmds:
       - task: compatibility-chart
       - task: tasks:{{.REPOSITORY_SUBTYPE}}
@@ -21,7 +21,7 @@ tasks:
 
   compatibility-chart:
     deps:
-      - :common:python:requirements
+      - :install:python:requirements
       - :install:software:jq
     env:
       TMP:
@@ -36,7 +36,7 @@ tasks:
 
   populate-platforms:
     deps:
-      - :common:python:requirements
+      - :install:python:requirements
       - :install:npm:prettier
     cmds:
       - ansibler --populate-platforms --json-file '{{.VARIABLES_PATH}}'
@@ -51,7 +51,7 @@ tasks:
 
   role-dependencies:
     deps:
-      - :common:python:requirements
+      - :install:python:requirements
     cmds:
       - cmd: ansibler --role-dependencies --json-file '{{.VARIABLES_PATH}}'
         ignore_error: true

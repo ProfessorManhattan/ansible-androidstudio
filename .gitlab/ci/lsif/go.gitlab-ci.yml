@@ -1,0 +1,11 @@
+---
+code-intelligence:
+  stage: lsif
+  image: sourcegraph/lsif-go:latest
+  allow_failure: true
+  needs: []
+  script:
+    - lsif-go
+  artifacts:
+    reports:
+      lsif: dump.lsif

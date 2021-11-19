@@ -1,7 +1,6 @@
 ---
 name: Windows Ansible Role Test
 on:
-  pull_request:
   push:
     branches:
       - master
@@ -22,7 +21,7 @@ jobs:
 
       - name: Setup WinRM.
         run: |
-          ./tests/windows/test.ps1
+          ./test/windows/test.ps1
           ipconfig
 
       - name: Setup WSL.
@@ -36,4 +35,4 @@ jobs:
           apt update
           apt install net-tools
           ifconfig
-          bash tests/windows/test.sh
+          bash test/windows/test.sh

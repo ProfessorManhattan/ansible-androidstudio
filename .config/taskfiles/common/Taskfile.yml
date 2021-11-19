@@ -35,10 +35,10 @@ tasks:
 
   commit:
     deps:
-      - :install:local:modules
+      - :install:modules:local
       - :install:npm:commitizen
       - :install:npm:commitlint
-      - python:requirements
+      - :install:python:requirements
     desc: Lint staged files, report spelling errors, and open a _required_ commit dialoge
     summary: |
       # Commit code
@@ -59,7 +59,7 @@ tasks:
 
   husky:
     deps:
-      - :install:local:modules
+      - :install:modules:local
       - :install:npm:commitizen
       - :install:npm:commitlint
       - :install:npm:husky
@@ -106,24 +106,6 @@ tasks:
         vars:
           FILE: .config/husky/prepare-commit-msg
 
-  node:dependencies:global:
-    run: once
-    cmds:
-      - task: :install:npm:commitizen
-      - task: :install:npm:commitlint
-      - task: :install:npm:cspell
-      - task: :install:npm:eslint
-      - task: :install:npm:hbs
-      - task: :install:npm:husky
-      - task: :install:npm:lint-staged
-      - task: :install:npm:prettier
-      - task: :install:npm:readme
-      - task: :install:npm:remark
-      - task: :install:npm:shellcheck
-      - task: :install:npm:standard-version
-    status:
-      - '[[ "${container:=}" == "docker" ]]'
-
   precommit:
     deps:
       - :fix:json
@@ -151,9 +133,9 @@ tasks:
 
   requirements:
     deps:
-      - :install:local:modules
-      - node:dependencies:global
-      - python:requirements
+      - :install:modules:global
+      - :install:modules:local
+      - :install:python:requirements
     desc: Ensure all the dependencies are installed (Node.js, Python, etc.)
     summary: |
       # Ensure dependencies are installed
