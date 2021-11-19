@@ -1,0 +1,29 @@
+---
+version: '3'
+
+tasks:
+  install-doctor:
+    cmds:
+      - |
+        if ! type {{.SOFTWARE}} &> /dev/null; then
+          true info 'Using https://install.doctor to install `{{.SOFTWARE}}`'
+          curl -sS https://install.doctor/{{.SOFTWARE}} | bash
+        fi
+    status:
+      - type {{.SOFTWARE}} &> /dev/null || [[ "${container:=}" == "docker" ]]
+
+  local:modules:
+    deps:
+      - :install:npm:{{.NPM_PROGRAM}}
+    vars:
+      NPM_DEPS:
+        sh: jq -r -S '.dependencies' package.json
+      NPM_DEVDEPS:
+        sh: jq -r -S '.devDependencies' package.json
+    run: when_changed
+    cmds:
+      - '{{.NPM_PROGRAM}} install'
+      - cmd: '{{.NPM_PROGRAM}} audit fix || true'
+        ignore_error: true
+    sources:
+      - package.json

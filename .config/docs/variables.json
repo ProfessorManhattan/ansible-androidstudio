@@ -1,0 +1,194 @@
+{
+  "author": {
+    "email": "brian@megabyte.space",
+    "name": "Brian Zalewski"
+  },
+  "autodoc_actions_description": "",
+  "autodoc_tags_description": "",
+  "autodoc_todo_description": "",
+  "autodoc_variables_description": "",
+  "badge_style": "for-the-badge",
+  "blueprint_variables": [
+    ["Variable", "Description"],
+    ["`badge_style`", "Badge style to use from shields.io when generating the documentation"],
+    [
+      "`description_template`",
+      "This is used to populate the description in the `package.json` file which in turn gets used in the README and also may be used to describe the project on other websites. When you add the text `IMAGE_SIZE_PLACEHOLDER` to this variable, it will be replaced with container size information."
+    ],
+    [
+      "`docker_command`",
+      "The command that you would normally run when using the Docker image as a one-liner. For Ansible Lint this command would just be `.` because the [Ansible Lint Docker project](https://gitlab.com/megabyte-labs/dockerfile/ci-pipeline/ansible-lint) has an entrypoint of `ENTRYPOINT ['ansible-lint'] in its Dockerfile. So, combining the two means that the command that will run is `ansible-lint .`. However, if the Ansible Lint project did not specify an entrypoint then this field would have to be `ansible-lint .` since that is the command that you would normally run when using this tool."
+    ],
+    [
+      "`docker_command_alias`",
+      "Used for generating the documentation for running the Docker container via a bash alias. This variable is the function name. For YAML Lint, this would be `yamllint`. If the user decided to add the bash alias listed in the README in the [YAML Lint repository](https://gitlab.com/megabyte-labs/dockerfile/ci-pipeline/yamllint), they would access the alias by running `yamllint`. To get a better idea, you should refer to any of our Dockerfile project's README files."
+    ],
+    [
+      "`dockerhub_description`",
+      "The short description of the project. This is shown on DockerHub and has a limit of 100 characters."
+    ],
+    [
+      "`dockerslim_command`",
+      "The arguments passed to DockerSlim when generating a slim build. **Any \\ included in this string must be added as \\\\\\ due to multiple levels of escape character parsings.**."
+    ],
+    [
+      "`preferred_tag`",
+      "In general, this should either be `latest` or `slim`. This is the tag that is used to generate the parts of the documentation that refer to specific Docker image tags."
+    ],
+    [
+      "`pretty_name`",
+      "The full (pretty) name of the tool (used for generating documentation). This should be capitalized and/or use the same capitalization that the product officially uses (if applicable)."
+    ],
+    [
+      "`project_title`",
+      "The title of the project - this controls the title of the README.md and sometimes may be the same as the `pretty_name`."
+    ],
+    [
+      "`slug`",
+      "The slug is found by looking at the URL of the repository (e.g. for Ansible Lint, the slug would be `ansible-lint` since the last part of [this URL](https://gitlab.com/megabyte-labs/dockerfile/ci-pipeline/ansible-lint) is ansible-lint)."
+    ],
+    [
+      "`slug_full`",
+      "This variable is populated by `.start.sh` by combining the `subgroup` and `slug` or simply using the `slug` depending on which subgroup the project belongs to."
+    ],
+    [
+      "`subgroup`",
+      "The subgroup is found by looking at the second to last part of the URL of the repository (e.g. for Ansible Lint the subgroup would be `ci-pipeline`)."
+    ]
+  ],
+  "company": "Megabyte LLC",
+  "copyright": "2020-2021",
+  "docker_label_authors": "Brian Zalewski <brian@megabyte.space>",
+  "docs": {
+    "header_description_post": "<i></i>",
+    "header_description_pre": "<i></i>",
+    "header_title_post": "<i></i>",
+    "header_title_pre": "<i></i>",
+    "link": "https://megabyte.space/docs/common/dockerfile"
+  },
+  "email": {
+    "help": "help@megabyte.space"
+  },
+  "github_prefix": "docker-",
+  "group": "dockerfile",
+  "json_top_keys": "",
+  "license": "MIT",
+  "link": {
+    "chat": "https://app.slack.com/client/T01ABCG4NK1/C01NN74H0LW/details/",
+    "docs": "https://megabyte.space/docs",
+    "home": "https://megabyte.space",
+    "installdoctor": "https://install.doctor",
+    "privacy": "https://megabyte.space/privacy",
+    "shield": "https://shields.io",
+    "terms": "https://megabyte.space/terms"
+  },
+  "misc": {
+    "appnest": "https://github.com/andreasbm/readme",
+    "husky": "https://www.npmjs.com/package/husky",
+    "tinypng": "https://tinypng.com/"
+  },
+  "name": "[[ package.json .blueprint.name - See CONTRIBUTING.md ]]",
+  "npm_private": false,
+  "npm_publish_config_access": "public",
+  "organization": "Megabyte Labs",
+  "overview": "[[ This is a new repository without the details filled in yet. Look for the section about blueprint data in the CONTRIBUTING.md to set up the project. ]]",
+  "profile": {
+    "dockerhub": "megabytelabs",
+    "galaxy": "professormanhattan",
+    "github": "ProfessorManhattan",
+    "linkedin": "blzalewski",
+    "npmjs": "thisismyfirstday",
+    "npmjs_organization": "mblabs",
+    "opencollective": "megabytelabs",
+    "patreon": "ProfessorManhattan",
+    "pypi": "ProfessorManhattan",
+    "replit": "ProfessorMegaby",
+    "stackblitz": "ProfessorManhattan",
+    "twitter": "MegabyteLabs",
+    "vagrant": "ProfessorManhattan"
+  },
+  "profile_link": {
+    "dockerhub": "https://hub.docker.com/u",
+    "galaxy": "https://galaxy.ansible.com",
+    "github": "https://github.com",
+    "linkedin": "https://www.linkedin.com/in/",
+    "npmjs": "https://www.npmjs.com/~",
+    "opencollective": "https://opencollective.com",
+    "patreon": "https://www.patreon.com",
+    "pypi": "https://pypi.org/user",
+    "replit": "https://repl.it/@",
+    "stackblitz": "https://stackblitz.com/@",
+    "twitter": "MegabyteLabs",
+    "vagrant": "https://app.vagrantup.com"
+  },
+  "repository": {
+    "github": "",
+    "gitlab": "",
+    "gitlabBaseUrl": "https://gitlab.com/megabyte-labs",
+    "group": {
+      "ansible_roles": "https://gitlab.com/megabyte-labs/ansible-roles",
+      "apps": "https://gitlab.com/megabyte-labs/apps",
+      "ci": "https://gitlab.com/megabyte-labs/ci",
+      "cloud": "https://gitlab.com/megabyte-labs/cloud",
+      "common": "https://gitlab.com/megabyte-labs/common",
+      "cryptocurrency": "https://gitlab.com/megabyte-labs/cryptocurrency",
+      "docker_compose": "https://gitlab.com/megabyte-labs/docker-compose",
+      "dockerfile": "https://gitlab.com/megabyte-labs/dockerfile",
+      "documentation": "https://gitlab.com/megabyte-labs/documentation",
+      "kubernetes": "https://gitlab.com/megabyte-labs/kubernetes",
+      "npm": "https://gitlab.com/megabyte-labs/npm",
+      "packer": "https://gitlab.com/megabyte-labs/packer",
+      "python": "https://gitlab.com/megabyte-labs/python",
+      "software": "https://gitlab.com/megabyte-labs/software",
+      "web_components": "https://gitlab.com/megabyte-labs/web-components"
+    },
+    "location": {
+      "commits": {
+        "github": "/commits/master",
+        "gitlab": "/-/commits/master"
+      },
+      "conduct": {
+        "github": "/blob/master/CODE_OF_CONDUCT.md",
+        "gitlab": "/-/blob/master/CODE_OF_CONDUCT.md"
+      },
+      "contributing": {
+        "github": "/blob/master/CONTRIBUTING.md",
+        "gitlab": "/-/blob/master/CONTRIBUTING.md"
+      },
+      "demo": {
+        "github": "/raw/master/.demo.gif",
+        "gitlab": "/-/raw/master/.demo.gif"
+      },
+      "issues": {
+        "github": "/issues",
+        "gitlab": "/-/issues"
+      },
+      "license": {
+        "github": "/blob/master/LICENSE",
+        "gitlab": "/-/blob/master/LICENSE"
+      },
+      "logo": {
+        "github": "/raw/master/logo.png",
+        "gitlab": "/-/raw/master/logo.png"
+      },
+      "readme": {
+        "github": "/blob/master/README.md",
+        "gitlab": "/-/blob/master/README.md"
+      }
+    },
+    "namespace": "",
+    "project": {
+      "assets": "https://gitlab.com/megabyte-labs/assets/-/raw/master",
+      "autodoc": "https://github.com/AndresBott/ansible-autodoc",
+      "playbooks": "https://gitlab.com/InstallDoc/ansible-playbook-boilerplate",
+      "wrangler": "https://gitlab.com/megabyte-labs/wrangler"
+    }
+  },
+  "sharp_instructions": [],
+  "sponsorship": {
+    "author": "Brian Zalewski",
+    "text": "I create open source projects out of love. Although I have a job, shelter, and as much fast food as I can handle, it would still be pretty cool to be appreciated by the community for something I have spent a lot of time and money on. Please consider sponsoring me! Who knows? Maybe I will be able to quit my job and publish open source full time."
+  },
+  "subgroup": "[[ Needs to be setup. Set this in the common repository for this type of project ]]",
+  "title": "[[ package.json .blueprint.title - See CONTRIBUTING.md ]]"
+}

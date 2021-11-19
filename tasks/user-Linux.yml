@@ -60,6 +60,8 @@
     emulator_version | default([]) +
     platform_tools_version | default([]) }}'
 
+# @action Ensures configured Android SDKs are present
+# Updates `~/.bashrc` to include SDK tools in `PATH` on Linux systems
 - name: Ensure Tools are added to Bash PATH
   become_user: '{{ user.username }}'
   blockinfile:
@@ -73,6 +75,8 @@
     mode: 0644
     path: ~/.bashrc
 
+# @action Ensures configured Android SDKs are present
+# Updates `~/.zshrc` to include SDK tools in `PATH` on Linux systems
 - name: Ensure Tools are added to ZSH PATH
   become_user: '{{ user.username }}'
   blockinfile:

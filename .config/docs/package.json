@@ -1,0 +1,135 @@
+{
+  "private": false,
+  "name": "@mblabs/docs-docker",
+  "version": "0.0.1",
+  "description": "Documentation partials used to generate documentation for Dockerfile/DockerSlim projects",
+  "license": "MIT",
+  "author": "Brian Zalewski <brian@megabyte.space> (https://megabyte.space)",
+  "homepage": "https://megabyte.space",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ProfessorManhattan/docs-docker.git"
+  },
+  "bugs": {
+    "email": "help@megabyte.space",
+    "url": "https://gitlab.com/megabyte-labs/documentation/dockerfile/-/issues"
+  },
+  "type": "module",
+  "scripts": {
+    "help": "task --list",
+    "prepare": "task common:husky",
+    "start": "bash .config/start.sh"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "dependencies": {
+    "tslib": "^2.3.1"
+  },
+  "devDependencies": {
+    "@commitlint/config-conventional": "^13.1.0",
+    "@mblabs/eslint-config": "^1.0.0",
+    "@mblabs/prettier-config": "^14.14.14",
+    "@typescript-eslint/eslint-plugin": "^5.2.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "handlebars-helpers": "^0.10.0"
+  },
+  "keywords": [
+    "common",
+    "docker",
+    "dockerfile",
+    "dockerslim",
+    "docs",
+    "documentation",
+    "megabytelabs",
+    "npm",
+    "package",
+    "partials",
+    "professormanhattan",
+    "shared"
+  ],
+  "engines": {
+    "node": ">=14.18.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "blueprint": {
+    "description": "Documentation partials used to generate documentation for Dockerfile/DockerSlim projects",
+    "docs": {
+      "link": "https://megabyte.space/docs/documentation/dockerfile"
+    },
+    "group": "documentation",
+    "name": "Dockerfile Documentation",
+    "overview": "This repository contains documentation partials used to generate documentation for Dockerfile/[DockerSlim](https://dockersl.im/) projects. It uses the partials in conjunction with customizable variables that are used to generate unique documentation that follow the same format. When this project is updated, the changes are propagated to the [Dockerfile common files repository](https://gitlab.com/megabyte-labs/common/dockerfile). From there, common files/documentation are propagated to individual Dockerfile projects.",
+    "repository": {
+      "github": "https://github.com/ProfessorManhattan/docs-docker",
+      "gitlab": "https://gitlab.com/megabyte-labs/documentation/dockerfile"
+    },
+    "slug": "docs-docker",
+    "subgroup": "dockerfile",
+    "title": "Dockerfile-Project Documentation Partials"
+  },
+  "eslintConfig": {
+    "extends": "@mblabs/eslint-config"
+  },
+  "funding": [
+    {
+      "type": "opencollective",
+      "url": "https://opencollective.com/megabytelabs"
+    },
+    {
+      "type": "patreon",
+      "url": "https://www.patreon.com/ProfessorManhattan"
+    }
+  ],
+  "lint-staged": {
+    "**/*": [
+      "blocklint --wordlist blacklist,slave,whitelist",
+      "check-merge-conflict",
+      "check-added-large-files",
+      "check-symlinks",
+      "destroyed-symlinks"
+    ],
+    "**/*.(css|html|less|md|mjml|php|scss|sh|xml)": [
+      "task fix:prettier --"
+    ],
+    "**/*.(jpg|png)": [
+      "task image:compress --"
+    ],
+    "**/*.(js|jsx|ts|tsx)": [
+      "task fix:js --",
+      "task lint:js --"
+    ],
+    "**/*.json": [
+      "task fix:json --"
+    ],
+    "**/*.sh": [
+      "task fix:shell --",
+      "task lint:shell --"
+    ],
+    "**/*.toml": [
+      "task lint:toml --"
+    ],
+    "**/*.xml": [
+      "task fix:xml --",
+      "task lint:xml --"
+    ],
+    "**/*.yml": [
+      "task fix:yaml --",
+      "task lint:yaml --"
+    ],
+    "logo.png": [
+      "task image:resize -- 200 200",
+      "task image:compress --"
+    ]
+  },
+  "prettier": "@mblabs/prettier-config",
+  "standard-version": {
+    "scripts": {
+      "prerelease": "git add --all"
+    }
+  }
+}

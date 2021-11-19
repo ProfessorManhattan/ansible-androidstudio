@@ -1,0 +1,144 @@
+---
+version: '3'
+
+vars:
+  PROJECT_COMMON_URL: https://gitlab.com/megabyte-labs/common/{{.REPOSITORY_TYPE}}.git
+  SHARED_FOLDER: .shared
+
+tasks:
+  clean:
+    cmds:
+      - rm -rf {{.SHARED_FOLDER}}
+
+  clone:
+    cmds:
+      - rm -rf {{.SHARED_FOLDER}}
+      - git clone --depth=1 {{.SHARED_COMMON_URL}} {{.SHARED_FOLDER}}
+      - rm -rf ./{{.SHARED_FOLDER}}/.git
+
+  copy:
+    cmds:
+      - cp -rT {{.SHARED_FOLDER}}/.common .
+      - cp -rT {{.SHARED_FOLDER}}/.common-{{.REPOSITORY_SUBTYPE}} .
+      - task: :common:husky:permissions
+
+  merge:
+    deps:
+      - merge:package
+
+  merge:package:
+    cmds:
+      - task: save:common:keywords
+      - task: merge:package:files
+
+  merge:package:files:
+    deps:
+      - :install:software:jq
+    env:
+      BLUEPRINT:
+        sh: jq -r '.blueprint' package.json
+      PKG_TMP:
+        sh: mktemp
+    cmds:
+      - |
+        function ensureKeywords() {
+          if [ ! -f "$1" ]; then echo "{}" > "$1"; fi
+          KEYWORDS="$(jq -r '.keywords' "$1")"
+          if [ "$KEYWORDS" == 'null' ] || [ "$KEYWORDS" == '' ]; then
+            TMP="$(mktemp)"
+            jq -r '.keywords = [] | .' "$1" > "$TMP"
+            mv "$TMP" "$1"
+          fi
+        }
+
+        ensureKeywords package.json
+      - jq --arg blueprint "$BLUEPRINT" --arg keywords "$(jq '.keywords[]' package.json package.hbs.json | jq -s '. | unique')"
+        -s -S '.[0] * .[1] | .keywords = ($keywords | fromjson) | .blueprint = ($blueprint | fromjson) | .' package.json
+        package.hbs.json > "$PKG_TMP"
+      - mv "$PKG_TMP" package.hbs.json
+
+  merge:package:json-blueprint-overrides:
+    summary: |
+      # Merge data from package.json's '.blueprint.jsonOverrides' key
+
+      If you wanted to ensure that the project's package.json file always has its 'xyz' key
+      equal to 'abc' then you would add the following to the package.json file:
+
+      ```json
+      {
+        ...
+        "blueprint": {
+          "jsonOverrides": {
+            "package.json": {
+              "xyz": "abc"
+            }
+          }
+        }
+      }
+      ```
+
+      In the above example, you could also set the value of package.json equal to the path of some other
+      JSON file in the project that you would like to override.
+
+      This method is here in case there are any key/values that you would like to freeze.
+    cmds:
+      - |
+        jq -r '.blueprint.jsonOverrides | keys[]' package.json | while read FILE_PATH; do
+          VALUE="$(jq --arg filepath "$FILE_PATH" '.blueprint.jsonOverrides[$filepath]' "$FILE_PATH")"
+          TMP="$(mktemp)"
+          jq --arg value "$VALUE" -s '.[] + ($value | fromjson)' "$FILE_PATH" > "$TMP"
+          mv "$TMP" "$FILE_PATH"
+        done
+
+  save:common:keywords:
+    env:
+      KEYWORDS:
+        sh: jq -r '.keywords' package.hbs.json
+    cmds:
+      - jq -n --arg keywords "$KEYWORDS" '.keywords = ($keywords | fromjson | unique)' > .config/common-keywords.json
+
+  template:
+    deps:
+      - :install:local:modules
+      - :install:npm:hbs
+    cmds:
+      - task: template:variables
+      - task: template:files
+
+  template:files:
+    deps:
+      - template:files:handlebars
+      - template:files:hbs
+
+  template:files:handlebars:
+    cmds:
+      - |
+        function handlebars() {
+          FILE="$1"
+          {{.NPX_HANDLE}}hbs --data .variables.json --helper ./.config/hbs.cjs "$FILE" --stdout > "${FILE%.*}"
+          rm "$FILE"
+        }
+        find . -type f -not \( {{.IGNORE_FOLDERS}} \) -prune -name '*.handlebars' | while read FILE; do
+          handlebars "$FILE" &
+        done
+        wait
+
+  template:files:hbs:
+    cmds:
+      - |
+        function handlebars() {
+          FILE="$1"
+          {{.NPX_HANDLE}}hbs --data .variables.json --helper ./.config/hbs.cjs "$FILE" --stdout > "${FILE//.hbs}"
+          rm "$FILE"
+        }
+        find . -type f -not \( {{.IGNORE_FOLDERS}} \) -prune -name '*.hbs.*' | while read FILE; do
+          handlebars "$FILE" &
+        done
+        wait
+
+  template:variables:
+    cmds:
+      - task: :upstream:variables
+        vars:
+          INPUT_FILE: .config/variables.json
+          OUTPUT_FILE: ./.variables.json

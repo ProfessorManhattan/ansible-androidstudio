@@ -1,0 +1,2 @@
+json_key_file "path/to/your/play-store-credentials.json"
+package_name("your.package.name")

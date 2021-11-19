@@ -56,6 +56,8 @@
     emulator_version | default([]) +
     platform_tools_version | default([]) }}'
 
+# @action Ensures configured Android SDKs are present
+# Updates `PATH` on Windows systems
 - name: Ensure Tools are added to PATH
   become_user: '{{ user.username }}'
   ansible.windows.win_path:

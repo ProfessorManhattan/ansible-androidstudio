@@ -1,0 +1,200 @@
+---
+version: '3'
+
+tasks:
+  local:
+    deps:
+      - :ansible:symlink:{{.REPOSITORY_SUBTYPE}}
+      - :common:python:requirements
+    label: test:local
+    desc: Run the Ansible play on the local machine
+    summary: |
+      # Run the Ansible play on the local machine
+
+      This task will use the inventory stored in `tests/inventory`, the playbook
+      file stored in `tests/test.yml`, and the Ansible configuration file stored in
+      `tests/ansible.cfg` to run the play. At the beginning of the play, you will
+      be prompted for the sudo password.
+    cmds:
+      - true info "Running the Ansible play locally"
+      - cp tests/inventory inventory
+      - if [ ! -f main.yml.bak ]; then cp main.yml main.yml.bak; fi
+      - cp tests/test.yml main.yml
+      - if [ ! -f ansible.cfg.bak ]; then cp ansible.cfg ansible.cfg.bak; fi
+      - cp tests/ansible.cfg ansible.cfg
+      - ansible-playbook --ask-sudo-pass main.yml
+      - mv main.yml.bak main.yml
+      - mv ansible.cfg.bak ansible.cfg
+    # log:
+    #   error: Finished local testing of the Ansible play with error(s)
+    #   success: Local testing of the Ansible play was successful!
+    preconditions:
+      - sh: typeof ansible &> /dev/null
+        msg: Ansible is not available.
+
+  molecule:docker:
+    deps:
+      - :common:python:requirements
+      - :install:software:docker
+      - :install:software:sshpass
+    label: test:docker
+    desc: Performs a full test, including a test for idempotency, on all available Linux systems using Docker
+    summary: |
+      # Perform a full test, including an idempotency test, on all available Linux systems using Docker
+
+      This task runs the project's Molecule tests using Docker. It only tests against
+      Linux systems. If the role/project contains any steps that use the
+      `community.general.snap` plugin, then only the operating systems that support that
+      plugin with Docker are tested.
+
+      **Example usage:**
+      `task ansible:test:molecule:docker`
+
+      **Save test results for use with auto-generating compatibility chart:**
+      `task ansible:test:molecule:docker:matrix`
+    vars:
+      SNAP_REFS:
+        sh: grep -Ril 'community.general.snap:' ./tasks || true
+    cmds:
+      - molecule test -s docker{{if .SNAP_REFS}}-snap{{end}}
+
+  molecule:docker:matrix:
+    deps:
+      - :common:python:requirements
+      - :install:software:docker
+      - :install:software:sshpass
+    vars:
+      MOLECULE_DATE:
+        sh: date '+%Y-%m-%d'
+      SNAP_REFS:
+        sh: grep -Ril 'community.general.snap:' ./tasks || true
+    cmds:
+      - mkdir -p molecule/.results
+      - PY_COLORS=0 molecule test -s "docker{{if .SNAP_REFS}}-snap{{end}}" > "molecule/.results/{{.MOLECULE_DATE}}-$SCENARIO.txt"
+
+  molecule:virtualbox:
+    deps:
+      - :common:python:requirements
+      - :install:software:sshpass
+      - :install:software:vagrant
+      - :install:software:virtualbox
+    label: test:e2e
+    desc: Runs a full E2E Molecule test for all supported operating systems
+    summary: |
+      # Run a full E2E Molecule test for all supported operating systems
+
+      This task uses VirtualBox to run tests for all of our supported operating
+      systems in parallel. It is very RAM intensive so, if you want to run this,
+      your computer should have _at least 32GB of RAM_.
+
+      **Run the full test:**
+      `task ansible:test:molecule:virtualbox`
+
+      **Generate the compatibility matrix used in the README.md:**
+      `task ansible:test:molecule:virtualbox:matrix`
+    env:
+      # yamllint disable-line rule:truthy
+      OBJC_DISABLE_INITIALIZE_FORK_SAFETY: YES
+    cmds:
+      - molecule test
+
+  molecule:virtualbox:converge:
+    deps:
+      - :common:python:requirements
+      - :install:software:sshpass
+      - :install:software:vagrant
+      - :install:software:virtualbox
+    label: test:virtualbox
+    desc: Provisions a desktop VirtualBox VM and then runs a Molecule test
+    summary: |
+      # Provision a desktop VirtualBox VM and then run a Molecule test
+
+      This task opens a VM with an operating system of your choosing and then tests
+      the project's play against it. It then leaves the VM open for inspection.
+
+      **Example with interactive prompt for VM type:**
+      `task test:molecule`
+
+      **Example usage bypassing prompt:**
+      `task test:molecule -- archlinux`
+
+      ## Available scenarios:
+
+      * archlinux
+      * centos
+      * debian
+      * fedora
+      * macos
+      * ubuntu
+      * windows
+    env:
+      # yamllint disable-line rule:truthy
+      OBJC_DISABLE_INITIALIZE_FORK_SAFETY: YES
+    cmds:
+      - task: test:molecule:virtualbox:converge:{{if .CLI_ARGS}}cli{{else}}prompt{{end}}
+
+  molecule:virtualbox:converge:cli: molecule converge -s {{.CLI_ARGS}}-desktop
+
+  molecule:virtualbox:converge:prompt: node .common/scripts/prompts/molecule-desktop.js
+
+  molecule:virtualbox:matrix:
+    deps:
+      - :common:python:requirements
+      - :install:software:sshpass
+      - :install:software:vagrant
+      - :install:software:virtualbox
+    vars:
+      MOLECULE_DATE:
+        sh: date '+%Y-%m-%d'
+    cmds:
+      - mkdir -p molecule/.results
+      - PY_COLORS=0 molecule test > molecule/.results/{{.MOLECULE_DATE}}-default.txt
+
+  vagrant:
+    deps:
+      - :common:python:requirements
+      - :install:software:sshpass
+      - :install:software:vagrant
+      - :install:software:virtualbox
+    label: test:vagrant
+    desc: Runs the playbook using Vagrant
+    summary: |
+      # Run the playbook using Vagrant
+
+      Using Vagrant, you can pick and choose which operating system and
+      virtualization provider you want to use to test the playbook.
+
+      ## Possible virtualization providers:
+
+      * hyperv
+      * libvirt
+      * parallels
+      * virtualbox
+      * vmware_fusion
+      * vmware_workstation
+
+      ## Possible operating systems:
+
+      * archlinux
+      * centos
+      * debian
+      * fedora
+      * macos
+      * ubuntu
+      * windows
+
+      **Example opening interactive prompt:**
+      `task test:vagrant`
+
+      **Example bypassing interactive prompt:**
+      `task test:vagrant -- --provider=vmware_workstation windows`
+    cmds:
+      - task: vagrant-prompt-{{if .CLI_ARGS}}cli{{else}}prompt{{end}}
+
+  vagrant:cli:
+    cmds:
+      - vagrant up {{.CLI_ARGS}}
+
+  vagrant:prompt:
+    cmds:
+      - node .common/scripts/prompts/vagrant-up.js

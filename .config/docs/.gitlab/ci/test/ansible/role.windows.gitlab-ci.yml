@@ -1,0 +1,26 @@
+---
+.shared_windows_runners:
+  tags:
+    - shared-windows
+    - windows
+    - windows-1809
+
+windows:
+  stage: test
+  extends:
+    - .shared_windows_runners
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'schedule' || $CI_PIPELINE_SOURCE == 'web'
+    - if: $CI_COMMIT_TITLE =~ /^(automation|chore).*/
+      when: never
+    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
+      changes:
+        - '{defaults,handlers,meta,molecule,tasks,templates,vars}/**/*.yml'
+        - templates/**/*.j2
+        - ansible.cfg
+        - files/**/*
+        - requirements.txt
+        - requirements.yml
+    - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == 'master'
+  script:
+    - ./tests/windows/test.ps1

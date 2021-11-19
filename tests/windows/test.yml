@@ -1,4 +1,0 @@
----
-- hosts: windows-docker
-  roles:
-    - role: professormanhattan.androidstudio

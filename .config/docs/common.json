@@ -1,0 +1,55 @@
+{
+  "blueprint_variables": [
+    ["Variable", "Description"],
+    ["`badge_style`", "Badge style to use from shields.io when generating the documentation"],
+    [
+      "`description_template`",
+      "This is used to populate the description in the `package.json` file which in turn gets used in the README and also may be used to describe the project on other websites. When you add the text `IMAGE_SIZE_PLACEHOLDER` to this variable, it will be replaced with container size information."
+    ],
+    [
+      "`docker_command`",
+      "The command that you would normally run when using the Docker image as a one-liner. For Ansible Lint this command would just be `.` because the [Ansible Lint Docker project](https://gitlab.com/megabyte-labs/dockerfile/ci-pipeline/ansible-lint) has an entrypoint of `ENTRYPOINT ['ansible-lint'] in its Dockerfile. So, combining the two means that the command that will run is `ansible-lint .`. However, if the Ansible Lint project did not specify an entrypoint then this field would have to be `ansible-lint .` since that is the command that you would normally run when using this tool."
+    ],
+    [
+      "`docker_command_alias`",
+      "Used for generating the documentation for running the Docker container via a bash alias. This variable is the function name. For YAML Lint, this would be `yamllint`. If the user decided to add the bash alias listed in the README in the [YAML Lint repository](https://gitlab.com/megabyte-labs/dockerfile/ci-pipeline/yamllint), they would access the alias by running `yamllint`. To get a better idea, you should refer to any of our Dockerfile project's README files."
+    ],
+    [
+      "`dockerhub_description`",
+      "The short description of the project. This is shown on DockerHub and has a limit of 100 characters."
+    ],
+    [
+      "`dockerslim_command`",
+      "The arguments passed to DockerSlim when generating a slim build. **Any \\ included in this string must be added as \\\\\\ due to multiple levels of escape character parsings.**."
+    ],
+    [
+      "`preferred_tag`",
+      "In general, this should either be `latest` or `slim`. This is the tag that is used to generate the parts of the documentation that refer to specific Docker image tags."
+    ],
+    [
+      "`pretty_name`",
+      "The full (pretty) name of the tool (used for generating documentation). This should be capitalized and/or use the same capitalization that the product officially uses (if applicable)."
+    ],
+    [
+      "`project_title`",
+      "The title of the project - this controls the title of the README.md and sometimes may be the same as the `pretty_name`."
+    ],
+    [
+      "`slug`",
+      "The slug is found by looking at the URL of the repository (e.g. for Ansible Lint, the slug would be `ansible-lint` since the last part of [this URL](https://gitlab.com/megabyte-labs/dockerfile/ci-pipeline/ansible-lint) is ansible-lint)."
+    ],
+    [
+      "`slug_full`",
+      "This variable is populated by `.start.sh` by combining the `subgroup` and `slug` or simply using the `slug` depending on which subgroup the project belongs to."
+    ],
+    [
+      "`subgroup`",
+      "The subgroup is found by looking at the second to last part of the URL of the repository (e.g. for Ansible Lint the subgroup would be `ci-pipeline`)."
+    ]
+  ],
+  "docs": {
+    "link": "https://megabyte.space/docs/common/dockerfile"
+  },
+  "github_prefix": "docker-",
+  "group": "dockerfile"
+}

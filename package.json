@@ -18,16 +18,8 @@
     "node": ">=10"
   },
   "scripts": {
-    "clean": "task common:clean",
-    "commit": "task common:commit",
     "info": "task --list",
-    "preinstall": "npx -y only-allow pnpm",
-    "prepare": "task common:husky",
-    "prepare-release": "task common:prepare-release",
-    "requirements": "task common:requirements",
-    "reset": "task common:reset",
-    "reset-force": "task common:reset-force",
-    "update": "task common:update"
+    "prepare": "task common:husky"
   },
   "keywords": [
     "adb",
@@ -60,31 +52,27 @@
     "ubuntu",
     "windows"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "tslib": "^2.3.1"
+  },
   "devDependencies": {
     "@commitlint/config-conventional": "^13.1.0",
-    "@megabytelabs/prettier-config": "^14.14.14",
-    "@prettier/plugin-xml": "^1.0.2",
+    "@mblabs/eslint-config": "^1.0.0",
+    "@mblabs/prettier-config": "^14.14.14",
+    "@typescript-eslint/eslint-plugin": "^5.2.0",
     "cz-conventional-changelog": "^3.3.0",
-    "eslint": "^7.32.0",
-    "eslint-config-prettier": "8.3.0",
-    "eslint-formatter-pretty": "^4.1.0",
-    "eslint-plugin-editorconfig": "^3.0.2",
-    "eslint-plugin-eslint-comments": "^3.2.0",
-    "eslint-plugin-jsonc": "^1.6.0",
-    "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-yml": "0.10.1",
-    "prettier": "^2.4.0",
-    "prettier-plugin-sh": "^0.7.1"
+    "handlebars-helpers": "^0.10.0"
   },
   "blueprint": {
     "description": "Installs Android Studio and sets up Android SDKs on nearly any OS",
     "name": "Android Studio",
-    "overview": "[Android Studio](https://developer.android.com/studio) is the official integrated development environment for Google's Android operating system, built on JetBrains' IntelliJ IDEA software and designed specifically for Android development.",
+    "group": "ansible",
+    "overview": "[Android Studio](https://developer.android.com/studio) is the official integrated development environment for Google's Android operating system, built on JetBrains' IntelliJ IDEA software and designed specifically for Android development. This role installs Android Studio on nearly any operating system and also ensures a configurable list of command-line tools and SDKs are installed and seamlessly integrated with the system (i.e. the role adds items to the `PATH`).",
     "repository": {
       "github": "https://github.com/ProfessorManhattan/ansible-androidstudio",
       "gitlab": "https://gitlab.com/megabyte-labs/ansible-roles/androidstudio"
     },
+    "subgroup": "role",
     "slug": "androidstudio",
     "title": "Android Studio - An IDE for Android Development"
   },
@@ -117,7 +105,7 @@
     "**/*.json": [
       "task fix:json --"
     ],
-    "**/*.(js|jsx|ts)": [
+    "**/*.(js|jsx|ts|tsx)": [
       "task fix:js --",
       "task lint:js --"
     ],
@@ -142,19 +130,9 @@
     "logo.png": [
       "task image:resize -- 200 200",
       "task image:compress --"
-    ],
-    "requirements.txt": [
-      "requirements-txt-fixer"
-    ],
-    "**/*.py": [
-      "black",
-      "flake8"
-    ],
-    "**/*vault.yml": [
-      "task ansible:vault:lint:file --"
     ]
   },
-  "prettier": "@megabytelabs/prettier-config",
+  "prettier": "@mblabs/prettier-config",
   "standard-version": {
     "scripts": {
       "prerelease": "git add --all"

@@ -22,7 +22,9 @@
 # @action Ensures Android Studio is installed
 # Installs Android Studio on Archlinux, CentOS, Debian, Fedora, macOS, Ubuntu, and Windows
 # @action Ensures Android Studio is installed
-# Installs a configurable list of Android SDKs and Tools
+# Ensures command-line tools are downloaded, installed, and available in the `PATH`
+# @action Ensures configured Android SDKs are present
+# Installs a configurable list of Android SDKs and Tools to user(s) home folder(s)
 # @action Ensures configured Android SDKs are present
 # Ensures Android SDK tools like `adb` are present in PATH
 - name: Include tasks based on the operating system

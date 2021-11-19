@@ -1,0 +1,17 @@
+---
+npm-test:
+  stage: test
+  image: node:slim
+  needs: []
+  variables:
+    GIT_DEPTH: 1
+  cache:
+    key: megabytelabs
+    paths:
+      - node_modules/
+  before_script:
+    - npm ci --cache .npm --ignore-scripts --prefer-offline
+    - npm install shellcheck
+  script:
+    - set -eo pipefail
+    - task test:all

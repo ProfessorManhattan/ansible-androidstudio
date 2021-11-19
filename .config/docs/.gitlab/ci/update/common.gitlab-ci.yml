@@ -1,0 +1,22 @@
+---
+update:
+  stage: update
+  image: megabytelabs/updater:slim
+  rules:
+    - if: ($CI_PIPELINE_SOURCE == 'pipeline' || $CI_PIPELINE_SOURCE == 'web') && $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
+  variables:
+    GIT_DEPTH: 1
+    GIT_SUBMODULE_STRATEGY: recursive
+    PIP_CACHE_DIR: $CI_PROJECT_DIR/.cache/pip
+  cache:
+    key: $CI_COMMIT_REF_SLUG
+    paths:
+      - .cache/
+      - .npm/
+      - .pnpm-store/
+      - .venv/
+  before_script:
+    - task ci:before
+  script:
+    - task start
+    - task ci:commit

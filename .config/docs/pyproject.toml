@@ -1,0 +1,31 @@
+[tool.poetry]
+name = "docs-docker"
+version = "0.0.1"
+description = "Documentation partials used to generate documentation for Dockerfile/DockerSlim projects"
+authors = ["Brian Zalewski <brian@megabyte.space>"]
+license = "MIT"
+readme = "README.md"
+homepage = "https://megabyte.space"
+documentation = "https://megabyte.space/docs/documentation/dockerfile"
+keywords = ["common", "docker", "dockerfile", "dockerslim", "docs", "documentation", "megabytelabs", "npm", "package", "partials", "professormanhattan", "shared"]
+include = ["CHANGELOG.md", "LICENSE"]
+
+[tool.poetry.dependencies]
+python = ">=3.7.0,<4.0.0"
+
+[tool.poetry.dev-dependencies]
+blocklint = "^0.2.3"
+pre-commit-hooks = "^4.0.1"
+proselint = "^0.12.0"
+yamllint = "^1.26.3"
+
+[tool.poetry.urls]
+"Bug Tracker" = "https://gitlab.com/megabyte-labs/documentation/dockerfile/-/issues"
+"GitHub" = "https://github.com/ProfessorManhattan/docs-docker"
+"GitLab" = "https://gitlab.com/megabyte-labs/documentation/dockerfile"
+"Open Collective" = "https://opencollective.com/megabytelabs"
+"Patreon" = "https://www.patreon.com/ProfessorManhattan"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

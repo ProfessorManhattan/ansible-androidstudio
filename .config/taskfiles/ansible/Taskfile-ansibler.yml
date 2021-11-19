@@ -1,0 +1,73 @@
+---
+version: '3'
+
+vars:
+  MAIN_TASKS_PATH: tasks/main.yml
+  META_PATH: meta/main.yml
+  MOLECULE_RESULTS_PATH: molecule/.results
+  REQUIREMENTS_PATH: requirements.yml
+  VARIABLES_PATH: .variables.json
+
+tasks:
+  ansibler:
+    deps:
+      - :common:python:requirements
+    cmds:
+      - task: compatibility-chart
+      - task: tasks:{{.REPOSITORY_SUBTYPE}}
+    preconditions:
+      - sh: 'type ansibler &> /dev/null'
+        msg: '`ansibler` is not installed globally.'
+
+  compatibility-chart:
+    deps:
+      - :common:python:requirements
+      - :install:software:jq
+    env:
+      TMP:
+        sh: mktemp
+    cmds:
+      - ansibler --generate-compatibility-chart --molecule-results-dir '{{.MOLECULE_RESULTS_PATH}}' --json-file '{{.VARIABLES_PATH}}'
+    # log:
+    #   error: 'Failed to generate the compatibility chart JSON using data from `{{.MOLECULE_RESULTS_PATH}}/`'
+    #   success: 'Generated compatibility chart JSON and injected it into the `{{.VARIABLES_PATH}}` file'
+    sources:
+      - '{{.MOLECULE_RESULTS_PATH}}/*'
+
+  populate-platforms:
+    deps:
+      - :common:python:requirements
+      - :install:npm:prettier
+    cmds:
+      - ansibler --populate-platforms --json-file '{{.VARIABLES_PATH}}'
+      - >
+        {{.NPX_HANDLE}}prettier --write '{{.META_PATH}}'
+    # log:
+    #   error: 'Error populating the `{{.META_PATH}}` platforms variable with `ansibler.'
+    #   success: 'Populated the platforms variable in `{{.META_PATH}}` using data from `{{.MOLECULE_RESULTS_PATH}}`'
+    sources:
+      - '{{.MAIN_TASKS_PATH}}'
+      - '{{.MOLECULE_RESULTS_PATH}}/*'
+
+  role-dependencies:
+    deps:
+      - :common:python:requirements
+    cmds:
+      - cmd: ansibler --role-dependencies --json-file '{{.VARIABLES_PATH}}'
+        ignore_error: true
+    # log:
+    #   error: 'Failed to acquire the `role_dependencies` JSON and inject it into `{{.VARIABLES_PATH}}`'
+    #   success: 'Populated the `role_dependencies` variable in `{{.VARIABLES_PATH}}`'
+    sources:
+      - '{{.REQUIREMENTS_PATH}}'
+
+  tasks:playbook:
+    deps:
+      - :ansible:collection-dependencies
+      - role-dependencies
+
+  tasks:role:
+    deps:
+      - :ansible:collection-dependencies
+      - populate-platforms
+      - role-dependencies

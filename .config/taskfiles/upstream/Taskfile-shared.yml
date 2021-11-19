@@ -1,0 +1,71 @@
+---
+version: '3'
+
+vars:
+  SHARED_COMMON_FOLDER: common
+  VARIABLES_URL: https://gitlab.com/megabyte-labs/documentation/shared/-/raw/master/common.json
+
+tasks:
+  copy:
+    cmds:
+      - mv .gitlab-ci.yml .gitlab-ci.yml.bak
+      - cp -rT ./{{.SHARED_COMMON_FOLDER}}/ .
+      - mv .gitlab-ci.yml.bak .gitlab-ci.yml
+      - task: :common:husky:permissions
+
+  merge:
+    cmds:
+      - task: :upstream:project:merge:package:files
+
+  prepare:
+    cmds:
+      - task: merge
+      - task: variables
+
+  template:
+    deps:
+      - :install:local:modules
+      - :install:npm:hbs
+    cmds:
+      - task: template:files
+
+  template:files:
+    deps:
+      - template:files:handlebars
+      - template:files:hbs
+
+  template:files:handlebars:
+    cmds:
+      - |
+        function handlebars() {
+          FILE="$1"
+          {{.NPX_HANDLE}}hbs --data .variables.json --helper ./.config/hbs.cjs "$FILE" --stdout > "${FILE%.*}"
+          rm "$FILE"
+        }
+        find . -type f -not \( -path './{{.SHARED_COMMON_FOLDER}}*' -o -path './deprecated*' -o {{.IGNORE_FOLDERS}} \) \
+        -prune -name '*.handlebars' | while read FILE; do
+          handlebars "$FILE" &
+        done
+        wait
+
+  template:files:hbs:
+    cmds:
+      - |
+        function handlebars() {
+          FILE="$1"
+          {{.NPX_HANDLE}}hbs --data .variables.json --helper ./.config/hbs.cjs "$FILE" --stdout > "${FILE//.hbs}"
+          rm "$FILE"
+        }
+        find . -type f -not \( -path './{{.SHARED_COMMON_FOLDER}}*' -o -path './deprecated*' -o {{.IGNORE_FOLDERS}} \) \
+        -prune -name '*.hbs.*' | while read FILE; do
+          handlebars "$FILE" &
+        done
+        wait
+
+  variables:
+    cmds:
+      - curl -s {{.VARIABLES_URL}} > .variables.json
+      - task: :upstream:variables
+        vars:
+          INPUT_FILE: .variables.json
+          OUTPUT_FILE: .variables.json
