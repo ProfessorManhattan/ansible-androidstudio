@@ -19,7 +19,8 @@
   },
   "scripts": {
     "info": "task --list",
-    "prepare": "task common:husky"
+    "prepare": "task common:husky",
+    "test": "git reset --hard HEAD && git clean -fxd && cd .commonshared && git pull origin master && cd .. && cp -rT .commonshared/common/.config .config && task start"
   },
   "keywords": [
     "adb",
