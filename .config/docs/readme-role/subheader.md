@@ -29,10 +29,10 @@
   <a title="Version: {{ pkg.version }}" href="{{ repository.github }}" target="_blank">
     <img alt="Version: {{ pkg.version }}" src="https://img.shields.io/badge/version-{{ pkg.version }}-blue.svg?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgAQMAAABJtOi3AAAABlBMVEUAAAD///+l2Z/dAAAAAXRSTlMAQObYZgAAACNJREFUCNdjIACY//+BEp9hhM3hAzYQwoBIAqEDYQrCZLwAAGlFKxU1nF9cAAAAAElFTkSuQmCC&cacheSeconds=2592000&style={{ badge_style }}" />
   </a>
-  <a title="Windows 11 build status on GitHub" href="{{ repository.github }}/actions/Windows.yml" target="_blank">
+  <a title="Windows 11 build status on GitHub" href="{{ repository.github }}/actions/workflows/Windows.yml" target="_blank">
     <img alt="Windows 11 build status" src="https://img.shields.io/github/workflow/status/{{ profile.github }}/{{ repository.prefix.github }}{{ galaxy_info.role_name }}/Windows/master?color=cyan&label=Windows&logo=windows&style={{ badge_style }}">
   </a>
-  <a title="macOS build status on GitHub" href="{{ repository.github }}/actions/macOS.yml" target="_blank">
+  <a title="macOS build status on GitHub" href="{{ repository.github }}/actions/workflows/macOS.yml" target="_blank">
     <img alt="macOS build status" src="https://img.shields.io/github/workflow/status/{{ profile.github }}/{{ repository.prefix.github }}{{ galaxy_info.role_name }}/macOS/master?label=macOS&logo=apple&style={{ badge_style }}">
   </a>
   <a title="Linux build status on GitLab" href="{{ repository.gitlab }}{{ repository.location.commits.gitlab }}" target="_blank">
