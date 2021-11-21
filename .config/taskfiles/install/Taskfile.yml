@@ -47,3 +47,12 @@ tasks:
         ignore_error: true
     sources:
       - package.json
+
+  modules:prompt:
+    deps:
+      - :install:npm:{{.NPM_PROGRAM}}
+    run: once
+    cmds:
+      - npm install chalk inquirer signale
+    sources:
+      - .config/scripts/prompts/**

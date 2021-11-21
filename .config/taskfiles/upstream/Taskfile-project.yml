@@ -9,6 +9,11 @@ tasks:
   boilerplate:
     cmds:
       - |
+        if [ "$(jq -r '.blueprint.boilerplate' package.json)" == 'true' ]; then
+          for ENTITY in .boilerplate/*; do
+            rm -rf "${ENTITY/#.boilerplate\/}"
+          done
+        fi
         GREP=""
         for ENTITY in .boilerplate/*; do
           GREP="${ENTITY/#.boilerplate\/}"\\\|"${GREP}"

@@ -229,6 +229,13 @@ tasks:
         vars:
           FORMULAE: glab
 
+  go:
+    run: once
+    cmds:
+      - task: brew:formulae
+        vars:
+          FORMULAE: go
+
   jq:
     run: once
     cmds:
@@ -286,18 +293,58 @@ tasks:
           FORMULAE: aquasecurity/trivy/trivy
 
   vagrant:
+    cmds:
+      - task: vagrant:{{OS}}
+
+  vagrant:darwin:
     run: once
     cmds:
       - task: brew:cask
         vars:
           CASK: vagrant
 
+  vagrant:linux:
+    run: once
+    cmds:
+      - task: :install:install-doctor
+        vars:
+          SOFTWARE: vagrant
+
   virtualbox:
+    cmds:
+      - task: virtualbox:{{OS}}
+
+  virtualbox:darwin:
     run: once
     cmds:
       - task: brew:cask
         vars:
           CASK: virtualbox
+
+  virtualbox:linux:
+    run: once
+    cmds:
+      - task: :install:install-doctor
+        vars:
+          SOFTWARE: virtualbox
+
+  vmware:
+    cmds:
+      - task: vmware:{{OS}}
+
+  vmware:darwin:
+    run: once
+    cmds:
+      - task: brew:cask
+        vars:
+          CASK: vmware-fusion
+
+  vmware:linux:
+    run: once
+    cmds:
+      - task: :install:install-doctor
+        vars:
+          SOFTWARE: vmware
 
   yq:
     run: once

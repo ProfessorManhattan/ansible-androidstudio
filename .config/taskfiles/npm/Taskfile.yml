@@ -228,6 +228,13 @@ tasks:
     cmds:
       - '{{.NPX_HANDLE}}jest'
 
+  test:ci:
+    deps:
+      - :install:modules:local
+      - :install:npm:jest
+    cmds:
+      - '{{.NPX_HANDLE}}jest --collectCoverage --ci --reporters=default --reporters=jest-junit'
+
   test:coverage:
     deps:
       - :install:modules:local

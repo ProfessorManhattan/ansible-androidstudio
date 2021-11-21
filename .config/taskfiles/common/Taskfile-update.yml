@@ -28,15 +28,16 @@ tasks:
     vars:
       CONTRIB_TEMPLATE: .config/docs/blueprint-contributing.md
     cmds:
+      - mkdir -p docs
       - >
         {{.NPX_HANDLE}}readme generate --silent --headingPrefix '{}' --config .variables.json
-        --input "{{.CONTRIB_TEMPLATE}}" --output CONTRIBUTING.md
+        --input "{{.CONTRIB_TEMPLATE}}" --output docs/CONTRIBUTING.md
       - task: markdown:scrub
         vars:
-          SCRUB_FILE: CONTRIBUTING.md
-      - '{{.NPX_HANDLE}}prettier --write CONTRIBUTING.md'
+          SCRUB_FILE: docs/CONTRIBUTING.md
+      - '{{.NPX_HANDLE}}prettier --write docs/CONTRIBUTING.md'
     sources:
-      - CONTRIBUTING.md
+      - docs/CONTRIBUTING.md
       - .config/docs/**/*
       - .variables.json
     preconditions:

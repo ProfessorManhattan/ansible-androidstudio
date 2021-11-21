@@ -53,6 +53,18 @@ tasks:
       - task: :lint:python
       - task: test:pytest
 
+  test:ci:
+    deps:
+      - :install:python:pytest
+      - :install:python:pytest-cov
+      - :install:software:poetry
+    cmds:
+      - poetry config virtualenvs.create false
+      - poetry install --no-dev
+      - poetry run pytest --junitxml=report.xml --cov=src/
+      - poetry run coverage report
+      - poetry run coverage xml
+
   test:pytest:
     deps:
       - :install:python:requirements

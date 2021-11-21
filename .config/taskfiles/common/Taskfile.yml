@@ -204,19 +204,27 @@ tasks:
       * ubuntu-18.04
       * ubuntu-20.04
       * ubuntu-21.04
+    cmds:
+      - task: shell:{{if .CLI_ARGS}}cli{{else}}prompt{{end}}
+
+  shell:cli:
+    vars:
+      WORKDIR:
+        sh: basename $PWD
+    cmds:
+      - docker run --cap-drop=ALL -it -v "$PWD:/{{.WORKDIR}}" -w /{{.WORKDIR}} --rm megabytelabs/ansible-molecule-{{.CLI_ARGS}}:latest /bin/bash
+
+  shell:prompt:
+    deps:
+      - :install:modules:prompt
+    interactive: true
     vars:
       WORKDIR:
         sh: basename $PWD
     cmds:
       - |
-        {{if .CLI_ARGS}}
-          docker run --cap-drop=ALL -it -v "$PWD:/{{.WORKDIR}}" -w /{{.WORKDIR}} --rm megabytelabs/ansible-molecule-{{.CLI_ARGS}}:latest /bin/bash
-        {{else}}
-          node .config/scripts/prompts/shell.js
-        {{end}}
-    preconditions:
-      - sh: 'type docker &> /dev/null'
-        msg: Docker is not installed.
+        CHOICE="$(node .config/scripts/prompts/shell.js)"
+        docker run --cap-drop=ALL -it -v "$PWD:/{{.WORKDIR}}" -w /{{.WORKDIR}} --rm "megabytelabs/ansible-molecule-$CHOICE:latest" /bin/bash
 
   update:
     deps:

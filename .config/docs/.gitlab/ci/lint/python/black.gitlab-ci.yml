@@ -1,0 +1,11 @@
+---
+black:
+  stage: lint
+  image:
+    name: megabytelabs/black:slim
+    entrypoint: ['']
+  variables:
+    GIT_DEPTH: 1
+  script:
+    - set -eo pipefail
+    - black . --check

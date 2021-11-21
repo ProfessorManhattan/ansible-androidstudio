@@ -184,6 +184,23 @@ tasks:
       - sh: '[ "{{.NAME}}" != "null" ]'
         msg: The `.blueprint.name` variable in `package.json` must be set.
 
+  gitlab:integrations:
+    deps:
+      - gitlab:integrations:github
+
+  gitlab:integrations:github:
+    deps:
+      - :install:software:glab
+      - :install:software:jq
+    env:
+      GITHUB_REPO:
+        sh: jq -r '.blueprint.repository.github' package.json
+    cmds:
+      - |
+        if [ ! -z "$GITLAB_TOKEN" ] && [ ! -z "$GITHUB_TOKEN" ]; then
+          glab api projects/:fullpath/integrations/github -X PUT -f token="$GITHUB_TOKEN" -f repository_url="$GITHUB_REPO"
+        fi
+
   gitlab:mirror:
     deps:
       - :install:software:glab
@@ -270,6 +287,7 @@ tasks:
   gitlab:update:
     deps:
       - gitlab:mirror
+      - gitlab:integrations
       - gitlab:pipelines
       - gitlab:update:meta
       - gitlab:wiki
@@ -282,18 +300,33 @@ tasks:
     vars:
       DESCRIPTION:
         sh: jq -r '.description' package.json
+      ISSUES_TEMPLATE: '## Summary\r\n\r\n(Summarize the bug encountered concisely)\r\n\r\n##
+        Steps to reproduce\r\n\r\n(How one can reproduce the issue - this is very important)\r\n\r\n##
+        Example Project\r\n\r\n(If possible, please create an example project here on GitLab.com that
+        exhibits the problematic\r\nbehavior, and link to it here in the bug report.\r\nIf you are using
+        an older version of GitLab, this will also determine whether the bug has been fixed\r\nin a more
+        recent version)\r\n\r\n## What is the current bug behavior?\r\n\r\n(What actually happens)\r\n\r\n##
+        What is the expected correct behavior?\r\n\r\n(What you should see instead)\r\n\r\n## Relevant
+        logs and/or screenshots\r\n\r\n(Paste any relevant logs - please use code blocks (```) to format
+        console output, logs, and code, as\r\nit is very hard to read otherwise.)\r\n\r\n## Possible
+        fixes\r\n\r\n(If you can, link to the line of code that might be responsible for the problem)'
       NAME:
         sh: jq -r '.blueprint.name' package.json
       PROJECT_TYPE:
         sh: if [[ $(jq -r '.private' package.json) == 'true' ]]; then echo 'private'; else echo 'public'; fi
+      TEST_COVERAGE_REGEX:
+        sh: jq -r '.build_coverage_regex' .variables.json | sed 's/^null$//'
     env:
       KEYWORDS:
         sh: jq -r '.keywords | tostring' package.json | sed 's/\[//' | sed 's/\]//' | sed 's/"//g'
     cmds:
       - |
         if [ ! -z "$GITLAB_TOKEN" ]; then
-          glab api projects/:fullpath -X PUT -f description="{{.DESCRIPTION}}" -f name="{{.NAME}}" \
-            -f wiki_enabled={{.GITLAB_WIKI}} -f visibility="{{.PROJECT_TYPE}}" -f tag_list="$KEYWORDS" --silent
+          PROJECT_ID="$(glab api projects/:fullpath -X PUT -f build_coverage_regex="{{.TEST_COVERAGE_REGEX}}" \
+          -f wiki_enabled={{.GITLAB_WIKI}} -f visibility="{{.PROJECT_TYPE}}" -f topics="$KEYWORDS" | jq '.id')"
+          curl -s -H 'Content-Type: application/json' -H "Authorization: Bearer $GITLAB_TOKEN" -X PUT --data \
+          '{"description": "{{.DESCRIPTION}}", "issues_template": "{{.ISSUES_TEMPLATE}}", "name": "{{.NAME}}"}' \
+          "https://gitlab.com/api/v4/projects/$PROJECT_ID" > /dev/null
         else
           true warn 'The `GITLAB_TOKEN` environment variable is not set so the GitLab repository cannot be updated via the API.'
         fi

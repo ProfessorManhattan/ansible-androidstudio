@@ -2,10 +2,19 @@
 python:
   stage: test
   image:
-    name: megabytelabs/yamllint:slim
+    name: megabytelabs/pytest:slim
     entrypoint: ['']
+  allow_failure: true
   variables:
     GIT_DEPTH: 1
+  cache:
+    key: $CI_COMMIT_REF_SLUG
+    paths:
+      - .cache/
   script:
-    - set -eo pipefail
-    - yamllint -c .config/yamllint.yml -s .
+    - task python:test:ci
+  artifacts:
+    reports:
+      cobertura: coverage.xml
+      junit: report.xml
+    when: always

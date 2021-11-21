@@ -38,7 +38,7 @@ tasks:
 
       For more information, see [Ansible Lint's GitHub page](https://github.com/ansible-community/ansible-lint).
     cmds:
-      - ansible-lint -c {{.ANSIBLE_LINT_CONFIG}}
+      - poetry run ansible-lint -c {{.ANSIBLE_LINT_CONFIG}}
 
   commit:
     deps:
@@ -315,7 +315,7 @@ tasks:
       **Example scanning specific file:**
       `task lint:toml -- myfile.toml`
     cmds:
-      - check-toml {{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}.{{end}}
+      - poetry run check-toml {{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}.{{end}}
 
   vagrant:
     deps:
@@ -348,7 +348,7 @@ tasks:
       **Example scanning specific file:**
       `task lint:xml -- myfile.xml`
     cmds:
-      - check-xml {{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}.{{end}}
+      - poetry run check-xml {{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}.{{end}}
 
   yaml:
     deps:
@@ -375,4 +375,4 @@ tasks:
 
       For more information, see the [YAML Lint GitHub page](https://github.com/adrienverge/yamllint).
     cmds:
-      - yamllint -c {{.YAMLLINT_CONFIG}} -s {{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}.{{end}}
+      - poetry run yamllint -c {{.YAMLLINT_CONFIG}} -s {{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}.{{end}}

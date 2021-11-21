@@ -1,0 +1,13 @@
+---
+gotest:
+  stage: test
+  image: megabytelabs/gotest:slim
+  needs: []
+  variables:
+    GIT_DEPTH: 1
+  script:
+    - task go:test:ci
+  artifacts:
+    reports:
+      junit: report.xml
+    when: always

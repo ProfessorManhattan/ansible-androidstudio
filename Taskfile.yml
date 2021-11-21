@@ -15,8 +15,11 @@ includes:
   docker: ./.config/taskfiles/Taskfile-docker.yml
   fix: ./.config/taskfiles/Taskfile-fix.yml
   git: ./.config/taskfiles/Taskfile-git.yml
+  go: ./.config/taskfiles/go/Taskfile.yml
+  go:test: ./.config/taskfiles/go/Taskfile-test.yml
   image: ./.config/taskfiles/Taskfile-image.yml
   install: ./.config/taskfiles/install/Taskfile.yml
+  install:go: ./.config/taskfiles/install/Taskfile-go.yml
   install:npm: ./.config/taskfiles/install/Taskfile-npm.yml
   install:python: ./.config/taskfiles/install/Taskfile-python.yml
   install:software: ./.config/taskfiles/install/Taskfile-software.yml

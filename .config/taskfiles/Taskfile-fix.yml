@@ -65,8 +65,8 @@ tasks:
     cmds:
       - |
         function misc() {
-          fix-byte-order-marker "$1" &
-          mixed-line-ending --fix=lf "$1" &
+          poetry run fix-byte-order-marker "$1" &
+          poetry run mixed-line-ending --fix=lf "$1" &
         }
         {{if .CLI_ARGS}}
           misc '{{.CLI_ARGS}}'

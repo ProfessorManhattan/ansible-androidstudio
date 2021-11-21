@@ -32,9 +32,9 @@ molecule-linux:
     DOCKER_TLS_VERIFY: 1
     GIT_DEPTH: 1
   script:
-    - set -eo pipefail
+    - task
     - SCENARIO="ci-docker-$OPERATING_SYSTEM"
-    - SNAP_REFERENCES=$(grep -Ril "community.general.snap:" ./tasks)
+    - SNAP_REFERENCES="$(grep -Ril 'community.general.snap:' ./tasks)"
     - if [ "$SNAP_REFERENCES" ]; then SCENARIO="ci-docker-$OPERATING_SYSTEM-snap"; fi
     - echo "***Molecule Scenario*** ---> $SCENARIO"
     - if [ -d "molecule/$SCENARIO" ]; then molecule test -s "$SCENARIO"; fi

@@ -1,4 +1,5 @@
 const glob = require("glob")
+const { execSync } = require('child_process')
 
 module.exports.register = function (Handlebars) {
   /**
@@ -15,6 +16,12 @@ module.exports.register = function (Handlebars) {
     const files = glob.sync(pattern)
 
     return files
+  })
+
+  Handlebars.registerHelper('poet', function(input, options) {
+    const formulae = execSync('poetry run poet -f ' + input)
+
+    return formulae
   })
 
   Handlebars.registerHelper('taskfileSort', function(taskfiles, options) {

@@ -1,0 +1,53 @@
+---
+version: '3'
+
+vars:
+  EXTENSIONS_FILE: .vscode/extensions.json
+  EXTENSIONS_URL: https://gitlab.com/ProfessorManhattan/Playbooks/-/raw/master/environments/prod/group_vars/desktop/vscode-extensions.yml
+  TASKS_FILE: .vscode/tasks.json
+
+tasks:
+  extensions:
+    deps:
+      - :install:npm:prettier
+      - :install:software:jq
+      - :install:software:yq
+    cmds:
+      - >
+        curl -s "{{.EXTENSIONS_URL}}" | yq e '.vscode_extensions[].name' - | jq -cRrs 'split("\n") | "{ \"recommendations\": \(.) }"'
+        | jq '.recommendations = ([ .recommendations[] | select(length > 0) ])' > {{.EXTENSIONS_FILE}}
+
+  generate:
+    deps:
+      - extensions
+      - tasks
+
+  tasks:
+    deps:
+      - :install:npm:prettier
+      - :install:software:jq
+    env:
+      TASK_LIST:
+        sh: task --list
+      TMP:
+        sh: mktemp
+    run: when_changed
+    cmds:
+      - |
+        echo '{"version": "2.0.0"}' > "$TMP"
+      - |
+        TASKS='['
+        while read LINE; do
+          if [ "${LINE:0:1}" == '*' ]; then
+            TASK_NAME=$(echo "$LINE" | sed 's/^\*.\([^\ ]*\):\(.*\)$/\1/g' | xargs)
+            TASK_DESC=$(echo "$LINE" | sed 's/^\*.\([^\ ]*\):\(.*\)$/\2/g' | xargs)
+            LABEL="($TASK_NAME): $TASK_DESC"
+            TYPE="shell"
+            COMMAND="bash .config/scripts/vscode.sh && task $TASK_NAME"
+            TASKS+="{\"label\": \"$LABEL\", \"type\": \"$TYPE\", \"command\": \"$COMMAND\"},"
+          fi
+        done <<< "$TASK_LIST"
+        jq --arg tasks "${TASKS%?}]" '.tasks = ($tasks | fromjson)' "$TMP" > '{{.TASKS_FILE}}'
+      - task: :fix:prettier
+        vars:
+          CLI_ARGS: '{{.TASKS_FILE}}'

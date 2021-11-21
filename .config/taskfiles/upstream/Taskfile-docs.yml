@@ -51,7 +51,8 @@ tasks:
       - rm -rf common
       - mv {{.SHARED_FOLDER}}/common common
       - mv {{.SHARED_FOLDER}}/README.md README.md
-      - mv {{.SHARED_FOLDER}}/CONTRIBUTING.md CONTRIBUTING.md
+      - mkdir -p docs
+      - mv {{.SHARED_FOLDER}}/docs/CONTRIBUTING.md docs/CONTRIBUTING.md
 
   merge:
     deps:

@@ -12,13 +12,11 @@ galaxy_info:
     - name: Debian
       versions:
         - buster
-        - buster
     - name: Ubuntu
       versions:
         - bionic
-        - focal
         - hirsute
-        - bionic
+        - focal
   galaxy_tags:
     - adb
     - android
@@ -32,7 +30,7 @@ galaxy_info:
     - google
     - ide
     - java
-    - npm
+    - mblabs
     - package
     - platformtools
     - professormanhattan

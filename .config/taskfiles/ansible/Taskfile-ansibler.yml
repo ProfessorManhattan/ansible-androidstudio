@@ -22,22 +22,19 @@ tasks:
   compatibility-chart:
     deps:
       - :install:software:jq
-    env:
-      TMP:
-        sh: mktemp
     cmds:
+      - mkdir -p .cache
+      - if [ ! -f .cache/compatibility-chart.json ]; then echo "{}" > .cache/compatibility-chart.json; fi
       - task: compatibility-chart:generate
-      - jq -s -S '.[0] + .[1]' '{{.VARIABLES_PATH}}' .cache/compatibility-chart.json > "$TMP"
-      - mv "$TMP" '{{.VARIABLES_PATH}}'
+      - |
+        TMP="$(mktemp)"
+        jq -s -S '.[0] + .[1]' '{{.VARIABLES_PATH}}' .cache/compatibility-chart.json > "$TMP"
+        mv "$TMP" '{{.VARIABLES_PATH}}'
 
   compatibility-chart:generate:
     deps:
       - :install:python:requirements
-    env:
-      TMP:
-        sh: mktemp
     cmds:
-      - mkdir -p .cache
       - ansibler --generate-compatibility-chart --molecule-results-dir '{{.MOLECULE_RESULTS_PATH}}' --json-file .cache/compatibility-chart.json
     sources:
       - '{{.MOLECULE_RESULTS_PATH}}/*'
@@ -47,20 +44,20 @@ tasks:
   populate-platforms:
     deps:
       - :install:software:jq
-    env:
-      TMP:
-        sh: mktemp
     cmds:
+      - mkdir -p .cache
+      - if [ ! -f .cache/platforms.json ]; then echo "{}" > .cache/platforms.json; fi
       - task: populate-platforms:generate
-      - jq -s -S '.[0] + .[1]' '{{.VARIABLES_PATH}}' .cache/platforms.json > "$TMP"
-      - mv "$TMP" '{{.VARIABLES_PATH}}'
+      - |
+        TMP="$(mktemp)"
+        jq -s -S '.[0] + .[1]' '{{.VARIABLES_PATH}}' .cache/platforms.json > "$TMP"
+        mv "$TMP" '{{.VARIABLES_PATH}}'
 
   populate-platforms:generate:
     deps:
       - :install:python:requirements
       - :install:npm:prettier
     cmds:
-      - mkdir -p .cache
       - ansibler --populate-platforms --json-file .cache/platforms.json
       - >
         {{.NPX_HANDLE}}prettier --write '{{.META_PATH}}'
@@ -73,19 +70,19 @@ tasks:
   role-dependencies:
     deps:
       - :install:software:jq
-    env:
-      TMP:
-        sh: mktemp
     cmds:
+      - mkdir -p .cache
+      - if [ ! -f .cache/role-dependencies.json ]; then echo "{}" > .cache/role-dependencies.json; fi
       - task: role-dependencies:generate
-      - jq -s -S '.[0] + .[1]' '{{.VARIABLES_PATH}}' .cache/role-dependencies.json > "$TMP"
-      - mv "$TMP" '{{.VARIABLES_PATH}}'
+      - |
+        TMP="$(mktemp)"
+        jq -s -S '.[0] + .[1]' '{{.VARIABLES_PATH}}' .cache/role-dependencies.json > "$TMP"
+        mv "$TMP" '{{.VARIABLES_PATH}}'
 
   role-dependencies:generate:
     deps:
       - :install:python:requirements
     cmds:
-      - mkdir -p .cache
       - cmd: ansibler --role-dependencies --json-file .cache/role-dependencies.json
         ignore_error: true
     sources:

@@ -20,7 +20,7 @@
     "info": "task --list",
     "prepare": "task common:husky",
     "start": "bash .config/start.sh",
-    "test": "git reset --hard HEAD && git clean -fxd && cd .commonshared && git pull origin master && cd .. && cp -rT .commonshared/common/.config .config && task start"
+    "test": "cd share && git pull origin master && cd .. && cp -rT share/common/.config/taskfiles .config/taskfiles && task start"
   },
   "config": {
     "commitizen": {
@@ -30,13 +30,20 @@
   "dependencies": {
     "tslib": "^2.3.1"
   },
+  "optionalDependencies": {
+    "chalk": "^4.1.2",
+    "inquirer": "^8.2.0",
+    "signale": "^1.4.0"
+  },
   "devDependencies": {
     "@commitlint/config-conventional": "^13.1.0",
-    "@mblabs/eslint-config": "^1.0.99",
+    "@mblabs/eslint-config": "^1.0.97",
     "@mblabs/prettier-config": "^14.14.14",
+    "@mblabs/release-config": "^1.0.0",
     "@typescript-eslint/eslint-plugin": "^5.2.0",
     "cz-conventional-changelog": "^3.3.0",
-    "handlebars-helpers": "^0.10.0"
+    "handlebars-helpers": "^0.10.0",
+    "semantic-release": "^18.0.0"
   },
   "keywords": [
     "adb",
@@ -61,6 +68,7 @@
     "installdoctor",
     "java",
     "macos",
+    "mblabs",
     "megabytelabs",
     "molecule",
     "npm",
@@ -105,10 +113,60 @@
       "url": "https://www.patreon.com/ProfessorManhattan"
     }
   ],
+  "lint-staged": {
+    "**/*": [
+      "blocklint --wordlist blacklist,slave,whitelist",
+      "check-merge-conflict",
+      "check-added-large-files",
+      "check-symlinks",
+      "destroyed-symlinks"
+    ],
+    "**/*.(css|html|less|md|mjml|php|scss|sh|xml)": [
+      "task fix:prettier --"
+    ],
+    "**/*.(jpg|png)": [
+      "task image:compress --"
+    ],
+    "**/*.(js|jsx|ts|tsx)": [
+      "task fix:js --",
+      "task lint:js --"
+    ],
+    "**/*.json": [
+      "task fix:json --"
+    ],
+    "**/*.py": [
+      "task fix:python --",
+      "task lint:python --"
+    ],
+    "**/*.sh": [
+      "task fix:shell --",
+      "task lint:shell --"
+    ],
+    "**/*.toml": [
+      "task lint:toml --"
+    ],
+    "**/*.xml": [
+      "task fix:xml --",
+      "task lint:xml --"
+    ],
+    "**/*.yml": [
+      "task fix:yaml --",
+      "task lint:yaml --"
+    ],
+    "**/*vault.yml": [
+      "task ansible:vault:lint:file --"
+    ],
+    "logo.png": [
+      "task image:resize -- 200 200",
+      "task image:compress --"
+    ]
+  },
   "prettier": "@mblabs/prettier-config",
-  "optionalDependencies": {
-    "chalk": "^4.1.2",
-    "inquirer": "^8.2.0",
-    "signale": "^1.4.0"
+  "release": {
+    "branches": [
+      "master",
+      "next"
+    ],
+    "extends": "@mblabs/release-config"
   }
 }

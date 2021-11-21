@@ -37,11 +37,11 @@ tasks:
   environment:prompt:
     deps:
       - :install:modules:local
-    env:
-      ENVIRONMENT:
-        sh: node .common/scripts/prompts/environment.js
+      - :install:modules:prompt
+    interactive: true
     cmds:
       - |
+        ENVIRONMENT="$(node .config/scripts/prompts/environment.js)"
         if [ ! -z "$ENVIRONMENT" ]; then
           for ITEM in "environments/$ENVIRONMENT/*"; do
             if [ -d "$ITEM" ] || [ -f "$ITEM" ]; then
