@@ -198,7 +198,7 @@ tasks:
     cmds:
       - |
         if [ ! -z "$GITLAB_TOKEN" ] && [ ! -z "$GITHUB_TOKEN" ]; then
-          glab api projects/:fullpath/integrations/github -X PUT -f token="$GITHUB_TOKEN" -f repository_url="$GITHUB_REPO"
+          glab api projects/:fullpath/integrations/github -X PUT -f token="$GITHUB_TOKEN" -f repository_url="$GITHUB_REPO" --silent
         fi
 
   gitlab:mirror:
