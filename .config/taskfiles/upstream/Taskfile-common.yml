@@ -26,7 +26,10 @@ tasks:
       - mkdir -p ./{{.SHARED_FOLDER}}/common/.config
       - rm -rf ./{{.SHARED_FOLDER}}/.config/docs
       - git clone --depth=1 {{.DOCS_URL}} ./{{.SHARED_FOLDER}}/common/.config/docs
-      - rm -rf ./{{.SHARED_FOLDER}}/common/.config/docs/.git
+      - |
+        cd rm -rf ./{{.SHARED_FOLDER}}/common/.config/docs
+        rm -rf .git .config .github .gitlab .vscode .editorconfig .gitignore .gitlab-ci.yml
+        rm -rf LICENSE Taskfile.yml package-lock.json package.json poetry.lock pyproject.toml
 
   copy:
     deps:
@@ -129,7 +132,6 @@ tasks:
     cmds:
       - task: merge:variables:project
       - task: merge:variables:subtype
-
 
   merge:variables:project:
     deps:
