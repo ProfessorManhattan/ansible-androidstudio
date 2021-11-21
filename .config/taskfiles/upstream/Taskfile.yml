@@ -4,11 +4,13 @@ version: '3'
 tasks:
   common:
     cmds:
+      - task: :upstream:common:reset
       - task: :upstream:common:clone
       - task: :upstream:common:copy
       - task: :upstream:common:merge
       - task: :upstream:common:clean
       - task: :upstream:common:template
+      - task: :upstream:common:combine
       - task: :vscode:generate
       - task: :fix:eslint
 

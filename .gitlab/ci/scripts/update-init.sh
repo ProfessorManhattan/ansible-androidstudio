@@ -32,6 +32,7 @@ if test -d .config/docs; then
   cd ../..
 fi
 curl -s https://gitlab.com/megabyte-labs/common/shared/-/raw/master/common/.config/taskfiles/upstream/Taskfile-common.yml > .config/taskfiles/upstream/Taskfile-common.yml
+curl -s https://gitlab.com/megabyte-labs/common/shared/-/raw/master/common/.config/taskfiles/upstream/Taskfile-project.yml > .config/taskfiles/upstream/Taskfile-project.yml
 if [ -n "$GITLAB_CI" ]; then
   task ci:commit
 fi

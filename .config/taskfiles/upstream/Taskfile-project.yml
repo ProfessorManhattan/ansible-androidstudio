@@ -11,14 +11,16 @@ tasks:
       - |
         if [ "$(jq -r '.blueprint.boilerplate' package.json)" == 'true' ]; then
           for ENTITY in .boilerplate/*; do
-            rm -rf "${ENTITY/#.boilerplate\/}"
+            TARGET="$(echo $ENTITY | sed 's/^.boilerplate\///')"
+            rm -rf "$TARGET"
           done
         fi
         GREP=""
         for ENTITY in .boilerplate/*; do
-          GREP="${ENTITY/#.boilerplate\/}"\\\|"${GREP}"
+          TARGET="$(echo $ENTITY | sed 's/^.boilerplate\///')"
+          GREP="$TARGET"\|"$GREP"
         done
-        GREP="${GREP/%\\\|}"
+        GREP="$(echo $GREP | sed 's/\\|$//')"
         if ! ls -la | grep "$GREP" &> /dev/null; then
           true info "Adding boilerplate code since there are no overlapping files"
           cp -rT .boilerplate .
@@ -38,8 +40,8 @@ tasks:
 
   copy:
     cmds:
-      - cp -rT {{.SHARED_FOLDER}}/.common .
-      - cp -rT {{.SHARED_FOLDER}}/.common-{{.REPOSITORY_SUBTYPE}} .
+      - cp -rT {{.SHARED_FOLDER}}/_generated_/common .
+      - cp -rT {{.SHARED_FOLDER}}/_generated_/{{.REPOSITORY_SUBTYPE}} .
       - task: :common:husky:permissions
       - task: save:common:keywords
 
