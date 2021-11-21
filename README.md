@@ -111,18 +111,18 @@ alternative_description. [Android Studio](https://developer.android.com/studio) 
 
 ## Features
 
-**Ensures configured Android SDKs are present:**
-
-- Updates `PATH` on Windows systems
-- Installs a configurable list of Android SDKs and Tools to user(s) home folder(s)
-- Ensures Android SDK tools like `adb` are present in PATH
-- Updates `~/.bashrc` to include SDK tools in `PATH` on Linux systems
-- Updates `~/.zshrc` to include SDK tools in `PATH` on Linux systems
-
 **Ensures Android Studio is installed:**
 
 - Installs Android Studio on Archlinux, CentOS, Debian, Fedora, macOS, Ubuntu, and Windows
 - Ensures command-line tools are downloaded, installed, and available in the `PATH`
+
+**Ensures configured Android SDKs are present:**
+
+- Installs a configurable list of Android SDKs and Tools to user(s) home folder(s)
+- Ensures Android SDK tools like `adb` are present in PATH
+- Updates `~/.bashrc` to include SDK tools in `PATH` on Linux systems
+- Updates `~/.zshrc` to include SDK tools in `PATH` on Linux systems
+- Updates `PATH` on Windows systems
 
 <a href="#quick-start" style="width:100%"><img style="width:100%" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
