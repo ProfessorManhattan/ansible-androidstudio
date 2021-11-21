@@ -31,6 +31,16 @@ tasks:
         rm -rf .git .config .github .gitlab .vscode .editorconfig .gitignore .gitlab-ci.yml
         rm -rf LICENSE Taskfile.yml package-lock.json package.json poetry.lock pyproject.toml
 
+  combine:
+    cmds:
+      - mkdir -p _generated_
+      - mv .common* _generated_
+      - |
+        mv _generated_/.common _generated_/common
+        for FOLDER in _generated_/.common-*; do
+          mv _generated_/"${FOLDER/#_generated_\/}" _generated_/"${FOLDER/#_generated_\/.common-}"
+        done
+
   copy:
     deps:
       - copy:common
@@ -173,6 +183,11 @@ tasks:
           handleSubtype "$FOLDER" &
         done
         wait
+
+  reset:
+    cmds:
+      - rm -rf .common*
+      - rm -rf _generated_
 
   template:
     deps:
