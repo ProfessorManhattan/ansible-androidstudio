@@ -38,7 +38,8 @@ tasks:
       - |
         mv _generated_/.common _generated_/common
         for FOLDER in _generated_/.common-*; do
-          mv _generated_/"${FOLDER/#_generated_\/}" _generated_/"${FOLDER/#_generated_\/.common-}"
+          TARGET="$(echo $FOLDER | sed 's/^_generated_\/.common-//')"
+          mv "$FOLDER" "_generated_/$TARGET"
         done
 
   copy:
