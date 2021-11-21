@@ -33,6 +33,6 @@ jobs:
         shell: wsl-bash {0}
         run: |
           apt update
-          ls -la
-          
+          apt install net-tools
+          ifconfig
           bash test/windows/test.sh
