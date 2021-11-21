@@ -111,18 +111,18 @@ This repository is the home of an [Ansible](https://www.ansible.com/) role that 
 
 ## Features
 
-**Ensures configured Android SDKs are present:**
-
-- Updates `PATH` on Windows systems
-- Installs a configurable list of Android SDKs and Tools to user(s) home folder(s)
-- Ensures Android SDK tools like `adb` are present in PATH
-- Updates `~/.bashrc` to include SDK tools in `PATH` on Linux systems
-- Updates `~/.zshrc` to include SDK tools in `PATH` on Linux systems
-
 **Ensures Android Studio is installed:**
 
 - Installs Android Studio on Archlinux, CentOS, Debian, Fedora, macOS, Ubuntu, and Windows
 - Ensures command-line tools are downloaded, installed, and available in the `PATH`
+
+**Ensures configured Android SDKs are present:**
+
+- Installs a configurable list of Android SDKs and Tools to user(s) home folder(s)
+- Ensures Android SDK tools like `adb` are present in PATH
+- Updates `~/.bashrc` to include SDK tools in `PATH` on Linux systems
+- Updates `~/.zshrc` to include SDK tools in `PATH` on Linux systems
+- Updates `PATH` on Windows systems
 
 <a href="#quick-start" style="width:100%"><img style="width:100%" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
@@ -152,7 +152,11 @@ You can also check out **[Install Doctor](https://install.doctor)**. It is an ap
 
 This role contains variables that you can customize. The variables you can customize are located in `defaults/main.yml`. By default, the variables use sensible defaults but you may want to customize the role depending on your use case. The variables, along with descriptions, are listed below:
 
-role_variables
+| Name                            | Default Value | Description                                                                                                                                                                                                                                                                                                                                                                                                                |
+| ------------------------------- | ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`android_sdks`](#android_sdks) | `[]`          | The list of SDKs and tools to install after Android Studio is installed. If no value is provided, the latest version of the SDKs and tools will be installed. Use the correct format, which can be found by executing `sdkmanage --list` after the CLI tools are installed; some package need a version to be specified and some do not.                                                                                   |
+| [`sdk_location`](#sdk_location) | `""`          | The folder to set as the SDK location                                                                                                                                                                                                                                                                                                                                                                                      |
+| [`user_configs`](#user_configs) | `[]`          | The `user_configs` variable is an array of objects that should, at the very least have the `username` property defined for each user with a home directory that you would like this role to install the Android SDK tools into. If the system property is set to true, then the SDK tools will not be installed to that user's home directory. You can control the installation location with the `sdk_location` variable. |
 
 ### Variable Examples
 
