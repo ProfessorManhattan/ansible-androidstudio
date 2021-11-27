@@ -44,11 +44,13 @@ if test -d .config/docs; then
 fi
 curl -s https://gitlab.com/megabyte-labs/common/shared/-/raw/master/common/.config/taskfiles/upstream/Taskfile-common.yml > .config/taskfiles/upstream/Taskfile-common.yml
 curl -s https://gitlab.com/megabyte-labs/common/shared/-/raw/master/common/.config/taskfiles/upstream/Taskfile-project.yml > .config/taskfiles/upstream/Taskfile-project.yml
-curl -s https://gitlab.com/megabyte-labs/common/shared/-/raw/master/Taskfile.yml > Taskfile-shared.yml
-TMP="$(mktemp)"
-yq eval-all 'select(fileIndex==0).includes = select(fileIndex==1).includes | select(fileIndex==0)' Taskfile.yml Taskfile-shared.yml > "$TMP"
-mv "$TMP" Taskfile.yml
-rm Taskfile-shared.yml
+if ! task donothing &> /dev/null; then
+  curl -s https://gitlab.com/megabyte-labs/common/shared/-/raw/master/Taskfile.yml > Taskfile-shared.yml
+  TMP="$(mktemp)"
+  yq eval-all 'select(fileIndex==0).includes = select(fileIndex==1).includes | select(fileIndex==0)' Taskfile.yml Taskfile-shared.yml > "$TMP"
+  mv "$TMP" Taskfile.yml
+  rm Taskfile-shared.yml
+fi
 git clone https://gitlab.com/megabyte-labs/common/shared.git common-shared
 rm -rf .config
 mkdir -p .config
