@@ -107,6 +107,11 @@
       "command": "bash .config/scripts/vscode.sh && task update"
     },
     {
+      "label": "(docker:build): Build a regular Docker image and then generate a slim build from it",
+      "type": "shell",
+      "command": "bash .config/scripts/vscode.sh && task docker:build"
+    },
+    {
       "label": "(docker:build:fat): Build a Docker container from the Dockerfile",
       "type": "shell",
       "command": "bash .config/scripts/vscode.sh && task docker:build:fat"
@@ -382,9 +387,9 @@
       "command": "bash .config/scripts/vscode.sh && task packer:build:virtualbox"
     },
     {
-      "label": "(packer:packer:vmware): Build a Packer image for VMWare",
+      "label": "(packer:build:vmware): Build a Packer image for VMWare",
       "type": "shell",
-      "command": "bash .config/scripts/vscode.sh && task packer:packer:vmware"
+      "command": "bash .config/scripts/vscode.sh && task packer:build:vmware"
     },
     {
       "label": "(publish:android:beta): Publishes Android app to Firebase beta channel",

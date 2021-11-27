@@ -4,6 +4,9 @@ bandit:
   image:
     name: megabytelabs/yamllint:slim
     entrypoint: ['']
+  rules:
+    - exists:
+        - '**/*.py'
   variables:
     GIT_DEPTH: 1
   script:

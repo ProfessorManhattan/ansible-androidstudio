@@ -4,6 +4,10 @@ ansible-lint:
   image:
     name: megabytelabs/ansible-lint:slim
     entrypoint: ['']
+  rules:
+    - exists:
+        - ansible.cfg
+        - meta/main.yml
   variables:
     GIT_DEPTH: 1
   script:

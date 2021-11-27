@@ -32,7 +32,7 @@ jobs:
           ANSIBLE_FORCE_COLOR: '1'
         shell: wsl-bash {0}
         run: |
-          apt update
-          apt install net-tools
-          ifconfig
+          apt update -y
+          apt install -y dos2unix python3-pip
+          dos2unix test/windows/test.sh
           bash test/windows/test.sh

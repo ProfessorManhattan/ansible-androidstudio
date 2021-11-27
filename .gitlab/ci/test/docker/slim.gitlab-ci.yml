@@ -4,6 +4,9 @@ dockerslim:
   image:
     name: megabytelabs/yamllint:slim
     entrypoint: ['']
+  rules:
+    - exists:
+        - '*slim.config.json'
   variables:
     GIT_DEPTH: 1
   script:

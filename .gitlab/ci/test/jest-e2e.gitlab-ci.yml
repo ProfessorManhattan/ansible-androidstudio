@@ -4,6 +4,9 @@ jest-e2e:
   image:
     name: megabytelabs/yamllint:slim
     entrypoint: ['']
+  rules:
+    - exists:
+        - 'test/**/*.e2e-spec.ts'
   variables:
     GIT_DEPTH: 1
   script:

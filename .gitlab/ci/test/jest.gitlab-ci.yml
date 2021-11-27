@@ -2,6 +2,9 @@
 jest:
   stage: test
   image: megabytelabs/jest:slim
+  rules:
+    - exists:
+        - 'src/**/*.spec.ts'
   needs: []
   variables:
     GIT_DEPTH: 1
@@ -18,9 +21,9 @@ jest:
       - coverage/
     reports:
       cobertura: coverage/cobertura-coverage.xml
-
       junit: junit.xml
     when: always
+
 pages:
   stage: deploy
   only:

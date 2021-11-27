@@ -17,8 +17,7 @@ molecule:
     - if: $CI_PIPELINE_SOURCE == 'schedule' || $CI_PIPELINE_SOURCE == 'web'
     - if: $CI_COMMIT_TITLE =~ /^(automation|chore).*/
       when: never
-    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
-      changes:
+    - changes:
         - main.yml
     - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == 'master'
   variables:

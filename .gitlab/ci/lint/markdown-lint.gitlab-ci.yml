@@ -2,6 +2,9 @@
 markdown-lint:
   stage: lint
   image: pipelinecomponents/markdownlint
+  rules:
+    - exists:
+        - '**/*.md'
   variables:
     GIT_DEPTH: 1
   script:

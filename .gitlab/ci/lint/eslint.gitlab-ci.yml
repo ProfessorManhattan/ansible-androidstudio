@@ -5,6 +5,9 @@ eslint:
     name: megabytelabs/yamllint:slim
     entrypoint: ['']
   allow_failure: true
+  rules:
+    - exists:
+        - '**/*.{js,jsx,json,json.handlebars,toml,ts,tsx,yml}'
   variables:
     GIT_DEPTH: 1
   script:

@@ -5,6 +5,9 @@ python:
     name: megabytelabs/pytest:slim
     entrypoint: ['']
   allow_failure: true
+  rules:
+    - exists:
+        - 'test/**/*.py'
   variables:
     GIT_DEPTH: 1
   cache:

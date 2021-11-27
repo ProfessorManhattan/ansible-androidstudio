@@ -4,6 +4,9 @@ shellcheck-fix:
   image:
     name: megabytelabs/yamllint:slim
     entrypoint: ['']
+  rules:
+    - exists:
+        - '**/*.{sh,sh.j2}'
   variables:
     GIT_DEPTH: 1
   script:

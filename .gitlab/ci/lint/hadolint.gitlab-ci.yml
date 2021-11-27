@@ -4,6 +4,9 @@ hadolint:
   image:
     name: megabytelabs/hadolint:slim
     entrypoint: ['']
+  rules:
+    - exists:
+        - '**/*Dockerfile*'
   variables:
     GIT_DEPTH: 1
   script:

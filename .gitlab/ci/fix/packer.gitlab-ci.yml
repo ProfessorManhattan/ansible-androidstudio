@@ -8,6 +8,8 @@ packer-fix:
     - if: $CI_COMMIT_TITLE =~ /^automation\(.*/
       when: never
     - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
+      exists:
+        - '*template.json'
   variables:
     GIT_DEPTH: 1
     GIT_SUBMODULE_STRATEGY: recursive

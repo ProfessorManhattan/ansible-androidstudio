@@ -4,6 +4,9 @@ gitlab-ci-lint:
   image:
     name: megabytelabs/gitlab-ci-lint:slim
     entrypoint: ['']
+  rules:
+    - exists:
+        - '**/*gitlab-ci.yml'
   variables:
     GIT_DEPTH: 1
   script:

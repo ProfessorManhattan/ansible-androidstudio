@@ -1,28 +1,47 @@
 #!/usr/bin/env bash
 
 # @file test/windows/test.sh
-# @brief A script that is used to test an Ansible role on Windows from a Docker container.
+# @brief A script that is used to test an Ansible role on Windows from a WSL environment (or possibly Docker)
 #
-# @description
-# This script is intended to be run by a Docker container on a Windows host to provision the Windows
-# host via Ansible (which is installed on the Docker container). It is also intended to be used in a
-# GitLab CI task that uses a Windows shared runner.
+# @description This script is intended to be run in a WSL environment on a Windows host to provision the Windows
+# host via Ansible using WinRM and CredSSP.
 
-# Ensure Ansible is installed
-if ! type ansible &> /dev/null; then
-  pip3 install ansible pywinrm
-fi
+TEST_TYPE='windows'
 
-# Ensure Ansible Galaxy dependencies are installed
+# @description Ensure Ansible is installed along with required dependencies
+pip3 install ansible 'pywinrm[credssp]'
+
+# @description Ensure Ansible Galaxy dependencies are installed
 if [ -f requirements.yml ]; then
   ansible-galaxy install -r requirements.yml
 fi
 
-# Symlink the Ansible Galaxy role name to the working directory one level up
+# @description Symlink the Ansible Galaxy role name to the working directory one level up
 ROLE_NAME="$(grep "role:" test/windows/test.yml | sed 's^- role: ^^' | xargs)"
 ln -s "$(basename "$PWD")" "../$ROLE_NAME"
 
-# Copy required files and run the Ansible play
-cp test/windows/ansible.cfg ansible.cfg
-cp test/windows/test.yml test.yml
-ansible-playbook -i test/windows/inventory test.yml
+# @description Back up files and then copy replacements (i.e. ansible.cfg)
+function backupAndCopyFiles() {
+  if [ -f ansible.cfg ]; then
+    cp ansible.cfg ansible.cfg.bak
+  fi
+  cp "test/$TEST_TYPE/ansible.cfg" ansible.cfg
+}
+
+# @description Restores files that were backed up (i.e. ansible.cfg)
+function restoreFiles() {
+  if [ -f ansible.cfg.bak ]; then
+    mv ansible.cfg.bak ansible.cfg
+  fi
+}
+
+# @description Calls [restoreFiles] and exits with an error
+function restoreFilesAndExitError() {
+  restoreFiles
+  exit 1
+}
+
+# @description Back up files, run the play, and then restore files
+backupAndCopyFiles
+ansible-playbook -i "test/$TEST_TYPE/inventory" "test/$TEST_TYPE/test.yml" || restoreFilesAndExitError
+restoreFiles

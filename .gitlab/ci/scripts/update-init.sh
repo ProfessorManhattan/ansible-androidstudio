@@ -14,6 +14,17 @@ if [ -n "$GITLAB_CI" ]; then
   git pull origin "$CI_COMMIT_REF_NAME"
 fi
 npm install --save-dev @mblabs/eslint-config@latest
+
+rm -f .config/taskfiles/Taskfile-ci.yml
+rm -f .config/taskfiles/Taskfile-docker.yml
+rm -f .config/taskfiles/Taskfile-fix.yml
+rm -f .config/taskfiles/Taskfile-git.yml
+rm -f .config/taskfiles/Taskfile-image.yml
+rm -f .config/taskfiles/Taskfile-packer.yml
+rm -f .config/taskfiles/Taskfile-python.yml
+rm -f .config/taskfiles/Taskfile-security.yml
+rm -f .config/taskfiles/Taskfile-symlink.yml
+rm -f .config/taskfiles/Taskfile-vscode.yml
 TMP="$(mktemp)"
 jq 'del(."standard-version")' package.json > "$TMP"
 mv "$TMP" package.json
@@ -33,6 +44,14 @@ if test -d .config/docs; then
 fi
 curl -s https://gitlab.com/megabyte-labs/common/shared/-/raw/master/common/.config/taskfiles/upstream/Taskfile-common.yml > .config/taskfiles/upstream/Taskfile-common.yml
 curl -s https://gitlab.com/megabyte-labs/common/shared/-/raw/master/common/.config/taskfiles/upstream/Taskfile-project.yml > .config/taskfiles/upstream/Taskfile-project.yml
+curl -s https://gitlab.com/megabyte-labs/common/shared/-/raw/master/Taskfile.yml > Taskfile-shared.yml
+TMP="$(mktemp)"
+yq eval-all 'select(fileIndex==0).includes = select(fileIndex==1).includes | select(fileIndex==0)' Taskfile.yml Taskfile-shared.yml > "$TMP"
+mv "$TMP" Taskfile.yml
+rm Taskfile-shared.yml
+git clone https://gitlab.com/megabyte-labs/common/shared.git common-shared
+cp -rT common-shared/common/.config/taskfiles .config/taskfiles
+rm -rf common-shared
 if [ -n "$GITLAB_CI" ]; then
   task ci:commit
 fi

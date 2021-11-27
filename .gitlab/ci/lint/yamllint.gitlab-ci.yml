@@ -4,6 +4,9 @@ yamllint:
   image:
     name: megabytelabs/yamllint:slim
     entrypoint: ['']
+  rules:
+    - exists:
+        - '**/*.{yaml,yml}'
   variables:
     GIT_DEPTH: 1
   script:

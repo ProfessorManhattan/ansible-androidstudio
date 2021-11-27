@@ -4,6 +4,9 @@ shellcheck:
   image:
     name: megabytelabs/shellcheck:slim
     entrypoint: ['']
+  rules:
+    - exists:
+        - '**/*.{sh,sh.j2}'
   variables:
     GIT_DEPTH: 1
   script:

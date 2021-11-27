@@ -4,6 +4,9 @@ stylelint:
   image:
     name: megabytelabs/stylelint:slim
     entrypoint: ['']
+  rules:
+    - exists:
+        - '**/*.{css,scss}'
   variables:
     GIT_DEPTH: 1
   script:

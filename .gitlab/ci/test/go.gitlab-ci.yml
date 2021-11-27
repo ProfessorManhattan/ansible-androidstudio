@@ -2,6 +2,9 @@
 gotest:
   stage: test
   image: megabytelabs/gotest:slim
+  rules:
+    - exists:
+        - '**/*_test.go'
   needs: []
   variables:
     GIT_DEPTH: 1

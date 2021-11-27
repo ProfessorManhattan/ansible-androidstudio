@@ -1,23 +1,47 @@
 #!/usr/bin/env bash
 
 # @file test/darwin/test.sh
-# @brief A script that is used to test the role's macOS compatibility via a [GitHub action](https://gitlab.com/megabyte-labs/common/ansible/-/blob/master/files-role/.github/workflows/macOS.yml).
+# @brief A script that is used to test the role's macOS compatibility via a
+# [GitHub action](https://gitlab.com/megabyte-labs/common/ansible/-/blob/master/files-role/.github/workflows/macOS.yml).
 
-# Ensure Ansible is installed
+TEST_TYPE='darwin'
+
+# @description Ensure Ansible is installed
 if ! type ansible &> /dev/null; then
   pip3 install ansible
 fi
 
-# Ensure Ansible Galaxy dependencies are installed
+# @description Ensure Ansible Galaxy dependencies are installed
 if [ -f requirements.yml ]; then
   ansible-galaxy install -r requirements.yml
 fi
 
-# Symlink the Ansible Galaxy role name to the working directory one level up
+# @description Symlink the Ansible Galaxy role name to the working directory one level up
 ROLE_NAME="$(grep "role:" test/darwin/test.yml | sed 's^- role: ^^' | xargs)"
 ln -s "$(basename "$PWD")" "../$ROLE_NAME"
 
-# Copy required files and run the Ansible play
-cp test/darwin/ansible.cfg ansible.cfg
-cp test/darwin/test.yml test.yml
-ansible-playbook -i test/darwin/inventory test.yml
+# @description Back up files and then copy replacements (i.e. ansible.cfg)
+function backupAndCopyFiles() {
+  if [ -f ansible.cfg ]; then
+    cp ansible.cfg ansible.cfg.bak
+  fi
+  cp "test/$TEST_TYPE/ansible.cfg" ansible.cfg
+}
+
+# @description Restores files that were backed up (i.e. ansible.cfg)
+function restoreFiles() {
+  if [ -f ansible.cfg.bak ]; then
+    mv ansible.cfg.bak ansible.cfg
+  fi
+}
+
+# @description Calls [restoreFiles] and exits with an error
+function restoreFilesAndExitError() {
+  restoreFiles
+  exit 1
+}
+
+# @description Back up files, run the play, and then restore files
+backupAndCopyFiles
+ansible-playbook -i "test/$TEST_TYPE/inventory" "test/$TEST_TYPE/test.yml" || restoreFilesAndExitError
+restoreFiles

@@ -1,4 +1,4 @@
 ---
-- hosts: windows-docker
+- hosts: windows-ci
   roles:
     - role: .
