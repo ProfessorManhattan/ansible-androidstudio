@@ -1,23 +1,25 @@
 ---
 version: '3'
-
 includes:
   ansible: ./.config/taskfiles/ansible/Taskfile.yml
   ansible:ansibler: ./.config/taskfiles/ansible/Taskfile-ansibler.yml
   ansible:playbook: ./.config/taskfiles/ansible/Taskfile-playbook.yml
   ansible:populate: ./.config/taskfiles/ansible/Taskfile-populate.yml
   ansible:test: ./.config/taskfiles/ansible/Taskfile-test.yml
-  boilr: ./.config/taskfiles/Taskfile-boilr.yml
-  ci: ./.config/taskfiles/Taskfile-ci.yml
+  boilerplate: ./.config/taskfiles/boilerplate/Taskfile.yml
+  ci: ./.config/taskfiles/ci/Taskfile.yml
   common: ./.config/taskfiles/common/Taskfile.yml
   common:code: ./.config/taskfiles/common/Taskfile-code.yml
   common:update: ./.config/taskfiles/common/Taskfile-update.yml
-  docker: ./.config/taskfiles/Taskfile-docker.yml
-  fix: ./.config/taskfiles/Taskfile-fix.yml
-  git: ./.config/taskfiles/Taskfile-git.yml
+  docker: ./.config/taskfiles/docker/Taskfile.yml
+  docker:build: ./.config/taskfiles/docker/Taskfile-build.yml
+  docker:test: ./.config/taskfiles/docker/Taskfile-test.yml
+  docker:update: ./.config/taskfiles/docker/Taskfile-update.yml
+  fix: ./.config/taskfiles/fix/Taskfile.yml
+  git: ./.config/taskfiles/git/Taskfile.yml
   go: ./.config/taskfiles/go/Taskfile.yml
   go:test: ./.config/taskfiles/go/Taskfile-test.yml
-  image: ./.config/taskfiles/Taskfile-image.yml
+  image: ./.config/taskfiles/image/Taskfile.yml
   install: ./.config/taskfiles/install/Taskfile.yml
   install:go: ./.config/taskfiles/install/Taskfile-go.yml
   install:npm: ./.config/taskfiles/install/Taskfile-npm.yml
@@ -31,7 +33,9 @@ includes:
   npm: ./.config/taskfiles/npm/Taskfile.yml
   npm:cov: ./.config/taskfiles/npm/Taskfile-cov.yml
   npm:doc: ./.config/taskfiles/npm/Taskfile-doc.yml
-  packer: ./.config/taskfiles/Taskfile-packer.yml
+  packer: ./.config/taskfiles/packer/Taskfile.yml
+  packer:build: ./.config/taskfiles/packer/Taskfile-build.yml
+  packer:update: ./.config/taskfiles/packer/Taskfile-update.yml
   publish: ./.config/taskfiles/publish/Taskfile.yml
   publish:android: ./.config/taskfiles/publish/Taskfile-android.yml
   publish:brew: ./.config/taskfiles/publish/Taskfile-brew.yml
@@ -40,19 +44,18 @@ includes:
   publish:ios: ./.config/taskfiles/publish/Taskfile-ios.yml
   publish:menubar: ./.config/taskfiles/publish/Taskfile-menubar.yml
   publish:opera: ./.config/taskfiles/publish/Taskfile-opera.yml
-  python: ./.config/taskfiles/Taskfile-python.yml
-  security: ./.config/taskfiles/Taskfile-security.yml
-  symlink: ./.config/taskfiles/Taskfile-symlink.yml
+  python: ./.config/taskfiles/python/Taskfile.yml
+  python:test: ./.config/taskfiles/python/Taskfile-test.yml
+  security: ./.config/taskfiles/security/Taskfile.yml
+  symlink: ./.config/taskfiles/symlink/Taskfile.yml
   upstream: ./.config/taskfiles/upstream/Taskfile.yml
   upstream:common: ./.config/taskfiles/upstream/Taskfile-common.yml
   upstream:commondocs: ./.config/taskfiles/upstream/Taskfile-commondocs.yml
   upstream:docs: ./.config/taskfiles/upstream/Taskfile-docs.yml
   upstream:project: ./.config/taskfiles/upstream/Taskfile-project.yml
   upstream:shared: ./.config/taskfiles/upstream/Taskfile-shared.yml
-  vscode: ./.config/taskfiles/Taskfile-vscode.yml
-
+  vscode: ./.config/taskfiles/vscode/Taskfile.yml
 output: interleaved
-
 vars:
   GALAXY_NAMESPACE:
     sh: if [ -f meta/main.yml ]; then yq e '.galaxy_info.namespace' meta/main.yml; else jq -r '.name' package.json | sed 's/\/.*//' | sed 's/@//'; fi
@@ -60,21 +63,15 @@ vars:
     sh: if [ -f meta/main.yml ]; then yq e '.galaxy_info.role_name' meta/main.yml; else jq -r '.name' package.json | sed 's/.*\///'; fi
   GITHUB_ORG: ProfessorManhattan
   GITHUB_USER: ProfessorManhattan
-  IGNORE_FOLDERS: -path './.autodoc/*' -o -path './.cache/*' -o -path './.common*' -o -path './.config/*' -o -path './.git/*'
-    -o -path './.github/*' -o -path './.gitlab/*' -o -path './.husky/*' -o -path './.modules/*' -o -path './.npm/*'
-    -o -path './.pnpm-store/*' -o -path './.shared/*' -o -path './.task/*' -o -path './.venv/*' -o -path './.vscode/*'
-    -o -path './build/*' -o -path './dist/*' -o -path './node_modules/*' -o -path './venv/*' -o -name pnpm-lock.yaml
-    -o -name package-lock.json -o -name poetry.lock -o -name '.variables.json'
+  IGNORE_FOLDERS: -path './.autodoc/*' -o -path './.cache/*' -o -path './.common*' -o -path './.config/*' -o -path './.git/*' -o -path './.github/*' -o -path './.gitlab/*' -o -path './.husky/*' -o -path './.modules/*' -o -path './.npm/*' -o -path './.pnpm-store/*' -o -path './.shared/*' -o -path './.task/*' -o -path './.venv/*' -o -path './.vscode/*' -o -path './build/*' -o -path './dist/*' -o -path './node_modules/*' -o -path './venv/*' -o -name pnpm-lock.yaml -o -name package-lock.json -o -name poetry.lock -o -name '.variables.json'
   NPM_PROGRAM: npm
   NPX_HANDLE: ''
   NPX_PACKAGE: npx
   REPOSITORY_SUBTYPE: role
   REPOSITORY_TYPE: ansible
   TIMEZONE: America/New_York
-
 tasks:
   donothing: 'true'
-
   start:
     desc: Set up the project and refresh it with the latest changes
     summary: |

@@ -1,13 +1,8 @@
 ---
 version: '3'
 
-vars:
-  TEMPLATE_FILE:
-    sh: if [ ! -z "{{.CLI_ARGS}}" ]; then echo "{{.CLI_ARGS}}"; else echo "template.packer.json"; fi
-  VARIABLES_PATH: .variables.json
-
 tasks:
-  build:all:
+  all:
     deps:
       - :install:software:kvm
       - :install:software:packer
@@ -42,7 +37,7 @@ tasks:
     cmds:
       - packer build {{.TEMPLATE_FILE}}
 
-  build:kvm:
+  kvm:
     deps:
       - :install:software:kvm
       - :install:software:packer
@@ -65,7 +60,7 @@ tasks:
     cmds:
       - packer build -only=qemu {{.TEMPLATE_FILE}}
 
-  build:parallels:
+  parallels:
     deps:
       - :install:software:packer
       - :install:software:parallels
@@ -87,7 +82,7 @@ tasks:
     cmds:
       - packer build -only=parallels-iso {{.TEMPLATE_FILE}}
 
-  build:virtualbox:
+  virtualbox:
     deps:
       - :install:software:packer
       - :install:software:virtualbox
@@ -109,25 +104,7 @@ tasks:
     cmds:
       - packer build -only=virtualbox-iso {{.TEMPLATE_FILE}}
 
-  latestos:
-    deps:
-      - :install:python:requirements
-      - :install:software:jq
-    vars:
-      TAG:
-        sh: jq -r '.variables.latestos_tag' template.json
-    cmds:
-      - |
-        if [ "${container:=}" != 'docker' ] && [[ '{{.TAG}}' != 'macos' ]]; then # TODO: Only generate if latestos wasn't run recently
-          latestos {{.TAG}}
-        fi
-    status:
-      - '[[ "{{.TAG}}}" == "macos" ]] || [ "${container:=}" == "docker" ]'
-    preconditions:
-      - sh: test -f template.json
-        msg: The `template.json` file is missing from the root of this project.
-
-  packer:vmware:
+  vmware:
     deps:
       - :install:software:packer
       - :install:software:vmware
@@ -149,92 +126,3 @@ tasks:
       `task packer:vmware -- another_template.json`
     cmds:
       - packer build -only=vmware-iso {{.TEMPLATE_FILE}}
-
-  update:descriptions:
-    deps:
-      - :install:software:jq
-    env:
-      DESCRIPTION_TEMPLATE:
-        sh: jq -r '.description_template' '{{.VARIABLES_PATH}}'
-      TMP:
-        sh: mktemp
-      VERSION_DESCRIPTION:
-        sh: jq -r '.version_description' '{{.VARIABLES_PATH}}'
-    cmds:
-      - jq --arg a "$DESCRIPTION_TEMPLATE" --arg b "$VERSION_DESCRIPTION" '.variables.description = $a | .variables.version_description = $b'
-        template.packer.json > "$TMP"
-      - mv "$TMP" template.json
-    sources:
-      - template.json
-      - '{{.VARIABLES_PATH}}'
-
-  update:readme:
-    cmds:
-      - task: update:readme:platform
-        vars:
-          TYPE: hyperv-iso
-      - task: update:readme:platform
-        vars:
-          TYPE: parallels-iso
-      - task: update:readme:platform
-        vars:
-          TYPE: qemu
-      - task: update:readme:platform
-        vars:
-          TYPE: virtualbox-iso
-      - task: update:readme:platform
-        vars:
-          TYPE: vmware-iso
-
-  update:readme:platform:
-    cmds:
-      - task: update:readme:platform:{{OS}}
-    status:
-      - |
-        ! grep -q '"type": "{{.TYPE}}"' template.packer.json
-
-  update:readme:platform:darwin: sed -i .bak '/SUPPORTED_OS_{{.TYPE}}/d' README.md && rm README.md.bak
-
-  update:readme:platform:linux: sed -i '/SUPPORTED_OS_{{.TYPE}}/d' README.md
-
-  update:variables:
-    deps:
-      - :install:software:jq
-    vars:
-      ISO_VERSION:
-        sh: jq -r '.variables.iso_version' template.packer.json
-      MAJOR_VERSION:
-        sh: cut -d '.' -f 1 <<< {{.ISO_VERSION}}
-      MINOR_VERSION:
-        sh: cut -d '.' -f 2 <<< {{.ISO_VERSION}}
-    env:
-      TEMPLATE_JSON:
-        sh: jq -r '.' template.json
-      TMP:
-        sh: mktemp
-    cmds:
-      - jq -S --arg templatejson "$TEMPLATE_JSON" '.template_json = ($templatejson | fromjson)' '{{.VARIABLES_PATH}}' > "$TMP"
-      - mv "$TMP" '{{.VARIABLES_PATH}}'
-      - task: update:variables:{{OS}}
-    sources:
-      - template.json
-      - '{{.VARIABLES_PATH}}'
-    preconditions:
-      - sh: test -f template.json
-        msg: 'A `template.json` file is not present. This project uses values stored in `template.json` to generate certain
-          meta artifacts. Please add a `template.json`. You can find an example of one in
-          [this repository](https://gitlab.com/megabyte-labs/packer/ubuntu-desktop)'
-      - sh: test -f '{{.VARIABLES_PATH}}'
-        msg: 'The `{{.VARIABLES_PATH}}` file is missing!'
-
-  update:variables:darwin:
-    cmds:
-      - sed -i .bak "s^MAJOR_VERSION^{{.MAJOR_VERSION}}^g" '{{.VARIABLES_PATH}}' && rm '{{.VARIABLES_PATH}}.bak'
-      - sed -i .bak "s^MINOR_VERSION^{{.MINOR_VERSION}}^g" '{{.VARIABLES_PATH}}' && rm '{{.VARIABLES_PATH}}.bak'
-      - sed -i .bak "s^ISO_VERSION^{{.ISO_VERSION}}^g" '{{.VARIABLES_PATH}}' && rm '{{.VARIABLES_PATH}}.bak'
-
-  update:variables:linux:
-    cmds:
-      - sed -i "s^MAJOR_VERSION^{{.MAJOR_VERSION}}^g" '{{.VARIABLES_PATH}}'
-      - sed -i "s^MINOR_VERSION^{{.MINOR_VERSION}}^g" '{{.VARIABLES_PATH}}'
-      - sed -i "s^ISO_VERSION^{{.ISO_VERSION}}^g" '{{.VARIABLES_PATH}}'

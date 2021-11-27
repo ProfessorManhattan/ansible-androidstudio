@@ -57,4 +57,5 @@ tasks:
     cmds:
       - >
         git submodule foreach 'git config user.email "$GITLAB_CI_EMAIL"; git config user.name "$GITLAB_CI_NAME";
+
         git checkout master; git pull origin master --ff-only'
