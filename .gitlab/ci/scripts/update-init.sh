@@ -50,8 +50,16 @@ yq eval-all 'select(fileIndex==0).includes = select(fileIndex==1).includes | sel
 mv "$TMP" Taskfile.yml
 rm Taskfile-shared.yml
 git clone https://gitlab.com/megabyte-labs/common/shared.git common-shared
+rm -rf .config
+mkdir -p .config
 cp -rT common-shared/common/.config/taskfiles .config/taskfiles
+git checkout HEAD .config/common-keywords.json || true
 rm -rf common-shared
+rm -f .ansible-lint
+rm -f .flake8
+rm -f .prettierignore
+rm -f .yamllint
+rm -f requirements.txt
 if [ -n "$GITLAB_CI" ]; then
   task ci:commit
 fi
