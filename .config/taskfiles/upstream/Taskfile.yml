@@ -74,6 +74,9 @@ tasks:
         find . -type f -not \( {{.ADDITIONAL_IGNORE_FOLDERS}} {{.IGNORE_FOLDERS}} \) -prune -name '*.handlebars' | while read FILE; do
           handlebars "$FILE" &
         done
+        find .config -type f -name '*.handlebars' | while read FILE; do
+          handlebars "$FILE" &
+        done
         wait
 
   template:hbs:
@@ -94,6 +97,9 @@ tasks:
           rm "$FILE"
         }
         find . -type f -not \( {{.ADDITIONAL_IGNORE_FOLDERS}} {{.IGNORE_FOLDERS}} \) -prune -name '*.hbs.*' | while read FILE; do
+          handlebars "$FILE" &
+        done
+        find .config -type f -name '*.hbs.*' | while read FILE; do
           handlebars "$FILE" &
         done
         wait
