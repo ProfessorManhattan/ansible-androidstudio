@@ -74,6 +74,7 @@ tasks:
       - mkdir -p .cache
       - if [ ! -f .cache/role-dependencies.json ]; then echo "{}" > .cache/role-dependencies.json; fi
       - task: role-dependencies:generate
+      - if [ -f role-dependencies.json ]; then mv role-dependencies.json .cache/role-dependencies.json; fi
       - |
         TMP="$(mktemp)"
         jq -s -S '.[0] + .[1]' '{{.VARIABLES_PATH}}' .cache/role-dependencies.json > "$TMP"
