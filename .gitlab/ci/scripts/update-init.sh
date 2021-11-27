@@ -44,6 +44,10 @@ if test -d .config/docs; then
 fi
 curl -s https://gitlab.com/megabyte-labs/common/shared/-/raw/master/common/.config/taskfiles/upstream/Taskfile-common.yml > .config/taskfiles/upstream/Taskfile-common.yml
 curl -s https://gitlab.com/megabyte-labs/common/shared/-/raw/master/common/.config/taskfiles/upstream/Taskfile-project.yml > .config/taskfiles/upstream/Taskfile-project.yml
+git clone https://gitlab.com/megabyte-labs/common/shared.git common-shared
+mkdir -p .config
+rm -rf .config/taskfiles
+cp -rT common-shared/common/.config/taskfiles .config/taskfiles
 if ! task donothing &> /dev/null; then
   curl -s https://gitlab.com/megabyte-labs/common/shared/-/raw/master/Taskfile.yml > Taskfile-shared.yml
   TMP="$(mktemp)"
@@ -51,11 +55,6 @@ if ! task donothing &> /dev/null; then
   mv "$TMP" Taskfile.yml
   rm Taskfile-shared.yml
 fi
-git clone https://gitlab.com/megabyte-labs/common/shared.git common-shared
-rm -rf .config
-mkdir -p .config
-cp -rT common-shared/common/.config/taskfiles .config/taskfiles
-git checkout HEAD .config/common-keywords.json || true
 rm -rf common-shared
 rm -f .ansible-lint
 rm -f .flake8
@@ -65,3 +64,5 @@ rm -f requirements.txt
 if [ -n "$GITLAB_CI" ]; then
   task ci:commit
 fi
+rm -rf .config
+git checkout HEAD .config/taskfiles || true
