@@ -1,24 +1,33 @@
 ## Requirements
 
-- **[Python 3](https://www.python.org/)**
-- **[Ansible >2.9](https://www.ansible.com/)**
+- **[Python >=3.7](https://www.python.org/)**
+- **[Ansible >=2.9](https://www.ansible.com/)**
+- Ansible controller should be a macOS/Linux environment (WSL/Docker can be used on Windows)
 
-There are Python and Ansible package requirements that can be installed by running the following command in the root of this repository:
+### Host Requirements
+
+There are Python and Ansible package requirements need to be installed by running the following command (or equivalent) in the root of this repository:
 
 ```
-pip3 install -r requirements.txt
+if type poetry &> /dev/null; then poetry install --no-root; else pip3 install -r .config/assets/requirements.txt; fi
 ansible-galaxy install requirements.yml
 ```
 
-You can also run `bash .start.sh` if you do not mind development dependencies being installed as well.
+### Host Requirements (Easy Way)
 
-The methods above should be used if you are not using the method detailed in the [Quick Start](#quick-start) section.
+You can also run `bash .config/scripts/start.sh` if you do not mind development dependencies being installed as well. This method will even handle installing Python 3 and Ansible.
 
-SSH (or WinRM in the case of Windows) and Python should be available on the target systems you would like to provision.
-
-### Optional Requirements
+### Operating System
 
 **This playbook is built and tested to run on fresh installs of Windows, Mac OS X, Ubuntu, Fedora, Debian, CentOS, and Archlinux**. It may still be possible to run the playbook on your current machine. However, installing the playbook on a fresh install is the only thing we actively support. That said, if you come across an issue with an environment that already has configurations and software present, please do not hesitate to [open an issue]({{ repository.gitlab }}{{ repository.location.issue.gitlab }}).
+
+### Connection
+
+SSH (or WinRM in the case of Windows) and Python should be available on the target systems you would like to provision. If you are attempting to provision a Windows machine, you can ensure that WinRM is enabled and configured so that you can remotely provision the Windows target by running the following command with PowerShell:
+
+```powershell
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://gitlab.com/megabyte-labs/gas-station/-/raw/master/files/quickstart.ps1'))
+```
 
 ### MAS on Mac OS X
 
