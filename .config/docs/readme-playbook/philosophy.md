@@ -15,6 +15,6 @@ You might ask, "But how can I retain application-level configurations?" We curre
 - Pre-defining dotfiles in a customizable Git repository
 - Backing up to encrypted S3 buckets
 - Syncing files to private git repositories
-- Utilizing tools that synchronize settings like [macprefs]()
+- Utilizing tools that synchronize settings like [mackup](https://github.com/lra/mackup) or [macprefs](https://github.com/clintmod/macprefs) in the case of macOS
 
 However, we intentionally keep this synchronization to a minimum (i.e. only back up what is necessary). After all, one of the goals of this project is to be able to regularly flush the bad stuff off a system. By keeping what we back up to a minimum, we reduce the attack surface.
