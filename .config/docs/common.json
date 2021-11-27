@@ -44,6 +44,7 @@
     ["`ci-docker-fedora`", "Uses Docker to test multiple versions of Fedora."],
     ["`ci-docker-ubuntu`", "Uses Docker to test multiple versions of Ubuntu."]
   ],
+  "playbook_path": "megabyte-labs/gas-station",
   "profile": {
     "npmjs_organization": "installdoc"
   },
