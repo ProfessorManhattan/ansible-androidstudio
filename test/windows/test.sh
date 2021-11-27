@@ -41,6 +41,9 @@ function restoreFilesAndExitError() {
   exit 1
 }
 
+# @description Silence error about ansible.cfg being writable
+export ANSIBLE_CONFIG="$PWD/ansible.cfg"
+
 # @description Back up files, run the play, and then restore files
 backupAndCopyFiles
 ansible-playbook -i "test/$TEST_TYPE/inventory" "test/$TEST_TYPE/test.yml" || restoreFilesAndExitError

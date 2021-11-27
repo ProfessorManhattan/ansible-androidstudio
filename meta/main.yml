@@ -12,13 +12,11 @@ galaxy_info:
     - name: Debian
       versions:
         - buster
-        - buster
     - name: Ubuntu
       versions:
         - bionic
-        - bionic
-        - hirsute
         - focal
+        - hirsute
   galaxy_tags:
     - adb
     - android
