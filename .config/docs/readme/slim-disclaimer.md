@@ -1,1 +1,0 @@
-**NOTE:** To use our optimized image (built with DockerSlim) for {{ pretty_name }} {{ pkg.version }}, you must use a build tagged with the `slim` keyword. For instance, to use the latest slim build you should specify the image as `megabytelabs/{{ slug }}:slim`.
