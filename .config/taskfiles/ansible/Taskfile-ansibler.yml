@@ -30,6 +30,7 @@ tasks:
         TMP="$(mktemp)"
         jq -s -S '.[0] + .[1]' '{{.VARIABLES_PATH}}' .cache/compatibility-chart.json > "$TMP"
         mv "$TMP" '{{.VARIABLES_PATH}}'
+      - task: populate-platforms
 
   compatibility-chart:generate:
     deps:
@@ -43,29 +44,12 @@ tasks:
 
   populate-platforms:
     deps:
-      - :install:software:jq
-    cmds:
-      - mkdir -p .cache
-      - if [ ! -f .cache/platforms.json ]; then echo "{}" > .cache/platforms.json; fi
-      - task: populate-platforms:generate
-      - |
-        TMP="$(mktemp)"
-        jq -s -S '.[0] + .[1]' '{{.VARIABLES_PATH}}' .cache/platforms.json > "$TMP"
-        mv "$TMP" '{{.VARIABLES_PATH}}'
-
-  populate-platforms:generate:
-    deps:
       - :install:python:requirements
-      - :install:npm:prettier
     cmds:
-      - ansibler --populate-platforms --json-file .cache/platforms.json
-      - >
-        {{.NPX_HANDLE}}prettier --write '{{.META_PATH}}'
+      - ansibler --populate-platforms --json-file .cache/compatibility-chart.json
     sources:
-      - '{{.MAIN_TASKS_PATH}}'
-      - '{{.MOLECULE_RESULTS_PATH}}/*'
-    generates:
-      - .cache/platforms.json
+      - .cache/compatibility-chart.json
+      - meta/main.yml
 
   role-dependencies:
     deps:
