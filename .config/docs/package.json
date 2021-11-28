@@ -1,5 +1,5 @@
 {
-  "private": false,
+  "private": true,
   "name": "@installdoc/ansible-androidstudio",
   "version": "1.1.14",
   "description": "Installs Android Studio and sets up Android SDKs on nearly any OS",
@@ -17,10 +17,8 @@
   "type": "module",
   "scripts": {
     "help": "task --list",
-    "info": "task --list",
     "prepare": "task common:husky",
-    "start": "bash .config/start.sh",
-    "test": "cd share && git pull origin master && cd .. && cp -rT share/common/.config/taskfiles .config/taskfiles && task start"
+    "start": "bash .config/start.sh"
   },
   "config": {
     "commitizen": {
@@ -46,39 +44,9 @@
     "semantic-release": "^18.0.0"
   },
   "keywords": [
-    "adb",
-    "android",
-    "androidsdk",
-    "androidstudio",
-    "ansible",
-    "ansible-role",
-    "apps",
-    "archlinux",
-    "awesome",
-    "centos",
-    "debian",
-    "desktop",
-    "development",
-    "doctor",
-    "fedora",
-    "google",
-    "ide",
-    "install",
-    "installdoc",
-    "installdoctor",
-    "java",
-    "macos",
     "mblabs",
     "megabytelabs",
-    "molecule",
-    "npm",
-    "package",
-    "platformtools",
-    "professormanhattan",
-    "role",
-    "snap",
-    "ubuntu",
-    "windows"
+    "professormanhattan"
   ],
   "engines": {
     "node": ">=14.18.0"
@@ -87,18 +55,15 @@
     "access": "public"
   },
   "blueprint": {
-    "ansible_galaxy_project_id": "56329",
-    "description": "Installs Android Studio and sets up Android SDKs on nearly any OS",
-    "group": "ansible",
-    "name": "Android Studio",
-    "overview": "[Android Studio](https://developer.android.com/studio) is the official integrated development environment for Google's Android operating system, built on JetBrains' IntelliJ IDEA software and designed specifically for Android development. This role installs Android Studio on nearly any operating system and also ensures a configurable list of command-line tools and SDKs are installed and seamlessly integrated with the system (i.e. the role adds items to the `PATH`).",
+    "description": "An NPM package that is part of the Megabyte Labs eco-system",
+    "name": "My Project Name",
+    "overview": "This text shows up at the top of the README.md.",
     "repository": {
       "github": "https://github.com/ProfessorManhattan/ansible-androidstudio",
       "gitlab": "https://gitlab.com/megabyte-labs/ansible-roles/androidstudio"
     },
-    "slug": "androidstudio",
-    "subgroup": "role",
-    "title": "Android Studio - An IDE for Android Development"
+    "slug": "my-project",
+    "title": "Title of the README.md"
   },
   "eslintConfig": {
     "extends": "@mblabs/eslint-config"
@@ -134,10 +99,6 @@
     "**/*.json": [
       "task fix:json --"
     ],
-    "**/*.py": [
-      "task fix:python --",
-      "task lint:python --"
-    ],
     "**/*.sh": [
       "task fix:shell --",
       "task lint:shell --"
@@ -152,9 +113,6 @@
     "**/*.yml": [
       "task fix:yaml --",
       "task lint:yaml --"
-    ],
-    "**/*vault.yml": [
-      "task ansible:vault:lint:file --"
     ],
     "logo.png": [
       "task image:resize -- 200 200",
