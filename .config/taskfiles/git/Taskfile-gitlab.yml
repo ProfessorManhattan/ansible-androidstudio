@@ -1,6 +1,9 @@
 ---
 version: '3'
 
+vars:
+  REPOSITORY_LIST: .cache/repository-list.txt
+
 tasks:
   group:exec:
     desc: Execute a shell script across all repositories in a group and commit the changes
@@ -11,9 +14,9 @@ tasks:
       subgroups and then execute a command in each of the repositories.
 
       **Example (in the format task taskName -- gitlabGroup ---- commandsToRun):**
-      `task {{.TASK}} -- megabyte-labs/ansible-roles ---- rm .ansible-lint; git add --all; git commit; git push; etc.`
+      `task {{.TASK}} -- megabyte-labs/ansible-roles ---- 'rm .ansible-lint; git add --all; git commit; git push; etc.'`
     cmds:
-      - task group:repositories -- {{index (splitList " ---- " .CLI_ARGS) 0}}
+      - task git:gitlab:group:repositories -- {{index (splitList " ---- " .CLI_ARGS) 0}}
       - |
         BASE_PWD="$PWD"
         function execRepo() {
@@ -39,7 +42,7 @@ tasks:
           )
           echo "Finished running bash command on $REPO_PATH"
         }
-        cat repository-list.txt | while IFS= read -r REPO_DETAILS; do
+        cat {{.REPOSITORY_LIST}} | while IFS= read -r REPO_DETAILS; do
           echo "Executing logic on $REPO_DETAILS"
           execRepo "$REPO_DETAILS" &
         done
@@ -54,20 +57,21 @@ tasks:
 
       Given a GitLab group path (which can include subgroups as well), this task will cycle through
       the group and its' subgroups and generate a list of repositories. The repositories are
-      saved to a file called `repository-list.txt`.
+      saved to a file called `{{.REPOSITORY_LIST}}`.
 
       **Example specifying a group and subgroup:**
-      `task git:gitlab:group:repositories -- megabyte-labs/ansible-roles`
+      `task {{.TASK}} -- megabyte-labs/ansible-roles`
 
       **Example opening an interactive prompt:**
-      `task git:gitlab:group:repositories`
+      `task {{.TASK}}`
     cmds:
-      - rm -f repository-list.txt
+      - mkdir -p .cache
+      - rm -f {{.REPOSITORY_LIST}}
       - task: group:repositories:{{if .CLI_ARGS}}loop{{else}}prompt{{end}}
 
   group:repositories:loop:
     cmds:
-      - glab api "groups/{{urlquery .CLI_ARGS}}" | jq -r '.projects[] | .ssh_url_to_repo + "   " + .path_with_namespace' >> repository-list.txt
+      - glab api "groups/{{urlquery .CLI_ARGS}}" | jq -r '.projects[] | .ssh_url_to_repo + "   " + .path_with_namespace' >> {{.REPOSITORY_LIST}}
       - |
         SUBGROUPS="$(glab api groups/{{urlquery .CLI_ARGS}}/subgroups | jq -r '.[] | .full_path')"
         echo "$SUBGROUPS"
@@ -78,4 +82,14 @@ tasks:
         fi
         wait
 
-  group:repositories:prompt: echo TODO
+  group:repositories:prompt:
+    interactive: true
+    vars:
+      CURR_PWD:
+        sh: echo "$PWD"
+    cmds:
+      - mkdir -p .cache
+      - |
+        GROUP="$(node .config/scripts/prompts/gitlab-group.js)"
+        SCRIPT="$(node .config/scripts/prompts/gitlab-group-command.js)"
+        task git:gitlab:group:exec -- "$GROUP" ---- 'bash {{.CURR_PWD}}/'"$SCRIPT"

@@ -43,6 +43,11 @@ tasks:
     deps:
       - :install:npm:prettier
       - :install:software:jq
+    env:
+      TASK_LIST:
+        sh: task --list
+      TMP:
+        sh: mktemp
     summary: |
       # Populate the `.vscode/tasks.json` file
 
@@ -52,11 +57,6 @@ tasks:
 
       This is a simple implementation. There are many features provided by VS Code that we
       can potentially leverage to make our `tasks.json` better and more useful to developers.
-    env:
-      TASK_LIST:
-        sh: task --list
-      TMP:
-        sh: mktemp
     run: when_changed
     cmds:
       - |
