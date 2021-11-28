@@ -3,7 +3,7 @@ version: '3'
 
 vars:
   EXTENSIONS_FILE: .vscode/extensions.json
-  EXTENSIONS_URL: https://gitlab.com/ProfessorManhattan/Playbooks/-/raw/master/environments/prod/group_vars/desktop/vscode-extensions.yml
+  EXTENSIONS_URL: https://gitlab.com/megabyte-labs/gas-station/-/raw/master/environments/prod/group_vars/desktop/vscode-extensions.yml
   TASKS_FILE: .vscode/tasks.json
 
 tasks:
@@ -16,8 +16,7 @@ tasks:
       - mkdir -p .vscode
       - |
         TMP="$(mktemp)"
-        curl -s "{{.EXTENSIONS_URL}}" > "$TMP"
-        cat "$TMP" | yq e '.vscode_extensions[].name' - | jq -cRrs 'split("\n") | "{ \"recommendations\": \(.) }"'
+        curl -s '{{.EXTENSIONS_URL}}' | yq e '.vscode_extensions[].name' - | jq -cRrs 'split("\n") | "{ \"recommendations\": \(.) }"'
         | jq '.recommendations = ([ .recommendations[] | select(length > 0) ])' > {{.EXTENSIONS_FILE}}
 
   generate:
