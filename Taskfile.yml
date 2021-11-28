@@ -18,6 +18,7 @@ includes:
   docker:update: ./.config/taskfiles/docker/Taskfile-update.yml
   fix: ./.config/taskfiles/fix/Taskfile.yml
   git: ./.config/taskfiles/git/Taskfile.yml
+  git:gitlab: ./.config/taskfiles/git/Taskfile-gitlab.yml
   go: ./.config/taskfiles/go/Taskfile.yml
   go:test: ./.config/taskfiles/go/Taskfile-test.yml
   image: ./.config/taskfiles/image/Taskfile.yml
