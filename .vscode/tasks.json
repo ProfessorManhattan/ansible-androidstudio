@@ -1,5 +1,5 @@
 {
-  "version": "2.0.0",
+  "recommendations": [],
   "tasks": [
     {
       "label": "(ansible:playbook:environment:cli): Prompts for which environment to use and then symlinks to it",
