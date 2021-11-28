@@ -86,7 +86,7 @@ tasks:
 
   husky:permission:
     cmds:
-      - chmod +x "{{.FILE}}"
+      - if [ -f "{{.FILE}}" ]; then chmod +x "{{.FILE}}"; fi
     sources:
       - '{{.FILE}}'
 
