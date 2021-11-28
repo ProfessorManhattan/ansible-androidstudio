@@ -78,4 +78,4 @@ tasks:
         fi
         wait
 
-  group:repositories:prompt: 'echo TODO'
+  group:repositories:prompt: echo TODO
