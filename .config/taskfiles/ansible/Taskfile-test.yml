@@ -148,14 +148,7 @@ tasks:
     deps:
       - :install:modules:prompt
     cmds:
-      - |
-        CHOICE="$(node .config/scripts/prompts/molecule-desktop.js)"
-        SCENARIO="$CHOICE-desktop"
-        if test -d "molecule/$SCENARIO"; then
-          molecule converge -s "$SCENARIO"
-        else
-          true error "The `$SCENARIO` scenario is not present in the `molecule/` folder"
-        fi
+      - node .config/scripts/prompts/molecule-desktop.js
 
   molecule:virtualbox:matrix:
     deps:
@@ -220,6 +213,4 @@ tasks:
       - :install:modules:prompt
     interactive: true
     cmds:
-      - |
-        CHOICE="$(node .config/scripts/prompts/vagrant-up.js)"
-        vagrant up "$CHOICE"
+      - node .config/scripts/prompts/vagrant-up.js
