@@ -83,6 +83,10 @@ vars:
 tasks:
   donothing: 'true'
 
+  group:exec:
+    cmds:
+      - task: git:gitlab:group:exec
+
   start:
     desc: Set up the project and refresh it with the latest changes
     summary: |

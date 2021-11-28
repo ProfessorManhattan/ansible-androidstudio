@@ -3,6 +3,8 @@
 import inquirer from 'inquirer'
 import * as fs from 'node:fs'
 import signale from 'signale'
+import { decorateFiles } from './lib/decorate-files.js'
+import { logInstructions } from './lib/log.js'
 
 const fatalErrorMessage = 'The logger encountered a fatal error!'
 
@@ -44,15 +46,16 @@ function syncLink(element, target, environment) {
  * @returns {*} An object with details on whether to show a warning message or a "flawless" success message
  */
 async function promptForEnvironment() {
+  const choicesDecorated = getDirectories('environments/').map((choice) => decorateFiles(choice))
   const response = await inquirer.prompt([
     {
-      choices: getDirectories('environments/'),
+      choices: choicesDecorated,
       message: 'Which environment would you like to use?',
       name: 'environment',
       type: 'list'
     }
   ])
-  const { environment } = response
+  const environment = response.environment.replace('◼ ', '')
   // eslint-disable-next-line sonarjs/cognitive-complexity
   const elements = fs.readdirSync(`environments/${environment}/`).map((element) => {
     return new Promise((resolve) => {
@@ -97,7 +100,8 @@ async function promptForEnvironment() {
  * Main script logic
  */
 async function run() {
-  signale.info(
+  logInstructions(
+    'Symlink Environment',
     'Answer the prompt below to switch between environments. Each environment' +
       ' should be a folder with folders and files you wish to link to from the root' +
       ' of the project. They should normally consist of a host_vars, group_vars,' +
