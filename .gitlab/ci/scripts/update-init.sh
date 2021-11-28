@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
 
 # @file .gitlab/ci/scripts/update-init.sh
-# @brief Script that executes before any CI update step
+# @brief Script that executes before the start task if the UPDATE_INIT_SCRIPT is set to the URL
+# of this script
 
 set -eo pipefail
 
-echo "Update script running.."
+# @description Configure git if environment is GitLab CI
 if [ -n "$GITLAB_CI" ]; then
   git remote set-url origin "https://root:$GROUP_ACCESS_TOKEN@$CI_SERVER_HOST/$CI_PROJECT_PATH.git"
   git config user.email "$GITLAB_CI_EMAIL"
@@ -13,28 +14,41 @@ if [ -n "$GITLAB_CI" ]; then
   git checkout "$CI_COMMIT_REF_NAME"
   git pull origin "$CI_COMMIT_REF_NAME"
 fi
-npm install --save-dev @mblabs/eslint-config@latest
 
-rm -f .config/taskfiles/Taskfile-ci.yml
-rm -f .config/taskfiles/Taskfile-docker.yml
-rm -f .config/taskfiles/Taskfile-fix.yml
-rm -f .config/taskfiles/Taskfile-git.yml
-rm -f .config/taskfiles/Taskfile-image.yml
-rm -f .config/taskfiles/Taskfile-packer.yml
-rm -f .config/taskfiles/Taskfile-python.yml
-rm -f .config/taskfiles/Taskfile-security.yml
-rm -f .config/taskfiles/Taskfile-symlink.yml
-rm -f .config/taskfiles/Taskfile-vscode.yml
-TMP="$(mktemp)"
-jq 'del(."standard-version")' package.json > "$TMP"
-mv "$TMP" package.json
-TMP="$(mktemp)"
-jq 'del(."lint-staged")' package.json > "$TMP"
-mv "$TMP" package.json
-mkdir -p docs
-mv CODE_OF_CONDUCT.md docs || true
-mv CONTRIBUTING.md docs || true
+# @description Clone shared files repository
+git clone https://gitlab.com/megabyte-labs/common/shared.git common-shared
+
+# @description Refresh taskfiles and GitLab CI files
+mkdir -p .config
+rm -rf .config/taskfiles
+cp -rT common-shared/common/.config/taskfiles .config/taskfiles
+rm -rf .gitlab/ci
+cp -rT common-shared/common/.gitlab/ci .gitlab/ci
+
+# @description Ensure proper NPM dependencies are installed
+npm install --save-dev @mblabs/eslint-config@latest
 npm install --save-optional chalk inquirer signale
+
+# @description Re-generate the Taskfile.yml if it has invalid includes
+if ! task donothing &> /dev/null; then
+  curl -s https://gitlab.com/megabyte-labs/common/shared/-/raw/master/Taskfile.yml > Taskfile-shared.yml
+  TMP="$(mktemp)"
+  yq eval-all 'select(fileIndex==0).includes = select(fileIndex==1).includes | select(fileIndex==0)' Taskfile.yml Taskfile-shared.yml > "$TMP"
+  mv "$TMP" Taskfile.yml
+  rm Taskfile-shared.yml
+  npm install
+  eslint --write Taskfile.yml
+fi
+
+# @description Clean up
+rm -rf common-shared
+
+# @description Ensure files from old file structure are removed
+rm -f .ansible-lint
+rm -f .flake8
+rm -f .prettierignore
+rm -f .yamllint
+rm -f requirements.txt
 rm -rf .config/esbuild
 if test -d .config/docs; then
   cd .config/docs
@@ -42,27 +56,30 @@ if test -d .config/docs; then
   rm -rf LICENSE Taskfile.yml package-lock.json package.json poetry.lock pyproject.toml
   cd ../..
 fi
-curl -s https://gitlab.com/megabyte-labs/common/shared/-/raw/master/common/.config/taskfiles/upstream/Taskfile-common.yml > .config/taskfiles/upstream/Taskfile-common.yml
-curl -s https://gitlab.com/megabyte-labs/common/shared/-/raw/master/common/.config/taskfiles/upstream/Taskfile-project.yml > .config/taskfiles/upstream/Taskfile-project.yml
-git clone https://gitlab.com/megabyte-labs/common/shared.git common-shared
-mkdir -p .config
-rm -rf .config/taskfiles
-cp -rT common-shared/common/.config/taskfiles .config/taskfiles
-if ! task donothing &> /dev/null; then
-  curl -s https://gitlab.com/megabyte-labs/common/shared/-/raw/master/Taskfile.yml > Taskfile-shared.yml
-  TMP="$(mktemp)"
-  yq eval-all 'select(fileIndex==0).includes = select(fileIndex==1).includes | select(fileIndex==0)' Taskfile.yml Taskfile-shared.yml > "$TMP"
-  mv "$TMP" Taskfile.yml
-  rm Taskfile-shared.yml
+
+# @description Ensure documentation is in appropriate location
+if [ -f CODE_OF_CONDUCT.md ]; then
+  mkdir -p docs
+  mv CODE_OF_CONDUCT.md docs
 fi
-rm -rf common-shared
-rm -f .ansible-lint
-rm -f .flake8
-rm -f .prettierignore
-rm -f .yamllint
-rm -f requirements.txt
+if [ -f CONTRIBUTING.md ]; then
+  mkdir -p docs
+  mv CODE_OF_CONDUCT.md docs
+fi
+if [ -f ARCHITECTURE.md ]; then
+  mkdir -p docs
+  mv CODE_OF_CONDUCT.md docs
+fi
+
+# @description Commit and push the changes
 if [ -n "$GITLAB_CI" ]; then
   task ci:commit
 fi
-rm -rf .config
-git checkout HEAD .config/taskfiles || true
+
+# @description Perform post commit tasks that will always cause changes
+TMP="$(mktemp)"
+jq 'del(."standard-version")' package.json > "$TMP"
+mv "$TMP" package.json
+TMP="$(mktemp)"
+jq 'del(."lint-staged")' package.json > "$TMP"
+mv "$TMP" package.json
