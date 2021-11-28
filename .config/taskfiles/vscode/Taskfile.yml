@@ -16,8 +16,10 @@ tasks:
       - mkdir -p .vscode
       - |
         TMP="$(mktemp)"
-        curl -s '{{.EXTENSIONS_URL}}' | yq e '.vscode_extensions[].name' - | jq -cRrs 'split("\n") | "{ \"recommendations\": \(.) }"'
-        | jq '.recommendations = ([ .recommendations[] | select(length > 0) ])' > {{.EXTENSIONS_FILE}}
+        curl -s '{{.EXTENSIONS_URL}}' > "$TMP"
+        cat "$TMP" | yq e '.vscode_extensions[].name' - \
+        | jq -cRrs 'split("\n") | "{ \"recommendations\": \(.) }"' | jq '.recommendations = ([ .recommendations[] | select(length > 0) ])' \
+        > '{{.EXTENSIONS_FILE}}'
 
   generate:
     deps:
