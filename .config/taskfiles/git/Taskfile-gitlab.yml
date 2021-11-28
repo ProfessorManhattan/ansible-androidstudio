@@ -16,6 +16,10 @@ tasks:
       **Example (in the format task taskName -- gitlabGroup ---- commandsToRun):**
       `task {{.TASK}} -- megabyte-labs/ansible-roles ---- 'rm .ansible-lint; git add --all; git commit; git push; etc.'`
     cmds:
+      - task: group:exec:{{if .CLI_ARGS}}cli{{else}}prompt{{end}}
+
+  group:exec:cli:
+    cmds:
       - task git:gitlab:group:repositories -- {{index (splitList " ---- " .CLI_ARGS) 0}}
       - |
         BASE_PWD="$PWD"
@@ -48,6 +52,12 @@ tasks:
         done
         wait
 
+  group:exec:prompt:
+    interactive: true
+    cmds:
+      - mkdir -p .cache
+      - node .config/scripts/prompts/gitlab-group.js
+
   group:repositories:
     deps:
       - :install:software:glab
@@ -57,17 +67,14 @@ tasks:
 
       Given a GitLab group path (which can include subgroups as well), this task will cycle through
       the group and its' subgroups and generate a list of repositories. The repositories are
-      saved to a file called `{{.REPOSITORY_LIST}}`.
+      saved to a file located at `{{.REPOSITORY_LIST}}`.
 
       **Example specifying a group and subgroup:**
       `task {{.TASK}} -- megabyte-labs/ansible-roles`
-
-      **Example opening an interactive prompt:**
-      `task {{.TASK}}`
     cmds:
       - mkdir -p .cache
       - rm -f {{.REPOSITORY_LIST}}
-      - task: group:repositories:{{if .CLI_ARGS}}loop{{else}}prompt{{end}}
+      - task: group:repositories:loop
 
   group:repositories:loop:
     cmds:
@@ -81,15 +88,3 @@ tasks:
           done
         fi
         wait
-
-  group:repositories:prompt:
-    interactive: true
-    vars:
-      CURR_PWD:
-        sh: echo "$PWD"
-    cmds:
-      - mkdir -p .cache
-      - |
-        GROUP="$(node .config/scripts/prompts/gitlab-group.js)"
-        SCRIPT="$(node .config/scripts/prompts/gitlab-group-command.js)"
-        task git:gitlab:group:exec -- "$GROUP" ---- 'bash {{.CURR_PWD}}/'"$SCRIPT"

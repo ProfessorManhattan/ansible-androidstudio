@@ -33,7 +33,7 @@ cp -rT common-shared/common/.gitlab/ci .gitlab/ci
 
 # @description Ensure proper NPM dependencies are installed
 npm install --save-dev @mblabs/eslint-config@latest
-npm install --save-optional chalk inquirer signale
+npm install --save-optional chalk inquirer signale string-break
 
 # @description Re-generate the Taskfile.yml if it has invalid includes
 if ! task donothing &> /dev/null; then

@@ -218,13 +218,11 @@ tasks:
     deps:
       - :install:modules:prompt
     interactive: true
-    vars:
+    env:
       WORKDIR:
         sh: basename $PWD
     cmds:
-      - |
-        CHOICE="$(node .config/scripts/prompts/shell.js)"
-        docker run --cap-drop=ALL -it -v "$PWD:/{{.WORKDIR}}" -w /{{.WORKDIR}} --rm "megabytelabs/ansible-molecule-$CHOICE:latest" /bin/bash
+      - node .config/scripts/prompts/shell.js
 
   update:
     deps:
