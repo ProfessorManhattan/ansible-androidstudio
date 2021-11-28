@@ -140,11 +140,11 @@ tasks:
       - github:create
     cmds:
       - |
-        if [ ! -z "$GITHUB_TOKEN" ] && [ ! -z "$ANSIBLE_GALAXY_TOKEN" ]; then
+        if [ ! -z "$GITHUB_TOKEN" ] && [ ! -z "$ANSIBLE_GALAXY_TOKEN" ] && [ '{{.REPOSITORY_TYPE}}' == 'ansible' ]; then
           gh secret set ANSIBLE_GALAXY_TOKEN -b "$ANSIBLE_GALAXY_TOKEN"
         fi
     status:
-      - '[ -z "$GITHUB_TOKEN" ] || [ -z "$ANSIBLE_GALAXY_TOKEN" ]'
+      - '[ -z "$GITHUB_TOKEN" ] || [ -z "$ANSIBLE_GALAXY_TOKEN" ] || [ "{{.REPOSITORY_TYPE}}" != "ansible" ]'
 
   gitlab:create:
     deps:
