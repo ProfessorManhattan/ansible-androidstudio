@@ -21,7 +21,8 @@ Write-Host "Setting up WinRM CredSSP"
 $url = "https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1"
 $file = "$env:temp\ConfigureRemotingForAnsible.ps1"
 (New-Object -TypeName System.Net.WebClient).DownloadFile($url, $file)
-PowerShell.exe -ExecutionPolicy ByPass -File $file -Verbose -EnableCredSSP -DisableBasicAuth
+PowerShell.exe -ExecutionPolicy ByPass -File $file -Verbose -EnableCredSSP -DisableBasicAuth -ForceNewSSLCert
+winrm qc
 
 # POC for using Docker instead of WSL to do the provisioning:
 # Write-Host "Running the Ansible play on the local machine via a Docker container with Ansible"
