@@ -28,6 +28,7 @@ git clone https://gitlab.com/megabyte-labs/common/shared.git common-shared
 mkdir -p .config
 rm -rf .config/taskfiles
 cp -rT common-shared/common/.config/taskfiles .config/taskfiles
+mkdir -p .gitlab
 rm -rf .gitlab/ci
 cp -rT common-shared/common/.gitlab/ci .gitlab/ci
 
