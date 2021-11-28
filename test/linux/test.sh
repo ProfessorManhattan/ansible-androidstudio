@@ -19,18 +19,25 @@ fi
 ROLE_NAME="$(grep "role:" test/linux/test.yml | sed 's^- role: ^^' | xargs)"
 ln -s "$(basename "$PWD")" "../$ROLE_NAME"
 
-# @description Back up files and then copy replacements (i.e. ansible.cfg)
+# @description Back up files and then copy replacements
 function backupAndCopyFiles() {
   if [ -f ansible.cfg ]; then
     cp ansible.cfg ansible.cfg.bak
   fi
   cp "test/$TEST_TYPE/ansible.cfg" ansible.cfg
+  if [ -f test.yml ]; then
+    cp test.yml test.yml.bak
+  fi
+  cp "test/$TEST_TYPE/test.yml" test.yml
 }
 
-# @description Restores files that were backed up (i.e. ansible.cfg)
+# @description Restores files that were backed up
 function restoreFiles() {
   if [ -f ansible.cfg.bak ]; then
     mv ansible.cfg.bak ansible.cfg
+  fi
+  if [ -f test.yml.bak ]; then
+    mv test.yml.bak test.yml
   fi
 }
 
@@ -42,5 +49,5 @@ function restoreFilesAndExitError() {
 
 # @description Back up files, run the play, and then restore files
 backupAndCopyFiles
-ansible-playbook -i "test/$TEST_TYPE/inventory" "test/$TEST_TYPE/test.yml" || restoreFilesAndExitError
+ansible-playbook -i "test/$TEST_TYPE/inventory" test.yml || restoreFilesAndExitError
 restoreFiles

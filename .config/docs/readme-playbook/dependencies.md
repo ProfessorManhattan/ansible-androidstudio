@@ -9,11 +9,11 @@
 There are Python and Ansible package requirements need to be installed by running the following command (or equivalent) in the root of this repository:
 
 ```
-if type poetry &> /dev/null; then poetry install --no-root; else pip3 install -r .config/assets/requirements.txt; fi
+if type poetry &> /dev/null; then poetry install --no-root; else pip3 install -r .config/requirements.txt; fi
 ansible-galaxy install requirements.yml
 ```
 
-### Host Requirements (Easy Way)
+#### Easier Method of Installing the Host Requirements
 
 You can also run `bash .config/scripts/start.sh` if you do not mind development dependencies being installed as well. This method will even handle installing Python 3 and Ansible.
 

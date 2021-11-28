@@ -457,6 +457,11 @@
       "command": "bash .config/scripts/vscode.sh && task python:publish"
     },
     {
+      "label": "(python:requirementstxt): Generate the requirements.txt fallback file",
+      "type": "shell",
+      "command": "bash .config/scripts/vscode.sh && task python:requirementstxt"
+    },
+    {
       "label": "(python:run): Runs the project by calling `run.py`",
       "type": "shell",
       "command": "bash .config/scripts/vscode.sh && task python:run"
