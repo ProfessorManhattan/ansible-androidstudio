@@ -4,7 +4,7 @@ import inquirer from 'inquirer'
 import { execSync } from 'node:child_process'
 import { readdirSync } from 'node:fs'
 import signale from 'signale'
-import { decorateSystem } from './lib/decorate-system'
+import { decorateSystem } from './lib/decorate-system.js'
 
 const platformMap = {
   'Hyper-V': 'hyperv',

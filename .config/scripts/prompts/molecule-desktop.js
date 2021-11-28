@@ -1,6 +1,6 @@
 import inquirer from 'inquirer'
 import signale from 'signale'
-import { decorateSystem } from './lib/decorate-system'
+import { decorateSystem } from './lib/decorate-system.js'
 
 /**
  * Prompts the user for the operating system they wish to launch and test the
