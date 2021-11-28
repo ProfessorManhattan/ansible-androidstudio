@@ -1,4 +1,5 @@
 {
+  "alt_badge_style": "flat-square",
   "author": {
     "email": "brian@megabyte.space",
     "name": "Brian Zalewski"
@@ -79,7 +80,6 @@
     ["`ci-docker-ubuntu`", "Uses Docker to test multiple versions of Ubuntu."]
   ],
   "name": "[[ package.json .blueprint.name - See CONTRIBUTING.md ]]",
-  "npm_private": false,
   "npm_publish_config_access": "public",
   "npm_scripts_help": "task --list",
   "npm_scripts_prepare": "task common:husky",
@@ -88,6 +88,7 @@
   "npm_type": "module",
   "organization": "Megabyte Labs",
   "overview": "[[ This is a new repository without the details filled in yet. Look for the section about blueprint data in the CONTRIBUTING.md to set up the project. ]]",
+  "playbook_path": "megabyte-labs/gas-station",
   "profile": {
     "dockerhub": "megabytelabs",
     "galaxy": "professormanhattan",
@@ -123,25 +124,41 @@
     "gitlabBaseUrl": "https://gitlab.com/megabyte-labs",
     "group": {
       "ansible_roles": "https://gitlab.com/megabyte-labs/ansible-roles",
+      "ansible_roles_path": "megabyte-labs/ansible-roles",
       "apps": "https://gitlab.com/megabyte-labs/apps",
+      "apps_path": "megabyte-labs/apps",
       "ci": "https://gitlab.com/megabyte-labs/ci",
+      "ci_path": "megabyte-labs/ci",
       "cloud": "https://gitlab.com/megabyte-labs/cloud",
+      "cloud_path": "megabyte-labs/cloud",
       "common": "https://gitlab.com/megabyte-labs/common",
+      "common_path": "megabyte-labs/common",
       "cryptocurrency": "https://gitlab.com/megabyte-labs/cryptocurrency",
+      "cryptocurrency_path": "megabyte-labs/cryptocurrency",
       "docker_compose": "https://gitlab.com/megabyte-labs/docker-compose",
+      "docker_compose_path": "megabyte-labs/docker-compose",
       "dockerfile": "https://gitlab.com/megabyte-labs/dockerfile",
+      "dockerfile_path": "megabyte-labs/dockerfile",
       "documentation": "https://gitlab.com/megabyte-labs/documentation",
+      "documentation_path": "megabyte-labs/documentation",
       "kubernetes": "https://gitlab.com/megabyte-labs/kubernetes",
+      "kubernetes_path": "megabyte-labs/kubernetes_path",
       "npm": "https://gitlab.com/megabyte-labs/npm",
+      "npm_path": "megabyte-labs/npm",
       "packer": "https://gitlab.com/megabyte-labs/packer",
+      "packer_path": "megabyte-labs/packer",
       "python": "https://gitlab.com/megabyte-labs/python",
+      "python_path": "megabyte-labs/python",
       "software": "https://gitlab.com/megabyte-labs/software",
-      "web_components": "https://gitlab.com/megabyte-labs/web-components"
+      "software_path": "megabyte-labs/software",
+      "web_components": "https://gitlab.com/megabyte-labs/web-components",
+      "web_components_path": "megabyte-labs/web-components"
     },
     "location": {
       "commits": {
         "github": "/commits/master",
-        "gitlab": "/-/commits/master"
+        "gitlab": "/-/commits/master",
+        "gitlab_e2e": "/-/commits/e2e"
       },
       "conduct": {
         "github": "/blob/master/CODE_OF_CONDUCT.md",
