@@ -84,14 +84,15 @@ tasks:
       - :install:modules:local
       - :install:npm:hbs
     vars:
-      PYTHON_BREW_NOTICE: This automated Homebrew formula requires that a setup.py file be available so that the package can be
-        linked with pip3 install -e .
+      PYTHON_BREW_NOTICE: In order for this file to be generated, the customPyPiPackageName needs to be specified in the
+        blueprint section of package.json and the PyPi package needs to be installed on the system.
     env:
       TMP:
         sh: mktemp
     cmds:
       - |
-        if [ ! -f setup.py ] && [ -f .config/brew/python.hbs.rb ]; then
+        BINARY_NAME="$(jq -r '.customPyPiPackageName' .variables.json)"
+        if [ "$BINARY_NAME" == 'null' ] || ! type "$BINARY_NAME" &> /dev/null; then
           echo "{{.PYTHON_BREW_NOTICE}}" > .config/brew/python.hbs.rb
         fi
       - cp package.json package.json.bak
