@@ -4,7 +4,7 @@ import inquirer from 'inquirer'
 import { execSync } from 'node:child_process'
 import { readdirSync } from 'node:fs'
 import { decorateSystem } from './lib/decorate-system.js'
-import { logInstructions } from './lib/log.js'
+import { logInstructions, LOG_DECORATOR_REGEX } from './lib/log.js'
 
 const platformMap = {
   'Hyper-V': 'hyperv',
@@ -128,7 +128,9 @@ async function promptForDesktop() {
     }
   ])
 
-  return response.operatingSystem.replace('● ', '').toLowerCase()
+  const DECORATION_LENGTH = 2
+
+  return response.operatingSystem.replace(LOG_DECORATOR_REGEX, '').toLowerCase().slice(DECORATION_LENGTH)
 }
 
 /**

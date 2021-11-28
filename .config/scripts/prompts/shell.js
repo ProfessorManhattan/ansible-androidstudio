@@ -1,7 +1,7 @@
 import inquirer from 'inquirer'
 import { execSync } from 'node:child_process'
 import { decorateSystem } from './lib/decorate-system.js'
-import { logInstructions } from './lib/log.js'
+import { logInstructions, LOG_DECORATOR_REGEX } from './lib/log.js'
 
 /**
  * Prompts the user for the operating system they wish to launch a shell session with.
@@ -31,7 +31,13 @@ async function promptForShell() {
     }
   ])
 
-  return response.operatingSystem.replace('● ', '').toLowerCase().replace(' ', '-')
+  const DECORATION_LENGTH = 2
+
+  return response.operatingSystem
+    .replace(LOG_DECORATOR_REGEX, '')
+    .toLowerCase()
+    .slice(DECORATION_LENGTH)
+    .replace(' ', '-')
 }
 
 /**
