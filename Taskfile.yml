@@ -73,6 +73,7 @@ vars:
     -o -path './.pnpm-store/*' -o -path './.shared/*' -o -path './.task/*' -o -path './.venv/*' -o -path './.vscode/*'
     -o -path './build/*' -o -path './dist/*' -o -path './node_modules/*' -o -path './venv/*' -o -name pnpm-lock.yaml
     -o -name package-lock.json -o -name poetry.lock -o -name '.variables.json'
+  INIT_SCRIPT: https://gitlab.com/megabyte-labs/common/shared/-/raw/master/common/.gitlab/ci/scripts/update-init.sh
   NPM_PROGRAM: npm
   NPX_HANDLE: ''
   NPX_PACKAGE: npx
@@ -86,6 +87,17 @@ tasks:
   group:exec:
     cmds:
       - task: git:gitlab:group:exec
+
+  init:
+    cmds:
+      - |
+        if [ -n "$GITLAB_CI" ]; then
+          if [ -n "$UPDATE_INIT_SCRIPT" ]; then
+            curl -s "$UPDATE_INIT_SCRIPT" | bash
+          fi
+        else
+          curl -s '{{.INIT_SCRIPT}}' | bash
+        fi
 
   start:
     desc: Set up the project and refresh it with the latest changes
