@@ -54,9 +54,9 @@ tasks:
       - task: :fix:eslint
 
   template:
-    deps:
-      - template:handlebars
-      - template:hbs
+    cmds:
+      - task: template:handlebars
+      - task: template:hbs
 
   template:handlebars:
     deps:
