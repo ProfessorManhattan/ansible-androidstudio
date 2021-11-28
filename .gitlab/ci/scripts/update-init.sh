@@ -37,7 +37,7 @@ if ! task donothing &> /dev/null; then
   mv "$TMP" Taskfile.yml
   rm Taskfile-shared.yml
   npm install
-  eslint --fix Taskfile.yml
+  task fix:eslint -- Taskfile.yml
 fi
 
 # @description Clean up
