@@ -12,20 +12,32 @@ tasks:
       - :install:npm:prettier
       - :install:software:jq
       - :install:software:yq
+    summary: |
+      # Generates the `.vscode/extensions.json` file for VS Code auto plugin recommendations
+
+      This task generates the `.vscode/extensions.json` file which is used to automatically have
+      VS Code show a popup with a link that leads to a list of plugins that the project recommends.
+      This list is populated by converting the list of VS Code plugins installed by default by
+      [Gas Station](https://gitlab.com/megabyte-labs/gas-station) into VS Code syntax.
     env:
       TMP:
+        sh: mktemp
+      TMP_JQ:
+        sh: mktemp
+      TMP_YQ:
         sh: mktemp
     cmds:
       - mkdir -p .vscode
       - curl -s {{.EXTENSIONS_URL}} > "$TMP"
-      - >-
-        cat "$TMP" | yq e '.vscode_extensions[].name' - | jq -cRrs 'split("\n") | "{ \"recommendations\": \(.) }"' |
-        jq '.recommendations = ([ .recommendations[] | select(length > 0) ])' > '{{.EXTENSIONS_FILE}}'
+      - cat "$TMP" | yq e '.vscode_extensions[].name' - > "$TMP_YQ"
+      - |
+        cat "$TMP_YQ" | jq -cRrs 'split("\n") | "{ \"recommendations\": \(.) }"' > "$TMP_JQ"
+      - cat "$TMP_JQ" | sed 's/,""//' > '{{.EXTENSIONS_FILE}}'
 
   generate:
-    cmds:
-      - task: extensions
-      - task: tasks
+    deps:
+      - extensions
+      - tasks
 
   tasks:
     deps:
@@ -36,6 +48,15 @@ tasks:
         sh: task --list
       TMP:
         sh: mktemp
+    summary: |
+      # Populate the `.vscode/tasks.json` file
+
+      This task populates the `.vscode/tasks.json` file with tasks that are viewable by
+      running `task --list`. With the file generated using the output from `tasks --list`,
+      the user can then easily run any of the tasks from within VS Code.
+
+      This is a simple implementation. There are many features provided by VS Code that we
+      can potentially leverage to make our `tasks.json` better and more useful to developers.
     run: when_changed
     cmds:
       - |
