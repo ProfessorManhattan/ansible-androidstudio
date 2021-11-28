@@ -212,8 +212,7 @@ tasks:
       WORKDIR:
         sh: basename $PWD
     cmds:
-      - cmd: docker run --cap-drop=ALL -it -v "$PWD:/{{.WORKDIR}}" -w /{{.WORKDIR}} --rm megabytelabs/ansible-molecule-{{.CLI_ARGS}}:latest /bin/bash
-        ignore_error: true
+      - docker run --cap-drop=ALL -it -v "$PWD:/{{.WORKDIR}}" -w /{{.WORKDIR}} --rm megabytelabs/ansible-molecule-{{.CLI_ARGS}}:latest /bin/bash
 
   shell:prompt:
     deps:
