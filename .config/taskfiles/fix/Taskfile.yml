@@ -23,7 +23,7 @@ tasks:
       **Example fixing all JS/TS files in a project:**
       `task fix:js`
     cmds:
-      - '{{.NPX_HANDLE}}eslint --fix {{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}.{{end}}'
+      - '{{.NPX_HANDLE}}eslint -c package.json --no-eslintrc --fix {{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}.{{end}}'
 
   json:
     deps:
