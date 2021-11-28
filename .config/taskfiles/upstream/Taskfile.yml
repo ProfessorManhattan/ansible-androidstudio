@@ -83,10 +83,17 @@ tasks:
     deps:
       - :install:modules:local
       - :install:npm:hbs
+    vars:
+      PYTHON_BREW_NOTICE: This automated Homebrew formula requires that a setup.py file be available so that the package can be
+        linked with pip3 install -e .
     env:
       TMP:
         sh: mktemp
     cmds:
+      - |
+        if [ ! -f setup.py ] && [ -f .config/brew/python.hbs.rb ]; then
+          echo "{{.PYTHON_BREW_NOTICE}}" > .config/brew/python.hbs.rb
+        fi
       - cp package.json package.json.bak
       - |
         function handlebars() {
