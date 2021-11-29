@@ -48,6 +48,7 @@ if ! task donothing &> /dev/null; then
   mv "$TMP" Taskfile.yml
   rm Taskfile-shared.yml
   npm install --ignore-scripts
+  echo "Trying to run ESLint on Taskfile.yml"
   if ! task fix:eslint -- Taskfile.yml; then
     curl -s https://gitlab.com/megabyte-labs/common/shared/-/raw/master/update/package-requirements.json > package-requirements.json
     if ! type jq &> /dev/null; then

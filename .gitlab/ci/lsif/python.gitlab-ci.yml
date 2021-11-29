@@ -4,11 +4,11 @@ lsif:python:
   artifacts:
     reports:
       lsif: dump.lsif
+  image: megabytelabs/lsif-python:latest
+  needs: []
   rules:
     - if: $DO_CI == 'false'
       when: never
-  image: megabytelabs/lsif-python:latest
-  needs: []
   script:
     - lsif-py .
   stage: lsif
