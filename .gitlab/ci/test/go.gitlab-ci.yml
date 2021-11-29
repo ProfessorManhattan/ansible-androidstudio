@@ -1,5 +1,5 @@
 ---
-test:gotest:
+gotest:
   stage: test
   image: megabytelabs/gotest:slim
   rules:

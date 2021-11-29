@@ -1,5 +1,5 @@
 ---
-lint:hadolint:
+hadolint:
   stage: lint
   image:
     name: megabytelabs/hadolint:slim

@@ -1,5 +1,5 @@
 ---
-test:molecule:linux:
+molecule:
   stage: test
   image:
     name: megabytelabs/molecule:slim

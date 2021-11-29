@@ -1,5 +1,5 @@
 ---
-publish:firebase:
+firebase:
   stage: publish
   image:
     name: megabytelabs/yamllint:slim

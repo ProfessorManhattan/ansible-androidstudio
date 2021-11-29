@@ -1,5 +1,5 @@
 ---
-test:python:
+python:
   stage: test
   image:
     name: megabytelabs/pytest:slim

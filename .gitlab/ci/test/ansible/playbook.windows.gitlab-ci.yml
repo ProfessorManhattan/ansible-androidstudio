@@ -1,5 +1,5 @@
 ---
-test:molecule:windows:
+molecule-windows:
   stage: test
   image: megabytelabs/molecule:latest
   services:

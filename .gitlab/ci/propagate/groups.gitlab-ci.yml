@@ -1,5 +1,5 @@
 ---
-propagate:groups:
+propagate:
   stage: deploy
   image: megabytelabs/propagate:slim
   rules:

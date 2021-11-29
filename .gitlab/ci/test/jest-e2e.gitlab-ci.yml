@@ -1,5 +1,5 @@
 ---
-test:jest:e2e:
+jest-e2e:
   stage: test
   image:
     name: megabytelabs/yamllint:slim

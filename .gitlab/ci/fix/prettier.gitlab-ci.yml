@@ -1,5 +1,5 @@
 ---
-fix:prettier:
+prettier-fix:
   stage: fix
   image:
     name: megabytelabs/prettier-write:slim

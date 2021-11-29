@@ -1,5 +1,5 @@
 ---
-lint:markdown:
+markdown-lint:
   stage: lint
   image: pipelinecomponents/markdownlint
   rules:

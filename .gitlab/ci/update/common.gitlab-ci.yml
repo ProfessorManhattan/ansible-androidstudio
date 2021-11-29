@@ -1,5 +1,5 @@
 ---
-update:common:
+update:
   stage: update
   image: megabytelabs/updater:slim
   rules:

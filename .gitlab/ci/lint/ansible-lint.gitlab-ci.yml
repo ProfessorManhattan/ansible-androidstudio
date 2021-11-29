@@ -1,5 +1,5 @@
 ---
-lint:ansible:
+ansible-lint:
   stage: lint
   image:
     name: megabytelabs/ansible-lint:slim

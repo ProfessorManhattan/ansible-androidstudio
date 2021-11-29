@@ -1,5 +1,5 @@
 ---
-dockerize:npm:
+dockerize:
   stage: publish
   image:
     name: megabytelabs/yamllint:slim

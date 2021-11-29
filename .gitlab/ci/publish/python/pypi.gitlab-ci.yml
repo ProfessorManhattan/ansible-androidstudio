@@ -1,5 +1,5 @@
 ---
-publish:pypi:
+pypi:
   stage: publish
   image:
     name: megabytelabs/yamllint:slim

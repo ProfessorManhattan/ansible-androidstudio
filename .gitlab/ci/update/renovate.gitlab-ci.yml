@@ -1,5 +1,5 @@
 ---
-update:renovate:
+renovate:
   stage: update
   image:
     name: renovate/renovate:slim

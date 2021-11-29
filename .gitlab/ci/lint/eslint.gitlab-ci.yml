@@ -1,5 +1,5 @@
 ---
-lint:eslint:
+eslint:
   stage: lint
   image:
     name: megabytelabs/yamllint:slim

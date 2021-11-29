@@ -1,5 +1,5 @@
 ---
-lint:shellcheck:
+shellcheck:
   stage: lint
   image:
     name: megabytelabs/shellcheck:slim

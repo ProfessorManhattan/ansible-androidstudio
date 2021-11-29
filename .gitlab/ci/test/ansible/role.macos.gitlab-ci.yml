@@ -3,7 +3,7 @@
   tags:
     - shared-macos-amd64
 
-test:molecule:darwin:
+molecule-macos:
   stage: test
   extends:
     - .shared_macos_runners

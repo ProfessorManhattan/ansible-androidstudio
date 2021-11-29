@@ -1,5 +1,5 @@
 ---
-test:molecule:darwin:
+molecule-osx:
   stage: test
   image: megabytelabs/molecule:latest
   services:

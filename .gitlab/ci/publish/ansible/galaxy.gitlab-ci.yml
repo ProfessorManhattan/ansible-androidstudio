@@ -1,5 +1,5 @@
 ---
-galaxy:webhook:
+galaxy:
   stage: publish
   image:
     name: megabytelabs/yamllint:slim

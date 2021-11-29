@@ -1,5 +1,5 @@
 ---
-lsif:python:
+code-intelligence:
   stage: lsif
   image: megabytelabs/lsif-python:latest
   allow_failure: true

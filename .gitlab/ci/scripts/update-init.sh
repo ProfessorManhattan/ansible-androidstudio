@@ -13,7 +13,8 @@ if [ -n "$GITLAB_CI" ]; then
   git config user.name "$GITLAB_CI_NAME"
   git checkout "$CI_COMMIT_REF_NAME"
   git pull origin "$CI_COMMIT_REF_NAME"
-elif git reset --hard HEAD &> /dev/null; then
+else
+  git reset --hard HEAD
   git clean -fxd
   git checkout master
   git pull origin master

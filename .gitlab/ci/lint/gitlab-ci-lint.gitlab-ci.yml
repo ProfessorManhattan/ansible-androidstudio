@@ -1,5 +1,5 @@
 ---
-lint:gitlab-ci:
+gitlab-ci-lint:
   stage: lint
   image:
     name: megabytelabs/gitlab-ci-lint:slim
