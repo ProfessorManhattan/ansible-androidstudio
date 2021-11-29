@@ -3,6 +3,8 @@ test:molecule:windows:
   allow_failure: true
   image: megabytelabs/molecule:latest
   rules:
+    - if: $DO_CI == 'false'
+      when: never
     - if: $CI_COMMIT_TITLE =~ /^(automation|chore).*/
       when: never
     - changes:

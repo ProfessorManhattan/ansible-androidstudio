@@ -149,5 +149,5 @@ tasks:
       - mv "$TMP" {{.OUTPUT_FILE}}
       - |
         if [ '{{.REPOSITORY_TYPE}}' == 'ansible' ] && [ -f meta/main.yml ]; then
-          task: ansible:update:variables:descriptions
+          task ansible:update:variables:descriptions
         fi

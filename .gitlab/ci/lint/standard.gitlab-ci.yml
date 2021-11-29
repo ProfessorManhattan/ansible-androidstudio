@@ -8,6 +8,8 @@ lint:standard:
     name: megabytelabs/standard:slim
     entrypoint: ['']
   rules:
+    - if: $DO_CI == 'false'
+      when: never
     - exists:
         - '**/*.js'
   script:

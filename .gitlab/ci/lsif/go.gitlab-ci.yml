@@ -4,6 +4,9 @@ lsif:go:
   artifacts:
     reports:
       lsif: dump.lsif
+  rules:
+    - if: $DO_CI == 'false'
+      when: never
   image: sourcegraph/lsif-go:latest
   needs: []
   script:

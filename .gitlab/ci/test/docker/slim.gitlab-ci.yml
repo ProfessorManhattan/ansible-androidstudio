@@ -4,6 +4,8 @@ test:dockerslim:
     name: megabytelabs/yamllint:slim
     entrypoint: ['']
   rules:
+    - if: $DO_CI == 'false'
+      when: never
     - exists:
         - '*slim.config.json'
   script:

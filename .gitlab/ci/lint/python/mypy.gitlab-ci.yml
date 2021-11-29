@@ -4,6 +4,8 @@ lint:mypy:
     name: megabytelabs/yamllint:slim
     entrypoint: ['']
   rules:
+    - if: $DO_CI == 'false'
+      when: never
     - exists:
         - '**/*.py'
   script:

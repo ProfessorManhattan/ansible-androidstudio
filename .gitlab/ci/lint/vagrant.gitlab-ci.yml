@@ -5,6 +5,8 @@ vagrant:validate:
     name: megabytelabs/vagrant:slim
     entrypoint: ['']
   rules:
+    - if: $DO_CI == 'false'
+      when: never
     - exists:
         - '**/Vagrantfile'
   script:

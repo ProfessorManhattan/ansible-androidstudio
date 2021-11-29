@@ -4,6 +4,8 @@ lint:stylelint:
     name: megabytelabs/stylelint:slim
     entrypoint: ['']
   rules:
+    - if: $DO_CI == 'false'
+      when: never
     - exists:
         - '**/*.{css,scss}'
   script:

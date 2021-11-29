@@ -7,7 +7,6 @@ test:jest:unit:
       cobertura: coverage/cobertura-coverage.xml
       junit: junit.xml
     when: always
-
   before_script:
     - task ci:before:npm
   cache:
@@ -17,6 +16,8 @@ test:jest:unit:
   image: megabytelabs/jest:slim
   needs: []
   rules:
+    - if: $DO_CI == 'false'
+      when: never
     - exists:
         - 'src/**/*.spec.ts'
   script:
@@ -24,8 +25,12 @@ test:jest:unit:
   stage: test
   variables:
     GIT_DEPTH: 1
+
 pages:
   stage: deploy
+  rules:
+    - if: $DO_CI == 'false'
+      when: never
   only:
     - master
   dependencies:

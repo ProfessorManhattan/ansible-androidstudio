@@ -5,6 +5,8 @@ packer:validate:
     name: megabytelabs/packer:slim
     entrypoint: ['']
   rules:
+    - if: $DO_CI == 'false'
+      when: never
     - exists:
         - '*template.json'
   script:

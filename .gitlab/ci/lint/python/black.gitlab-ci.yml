@@ -4,6 +4,8 @@ lint:black:
     name: megabytelabs/black:slim
     entrypoint: ['']
   rules:
+    - if: $DO_CI == 'false'
+      when: never
     - exists:
         - '**/*.py'
   script:

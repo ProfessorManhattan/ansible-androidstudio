@@ -31,7 +31,7 @@ tasks:
       - |
         if [[ $(git status --porcelain) ]]; then
           git commit -m "automation(upstream-sync) Applying changes from upstream repository."
-          git push -o ci.skip origin "$CI_COMMIT_REF_NAME"
+          git push -o ci.variable="DO_CI=false" origin "$CI_COMMIT_REF_NAME"
         fi
 
   commit:config:

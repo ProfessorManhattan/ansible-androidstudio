@@ -2,8 +2,9 @@
 pages:
   stage: publish
   allow_failure: true
-  only:
-    - master
+  rules:
+    - if: $DO_CI == 'false'
+      when: never
   variables:
     GIT_DEPTH: 1
   script:

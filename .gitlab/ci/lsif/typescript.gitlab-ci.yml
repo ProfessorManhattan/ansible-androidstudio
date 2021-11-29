@@ -4,6 +4,9 @@ lsif:typescript:
   artifacts:
     reports:
       lsif: dump.lsif
+  rules:
+    - if: $DO_CI == 'false'
+      when: never
   image: sourcegraph/lsif-node:latest
   needs: []
   script:

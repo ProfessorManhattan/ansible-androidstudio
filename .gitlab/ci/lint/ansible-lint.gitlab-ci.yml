@@ -4,6 +4,8 @@ lint:ansible:
     name: megabytelabs/ansible-lint:slim
     entrypoint: ['']
   rules:
+    - if: $DO_CI == 'false'
+      when: never
     - exists:
         - ansible.cfg
         - meta/main.yml

@@ -6,6 +6,9 @@ publish:gitlab:registry:
     - git checkout "$CI_COMMIT_REF_NAME"
     - git pull origin "$CI_COMMIT_REF_NAME"
   image: docker
+  rules:
+    - if: $DO_CI == 'false'
+      when: never
   script:
     - set -eo pipefail
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY"

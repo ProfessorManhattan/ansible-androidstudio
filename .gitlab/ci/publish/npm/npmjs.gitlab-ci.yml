@@ -19,6 +19,8 @@ publish:npm:
       - .npm/
   image: megabytelabs/npm-publisher:slim
   rules:
+    - if: $DO_CI == 'false'
+      when: never
     - if: $CI_COMMIT_TITLE =~ /^(automation|chore).*/
       when: never
     - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH

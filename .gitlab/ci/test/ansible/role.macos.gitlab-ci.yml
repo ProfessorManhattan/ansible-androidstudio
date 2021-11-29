@@ -8,6 +8,8 @@ test:molecule:darwin:
   extends:
     - .shared_macos_runners
   rules:
+    - if: $DO_CI == 'false'
+      when: never
     - if: $CI_PIPELINE_SOURCE == 'schedule' || $CI_PIPELINE_SOURCE == 'web'
     - if: $CI_COMMIT_TITLE =~ /^(automation|chore).*/
       when: never

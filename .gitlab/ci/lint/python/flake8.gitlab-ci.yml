@@ -4,6 +4,8 @@ lint:flake8:
     name: megabytelabs/flake8:slim
     entrypoint: ['']
   rules:
+    - if: $DO_CI == 'false'
+      when: never
     - exists:
         - '**/*.py'
   script:

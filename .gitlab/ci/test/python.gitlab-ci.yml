@@ -14,6 +14,8 @@ test:python:
     name: megabytelabs/pytest:slim
     entrypoint: ['']
   rules:
+    - if: $DO_CI == 'false'
+      when: never
     - exists:
         - 'test/**/*.py'
   script:

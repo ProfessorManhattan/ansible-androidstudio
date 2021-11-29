@@ -4,6 +4,8 @@ lint:hadolint:
     name: megabytelabs/hadolint:slim
     entrypoint: ['']
   rules:
+    - if: $DO_CI == 'false'
+      when: never
     - exists:
         - '**/*Dockerfile*'
   script:

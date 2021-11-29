@@ -2,6 +2,8 @@
 propagate:projects:
   image: megabytelabs/propagate:slim
   rules:
+    - if: $DO_CI == 'false'
+      when: never
     - if: $CI_COMMIT_TITLE =~ /^chore.*/
       when: never
     - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH && $PROPAGATE_FILES == 'true'

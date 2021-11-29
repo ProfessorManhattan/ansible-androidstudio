@@ -7,6 +7,8 @@ test:gotest:
   image: megabytelabs/gotest:slim
   needs: []
   rules:
+    - if: $DO_CI == 'false'
+      when: never
     - exists:
         - '**/*_test.go'
   script:

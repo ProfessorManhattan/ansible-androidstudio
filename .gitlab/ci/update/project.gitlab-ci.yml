@@ -12,6 +12,8 @@ update:project:
       - .venv/
   image: megabytelabs/updater:slim
   rules:
+    - if: $DO_CI == 'false'
+      when: never
     - if: ($CI_PIPELINE_SOURCE == 'pipeline' || $CI_PIPELINE_SOURCE == 'web') && $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
   script:
     - task ci:submodules

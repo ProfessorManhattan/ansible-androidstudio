@@ -11,6 +11,8 @@ fix:prettier:
     name: megabytelabs/prettier-write:slim
     entrypoint: ['']
   rules:
+    - if: $DO_CI == 'false'
+      when: never
     - if: $CI_COMMIT_TITLE =~ /^chore.*/
       when: never
     - if: $CI_PIPELINE_SOURCE != 'pipeline' && $CI_PIPELINE_SOURCE != 'web' && $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH

@@ -4,6 +4,9 @@ sonarcloud:
   image:
     name: sonarsource/sonar-scanner-cli:latest
     entrypoint: ['']
+  rules:
+    - if: $DO_CI == 'false'
+      when: never
   only:
     - merge_requests
     - master

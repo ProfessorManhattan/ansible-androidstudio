@@ -4,6 +4,8 @@ lint:yamllint:
     name: megabytelabs/yamllint:slim
     entrypoint: ['']
   rules:
+    - if: $DO_CI == 'false'
+      when: never
     - exists:
         - '**/*.{yaml,yml}'
   script:

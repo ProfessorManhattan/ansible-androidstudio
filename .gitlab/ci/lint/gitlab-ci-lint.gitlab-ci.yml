@@ -4,6 +4,8 @@ lint:gitlab-ci:
     name: megabytelabs/gitlab-ci-lint:slim
     entrypoint: ['']
   rules:
+    - if: $DO_CI == 'false'
+      when: never
     - exists:
         - '**/*gitlab-ci.yml'
   script:
