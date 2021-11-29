@@ -25,10 +25,10 @@ tasks:
         TMP="$(mktemp)"
         curl -s {{.EXTENSIONS_URL}} > "$TMP"
         TMP_YQ="$(mktemp)"
-        cat "$TMP" | yq e '.vscode_extensions[].name' - > "$TMP_YQ"
+        yq e '.vscode_extensions[].name' - < "$TMP" > "$TMP_YQ"
         TMP_JQ="$(mktemp)"
-        cat "$TMP_YQ" | jq -cRrs 'split("\n") | "{ \"recommendations\": \(.) }"' > "$TMP_JQ"
-        cat "$TMP_JQ" | sed 's/,""//' > '{{.EXTENSIONS_FILE}}'
+        jq -cRrs 'split("\n") | "{ \"recommendations\": \(.) }"' < "$TMP_YQ" > "$TMP_JQ"
+        sed 's/,""//' < "$TMP_JQ" > '{{.EXTENSIONS_FILE}}'
       - prettier --write '{{.EXTENSIONS_FILE}}'
 
   generate:
