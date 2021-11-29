@@ -91,9 +91,11 @@ tasks:
         sh: mktemp
     cmds:
       - |
-        BINARY_NAME="$(jq -r '.customPyPiPackageName' .variables.json)"
-        if [ "$BINARY_NAME" == 'null' ] || ! type "$BINARY_NAME" &> /dev/null; then
-          echo "{{.PYTHON_BREW_NOTICE}}" > .config/brew/python.hbs.rb
+        if [ '{{.REPOSITORY_TYPE}}' == 'python' ] && [ -f '.config/brew/python.hbs.rb' ]; then
+          BINARY_NAME="$(jq -r '.customPyPiPackageName' .variables.json)"
+          if [ "$BINARY_NAME" == 'null' ] || ! type "$BINARY_NAME" &> /dev/null; then
+            echo "{{.PYTHON_BREW_NOTICE}}" > .config/brew/python.hbs.rb
+          fi
         fi
       - cp package.json package.json.bak
       - |
