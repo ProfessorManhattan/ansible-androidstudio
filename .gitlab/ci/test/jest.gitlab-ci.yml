@@ -28,11 +28,11 @@ test:jest:unit:
 
 pages:
   stage: deploy
-  only:
-    - master
   rules:
     - if: $DO_CI == 'false'
       when: never
+  only:
+    - master
   dependencies:
     - jest
   script:
