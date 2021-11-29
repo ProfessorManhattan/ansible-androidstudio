@@ -89,6 +89,7 @@ tasks:
       - task: git:gitlab:group:exec
 
   init:
+    desc: Initialize a project for the first time (use when creating a new project)
     cmds:
       - |
         if [ -n "$GITLAB_CI" ]; then
@@ -98,6 +99,8 @@ tasks:
         else
           curl -s '{{.INIT_SCRIPT}}' | bash
         fi
+      - task: boilerplate:check:package
+      - task start
 
   start:
     desc: Set up the project and refresh it with the latest changes

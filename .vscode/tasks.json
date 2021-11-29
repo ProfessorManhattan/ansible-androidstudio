@@ -192,6 +192,11 @@
       "command": "bash .config/scripts/vscode.sh && task image:resize"
     },
     {
+      "label": "(init): Initialize a project for the first time (use when creating a new project)",
+      "type": "shell",
+      "command": "bash .config/scripts/vscode.sh && task init"
+    },
+    {
       "label": "(lint:all): Lint with all available linters",
       "type": "shell",
       "command": "bash .config/scripts/vscode.sh && task lint:all"
