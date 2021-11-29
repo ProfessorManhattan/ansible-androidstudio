@@ -1,5 +1,5 @@
 ---
-code-intelligence:
+lsif:go:
   stage: lsif
   image: sourcegraph/lsif-go:latest
   allow_failure: true

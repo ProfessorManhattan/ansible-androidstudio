@@ -1,5 +1,5 @@
 ---
-dockerhub-publish:
+publish:dockerhub:
   stage: publish
   image: megabytelabs/docker-publish:slim
   services:

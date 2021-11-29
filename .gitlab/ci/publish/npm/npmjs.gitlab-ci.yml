@@ -1,5 +1,5 @@
 ---
-npmjs-publish:
+publish:npm:
   stage: publish
   image: megabytelabs/npm-publisher:slim
   rules:

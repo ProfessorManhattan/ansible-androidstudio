@@ -1,5 +1,5 @@
 ---
-black-fix:
+fix:black:
   stage: fix
   image:
     name: megabytelabs/yamllint:slim

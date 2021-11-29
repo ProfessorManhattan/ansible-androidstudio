@@ -1,5 +1,5 @@
 ---
-sphinx:
+publish:sphinx:
   stage: publish
   image:
     name: megabytelabs/yamllint:slim

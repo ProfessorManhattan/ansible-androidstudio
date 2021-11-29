@@ -1,5 +1,5 @@
 ---
-dockerslim:
+test:dockerslim:
   stage: test
   image:
     name: megabytelabs/yamllint:slim

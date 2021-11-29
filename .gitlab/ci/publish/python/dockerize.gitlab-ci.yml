@@ -1,5 +1,5 @@
 ---
-dockerize:
+dockerize:pypi:
   stage: publish
   image:
     name: megabytelabs/yamllint:slim

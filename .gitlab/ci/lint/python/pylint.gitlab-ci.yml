@@ -1,5 +1,5 @@
 ---
-pylint:
+lint:pylint:
   stage: lint
   image:
     name: megabytelabs/yamllint:slim

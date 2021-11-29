@@ -1,5 +1,5 @@
 ---
-tflint:
+lint:tflint:
   stage: lint
   image:
     name: megabytelabs/tflint:slim

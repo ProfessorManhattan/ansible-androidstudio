@@ -1,5 +1,5 @@
 ---
-eslint-fix:
+fix:eslint:
   stage: fix
   image:
     name: megabytelabs/yamllint:slim

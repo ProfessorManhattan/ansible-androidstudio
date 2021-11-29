@@ -1,5 +1,5 @@
 ---
-bandit:
+lint:bandit:
   stage: lint
   image:
     name: megabytelabs/yamllint:slim

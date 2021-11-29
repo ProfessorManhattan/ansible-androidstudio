@@ -1,5 +1,5 @@
 ---
-stylelint:
+lint:stylelint:
   stage: lint
   image:
     name: megabytelabs/stylelint:slim

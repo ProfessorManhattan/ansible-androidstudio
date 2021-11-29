@@ -1,5 +1,5 @@
 ---
-shellcheck-fix:
+fix:shellcheck:
   stage: fix
   image:
     name: megabytelabs/yamllint:slim

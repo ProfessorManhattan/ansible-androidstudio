@@ -1,5 +1,5 @@
 ---
-jest:
+test:jest:unit:
   stage: test
   image: megabytelabs/jest:slim
   rules:

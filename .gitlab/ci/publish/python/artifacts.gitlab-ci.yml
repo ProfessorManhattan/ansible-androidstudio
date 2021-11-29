@@ -1,5 +1,5 @@
 ---
-artifacts:
+python:artifacts:
   stage: publish
   image:
     name: megabytelabs/yamllint:slim

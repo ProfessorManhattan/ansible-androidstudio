@@ -1,5 +1,5 @@
 ---
-artifacts:
+publish:angular:artifacts:
   stage: publish
   image:
     name: megabytelabs/yamllint:slim

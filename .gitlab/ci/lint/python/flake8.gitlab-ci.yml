@@ -1,5 +1,5 @@
 ---
-flake8:
+lint:flake8:
   stage: lint
   image:
     name: megabytelabs/flake8:slim

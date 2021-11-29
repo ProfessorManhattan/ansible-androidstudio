@@ -1,5 +1,5 @@
 ---
-standard:
+lint:standard:
   stage: lint
   image:
     name: megabytelabs/standard:slim

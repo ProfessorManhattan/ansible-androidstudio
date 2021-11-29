@@ -1,5 +1,5 @@
 ---
-pydocstyle:
+lint:pydocstyle:
   stage: lint
   image:
     name: megabytelabs/yamllint:slim

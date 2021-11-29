@@ -1,5 +1,5 @@
 ---
-standard-fix:
+fix:standard:
   stage: fix
   image:
     name: megabytelabs/standard:slim

@@ -1,5 +1,5 @@
 ---
-packer-validate:
+packer:validate:
   stage: lint
   image:
     name: megabytelabs/packer:slim

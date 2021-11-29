@@ -1,5 +1,5 @@
 ---
-packer-fix:
+fix:packer:
   stage: fix
   image:
     name: megabytelabs/packer:slim

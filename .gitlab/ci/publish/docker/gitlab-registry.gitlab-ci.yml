@@ -1,5 +1,5 @@
 ---
-gitlab-registry:
+publish:gitlab:registry:
   stage: test
   image: docker
   services:

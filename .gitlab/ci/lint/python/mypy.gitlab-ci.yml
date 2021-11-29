@@ -1,5 +1,5 @@
 ---
-mypy:
+lint:mypy:
   stage: lint
   image:
     name: megabytelabs/yamllint:slim

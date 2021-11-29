@@ -1,5 +1,5 @@
 ---
-prettier:
+lint:prettier:
   stage: lint
   image:
     name: megabytelabs/prettier-write:slim

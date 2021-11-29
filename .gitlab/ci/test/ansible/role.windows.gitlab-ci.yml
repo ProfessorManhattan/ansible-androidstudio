@@ -5,7 +5,7 @@
     - windows
     - windows-1809
 
-windows:
+test:molecule:windows:
   stage: test
   extends:
     - .shared_windows_runners
