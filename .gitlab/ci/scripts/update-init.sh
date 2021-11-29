@@ -51,11 +51,18 @@ rm -rf common-shared
 
 # @description Ensure files from old file structure are removed
 rm -f .ansible-lint
+rm -f .eslintrc.cjs
 rm -f .flake8
+rm -f .gitmodules
 rm -f .prettierignore
+rm -f .start.sh
+rm -f .update.sh
 rm -f .yamllint
 rm -f requirements.txt
+rm -rf .common
 rm -rf .config/esbuild
+rm -rf .husky
+rm -rf tests
 if test -d .config/docs; then
   cd .config/docs
   rm -rf .git .config .github .gitlab .vscode .editorconfig .gitignore .gitlab-ci.yml

@@ -4,11 +4,11 @@ lsif:javascript:
   artifacts:
     reports:
       lsif: dump.lsif
-  image: sourcegraph/lsif-node:latest
-  needs: []
   rules:
     - if: $DO_CI == 'false'
       when: never
+  image: sourcegraph/lsif-node:latest
+  needs: []
   script:
     - lsif-tsc **/*.js --AllowJs --checkJs
   stage: lsif

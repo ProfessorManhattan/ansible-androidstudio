@@ -4,11 +4,11 @@ lsif:typescript:
   artifacts:
     reports:
       lsif: dump.lsif
-  image: sourcegraph/lsif-node:latest
-  needs: []
   rules:
     - if: $DO_CI == 'false'
       when: never
+  image: sourcegraph/lsif-node:latest
+  needs: []
   script:
     - lsif-tsc -p .
   stage: lsif
