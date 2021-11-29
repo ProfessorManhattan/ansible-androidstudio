@@ -1,12 +1,12 @@
 ---
-markdown-lint:
-  stage: lint
+lint:markdown:
   image: pipelinecomponents/markdownlint
   rules:
     - exists:
         - '**/*.md'
-  variables:
-    GIT_DEPTH: 1
   script:
     - set -eo pipefail
     - mdl .
+  stage: lint
+  variables:
+    GIT_DEPTH: 1

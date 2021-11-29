@@ -1,23 +1,23 @@
 ---
-python:
-  stage: test
-  image:
-    name: megabytelabs/pytest:slim
-    entrypoint: ['']
+test:python:
   allow_failure: true
-  rules:
-    - exists:
-        - 'test/**/*.py'
-  variables:
-    GIT_DEPTH: 1
-  cache:
-    key: $CI_COMMIT_REF_SLUG
-    paths:
-      - .cache/
-  script:
-    - task python:test:ci
   artifacts:
     reports:
       cobertura: coverage.xml
       junit: report.xml
     when: always
+  cache:
+    key: $CI_COMMIT_REF_SLUG
+    paths:
+      - .cache/
+  image:
+    name: megabytelabs/pytest:slim
+    entrypoint: ['']
+  rules:
+    - exists:
+        - 'test/**/*.py'
+  script:
+    - task python:test:ci
+  stage: test
+  variables:
+    GIT_DEPTH: 1

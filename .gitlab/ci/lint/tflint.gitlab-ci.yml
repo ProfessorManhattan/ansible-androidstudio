@@ -1,11 +1,11 @@
 ---
-tflint:
-  stage: lint
+lint:tflint:
   image:
     name: megabytelabs/tflint:slim
     entrypoint: ['']
-  variables:
-    GIT_DEPTH: 1
   script:
     - set -eo pipefail
     - tflint
+  stage: lint
+  variables:
+    GIT_DEPTH: 1

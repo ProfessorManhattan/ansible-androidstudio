@@ -1,11 +1,11 @@
 ---
-code-intelligence:
-  stage: lsif
-  image: sourcegraph/lsif-node:latest
+lsif:typescript:
   allow_failure: true
-  needs: []
-  script:
-    - lsif-tsc -p .
   artifacts:
     reports:
       lsif: dump.lsif
+  image: sourcegraph/lsif-node:latest
+  needs: []
+  script:
+    - lsif-tsc -p .
+  stage: lsif

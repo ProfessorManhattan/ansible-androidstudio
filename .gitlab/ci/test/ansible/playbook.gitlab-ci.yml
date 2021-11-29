@@ -1,11 +1,8 @@
 ---
-molecule:
-  stage: test
+test:molecule:linux:
   image:
     name: megabytelabs/molecule:slim
     entrypoint: ['']
-  services:
-    - docker:20.10.7-dind
   parallel:
     matrix:
       - OPERATING_SYSTEM: archlinux
@@ -20,11 +17,14 @@ molecule:
     - changes:
         - main.yml
     - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == 'master'
+  script:
+    - set -eo pipefail
+  services:
+    - docker:20.10.7-dind
+  stage: test
   variables:
     DOCKER_CERT_PATH: $DOCKER_TLS_CERTDIR/client
     DOCKER_HOST: tcp://docker:2376
     DOCKER_TLS_CERTDIR: /certs
     DOCKER_TLS_VERIFY: 1
     GIT_DEPTH: 1
-  script:
-    - set -eo pipefail

@@ -1,15 +1,15 @@
 ---
-gitlab-ci-lint:
-  stage: lint
+lint:gitlab-ci:
   image:
     name: megabytelabs/gitlab-ci-lint:slim
     entrypoint: ['']
   rules:
     - exists:
         - '**/*gitlab-ci.yml'
-  variables:
-    GIT_DEPTH: 1
   script:
     - set -eo pipefail
     - printenv
     - find . -type f -name \*.gitlab-ci.yml -print0 | xargs -0 -r -n1 gitlab-ci-lint --token "$GROUP_ACCESS_TOKEN"
+  stage: lint
+  variables:
+    GIT_DEPTH: 1

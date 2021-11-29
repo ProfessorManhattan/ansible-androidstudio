@@ -1,13 +1,8 @@
 ---
-update:
-  stage: update
-  image: megabytelabs/updater:slim
-  rules:
-    - if: ($CI_PIPELINE_SOURCE == 'pipeline' || $CI_PIPELINE_SOURCE == 'web') && $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
-  variables:
-    GIT_DEPTH: 1
-    GIT_SUBMODULE_STRATEGY: recursive
-    PIP_CACHE_DIR: $CI_PROJECT_DIR/.cache/pip
+update:project:
+  before_script:
+    - if [ -n "$UPDATE_INIT_SCRIPT" ]; then curl -s "$UPDATE_INIT_SCRIPT" | bash; fi
+    - task ci:before
   cache:
     key: $CI_COMMIT_REF_SLUG
     paths:
@@ -15,10 +10,15 @@ update:
       - .npm/
       - .pnpm-store/
       - .venv/
-  before_script:
-    - if [ -n "$UPDATE_INIT_SCRIPT" ]; then curl -s "$UPDATE_INIT_SCRIPT" | bash; fi
-    - task ci:before
+  image: megabytelabs/updater:slim
+  rules:
+    - if: ($CI_PIPELINE_SOURCE == 'pipeline' || $CI_PIPELINE_SOURCE == 'web') && $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
   script:
     - task ci:submodules
     - task start
     - task ci:commit
+  stage: update
+  variables:
+    GIT_DEPTH: 1
+    GIT_SUBMODULE_STRATEGY: recursive
+    PIP_CACHE_DIR: $CI_PROJECT_DIR/.cache/pip

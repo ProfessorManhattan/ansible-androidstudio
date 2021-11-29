@@ -1,14 +1,14 @@
 ---
-flake8:
-  stage: lint
+lint:flake8:
   image:
     name: megabytelabs/flake8:slim
     entrypoint: ['']
   rules:
     - exists:
         - '**/*.py'
-  variables:
-    GIT_DEPTH: 1
   script:
     - set -eo pipefail
     - flake8 .
+  stage: lint
+  variables:
+    GIT_DEPTH: 1

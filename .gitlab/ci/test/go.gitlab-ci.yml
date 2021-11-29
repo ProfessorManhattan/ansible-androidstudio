@@ -1,16 +1,16 @@
 ---
-gotest:
-  stage: test
-  image: megabytelabs/gotest:slim
-  rules:
-    - exists:
-        - '**/*_test.go'
-  needs: []
-  variables:
-    GIT_DEPTH: 1
-  script:
-    - task go:test:ci
+test:gotest:
   artifacts:
     reports:
       junit: report.xml
     when: always
+  image: megabytelabs/gotest:slim
+  needs: []
+  rules:
+    - exists:
+        - '**/*_test.go'
+  script:
+    - task go:test:ci
+  stage: test
+  variables:
+    GIT_DEPTH: 1
