@@ -4,13 +4,13 @@ sonarcloud:
   image:
     name: sonarsource/sonar-scanner-cli:latest
     entrypoint: ['']
-  rules:
-    - if: $DO_CI == 'false'
-      when: never
   only:
     - merge_requests
     - master
     - develop
+  rules:
+    - if: $DO_CI == 'false'
+      when: never
   variables:
     GIT_DEPTH: '0'
     SONAR_USER_HOME: '${CI_PROJECT_DIR}/.sonar'
