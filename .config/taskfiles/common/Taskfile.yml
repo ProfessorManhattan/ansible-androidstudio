@@ -61,13 +61,13 @@ tasks:
       - :install:npm:husky
     cmds:
       - task: husky:install
-      - task: husky:permissions
+      - task common:husky:permissions &
     status:
       - '[[ "${container:=}" == "docker" ]]'
 
   husky:ci:
     cmds:
-      - task: husky:permissions
+      - task common:husky:permissions &
     status:
       - '[[ "${container:=}" != "docker" ]]'
 
@@ -84,30 +84,12 @@ tasks:
     status:
       - '[ ! -d .git ] || [[ "${container:=} == "docker" ]]'
 
-  husky:permission:
-    cmds:
-      - if [ -f "{{.FILE}}" ]; then chmod +x "{{.FILE}}"; fi
-    sources:
-      - '{{.FILE}}'
-
   husky:permissions:
     cmds:
-      - task: husky:permission
-        vars:
-          FILE: .config/husky/commit-msg
-      - task: husky:permission
-        vars:
-          FILE: .config/husky/pre-commit
-      - task: husky:permission
-        vars:
-          FILE: .config/husky/prepare-commit-msg
-
-  precommit:
-    deps:
-      - :fix:json
-      - :fix:misc
-      - :security:gitleaks
-      - :security:private-keys
+      - |
+        find ./.config/husky/* -maxdepth 0 -type f | while read PATHH; do
+          chmod +x "$PATHH"
+        done
 
   prepare-release:
     deps:

@@ -23,7 +23,8 @@ tasks:
       **Example fixing all JS/TS files in a project:**
       `task fix:js`
     cmds:
-      - '{{.NPX_HANDLE}}eslint -c package.json --no-eslintrc --fix {{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}.{{end}}'
+      - '{{.NPX_HANDLE}}eslint -c package.json --no-eslintrc --format pretty --cache-location .config/eslintcache
+        --fix {{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}.{{end}}'
 
   json:
     deps:
@@ -42,7 +43,8 @@ tasks:
       **Example looping through project:**
       `task fix:json`
     cmds:
-      - '{{.NPX_HANDLE}}eslint --fix --format pretty --ext .json {{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}.{{end}}'
+      - '{{.NPX_HANDLE}}eslint -c package.json --no-eslintrc --cache-location .config/eslintcache --fix
+        --format pretty --ext .json {{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}.{{end}}'
 
   misc:
     deps:
@@ -215,7 +217,8 @@ tasks:
       **Example fixing specific `.xml` file(s):**
       `task fix:xml -- 'file_name.xml'`
     cmds:
-      - '{{.NPX_HANDLE}}eslint --fix --format pretty --ext .xml {{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}.{{end}}'
+      - '{{.NPX_HANDLE}}eslint -c package.json --no-eslintrc --cache-location .config/eslintcache --fix
+        --format pretty --ext .xml {{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}.{{end}}'
 
   yaml:
     desc: Autofix YML files
@@ -292,4 +295,5 @@ tasks:
       **Example fixing specific `.yml` file(s):**
       `task fix:yaml:order -- 'file_name.{yml,yaml}'`
     cmds:
-      - '{{.NPX_HANDLE}}eslint --format pretty --fix --ext yml,yaml {{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}.{{end}}'
+      - '{{.NPX_HANDLE}}eslint -c package.json --no-eslintrc --format pretty --fix
+        --cache-location .config/eslintcache --ext yml,yaml {{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}.{{end}}'

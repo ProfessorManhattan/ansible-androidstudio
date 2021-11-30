@@ -38,7 +38,7 @@
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^13.1.0",
-    "@mblabs/eslint-config": "^1.0.107",
+    "@mblabs/eslint-config": "^1.0.108",
     "@mblabs/prettier-config": "^14.14.30",
     "@mblabs/release-config": "^1.0.0",
     "@typescript-eslint/eslint-plugin": "^5.2.0",

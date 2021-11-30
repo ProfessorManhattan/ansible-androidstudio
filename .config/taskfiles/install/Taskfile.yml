@@ -21,6 +21,7 @@ tasks:
       - task: :install:npm:commitlint
       - task: :install:npm:cspell
       - task: :install:npm:eslint
+      - task: :install:npm:git-notify
       - task: :install:npm:hbs
       - task: :install:npm:husky
       - task: :install:npm:lint-staged
@@ -29,6 +30,7 @@ tasks:
       - task: :install:npm:remark
       - task: :install:npm:shellcheck
       - task: :install:npm:standard-version
+      - task: :install:npm:yarnhook
     status:
       - '[[ "${container:=}" == "docker" ]]'
 
