@@ -37,12 +37,13 @@
     "string-break": "^1.2.0"
   },
   "devDependencies": {
-    "@commitlint/config-conventional": "^13.1.0",
-    "@mblabs/eslint-config": "^1.0.108",
+    "@commitlint/config-conventional": "^13.2.0",
+    "@mblabs/eslint-config": "^1.0.111",
     "@mblabs/prettier-config": "^14.14.30",
     "@mblabs/release-config": "^1.0.0",
     "@typescript-eslint/eslint-plugin": "^5.2.0",
     "cz-conventional-changelog": "^3.3.0",
+    "glob": "^7.2.0",
     "handlebars-helpers": "^0.10.0",
     "semantic-release": "^18.0.0"
   },

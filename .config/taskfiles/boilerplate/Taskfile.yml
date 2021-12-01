@@ -10,6 +10,16 @@ tasks:
       BLUEPRINT_REQUIRED_FIELDS: title description group name overview slug subgroup
     cmds:
       - |
+        if [ "$(jq -r '.type' package.json)" != 'module' ]; then
+          TMP="$(mktemp)"
+          jq '.type = "module"' package.json > "$TMP"
+          mv "$TMP" package.json
+        fi
+        if [ "$(jq -r '.dependencies' package.json)" == 'null' ]; then
+          TMP="$(mktemp)"
+          jq '.dependencies = {}' package.json > "$TMP"
+          mv "$TMP" package.json
+        fi
         ALREADY_PRESENT=true
         for ITEM in {{.BLUEPRINT_REQUIRED_FIELDS}}; do
           VALUE="$(jq --arg item "$ITEM" -r '.blueprint[$item]' package.json)"

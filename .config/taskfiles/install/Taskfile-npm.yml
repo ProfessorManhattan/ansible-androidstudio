@@ -177,6 +177,13 @@ tasks:
         vars:
           NPM_PACKAGE: npm
 
+  only-allow:
+    run: once
+    cmds:
+      - task: global
+        vars:
+          NPM_PACKAGE: only-allow
+
   open-cli:
     run: once
     cmds:
