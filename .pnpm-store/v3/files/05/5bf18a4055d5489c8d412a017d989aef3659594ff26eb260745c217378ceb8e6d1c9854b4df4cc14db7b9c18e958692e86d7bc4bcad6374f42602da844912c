@@ -1,1 +1,0 @@
-export declare type GetModule = (url: string, options?: any) => Promise<string>;

@@ -1,1 +1,0 @@
-export declare function customTransformer(commit: any, context: any): any;

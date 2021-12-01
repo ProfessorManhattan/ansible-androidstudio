@@ -1,4 +1,0 @@
-import type { RuleContext } from "../types";
-import type { SchemaObject } from "./types";
-export declare function urlToSchemastoreFilePath(url: string): string | null;
-export declare function loadSchema(schemaPath: string, context: RuleContext): null | SchemaObject;

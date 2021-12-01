@@ -41,9 +41,8 @@ if [ -f 'package-lock.json' ]; then
   rm package-lock.json
 fi
 pnpm install --save-dev --ignore-scripts @mblabs/eslint-config@latest @mblabs/prettier-config@latest handlebars-helpers glob
-pnpm install --save-dev --ignore-scripts @commitlint/config-conventional cz-conventional-changelog
 pnpm install --save-optional --ignore-scripts chalk inquirer signale string-break
-
+sed 's/.*cz-conventional-changelog.*//' < package.json
 # @description Re-generate the Taskfile.yml if it has invalid includes
 echo "Ensuring Taskfile is properly configured"
 task donothing || EXIT_CODE=$?
@@ -66,8 +65,10 @@ rm -f .start.sh
 rm -f .update.sh
 rm -f .yamllint
 rm -f requirements.txt
+rm -f .config/eslintcache
 rm -rf .common
 rm -rf .config/esbuild
+rm -rf .pnpm-store
 rm -rf .husky
 rm -rf tests
 if test -d .config/docs; then

@@ -1,3 +1,0 @@
-import type { TOMLToken } from "../types";
-export declare function isCommentToken(token: TOMLToken | null): boolean;
-export declare function isEqualSign(token: TOMLToken | null): token is TOMLToken;
