@@ -65,10 +65,8 @@ rm -f .start.sh
 rm -f .update.sh
 rm -f .yamllint
 rm -f requirements.txt
-rm -f .config/eslintcache
 rm -rf .common
 rm -rf .config/esbuild
-rm -rf .pnpm-store
 rm -rf .husky
 rm -rf tests
 if test -d .config/docs; then
