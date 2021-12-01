@@ -123,7 +123,7 @@ tasks:
       `task lint:eslint -- '**/*.js'`
     cmds:
       - '{{.NPX_HANDLE}}eslint -c package.json --no-eslintrc --format pretty --cache
-        --cache-location .config/eslintcache {{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}.{{end}}'
+        --cache-location .cache/eslintcache {{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}.{{end}}'
 
   js:
     deps:
@@ -131,7 +131,7 @@ tasks:
       - :install:npm:eslint
     cmds:
       - '{{.NPX_HANDLE}}eslint -c package.json --no-eslintrc --format pretty --ext .js,.jsx,.ts --cache
-        --cache-location .config/eslintcache {{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}.{{end}}'
+        --cache-location .cache/eslintcache {{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}.{{end}}'
 
   lint-staged:
     deps:
