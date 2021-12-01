@@ -1,0 +1,75 @@
+{
+  "projectName": "eslint-plugin-no-explicit-type-exports",
+  "projectOwner": "intuit",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "commitConvention": "none",
+  "contributors": [
+    {
+      "login": "kendallgassner",
+      "name": "Kendall Gassner",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/15275462?v=4",
+      "profile": "https://github.com/kendallgassner",
+      "contributions": [
+        "code",
+        "doc",
+        "ideas",
+        "infra"
+      ]
+    },
+    {
+      "login": "hipstersmoothie",
+      "name": "Andrew Lisowski",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/1192452?v=4",
+      "profile": "https://github.com/hipstersmoothie",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "Rashmi-K-A",
+      "name": "Rashmi K A",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/39820442?v=4",
+      "profile": "https://github.com/Rashmi-K-A",
+      "contributions": [
+        "test"
+      ]
+    },
+    {
+      "login": "rajatdiptabiswas",
+      "name": "Rajat Biswas",
+      "avatar_url": "https://avatars.githubusercontent.com/rajatdiptabiswas",
+      "profile": "https://github.com/rajatdiptabiswas",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "alexogeny",
+      "name": "alexogeny",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6896115?v=4",
+      "profile": "https://github.com/alexogeny",
+      "contributions": [
+        "test",
+        "code"
+      ]
+    },
+    {
+      "login": "DianaTdr",
+      "name": "Diana Toader",
+      "avatar_url": "https://avatars.githubusercontent.com/u/35532678?v=4",
+      "profile": "https://github.com/DianaTdr",
+      "contributions": [
+        "doc",
+        "test",
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7
+}

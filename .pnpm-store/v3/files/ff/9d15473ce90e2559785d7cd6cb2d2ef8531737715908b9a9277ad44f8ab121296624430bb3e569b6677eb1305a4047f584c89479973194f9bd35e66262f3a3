@@ -1,0 +1,18 @@
+export declare const ansibleOrder: string[];
+export declare const ansibleRules: {
+    'yml/sort-keys': (string | {
+        order: string[];
+        pathPattern: string;
+    } | {
+        order: {
+            type: string;
+        };
+        pathPattern: string;
+    })[];
+};
+export declare const ansibleMetaRules: {
+    'yml/sort-keys': (string | {
+        order: string[];
+        pathPattern: string;
+    })[];
+};

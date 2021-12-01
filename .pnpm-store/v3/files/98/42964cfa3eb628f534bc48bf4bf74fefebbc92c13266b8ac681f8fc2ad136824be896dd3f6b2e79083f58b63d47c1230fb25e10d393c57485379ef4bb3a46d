@@ -1,0 +1,64 @@
+{
+  "author": "Nicholas Jamieson <nicholas@cartant.com>",
+  "bin": {
+    "rxjs-report-usage": "./bin/rxjs-report-usage"
+  },
+  "bugs": {
+    "url": "https://github.com/cartant/rxjs-report-usage/issues"
+  },
+  "dependencies": {
+    "@babel/parser": "^7.10.3",
+    "@babel/traverse": "^7.10.3",
+    "@babel/types": "^7.10.3",
+    "bent": "~7.3.6",
+    "chalk": "~4.1.0",
+    "glob": "~7.2.0",
+    "prompts": "~2.4.2"
+  },
+  "description": "Report RxJS API usage to the core team",
+  "devDependencies": {
+    "csv-parser": "^2.3.3",
+    "husky": "^4.2.5",
+    "jest": "^27.0.0",
+    "lint-staged": "^10.2.11",
+    "ndjson-cli": "^0.3.1",
+    "prettier": "^2.0.5",
+    "yargs": "^17.0.0"
+  },
+  "files": [
+    "bin",
+    "config.js",
+    "src"
+  ],
+  "homepage": "https://github.com/cartant/rxjs-report-usage",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "keywords": [
+    "rxjs",
+    "usage"
+  ],
+  "license": "MIT",
+  "lint-staged": {
+    "*.{js,json}": "prettier --write"
+  },
+  "main": "./src/index.js",
+  "name": "rxjs-report-usage",
+  "optionalDependencies": {},
+  "peerDependencies": {},
+  "private": false,
+  "publishConfig": {
+    "tag": "latest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cartant/rxjs-report-usage.git"
+  },
+  "scripts": {
+    "prettier": "prettier --write \"./{bin,src,tests}/**/*.{js,json}\"",
+    "prettier:ci": "prettier --check \"./{bin,src,tests}/**/*.{js,json}\""
+  },
+  "version": "1.0.6"
+}

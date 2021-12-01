@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.jsonRules = void 0;
+exports.jsonRules = {
+    'jsonc/sort-keys': [
+        'error',
+        {
+            order: { type: 'asc' },
+            pathPattern: '.*'
+        }
+    ]
+};
+//# sourceMappingURL=json.js.map

@@ -1,0 +1,18 @@
+export declare const tsSpecRules: {
+    'import/no-extraneous-dependencies': (string | {
+        devDependencies: boolean;
+    })[];
+    'init-declarations': string;
+    'jest-async/expect-return': string;
+    'jest/no-hooks': string;
+    'jest/prefer-expect-assertions': (string | {
+        onlyFunctionsWithAsyncKeyword: boolean;
+    })[];
+    'jest/prefer-lowercase-title': (string | {
+        ignoreTopLevelDescribe: boolean;
+    })[];
+    'jest/unbound-method': string;
+    'max-lines-per-function': string;
+    'no-magic-numbers': string;
+    'no-undef': string;
+};

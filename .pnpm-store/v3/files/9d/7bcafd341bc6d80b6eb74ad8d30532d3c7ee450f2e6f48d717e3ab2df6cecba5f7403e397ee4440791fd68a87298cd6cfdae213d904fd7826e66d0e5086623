@@ -1,0 +1,43 @@
+{
+  "name": "dot-properties",
+  "version": "1.0.1",
+  "license": "MIT",
+  "author": "Eemeli Aro <eemeli@gmail.com>",
+  "repository": "github:eemeli/dot-properties",
+  "description": "Parse & stringify .properties files",
+  "keywords": [
+    "properties",
+    "java",
+    "resource",
+    "bundle",
+    "i18n"
+  ],
+  "types": "./lib/index.d.ts",
+  "main": "./lib/index.js",
+  "files": [
+    "lib/"
+  ],
+  "scripts": {
+    "lint": "eslint .",
+    "test": "jest"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "testMatch": [
+      "**/tests/*.js"
+    ]
+  },
+  "prettier": {
+    "arrowParens": "avoid",
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "none"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-plugin-prettier": "^3.1.3",
+    "jest": "^25.3.0",
+    "prettier": "^2.0.4"
+  }
+}

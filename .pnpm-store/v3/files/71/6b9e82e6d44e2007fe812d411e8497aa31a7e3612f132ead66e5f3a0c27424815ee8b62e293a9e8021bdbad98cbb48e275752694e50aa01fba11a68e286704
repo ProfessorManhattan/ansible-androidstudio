@@ -1,0 +1,123 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getTOMLNodeFromPath = void 0;
+const toml_eslint_parser_1 = require("toml-eslint-parser");
+const TRAVERSE_TARGET_TYPE = new Set([
+    "TOMLArray",
+    "TOMLInlineTable",
+]);
+const GET_TOML_NODES = {
+    TOMLArray(node, paths) {
+        const path = String(paths.shift());
+        for (let index = 0; index < node.elements.length; index++) {
+            if (String(index) !== path) {
+                continue;
+            }
+            const element = node.elements[index];
+            return { value: element };
+        }
+        throw new Error(`${"Unexpected state: ["}${[path, ...paths].join(", ")}]`);
+    },
+    TOMLInlineTable(node, paths) {
+        for (const body of node.body) {
+            const keys = (0, toml_eslint_parser_1.getStaticTOMLValue)(body.key);
+            const m = getMatchType(paths, keys);
+            if (m === 1) {
+                paths.length = 0;
+                return { value: body.key };
+            }
+            if (m === 3) {
+                paths.length = 0;
+                return { value: body.key };
+            }
+            if (m === 2) {
+                for (let index = 0; index < keys.length; index++) {
+                    paths.shift();
+                }
+                return { key: () => body.key.range, value: body.value };
+            }
+        }
+        throw new Error(`${"Unexpected state: ["}${paths.join(", ")}]`);
+    },
+};
+function getTOMLNodeFromPath(node, paths) {
+    const topLevelTable = node.body[0];
+    if (!paths.length) {
+        return {
+            key: (sourceCode) => (sourceCode.getFirstToken(topLevelTable) || topLevelTable)
+                .range,
+            value: topLevelTable,
+        };
+    }
+    for (const body of topLevelTable.body) {
+        if (body.type === "TOMLKeyValue") {
+            const result = getTOMLNodeFromPathForKeyValue(body, paths);
+            if (result) {
+                return result;
+            }
+        }
+        else {
+            const m = getMatchType(paths, body.resolvedKey);
+            if (m === 1) {
+                return { value: body.key };
+            }
+            if (m === 3) {
+                return { value: body.key };
+            }
+            if (m === 2) {
+                const nextKeys = paths.slice(body.resolvedKey.length);
+                for (const keyVal of body.body) {
+                    const result = getTOMLNodeFromPathForKeyValue(keyVal, nextKeys);
+                    if (result) {
+                        return result;
+                    }
+                }
+            }
+        }
+    }
+    throw new Error(`${"Unexpected state: ["}${paths.join(", ")}]`);
+}
+exports.getTOMLNodeFromPath = getTOMLNodeFromPath;
+function getTOMLNodeFromPathForKeyValue(node, paths) {
+    const keys = (0, toml_eslint_parser_1.getStaticTOMLValue)(node.key);
+    const m = getMatchType(paths, keys);
+    if (m === 1) {
+        return { value: node.key };
+    }
+    if (m === 3) {
+        return { value: node.key };
+    }
+    if (m === 2) {
+        const nextKeys = paths.slice(keys.length);
+        return getTOMLNodeFromPathForContent(node.value, nextKeys);
+    }
+    return null;
+}
+function getTOMLNodeFromPathForContent(node, [...paths]) {
+    let data = {
+        value: node,
+    };
+    while (paths.length && data.value) {
+        if (!isTraverseTarget(data.value)) {
+            throw new Error(`Unexpected node type: ${data.value.type}`);
+        }
+        data = GET_TOML_NODES[data.value.type](data.value, paths);
+    }
+    return data;
+}
+function isTraverseTarget(node) {
+    return TRAVERSE_TARGET_TYPE.has(node.type);
+}
+function getMatchType(paths, keys) {
+    if (keys.length <= paths.length) {
+        if (!keys.every((key, index) => String(key) === String(paths[index]))) {
+            return 0;
+        }
+        return keys.length === paths.length
+            ? 1
+            : 2;
+    }
+    return paths.every((path, index) => String(path) === String(keys[index]))
+        ? 3
+        : 0;
+}

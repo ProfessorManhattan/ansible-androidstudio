@@ -1,0 +1,77 @@
+{
+  "name": "php-parser",
+  "version": "3.0.2",
+  "description": "Parse PHP code from JS and returns its AST",
+  "main": "src/index.js",
+  "browser": "dist/php-parser.js",
+  "files": [
+    "src",
+    "dist",
+    "index.d.ts",
+    "LICENSE"
+  ],
+  "scripts": {
+    "fix": "eslint . --fix",
+    "test": "jest",
+    "husky": "npm run test",
+    "prebuild": "npm run test",
+    "build": "webpack --config webpack.config.js",
+    "-postbuild": "npm run build-docs",
+    "build-docs": "jsdoc -c .jsdoc.json",
+    "publish-docs": "git subtree push --prefix docs origin gh-pages"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run husky"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/glayzzle/php-parser"
+  },
+  "bugs": {
+    "url": "https://github.com/glayzzle/php-parser/issues"
+  },
+  "homepage": "https://glayzzle.com/",
+  "keywords": [
+    "php",
+    "php5",
+    "php7",
+    "parser",
+    "lexer",
+    "tokenizer",
+    "ast"
+  ],
+  "author": "Ioan CHIRIAC",
+  "contributors": [
+    {
+      "name": "Filippo Conti",
+      "email": "filippo@codekraft.it",
+      "url": "https://b4dnewz.github.io/"
+    },
+    {
+      "name": "Christian Zosel",
+      "email": "christian@zosel.ch",
+      "url": "https://twitter.com/chrzosel"
+    }
+  ],
+  "license": "BSD-3-Clause",
+  "devDependencies": {
+    "@babel/core": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
+    "babel-loader": "^8.0.5",
+    "coveralls": "^3.0.3",
+    "eslint": "^5.15.0",
+    "eslint-plugin-jest": "^24.0.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "husky": "^4.0.2",
+    "jest": "^26.4.2",
+    "jest-runner-eslint": "^0.9.0",
+    "jsdoc": "^3.5.5",
+    "jsdoc-template": "^1.2.0",
+    "prettier": "^2.0.2",
+    "uglifyjs-webpack-plugin": "^2.1.2",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.2.3"
+  }
+}

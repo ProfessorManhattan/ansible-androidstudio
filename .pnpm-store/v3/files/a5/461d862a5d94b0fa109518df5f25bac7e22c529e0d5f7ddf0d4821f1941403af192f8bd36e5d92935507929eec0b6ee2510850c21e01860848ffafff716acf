@@ -1,0 +1,46 @@
+{
+  "name": "eslint-plugin-no-constructor-bind",
+  "version": "2.0.4",
+  "description": "Prefer class arrow methods to binding in the constructor",
+  "main": "lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/markalfred/eslint-plugin-no-constructor-bind.git"
+  },
+  "bugs": {
+    "url": "https://github.com/markalfred/eslint-plugin-no-constructor-bind/issues"
+  },
+  "directories": {
+    "doc": "docs",
+    "lib": "lib",
+    "test": "tests"
+  },
+  "dependencies": {
+    "requireindex": "~1.2.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.0",
+    "coveralls": "^3.1.0",
+    "eslint": "^6.8.0",
+    "istanbul": "^0.4.5",
+    "mocha": "^7.2.0",
+    "mocha-lcov-reporter": "^1.3.0"
+  },
+  "scripts": {
+    "test": "mocha tests --recursive",
+    "coverage": "istanbul cover _mocha -- tests --recursive",
+    "precoveralls": "npm run coverage -- --report lcovonly",
+    "coveralls": "cat ./coverage/lcov.info | coveralls",
+    "postcoveralls": "rm -rf ./coverage"
+  },
+  "keywords": [
+    "eslint",
+    "eslintplugin",
+    "eslint-plugin"
+  ],
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "author": "Mark Battersby",
+  "license": "ISC"
+}

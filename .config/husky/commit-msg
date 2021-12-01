@@ -1,8 +1,8 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-# @file .husky/commit-msg
+# @file .config/husky/commit-msg
 # @brief A git hook script for the `commit-msg` hook
+# @arg $1 Path to a temporary file that contains the commit message written by the developer (e.g. .git/COMMIT_EDITMSG)
 
-echo 'Validating commit message with `commitlint`'
-task lint:commit -- "$1"
+task git:hook:commit-msg -- "$1"

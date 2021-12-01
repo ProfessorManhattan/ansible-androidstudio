@@ -1,0 +1,636 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test statements halt statements test fallback 1`] = `
+Program {
+  "children": Array [
+    If {
+      "alternate": null,
+      "body": Block {
+        "children": Array [
+          Halt {
+            "after": "
+        }
+        $b = 1;
+      ",
+            "kind": "halt",
+          },
+        ],
+        "kind": "block",
+      },
+      "kind": "if",
+      "shortForm": false,
+      "test": Boolean {
+        "kind": "boolean",
+        "raw": "true",
+        "value": true,
+      },
+    },
+    ExpressionStatement {
+      "expression": Assign {
+        "kind": "assign",
+        "left": Variable {
+          "curly": false,
+          "kind": "variable",
+          "name": "b",
+        },
+        "operator": "=",
+        "right": Number {
+          "kind": "number",
+          "value": "1",
+        },
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [
+    Error {
+      "expected": undefined,
+      "kind": "error",
+      "line": 3,
+      "message": "__HALT_COMPILER() can only be used from the outermost scope on line 3",
+      "token": undefined,
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`Test statements halt statements test halt statement 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Assign {
+        "kind": "assign",
+        "left": Variable {
+          "curly": false,
+          "kind": "variable",
+          "name": "a",
+        },
+        "operator": "=",
+        "right": Number {
+          "kind": "number",
+          "value": "1",
+        },
+      },
+      "kind": "expressionstatement",
+    },
+    Halt {
+      "after": "
+        $b = 1;
+      ",
+      "kind": "halt",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`Test statements test declare 1`] = `
+Program {
+  "children": Array [
+    If {
+      "alternate": null,
+      "body": Block {
+        "children": Array [
+          Declare {
+            "children": Array [],
+            "directives": Array [
+              DeclareDirective {
+                "key": Identifier {
+                  "kind": "identifier",
+                  "name": "ticks",
+                },
+                "kind": "declaredirective",
+                "value": Number {
+                  "kind": "number",
+                  "value": "1",
+                },
+              },
+            ],
+            "kind": "declare",
+            "mode": "none",
+          },
+        ],
+        "kind": "block",
+      },
+      "kind": "if",
+      "shortForm": false,
+      "test": Boolean {
+        "kind": "boolean",
+        "raw": "true",
+        "value": true,
+      },
+    },
+    ExpressionStatement {
+      "expression": Assign {
+        "kind": "assign",
+        "left": Variable {
+          "curly": false,
+          "kind": "variable",
+          "name": "a",
+        },
+        "operator": "=",
+        "right": Number {
+          "kind": "number",
+          "value": "1",
+        },
+      },
+      "kind": "expressionstatement",
+    },
+    Declare {
+      "children": Array [],
+      "directives": Array [
+        DeclareDirective {
+          "key": Identifier {
+            "kind": "identifier",
+            "name": "ticks",
+          },
+          "kind": "declaredirective",
+          "value": Number {
+            "kind": "number",
+            "value": "2",
+          },
+        },
+        DeclareDirective {
+          "key": Identifier {
+            "kind": "identifier",
+            "name": "encoding",
+          },
+          "kind": "declaredirective",
+          "value": Bin {
+            "kind": "bin",
+            "left": Bin {
+              "kind": "bin",
+              "left": Name {
+                "kind": "name",
+                "name": "ISO",
+                "resolution": "uqn",
+              },
+              "right": Number {
+                "kind": "number",
+                "value": "8859",
+              },
+              "type": "-",
+            },
+            "right": Number {
+              "kind": "number",
+              "value": "1",
+            },
+            "type": "-",
+          },
+        },
+      ],
+      "kind": "declare",
+      "mode": "none",
+    },
+    ExpressionStatement {
+      "expression": Assign {
+        "kind": "assign",
+        "left": Variable {
+          "curly": false,
+          "kind": "variable",
+          "name": "b",
+        },
+        "operator": "=",
+        "right": Number {
+          "kind": "number",
+          "value": "1",
+        },
+      },
+      "kind": "expressionstatement",
+    },
+    Declare {
+      "children": Array [
+        ExpressionStatement {
+          "expression": Assign {
+            "kind": "assign",
+            "left": Variable {
+              "curly": false,
+              "kind": "variable",
+              "name": "c",
+            },
+            "operator": "=",
+            "right": Number {
+              "kind": "number",
+              "value": "2",
+            },
+          },
+          "kind": "expressionstatement",
+        },
+      ],
+      "directives": Array [
+        DeclareDirective {
+          "key": Identifier {
+            "kind": "identifier",
+            "name": "ticks",
+          },
+          "kind": "declaredirective",
+          "value": Number {
+            "kind": "number",
+            "value": "1",
+          },
+        },
+      ],
+      "kind": "declare",
+      "mode": "block",
+    },
+    Declare {
+      "children": Array [
+        ExpressionStatement {
+          "expression": Assign {
+            "kind": "assign",
+            "left": Variable {
+              "curly": false,
+              "kind": "variable",
+              "name": "d",
+            },
+            "operator": "=",
+            "right": Number {
+              "kind": "number",
+              "value": "3",
+            },
+          },
+          "kind": "expressionstatement",
+        },
+      ],
+      "directives": Array [
+        DeclareDirective {
+          "key": Identifier {
+            "kind": "identifier",
+            "name": "encoding",
+          },
+          "kind": "declaredirective",
+          "value": String {
+            "isDoubleQuote": true,
+            "kind": "string",
+            "raw": "\\"UTF-8\\"",
+            "unicode": false,
+            "value": "UTF-8",
+          },
+        },
+      ],
+      "kind": "declare",
+      "mode": "short",
+    },
+    ExpressionStatement {
+      "expression": Assign {
+        "kind": "assign",
+        "left": Variable {
+          "curly": false,
+          "kind": "variable",
+          "name": "e",
+        },
+        "operator": "=",
+        "right": Number {
+          "kind": "number",
+          "value": "4",
+        },
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`Test statements test global 1`] = `
+Program {
+  "children": Array [
+    _Function {
+      "arguments": Array [],
+      "attrGroups": Array [],
+      "body": Block {
+        "children": Array [
+          Global {
+            "items": Array [
+              Variable {
+                "curly": false,
+                "kind": "variable",
+                "name": "a",
+              },
+              Variable {
+                "curly": false,
+                "kind": "variable",
+                "name": "b",
+              },
+            ],
+            "kind": "global",
+          },
+        ],
+        "kind": "block",
+      },
+      "byref": false,
+      "kind": "function",
+      "name": Identifier {
+        "kind": "identifier",
+        "name": "foo",
+      },
+      "nullable": false,
+      "type": null,
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`Test statements test goto label 1`] = `
+Program {
+  "children": Array [
+    Label {
+      "kind": "label",
+      "name": Identifier {
+        "kind": "identifier",
+        "name": "start",
+      },
+    },
+    ExpressionStatement {
+      "expression": Post {
+        "kind": "post",
+        "type": "+",
+        "what": Variable {
+          "curly": false,
+          "kind": "variable",
+          "name": "i",
+        },
+      },
+      "kind": "expressionstatement",
+    },
+    Goto {
+      "kind": "goto",
+      "label": Identifier {
+        "kind": "identifier",
+        "name": "start",
+      },
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`Test statements test inner statements 1`] = `
+Program {
+  "children": Array [
+    If {
+      "alternate": null,
+      "body": Block {
+        "children": Array [
+          _Function {
+            "arguments": Array [],
+            "attrGroups": Array [],
+            "body": Block {
+              "children": Array [],
+              "kind": "block",
+            },
+            "byref": false,
+            "kind": "function",
+            "name": Identifier {
+              "kind": "identifier",
+              "name": "foo",
+            },
+            "nullable": false,
+            "type": null,
+          },
+          Class {
+            "attrGroups": Array [],
+            "body": Array [],
+            "extends": null,
+            "implements": null,
+            "isAbstract": true,
+            "isAnonymous": false,
+            "isFinal": false,
+            "kind": "class",
+            "name": Identifier {
+              "kind": "identifier",
+              "name": "foo",
+            },
+          },
+          Class {
+            "attrGroups": Array [],
+            "body": Array [],
+            "extends": null,
+            "implements": null,
+            "isAbstract": false,
+            "isAnonymous": false,
+            "isFinal": true,
+            "kind": "class",
+            "name": Identifier {
+              "kind": "identifier",
+              "name": "foo",
+            },
+          },
+          Class {
+            "attrGroups": Array [],
+            "body": Array [],
+            "extends": null,
+            "implements": null,
+            "isAbstract": false,
+            "isAnonymous": false,
+            "isFinal": false,
+            "kind": "class",
+            "name": Identifier {
+              "kind": "identifier",
+              "name": "foo",
+            },
+          },
+          Trait {
+            "body": Array [],
+            "kind": "trait",
+            "name": Identifier {
+              "kind": "identifier",
+              "name": "foo",
+            },
+          },
+          Interface {
+            "attrGroups": Array [],
+            "body": Array [],
+            "extends": null,
+            "kind": "interface",
+            "name": Identifier {
+              "kind": "identifier",
+              "name": "foo",
+            },
+          },
+        ],
+        "kind": "block",
+      },
+      "kind": "if",
+      "shortForm": false,
+      "test": Boolean {
+        "kind": "boolean",
+        "raw": "true",
+        "value": true,
+      },
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`Test statements test static 1`] = `
+Program {
+  "children": Array [
+    _Function {
+      "arguments": Array [],
+      "attrGroups": Array [],
+      "body": Block {
+        "children": Array [
+          Static {
+            "kind": "static",
+            "variables": Array [
+              Variable {
+                "curly": false,
+                "kind": "variable",
+                "name": "a",
+              },
+              StaticVariable {
+                "defaultValue": Number {
+                  "kind": "number",
+                  "value": "5",
+                },
+                "kind": "staticvariable",
+                "variable": Variable {
+                  "curly": false,
+                  "kind": "variable",
+                  "name": "b",
+                },
+              },
+            ],
+          },
+        ],
+        "kind": "block",
+      },
+      "byref": false,
+      "kind": "function",
+      "name": Identifier {
+        "kind": "identifier",
+        "name": "foo",
+      },
+      "nullable": false,
+      "type": null,
+    },
+    Static {
+      "kind": "static",
+      "variables": Array [
+        StaticVariable {
+          "defaultValue": Number {
+            "kind": "number",
+            "value": "11",
+          },
+          "kind": "staticvariable",
+          "variable": Variable {
+            "curly": false,
+            "kind": "variable",
+            "name": "sVar1",
+          },
+        },
+      ],
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`Test statements test try 1`] = `
+Program {
+  "children": Array [
+    Try {
+      "always": Block {
+        "children": Array [
+          ExpressionStatement {
+            "expression": Call {
+              "arguments": Array [],
+              "kind": "call",
+              "what": Name {
+                "kind": "name",
+                "name": "clean",
+                "resolution": "uqn",
+              },
+            },
+            "kind": "expressionstatement",
+          },
+        ],
+        "kind": "block",
+      },
+      "body": Block {
+        "children": Array [
+          ExpressionStatement {
+            "expression": Call {
+              "arguments": Array [],
+              "kind": "call",
+              "what": Name {
+                "kind": "name",
+                "name": "foo",
+                "resolution": "uqn",
+              },
+            },
+            "kind": "expressionstatement",
+          },
+        ],
+        "kind": "block",
+      },
+      "catches": Array [
+        Catch {
+          "body": Block {
+            "children": Array [
+              ExpressionStatement {
+                "expression": Call {
+                  "arguments": Array [
+                    Variable {
+                      "curly": false,
+                      "kind": "variable",
+                      "name": "err",
+                    },
+                  ],
+                  "kind": "call",
+                  "what": Name {
+                    "kind": "name",
+                    "name": "var_dump",
+                    "resolution": "uqn",
+                  },
+                },
+                "kind": "expressionstatement",
+              },
+              Throw {
+                "kind": "throw",
+                "what": Variable {
+                  "curly": false,
+                  "kind": "variable",
+                  "name": "err",
+                },
+              },
+            ],
+            "kind": "block",
+          },
+          "kind": "catch",
+          "variable": Variable {
+            "curly": false,
+            "kind": "variable",
+            "name": "err",
+          },
+          "what": Array [
+            Name {
+              "kind": "name",
+              "name": "FooError",
+              "resolution": "uqn",
+            },
+            Name {
+              "kind": "name",
+              "name": "BarError",
+              "resolution": "uqn",
+            },
+          ],
+        },
+      ],
+      "kind": "try",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;

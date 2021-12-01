@@ -1,7 +1,7 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-# @file .husky/prepare-commit-msg
+# @file .config/husky/prepare-commit-msg
 # @brief A git hook script for the `prepare-commit-msg` hook
 # @arg $1 string The full path to the MERGE_MSG
 # @arg $2 string The type of the `prepare-commit-msg` event. For a `git pull origin master`

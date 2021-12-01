@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var tslib_1 = require("tslib");
+var parser_babel_1 = require("prettier/parser-babel");
+var prettier_package_json_1 = require("prettier-package-json");
+var parser = parser_babel_1.parsers['json-stringify'];
+exports.parsers = {
+    'json-stringify': (0, tslib_1.__assign)((0, tslib_1.__assign)({}, parser), { preprocess: function (text, options) {
+            var regex = new RegExp("package.*json$");
+            return regex.test(options.filepath) ? (0, prettier_package_json_1.format)(JSON.parse(text)) : text;
+        } })
+};
+//# sourceMappingURL=main.js.map

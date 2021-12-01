@@ -1,0 +1,11 @@
+export declare const taskfileRules: {
+    'yml/sort-keys': (string | {
+        order: string[];
+        pathPattern: string;
+    } | {
+        order: {
+            type: string;
+        };
+        pathPattern: string;
+    })[];
+};

@@ -1,0 +1,19 @@
+{
+  "name": "java-parser",
+  "version": "2.0.0",
+  "description": "Java Parser in JavaScript",
+  "main": "src/index.js",
+  "repository": "https://github.com/jhipster/prettier-java/tree/main/packages/java-parser",
+  "license": "Apache-2.0",
+  "types": "./api.d.ts",
+  "dependencies": {
+    "chevrotain": "6.5.0",
+    "lodash": "4.17.21"
+  },
+  "scripts": {
+    "test": "npm-run-all clone-samples test:execute",
+    "test:execute": "mocha \"test/**/*-spec.js\"",
+    "clone-samples": "node ./scripts/clone-samples"
+  },
+  "gitHead": "a9fe7da3d13d0c8a4b74dc6623f3b388fc2aade4"
+}

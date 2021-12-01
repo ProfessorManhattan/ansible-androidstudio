@@ -1,0 +1,18 @@
+{
+  "folders":
+  [
+     {
+        "follow_symlinks": true,
+        "path": "."
+     }
+  ],
+  "settings":
+  {
+    // Project-specific, package-specific settings
+    "JsPrettier":
+    {
+      "auto_format_on_save": false
+    }
+  }
+}
+

@@ -1,0 +1,1 @@
+export declare function myExportedFunction(message: string): string;

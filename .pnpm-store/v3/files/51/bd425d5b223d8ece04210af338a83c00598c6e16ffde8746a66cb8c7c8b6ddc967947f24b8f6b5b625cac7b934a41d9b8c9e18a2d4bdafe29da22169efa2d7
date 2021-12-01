@@ -1,0 +1,29 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const utils_1 = require("../utils");
+const coreRule = utils_1.getCoreRule("array-bracket-newline");
+exports.default = utils_1.createRule("array-bracket-newline", {
+    meta: {
+        docs: {
+            description: "enforce linebreaks after opening and before closing array brackets",
+            categories: ["standard"],
+            extensionRule: "array-bracket-newline",
+        },
+        fixable: coreRule.meta.fixable,
+        schema: coreRule.meta.schema,
+        messages: coreRule.meta.messages,
+        type: coreRule.meta.type,
+    },
+    create(context) {
+        return utils_1.defineWrapperListener(coreRule, context, {
+            options: context.options,
+            createListenerProxy(listener) {
+                return {
+                    TOMLArray(node) {
+                        listener.ArrayExpression(utils_1.convertESNode(node));
+                    },
+                };
+            },
+        });
+    },
+});

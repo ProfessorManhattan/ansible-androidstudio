@@ -1,0 +1,8 @@
+export declare const jsonRules: {
+    'jsonc/sort-keys': (string | {
+        order: {
+            type: string;
+        };
+        pathPattern: string;
+    })[];
+};

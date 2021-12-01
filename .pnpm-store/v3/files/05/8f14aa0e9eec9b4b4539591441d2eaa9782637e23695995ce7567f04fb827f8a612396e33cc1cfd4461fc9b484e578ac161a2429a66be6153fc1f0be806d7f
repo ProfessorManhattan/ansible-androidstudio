@@ -1,0 +1,734 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test loops statements (for, while) fix #122 1`] = `
+Program {
+  "children": Array [
+    Foreach {
+      "body": ExpressionStatement {
+        "expression": Array {
+          "items": Array [
+            Entry {
+              "byRef": false,
+              "key": null,
+              "kind": "entry",
+              "unpack": false,
+              "value": Variable {
+                "curly": false,
+                "kind": "variable",
+                "name": "foo",
+              },
+            },
+          ],
+          "kind": "array",
+          "shortForm": false,
+        },
+        "kind": "expressionstatement",
+      },
+      "key": Variable {
+        "curly": false,
+        "kind": "variable",
+        "name": "bar",
+      },
+      "kind": "foreach",
+      "shortForm": false,
+      "source": Variable {
+        "curly": false,
+        "kind": "variable",
+        "name": "foo",
+      },
+      "value": undefined,
+    },
+    ExpressionStatement {
+      "expression": undefined,
+      "kind": "expressionstatement",
+    },
+    Echo {
+      "expressions": Array [
+        Encapsed {
+          "kind": "encapsed",
+          "raw": "\\"$k -> $v
+\\"",
+          "type": "string",
+          "value": Array [
+            EncapsedPart {
+              "curly": false,
+              "expression": Variable {
+                "curly": false,
+                "kind": "variable",
+                "name": "k",
+              },
+              "kind": "encapsedpart",
+              "syntax": "simple",
+            },
+            EncapsedPart {
+              "curly": false,
+              "expression": String {
+                "isDoubleQuote": false,
+                "kind": "string",
+                "raw": " -> ",
+                "unicode": false,
+                "value": " -> ",
+              },
+              "kind": "encapsedpart",
+              "syntax": null,
+            },
+            EncapsedPart {
+              "curly": false,
+              "expression": Variable {
+                "curly": false,
+                "kind": "variable",
+                "name": "v",
+              },
+              "kind": "encapsedpart",
+              "syntax": "simple",
+            },
+            EncapsedPart {
+              "curly": false,
+              "expression": String {
+                "isDoubleQuote": false,
+                "kind": "string",
+                "raw": "
+",
+                "unicode": false,
+                "value": "",
+              },
+              "kind": "encapsedpart",
+              "syntax": null,
+            },
+          ],
+        },
+      ],
+      "kind": "echo",
+      "shortForm": false,
+    },
+  ],
+  "errors": Array [
+    Error {
+      "expected": "VARIABLE",
+      "kind": "error",
+      "line": 2,
+      "message": "Parse Error : syntax error, unexpected 'array' (T_ARRAY) on line 2",
+      "token": "'array' (T_ARRAY)",
+    },
+    Error {
+      "expected": ")",
+      "kind": "error",
+      "line": 2,
+      "message": "Parse Error : syntax error, unexpected 'array' (T_ARRAY), expecting ')' on line 2",
+      "token": "'array' (T_ARRAY)",
+    },
+    Error {
+      "expected": ";",
+      "kind": "error",
+      "line": 2,
+      "message": "Parse Error : syntax error, unexpected ')', expecting ';' on line 2",
+      "token": "')'",
+    },
+    Error {
+      "expected": "EXPR",
+      "kind": "error",
+      "line": 2,
+      "message": "Parse Error : syntax error, unexpected ')' on line 2",
+      "token": "')'",
+    },
+    Error {
+      "expected": ";",
+      "kind": "error",
+      "line": 3,
+      "message": "Parse Error : syntax error, unexpected 'echo' (T_ECHO), expecting ';' on line 3",
+      "token": "'echo' (T_ECHO)",
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`Test loops statements (for, while) fix #122 2`] = `
+Program {
+  "children": Array [
+    Foreach {
+      "body": Echo {
+        "expressions": Array [
+          Encapsed {
+            "kind": "encapsed",
+            "raw": "\\"$k -> $v
+\\"",
+            "type": "string",
+            "value": Array [
+              EncapsedPart {
+                "curly": false,
+                "expression": Variable {
+                  "curly": false,
+                  "kind": "variable",
+                  "name": "k",
+                },
+                "kind": "encapsedpart",
+                "syntax": "simple",
+              },
+              EncapsedPart {
+                "curly": false,
+                "expression": String {
+                  "isDoubleQuote": false,
+                  "kind": "string",
+                  "raw": " -> ",
+                  "unicode": false,
+                  "value": " -> ",
+                },
+                "kind": "encapsedpart",
+                "syntax": null,
+              },
+              EncapsedPart {
+                "curly": false,
+                "expression": Variable {
+                  "curly": false,
+                  "kind": "variable",
+                  "name": "v",
+                },
+                "kind": "encapsedpart",
+                "syntax": "simple",
+              },
+              EncapsedPart {
+                "curly": false,
+                "expression": String {
+                  "isDoubleQuote": false,
+                  "kind": "string",
+                  "raw": "
+",
+                  "unicode": false,
+                  "value": "",
+                },
+                "kind": "encapsedpart",
+                "syntax": null,
+              },
+            ],
+          },
+        ],
+        "kind": "echo",
+        "shortForm": false,
+      },
+      "key": List {
+        "items": Array [
+          Entry {
+            "byRef": false,
+            "key": null,
+            "kind": "entry",
+            "unpack": false,
+            "value": Variable {
+              "curly": false,
+              "kind": "variable",
+              "name": "bar",
+            },
+          },
+        ],
+        "kind": "list",
+        "shortForm": true,
+      },
+      "kind": "foreach",
+      "shortForm": false,
+      "source": Variable {
+        "curly": false,
+        "kind": "variable",
+        "name": "foo",
+      },
+      "value": Variable {
+        "curly": false,
+        "kind": "variable",
+        "name": "foo",
+      },
+    },
+  ],
+  "errors": Array [
+    Error {
+      "expected": undefined,
+      "kind": "error",
+      "line": 2,
+      "message": "Fatal Error : Cannot use list as key element on line 2",
+      "token": undefined,
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`Test loops statements (for, while) test do 1`] = `
+Program {
+  "children": Array [
+    Do {
+      "body": Block {
+        "children": Array [
+          Echo {
+            "expressions": Array [
+              String {
+                "isDoubleQuote": true,
+                "kind": "string",
+                "raw": "\\"something\\"",
+                "unicode": false,
+                "value": "something",
+              },
+            ],
+            "kind": "echo",
+            "shortForm": false,
+          },
+        ],
+        "kind": "block",
+      },
+      "kind": "do",
+      "test": Boolean {
+        "kind": "boolean",
+        "raw": "true",
+        "value": true,
+      },
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`Test loops statements (for, while) test for 1`] = `
+Program {
+  "children": Array [
+    For {
+      "body": Echo {
+        "expressions": Array [
+          Variable {
+            "curly": false,
+            "kind": "variable",
+            "name": "i",
+          },
+        ],
+        "kind": "echo",
+        "shortForm": false,
+      },
+      "increment": Array [
+        Post {
+          "kind": "post",
+          "type": "+",
+          "what": Variable {
+            "curly": false,
+            "kind": "variable",
+            "name": "i",
+          },
+        },
+      ],
+      "init": Array [
+        Assign {
+          "kind": "assign",
+          "left": Variable {
+            "curly": false,
+            "kind": "variable",
+            "name": "i",
+          },
+          "operator": "=",
+          "right": Number {
+            "kind": "number",
+            "value": "0",
+          },
+        },
+        Assign {
+          "kind": "assign",
+          "left": Variable {
+            "curly": false,
+            "kind": "variable",
+            "name": "b",
+          },
+          "operator": "=",
+          "right": Number {
+            "kind": "number",
+            "value": "0",
+          },
+        },
+      ],
+      "kind": "for",
+      "shortForm": false,
+      "test": Array [
+        Bin {
+          "kind": "bin",
+          "left": Variable {
+            "curly": false,
+            "kind": "variable",
+            "name": "i",
+          },
+          "right": Number {
+            "kind": "number",
+            "value": "10",
+          },
+          "type": "<",
+        },
+        Variable {
+          "curly": false,
+          "kind": "variable",
+          "name": "ok",
+        },
+      ],
+    },
+    For {
+      "body": Block {
+        "children": Array [
+          Echo {
+            "expressions": Array [
+              Variable {
+                "curly": false,
+                "kind": "variable",
+                "name": "ok",
+              },
+            ],
+            "kind": "echo",
+            "shortForm": false,
+          },
+          Continue {
+            "kind": "continue",
+            "level": Number {
+              "kind": "number",
+              "value": "5",
+            },
+          },
+          Continue {
+            "kind": "continue",
+            "level": Number {
+              "kind": "number",
+              "parenthesizedExpression": true,
+              "value": "5",
+            },
+          },
+        ],
+        "kind": "block",
+      },
+      "increment": Array [],
+      "init": Array [],
+      "kind": "for",
+      "shortForm": true,
+      "test": Array [],
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`Test loops statements (for, while) test foreach 1`] = `
+Program {
+  "children": Array [
+    Foreach {
+      "body": Echo {
+        "expressions": Array [
+          Encapsed {
+            "kind": "encapsed",
+            "raw": "\\"$k -> $v
+\\"",
+            "type": "string",
+            "value": Array [
+              EncapsedPart {
+                "curly": false,
+                "expression": Variable {
+                  "curly": false,
+                  "kind": "variable",
+                  "name": "k",
+                },
+                "kind": "encapsedpart",
+                "syntax": "simple",
+              },
+              EncapsedPart {
+                "curly": false,
+                "expression": String {
+                  "isDoubleQuote": false,
+                  "kind": "string",
+                  "raw": " -> ",
+                  "unicode": false,
+                  "value": " -> ",
+                },
+                "kind": "encapsedpart",
+                "syntax": null,
+              },
+              EncapsedPart {
+                "curly": false,
+                "expression": Variable {
+                  "curly": false,
+                  "kind": "variable",
+                  "name": "v",
+                },
+                "kind": "encapsedpart",
+                "syntax": "simple",
+              },
+              EncapsedPart {
+                "curly": false,
+                "expression": String {
+                  "isDoubleQuote": false,
+                  "kind": "string",
+                  "raw": "
+",
+                  "unicode": false,
+                  "value": "",
+                },
+                "kind": "encapsedpart",
+                "syntax": null,
+              },
+            ],
+          },
+        ],
+        "kind": "echo",
+        "shortForm": false,
+      },
+      "key": null,
+      "kind": "foreach",
+      "shortForm": false,
+      "source": Variable {
+        "byref": true,
+        "curly": false,
+        "kind": "variable",
+        "name": "foo",
+      },
+      "value": Variable {
+        "curly": false,
+        "kind": "variable",
+        "name": "v",
+      },
+    },
+    Foreach {
+      "body": Block {
+        "children": Array [
+          Echo {
+            "expressions": Array [
+              Encapsed {
+                "kind": "encapsed",
+                "raw": "\\"$a -> $b
+\\"",
+                "type": "string",
+                "value": Array [
+                  EncapsedPart {
+                    "curly": false,
+                    "expression": Variable {
+                      "curly": false,
+                      "kind": "variable",
+                      "name": "a",
+                    },
+                    "kind": "encapsedpart",
+                    "syntax": "simple",
+                  },
+                  EncapsedPart {
+                    "curly": false,
+                    "expression": String {
+                      "isDoubleQuote": false,
+                      "kind": "string",
+                      "raw": " -> ",
+                      "unicode": false,
+                      "value": " -> ",
+                    },
+                    "kind": "encapsedpart",
+                    "syntax": null,
+                  },
+                  EncapsedPart {
+                    "curly": false,
+                    "expression": Variable {
+                      "curly": false,
+                      "kind": "variable",
+                      "name": "b",
+                    },
+                    "kind": "encapsedpart",
+                    "syntax": "simple",
+                  },
+                  EncapsedPart {
+                    "curly": false,
+                    "expression": String {
+                      "isDoubleQuote": false,
+                      "kind": "string",
+                      "raw": "
+",
+                      "unicode": false,
+                      "value": "",
+                    },
+                    "kind": "encapsedpart",
+                    "syntax": null,
+                  },
+                ],
+              },
+            ],
+            "kind": "echo",
+            "shortForm": false,
+          },
+        ],
+        "kind": "block",
+      },
+      "key": Variable {
+        "curly": false,
+        "kind": "variable",
+        "name": "a",
+      },
+      "kind": "foreach",
+      "shortForm": true,
+      "source": Array {
+        "items": Array [
+          Entry {
+            "byRef": false,
+            "key": null,
+            "kind": "entry",
+            "unpack": false,
+            "value": Array {
+              "items": Array [
+                Entry {
+                  "byRef": false,
+                  "key": null,
+                  "kind": "entry",
+                  "unpack": false,
+                  "value": Number {
+                    "kind": "number",
+                    "value": "1",
+                  },
+                },
+                Entry {
+                  "byRef": false,
+                  "key": null,
+                  "kind": "entry",
+                  "unpack": false,
+                  "value": Number {
+                    "kind": "number",
+                    "value": "2",
+                  },
+                },
+              ],
+              "kind": "array",
+              "shortForm": true,
+            },
+          },
+          Entry {
+            "byRef": false,
+            "key": null,
+            "kind": "entry",
+            "unpack": false,
+            "value": Array {
+              "items": Array [
+                Entry {
+                  "byRef": false,
+                  "key": null,
+                  "kind": "entry",
+                  "unpack": false,
+                  "value": Number {
+                    "kind": "number",
+                    "value": "3",
+                  },
+                },
+                Entry {
+                  "byRef": false,
+                  "key": null,
+                  "kind": "entry",
+                  "unpack": false,
+                  "value": Number {
+                    "kind": "number",
+                    "value": "4",
+                  },
+                },
+              ],
+              "kind": "array",
+              "shortForm": true,
+            },
+          },
+        ],
+        "kind": "array",
+        "shortForm": true,
+      },
+      "value": List {
+        "items": Array [
+          Entry {
+            "byRef": false,
+            "key": null,
+            "kind": "entry",
+            "unpack": false,
+            "value": Variable {
+              "curly": false,
+              "kind": "variable",
+              "name": "c",
+            },
+          },
+          Entry {
+            "byRef": false,
+            "key": null,
+            "kind": "entry",
+            "unpack": false,
+            "value": Variable {
+              "curly": false,
+              "kind": "variable",
+              "name": "d",
+            },
+          },
+        ],
+        "kind": "list",
+        "shortForm": true,
+      },
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`Test loops statements (for, while) test while test default form 1`] = `
+Program {
+  "children": Array [
+    While {
+      "body": Block {
+        "children": Array [
+          Echo {
+            "expressions": Array [
+              String {
+                "isDoubleQuote": true,
+                "kind": "string",
+                "raw": "\\"go\\"",
+                "unicode": false,
+                "value": "go",
+              },
+            ],
+            "kind": "echo",
+            "shortForm": false,
+          },
+        ],
+        "kind": "block",
+      },
+      "kind": "while",
+      "shortForm": false,
+      "test": Boolean {
+        "kind": "boolean",
+        "raw": "true",
+        "value": true,
+      },
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`Test loops statements (for, while) test while test short form 1`] = `
+Program {
+  "children": Array [
+    While {
+      "body": Block {
+        "children": Array [
+          Echo {
+            "expressions": Array [
+              String {
+                "isDoubleQuote": true,
+                "kind": "string",
+                "raw": "\\"short\\"",
+                "unicode": false,
+                "value": "short",
+              },
+            ],
+            "kind": "echo",
+            "shortForm": false,
+          },
+        ],
+        "kind": "block",
+      },
+      "kind": "while",
+      "shortForm": true,
+      "test": Boolean {
+        "kind": "boolean",
+        "raw": "true",
+        "value": true,
+      },
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;

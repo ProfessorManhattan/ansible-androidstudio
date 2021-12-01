@@ -1,0 +1,122 @@
+export declare const commitTypes: {
+    bodyLineLength: number;
+    maxSubjectLength: number;
+    types: {
+        build: {
+            changelog: boolean;
+            description: string;
+            emoji: string;
+            release: string;
+            title: string;
+        };
+        chore: {
+            aliases: {
+                devDependencies: {
+                    description: string;
+                    emoji: string;
+                    scope: string;
+                    title: string;
+                };
+            };
+            changelog: boolean;
+            description: string;
+            emoji: string;
+            release: boolean;
+            title: string;
+        };
+        ci: {
+            changelog: boolean;
+            description: string;
+            emoji: string;
+            release: boolean;
+            title: string;
+        };
+        docs: {
+            changelog: boolean;
+            description: string;
+            emoji: string;
+            release: {
+                release: string;
+                scope: string;
+            };
+            title: string;
+        };
+        feat: {
+            aliases: {
+                initial: {
+                    description: string;
+                    emoji: string;
+                    title: string;
+                };
+            };
+            changelog: boolean;
+            description: string;
+            emoji: string;
+            release: string;
+            title: string;
+        };
+        fix: {
+            aliases: {
+                dependencies: {
+                    description: string;
+                    emoji: string;
+                    scope: string;
+                    title: string;
+                };
+                metadata: {
+                    description: string;
+                    emoji: string;
+                    scope: string;
+                    title: string;
+                };
+                peerDependencies: {
+                    description: string;
+                    emoji: string;
+                    scope: string;
+                    title: string;
+                };
+            };
+            changelog: boolean;
+            description: string;
+            emoji: string;
+            release: string;
+            title: string;
+        };
+        perf: {
+            changelog: boolean;
+            description: string;
+            emoji: string;
+            release: string;
+            title: string;
+        };
+        refactor: {
+            changelog: boolean;
+            description: string;
+            emoji: string;
+            release: boolean;
+            title: string;
+        };
+        revert: {
+            changelog: boolean;
+            description: string;
+            emoji: string;
+            release: boolean;
+            title: string;
+        };
+        style: {
+            changelog: boolean;
+            description: string;
+            emoji: string;
+            release: boolean;
+            title: string;
+        };
+        test: {
+            changelog: boolean;
+            description: string;
+            emoji: string;
+            release: boolean;
+            title: string;
+        };
+    };
+    typesOrder: string[];
+};

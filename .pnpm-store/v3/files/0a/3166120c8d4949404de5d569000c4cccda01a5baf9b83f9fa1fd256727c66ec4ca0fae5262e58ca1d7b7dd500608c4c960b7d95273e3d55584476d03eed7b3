@@ -1,0 +1,228 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.baseRules = exports.ruleState = void 0;
+var constants_1 = require("../constants");
+var maxLineLength = 120;
+var maxStatementsPerFunction = 10;
+exports.ruleState = {
+    error: 2,
+    off: 0,
+    warn: 1
+};
+var baseRules = function (repoType, repoSubType) {
+    return {
+        'array-func/prefer-array-from': 'off',
+        'arrow-parens': ['error', 'always'],
+        'brace-style': ['error', '1tbs'],
+        'comma-dangle': 'off',
+        'editorconfig/indent': 'off',
+        eqeqeq: ['error', 'always'],
+        'eslint-comments/disable-enable-pair': ['error', { allowWholeFile: true }],
+        'ext/lines-between-object-properties': [exports.ruleState.error, 'never'],
+        'filenames/match-regex': [exports.ruleState.error, '^[a-z-]+.?[a-z-]+$'],
+        'filenames/no-index': exports.ruleState.error,
+        'fp/no-class': 'off',
+        'fp/no-let': 'off',
+        'fp/no-mutating-methods': 'warn',
+        'fp/no-mutation': [
+            'error',
+            {
+                allowThis: true,
+                commonjs: true,
+                exceptions: []
+            }
+        ],
+        'fp/no-nil': 'off',
+        'fp/no-rest-parameters': 'warn',
+        'fp/no-this': 'off',
+        'fp/no-unused-expression': 'off',
+        'func-style': ['error', 'declaration', { allowArrowFunctions: true }],
+        'functional/functional-parameters': ['error', { enforceParameterCount: false }],
+        'functional/immutable-data': [
+            'warn',
+            {
+                ignoreAccessorPattern: ['module.exports'],
+                ignoreImmediateMutation: true
+            }
+        ],
+        'functional/no-class': 'off',
+        'functional/no-conditional-statement': 'off',
+        'functional/no-expression-statement': 'off',
+        'functional/no-return-void': 'off',
+        'functional/no-this-expression': 'off',
+        'id-blacklist': [
+            'error',
+            'any',
+            'Number',
+            'number',
+            'String',
+            'string',
+            'Boolean',
+            'boolean',
+            'Undefined',
+            'undefined'
+        ],
+        'import/no-extraneous-dependencies': [
+            'error',
+            { devDependencies: false, optionalDependencies: ['**/.config/scripts/**/*.js'], peerDependencies: false }
+        ],
+        'import/no-unresolved': [
+            exports.ruleState.error,
+            {
+                ignore: [
+                    '@mblabs/angular-common',
+                    '@mblabs/common',
+                    '@mblabs/nestjs-common',
+                    'chalk',
+                    'esbuild',
+                    'esbuild-node-externals',
+                    'inquirer',
+                    'signale'
+                ]
+            }
+        ],
+        'jest/require-hook': 'off',
+        'linebreak-style': ['error', 'unix'],
+        'max-classes-per-file': ['error', constants_1.maxClassesPerFile],
+        'max-len': [
+            'error',
+            {
+                code: maxLineLength,
+                ignoreComments: true,
+                ignoreTrailingComments: true
+            }
+        ],
+        'max-statements': ['error', maxStatementsPerFunction, { ignoreTopLevelFunctions: true }],
+        'newline-per-chained-call': 'off',
+        'no-array-constructor': 'error',
+        'no-console': [
+            'error',
+            {
+                allow: [
+                    'warn',
+                    'dir',
+                    'time',
+                    'timeEnd',
+                    'timeLog',
+                    'trace',
+                    'assert',
+                    'clear',
+                    'count',
+                    'countReset',
+                    'group',
+                    'groupEnd',
+                    'table',
+                    'debug',
+                    'info',
+                    'dirxml',
+                    'groupCollapsed',
+                    'Console',
+                    'profile',
+                    'profileEnd',
+                    'timeStamp',
+                    'context'
+                ]
+            }
+        ],
+        'no-constructor-bind/no-constructor-bind': 'error',
+        'no-constructor-bind/no-constructor-state': 'error',
+        'no-empty-function': ['error', { allow: ['constructors'] }],
+        'no-loops/no-loops': exports.ruleState.error,
+        'no-magic-numbers': ['error', { ignore: [-1, 0, 1] }],
+        'no-multiple-empty-lines': [
+            'error',
+            {
+                max: 2
+            }
+        ],
+        'no-plusplus': [
+            'error',
+            {
+                allowForLoopAfterthoughts: true
+            }
+        ],
+        'no-restricted-syntax': ['error', 'ForInStatement'],
+        'no-shadow': ['error'],
+        'no-ternary': 'off',
+        'no-unused-expressions': ['error', { allowTernary: true }],
+        'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+        'node/no-extraneous-import': 'off',
+        'node/no-missing-import': [
+            'error',
+            {
+                allowModules: [
+                    '@mblabs/angular-common',
+                    '@mblabs/common',
+                    '@mblabs/nestjs-common',
+                    'chalk',
+                    'esbuild',
+                    'esbuild-node-externals',
+                    'inquirer',
+                    'signale'
+                ]
+            }
+        ],
+        'node/no-unpublished-import': 'off',
+        'one-var': ['error', 'never'],
+        'padding-line-between-statements': [
+            'error',
+            {
+                blankLine: 'always',
+                next: 'return',
+                prev: '*'
+            }
+        ],
+        'prefer-arrow/prefer-arrow-functions': [
+            'warn',
+            {
+                allowStandaloneDeclarations: true,
+                classPropertiesAllowed: false,
+                disallowPrototype: true,
+                singleReturnOnly: false
+            }
+        ],
+        'quote-props': ['error', 'as-needed'],
+        'require-jsdoc': [
+            'error',
+            {
+                require: {
+                    ArrowFunctionExpression: true,
+                    ClassDeclaration: true,
+                    FunctionDeclaration: true,
+                    FunctionExpression: true,
+                    MethodDefinition: true
+                }
+            }
+        ],
+        'sort-class-members/sort-class-members': [
+            exports.ruleState.error,
+            {
+                accessorPairPositioning: 'getThenSet',
+                order: [
+                    '[static-properties]',
+                    '[static-methods]',
+                    '[properties]',
+                    '[conventional-private-properties]',
+                    'constructor',
+                    '[methods]',
+                    '[conventional-private-methods]'
+                ]
+            }
+        ],
+        'sort-imports': 'off',
+        'sort-keys': 'off',
+        'sort-keys-fix/sort-keys-fix': 'error',
+        'spaced-comment': [
+            'error',
+            'always',
+            {
+                markers: ['/']
+            }
+        ],
+        'unicorn/prefer-module': repoType === 'npm' && repoSubType === 'library' ? exports.ruleState.off : exports.ruleState.error,
+        'unused-imports/no-unused-imports': 'error',
+        'woke/all': exports.ruleState.error
+    };
+};
+exports.baseRules = baseRules;
+//# sourceMappingURL=base.js.map

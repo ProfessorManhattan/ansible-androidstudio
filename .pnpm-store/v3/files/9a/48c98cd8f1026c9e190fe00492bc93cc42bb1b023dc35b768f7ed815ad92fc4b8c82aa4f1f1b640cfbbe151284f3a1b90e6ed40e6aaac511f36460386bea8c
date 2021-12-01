@@ -1,0 +1,33 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const utils_1 = require("../utils");
+const coreRule = utils_1.getCoreRule("object-curly-spacing");
+exports.default = utils_1.createRule("inline-table-curly-spacing", {
+    meta: {
+        docs: {
+            description: "enforce consistent spacing inside braces",
+            categories: ["standard"],
+            extensionRule: "object-curly-spacing",
+        },
+        fixable: coreRule.meta.fixable,
+        schema: coreRule.meta.schema,
+        messages: coreRule.meta.messages,
+        type: coreRule.meta.type,
+    },
+    create(context) {
+        return utils_1.defineWrapperListener(coreRule, context, {
+            options: [
+                context.options[0] || "always",
+                ...context.options.slice(1),
+            ],
+            createListenerProxy(listener) {
+                return {
+                    TOMLInlineTable(node) {
+                        listener.ObjectExpression(utils_1.convertESNode(node));
+                    },
+                };
+            },
+            getNodeProxy: utils_1.convertESNode,
+        });
+    },
+});

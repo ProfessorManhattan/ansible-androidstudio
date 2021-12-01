@@ -1,0 +1,3566 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`encapsed curly #2 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Encapsed {
+        "kind": "encapsed",
+        "raw": "\\"string {$$juice} string\\"",
+        "type": "string",
+        "value": Array [
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": "string ",
+              "unicode": false,
+              "value": "string ",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": Variable {
+              "curly": false,
+              "kind": "variable",
+              "name": Variable {
+                "curly": false,
+                "kind": "variable",
+                "name": "juice",
+              },
+            },
+            "kind": "encapsedpart",
+            "syntax": "complex",
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": " string",
+              "unicode": false,
+              "value": " string",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+        ],
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`encapsed curly #3 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Encapsed {
+        "kind": "encapsed",
+        "raw": "\\"string {$call()} string\\"",
+        "type": "string",
+        "value": Array [
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": "string ",
+              "unicode": false,
+              "value": "string ",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": Call {
+              "arguments": Array [],
+              "kind": "call",
+              "what": Variable {
+                "curly": false,
+                "kind": "variable",
+                "name": "call",
+              },
+            },
+            "kind": "encapsedpart",
+            "syntax": "complex",
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": " string",
+              "unicode": false,
+              "value": " string",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+        ],
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`encapsed curly 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Encapsed {
+        "kind": "encapsed",
+        "raw": "\\"string {$juice} string\\"",
+        "type": "string",
+        "value": Array [
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": "string ",
+              "unicode": false,
+              "value": "string ",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": Variable {
+              "curly": false,
+              "kind": "variable",
+              "name": "juice",
+            },
+            "kind": "encapsedpart",
+            "syntax": "complex",
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": " string",
+              "unicode": false,
+              "value": " string",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+        ],
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`encapsed dollar open curly braces #2 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Encapsed {
+        "kind": "encapsed",
+        "raw": "\\"string \${$juice} string\\"",
+        "type": "string",
+        "value": Array [
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": "string ",
+              "unicode": false,
+              "value": "string ",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+          EncapsedPart {
+            "curly": true,
+            "expression": Variable {
+              "curly": false,
+              "kind": "variable",
+              "name": Variable {
+                "curly": false,
+                "kind": "variable",
+                "name": "juice",
+              },
+            },
+            "kind": "encapsedpart",
+            "syntax": "simple",
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": " string",
+              "unicode": false,
+              "value": " string",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+        ],
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`encapsed dollar open curly braces #3 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Encapsed {
+        "kind": "encapsed",
+        "raw": "\\"string \${\${$juice}} string\\"",
+        "type": "string",
+        "value": Array [
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": "string ",
+              "unicode": false,
+              "value": "string ",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+          EncapsedPart {
+            "curly": true,
+            "expression": Variable {
+              "curly": false,
+              "kind": "variable",
+              "name": Variable {
+                "curly": true,
+                "kind": "variable",
+                "name": Variable {
+                  "curly": false,
+                  "kind": "variable",
+                  "name": "juice",
+                },
+              },
+            },
+            "kind": "encapsedpart",
+            "syntax": "simple",
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": " string",
+              "unicode": false,
+              "value": " string",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+        ],
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`encapsed dollar open curly braces #4 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Encapsed {
+        "kind": "encapsed",
+        "raw": "\\"string \${call()} string\\"",
+        "type": "string",
+        "value": Array [
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": "string ",
+              "unicode": false,
+              "value": "string ",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+          EncapsedPart {
+            "curly": true,
+            "expression": Variable {
+              "curly": false,
+              "kind": "variable",
+              "name": Call {
+                "arguments": Array [],
+                "kind": "call",
+                "what": Name {
+                  "kind": "name",
+                  "name": "call",
+                  "resolution": "uqn",
+                },
+              },
+            },
+            "kind": "encapsedpart",
+            "syntax": "simple",
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": " string",
+              "unicode": false,
+              "value": " string",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+        ],
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`encapsed dollar open curly braces #5 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Encapsed {
+        "kind": "encapsed",
+        "raw": "\\"string \${test[test]} string\\"",
+        "type": "string",
+        "value": Array [
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": "string ",
+              "unicode": false,
+              "value": "string ",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+          EncapsedPart {
+            "curly": true,
+            "expression": OffsetLookup {
+              "kind": "offsetlookup",
+              "offset": Name {
+                "kind": "name",
+                "name": "test",
+                "resolution": "uqn",
+              },
+              "what": Variable {
+                "curly": false,
+                "kind": "variable",
+                "name": "test",
+              },
+            },
+            "kind": "encapsedpart",
+            "syntax": "simple",
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": " string",
+              "unicode": false,
+              "value": " string",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+        ],
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`encapsed dollar open curly braces #6 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Encapsed {
+        "kind": "encapsed",
+        "raw": "\\"string \${test[1]} string\\"",
+        "type": "string",
+        "value": Array [
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": "string ",
+              "unicode": false,
+              "value": "string ",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+          EncapsedPart {
+            "curly": true,
+            "expression": OffsetLookup {
+              "kind": "offsetlookup",
+              "offset": Number {
+                "kind": "number",
+                "value": "1",
+              },
+              "what": Variable {
+                "curly": false,
+                "kind": "variable",
+                "name": "test",
+              },
+            },
+            "kind": "encapsedpart",
+            "syntax": "simple",
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": " string",
+              "unicode": false,
+              "value": " string",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+        ],
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`encapsed dollar open curly braces #7 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Encapsed {
+        "kind": "encapsed",
+        "raw": "\\"string \${test[-1]} string\\"",
+        "type": "string",
+        "value": Array [
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": "string ",
+              "unicode": false,
+              "value": "string ",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+          EncapsedPart {
+            "curly": true,
+            "expression": OffsetLookup {
+              "kind": "offsetlookup",
+              "offset": Unary {
+                "kind": "unary",
+                "type": "-",
+                "what": Number {
+                  "kind": "number",
+                  "value": "1",
+                },
+              },
+              "what": Variable {
+                "curly": false,
+                "kind": "variable",
+                "name": "test",
+              },
+            },
+            "kind": "encapsedpart",
+            "syntax": "simple",
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": " string",
+              "unicode": false,
+              "value": " string",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+        ],
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`encapsed dollar open curly braces #8 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Encapsed {
+        "kind": "encapsed",
+        "raw": "\\"string \${test[$var]} string\\"",
+        "type": "string",
+        "value": Array [
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": "string ",
+              "unicode": false,
+              "value": "string ",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+          EncapsedPart {
+            "curly": true,
+            "expression": OffsetLookup {
+              "kind": "offsetlookup",
+              "offset": Variable {
+                "curly": false,
+                "kind": "variable",
+                "name": "var",
+              },
+              "what": Variable {
+                "curly": false,
+                "kind": "variable",
+                "name": "test",
+              },
+            },
+            "kind": "encapsedpart",
+            "syntax": "simple",
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": " string",
+              "unicode": false,
+              "value": " string",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+        ],
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`encapsed dollar open curly braces 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Encapsed {
+        "kind": "encapsed",
+        "raw": "\\"string \${juice} string\\"",
+        "type": "string",
+        "value": Array [
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": "string ",
+              "unicode": false,
+              "value": "string ",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+          EncapsedPart {
+            "curly": true,
+            "expression": Variable {
+              "curly": false,
+              "kind": "variable",
+              "name": "juice",
+            },
+            "kind": "encapsedpart",
+            "syntax": "simple",
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": " string",
+              "unicode": false,
+              "value": " string",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+        ],
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`encapsed multiple nullsafepropertylookup (complex syntax) 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Encapsed {
+        "kind": "encapsed",
+        "raw": "\\"string {$obj?->property?->property} string\\"",
+        "type": "string",
+        "value": Array [
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": "string ",
+              "unicode": false,
+              "value": "string ",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": PropertyLookup {
+              "kind": "nullsafepropertylookup",
+              "offset": Identifier {
+                "kind": "identifier",
+                "name": "property",
+              },
+              "what": PropertyLookup {
+                "kind": "nullsafepropertylookup",
+                "offset": Identifier {
+                  "kind": "identifier",
+                  "name": "property",
+                },
+                "what": Variable {
+                  "curly": false,
+                  "kind": "variable",
+                  "name": "obj",
+                },
+              },
+            },
+            "kind": "encapsedpart",
+            "syntax": "complex",
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": " string",
+              "unicode": false,
+              "value": " string",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+        ],
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`encapsed multiple propertylookup (complex syntax) 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Encapsed {
+        "kind": "encapsed",
+        "raw": "\\"string {$obj->property->property} string\\"",
+        "type": "string",
+        "value": Array [
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": "string ",
+              "unicode": false,
+              "value": "string ",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": PropertyLookup {
+              "kind": "propertylookup",
+              "offset": Identifier {
+                "kind": "identifier",
+                "name": "property",
+              },
+              "what": PropertyLookup {
+                "kind": "propertylookup",
+                "offset": Identifier {
+                  "kind": "identifier",
+                  "name": "property",
+                },
+                "what": Variable {
+                  "curly": false,
+                  "kind": "variable",
+                  "name": "obj",
+                },
+              },
+            },
+            "kind": "encapsedpart",
+            "syntax": "complex",
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": " string",
+              "unicode": false,
+              "value": " string",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+        ],
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`encapsed negative offset in encapsed var offset 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Encapsed {
+        "kind": "encapsed",
+        "raw": "\\"$var[-1]\\"",
+        "type": "string",
+        "value": Array [
+          EncapsedPart {
+            "curly": false,
+            "expression": OffsetLookup {
+              "kind": "offsetlookup",
+              "offset": Number {
+                "kind": "number",
+                "value": -1,
+              },
+              "what": Variable {
+                "curly": false,
+                "kind": "variable",
+                "name": "var",
+              },
+            },
+            "kind": "encapsedpart",
+            "syntax": "simple",
+          },
+        ],
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`encapsed newline before closing curly (complex syntax) 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Encapsed {
+        "kind": "encapsed",
+        "raw": "\\"string {$var
+} string\\"",
+        "type": "string",
+        "value": Array [
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": "string ",
+              "unicode": false,
+              "value": "string ",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": Variable {
+              "curly": false,
+              "kind": "variable",
+              "name": "var",
+            },
+            "kind": "encapsedpart",
+            "syntax": "complex",
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": " string",
+              "unicode": false,
+              "value": " string",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+        ],
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`encapsed no curly 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Encapsed {
+        "kind": "encapsed",
+        "raw": "\\"string $$juice string\\"",
+        "type": "string",
+        "value": Array [
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": "string $",
+              "unicode": false,
+              "value": "string $",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": Variable {
+              "curly": false,
+              "kind": "variable",
+              "name": "juice",
+            },
+            "kind": "encapsedpart",
+            "syntax": "simple",
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": " string",
+              "unicode": false,
+              "value": " string",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+        ],
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`encapsed nullsafepropertylookup (complex syntax) 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Encapsed {
+        "kind": "encapsed",
+        "raw": "\\"string {$obj?->property} string\\"",
+        "type": "string",
+        "value": Array [
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": "string ",
+              "unicode": false,
+              "value": "string ",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": PropertyLookup {
+              "kind": "nullsafepropertylookup",
+              "offset": Identifier {
+                "kind": "identifier",
+                "name": "property",
+              },
+              "what": Variable {
+                "curly": false,
+                "kind": "variable",
+                "name": "obj",
+              },
+            },
+            "kind": "encapsedpart",
+            "syntax": "complex",
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": " string",
+              "unicode": false,
+              "value": " string",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+        ],
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`encapsed nullsafepropertylookup (simple syntax) 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Encapsed {
+        "kind": "encapsed",
+        "raw": "\\"string $obj?->property string\\"",
+        "type": "string",
+        "value": Array [
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": "string ",
+              "unicode": false,
+              "value": "string ",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": Variable {
+              "curly": false,
+              "kind": "variable",
+              "name": "obj",
+            },
+            "kind": "encapsedpart",
+            "syntax": "simple",
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": "?->property string",
+              "unicode": false,
+              "value": "?->property string",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+        ],
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`encapsed nullsafepropertylookup 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": PropertyLookup {
+        "kind": "nullsafepropertylookup",
+        "offset": EncapsedPart {
+          "curly": false,
+          "expression": Encapsed {
+            "kind": "encapsed",
+            "raw": "\\"set{$type}\\"",
+            "type": "string",
+            "value": Array [
+              EncapsedPart {
+                "curly": false,
+                "expression": String {
+                  "isDoubleQuote": false,
+                  "kind": "string",
+                  "raw": "set",
+                  "unicode": false,
+                  "value": "set",
+                },
+                "kind": "encapsedpart",
+                "syntax": null,
+              },
+              EncapsedPart {
+                "curly": false,
+                "expression": Variable {
+                  "curly": false,
+                  "kind": "variable",
+                  "name": "type",
+                },
+                "kind": "encapsedpart",
+                "syntax": "complex",
+              },
+            ],
+          },
+          "kind": "encapsedpart",
+          "syntax": "complex",
+        },
+        "what": Variable {
+          "curly": false,
+          "kind": "variable",
+          "name": "this",
+        },
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`encapsed nullsafepropertylookup and offsetlookup (complex syntax) 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Encapsed {
+        "kind": "encapsed",
+        "raw": "\\"string {$obj?->values[3]?->name} string\\"",
+        "type": "string",
+        "value": Array [
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": "string ",
+              "unicode": false,
+              "value": "string ",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": PropertyLookup {
+              "kind": "nullsafepropertylookup",
+              "offset": Identifier {
+                "kind": "identifier",
+                "name": "name",
+              },
+              "what": OffsetLookup {
+                "kind": "offsetlookup",
+                "offset": Number {
+                  "kind": "number",
+                  "value": "3",
+                },
+                "what": PropertyLookup {
+                  "kind": "nullsafepropertylookup",
+                  "offset": Identifier {
+                    "kind": "identifier",
+                    "name": "values",
+                  },
+                  "what": Variable {
+                    "curly": false,
+                    "kind": "variable",
+                    "name": "obj",
+                  },
+                },
+              },
+            },
+            "kind": "encapsedpart",
+            "syntax": "complex",
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": " string",
+              "unicode": false,
+              "value": " string",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+        ],
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`encapsed nullsafepropertylookup by variable (2) (complex syntax) 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Encapsed {
+        "kind": "encapsed",
+        "raw": "\\"string {$obj?->{$array[1]}} string\\"",
+        "type": "string",
+        "value": Array [
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": "string ",
+              "unicode": false,
+              "value": "string ",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": PropertyLookup {
+              "kind": "nullsafepropertylookup",
+              "offset": EncapsedPart {
+                "curly": false,
+                "expression": OffsetLookup {
+                  "kind": "offsetlookup",
+                  "offset": Number {
+                    "kind": "number",
+                    "value": "1",
+                  },
+                  "what": Variable {
+                    "curly": false,
+                    "kind": "variable",
+                    "name": "array",
+                  },
+                },
+                "kind": "encapsedpart",
+                "syntax": "complex",
+              },
+              "what": Variable {
+                "curly": false,
+                "kind": "variable",
+                "name": "obj",
+              },
+            },
+            "kind": "encapsedpart",
+            "syntax": "complex",
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": " string",
+              "unicode": false,
+              "value": " string",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+        ],
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`encapsed nullsafepropertylookup by variable (complex syntax) 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Encapsed {
+        "kind": "encapsed",
+        "raw": "\\"string {$obj?->$var} string\\"",
+        "type": "string",
+        "value": Array [
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": "string ",
+              "unicode": false,
+              "value": "string ",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": PropertyLookup {
+              "kind": "nullsafepropertylookup",
+              "offset": Variable {
+                "curly": false,
+                "kind": "variable",
+                "name": "var",
+              },
+              "what": Variable {
+                "curly": false,
+                "kind": "variable",
+                "name": "obj",
+              },
+            },
+            "kind": "encapsedpart",
+            "syntax": "complex",
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": " string",
+              "unicode": false,
+              "value": " string",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+        ],
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`encapsed nullsafepropertylookup with comments (complex syntax) 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Encapsed {
+        "kind": "encapsed",
+        "raw": "\\"string {$var?->foo?->bar /* Comment */ } string\\"",
+        "type": "string",
+        "value": Array [
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": "string ",
+              "unicode": false,
+              "value": "string ",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": PropertyLookup {
+              "kind": "nullsafepropertylookup",
+              "offset": Identifier {
+                "kind": "identifier",
+                "name": "bar",
+              },
+              "what": PropertyLookup {
+                "kind": "nullsafepropertylookup",
+                "offset": Identifier {
+                  "kind": "identifier",
+                  "name": "foo",
+                },
+                "what": Variable {
+                  "curly": false,
+                  "kind": "variable",
+                  "name": "var",
+                },
+              },
+            },
+            "kind": "encapsedpart",
+            "syntax": "complex",
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": " string",
+              "unicode": false,
+              "value": " string",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+        ],
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`encapsed nullsafepropertylookup with multiple call (complex syntax) 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Encapsed {
+        "kind": "encapsed",
+        "raw": "\\"string {$obj?->call()?->call()} string\\"",
+        "type": "string",
+        "value": Array [
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": "string ",
+              "unicode": false,
+              "value": "string ",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": Call {
+              "arguments": Array [],
+              "kind": "call",
+              "what": PropertyLookup {
+                "kind": "nullsafepropertylookup",
+                "offset": Identifier {
+                  "kind": "identifier",
+                  "name": "call",
+                },
+                "what": Call {
+                  "arguments": Array [],
+                  "kind": "call",
+                  "what": PropertyLookup {
+                    "kind": "nullsafepropertylookup",
+                    "offset": Identifier {
+                      "kind": "identifier",
+                      "name": "call",
+                    },
+                    "what": Variable {
+                      "curly": false,
+                      "kind": "variable",
+                      "name": "obj",
+                    },
+                  },
+                },
+              },
+            },
+            "kind": "encapsedpart",
+            "syntax": "complex",
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": " string",
+              "unicode": false,
+              "value": " string",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+        ],
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`encapsed offsetlookup (2) (simple syntax) 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Encapsed {
+        "kind": "encapsed",
+        "raw": "\\"string $array[koolaid1] string\\"",
+        "type": "string",
+        "value": Array [
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": "string ",
+              "unicode": false,
+              "value": "string ",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": OffsetLookup {
+              "kind": "offsetlookup",
+              "offset": Identifier {
+                "kind": "identifier",
+                "name": "koolaid1",
+              },
+              "what": Variable {
+                "curly": false,
+                "kind": "variable",
+                "name": "array",
+              },
+            },
+            "kind": "encapsedpart",
+            "syntax": "simple",
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": " string",
+              "unicode": false,
+              "value": " string",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+        ],
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`encapsed offsetlookup (3) (simple syntax) 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Encapsed {
+        "kind": "encapsed",
+        "raw": "\\"string $array[0][0] string\\"",
+        "type": "string",
+        "value": Array [
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": "string ",
+              "unicode": false,
+              "value": "string ",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": OffsetLookup {
+              "kind": "offsetlookup",
+              "offset": Number {
+                "kind": "number",
+                "value": "0",
+              },
+              "what": Variable {
+                "curly": false,
+                "kind": "variable",
+                "name": "array",
+              },
+            },
+            "kind": "encapsedpart",
+            "syntax": "simple",
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": "[0] string",
+              "unicode": false,
+              "value": "[0] string",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+        ],
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`encapsed offsetlookup (complex syntax) 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Encapsed {
+        "kind": "encapsed",
+        "raw": "\\"string {$array[\\"key\\"]} string\\"",
+        "type": "string",
+        "value": Array [
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": "string ",
+              "unicode": false,
+              "value": "string ",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": OffsetLookup {
+              "kind": "offsetlookup",
+              "offset": String {
+                "isDoubleQuote": true,
+                "kind": "string",
+                "raw": "\\"key\\"",
+                "unicode": false,
+                "value": "key",
+              },
+              "what": Variable {
+                "curly": false,
+                "kind": "variable",
+                "name": "array",
+              },
+            },
+            "kind": "encapsedpart",
+            "syntax": "complex",
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": " string",
+              "unicode": false,
+              "value": " string",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+        ],
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`encapsed offsetlookup (simple syntax) 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Encapsed {
+        "kind": "encapsed",
+        "raw": "\\"string $array[0] string\\"",
+        "type": "string",
+        "value": Array [
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": "string ",
+              "unicode": false,
+              "value": "string ",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": OffsetLookup {
+              "kind": "offsetlookup",
+              "offset": Number {
+                "kind": "number",
+                "value": "0",
+              },
+              "what": Variable {
+                "curly": false,
+                "kind": "variable",
+                "name": "array",
+              },
+            },
+            "kind": "encapsedpart",
+            "syntax": "simple",
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": " string",
+              "unicode": false,
+              "value": " string",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+        ],
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`encapsed offsetlookup 2 (complex syntax) 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Encapsed {
+        "kind": "encapsed",
+        "raw": "\\"string {$array[4][3]} string\\"",
+        "type": "string",
+        "value": Array [
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": "string ",
+              "unicode": false,
+              "value": "string ",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": OffsetLookup {
+              "kind": "offsetlookup",
+              "offset": Number {
+                "kind": "number",
+                "value": "3",
+              },
+              "what": OffsetLookup {
+                "kind": "offsetlookup",
+                "offset": Number {
+                  "kind": "number",
+                  "value": "4",
+                },
+                "what": Variable {
+                  "curly": false,
+                  "kind": "variable",
+                  "name": "array",
+                },
+              },
+            },
+            "kind": "encapsedpart",
+            "syntax": "complex",
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": " string",
+              "unicode": false,
+              "value": " string",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+        ],
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`encapsed offsetlookup 3 (complex syntax) 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Encapsed {
+        "kind": "encapsed",
+        "raw": "\\"string {$arr[foo][3]} string\\"",
+        "type": "string",
+        "value": Array [
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": "string ",
+              "unicode": false,
+              "value": "string ",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": OffsetLookup {
+              "kind": "offsetlookup",
+              "offset": Number {
+                "kind": "number",
+                "value": "3",
+              },
+              "what": OffsetLookup {
+                "kind": "offsetlookup",
+                "offset": Name {
+                  "kind": "name",
+                  "name": "foo",
+                  "resolution": "uqn",
+                },
+                "what": Variable {
+                  "curly": false,
+                  "kind": "variable",
+                  "name": "arr",
+                },
+              },
+            },
+            "kind": "encapsedpart",
+            "syntax": "complex",
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": " string",
+              "unicode": false,
+              "value": " string",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+        ],
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`encapsed offsetlookup 4 (complex syntax) 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Encapsed {
+        "kind": "encapsed",
+        "raw": "\\"string {$arr[\\"foo\\"][3]} string\\"",
+        "type": "string",
+        "value": Array [
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": "string ",
+              "unicode": false,
+              "value": "string ",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": OffsetLookup {
+              "kind": "offsetlookup",
+              "offset": Number {
+                "kind": "number",
+                "value": "3",
+              },
+              "what": OffsetLookup {
+                "kind": "offsetlookup",
+                "offset": String {
+                  "isDoubleQuote": true,
+                  "kind": "string",
+                  "raw": "\\"foo\\"",
+                  "unicode": false,
+                  "value": "foo",
+                },
+                "what": Variable {
+                  "curly": false,
+                  "kind": "variable",
+                  "name": "arr",
+                },
+              },
+            },
+            "kind": "encapsedpart",
+            "syntax": "complex",
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": " string",
+              "unicode": false,
+              "value": " string",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+        ],
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`encapsed positive offset in encapsed var offset 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Encapsed {
+        "kind": "encapsed",
+        "raw": "\\"$var[1]\\"",
+        "type": "string",
+        "value": Array [
+          EncapsedPart {
+            "curly": false,
+            "expression": OffsetLookup {
+              "kind": "offsetlookup",
+              "offset": Number {
+                "kind": "number",
+                "value": "1",
+              },
+              "what": Variable {
+                "curly": false,
+                "kind": "variable",
+                "name": "var",
+              },
+            },
+            "kind": "encapsedpart",
+            "syntax": "simple",
+          },
+        ],
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`encapsed propertylookup (complex syntax) 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Encapsed {
+        "kind": "encapsed",
+        "raw": "\\"string {$obj->property} string\\"",
+        "type": "string",
+        "value": Array [
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": "string ",
+              "unicode": false,
+              "value": "string ",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": PropertyLookup {
+              "kind": "propertylookup",
+              "offset": Identifier {
+                "kind": "identifier",
+                "name": "property",
+              },
+              "what": Variable {
+                "curly": false,
+                "kind": "variable",
+                "name": "obj",
+              },
+            },
+            "kind": "encapsedpart",
+            "syntax": "complex",
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": " string",
+              "unicode": false,
+              "value": " string",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+        ],
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`encapsed propertylookup (simple syntax) 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Encapsed {
+        "kind": "encapsed",
+        "raw": "\\"string $obj->property string\\"",
+        "type": "string",
+        "value": Array [
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": "string ",
+              "unicode": false,
+              "value": "string ",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": PropertyLookup {
+              "kind": "propertylookup",
+              "offset": Identifier {
+                "kind": "identifier",
+                "name": "property",
+              },
+              "what": Variable {
+                "curly": false,
+                "kind": "variable",
+                "name": "obj",
+              },
+            },
+            "kind": "encapsedpart",
+            "syntax": "simple",
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": " string",
+              "unicode": false,
+              "value": " string",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+        ],
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`encapsed propertylookup 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": PropertyLookup {
+        "kind": "propertylookup",
+        "offset": EncapsedPart {
+          "curly": false,
+          "expression": Encapsed {
+            "kind": "encapsed",
+            "raw": "\\"set{$type}\\"",
+            "type": "string",
+            "value": Array [
+              EncapsedPart {
+                "curly": false,
+                "expression": String {
+                  "isDoubleQuote": false,
+                  "kind": "string",
+                  "raw": "set",
+                  "unicode": false,
+                  "value": "set",
+                },
+                "kind": "encapsedpart",
+                "syntax": null,
+              },
+              EncapsedPart {
+                "curly": false,
+                "expression": Variable {
+                  "curly": false,
+                  "kind": "variable",
+                  "name": "type",
+                },
+                "kind": "encapsedpart",
+                "syntax": "complex",
+              },
+            ],
+          },
+          "kind": "encapsedpart",
+          "syntax": "complex",
+        },
+        "what": Variable {
+          "curly": false,
+          "kind": "variable",
+          "name": "this",
+        },
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`encapsed propertylookup by variable (2) (complex syntax) 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Encapsed {
+        "kind": "encapsed",
+        "raw": "\\"string {$obj->{$array[1]}} string\\"",
+        "type": "string",
+        "value": Array [
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": "string ",
+              "unicode": false,
+              "value": "string ",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": PropertyLookup {
+              "kind": "propertylookup",
+              "offset": EncapsedPart {
+                "curly": false,
+                "expression": OffsetLookup {
+                  "kind": "offsetlookup",
+                  "offset": Number {
+                    "kind": "number",
+                    "value": "1",
+                  },
+                  "what": Variable {
+                    "curly": false,
+                    "kind": "variable",
+                    "name": "array",
+                  },
+                },
+                "kind": "encapsedpart",
+                "syntax": "complex",
+              },
+              "what": Variable {
+                "curly": false,
+                "kind": "variable",
+                "name": "obj",
+              },
+            },
+            "kind": "encapsedpart",
+            "syntax": "complex",
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": " string",
+              "unicode": false,
+              "value": " string",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+        ],
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`encapsed propertylookup by variable (complex syntax) 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Encapsed {
+        "kind": "encapsed",
+        "raw": "\\"string {$obj->$var} string\\"",
+        "type": "string",
+        "value": Array [
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": "string ",
+              "unicode": false,
+              "value": "string ",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": PropertyLookup {
+              "kind": "propertylookup",
+              "offset": Variable {
+                "curly": false,
+                "kind": "variable",
+                "name": "var",
+              },
+              "what": Variable {
+                "curly": false,
+                "kind": "variable",
+                "name": "obj",
+              },
+            },
+            "kind": "encapsedpart",
+            "syntax": "complex",
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": " string",
+              "unicode": false,
+              "value": " string",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+        ],
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`encapsed propertylookup with comments (complex syntax) 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Encapsed {
+        "kind": "encapsed",
+        "raw": "\\"string {$var->foo->bar /* Comment */ } string\\"",
+        "type": "string",
+        "value": Array [
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": "string ",
+              "unicode": false,
+              "value": "string ",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": PropertyLookup {
+              "kind": "propertylookup",
+              "offset": Identifier {
+                "kind": "identifier",
+                "name": "bar",
+              },
+              "what": PropertyLookup {
+                "kind": "propertylookup",
+                "offset": Identifier {
+                  "kind": "identifier",
+                  "name": "foo",
+                },
+                "what": Variable {
+                  "curly": false,
+                  "kind": "variable",
+                  "name": "var",
+                },
+              },
+            },
+            "kind": "encapsedpart",
+            "syntax": "complex",
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": " string",
+              "unicode": false,
+              "value": " string",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+        ],
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`encapsed propertylookup with multiple call (complex syntax) 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Encapsed {
+        "kind": "encapsed",
+        "raw": "\\"string {$obj->call()->call()} string\\"",
+        "type": "string",
+        "value": Array [
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": "string ",
+              "unicode": false,
+              "value": "string ",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": Call {
+              "arguments": Array [],
+              "kind": "call",
+              "what": PropertyLookup {
+                "kind": "propertylookup",
+                "offset": Identifier {
+                  "kind": "identifier",
+                  "name": "call",
+                },
+                "what": Call {
+                  "arguments": Array [],
+                  "kind": "call",
+                  "what": PropertyLookup {
+                    "kind": "propertylookup",
+                    "offset": Identifier {
+                      "kind": "identifier",
+                      "name": "call",
+                    },
+                    "what": Variable {
+                      "curly": false,
+                      "kind": "variable",
+                      "name": "obj",
+                    },
+                  },
+                },
+              },
+            },
+            "kind": "encapsedpart",
+            "syntax": "complex",
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": " string",
+              "unicode": false,
+              "value": " string",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+        ],
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`encapsed staticlookup (2) (complex syntax) 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Encapsed {
+        "kind": "encapsed",
+        "raw": "\\"string {$obj::call()} string\\"",
+        "type": "string",
+        "value": Array [
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": "string ",
+              "unicode": false,
+              "value": "string ",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": Call {
+              "arguments": Array [],
+              "kind": "call",
+              "what": StaticLookup {
+                "kind": "staticlookup",
+                "offset": Identifier {
+                  "kind": "identifier",
+                  "name": "call",
+                },
+                "what": Variable {
+                  "curly": false,
+                  "kind": "variable",
+                  "name": "obj",
+                },
+              },
+            },
+            "kind": "encapsedpart",
+            "syntax": "complex",
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": " string",
+              "unicode": false,
+              "value": " string",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+        ],
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`encapsed staticlookup (3) (complex syntax) 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Encapsed {
+        "kind": "encapsed",
+        "raw": "\\"string {$obj::$var::$var} string\\"",
+        "type": "string",
+        "value": Array [
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": "string ",
+              "unicode": false,
+              "value": "string ",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": StaticLookup {
+              "kind": "staticlookup",
+              "offset": Variable {
+                "curly": false,
+                "kind": "variable",
+                "name": "var",
+              },
+              "what": StaticLookup {
+                "kind": "staticlookup",
+                "offset": Variable {
+                  "curly": false,
+                  "kind": "variable",
+                  "name": "var",
+                },
+                "what": Variable {
+                  "curly": false,
+                  "kind": "variable",
+                  "name": "obj",
+                },
+              },
+            },
+            "kind": "encapsedpart",
+            "syntax": "complex",
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": " string",
+              "unicode": false,
+              "value": " string",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+        ],
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`encapsed staticlookup (4) (complex syntax) 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Encapsed {
+        "kind": "encapsed",
+        "raw": "\\"string {$var::$target::$resource::$binary::$foo::$bar::$foobar::$bar::$foo::$foobar::$bar::$foo} string\\"",
+        "type": "string",
+        "value": Array [
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": "string ",
+              "unicode": false,
+              "value": "string ",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": StaticLookup {
+              "kind": "staticlookup",
+              "offset": Variable {
+                "curly": false,
+                "kind": "variable",
+                "name": "foo",
+              },
+              "what": StaticLookup {
+                "kind": "staticlookup",
+                "offset": Variable {
+                  "curly": false,
+                  "kind": "variable",
+                  "name": "bar",
+                },
+                "what": StaticLookup {
+                  "kind": "staticlookup",
+                  "offset": Variable {
+                    "curly": false,
+                    "kind": "variable",
+                    "name": "foobar",
+                  },
+                  "what": StaticLookup {
+                    "kind": "staticlookup",
+                    "offset": Variable {
+                      "curly": false,
+                      "kind": "variable",
+                      "name": "foo",
+                    },
+                    "what": StaticLookup {
+                      "kind": "staticlookup",
+                      "offset": Variable {
+                        "curly": false,
+                        "kind": "variable",
+                        "name": "bar",
+                      },
+                      "what": StaticLookup {
+                        "kind": "staticlookup",
+                        "offset": Variable {
+                          "curly": false,
+                          "kind": "variable",
+                          "name": "foobar",
+                        },
+                        "what": StaticLookup {
+                          "kind": "staticlookup",
+                          "offset": Variable {
+                            "curly": false,
+                            "kind": "variable",
+                            "name": "bar",
+                          },
+                          "what": StaticLookup {
+                            "kind": "staticlookup",
+                            "offset": Variable {
+                              "curly": false,
+                              "kind": "variable",
+                              "name": "foo",
+                            },
+                            "what": StaticLookup {
+                              "kind": "staticlookup",
+                              "offset": Variable {
+                                "curly": false,
+                                "kind": "variable",
+                                "name": "binary",
+                              },
+                              "what": StaticLookup {
+                                "kind": "staticlookup",
+                                "offset": Variable {
+                                  "curly": false,
+                                  "kind": "variable",
+                                  "name": "resource",
+                                },
+                                "what": StaticLookup {
+                                  "kind": "staticlookup",
+                                  "offset": Variable {
+                                    "curly": false,
+                                    "kind": "variable",
+                                    "name": "target",
+                                  },
+                                  "what": Variable {
+                                    "curly": false,
+                                    "kind": "variable",
+                                    "name": "var",
+                                  },
+                                },
+                              },
+                            },
+                          },
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+            },
+            "kind": "encapsedpart",
+            "syntax": "complex",
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": " string",
+              "unicode": false,
+              "value": " string",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+        ],
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`encapsed staticlookup (complex syntax) 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Encapsed {
+        "kind": "encapsed",
+        "raw": "\\"string {$obj::$var} string\\"",
+        "type": "string",
+        "value": Array [
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": "string ",
+              "unicode": false,
+              "value": "string ",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": StaticLookup {
+              "kind": "staticlookup",
+              "offset": Variable {
+                "curly": false,
+                "kind": "variable",
+                "name": "var",
+              },
+              "what": Variable {
+                "curly": false,
+                "kind": "variable",
+                "name": "obj",
+              },
+            },
+            "kind": "encapsedpart",
+            "syntax": "complex",
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": " string",
+              "unicode": false,
+              "value": " string",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+        ],
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`encapsed string offset in encapsed var offset 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Encapsed {
+        "kind": "encapsed",
+        "raw": "\\"$var[var]\\"",
+        "type": "string",
+        "value": Array [
+          EncapsedPart {
+            "curly": false,
+            "expression": OffsetLookup {
+              "kind": "offsetlookup",
+              "offset": Identifier {
+                "kind": "identifier",
+                "name": "var",
+              },
+              "what": Variable {
+                "curly": false,
+                "kind": "variable",
+                "name": "var",
+              },
+            },
+            "kind": "encapsedpart",
+            "syntax": "simple",
+          },
+        ],
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`encapsed string offset in encapsed var offset 2`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Encapsed {
+        "kind": "encapsed",
+        "raw": "\\"$var[$var]\\"",
+        "type": "string",
+        "value": Array [
+          EncapsedPart {
+            "curly": false,
+            "expression": OffsetLookup {
+              "kind": "offsetlookup",
+              "offset": Variable {
+                "curly": false,
+                "kind": "variable",
+                "name": "var",
+              },
+              "what": Variable {
+                "curly": false,
+                "kind": "variable",
+                "name": "var",
+              },
+            },
+            "kind": "encapsedpart",
+            "syntax": "simple",
+          },
+        ],
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`encapsed two variable (simple syntax) 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Encapsed {
+        "kind": "encapsed",
+        "raw": "\\"string $var->$var string\\"",
+        "type": "string",
+        "value": Array [
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": "string ",
+              "unicode": false,
+              "value": "string ",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": Variable {
+              "curly": false,
+              "kind": "variable",
+              "name": "var",
+            },
+            "kind": "encapsedpart",
+            "syntax": "simple",
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": "->",
+              "unicode": false,
+              "value": "->",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": Variable {
+              "curly": false,
+              "kind": "variable",
+              "name": "var",
+            },
+            "kind": "encapsedpart",
+            "syntax": "simple",
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": " string",
+              "unicode": false,
+              "value": " string",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+        ],
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`encapsed value of the var (complex syntax) 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Encapsed {
+        "kind": "encapsed",
+        "raw": "\\"string {\${$name}} string\\"",
+        "type": "string",
+        "value": Array [
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": "string ",
+              "unicode": false,
+              "value": "string ",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": Variable {
+              "curly": true,
+              "kind": "variable",
+              "name": Variable {
+                "curly": false,
+                "kind": "variable",
+                "name": "name",
+              },
+            },
+            "kind": "encapsedpart",
+            "syntax": "complex",
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": " string",
+              "unicode": false,
+              "value": " string",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+        ],
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`encapsed value of the var named by the return value (2) (complex syntax) 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Encapsed {
+        "kind": "encapsed",
+        "raw": "\\"string {\${call()}} string\\"",
+        "type": "string",
+        "value": Array [
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": "string ",
+              "unicode": false,
+              "value": "string ",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": Variable {
+              "curly": true,
+              "kind": "variable",
+              "name": Call {
+                "arguments": Array [],
+                "kind": "call",
+                "what": Name {
+                  "kind": "name",
+                  "name": "call",
+                  "resolution": "uqn",
+                },
+              },
+            },
+            "kind": "encapsedpart",
+            "syntax": "complex",
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": " string",
+              "unicode": false,
+              "value": " string",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+        ],
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`encapsed value of the var named by the return value (3) (complex syntax) 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Encapsed {
+        "kind": "encapsed",
+        "raw": "\\"string {\${$obj->property}} string\\"",
+        "type": "string",
+        "value": Array [
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": "string ",
+              "unicode": false,
+              "value": "string ",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": Variable {
+              "curly": true,
+              "kind": "variable",
+              "name": PropertyLookup {
+                "kind": "propertylookup",
+                "offset": Identifier {
+                  "kind": "identifier",
+                  "name": "property",
+                },
+                "what": Variable {
+                  "curly": false,
+                  "kind": "variable",
+                  "name": "obj",
+                },
+              },
+            },
+            "kind": "encapsedpart",
+            "syntax": "complex",
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": " string",
+              "unicode": false,
+              "value": " string",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+        ],
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`encapsed value of the var named by the return value (4) (complex syntax) 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Encapsed {
+        "kind": "encapsed",
+        "raw": "\\"string {\${$obj->call()}} string\\"",
+        "type": "string",
+        "value": Array [
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": "string ",
+              "unicode": false,
+              "value": "string ",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": Variable {
+              "curly": true,
+              "kind": "variable",
+              "name": Call {
+                "arguments": Array [],
+                "kind": "call",
+                "what": PropertyLookup {
+                  "kind": "propertylookup",
+                  "offset": Identifier {
+                    "kind": "identifier",
+                    "name": "call",
+                  },
+                  "what": Variable {
+                    "curly": false,
+                    "kind": "variable",
+                    "name": "obj",
+                  },
+                },
+              },
+            },
+            "kind": "encapsedpart",
+            "syntax": "complex",
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": " string",
+              "unicode": false,
+              "value": " string",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+        ],
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`encapsed value of the var named by the return value (5) (complex syntax) 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Encapsed {
+        "kind": "encapsed",
+        "raw": "\\"string {\${$obj::$var}} string\\"",
+        "type": "string",
+        "value": Array [
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": "string ",
+              "unicode": false,
+              "value": "string ",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": Variable {
+              "curly": true,
+              "kind": "variable",
+              "name": StaticLookup {
+                "kind": "staticlookup",
+                "offset": Variable {
+                  "curly": false,
+                  "kind": "variable",
+                  "name": "var",
+                },
+                "what": Variable {
+                  "curly": false,
+                  "kind": "variable",
+                  "name": "obj",
+                },
+              },
+            },
+            "kind": "encapsedpart",
+            "syntax": "complex",
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": " string",
+              "unicode": false,
+              "value": " string",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+        ],
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`encapsed value of the var named by the return value (6) (complex syntax) 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Encapsed {
+        "kind": "encapsed",
+        "raw": "\\"string {\${$obj::call()}} string\\"",
+        "type": "string",
+        "value": Array [
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": "string ",
+              "unicode": false,
+              "value": "string ",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": Variable {
+              "curly": true,
+              "kind": "variable",
+              "name": Call {
+                "arguments": Array [],
+                "kind": "call",
+                "what": StaticLookup {
+                  "kind": "staticlookup",
+                  "offset": Identifier {
+                    "kind": "identifier",
+                    "name": "call",
+                  },
+                  "what": Variable {
+                    "curly": false,
+                    "kind": "variable",
+                    "name": "obj",
+                  },
+                },
+              },
+            },
+            "kind": "encapsedpart",
+            "syntax": "complex",
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": " string",
+              "unicode": false,
+              "value": " string",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+        ],
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`encapsed value of the var named by the return value (complex syntax) 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Encapsed {
+        "kind": "encapsed",
+        "raw": "\\"string {\${call()}} string\\"",
+        "type": "string",
+        "value": Array [
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": "string ",
+              "unicode": false,
+              "value": "string ",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": Variable {
+              "curly": true,
+              "kind": "variable",
+              "name": Call {
+                "arguments": Array [],
+                "kind": "call",
+                "what": Name {
+                  "kind": "name",
+                  "name": "call",
+                  "resolution": "uqn",
+                },
+              },
+            },
+            "kind": "encapsedpart",
+            "syntax": "complex",
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": " string",
+              "unicode": false,
+              "value": " string",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+        ],
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`encapsed variable (complex syntax) 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Encapsed {
+        "kind": "encapsed",
+        "raw": "\\"string {$var} string\\"",
+        "type": "string",
+        "value": Array [
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": "string ",
+              "unicode": false,
+              "value": "string ",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": Variable {
+              "curly": false,
+              "kind": "variable",
+              "name": "var",
+            },
+            "kind": "encapsedpart",
+            "syntax": "complex",
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": " string",
+              "unicode": false,
+              "value": " string",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+        ],
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`encapsed variable (simple syntax) 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Encapsed {
+        "kind": "encapsed",
+        "raw": "\\"string $var string\\"",
+        "type": "string",
+        "value": Array [
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": "string ",
+              "unicode": false,
+              "value": "string ",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": Variable {
+              "curly": false,
+              "kind": "variable",
+              "name": "var",
+            },
+            "kind": "encapsedpart",
+            "syntax": "simple",
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": " string",
+              "unicode": false,
+              "value": " string",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+        ],
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`encapsed variable curly (simple syntax) 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Encapsed {
+        "kind": "encapsed",
+        "raw": "\\"string \${var} string\\"",
+        "type": "string",
+        "value": Array [
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": "string ",
+              "unicode": false,
+              "value": "string ",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+          EncapsedPart {
+            "curly": true,
+            "expression": Variable {
+              "curly": false,
+              "kind": "variable",
+              "name": "var",
+            },
+            "kind": "encapsedpart",
+            "syntax": "simple",
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": " string",
+              "unicode": false,
+              "value": " string",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+        ],
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`encapsed variable with before closing curly 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Encapsed {
+        "kind": "encapsed",
+        "raw": "\\"string {$var } string\\"",
+        "type": "string",
+        "value": Array [
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": "string ",
+              "unicode": false,
+              "value": "string ",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": Variable {
+              "curly": false,
+              "kind": "variable",
+              "name": "var",
+            },
+            "kind": "encapsedpart",
+            "syntax": "complex",
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": " string",
+              "unicode": false,
+              "value": " string",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+        ],
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`encapsed variable with space opening before curly 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Encapsed {
+        "kind": "encapsed",
+        "raw": "\\"string { $var} string\\"",
+        "type": "string",
+        "value": Array [
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": "string { ",
+              "unicode": false,
+              "value": "string { ",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": Variable {
+              "curly": false,
+              "kind": "variable",
+              "name": "var",
+            },
+            "kind": "encapsedpart",
+            "syntax": "simple",
+          },
+          EncapsedPart {
+            "curly": false,
+            "expression": String {
+              "isDoubleQuote": false,
+              "kind": "string",
+              "raw": "} string",
+              "unicode": false,
+              "value": "} string",
+            },
+            "kind": "encapsedpart",
+            "syntax": null,
+          },
+        ],
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;

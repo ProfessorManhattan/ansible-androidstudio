@@ -1,0 +1,992 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Tokenizer = void 0;
+const errors_1 = require("../errors");
+const code_point_iterator_1 = require("./code-point-iterator");
+const code_point_1 = require("./code-point");
+const HAS_BIGINT = typeof BigInt !== "undefined";
+const RADIX_PREFIXES = {
+    16: "0x",
+    10: "",
+    8: "0o",
+    2: "02",
+};
+const ESCAPES = {
+    [code_point_1.LATIN_SMALL_B]: code_point_1.BACKSPACE,
+    [code_point_1.LATIN_SMALL_T]: code_point_1.TABULATION,
+    [code_point_1.LATIN_SMALL_N]: code_point_1.LINE_FEED,
+    [code_point_1.LATIN_SMALL_F]: code_point_1.FORM_FEED,
+    [code_point_1.LATIN_SMALL_R]: code_point_1.CARRIAGE_RETURN,
+    [code_point_1.QUOTATION_MARK]: code_point_1.QUOTATION_MARK,
+    [code_point_1.BACKSLASH]: code_point_1.BACKSLASH,
+};
+/**
+ * Tokenizer for TOML.
+ */
+class Tokenizer {
+    /**
+     * Initialize this tokenizer.
+     */
+    constructor(text, parserOptions) {
+        this.backCode = false;
+        this.lastCodePoint = code_point_1.NULL;
+        this.state = "DATA";
+        this.token = null;
+        this.tokenStart = {
+            offset: -1,
+            line: 1,
+            column: -1,
+        };
+        /**
+         * The flag which enables values tokens.
+         * If this is true, this tokenizer will generate Integer, Float, Boolean, Offset Date-Time, Local Date-Time ,Local Date, Local Time, Array and Inline Table tokens.
+         */
+        this.valuesEnabled = false;
+        this.text = text;
+        this.parserOptions = parserOptions || {};
+        this.codePointIterator = new code_point_iterator_1.CodePointIterator(text);
+    }
+    get positions() {
+        return {
+            start: this.codePointIterator.start,
+            end: this.codePointIterator.end,
+        };
+    }
+    /**
+     * Report an invalid character error.
+     */
+    reportParseError(code, data) {
+        throw new errors_1.ParseError(code, this.codePointIterator.start.offset, this.codePointIterator.start.line, this.codePointIterator.start.column, data);
+    }
+    /**
+     * Get the next token.
+     */
+    nextToken() {
+        let token = this.token;
+        if (token != null) {
+            this.token = null;
+            return token;
+        }
+        let cp = this.lastCodePoint;
+        while (cp !== code_point_1.EOF && !this.token) {
+            cp = this.nextCode();
+            const nextState = this[this.state](cp);
+            if (!nextState) {
+                throw new Error(`Unknown error: pre state=${this.state}`);
+            }
+            this.state = nextState;
+        }
+        token = this.token;
+        this.token = null;
+        return token;
+    }
+    /**
+     * Get the next code point.
+     */
+    nextCode() {
+        if (this.lastCodePoint === code_point_1.EOF) {
+            return code_point_1.EOF;
+        }
+        if (this.backCode) {
+            this.backCode = false;
+            return this.lastCodePoint;
+        }
+        return (this.lastCodePoint = this.codePointIterator.next());
+    }
+    /**
+     * Skip code point iterator.
+     */
+    skip(count) {
+        if (this.backCode) {
+            this.backCode = false;
+            count--;
+        }
+        if (!count) {
+            return;
+        }
+        count--;
+        for (let index = 0; index < count; index++) {
+            this.codePointIterator.next();
+        }
+        this.lastCodePoint = this.codePointIterator.next();
+    }
+    /**
+     * Back the current code point as the given state.
+     */
+    back(state) {
+        this.backCode = true;
+        return state;
+    }
+    punctuatorToken(cp) {
+        this.startToken();
+        this.endToken("Punctuator", "end", cp);
+    }
+    startToken() {
+        this.tokenStart = Object.assign({}, this.codePointIterator.start);
+    }
+    /**
+     * Commit the current token.
+     */
+    endToken(type, pos, option1, option2) {
+        const { tokenStart } = this;
+        const end = this.codePointIterator[pos];
+        const range = [tokenStart.offset, end.offset];
+        const loc = {
+            start: {
+                line: tokenStart.line,
+                column: tokenStart.column,
+            },
+            end: {
+                line: end.line,
+                column: end.column,
+            },
+        };
+        if (type === "Block") {
+            this.token = {
+                type,
+                value: this.text.slice(tokenStart.offset + 1, end.offset),
+                range,
+                loc,
+            };
+        }
+        else {
+            let token;
+            const value = type === "Punctuator"
+                ? String.fromCodePoint(option1)
+                : this.text.slice(tokenStart.offset, end.offset);
+            if (type === "BasicString" ||
+                type === "LiteralString" ||
+                type === "MultiLineBasicString" ||
+                type === "MultiLineLiteralString") {
+                token = {
+                    type,
+                    value,
+                    string: String.fromCodePoint(...option1),
+                    range,
+                    loc,
+                };
+            }
+            else if (type === "Integer") {
+                const text = String.fromCodePoint(...option1);
+                token = {
+                    type,
+                    value,
+                    number: parseInt(text, option2),
+                    bigint: HAS_BIGINT
+                        ? BigInt(RADIX_PREFIXES[option2] + text)
+                        : null,
+                    range,
+                    loc,
+                };
+            }
+            else if (type === "Float") {
+                token = {
+                    type,
+                    value,
+                    number: option1,
+                    range,
+                    loc,
+                };
+            }
+            else if (type === "Boolean") {
+                token = {
+                    type,
+                    value,
+                    boolean: option1,
+                    range,
+                    loc,
+                };
+            }
+            else {
+                token = {
+                    type,
+                    value,
+                    range,
+                    loc,
+                };
+            }
+            this.token = token;
+        }
+    }
+    DATA(cp) {
+        while (code_point_1.isWhitespace(cp) || code_point_1.isEOL(cp)) {
+            cp = this.nextCode();
+        }
+        if (cp === code_point_1.HASH) {
+            this.startToken();
+            return "COMMENT";
+        }
+        if (cp === code_point_1.QUOTATION_MARK) {
+            this.startToken();
+            return "BASIC_STRING";
+        }
+        if (cp === code_point_1.SINGLE_QUOTE) {
+            this.startToken();
+            return "LITERAL_STRING";
+        }
+        if (cp === code_point_1.DOT || // .
+            cp === code_point_1.EQUALS_SIGN || // =
+            cp === code_point_1.LEFT_BRACKET || // [
+            cp === code_point_1.RIGHT_BRACKET || // ]
+            cp === code_point_1.LEFT_BRACE || // {
+            cp === code_point_1.RIGHT_BRACE || // }
+            cp === code_point_1.COMMA // ,
+        ) {
+            this.punctuatorToken(cp);
+            return "DATA";
+        }
+        if (this.valuesEnabled) {
+            if (cp === code_point_1.DASH || cp === code_point_1.PLUS_SIGN) {
+                this.startToken();
+                return "SIGN";
+            }
+            if (cp === code_point_1.LATIN_SMALL_N || cp === code_point_1.LATIN_SMALL_I) {
+                this.startToken();
+                return this.back("NAN_OR_INF");
+            }
+            if (code_point_1.isDigit(cp)) {
+                this.startToken();
+                return this.back("NUMBER");
+            }
+            if (cp === code_point_1.LATIN_SMALL_T || cp === code_point_1.LATIN_SMALL_F) {
+                this.startToken();
+                return this.back("BOOLEAN");
+            }
+        }
+        else {
+            if (isBare(cp)) {
+                this.startToken();
+                return "BARE";
+            }
+        }
+        if (cp === code_point_1.EOF) {
+            // end
+            return "DATA";
+        }
+        return this.reportParseError("unexpected-char");
+    }
+    COMMENT(cp) {
+        while (!code_point_1.isEOL(cp) && cp !== code_point_1.EOF) {
+            if (isControlOtherThanTab(cp)) {
+                return this.reportParseErrorControlChar();
+            }
+            cp = this.nextCode();
+        }
+        this.endToken("Block", "start");
+        return "DATA";
+    }
+    BARE(cp) {
+        while (isBare(cp)) {
+            cp = this.nextCode();
+        }
+        this.endToken("Bare", "start");
+        return this.back("DATA");
+    }
+    BASIC_STRING(cp) {
+        if (cp === code_point_1.QUOTATION_MARK) {
+            cp = this.nextCode();
+            if (cp === code_point_1.QUOTATION_MARK) {
+                return "MULTI_LINE_BASIC_STRING";
+            }
+            this.endToken("BasicString", "start", []);
+            return this.back("DATA");
+        }
+        const codePoints = [];
+        while (cp !== code_point_1.QUOTATION_MARK && cp !== code_point_1.EOF && cp !== code_point_1.LINE_FEED) {
+            if (isControlOtherThanTab(cp)) {
+                return this.reportParseErrorControlChar();
+            }
+            if (cp === code_point_1.BACKSLASH) {
+                cp = this.nextCode();
+                const ecp = ESCAPES[cp];
+                if (ecp) {
+                    codePoints.push(ecp);
+                    cp = this.nextCode();
+                    continue;
+                }
+                else if (cp === code_point_1.LATIN_SMALL_U) {
+                    const code = this.parseUnicode(4);
+                    codePoints.push(code);
+                    cp = this.nextCode();
+                    continue;
+                }
+                else if (cp === code_point_1.LATIN_CAPITAL_U) {
+                    const code = this.parseUnicode(8);
+                    codePoints.push(code);
+                    cp = this.nextCode();
+                    continue;
+                }
+                return this.reportParseError("invalid-char-in-escape-sequence");
+            }
+            codePoints.push(cp);
+            cp = this.nextCode();
+        }
+        if (cp !== code_point_1.QUOTATION_MARK) {
+            return this.reportParseError("unterminated-string");
+        }
+        this.endToken("BasicString", "end", codePoints);
+        return "DATA";
+    }
+    MULTI_LINE_BASIC_STRING(cp) {
+        const codePoints = [];
+        if (cp === code_point_1.LINE_FEED) {
+            // A newline immediately following the opening delimiter will be trimmed.
+            cp = this.nextCode();
+        }
+        while (cp !== code_point_1.EOF) {
+            if (cp !== code_point_1.LINE_FEED && isControlOtherThanTab(cp)) {
+                return this.reportParseErrorControlChar();
+            }
+            if (cp === code_point_1.QUOTATION_MARK) {
+                const nextPoints = this.codePointIterator.subCodePoints();
+                if (nextPoints.next() === code_point_1.QUOTATION_MARK &&
+                    nextPoints.next() === code_point_1.QUOTATION_MARK) {
+                    if (nextPoints.next() === code_point_1.QUOTATION_MARK) {
+                        codePoints.push(code_point_1.QUOTATION_MARK);
+                        if (nextPoints.next() === code_point_1.QUOTATION_MARK) {
+                            codePoints.push(code_point_1.QUOTATION_MARK);
+                            if (nextPoints.next() === code_point_1.QUOTATION_MARK) {
+                                return this.reportParseError("invalid-three-quotes");
+                            }
+                        }
+                    }
+                    this.skip(nextPoints.count - 1);
+                    // end
+                    this.endToken("MultiLineBasicString", "end", codePoints);
+                    return "DATA";
+                }
+            }
+            if (cp === code_point_1.BACKSLASH) {
+                cp = this.nextCode();
+                const ecp = ESCAPES[cp];
+                if (ecp) {
+                    codePoints.push(ecp);
+                    cp = this.nextCode();
+                    continue;
+                }
+                else if (cp === code_point_1.LATIN_SMALL_U) {
+                    const code = this.parseUnicode(4);
+                    codePoints.push(code);
+                    cp = this.nextCode();
+                    continue;
+                }
+                else if (cp === code_point_1.LATIN_CAPITAL_U) {
+                    const code = this.parseUnicode(8);
+                    codePoints.push(code);
+                    cp = this.nextCode();
+                    continue;
+                }
+                else if (cp === code_point_1.LINE_FEED) {
+                    cp = this.nextCode();
+                    while (code_point_1.isWhitespace(cp) || cp === code_point_1.LINE_FEED) {
+                        cp = this.nextCode();
+                    }
+                    continue;
+                }
+                else if (code_point_1.isWhitespace(cp)) {
+                    let valid = true;
+                    for (const nextCp of this.codePointIterator.iterateSubCodePoints()) {
+                        if (nextCp === code_point_1.LINE_FEED) {
+                            break;
+                        }
+                        if (!code_point_1.isWhitespace(nextCp)) {
+                            valid = false;
+                            break;
+                        }
+                    }
+                    if (valid) {
+                        cp = this.nextCode();
+                        while (code_point_1.isWhitespace(cp) || cp === code_point_1.LINE_FEED) {
+                            cp = this.nextCode();
+                        }
+                        continue;
+                    }
+                }
+                return this.reportParseError("invalid-char-in-escape-sequence");
+            }
+            codePoints.push(cp);
+            cp = this.nextCode();
+        }
+        return this.reportParseError("unterminated-string");
+    }
+    LITERAL_STRING(cp) {
+        if (cp === code_point_1.SINGLE_QUOTE) {
+            cp = this.nextCode();
+            if (cp === code_point_1.SINGLE_QUOTE) {
+                return "MULTI_LINE_LITERAL_STRING";
+            }
+            this.endToken("LiteralString", "start", []);
+            return this.back("DATA");
+        }
+        const codePoints = [];
+        while (cp !== code_point_1.SINGLE_QUOTE && cp !== code_point_1.EOF && cp !== code_point_1.LINE_FEED) {
+            if (isControlOtherThanTab(cp)) {
+                return this.reportParseErrorControlChar();
+            }
+            codePoints.push(cp);
+            cp = this.nextCode();
+        }
+        if (cp !== code_point_1.SINGLE_QUOTE) {
+            return this.reportParseError("unterminated-string");
+        }
+        this.endToken("LiteralString", "end", codePoints);
+        return "DATA";
+    }
+    MULTI_LINE_LITERAL_STRING(cp) {
+        const codePoints = [];
+        if (cp === code_point_1.LINE_FEED) {
+            // A newline immediately following the opening delimiter will be trimmed.
+            cp = this.nextCode();
+        }
+        while (cp !== code_point_1.EOF) {
+            if (cp !== code_point_1.LINE_FEED && isControlOtherThanTab(cp)) {
+                return this.reportParseErrorControlChar();
+            }
+            if (cp === code_point_1.SINGLE_QUOTE) {
+                const nextPoints = this.codePointIterator.subCodePoints();
+                if (nextPoints.next() === code_point_1.SINGLE_QUOTE &&
+                    nextPoints.next() === code_point_1.SINGLE_QUOTE) {
+                    if (nextPoints.next() === code_point_1.SINGLE_QUOTE) {
+                        codePoints.push(code_point_1.SINGLE_QUOTE);
+                        if (nextPoints.next() === code_point_1.SINGLE_QUOTE) {
+                            codePoints.push(code_point_1.SINGLE_QUOTE);
+                            if (nextPoints.next() === code_point_1.SINGLE_QUOTE) {
+                                return this.reportParseError("invalid-three-quotes");
+                            }
+                        }
+                    }
+                    this.skip(nextPoints.count - 1);
+                    // end
+                    this.endToken("MultiLineLiteralString", "end", codePoints);
+                    return "DATA";
+                }
+            }
+            codePoints.push(cp);
+            cp = this.nextCode();
+        }
+        return this.reportParseError("unterminated-string");
+    }
+    SIGN(cp) {
+        if (cp === code_point_1.LATIN_SMALL_N || cp === code_point_1.LATIN_SMALL_I) {
+            return this.back("NAN_OR_INF");
+        }
+        if (code_point_1.isDigit(cp)) {
+            return this.back("NUMBER");
+        }
+        return this.reportParseError("unexpected-char");
+    }
+    NAN_OR_INF(cp) {
+        if (cp === code_point_1.LATIN_SMALL_N) {
+            const codePoints = this.codePointIterator.subCodePoints();
+            if (codePoints.next() === code_point_1.LATIN_SMALL_A &&
+                codePoints.next() === code_point_1.LATIN_SMALL_N) {
+                this.skip(2);
+                this.endToken("Float", "end", NaN);
+                return "DATA";
+            }
+        }
+        else if (cp === code_point_1.LATIN_SMALL_I) {
+            const codePoints = this.codePointIterator.subCodePoints();
+            if (codePoints.next() === code_point_1.LATIN_SMALL_N &&
+                codePoints.next() === code_point_1.LATIN_SMALL_F) {
+                this.skip(2);
+                this.endToken("Float", "end", this.text[this.tokenStart.offset] === "-"
+                    ? -Infinity
+                    : Infinity);
+                return "DATA";
+            }
+        }
+        return this.reportParseError("unexpected-char");
+    }
+    NUMBER(cp) {
+        const start = this.text[this.tokenStart.offset];
+        const sign = start === "+" ? code_point_1.PLUS_SIGN : start === "-" ? code_point_1.DASH : code_point_1.NULL;
+        if (cp === code_point_1.DIGIT_0) {
+            if (sign === code_point_1.NULL) {
+                const subCodePoints = this.codePointIterator.subCodePoints();
+                const nextCp = subCodePoints.next();
+                if (code_point_1.isDigit(nextCp)) {
+                    const nextNextCp = subCodePoints.next();
+                    if ((code_point_1.isDigit(nextNextCp) &&
+                        code_point_1.isDigit(subCodePoints.next()) &&
+                        subCodePoints.next() === code_point_1.DASH) ||
+                        nextNextCp === code_point_1.COLON) {
+                        const isDate = nextNextCp !== code_point_1.COLON;
+                        const data = {
+                            hasDate: isDate,
+                            year: 0,
+                            month: 0,
+                            day: 0,
+                            hour: 0,
+                            minute: 0,
+                            second: 0,
+                        };
+                        this.data = data;
+                        return this.back(isDate ? "DATE_YEAR" : "TIME_HOUR");
+                    }
+                    return this.reportParseError("invalid-leading-zero");
+                }
+            }
+            cp = this.nextCode();
+            if (cp === code_point_1.LATIN_SMALL_X ||
+                cp === code_point_1.LATIN_SMALL_O ||
+                cp === code_point_1.LATIN_SMALL_B) {
+                if (sign !== code_point_1.NULL) {
+                    return this.reportParseError("unexpected-char");
+                }
+                return cp === code_point_1.LATIN_SMALL_X
+                    ? "HEX"
+                    : cp === code_point_1.LATIN_SMALL_O
+                        ? "OCTAL"
+                        : "BINARY";
+            }
+            if (cp === code_point_1.LATIN_SMALL_E || cp === code_point_1.LATIN_CAPITAL_E) {
+                const data = {
+                    // Float values -0.0 and +0.0 are valid and should map according to IEEE 754.
+                    left: sign === code_point_1.DASH ? -0 : 0,
+                };
+                this.data = data;
+                return "EXPONENT_RIGHT";
+            }
+            if (cp === code_point_1.DOT) {
+                const data = {
+                    minus: sign === code_point_1.DASH,
+                    absInt: 0,
+                };
+                this.data = data;
+                return "FRACTIONAL_RIGHT";
+            }
+            // Integer values -0 and +0 are valid and identical to an unprefixed zero.
+            this.endToken("Integer", "start", [code_point_1.DIGIT_0], 10);
+            return this.back("DATA");
+        }
+        const { codePoints, nextCp, hasUnderscore } = this.parseDigits(cp, code_point_1.isDigit);
+        if (nextCp === code_point_1.DASH &&
+            sign === code_point_1.NULL &&
+            !hasUnderscore &&
+            codePoints.length === 4) {
+            const data = {
+                hasDate: true,
+                year: Number(String.fromCodePoint(...codePoints)),
+                month: 0,
+                day: 0,
+                hour: 0,
+                minute: 0,
+                second: 0,
+            };
+            this.data = data;
+            return "DATE_MONTH";
+        }
+        if (nextCp === code_point_1.COLON &&
+            sign === code_point_1.NULL &&
+            !hasUnderscore &&
+            codePoints.length === 2) {
+            const data = {
+                hasDate: false,
+                year: 0,
+                month: 0,
+                day: 0,
+                hour: Number(String.fromCodePoint(...codePoints)),
+                minute: 0,
+                second: 0,
+            };
+            this.data = data;
+            return "TIME_MINUTE";
+        }
+        if (nextCp === code_point_1.LATIN_SMALL_E || nextCp === code_point_1.LATIN_CAPITAL_E) {
+            const absNum = Number(String.fromCodePoint(...codePoints));
+            const data = {
+                left: sign === code_point_1.DASH ? -absNum : absNum,
+            };
+            this.data = data;
+            return "EXPONENT_RIGHT";
+        }
+        if (nextCp === code_point_1.DOT) {
+            const data = {
+                minus: sign === code_point_1.DASH,
+                absInt: Number(String.fromCodePoint(...codePoints)),
+            };
+            this.data = data;
+            return "FRACTIONAL_RIGHT";
+        }
+        this.endToken("Integer", "start", sign === code_point_1.DASH ? [code_point_1.DASH, ...codePoints] : codePoints, 10);
+        return this.back("DATA");
+    }
+    HEX(cp) {
+        const { codePoints } = this.parseDigits(cp, code_point_1.isHexDig);
+        this.endToken("Integer", "start", codePoints, 16);
+        return this.back("DATA");
+    }
+    OCTAL(cp) {
+        const { codePoints } = this.parseDigits(cp, code_point_1.isOctalDig);
+        this.endToken("Integer", "start", codePoints, 8);
+        return this.back("DATA");
+    }
+    BINARY(cp) {
+        const { codePoints } = this.parseDigits(cp, (c) => c === code_point_1.DIGIT_0 || c === code_point_1.DIGIT_1);
+        this.endToken("Integer", "start", codePoints, 2);
+        return this.back("DATA");
+    }
+    FRACTIONAL_RIGHT(cp) {
+        const { minus, absInt } = this.data;
+        const { codePoints, nextCp } = this.parseDigits(cp, code_point_1.isDigit);
+        const absNum = absInt +
+            Number(String.fromCodePoint(...codePoints)) *
+                Math.pow(10, -codePoints.length);
+        if (nextCp === code_point_1.LATIN_SMALL_E || nextCp === code_point_1.LATIN_CAPITAL_E) {
+            const data = {
+                left: minus ? -absNum : absNum,
+            };
+            this.data = data;
+            return "EXPONENT_RIGHT";
+        }
+        this.endToken("Float", "start", minus ? -absNum : absNum);
+        return this.back("DATA");
+    }
+    EXPONENT_RIGHT(cp) {
+        const { left } = this.data;
+        let minus = false;
+        if (cp === code_point_1.DASH || cp === code_point_1.PLUS_SIGN) {
+            minus = cp === code_point_1.DASH;
+            cp = this.nextCode();
+        }
+        const { codePoints } = this.parseDigits(cp, code_point_1.isDigit);
+        let right = Number(String.fromCodePoint(...codePoints));
+        if (minus) {
+            right = 0 - right;
+        }
+        this.endToken("Float", "start", left * Math.pow(10, right));
+        return this.back("DATA");
+    }
+    BOOLEAN(cp) {
+        if (cp === code_point_1.LATIN_SMALL_T) {
+            const codePoints = this.codePointIterator.subCodePoints();
+            if (codePoints.next() === code_point_1.LATIN_SMALL_R &&
+                codePoints.next() === code_point_1.LATIN_SMALL_U &&
+                codePoints.next() === code_point_1.LATIN_SMALL_E) {
+                // true
+                this.skip(codePoints.count);
+                this.endToken("Boolean", "end", true);
+                return "DATA";
+            }
+        }
+        else if (cp === code_point_1.LATIN_SMALL_F) {
+            const codePoints = this.codePointIterator.subCodePoints();
+            if (codePoints.next() === code_point_1.LATIN_SMALL_A &&
+                codePoints.next() === code_point_1.LATIN_SMALL_L &&
+                codePoints.next() === code_point_1.LATIN_SMALL_S &&
+                codePoints.next() === code_point_1.LATIN_SMALL_E) {
+                // false
+                this.skip(codePoints.count);
+                this.endToken("Boolean", "end", false);
+                return "DATA";
+            }
+        }
+        return this.reportParseError("unexpected-char");
+    }
+    DATE_YEAR(cp) {
+        // already checked
+        const codePoints = [
+            cp,
+            this.nextCode(),
+            this.nextCode(),
+            this.nextCode(),
+        ];
+        this.nextCode(); // hyphen
+        const data = this.data;
+        data.year = Number(String.fromCodePoint(...codePoints));
+        return "DATE_MONTH";
+    }
+    DATE_MONTH(cp) {
+        const codePoints = [];
+        if (code_point_1.isDigit(cp)) {
+            codePoints.push(cp);
+        }
+        else {
+            return this.reportParseError("unexpected-char");
+        }
+        cp = this.nextCode();
+        if (code_point_1.isDigit(cp)) {
+            codePoints.push(cp);
+        }
+        else {
+            return this.reportParseError("unexpected-char");
+        }
+        cp = this.nextCode();
+        if (cp !== code_point_1.DASH) {
+            return this.reportParseError("unexpected-char");
+        }
+        const data = this.data;
+        data.month = Number(String.fromCodePoint(...codePoints));
+        return "DATE_DAY";
+    }
+    DATE_DAY(cp) {
+        const codePoints = [];
+        if (code_point_1.isDigit(cp)) {
+            codePoints.push(cp);
+        }
+        else {
+            return this.reportParseError("unexpected-char");
+        }
+        cp = this.nextCode();
+        if (code_point_1.isDigit(cp)) {
+            codePoints.push(cp);
+        }
+        else {
+            return this.reportParseError("unexpected-char");
+        }
+        const data = this.data;
+        data.day = Number(String.fromCodePoint(...codePoints));
+        if (!isValidDate(data.year, data.month, data.day)) {
+            return this.reportParseError("invalid-date");
+        }
+        cp = this.nextCode();
+        if (cp === code_point_1.LATIN_CAPITAL_T || cp === code_point_1.LATIN_SMALL_T) {
+            return "TIME_HOUR";
+        }
+        if (cp === code_point_1.SPACE) {
+            const subCodePoints = this.codePointIterator.subCodePoints();
+            if (code_point_1.isDigit(subCodePoints.next()) &&
+                code_point_1.isDigit(subCodePoints.next())) {
+                return "TIME_HOUR";
+            }
+        }
+        this.endToken("LocalDate", "start");
+        return this.back("DATA");
+    }
+    TIME_HOUR(cp) {
+        const codePoints = [];
+        if (code_point_1.isDigit(cp)) {
+            codePoints.push(cp);
+        }
+        else {
+            return this.reportParseError("unexpected-char");
+        }
+        cp = this.nextCode();
+        if (code_point_1.isDigit(cp)) {
+            codePoints.push(cp);
+        }
+        else {
+            return this.reportParseError("unexpected-char");
+        }
+        cp = this.nextCode();
+        if (cp !== code_point_1.COLON) {
+            return this.reportParseError("unexpected-char");
+        }
+        const data = this.data;
+        data.hour = Number(String.fromCodePoint(...codePoints));
+        return "TIME_MINUTE";
+    }
+    TIME_MINUTE(cp) {
+        const codePoints = [];
+        if (code_point_1.isDigit(cp)) {
+            codePoints.push(cp);
+        }
+        else {
+            return this.reportParseError("unexpected-char");
+        }
+        cp = this.nextCode();
+        if (code_point_1.isDigit(cp)) {
+            codePoints.push(cp);
+        }
+        else {
+            return this.reportParseError("unexpected-char");
+        }
+        cp = this.nextCode();
+        if (cp !== code_point_1.COLON) {
+            return this.reportParseError("unexpected-char");
+        }
+        const data = this.data;
+        data.minute = Number(String.fromCodePoint(...codePoints));
+        return "TIME_SECOND";
+    }
+    TIME_SECOND(cp) {
+        const codePoints = [];
+        if (code_point_1.isDigit(cp)) {
+            codePoints.push(cp);
+        }
+        else {
+            return this.reportParseError("unexpected-char");
+        }
+        cp = this.nextCode();
+        if (code_point_1.isDigit(cp)) {
+            codePoints.push(cp);
+        }
+        else {
+            return this.reportParseError("unexpected-char");
+        }
+        const data = this.data;
+        data.second = Number(String.fromCodePoint(...codePoints));
+        if (!isValidTime(data.hour, data.minute, data.second)) {
+            return this.reportParseError("invalid-time");
+        }
+        cp = this.nextCode();
+        if (cp === code_point_1.DOT) {
+            return "TIME_SEC_FRAC";
+        }
+        if (data.hasDate) {
+            if (cp === code_point_1.DASH || cp === code_point_1.PLUS_SIGN) {
+                return "TIME_OFFSET";
+            }
+            if (cp === code_point_1.LATIN_CAPITAL_Z || cp === code_point_1.LATIN_SMALL_Z) {
+                this.endToken("OffsetDateTime", "end");
+                return "DATA";
+            }
+            this.endToken("LocalDateTime", "start");
+            return this.back("DATA");
+        }
+        this.endToken("LocalTime", "start");
+        return this.back("DATA");
+    }
+    TIME_SEC_FRAC(cp) {
+        if (!code_point_1.isDigit(cp)) {
+            return this.reportParseError("unexpected-char");
+        }
+        while (code_point_1.isDigit(cp)) {
+            cp = this.nextCode();
+        }
+        const data = this.data;
+        if (data.hasDate) {
+            if (cp === code_point_1.DASH || cp === code_point_1.PLUS_SIGN) {
+                return "TIME_OFFSET";
+            }
+            if (cp === code_point_1.LATIN_CAPITAL_Z || cp === code_point_1.LATIN_SMALL_Z) {
+                this.endToken("OffsetDateTime", "end");
+                return "DATA";
+            }
+            this.endToken("LocalDateTime", "start");
+            return this.back("DATA");
+        }
+        this.endToken("LocalTime", "start");
+        return this.back("DATA");
+    }
+    TIME_OFFSET(cp) {
+        if (!code_point_1.isDigit(cp)) {
+            return this.reportParseError("unexpected-char");
+        }
+        const hourCodePoints = [cp];
+        cp = this.nextCode();
+        if (code_point_1.isDigit(cp)) {
+            hourCodePoints.push(cp);
+        }
+        else {
+            return this.reportParseError("unexpected-char");
+        }
+        cp = this.nextCode();
+        if (cp !== code_point_1.COLON) {
+            return this.reportParseError("unexpected-char");
+        }
+        const minuteCodePoints = [];
+        cp = this.nextCode();
+        if (code_point_1.isDigit(cp)) {
+            minuteCodePoints.push(cp);
+        }
+        else {
+            return this.reportParseError("unexpected-char");
+        }
+        cp = this.nextCode();
+        if (code_point_1.isDigit(cp)) {
+            minuteCodePoints.push(cp);
+        }
+        else {
+            return this.reportParseError("unexpected-char");
+        }
+        const hour = Number(String.fromCodePoint(...hourCodePoints));
+        const minute = Number(String.fromCodePoint(...minuteCodePoints));
+        if (!isValidTime(hour, minute, 0)) {
+            return this.reportParseError("invalid-time");
+        }
+        this.endToken("OffsetDateTime", "end");
+        return "DATA";
+    }
+    parseDigits(cp, checkDigit) {
+        if (cp === code_point_1.UNDERSCORE) {
+            return this.reportParseError("invalid-underscore");
+        }
+        if (!checkDigit(cp)) {
+            return this.reportParseError("unexpected-char");
+        }
+        const codePoints = [];
+        let before = code_point_1.NULL;
+        let hasUnderscore = false;
+        while (checkDigit(cp) || cp === code_point_1.UNDERSCORE) {
+            if (cp === code_point_1.UNDERSCORE) {
+                hasUnderscore = true;
+                if (before === code_point_1.UNDERSCORE) {
+                    return this.reportParseError("invalid-underscore");
+                }
+            }
+            else {
+                codePoints.push(cp);
+            }
+            before = cp;
+            cp = this.nextCode();
+        }
+        if (before === code_point_1.UNDERSCORE) {
+            return this.reportParseError("invalid-underscore");
+        }
+        return {
+            codePoints,
+            nextCp: cp,
+            hasUnderscore,
+        };
+    }
+    parseUnicode(count) {
+        const codePoints = [];
+        for (const cp of this.codePointIterator.iterateSubCodePoints()) {
+            if (!code_point_1.isHexDig(cp)) {
+                return this.reportParseError("invalid-char-in-escape-sequence");
+            }
+            codePoints.push(cp);
+            if (codePoints.length >= count) {
+                break;
+            }
+        }
+        this.skip(codePoints.length);
+        const code = String.fromCodePoint(...codePoints);
+        const codePoint = parseInt(code, 16);
+        if (!code_point_1.isUnicodeScalarValue(codePoint)) {
+            return this.reportParseError("invalid-code-point", { cp: code });
+        }
+        return codePoint;
+    }
+    reportParseErrorControlChar() {
+        return this.reportParseError("invalid-control-character");
+    }
+}
+exports.Tokenizer = Tokenizer;
+/**
+ * Check whether the code point is [A-Za-z0-9_-]
+ */
+function isBare(cp) {
+    return code_point_1.isLetter(cp) || code_point_1.isDigit(cp) || cp === code_point_1.UNDERSCORE || cp === code_point_1.DASH;
+}
+/**
+ * Check whether the code point is [A-Za-z0-9_-]
+ */
+function isControlOtherThanTab(cp) {
+    return (code_point_1.isControl(cp) && cp !== code_point_1.TABULATION) || cp === code_point_1.DELETE;
+}
+/**
+ * Check whether the given values is valid date
+ */
+function isValidDate(y, m, d) {
+    if (y <= 0 || m > 12 || m <= 0 || d <= 0) {
+        return false;
+    }
+    const maxDayOfMonth = m === 2
+        ? y & 3 || (!(y % 25) && y & 15)
+            ? 28
+            : 29
+        : 30 + ((m + (m >> 3)) & 1);
+    return d <= maxDayOfMonth;
+}
+/**
+ * Check whether the given values is valid time
+ */
+function isValidTime(h, m, s) {
+    if (h >= 24 || h < 0 || m > 59 || m < 0 || s > 60 || s < 0) {
+        return false;
+    }
+    return true;
+}

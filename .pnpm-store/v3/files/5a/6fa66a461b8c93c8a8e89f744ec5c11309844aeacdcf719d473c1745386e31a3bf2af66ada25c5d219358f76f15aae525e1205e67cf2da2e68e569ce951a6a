@@ -1,0 +1,15 @@
+export declare const acquireProjectType: () => {
+    readonly vars: {
+        readonly REPOSITORY_SUBTYPE: string;
+        readonly REPOSITORY_TYPE: string;
+    };
+};
+export declare const getExtends: (extension: 'javascript' | 'json' | 'toml' | 'typescript' | 'yml', type: string, subType: string) => readonly string[];
+export declare const getPlugins: (extension: 'javascript' | 'json' | 'toml' | 'typescript' | 'yml', type: string, subType: string) => readonly string[];
+export declare const getGitignore: () => readonly string[];
+export declare const getGlob: (pattern: string) => readonly string[];
+export declare const schemaDefinitions: () => readonly {
+    readonly fileMatch: readonly string[];
+    readonly schema: string;
+}[];
+export declare const vscodeTasksOrder: string[];

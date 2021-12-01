@@ -1,0 +1,234 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const jsonc_eslint_parser_1 = require("jsonc-eslint-parser");
+const yaml_eslint_parser_1 = require("yaml-eslint-parser");
+const toml_eslint_parser_1 = require("toml-eslint-parser");
+const utils_1 = require("../utils");
+const minimatch_1 = __importDefault(require("minimatch"));
+const path_1 = __importDefault(require("path"));
+const ast_1 = require("../utils/ast");
+const schema_1 = require("../utils/schema");
+const validator_factory_1 = require("../utils/validator-factory");
+function matchFile(filename, fileMatch) {
+    return (fileMatch.includes(path_1.default.basename(filename)) ||
+        fileMatch.some((fm) => (0, minimatch_1.default)(filename, fm, { dot: true })));
+}
+function parseOption(option, context, filename) {
+    if (typeof option === "string") {
+        return parseOption({
+            schemas: [
+                { fileMatch: [path_1.default.basename(filename)], schema: option },
+            ],
+            useSchemastoreCatalog: false,
+        }, context, filename);
+    }
+    const validators = [];
+    for (const schemaData of option.schemas || []) {
+        if (!matchFile(filename, schemaData.fileMatch)) {
+            continue;
+        }
+        const schema = typeof schemaData.schema === "string"
+            ? (0, schema_1.loadSchema)(schemaData.schema, context)
+            : schemaData.schema;
+        if (!schema) {
+            context.report({
+                loc: { line: 1, column: 0 },
+                message: `Specified schema could not be resolved.${typeof schemaData.schema === "string"
+                    ? ` Path: "${schemaData.schema}"`
+                    : ""}`,
+            });
+            continue;
+        }
+        const schemaPath = typeof schemaData.schema === "string"
+            ? schemaData.schema
+            : getCwd(context);
+        validators.push((0, validator_factory_1.compile)(schema, schemaPath, context));
+    }
+    if (!validators.length) {
+        if (option.useSchemastoreCatalog !== false) {
+            const catalog = require("../../schemastore/www.schemastore.org/api/json/catalog.json");
+            const schemas = catalog.schemas;
+            for (const schemaData of schemas) {
+                if (!schemaData.fileMatch) {
+                    continue;
+                }
+                if (!matchFile(filename, schemaData.fileMatch)) {
+                    continue;
+                }
+                const schema = (0, schema_1.loadSchema)(schemaData.url, context);
+                if (!schema) {
+                    continue;
+                }
+                const validator = (0, validator_factory_1.compile)(schema, schemaData.url, context);
+                validators.push(validator);
+            }
+        }
+    }
+    if (!validators.length) {
+        return null;
+    }
+    return (data) => {
+        const errors = [];
+        for (const validator of validators) {
+            errors.push(...validator(data));
+        }
+        return errors;
+    };
+}
+exports.default = (0, utils_1.createRule)("no-invalid", {
+    meta: {
+        docs: {
+            description: "validate object with JSON Schema.",
+            categories: ["recommended"],
+            default: "warn",
+        },
+        fixable: undefined,
+        schema: [
+            {
+                oneOf: [
+                    { type: "string" },
+                    {
+                        type: "object",
+                        properties: {
+                            schemas: {
+                                type: "array",
+                                items: {
+                                    type: "object",
+                                    properties: {
+                                        name: { type: "string" },
+                                        description: { type: "string" },
+                                        fileMatch: {
+                                            type: "array",
+                                            items: { type: "string" },
+                                            minItems: 1,
+                                        },
+                                        schema: { type: ["object", "string"] },
+                                    },
+                                    additionalProperties: true,
+                                    required: ["fileMatch", "schema"],
+                                },
+                            },
+                            useSchemastoreCatalog: { type: "boolean" },
+                        },
+                        additionalProperties: false,
+                    },
+                ],
+            },
+        ],
+        messages: {},
+        type: "suggestion",
+    },
+    create(context, { filename }) {
+        const cwd = getCwd(context);
+        const validator = parseOption(context.options[0] || {}, context, filename.startsWith(cwd) ? path_1.default.relative(cwd, filename) : filename);
+        if (!validator) {
+            return {};
+        }
+        let existsExports = false;
+        const sourceCode = context.getSourceCode();
+        function validateData(data, resolveLoc) {
+            const errors = validator(data);
+            for (const error of errors) {
+                const loc = resolveLoc(error);
+                if (!loc) {
+                    continue;
+                }
+                context.report({
+                    loc,
+                    message: error.message,
+                });
+            }
+        }
+        function validateJSExport(node, rootRange) {
+            if (existsExports) {
+                return;
+            }
+            existsExports = true;
+            const data = (0, ast_1.analyzeJsAST)(node, rootRange, context);
+            if (data == null) {
+                return;
+            }
+            validateData(data.object, (error) => {
+                let target = data.pathData;
+                for (const p of error.path) {
+                    const next = target === null || target === void 0 ? void 0 : target.children.get(p);
+                    target = typeof next === "symbol" ? undefined : next;
+                }
+                const key = target === null || target === void 0 ? void 0 : target.key;
+                const range = typeof key === "function" ? key(sourceCode) : key;
+                if (!range) {
+                    return null;
+                }
+                return {
+                    start: sourceCode.getLocFromIndex(range[0]),
+                    end: sourceCode.getLocFromIndex(range[1]),
+                };
+            });
+        }
+        return {
+            Program(node) {
+                if (context.parserServices.isJSON) {
+                    const program = node;
+                    validateData((0, jsonc_eslint_parser_1.getStaticJSONValue)(program), (error) => {
+                        return errorDataToLoc((0, ast_1.getJSONNodeFromPath)(program, error.path));
+                    });
+                }
+                else if (context.parserServices.isYAML) {
+                    const program = node;
+                    validateData((0, yaml_eslint_parser_1.getStaticYAMLValue)(program), (error) => {
+                        return errorDataToLoc((0, ast_1.getYAMLNodeFromPath)(program, error.path));
+                    });
+                }
+                else if (context.parserServices.isTOML) {
+                    const program = node;
+                    validateData((0, toml_eslint_parser_1.getStaticTOMLValue)(program), (error) => {
+                        return errorDataToLoc((0, ast_1.getTOMLNodeFromPath)(program, error.path));
+                    });
+                }
+            },
+            ExportDefaultDeclaration(node) {
+                if (node.declaration.type === "FunctionDeclaration" ||
+                    node.declaration.type === "ClassDeclaration" ||
+                    node.declaration.type === "VariableDeclaration") {
+                    return;
+                }
+                const defaultToken = sourceCode.getTokenBefore(node.declaration);
+                validateJSExport(node.declaration, [
+                    node.range[0],
+                    defaultToken.range[1],
+                ]);
+            },
+            AssignmentExpression(node) {
+                if ((node.left.type === "Identifier" &&
+                    node.left.name === "exports") ||
+                    (node.left.type === "MemberExpression" &&
+                        node.left.object.type === "Identifier" &&
+                        node.left.object.name === "module" &&
+                        node.left.computed === false &&
+                        node.left.property.type === "Identifier" &&
+                        node.left.property.name === "exports")) {
+                    validateJSExport(node.right, node.left.range);
+                }
+            },
+        };
+        function errorDataToLoc(errorData) {
+            if (errorData.key) {
+                const range = errorData.key(sourceCode);
+                return {
+                    start: sourceCode.getLocFromIndex(range[0]),
+                    end: sourceCode.getLocFromIndex(range[1]),
+                };
+            }
+            return errorData.value.loc;
+        }
+    },
+});
+function getCwd(context) {
+    if (context.getCwd) {
+        return context.getCwd();
+    }
+    return path_1.default.resolve("");
+}

@@ -1,0 +1,28 @@
+export declare const specRules: {
+    'filenames/match-regex': (string | number)[];
+    'fp/no-mutation': string;
+    'functional/no-class': string;
+    'functional/no-let': string;
+    'functional/no-this-expression': string;
+    'import/no-extraneous-dependencies': (string | {
+        devDependencies: boolean;
+    })[];
+    'init-declarations': string;
+    'jest-async/expect-return': string;
+    'jest/no-hooks': string;
+    'jest/prefer-expect-assertions': (string | {
+        onlyFunctionsWithAsyncKeyword: boolean;
+    })[];
+    'jest/prefer-lowercase-title': (string | {
+        ignoreTopLevelDescribe: boolean;
+    })[];
+    'jest/require-hook': string;
+    'jest/unbound-method': string;
+    'max-lines-per-function': string;
+    'no-magic-numbers': string;
+    'no-undef': string;
+    'node/no-unpublished-import': string;
+    'unicorn/prevent-abbreviations': (string | {
+        ignore: string[];
+    })[];
+};

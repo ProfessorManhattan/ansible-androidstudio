@@ -1,0 +1,54 @@
+{
+  "name": "eslint-formatter-gitlab",
+  "version": "3.0.0",
+  "description": "Show ESLint results directly in the GitLab code quality results",
+  "author": "Remco Haszing <remcohaszing@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://gitlab.com/remcohaszing/eslint-formatter-gitlab#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.com/remcohaszing/eslint-formatter-gitlab.git"
+  },
+  "bugs": {
+    "url": "https://gitlab.com/remcohaszing/eslint-formatter-gitlab.git/issues"
+  },
+  "files": [
+    "index.js"
+  ],
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "eslint",
+    "eslint-formatter",
+    "eslintformatter",
+    "gitlab",
+    "gitlab-ci"
+  ],
+  "dependencies": {
+    "chalk": "^4.0.0",
+    "js-yaml": "^4.0.0"
+  },
+  "peerDependencies": {
+    "eslint": "^5 || ^6 || ^7 || ^8"
+  },
+  "devDependencies": {
+    "codecov": "^3.0.0",
+    "eslint": "^7.0.0",
+    "eslint-config-remcohaszing": "^3.0.0",
+    "eslint-plugin-eslint-comments": "^3.0.0",
+    "eslint-plugin-import": "^2.0.0",
+    "eslint-plugin-jest": "^24.0.0",
+    "eslint-plugin-jest-formatting": "^3.0.0",
+    "eslint-plugin-jsdoc": "^36.0.0",
+    "eslint-plugin-markdown": "^2.0.0",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-sort-destructure-keys": "^1.0.0",
+    "eslint-plugin-unicorn": "^36.0.0",
+    "jest": "^27.0.0",
+    "jest-junit": "^13.0.0",
+    "memfs": "^3.0.0",
+    "prettier": "^2.0.0"
+  }
+}

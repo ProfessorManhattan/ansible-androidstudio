@@ -1,0 +1,8 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.myExportedFunction = void 0;
+function myExportedFunction(message) {
+    return message.charAt(0);
+}
+exports.myExportedFunction = myExportedFunction;
+//# sourceMappingURL=main.js.map

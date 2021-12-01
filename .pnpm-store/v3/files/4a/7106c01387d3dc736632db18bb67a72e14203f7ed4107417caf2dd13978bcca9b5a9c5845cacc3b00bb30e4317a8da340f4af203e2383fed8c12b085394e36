@@ -1,0 +1,72 @@
+export declare const tsRules: {
+    '@typescript-eslint/array-type': (string | {
+        default: string;
+    })[];
+    '@typescript-eslint/class-literal-property-style': string[];
+    '@typescript-eslint/explicit-member-accessibility': (string | {
+        accessibility: string;
+        overrides: {
+            accessors: string;
+            constructors: string;
+            methods: string;
+            parameterProperties: string;
+            properties: string;
+        };
+    })[];
+    '@typescript-eslint/member-delimiter-style': (string | {
+        multiline: {
+            delimiter: string;
+            requireLast: boolean;
+        };
+        singleline: {
+            delimiter: string;
+            requireLast: boolean;
+        };
+    })[];
+    '@typescript-eslint/no-shadow': string[];
+    '@typescript-eslint/quotes': (string | {
+        avoidEscape: boolean;
+    })[];
+    '@typescript-eslint/triple-slash-reference': (string | {
+        lib: string;
+        path: string;
+        types: string;
+    })[];
+    '@typescript-eslint/tslint/config': (string | {
+        rules: {
+            'comment-type': (string | boolean)[];
+            'completed-docs': (string | boolean)[];
+            encoding: boolean;
+            'import-spacing': boolean;
+            'invalid-void': boolean;
+            'no-inferred-empty-object-type': boolean;
+            'no-mergeable-namespace': boolean;
+            'no-promise-as-boolean': boolean;
+            'no-tautology-expression': boolean;
+            'no-unnecessary-callback-wrapper': boolean;
+            'number-literal-format': boolean;
+            'object-literal-sort-keys': boolean;
+            'prefer-conditional-expression': boolean;
+            'prefer-method-signature': boolean;
+            'prefer-switch': (boolean | {
+                'min-cases': number;
+            })[];
+            'return-undefined': boolean;
+            'static-this': boolean;
+            'strict-comparisons': boolean;
+            'strict-string-expressions': boolean;
+            'strict-type-predicates': boolean;
+            typedef: (string | boolean)[];
+            'unnecessary-else': boolean;
+        };
+    })[];
+    'class-methods-use-this': string;
+    'new-cap': string;
+    'no-explicit-type-exports/no-explicit-type-exports': number;
+    'no-unused-vars': string;
+    'no-useless-constructor': string;
+    'node/no-missing-import': string;
+    'node/no-unsupported-features/es-syntax': string;
+    'require-jsdoc': string;
+    'tsdoc/syntax': string;
+};

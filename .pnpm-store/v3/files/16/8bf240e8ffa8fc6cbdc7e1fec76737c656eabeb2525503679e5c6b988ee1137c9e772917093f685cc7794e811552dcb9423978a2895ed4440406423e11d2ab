@@ -1,0 +1,38 @@
+{
+  "name": "JSON",
+  "type": "data",
+  "tmScope": "source.json",
+  "aceMode": "json",
+  "codemirrorMode": "javascript",
+  "codemirrorMimeType": "application/json",
+  "extensions": [
+    ".json",
+    ".avsc",
+    ".geojson",
+    ".gltf",
+    ".har",
+    ".ice",
+    ".JSON-tmLanguage",
+    ".jsonl",
+    ".mcmeta",
+    ".tfstate",
+    ".tfstate.backup",
+    ".topojson",
+    ".webapp",
+    ".webmanifest",
+    ".yy",
+    ".yyp"
+  ],
+  "filenames": [
+    ".arcconfig",
+    ".htmlhintrc",
+    ".imgbotconfig",
+    ".tern-config",
+    ".tern-project",
+    ".watchmanconfig",
+    "Pipfile.lock",
+    "composer.lock",
+    "mcmod.info"
+  ],
+  "languageId": 174
+}

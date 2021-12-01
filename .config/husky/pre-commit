@@ -1,14 +1,14 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-# @file .husky/pre-commit
+# @file .config/husky/pre-commit
 # @brief A git hook script for the `pre-commit` hook
 
 echo "Performing various pre-commit tasks on staged files (like autofixing, detecting private keys, etc.)"
 STAGED_FILES=$(git diff --cached --name-only)
 for FILE in "$STAGED_FILES"; do
   if [ -f "$1" ]; then
-    task common:precommit -- "$FILE" &
+    task git:hook:pre-commit -- "$FILE" &
   fi
 done
 wait

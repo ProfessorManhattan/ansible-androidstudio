@@ -1,0 +1,10 @@
+/node_modules
+/.project
+/npm-debug.log
+/nbproject
+/coverage
+/.vscode
+/vendor
+*.swp
+composer.lock
+composer.json

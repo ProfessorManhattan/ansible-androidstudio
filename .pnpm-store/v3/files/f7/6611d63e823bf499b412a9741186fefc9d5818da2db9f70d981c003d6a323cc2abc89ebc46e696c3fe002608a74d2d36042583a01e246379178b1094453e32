@@ -1,0 +1,1 @@
+{"version":3,"file":"json.js","sourceRoot":"","sources":["../../src/rules/json.ts"],"names":[],"mappings":";;;AAAa,QAAA,SAAS,GAAG;IACvB,iBAAiB,EAAE;QACjB,OAAO;QACP;YACE,KAAK,EAAE,EAAE,IAAI,EAAE,KAAK,EAAE;YACtB,WAAW,EAAE,IAAI;SAClB;KACF;CACF,CAAA"}

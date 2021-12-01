@@ -1,0 +1,8 @@
+import type { SchemaObject } from "./ajv";
+import type { RuleContext } from "../types";
+export declare type Validator = (data: unknown) => ValidateError[];
+export declare type ValidateError = {
+    message: string;
+    path: string[];
+};
+export declare function compile(schema: SchemaObject, schemaPath: string, context: RuleContext): Validator;

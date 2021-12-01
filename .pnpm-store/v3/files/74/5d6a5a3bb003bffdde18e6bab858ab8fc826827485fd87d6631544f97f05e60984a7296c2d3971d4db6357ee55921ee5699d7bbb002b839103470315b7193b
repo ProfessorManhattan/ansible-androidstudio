@@ -1,0 +1,57 @@
+{
+  "name": "eslint-plugin-no-use-extend-native",
+  "version": "0.5.0",
+  "description": "ESLint plugin to prevent use of extended native objects",
+  "scripts": {
+    "compile": "babel src --out-dir rules",
+    "coveralls": "nyc report --reporter=text-lcov | coveralls",
+    "lint": "eslint ./ --ignore-pattern node_modules/ --ignore-pattern rules/ --ignore-pattern ava/",
+    "test": "npm run compile && npm run lint && nyc ava"
+  },
+  "ava": {
+    "require": [
+      "esm"
+    ]
+  },
+  "repository": "https://github.com/dustinspecker/eslint-plugin-no-use-extend-native",
+  "bugs": "https://github.com/dustinspecker/eslint-plugin-no-use-extend-native/issues",
+  "homepage": "https://github.com/dustinspecker/eslint-plugin-no-use-extend-native",
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "keywords": [
+    "eslint",
+    "eslintplugin",
+    "extend",
+    "native",
+    "prototype"
+  ],
+  "author": "Dustin Specker",
+  "contributors": [
+    "Brett Zamir"
+  ],
+  "license": "MIT",
+  "files": [
+    "index.js",
+    "rules"
+  ],
+  "dependencies": {
+    "is-get-set-prop": "^1.0.0",
+    "is-js-type": "^2.0.0",
+    "is-obj-prop": "^1.0.0",
+    "is-proto-prop": "^2.0.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/preset-env": "^7.9.5",
+    "ava": "^3.6.0",
+    "coveralls": "^3.0.11",
+    "eslint": "^6.8.0",
+    "eslint-ava-rule-tester": "^4.0.0",
+    "eslint-config-dustinspecker": "^5.0.0",
+    "eslint-path-formatter": "^0.1.1",
+    "eslint-plugin-new-with-error": "^2.0.0",
+    "esm": "^3.2.25",
+    "nyc": "^15.0.1"
+  }
+}

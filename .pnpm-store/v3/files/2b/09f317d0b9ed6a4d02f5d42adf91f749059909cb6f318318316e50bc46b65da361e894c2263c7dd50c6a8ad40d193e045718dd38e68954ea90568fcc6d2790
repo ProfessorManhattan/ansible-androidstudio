@@ -1,0 +1,189 @@
+const { createHash } = require('crypto');
+const { existsSync, lstatSync, mkdirSync, readFileSync, writeFileSync } = require('fs');
+const { EOL } = require('os');
+const { dirname, join, relative, resolve } = require('path');
+
+// eslint-disable-next-line unicorn/import-style
+const chalk = require('chalk');
+const yaml = require('js-yaml');
+
+const {
+  CI_CONFIG_PATH = '.gitlab-ci.yml',
+  CI_JOB_NAME,
+  CI_PROJECT_DIR = process.cwd(),
+  CI_PROJECT_URL,
+  CI_COMMIT_SHORT_SHA,
+  ESLINT_CODE_QUALITY_REPORT,
+  GITLAB_CI,
+  NODE_ENV,
+} = process.env;
+
+/**
+ * @returns {string} The output path of the code quality artifact.
+ */
+function getOutputPath() {
+  const configPath = join(CI_PROJECT_DIR, CI_CONFIG_PATH);
+  // GitlabCI allows a custom configuration path which can be a URL or a path relative to another
+  // project. In these cases CI_CONFIG_PATH is empty and we'll have to require the user provide
+  // ESLINT_CODE_QUALITY_REPORT.
+  if (!existsSync(configPath) || !lstatSync(configPath).isFile()) {
+    throw new Error(
+      'Could not resolve .gitlab-ci.yml to automatically detect report artifact path.' +
+        ' Please manually provide a path via the ESLINT_CODE_QUALITY_REPORT variable.',
+    );
+  }
+  const jobs = yaml.load(readFileSync(configPath, 'utf-8'));
+  const { artifacts } = jobs[CI_JOB_NAME];
+  const location = artifacts && artifacts.reports && artifacts.reports.codequality;
+  const msg = `Expected ${CI_JOB_NAME}.artifacts.reports.codequality to be one exact path`;
+  if (!location) {
+    throw new Error(`${msg}, but no value was found.`);
+  }
+  if (Array.isArray(location)) {
+    throw new TypeError(`${msg}, but found an array instead.`);
+  }
+  return resolve(CI_PROJECT_DIR, location);
+}
+
+/**
+ * @param {string} filePath - The path to the linted file.
+ * @param {object} message - The ESLint report message.
+ * @returns {string} The fingerprint for the ESLint report message.
+ */
+function createFingerprint(filePath, message) {
+  const md5 = createHash('md5');
+  md5.update(filePath);
+  if (message.ruleId) {
+    md5.update(message.ruleId);
+  }
+  md5.update(message.message);
+  return md5.digest('hex');
+}
+
+/**
+ * @param {object[]} results - The ESLint report results.
+ * @returns {object[]} The ESLint messages in the form of a GitLab code quality report.
+ */
+function convert(results) {
+  const messages = [];
+  for (const result of results) {
+    for (const message of result.messages) {
+      const relativePath = relative(CI_PROJECT_DIR, result.filePath);
+      // https://github.com/codeclimate/spec/blob/master/SPEC.md#data-types
+      messages.push({
+        description: message.message,
+        severity: message.severity === 2 ? 'major' : 'minor',
+        fingerprint: createFingerprint(relativePath, message),
+        location: {
+          path: relativePath,
+          lines: {
+            begin: message.line,
+          },
+        },
+      });
+    }
+  }
+  return messages;
+}
+
+/**
+ * @param {object} message - The ESLint report message.
+ * @returns {boolean} `true` if the message is at error level, `false` if it represents a warning
+ */
+function messageIsLevelError(message) {
+  return message.fatal || message.severity === 2;
+}
+
+/**
+ * @param {object[]} results - The ESLint report results.
+ * @returns {object} Statistics about the number of problems at various levels
+ * and length of contained description strings.
+ */
+function calculateResultsStats(results) {
+  const stats = { total: 0, errors: 0, warnings: 0, maxRuleIdLength: 0, maxMsgLength: 0 };
+
+  for (const result of results) {
+    for (const message of result.messages) {
+      const isError = messageIsLevelError(message);
+      stats.errors += isError ? 1 : 0;
+      stats.warnings += isError ? 0 : 1;
+      stats.maxRuleIdLength = message.ruleId
+        ? Math.max(stats.maxRuleIdLength, message.ruleId.length)
+        : stats.maxRuleIdLength;
+      stats.maxMsgLength = Math.max(stats.maxMsgLength, message.message.length);
+    }
+  }
+
+  stats.total = stats.warnings + stats.errors;
+
+  return stats;
+}
+
+const plural = (count, text) => `${count} ${text}${count === 1 ? '' : 's'}`;
+
+/**
+ * @param {object[]} results - The ESLint report results.
+ * @returns {string} The ESLint messages converted to a format
+ * suitable as output in GitLab CI job logs.
+ */
+function gitlabConsoleFormatter(results) {
+  // Severity labels manually padded to have equal lengths and end with spaces
+  const labelError = `${chalk.red('error')}  `;
+  const labelWarn = `${chalk.yellow('warn')}   `;
+
+  const lines = [''];
+
+  let gitLabBaseURL;
+  if (CI_PROJECT_URL && CI_COMMIT_SHORT_SHA) {
+    gitLabBaseURL = `${CI_PROJECT_URL}/-/blob/${CI_COMMIT_SHORT_SHA}/`;
+  }
+
+  const stats = calculateResultsStats(results);
+
+  for (const result of results) {
+    const { filePath, messages } = result;
+    const repoFilePath = relative(CI_PROJECT_DIR, filePath);
+
+    for (const message of messages) {
+      let line;
+      line = messageIsLevelError(message) ? labelError : labelWarn;
+      line += String(message.ruleId ? message.ruleId : '').padEnd(stats.maxRuleIdLength + 2);
+      line += message.message.padEnd(stats.maxMsgLength + 2);
+
+      if (gitLabBaseURL) {
+        // Create link to referenced file in GitLab
+        const anchor = message.line === undefined ? '' : `#L${message.line}`;
+        line += chalk.blue(`${gitLabBaseURL}${repoFilePath}${anchor}`);
+      } else {
+        line += `${filePath}:${message.line || 0}:${message.column || 0}`;
+      }
+
+      lines.push(line);
+    }
+  }
+
+  if (stats.total > 0) {
+    const details = `(${plural(stats.errors, 'error')}, ${plural(stats.warnings, 'warning')})`;
+    lines.push('', `${chalk.red('✖')} ${plural(stats.total, 'problem')} ${details}`);
+  } else {
+    lines.push(`${chalk.green('✔')} No problems found`);
+  }
+
+  lines.push('');
+  return lines.join(EOL);
+}
+
+module.exports = (results) => {
+  if (GITLAB_CI === 'true' && NODE_ENV !== 'test') {
+    chalk.level = 1;
+  }
+  if (CI_JOB_NAME || ESLINT_CODE_QUALITY_REPORT) {
+    const data = convert(results);
+    const outputPath = ESLINT_CODE_QUALITY_REPORT || getOutputPath();
+    const dir = dirname(outputPath);
+    mkdirSync(dir, { recursive: true });
+    writeFileSync(outputPath, JSON.stringify(data, null, 2));
+  }
+
+  return gitlabConsoleFormatter(results);
+};

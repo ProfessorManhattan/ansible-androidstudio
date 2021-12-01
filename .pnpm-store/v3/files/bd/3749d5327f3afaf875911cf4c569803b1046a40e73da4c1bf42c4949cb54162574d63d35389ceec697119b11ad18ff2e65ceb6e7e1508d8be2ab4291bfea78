@@ -1,0 +1,56 @@
+# ESLint Formatter for GitLab
+
+> Show ESLint results directly in the [GitLab code quality] results
+
+## Requirements
+
+This requires at least GitLab Bronze or Starter 11.5 and at least ESLint 5.
+
+## Installation
+
+Install `eslint` and `eslint-formatter-gitlab` using your package manager.
+
+```sh
+npm install --save-dev eslint eslint-formatter-gitlab
+```
+
+Define a GitLab job to run `eslint`.
+
+_.gitlab-ci.yml_:
+
+```yaml
+eslint:
+  image: node:14-alpine
+  script:
+    - npm ci
+    - npx eslint --format gitlab .
+  artifacts:
+    reports:
+      codequality: gl-codequality.json
+```
+
+The formatter will automatically detect a GitLab CI environment. It will detect where to output the
+code quality report based on the GitLab configuration file.
+
+## Example
+
+An example of the results can be seen in [Merge Request !1] of `eslint-formatter-gitlab` itself.
+
+## Configuration Options
+
+ESLint formatters don’t take any configuration options. In order to still allow some way of
+configuration, options are passed using environment variables.
+
+| Environment Variable         | Description                                                                                                                                                    |
+| ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ESLINT_CODE_QUALITY_REPORT` | The location to store the code quality report. By default it will detect the location of the codequality artifact defined in the GitLab CI configuration file. |
+
+## Upgrading
+
+### to v3
+
+- Support for the environment variable `ESLINT_FORMATTER` has been removed, console output now
+  always uses a builtin formatter.
+
+[gitlab code quality]: https://docs.gitlab.com/ee/user/project/merge_requests/code_quality.html
+[merge request !1]: https://gitlab.com/remcohaszing/eslint-formatter-gitlab/merge_requests/1

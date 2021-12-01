@@ -1,0 +1,33 @@
+{
+  "tags": {
+    "allowUnknownTags": true
+  },
+  "source": {
+    "include": ["src"],
+    "includePattern": ".+\\.js(doc|x)?$",
+    "excludePattern": "(^|\\/|\\\\)_"
+  },
+  "plugins": ["plugins/markdown"],
+  "markdown": {
+    "idInHeadings": true
+  },
+  "templates": {
+    "referenceTitle": "php-parser",
+    "cleverLinks": true,
+    "monospaceLinks": true,
+    "default": {
+      "outputSourceFiles": true
+    },
+    "search": {
+      "apiKey": "d7422763b31425c3da8b220f22ff04d2",
+      "indexName": "glayzzle"
+    }
+  },
+  "opts": {
+    "template": "./node_modules/jsdoc-template/",
+    "tutorials": "tutorials",
+    "destination": "docs",
+    "readme": "README.md",
+    "recurse": true
+  }
+}

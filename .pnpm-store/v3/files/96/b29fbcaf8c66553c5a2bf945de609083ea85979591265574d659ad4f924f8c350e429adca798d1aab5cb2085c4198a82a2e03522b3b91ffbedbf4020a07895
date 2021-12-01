@@ -1,0 +1,92 @@
+{
+  "private": false,
+  "name": "@mblabs/prettier-config",
+  "description": "Simplifies configuring Prettier by bundling plugins and configuring them",
+  "license": "MIT",
+  "version": "14.14.30",
+  "author": "Brian Zalewski <help@megabyte.space> (https://megabyte.space)",
+  "homepage": "https://gitlab.com/megabyte-space/npm/prettier-config",
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/megabyte-space/npm/prettier-config.git"
+  },
+  "bugs": {
+    "email": "help@megabyte.space",
+    "url": "https://gitlab.com/megabyte-space/npm/prettier-config/-/issues"
+  },
+  "main": "dist/main.js",
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "scripts": {},
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "dependencies": {
+    "@prettier/plugin-php": "^0.17.5",
+    "@prettier/plugin-pug": "^1.16.6",
+    "@prettier/plugin-ruby": "^1.6.1",
+    "@prettier/plugin-xml": "^1.0.2",
+    "prettier": "^2.4.1",
+    "prettier-package-json": "^2.6.0",
+    "prettier-plugin-go-template": "^0.0.11",
+    "prettier-plugin-ini": "^0.3.1",
+    "prettier-plugin-java": "^1.4.0",
+    "prettier-plugin-organize-imports": "^2.3.4",
+    "prettier-plugin-package-perfection": "^1.0.1",
+    "prettier-plugin-properties": "^0.1.0",
+    "prettier-plugin-sh": "^0.7.1",
+    "prettier-plugin-solidity": "^1.0.0-beta.18"
+  },
+  "devDependencies": {
+    "@commitlint/config-conventional": "^13.1.0",
+    "@megabytelabs/eslint-config": "^1.0.6",
+    "@megabytelabs/prettier-config": "^14.14.14",
+    "@types/node": "^16.11.6",
+    "@types/prettier": "^2.4.1",
+    "cz-conventional-changelog": "^3.0.1",
+    "typescript": "^4.4.4"
+  },
+  "blueprint": {
+    "description": "Simplifies configuring Prettier by bundling plugins and configuring them",
+    "overview": "[Prettier](https://prettier.io/) is the defacto standard for formatting JavaScript, TypeScript, JSON, and YML. It rarely, if ever, causes any issues and it makes keeping your code base neater much easier. On top of that, through the use of plugins, you can also use Prettier to format PHP, Pug, Ruby, XML, Go HTML templates, `.ini` files, Java, `.properties` files, shell scripts, and Solidity files.",
+    "name": "Prettier",
+    "repository": {
+      "github": "https://github.com/ProfessorManhattan/prettier-config",
+      "gitlab": "https://gitlab.com/megabyte-labs/npm/configs/prettier"
+    },
+    "slug": "prettier-config",
+    "title": "An Awesome Shared Prettier Config"
+  },
+  "keywords": [
+    "autoformat",
+    "config",
+    "configuration",
+    "prettier"
+  ],
+  "engines": {
+    "node": ">=10"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "funding": [
+    {
+      "type": "opencollective",
+      "url": "https://opencollective.com/megabytelabs"
+    },
+    {
+      "type": "patreon",
+      "url": "https://www.patreon.com/ProfessorManhattan"
+    }
+  ],
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,md,html,css}": [
+      "prettier --write"
+    ]
+  }
+}

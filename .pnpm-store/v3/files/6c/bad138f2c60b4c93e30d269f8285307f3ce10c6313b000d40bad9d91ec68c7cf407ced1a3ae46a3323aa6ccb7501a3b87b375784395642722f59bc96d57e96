@@ -1,0 +1,69 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ansibleMetaRules = exports.ansibleRules = exports.ansibleOrder = void 0;
+exports.ansibleOrder = [
+    'name',
+    'become',
+    'become_method',
+    'become_user',
+    'changed_when',
+    'hosts',
+    'gather_facts',
+    'vars',
+    'roles',
+    'include_tasks',
+    'include_vars',
+    'tasks',
+    'raw',
+    'args',
+    'loop',
+    'loop_control',
+    'register',
+    'when'
+];
+exports.ansibleRules = {
+    'yml/sort-keys': [
+        'error',
+        {
+            order: exports.ansibleOrder,
+            pathPattern: '^.$'
+        },
+        {
+            order: exports.ansibleOrder,
+            pathPattern: '^.tasks.$'
+        },
+        {
+            order: { type: 'asc' },
+            pathPattern: '^.([a-zA-Z0-9].+).$'
+        }
+    ]
+};
+exports.ansibleMetaRules = {
+    'yml/sort-keys': [
+        'error',
+        {
+            order: ['galaxy_info', 'dependencies'],
+            pathPattern: '^$'
+        },
+        {
+            order: ['role', 'when'],
+            pathPattern: '^dependencies'
+        },
+        {
+            order: [
+                'role_name',
+                'namespace',
+                'author',
+                'description',
+                'company',
+                'issue_tracker_url',
+                'license',
+                'min_ansible_version',
+                'platforms',
+                'galaxy_tags'
+            ],
+            pathPattern: '^galaxy_info$'
+        }
+    ]
+};
+//# sourceMappingURL=ansible.js.map

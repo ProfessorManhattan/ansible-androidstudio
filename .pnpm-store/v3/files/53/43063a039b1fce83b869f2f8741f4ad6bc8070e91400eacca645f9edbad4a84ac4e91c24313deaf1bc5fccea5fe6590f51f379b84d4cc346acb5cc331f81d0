@@ -1,0 +1,59 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const utils_1 = require("../utils");
+exports.default = utils_1.createRule("precision-of-fractional-seconds", {
+    meta: {
+        docs: {
+            description: "disallow precision of fractional seconds greater than the specified value.",
+            categories: ["recommended", "standard"],
+            extensionRule: false,
+        },
+        schema: [
+            {
+                type: "object",
+                properties: {
+                    max: {
+                        type: "number",
+                        minimum: 0,
+                    },
+                },
+                additionalProperties: false,
+            },
+        ],
+        messages: {
+            over: "Precision of fractional seconds greater than {{max}} are forbidden.",
+        },
+        type: "problem",
+    },
+    create(context) {
+        var _a, _b;
+        if (!context.parserServices.isTOML) {
+            return {};
+        }
+        const max = (_b = (_a = context.options[0]) === null || _a === void 0 ? void 0 : _a.max) !== null && _b !== void 0 ? _b : 3;
+        function verifyText(node) {
+            var _a, _b;
+            const text = node.datetime;
+            const fractional = ((_a = /^\d{4}-\d{2}-\d{2}[ tT]\d{2}:\d{2}:\d{2}.(\d+)/u.exec(text)) === null || _a === void 0 ? void 0 : _a[1]) || ((_b = /^\d{2}:\d{2}:\d{2}.(\d+)/u.exec(text)) === null || _b === void 0 ? void 0 : _b[1]);
+            if (!fractional) {
+                return;
+            }
+            if (fractional.length > max) {
+                context.report({
+                    node,
+                    messageId: "over",
+                    data: { max },
+                });
+            }
+        }
+        return {
+            TOMLValue(node) {
+                if (node.kind === "offset-date-time" ||
+                    node.kind === "local-date-time" ||
+                    node.kind === "local-time") {
+                    verifyText(node);
+                }
+            },
+        };
+    },
+});

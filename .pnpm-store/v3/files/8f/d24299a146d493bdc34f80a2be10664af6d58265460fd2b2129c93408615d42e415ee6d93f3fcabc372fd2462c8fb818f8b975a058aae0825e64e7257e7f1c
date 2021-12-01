@@ -1,0 +1,60 @@
+{
+  "name": "eslint-plugin-array-func",
+  "version": "3.1.7",
+  "description": "Rules dealing with Array functions and methods.",
+  "main": "index.js",
+  "scripts": {
+    "lint:js": "eslint index.js package.json rules/ test/ --ext js,json",
+    "lint:ec": "eclint check $(git ls-files)",
+    "lint": "npm run lint:js && npm run lint:ec",
+    "test": "npm run lint && nyc ava",
+    "coverage": "nyc report && codecov"
+  },
+  "author": "Martin Giger (https://humanoids.be)",
+  "license": "MIT",
+  "devDependencies": {
+    "@ava/babel": "^1.0.1",
+    "@freaktechnik/eslint-config-node": "^7.2.0",
+    "@freaktechnik/eslint-config-test": "^7.2.0",
+    "@typescript-eslint/parser": "^3.6.1",
+    "ava": "^3.10.1",
+    "codecov": "^3.7.0",
+    "eclint": "^2.8.1",
+    "eslint": "^7.4.0",
+    "eslint-ava-rule-tester": "^4.0.0",
+    "eslint-plugin-eslint-plugin": "^2.3.0",
+    "nyc": "^15.1.0",
+    "typescript": "^3.9.7"
+  },
+  "peerDependencies": {
+    "eslint": ">=3.0.0"
+  },
+  "keywords": [
+    "eslint",
+    "eslintplugin"
+  ],
+  "nyc": {
+    "reporter": [
+      "lcov",
+      "text"
+    ]
+  },
+  "engines": {
+    "node": ">= 6.8.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/freaktechnik/eslint-plugin-array-func.git"
+  },
+  "bugs": {
+    "url": "https://github.com/freaktechnik/eslint-plugin-array-func/issues"
+  },
+  "dependencies": {},
+  "ava": {
+    "babel": true,
+    "files": [
+      "test/**/*",
+      "!test/helpers"
+    ]
+  }
+}

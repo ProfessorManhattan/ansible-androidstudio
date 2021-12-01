@@ -1,5 +1,6 @@
 ---
 version: '3'
+
 includes:
   ansible: ./.config/taskfiles/ansible/Taskfile.yml
   ansible:ansibler: ./.config/taskfiles/ansible/Taskfile-ansibler.yml
@@ -8,6 +9,7 @@ includes:
   ansible:test: ./.config/taskfiles/ansible/Taskfile-test.yml
   boilerplate: ./.config/taskfiles/boilerplate/Taskfile.yml
   ci: ./.config/taskfiles/ci/Taskfile.yml
+  ci:github: ./.config/taskfiles/ci/Taskfile-github.yml
   common: ./.config/taskfiles/common/Taskfile.yml
   common:code: ./.config/taskfiles/common/Taskfile-code.yml
   common:update: ./.config/taskfiles/common/Taskfile-update.yml
@@ -18,6 +20,7 @@ includes:
   fix: ./.config/taskfiles/fix/Taskfile.yml
   git: ./.config/taskfiles/git/Taskfile.yml
   git:gitlab: ./.config/taskfiles/git/Taskfile-gitlab.yml
+  git:hook: ./.config/taskfiles/git/Taskfile-hook.yml
   go: ./.config/taskfiles/go/Taskfile.yml
   go:test: ./.config/taskfiles/go/Taskfile-test.yml
   image: ./.config/taskfiles/image/Taskfile.yml
@@ -56,7 +59,9 @@ includes:
   upstream:project: ./.config/taskfiles/upstream/Taskfile-project.yml
   upstream:shared: ./.config/taskfiles/upstream/Taskfile-shared.yml
   vscode: ./.config/taskfiles/vscode/Taskfile.yml
+
 output: interleaved
+
 vars:
   DOCKERHUB_PROFILE: megabytelabs
   GALAXY_NAMESPACE:
@@ -65,33 +70,44 @@ vars:
     sh: if [ -f meta/main.yml ]; then yq e '.galaxy_info.role_name' meta/main.yml; else jq -r '.name' package.json | sed 's/.*\///'; fi
   GITHUB_ORG: ProfessorManhattan
   GITHUB_USER: ProfessorManhattan
-  IGNORE_FOLDERS: -path './.autodoc/*' -o -path './.cache/*' -o -path './.common*' -o -path './.config/*' -o -path './.git/*' -o -path './.github/*' -o -path './.gitlab/*' -o -path './.husky/*' -o -path './.modules/*' -o -path './.npm/*' -o -path './.pnpm-store/*' -o -path './.shared/*' -o -path './.task/*' -o -path './.venv/*' -o -path './.vscode/*' -o -path './build/*' -o -path './dist/*' -o -path './node_modules/*' -o -path './venv/*' -o -name pnpm-lock.yaml -o -name package-lock.json -o -name poetry.lock -o -name '.variables.json'
+  IGNORE_FOLDERS: -path './.autodoc/*' -o -path './.cache/*' -o -path './.common*' -o -path './.config/*' -o -path './.git/*'
+    -o -path './.github/*' -o -path './.gitlab/*' -o -path './.husky/*' -o -path './.modules/*' -o -path './.npm/*'
+    -o -path './.pnpm-store/*' -o -path './.shared/*' -o -path './.task/*' -o -path './.venv/*' -o -path './.vscode/*'
+    -o -path './build/*' -o -path './dist/*' -o -path './node_modules/*' -o -path './venv/*' -o -name pnpm-lock.yaml
+    -o -name package-lock.json -o -name poetry.lock -o -name '.variables.json'
   INIT_SCRIPT: https://gitlab.com/megabyte-labs/common/shared/-/raw/master/common/.gitlab/ci/scripts/update-init.sh
+  NPM_KEEP_UPDATED: '@installdoc/* @mblabs/* @washingtondc/ping cz-conventional-changelog'
   NPM_PROGRAM: npm
+  NPM_PROGRAM_LOCAL: pnpm
   NPX_HANDLE: ''
   NPX_PACKAGE: npx
   REPOSITORY_SUBTYPE: role
   REPOSITORY_TYPE: ansible
   TIMEZONE: America/New_York
-  NPM_PROGRAM_LOCAL: pnpm
+
 tasks:
   donothing: 'true'
+
   group:exec:
     cmds:
       - task: git:gitlab:group:exec
+
   init:
-    desc: Initialize a project for the first time (use when creating a new project)
+    desc: Ensures project is initialized with upstream files and migrates pre-existing projects
     cmds:
       - |
         if [ -n "$GITLAB_CI" ]; then
-          if [ -n "$UPDATE_INIT_SCRIPT" ]; then
-            curl -s "$UPDATE_INIT_SCRIPT" | bash
-          fi
+          if [ -n "$UPDATE_INIT_SCRIPT" ]; then curl -s "$UPDATE_INIT_SCRIPT" | bash; fi
         else
-          curl -s '{{.INIT_SCRIPT}}' | bash
+          bash <(curl -s {{.INIT_SCRIPT}})
         fi
+
+  prepare:
+    desc: Prepares the project for the normal start command
+    cmds:
       - task: boilerplate:check:package
-      - task start
+      - task: boilerplate:clean
+
   start:
     desc: Set up the project and refresh it with the latest changes
     summary: |

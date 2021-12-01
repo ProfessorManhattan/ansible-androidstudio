@@ -1,0 +1,17 @@
+{
+  "name": "Wikitext",
+  "type": "prose",
+  "wrap": true,
+  "aliases": [
+    "mediawiki",
+    "wiki"
+  ],
+  "extensions": [
+    ".mediawiki",
+    ".wiki",
+    ".wikitext"
+  ],
+  "tmScope": "text.html.mediawiki",
+  "aceMode": "text",
+  "languageId": 228
+}

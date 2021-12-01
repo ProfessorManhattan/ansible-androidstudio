@@ -1,0 +1,1 @@
+{"version":3,"file":"yaml.js","sourceRoot":"","sources":["../../src/rules/yaml.ts"],"names":[],"mappings":";;;AAAa,QAAA,SAAS,GAAG;IACvB,sBAAsB,EAAE,KAAK;IAC7B,SAAS,EAAE;QACT,OAAO;QACP;YACE,IAAI,EAAE,GAAG;YACT,cAAc,EAAE,IAAI;YACpB,sBAAsB,EAAE,IAAI;SAC7B;KACF;IACD,oBAAoB,EAAE,KAAK;IAC3B,uBAAuB,EAAE,KAAK;CAC/B,CAAA"}

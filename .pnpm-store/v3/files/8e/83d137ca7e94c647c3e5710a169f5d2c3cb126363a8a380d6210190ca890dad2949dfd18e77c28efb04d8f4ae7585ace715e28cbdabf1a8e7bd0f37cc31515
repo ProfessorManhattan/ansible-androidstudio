@@ -1,0 +1,2364 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`switch statements colon and ';' separator #2 1`] = `
+Program {
+  "children": Array [
+    Switch {
+      "body": Block {
+        "children": Array [
+          Case {
+            "body": Block {
+              "children": Array [],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "1",
+            },
+          },
+          Case {
+            "body": Block {
+              "children": Array [],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "2",
+            },
+          },
+          Case {
+            "body": Block {
+              "children": Array [
+                Return {
+                  "expr": String {
+                    "isDoubleQuote": true,
+                    "kind": "string",
+                    "raw": "\\"3\\"",
+                    "unicode": false,
+                    "value": "3",
+                  },
+                  "kind": "return",
+                },
+              ],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "3",
+            },
+          },
+          Case {
+            "body": Block {
+              "children": Array [
+                Return {
+                  "expr": String {
+                    "isDoubleQuote": true,
+                    "kind": "string",
+                    "raw": "\\"5\\"",
+                    "unicode": false,
+                    "value": "5",
+                  },
+                  "kind": "return",
+                },
+              ],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": null,
+          },
+        ],
+        "kind": "block",
+      },
+      "kind": "switch",
+      "shortForm": true,
+      "test": Boolean {
+        "kind": "boolean",
+        "raw": "true",
+        "value": true,
+      },
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`switch statements colon and ';' separator 1`] = `
+Program {
+  "children": Array [
+    Switch {
+      "body": Block {
+        "children": Array [
+          Case {
+            "body": Block {
+              "children": Array [],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "1",
+            },
+          },
+          Case {
+            "body": Block {
+              "children": Array [],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "2",
+            },
+          },
+          Case {
+            "body": Block {
+              "children": Array [
+                Return {
+                  "expr": String {
+                    "isDoubleQuote": true,
+                    "kind": "string",
+                    "raw": "\\"3\\"",
+                    "unicode": false,
+                    "value": "3",
+                  },
+                  "kind": "return",
+                },
+              ],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "3",
+            },
+          },
+          Case {
+            "body": Block {
+              "children": Array [
+                Return {
+                  "expr": String {
+                    "isDoubleQuote": true,
+                    "kind": "string",
+                    "raw": "\\"5\\"",
+                    "unicode": false,
+                    "value": "5",
+                  },
+                  "kind": "return",
+                },
+              ],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": null,
+          },
+        ],
+        "kind": "block",
+      },
+      "kind": "switch",
+      "shortForm": true,
+      "test": Boolean {
+        "kind": "boolean",
+        "raw": "true",
+        "value": true,
+      },
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`switch statements colon and multiple difference cases #2 1`] = `
+Program {
+  "children": Array [
+    Switch {
+      "body": Block {
+        "children": Array [
+          Case {
+            "body": Block {
+              "children": Array [
+                Return {
+                  "expr": String {
+                    "isDoubleQuote": true,
+                    "kind": "string",
+                    "raw": "\\"1\\"",
+                    "unicode": false,
+                    "value": "1",
+                  },
+                  "kind": "return",
+                },
+              ],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "1",
+            },
+          },
+          Case {
+            "body": Block {
+              "children": Array [
+                Return {
+                  "expr": String {
+                    "isDoubleQuote": true,
+                    "kind": "string",
+                    "raw": "\\"2\\"",
+                    "unicode": false,
+                    "value": "2",
+                  },
+                  "kind": "return",
+                },
+              ],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "2",
+            },
+          },
+          Case {
+            "body": Block {
+              "children": Array [
+                Return {
+                  "expr": String {
+                    "isDoubleQuote": true,
+                    "kind": "string",
+                    "raw": "\\"3\\"",
+                    "unicode": false,
+                    "value": "3",
+                  },
+                  "kind": "return",
+                },
+              ],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "3",
+            },
+          },
+        ],
+        "kind": "block",
+      },
+      "kind": "switch",
+      "shortForm": true,
+      "test": Boolean {
+        "kind": "boolean",
+        "raw": "true",
+        "value": true,
+      },
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`switch statements colon and multiple difference cases 1`] = `
+Program {
+  "children": Array [
+    Switch {
+      "body": Block {
+        "children": Array [
+          Case {
+            "body": Block {
+              "children": Array [
+                Return {
+                  "expr": String {
+                    "isDoubleQuote": true,
+                    "kind": "string",
+                    "raw": "\\"1\\"",
+                    "unicode": false,
+                    "value": "1",
+                  },
+                  "kind": "return",
+                },
+              ],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "1",
+            },
+          },
+          Case {
+            "body": Block {
+              "children": Array [
+                Return {
+                  "expr": String {
+                    "isDoubleQuote": true,
+                    "kind": "string",
+                    "raw": "\\"2\\"",
+                    "unicode": false,
+                    "value": "2",
+                  },
+                  "kind": "return",
+                },
+              ],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "2",
+            },
+          },
+          Case {
+            "body": Block {
+              "children": Array [
+                Return {
+                  "expr": String {
+                    "isDoubleQuote": true,
+                    "kind": "string",
+                    "raw": "\\"3\\"",
+                    "unicode": false,
+                    "value": "3",
+                  },
+                  "kind": "return",
+                },
+              ],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "3",
+            },
+          },
+        ],
+        "kind": "block",
+      },
+      "kind": "switch",
+      "shortForm": true,
+      "test": Boolean {
+        "kind": "boolean",
+        "raw": "true",
+        "value": true,
+      },
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`switch statements colon and multiple difference cases with default #2 1`] = `
+Program {
+  "children": Array [
+    Switch {
+      "body": Block {
+        "children": Array [
+          Case {
+            "body": Block {
+              "children": Array [
+                Return {
+                  "expr": String {
+                    "isDoubleQuote": true,
+                    "kind": "string",
+                    "raw": "\\"1\\"",
+                    "unicode": false,
+                    "value": "1",
+                  },
+                  "kind": "return",
+                },
+              ],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "1",
+            },
+          },
+          Case {
+            "body": Block {
+              "children": Array [
+                Return {
+                  "expr": String {
+                    "isDoubleQuote": true,
+                    "kind": "string",
+                    "raw": "\\"2\\"",
+                    "unicode": false,
+                    "value": "2",
+                  },
+                  "kind": "return",
+                },
+              ],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "2",
+            },
+          },
+          Case {
+            "body": Block {
+              "children": Array [
+                Return {
+                  "expr": String {
+                    "isDoubleQuote": true,
+                    "kind": "string",
+                    "raw": "\\"3\\"",
+                    "unicode": false,
+                    "value": "3",
+                  },
+                  "kind": "return",
+                },
+              ],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "3",
+            },
+          },
+          Case {
+            "body": Block {
+              "children": Array [
+                Return {
+                  "expr": String {
+                    "isDoubleQuote": true,
+                    "kind": "string",
+                    "raw": "\\"5\\"",
+                    "unicode": false,
+                    "value": "5",
+                  },
+                  "kind": "return",
+                },
+              ],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": null,
+          },
+        ],
+        "kind": "block",
+      },
+      "kind": "switch",
+      "shortForm": true,
+      "test": Boolean {
+        "kind": "boolean",
+        "raw": "true",
+        "value": true,
+      },
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`switch statements colon and multiple difference cases with default 1`] = `
+Program {
+  "children": Array [
+    Switch {
+      "body": Block {
+        "children": Array [
+          Case {
+            "body": Block {
+              "children": Array [
+                Return {
+                  "expr": String {
+                    "isDoubleQuote": true,
+                    "kind": "string",
+                    "raw": "\\"1\\"",
+                    "unicode": false,
+                    "value": "1",
+                  },
+                  "kind": "return",
+                },
+              ],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "1",
+            },
+          },
+          Case {
+            "body": Block {
+              "children": Array [
+                Return {
+                  "expr": String {
+                    "isDoubleQuote": true,
+                    "kind": "string",
+                    "raw": "\\"2\\"",
+                    "unicode": false,
+                    "value": "2",
+                  },
+                  "kind": "return",
+                },
+              ],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "2",
+            },
+          },
+          Case {
+            "body": Block {
+              "children": Array [
+                Return {
+                  "expr": String {
+                    "isDoubleQuote": true,
+                    "kind": "string",
+                    "raw": "\\"3\\"",
+                    "unicode": false,
+                    "value": "3",
+                  },
+                  "kind": "return",
+                },
+              ],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "3",
+            },
+          },
+          Case {
+            "body": Block {
+              "children": Array [
+                Return {
+                  "expr": String {
+                    "isDoubleQuote": true,
+                    "kind": "string",
+                    "raw": "\\"5\\"",
+                    "unicode": false,
+                    "value": "5",
+                  },
+                  "kind": "return",
+                },
+              ],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": null,
+          },
+        ],
+        "kind": "block",
+      },
+      "kind": "switch",
+      "shortForm": true,
+      "test": Boolean {
+        "kind": "boolean",
+        "raw": "true",
+        "value": true,
+      },
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`switch statements colon and multiple same cases #2 1`] = `
+Program {
+  "children": Array [
+    Switch {
+      "body": Block {
+        "children": Array [
+          Case {
+            "body": Block {
+              "children": Array [],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "1",
+            },
+          },
+          Case {
+            "body": Block {
+              "children": Array [],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "2",
+            },
+          },
+          Case {
+            "body": Block {
+              "children": Array [
+                Return {
+                  "expr": String {
+                    "isDoubleQuote": true,
+                    "kind": "string",
+                    "raw": "\\"3\\"",
+                    "unicode": false,
+                    "value": "3",
+                  },
+                  "kind": "return",
+                },
+              ],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "3",
+            },
+          },
+        ],
+        "kind": "block",
+      },
+      "kind": "switch",
+      "shortForm": true,
+      "test": Boolean {
+        "kind": "boolean",
+        "raw": "true",
+        "value": true,
+      },
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`switch statements colon and multiple same cases 1`] = `
+Program {
+  "children": Array [
+    Switch {
+      "body": Block {
+        "children": Array [
+          Case {
+            "body": Block {
+              "children": Array [],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "1",
+            },
+          },
+          Case {
+            "body": Block {
+              "children": Array [],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "2",
+            },
+          },
+          Case {
+            "body": Block {
+              "children": Array [
+                Return {
+                  "expr": String {
+                    "isDoubleQuote": true,
+                    "kind": "string",
+                    "raw": "\\"3\\"",
+                    "unicode": false,
+                    "value": "3",
+                  },
+                  "kind": "return",
+                },
+              ],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "3",
+            },
+          },
+        ],
+        "kind": "block",
+      },
+      "kind": "switch",
+      "shortForm": true,
+      "test": Boolean {
+        "kind": "boolean",
+        "raw": "true",
+        "value": true,
+      },
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`switch statements colon and multiple same cases with default #2 1`] = `
+Program {
+  "children": Array [
+    Switch {
+      "body": Block {
+        "children": Array [
+          Case {
+            "body": Block {
+              "children": Array [],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "1",
+            },
+          },
+          Case {
+            "body": Block {
+              "children": Array [],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "2",
+            },
+          },
+          Case {
+            "body": Block {
+              "children": Array [
+                Return {
+                  "expr": String {
+                    "isDoubleQuote": true,
+                    "kind": "string",
+                    "raw": "\\"3\\"",
+                    "unicode": false,
+                    "value": "3",
+                  },
+                  "kind": "return",
+                },
+              ],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "3",
+            },
+          },
+          Case {
+            "body": Block {
+              "children": Array [
+                Return {
+                  "expr": String {
+                    "isDoubleQuote": true,
+                    "kind": "string",
+                    "raw": "\\"5\\"",
+                    "unicode": false,
+                    "value": "5",
+                  },
+                  "kind": "return",
+                },
+              ],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": null,
+          },
+        ],
+        "kind": "block",
+      },
+      "kind": "switch",
+      "shortForm": true,
+      "test": Boolean {
+        "kind": "boolean",
+        "raw": "true",
+        "value": true,
+      },
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`switch statements colon and multiple same cases with default 1`] = `
+Program {
+  "children": Array [
+    Switch {
+      "body": Block {
+        "children": Array [
+          Case {
+            "body": Block {
+              "children": Array [],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "1",
+            },
+          },
+          Case {
+            "body": Block {
+              "children": Array [],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "2",
+            },
+          },
+          Case {
+            "body": Block {
+              "children": Array [
+                Return {
+                  "expr": String {
+                    "isDoubleQuote": true,
+                    "kind": "string",
+                    "raw": "\\"3\\"",
+                    "unicode": false,
+                    "value": "3",
+                  },
+                  "kind": "return",
+                },
+              ],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "3",
+            },
+          },
+          Case {
+            "body": Block {
+              "children": Array [
+                Return {
+                  "expr": String {
+                    "isDoubleQuote": true,
+                    "kind": "string",
+                    "raw": "\\"5\\"",
+                    "unicode": false,
+                    "value": "5",
+                  },
+                  "kind": "return",
+                },
+              ],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": null,
+          },
+        ],
+        "kind": "block",
+      },
+      "kind": "switch",
+      "shortForm": true,
+      "test": Boolean {
+        "kind": "boolean",
+        "raw": "true",
+        "value": true,
+      },
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`switch statements colon and one case #2 1`] = `
+Program {
+  "children": Array [
+    Switch {
+      "body": Block {
+        "children": Array [
+          Case {
+            "body": Block {
+              "children": Array [
+                Return {
+                  "expr": String {
+                    "isDoubleQuote": true,
+                    "kind": "string",
+                    "raw": "\\"1\\"",
+                    "unicode": false,
+                    "value": "1",
+                  },
+                  "kind": "return",
+                },
+              ],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "1",
+            },
+          },
+        ],
+        "kind": "block",
+      },
+      "kind": "switch",
+      "shortForm": true,
+      "test": Boolean {
+        "kind": "boolean",
+        "raw": "true",
+        "value": true,
+      },
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`switch statements colon and one case 1`] = `
+Program {
+  "children": Array [
+    Switch {
+      "body": Block {
+        "children": Array [
+          Case {
+            "body": Block {
+              "children": Array [
+                Return {
+                  "expr": String {
+                    "isDoubleQuote": true,
+                    "kind": "string",
+                    "raw": "\\"1\\"",
+                    "unicode": false,
+                    "value": "1",
+                  },
+                  "kind": "return",
+                },
+              ],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "1",
+            },
+          },
+        ],
+        "kind": "block",
+      },
+      "kind": "switch",
+      "shortForm": true,
+      "test": Boolean {
+        "kind": "boolean",
+        "raw": "true",
+        "value": true,
+      },
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`switch statements curly and ';' separator #2 1`] = `
+Program {
+  "children": Array [
+    Switch {
+      "body": Block {
+        "children": Array [
+          Case {
+            "body": Block {
+              "children": Array [],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "1",
+            },
+          },
+          Case {
+            "body": Block {
+              "children": Array [],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "2",
+            },
+          },
+          Case {
+            "body": Block {
+              "children": Array [
+                Return {
+                  "expr": String {
+                    "isDoubleQuote": true,
+                    "kind": "string",
+                    "raw": "\\"3\\"",
+                    "unicode": false,
+                    "value": "3",
+                  },
+                  "kind": "return",
+                },
+              ],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "3",
+            },
+          },
+          Case {
+            "body": Block {
+              "children": Array [
+                Return {
+                  "expr": String {
+                    "isDoubleQuote": true,
+                    "kind": "string",
+                    "raw": "\\"5\\"",
+                    "unicode": false,
+                    "value": "5",
+                  },
+                  "kind": "return",
+                },
+              ],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": null,
+          },
+        ],
+        "kind": "block",
+      },
+      "kind": "switch",
+      "shortForm": false,
+      "test": Boolean {
+        "kind": "boolean",
+        "raw": "true",
+        "value": true,
+      },
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`switch statements curly and ';' separator 1`] = `
+Program {
+  "children": Array [
+    Switch {
+      "body": Block {
+        "children": Array [
+          Case {
+            "body": Block {
+              "children": Array [],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "1",
+            },
+          },
+          Case {
+            "body": Block {
+              "children": Array [],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "2",
+            },
+          },
+          Case {
+            "body": Block {
+              "children": Array [
+                Return {
+                  "expr": String {
+                    "isDoubleQuote": true,
+                    "kind": "string",
+                    "raw": "\\"3\\"",
+                    "unicode": false,
+                    "value": "3",
+                  },
+                  "kind": "return",
+                },
+              ],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "3",
+            },
+          },
+          Case {
+            "body": Block {
+              "children": Array [
+                Return {
+                  "expr": String {
+                    "isDoubleQuote": true,
+                    "kind": "string",
+                    "raw": "\\"5\\"",
+                    "unicode": false,
+                    "value": "5",
+                  },
+                  "kind": "return",
+                },
+              ],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": null,
+          },
+        ],
+        "kind": "block",
+      },
+      "kind": "switch",
+      "shortForm": false,
+      "test": Boolean {
+        "kind": "boolean",
+        "raw": "true",
+        "value": true,
+      },
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`switch statements curly and multiple difference cases #2 1`] = `
+Program {
+  "children": Array [
+    Switch {
+      "body": Block {
+        "children": Array [
+          Case {
+            "body": Block {
+              "children": Array [
+                Return {
+                  "expr": String {
+                    "isDoubleQuote": true,
+                    "kind": "string",
+                    "raw": "\\"1\\"",
+                    "unicode": false,
+                    "value": "1",
+                  },
+                  "kind": "return",
+                },
+              ],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "1",
+            },
+          },
+          Case {
+            "body": Block {
+              "children": Array [
+                Return {
+                  "expr": String {
+                    "isDoubleQuote": true,
+                    "kind": "string",
+                    "raw": "\\"2\\"",
+                    "unicode": false,
+                    "value": "2",
+                  },
+                  "kind": "return",
+                },
+              ],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "2",
+            },
+          },
+          Case {
+            "body": Block {
+              "children": Array [
+                Return {
+                  "expr": String {
+                    "isDoubleQuote": true,
+                    "kind": "string",
+                    "raw": "\\"3\\"",
+                    "unicode": false,
+                    "value": "3",
+                  },
+                  "kind": "return",
+                },
+              ],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "3",
+            },
+          },
+        ],
+        "kind": "block",
+      },
+      "kind": "switch",
+      "shortForm": false,
+      "test": Boolean {
+        "kind": "boolean",
+        "raw": "true",
+        "value": true,
+      },
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`switch statements curly and multiple difference cases 1`] = `
+Program {
+  "children": Array [
+    Switch {
+      "body": Block {
+        "children": Array [
+          Case {
+            "body": Block {
+              "children": Array [
+                Return {
+                  "expr": String {
+                    "isDoubleQuote": true,
+                    "kind": "string",
+                    "raw": "\\"1\\"",
+                    "unicode": false,
+                    "value": "1",
+                  },
+                  "kind": "return",
+                },
+              ],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "1",
+            },
+          },
+          Case {
+            "body": Block {
+              "children": Array [
+                Return {
+                  "expr": String {
+                    "isDoubleQuote": true,
+                    "kind": "string",
+                    "raw": "\\"2\\"",
+                    "unicode": false,
+                    "value": "2",
+                  },
+                  "kind": "return",
+                },
+              ],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "2",
+            },
+          },
+          Case {
+            "body": Block {
+              "children": Array [
+                Return {
+                  "expr": String {
+                    "isDoubleQuote": true,
+                    "kind": "string",
+                    "raw": "\\"3\\"",
+                    "unicode": false,
+                    "value": "3",
+                  },
+                  "kind": "return",
+                },
+              ],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "3",
+            },
+          },
+        ],
+        "kind": "block",
+      },
+      "kind": "switch",
+      "shortForm": false,
+      "test": Boolean {
+        "kind": "boolean",
+        "raw": "true",
+        "value": true,
+      },
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`switch statements curly and multiple difference cases with default #2 1`] = `
+Program {
+  "children": Array [
+    Switch {
+      "body": Block {
+        "children": Array [
+          Case {
+            "body": Block {
+              "children": Array [
+                Return {
+                  "expr": String {
+                    "isDoubleQuote": true,
+                    "kind": "string",
+                    "raw": "\\"1\\"",
+                    "unicode": false,
+                    "value": "1",
+                  },
+                  "kind": "return",
+                },
+              ],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "1",
+            },
+          },
+          Case {
+            "body": Block {
+              "children": Array [
+                Return {
+                  "expr": String {
+                    "isDoubleQuote": true,
+                    "kind": "string",
+                    "raw": "\\"2\\"",
+                    "unicode": false,
+                    "value": "2",
+                  },
+                  "kind": "return",
+                },
+              ],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "2",
+            },
+          },
+          Case {
+            "body": Block {
+              "children": Array [
+                Return {
+                  "expr": String {
+                    "isDoubleQuote": true,
+                    "kind": "string",
+                    "raw": "\\"3\\"",
+                    "unicode": false,
+                    "value": "3",
+                  },
+                  "kind": "return",
+                },
+              ],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "3",
+            },
+          },
+          Case {
+            "body": Block {
+              "children": Array [
+                Return {
+                  "expr": String {
+                    "isDoubleQuote": true,
+                    "kind": "string",
+                    "raw": "\\"5\\"",
+                    "unicode": false,
+                    "value": "5",
+                  },
+                  "kind": "return",
+                },
+              ],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": null,
+          },
+        ],
+        "kind": "block",
+      },
+      "kind": "switch",
+      "shortForm": false,
+      "test": Boolean {
+        "kind": "boolean",
+        "raw": "true",
+        "value": true,
+      },
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`switch statements curly and multiple difference cases with default 1`] = `
+Program {
+  "children": Array [
+    Switch {
+      "body": Block {
+        "children": Array [
+          Case {
+            "body": Block {
+              "children": Array [
+                Return {
+                  "expr": String {
+                    "isDoubleQuote": true,
+                    "kind": "string",
+                    "raw": "\\"1\\"",
+                    "unicode": false,
+                    "value": "1",
+                  },
+                  "kind": "return",
+                },
+              ],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "1",
+            },
+          },
+          Case {
+            "body": Block {
+              "children": Array [
+                Return {
+                  "expr": String {
+                    "isDoubleQuote": true,
+                    "kind": "string",
+                    "raw": "\\"2\\"",
+                    "unicode": false,
+                    "value": "2",
+                  },
+                  "kind": "return",
+                },
+              ],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "2",
+            },
+          },
+          Case {
+            "body": Block {
+              "children": Array [
+                Return {
+                  "expr": String {
+                    "isDoubleQuote": true,
+                    "kind": "string",
+                    "raw": "\\"3\\"",
+                    "unicode": false,
+                    "value": "3",
+                  },
+                  "kind": "return",
+                },
+              ],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "3",
+            },
+          },
+          Case {
+            "body": Block {
+              "children": Array [
+                Return {
+                  "expr": String {
+                    "isDoubleQuote": true,
+                    "kind": "string",
+                    "raw": "\\"5\\"",
+                    "unicode": false,
+                    "value": "5",
+                  },
+                  "kind": "return",
+                },
+              ],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": null,
+          },
+        ],
+        "kind": "block",
+      },
+      "kind": "switch",
+      "shortForm": false,
+      "test": Boolean {
+        "kind": "boolean",
+        "raw": "true",
+        "value": true,
+      },
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`switch statements curly and multiple same cases #2 1`] = `
+Program {
+  "children": Array [
+    Switch {
+      "body": Block {
+        "children": Array [
+          Case {
+            "body": Block {
+              "children": Array [],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "1",
+            },
+          },
+          Case {
+            "body": Block {
+              "children": Array [],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "2",
+            },
+          },
+          Case {
+            "body": Block {
+              "children": Array [
+                Return {
+                  "expr": String {
+                    "isDoubleQuote": true,
+                    "kind": "string",
+                    "raw": "\\"3\\"",
+                    "unicode": false,
+                    "value": "3",
+                  },
+                  "kind": "return",
+                },
+              ],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "3",
+            },
+          },
+        ],
+        "kind": "block",
+      },
+      "kind": "switch",
+      "shortForm": false,
+      "test": Boolean {
+        "kind": "boolean",
+        "raw": "true",
+        "value": true,
+      },
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`switch statements curly and multiple same cases 1`] = `
+Program {
+  "children": Array [
+    Switch {
+      "body": Block {
+        "children": Array [
+          Case {
+            "body": Block {
+              "children": Array [],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "1",
+            },
+          },
+          Case {
+            "body": Block {
+              "children": Array [],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "2",
+            },
+          },
+          Case {
+            "body": Block {
+              "children": Array [
+                Return {
+                  "expr": String {
+                    "isDoubleQuote": true,
+                    "kind": "string",
+                    "raw": "\\"3\\"",
+                    "unicode": false,
+                    "value": "3",
+                  },
+                  "kind": "return",
+                },
+              ],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "3",
+            },
+          },
+        ],
+        "kind": "block",
+      },
+      "kind": "switch",
+      "shortForm": false,
+      "test": Boolean {
+        "kind": "boolean",
+        "raw": "true",
+        "value": true,
+      },
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`switch statements curly and multiple same cases with default #2 1`] = `
+Program {
+  "children": Array [
+    Switch {
+      "body": Block {
+        "children": Array [
+          Case {
+            "body": Block {
+              "children": Array [],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "1",
+            },
+          },
+          Case {
+            "body": Block {
+              "children": Array [],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "2",
+            },
+          },
+          Case {
+            "body": Block {
+              "children": Array [
+                Return {
+                  "expr": String {
+                    "isDoubleQuote": true,
+                    "kind": "string",
+                    "raw": "\\"3\\"",
+                    "unicode": false,
+                    "value": "3",
+                  },
+                  "kind": "return",
+                },
+              ],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "3",
+            },
+          },
+          Case {
+            "body": Block {
+              "children": Array [
+                Return {
+                  "expr": String {
+                    "isDoubleQuote": true,
+                    "kind": "string",
+                    "raw": "\\"5\\"",
+                    "unicode": false,
+                    "value": "5",
+                  },
+                  "kind": "return",
+                },
+              ],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": null,
+          },
+        ],
+        "kind": "block",
+      },
+      "kind": "switch",
+      "shortForm": false,
+      "test": Boolean {
+        "kind": "boolean",
+        "raw": "true",
+        "value": true,
+      },
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`switch statements curly and multiple same cases with default 1`] = `
+Program {
+  "children": Array [
+    Switch {
+      "body": Block {
+        "children": Array [
+          Case {
+            "body": Block {
+              "children": Array [],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "1",
+            },
+          },
+          Case {
+            "body": Block {
+              "children": Array [],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "2",
+            },
+          },
+          Case {
+            "body": Block {
+              "children": Array [
+                Return {
+                  "expr": String {
+                    "isDoubleQuote": true,
+                    "kind": "string",
+                    "raw": "\\"3\\"",
+                    "unicode": false,
+                    "value": "3",
+                  },
+                  "kind": "return",
+                },
+              ],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "3",
+            },
+          },
+          Case {
+            "body": Block {
+              "children": Array [
+                Return {
+                  "expr": String {
+                    "isDoubleQuote": true,
+                    "kind": "string",
+                    "raw": "\\"5\\"",
+                    "unicode": false,
+                    "value": "5",
+                  },
+                  "kind": "return",
+                },
+              ],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": null,
+          },
+        ],
+        "kind": "block",
+      },
+      "kind": "switch",
+      "shortForm": false,
+      "test": Boolean {
+        "kind": "boolean",
+        "raw": "true",
+        "value": true,
+      },
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`switch statements curly and one case #2 1`] = `
+Program {
+  "children": Array [
+    Switch {
+      "body": Block {
+        "children": Array [
+          Case {
+            "body": Block {
+              "children": Array [
+                Return {
+                  "expr": String {
+                    "isDoubleQuote": true,
+                    "kind": "string",
+                    "raw": "\\"1\\"",
+                    "unicode": false,
+                    "value": "1",
+                  },
+                  "kind": "return",
+                },
+              ],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "1",
+            },
+          },
+        ],
+        "kind": "block",
+      },
+      "kind": "switch",
+      "shortForm": false,
+      "test": Boolean {
+        "kind": "boolean",
+        "raw": "true",
+        "value": true,
+      },
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`switch statements curly and one case 1`] = `
+Program {
+  "children": Array [
+    Switch {
+      "body": Block {
+        "children": Array [
+          Case {
+            "body": Block {
+              "children": Array [
+                Return {
+                  "expr": String {
+                    "isDoubleQuote": true,
+                    "kind": "string",
+                    "raw": "\\"1\\"",
+                    "unicode": false,
+                    "value": "1",
+                  },
+                  "kind": "return",
+                },
+              ],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "1",
+            },
+          },
+        ],
+        "kind": "block",
+      },
+      "kind": "switch",
+      "shortForm": false,
+      "test": Boolean {
+        "kind": "boolean",
+        "raw": "true",
+        "value": true,
+      },
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`switch statements empty case list #2 1`] = `
+Program {
+  "children": Array [
+    Switch {
+      "body": Block {
+        "children": Array [],
+        "kind": "block",
+      },
+      "kind": "switch",
+      "shortForm": false,
+      "test": Boolean {
+        "kind": "boolean",
+        "raw": "true",
+        "value": true,
+      },
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`switch statements empty case list #3 1`] = `
+Program {
+  "children": Array [
+    Switch {
+      "body": Block {
+        "children": Array [],
+        "kind": "block",
+      },
+      "kind": "switch",
+      "shortForm": true,
+      "test": Boolean {
+        "kind": "boolean",
+        "raw": "true",
+        "value": true,
+      },
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`switch statements empty case list #4 1`] = `
+Program {
+  "children": Array [
+    Switch {
+      "body": Block {
+        "children": Array [],
+        "kind": "block",
+      },
+      "kind": "switch",
+      "shortForm": true,
+      "test": Boolean {
+        "kind": "boolean",
+        "raw": "true",
+        "value": true,
+      },
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`switch statements empty case list 1`] = `
+Program {
+  "children": Array [
+    Switch {
+      "body": Block {
+        "children": Array [],
+        "kind": "block",
+      },
+      "kind": "switch",
+      "shortForm": false,
+      "test": Boolean {
+        "kind": "boolean",
+        "raw": "true",
+        "value": true,
+      },
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`switch statements parse correctly 1`] = `
+Program {
+  "children": Array [
+    Switch {
+      "body": Block {
+        "children": Array [
+          Case {
+            "body": Block {
+              "children": Array [],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Number {
+              "kind": "number",
+              "value": "1",
+            },
+          },
+          Case {
+            "body": Block {
+              "children": Array [
+                ExpressionStatement {
+                  "expression": Assign {
+                    "kind": "assign",
+                    "left": Variable {
+                      "curly": false,
+                      "kind": "variable",
+                      "name": "foo",
+                    },
+                    "operator": "=",
+                    "right": Boolean {
+                      "kind": "boolean",
+                      "raw": "false",
+                      "value": false,
+                    },
+                  },
+                  "kind": "expressionstatement",
+                },
+                Break {
+                  "kind": "break",
+                  "level": Number {
+                    "kind": "number",
+                    "value": "10",
+                  },
+                },
+              ],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Variable {
+              "curly": false,
+              "kind": "variable",
+              "name": "var",
+            },
+          },
+          Case {
+            "body": Block {
+              "children": Array [
+                ExpressionStatement {
+                  "expression": Assign {
+                    "kind": "assign",
+                    "left": Variable {
+                      "curly": false,
+                      "kind": "variable",
+                      "name": "foo",
+                    },
+                    "operator": "=",
+                    "right": Boolean {
+                      "kind": "boolean",
+                      "raw": "true",
+                      "value": true,
+                    },
+                  },
+                  "kind": "expressionstatement",
+                },
+                Break {
+                  "kind": "break",
+                  "level": null,
+                },
+              ],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Name {
+              "kind": "name",
+              "name": "FOO",
+              "resolution": "uqn",
+            },
+          },
+          Case {
+            "body": Block {
+              "children": Array [
+                ExpressionStatement {
+                  "expression": Assign {
+                    "kind": "assign",
+                    "left": Variable {
+                      "curly": false,
+                      "kind": "variable",
+                      "name": "bar",
+                    },
+                    "operator": "=",
+                    "right": Boolean {
+                      "kind": "boolean",
+                      "raw": "false",
+                      "value": false,
+                    },
+                  },
+                  "kind": "expressionstatement",
+                },
+              ],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": null,
+          },
+        ],
+        "kind": "block",
+      },
+      "kind": "switch",
+      "shortForm": false,
+      "test": Boolean {
+        "kind": "boolean",
+        "raw": "true",
+        "value": true,
+      },
+    },
+    Switch {
+      "body": Block {
+        "children": Array [
+          Case {
+            "body": Block {
+              "children": Array [
+                Return {
+                  "expr": Boolean {
+                    "kind": "boolean",
+                    "raw": "true",
+                    "value": true,
+                  },
+                  "kind": "return",
+                },
+              ],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Name {
+              "kind": "name",
+              "name": "A",
+              "resolution": "uqn",
+            },
+          },
+          Case {
+            "body": Block {
+              "children": Array [
+                Return {
+                  "expr": Boolean {
+                    "kind": "boolean",
+                    "raw": "false",
+                    "value": false,
+                  },
+                  "kind": "return",
+                },
+              ],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": Name {
+              "kind": "name",
+              "name": "B",
+              "resolution": "uqn",
+            },
+          },
+        ],
+        "kind": "block",
+      },
+      "kind": "switch",
+      "shortForm": true,
+      "test": Boolean {
+        "kind": "boolean",
+        "raw": "true",
+        "value": true,
+      },
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`switch statements test errors 1`] = `
+Program {
+  "children": Array [
+    Switch {
+      "body": Block {
+        "children": Array [
+          Case {
+            "body": Block {
+              "children": Array [
+                Switch {
+                  "body": Block {
+                    "children": Array [
+                      Case {
+                        "body": Block {
+                          "children": Array [
+                            Inline {
+                              "kind": "inline",
+                              "raw": " bug ",
+                              "value": " bug ",
+                            },
+                          ],
+                          "kind": "block",
+                        },
+                        "kind": "case",
+                        "test": null,
+                      },
+                      Case {
+                        "body": Block {
+                          "children": Array [
+                            Return {
+                              "expr": null,
+                              "kind": "return",
+                            },
+                            ExpressionStatement {
+                              "expression": Boolean {
+                                "kind": "boolean",
+                                "raw": "true",
+                                "value": true,
+                              },
+                              "kind": "expressionstatement",
+                            },
+                          ],
+                          "kind": "block",
+                        },
+                        "kind": "case",
+                        "test": Name {
+                          "kind": "name",
+                          "name": "A",
+                          "resolution": "uqn",
+                        },
+                      },
+                      Case {
+                        "body": Block {
+                          "children": Array [
+                            Return {
+                              "expr": Boolean {
+                                "kind": "boolean",
+                                "raw": "false",
+                                "value": false,
+                              },
+                              "kind": "return",
+                            },
+                          ],
+                          "kind": "block",
+                        },
+                        "kind": "case",
+                        "test": Name {
+                          "kind": "name",
+                          "name": "B",
+                          "resolution": "uqn",
+                        },
+                      },
+                    ],
+                    "kind": "block",
+                  },
+                  "kind": "switch",
+                  "shortForm": true,
+                  "test": Boolean {
+                    "kind": "boolean",
+                    "raw": "true",
+                    "value": true,
+                  },
+                },
+              ],
+              "kind": "block",
+            },
+            "kind": "case",
+            "test": null,
+          },
+        ],
+        "kind": "block",
+      },
+      "kind": "switch",
+      "shortForm": false,
+      "test": Boolean {
+        "kind": "boolean",
+        "raw": "true",
+        "value": true,
+      },
+    },
+  ],
+  "errors": Array [
+    Error {
+      "expected": Array [
+        "{",
+        ":",
+      ],
+      "kind": "error",
+      "line": 2,
+      "message": "Parse Error : syntax error, unexpected ';' on line 2",
+      "token": "';'",
+    },
+    Error {
+      "expected": Array [
+        204,
+        205,
+      ],
+      "kind": "error",
+      "line": 3,
+      "message": "Parse Error : syntax error, unexpected 'switch' (T_SWITCH) on line 3",
+      "token": "'switch' (T_SWITCH)",
+    },
+    Error {
+      "expected": Array [
+        ":",
+        ";",
+      ],
+      "kind": "error",
+      "line": 3,
+      "message": "Parse Error : syntax error, unexpected 'switch' (T_SWITCH) on line 3",
+      "token": "'switch' (T_SWITCH)",
+    },
+    Error {
+      "expected": Array [
+        204,
+        205,
+      ],
+      "kind": "error",
+      "line": 3,
+      "message": "Parse Error : syntax error, unexpected ' bug ' (T_INLINE_HTML) on line 3",
+      "token": "' bug ' (T_INLINE_HTML)",
+    },
+    Error {
+      "expected": Array [
+        ":",
+        ";",
+      ],
+      "kind": "error",
+      "line": 3,
+      "message": "Parse Error : syntax error, unexpected ' bug ' (T_INLINE_HTML) on line 3",
+      "token": "' bug ' (T_INLINE_HTML)",
+    },
+    Error {
+      "expected": null,
+      "kind": "error",
+      "line": 7,
+      "message": "Parse Error : syntax error on line 7",
+      "token": "the end of file (EOF)",
+    },
+  ],
+  "kind": "program",
+}
+`;

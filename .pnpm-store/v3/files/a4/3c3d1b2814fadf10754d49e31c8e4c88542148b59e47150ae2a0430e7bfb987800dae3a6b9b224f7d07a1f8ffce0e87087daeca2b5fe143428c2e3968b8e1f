@@ -1,0 +1,119 @@
+"use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.createRule = void 0;
+const jsoncESLintParser = __importStar(require("jsonc-eslint-parser"));
+const yamlESLintParser = __importStar(require("yaml-eslint-parser"));
+const tomlESLintParser = __importStar(require("toml-eslint-parser"));
+const path_1 = __importDefault(require("path"));
+function createRule(ruleName, rule) {
+    return {
+        meta: Object.assign(Object.assign({}, rule.meta), { docs: Object.assign(Object.assign({}, rule.meta.docs), { url: `https://ota-meshi.github.io/eslint-plugin-json-schema-validator/rules/${ruleName}.html`, ruleId: `json-schema-validator/${ruleName}`, ruleName }) }),
+        create(context) {
+            const filename = context.getFilename();
+            const visitor = rule.create(context, {
+                customBlock: false,
+                filename,
+            });
+            if (typeof context.parserServices.defineCustomBlocksVisitor ===
+                "function" &&
+                path_1.default.extname(filename) === ".vue") {
+                const jsonVisitor = context.parserServices.defineCustomBlocksVisitor(context, jsoncESLintParser, {
+                    target(lang, block) {
+                        if (lang) {
+                            return /^json[5c]?$/i.test(lang);
+                        }
+                        return block.name === "i18n";
+                    },
+                    create(blockContext) {
+                        return rule.create(blockContext, {
+                            customBlock: true,
+                            filename: getBlockFileName(blockContext.parserServices
+                                .customBlock, "json"),
+                        });
+                    },
+                });
+                const yamlVisitor = context.parserServices.defineCustomBlocksVisitor(context, yamlESLintParser, {
+                    target: ["yaml", "yml"],
+                    create(blockContext) {
+                        return rule.create(blockContext, {
+                            customBlock: true,
+                            filename: getBlockFileName(blockContext.parserServices
+                                .customBlock, "yaml"),
+                        });
+                    },
+                });
+                const tomlVisitor = context.parserServices.defineCustomBlocksVisitor(context, tomlESLintParser, {
+                    target: ["toml"],
+                    create(blockContext) {
+                        return rule.create(blockContext, {
+                            customBlock: true,
+                            filename: getBlockFileName(blockContext.parserServices
+                                .customBlock, "toml"),
+                        });
+                    },
+                });
+                return compositingVisitors(visitor, jsonVisitor, yamlVisitor, tomlVisitor);
+            }
+            return visitor;
+            function getBlockFileName(customBlock, langFallback) {
+                var _a, _b;
+                const attrs = {};
+                for (const attr of customBlock.startTag.attributes) {
+                    if (!attr.directive) {
+                        attrs[attr.key.name] = (_b = (_a = attr.value) === null || _a === void 0 ? void 0 : _a.value) !== null && _b !== void 0 ? _b : null;
+                    }
+                }
+                const ext = attrs.lang || langFallback;
+                let attrQuery = "";
+                for (const [key, val] of Object.entries(attrs)) {
+                    if (["id", "index", "src", "type"].includes(key)) {
+                        continue;
+                    }
+                    attrQuery += `&${key}=${val}`;
+                }
+                const result = `${customBlock.name}.${ext}`;
+                return `${filename}/${result}?vue&type=custom&blockType=${customBlock.name}${attrQuery}`;
+            }
+        },
+    };
+}
+exports.createRule = createRule;
+function compositingVisitors(visitor, ...visitors) {
+    for (const v of visitors) {
+        for (const key in v) {
+            if (visitor[key]) {
+                const o = visitor[key];
+                visitor[key] = (...args) => {
+                    o(...args);
+                    v[key](...args);
+                };
+            }
+            else {
+                visitor[key] = v[key];
+            }
+        }
+    }
+    return visitor;
+}

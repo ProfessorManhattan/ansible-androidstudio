@@ -1,0 +1,10 @@
+export declare const yamlRules: {
+    'capitalized-comments': string;
+    'max-len': (string | {
+        code: number;
+        ignoreComments: boolean;
+        ignoreTrailingComments: boolean;
+    })[];
+    'no-inline-comments': string;
+    'unicorn/filename-case': string;
+};
