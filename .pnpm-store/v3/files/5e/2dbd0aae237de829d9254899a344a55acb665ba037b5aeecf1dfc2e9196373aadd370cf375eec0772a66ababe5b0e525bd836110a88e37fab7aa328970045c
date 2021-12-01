@@ -1,0 +1,191 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.vscodeTasksOrder = exports.schemaDefinitions = exports.getGlob = exports.getGitignore = exports.getPlugins = exports.getExtends = exports.acquireProjectType = void 0;
+var tslib_1 = require("tslib");
+var glob_1 = (0, tslib_1.__importDefault)(require("glob"));
+var fs = (0, tslib_1.__importStar)(require("node:fs"));
+var node_path_1 = (0, tslib_1.__importDefault)(require("node:path"));
+var parse_gitignore_1 = (0, tslib_1.__importDefault)(require("parse-gitignore"));
+var YAML = (0, tslib_1.__importStar)(require("yaml"));
+var constants_1 = require("./constants");
+var acquireProjectType = function () {
+    if (fs.existsSync('./Taskfile.yml')) {
+        return YAML.parse(fs.readFileSync('./Taskfile.yml', 'utf8'));
+    }
+    return {
+        vars: {
+            REPOSITORY_SUBTYPE: 'generic',
+            REPOSITORY_TYPE: 'generic'
+        }
+    };
+};
+exports.acquireProjectType = acquireProjectType;
+var getScriptsExtends = function (type, subType, isTypeScript) {
+    if (isTypeScript === void 0) { isTypeScript = true; }
+    var base = isTypeScript
+        ? (0, tslib_1.__spreadArray)((0, tslib_1.__spreadArray)((0, tslib_1.__spreadArray)((0, tslib_1.__spreadArray)([], constants_1.templates.eslint, true), constants_1.templates.common, true), constants_1.templates.typescript, true), constants_1.templates.prettier, true) : (0, tslib_1.__spreadArray)((0, tslib_1.__spreadArray)((0, tslib_1.__spreadArray)((0, tslib_1.__spreadArray)([], constants_1.templates.eslint, true), constants_1.templates.common, true), constants_1.templates.javascript, true), constants_1.templates.prettier, true);
+    switch ("".concat(type, "-").concat(subType)) {
+        case 'angular-app':
+            return (0, tslib_1.__spreadArray)((0, tslib_1.__spreadArray)((0, tslib_1.__spreadArray)([], constants_1.templates.angular, true), constants_1.templates.jest, true), base, true);
+        case 'angular-website':
+            return (0, tslib_1.__spreadArray)((0, tslib_1.__spreadArray)((0, tslib_1.__spreadArray)([], constants_1.templates.angular, true), constants_1.templates.jest, true), base, true);
+        case 'npm-cli':
+            return (0, tslib_1.__spreadArray)((0, tslib_1.__spreadArray)((0, tslib_1.__spreadArray)([], constants_1.templates.jest, true), constants_1.templates.node, true), base, true);
+        case 'npm-config':
+            return (0, tslib_1.__spreadArray)((0, tslib_1.__spreadArray)([], constants_1.templates.node, true), base, true);
+        case 'npm-library':
+            return (0, tslib_1.__spreadArray)((0, tslib_1.__spreadArray)((0, tslib_1.__spreadArray)([], constants_1.templates.jest, true), constants_1.templates.node, true), base, true);
+        default:
+            return (0, tslib_1.__spreadArray)((0, tslib_1.__spreadArray)([], constants_1.templates.node, true), base, true);
+    }
+};
+var getExtends = function (extension, type, subType) {
+    switch (extension) {
+        case 'json':
+            return (0, tslib_1.__spreadArray)((0, tslib_1.__spreadArray)((0, tslib_1.__spreadArray)([], constants_1.templates.eslint, true), constants_1.templates.json, true), constants_1.templates.prettier, true);
+        case 'javascript':
+            return getScriptsExtends(type, subType, false);
+        case 'toml':
+            return (0, tslib_1.__spreadArray)((0, tslib_1.__spreadArray)((0, tslib_1.__spreadArray)([], constants_1.templates.eslint, true), constants_1.templates.toml, true), constants_1.templates.prettier, true);
+        case 'typescript':
+            return getScriptsExtends(type, subType);
+        case 'yml':
+            return (0, tslib_1.__spreadArray)((0, tslib_1.__spreadArray)((0, tslib_1.__spreadArray)([], constants_1.templates.eslint, true), constants_1.templates.yml, true), constants_1.templates.prettier, true);
+        default:
+            return [];
+    }
+};
+exports.getExtends = getExtends;
+var getScriptsPlugins = function (type, subType, isTypeScript) {
+    if (isTypeScript === void 0) { isTypeScript = true; }
+    var base = isTypeScript
+        ? (0, tslib_1.__spreadArray)((0, tslib_1.__spreadArray)((0, tslib_1.__spreadArray)((0, tslib_1.__spreadArray)([], constants_1.plugins.eslint, true), constants_1.plugins.common, true), constants_1.plugins.typescript, true), constants_1.plugins.prettier, true) : (0, tslib_1.__spreadArray)((0, tslib_1.__spreadArray)((0, tslib_1.__spreadArray)((0, tslib_1.__spreadArray)([], constants_1.plugins.eslint, true), constants_1.plugins.common, true), constants_1.plugins.javascript, true), constants_1.plugins.prettier, true);
+    switch ("".concat(type, "-").concat(subType)) {
+        case 'angular-app':
+            return (0, tslib_1.__spreadArray)((0, tslib_1.__spreadArray)((0, tslib_1.__spreadArray)((0, tslib_1.__spreadArray)([], constants_1.plugins.angular, true), constants_1.plugins.html, true), constants_1.plugins.jest, true), base, true);
+        case 'angular-website':
+            return (0, tslib_1.__spreadArray)((0, tslib_1.__spreadArray)((0, tslib_1.__spreadArray)((0, tslib_1.__spreadArray)([], constants_1.plugins.angular, true), constants_1.plugins.html, true), constants_1.plugins.jest, true), base, true);
+        case 'npm-cli':
+            return (0, tslib_1.__spreadArray)((0, tslib_1.__spreadArray)([], constants_1.plugins.jest, true), base, true);
+        case 'npm-library':
+            return (0, tslib_1.__spreadArray)((0, tslib_1.__spreadArray)([], constants_1.plugins.jest, true), base, true);
+        default:
+            return (0, tslib_1.__spreadArray)((0, tslib_1.__spreadArray)([], constants_1.plugins.jest, true), base, true);
+    }
+};
+var getPlugins = function (extension, type, subType) {
+    switch (extension) {
+        case 'javascript':
+            return getScriptsPlugins(type, subType, false);
+        case 'json':
+            return (0, tslib_1.__spreadArray)((0, tslib_1.__spreadArray)([], constants_1.plugins.eslint, true), constants_1.plugins.prettier, true);
+        case 'toml':
+            return (0, tslib_1.__spreadArray)((0, tslib_1.__spreadArray)([], constants_1.plugins.eslint, true), constants_1.plugins.prettier, true);
+        case 'typescript':
+            return getScriptsPlugins(type, subType);
+        case 'yml':
+            return (0, tslib_1.__spreadArray)((0, tslib_1.__spreadArray)([], constants_1.plugins.eslint, true), constants_1.plugins.prettier, true);
+        default:
+            return [];
+    }
+};
+exports.getPlugins = getPlugins;
+var getGitignore = function () {
+    if (fs.existsSync('./.gitignore')) {
+        return (0, parse_gitignore_1.default)(fs.readFileSync('./.gitignore'));
+    }
+    else {
+        return [];
+    }
+};
+exports.getGitignore = getGitignore;
+var getGlob = function (pattern) {
+    var files = glob_1.default.sync(pattern);
+    return files.map(function (file) { return node_path_1.default.basename(file); });
+};
+exports.getGlob = getGlob;
+var schemaDefinitions = function () {
+    return [
+        {
+            fileMatch: ['commitlint.config.cjs'],
+            schema: 'https://json.schemastore.org/commitlintrc.json'
+        },
+        {
+            fileMatch: (0, tslib_1.__spreadArray)(['.gitlab-ci.yml'], (0, exports.getGlob)('.gitlab/ci/**/*.yml'), true),
+            schema: 'https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/assets/javascripts/editor/schema/ci.json'
+        },
+        {
+            fileMatch: ['cspell.json'],
+            schema: 'https://raw.githubusercontent.com/streetsidesoftware/cspell/main/packages/cspell-types/cspell.schema.json'
+        },
+        {
+            fileMatch: ['package.json'],
+            schema: 'https://json.schemastore.org/package.json'
+        },
+        {
+            fileMatch: ['stylelintrc.cjs'],
+            schema: 'https://json.schemastore.org/stylelintrc.json'
+        },
+        {
+            fileMatch: (0, tslib_1.__spreadArray)(['Taskfile.yml'], (0, exports.getGlob)('.config/taskfiles/**/*.yml'), true),
+            schema: 'https://json.schemastore.org/taskfile.json'
+        },
+        {
+            fileMatch: ['tsconfig.json', 'tsconfig.module.json'],
+            schema: 'https://json.schemastore.org/tsconfig.json'
+        },
+        {
+            fileMatch: ['yamllint.yml'],
+            schema: 'https://json.schemastore.org/yamllint.json'
+        }
+    ];
+};
+exports.schemaDefinitions = schemaDefinitions;
+exports.vscodeTasksOrder = [
+    'version',
+    'label',
+    'type',
+    'group',
+    'command',
+    'linux',
+    'osx',
+    'windows',
+    'isBackground',
+    'presentation',
+    'reveal',
+    'echo',
+    'focus',
+    'panel',
+    'problemMatcher',
+    'base',
+    'owner',
+    'severity',
+    'fileLocation',
+    'pattern',
+    'regexp',
+    'kind',
+    'file',
+    'location',
+    'line',
+    'column',
+    'endLine',
+    'endColumn',
+    'code',
+    'message',
+    'loop',
+    'background',
+    'activeOnStart',
+    'beginsPattern',
+    'endsPattern',
+    'tasks',
+    'cwd',
+    'env',
+    'shell',
+    'executable',
+    'options',
+    'args',
+    'runOptions',
+    'reevaluateOnRerun',
+    'runOn'
+];
+//# sourceMappingURL=library.js.map
