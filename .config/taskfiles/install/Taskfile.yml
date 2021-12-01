@@ -19,6 +19,7 @@ tasks:
     cmds:
       - task: :install:npm:commitizen
       - task: :install:npm:commitlint
+      - task: :install:npm:cz-emoji
       - task: :install:npm:cspell
       - task: :install:npm:eslint
       - task: :install:npm:git-notify
