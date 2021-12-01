@@ -40,6 +40,7 @@ tasks:
       - modules:local:package
     cmds:
       - '{{.NPM_PROGRAM_LOCAL}} install'
+      - task install:npm:cz-emoji &
       - task: modules:local:sync
     sources:
       - .cache/package-deps.json
