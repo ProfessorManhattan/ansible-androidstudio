@@ -38,13 +38,11 @@
     "string-break": "^1.2.0"
   },
   "devDependencies": {
-    "@commitlint/config-conventional": "^13.2.0",
     "@mblabs/eslint-config": "^1.0.115",
     "@mblabs/prettier-config": "^14.14.30",
     "@mblabs/release-config": "^1.0.0",
     "@typescript-eslint/eslint-plugin": "^5.2.0",
     "commitlint-config-gitmoji": "^2.2.5",
-    "cz-conventional-changelog": "^3.3.0",
     "glob": "^7.2.0",
     "handlebars-helpers": "^0.10.0",
     "semantic-release": "^18.0.0"
@@ -117,54 +115,6 @@
       "url": "https://www.patreon.com/ProfessorManhattan"
     }
   ],
-  "lint-staged": {
-    "**/*": [
-      "blocklint --wordlist blacklist,slave,whitelist",
-      "check-merge-conflict",
-      "check-added-large-files",
-      "check-symlinks",
-      "destroyed-symlinks"
-    ],
-    "**/*.(css|html|less|md|mjml|php|scss|sh|xml)": [
-      "task fix:prettier --"
-    ],
-    "**/*.(jpg|png)": [
-      "task image:compress --"
-    ],
-    "**/*.(js|jsx|ts|tsx)": [
-      "task fix:js --",
-      "task lint:js --"
-    ],
-    "**/*.json": [
-      "task fix:json --"
-    ],
-    "**/*.py": [
-      "task fix:python --",
-      "task lint:python --"
-    ],
-    "**/*.sh": [
-      "task fix:shell --",
-      "task lint:shell --"
-    ],
-    "**/*.toml": [
-      "task lint:toml --"
-    ],
-    "**/*.xml": [
-      "task fix:xml --",
-      "task lint:xml --"
-    ],
-    "**/*.yml": [
-      "task fix:yaml --",
-      "task lint:yaml --"
-    ],
-    "**/*vault.yml": [
-      "task ansible:vault:lint:file --"
-    ],
-    "logo.png": [
-      "task image:resize -- 200 200",
-      "task image:compress --"
-    ]
-  },
   "prettier": "@mblabs/prettier-config",
   "release": {
     "branches": [

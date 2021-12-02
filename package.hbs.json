@@ -1,0 +1,151 @@
+{
+  "author": "{{author.name}} <{{author.email}}> ({{link.home}})",
+  "blueprint": {
+    "description": "An NPM package that is part of the Megabyte Labs eco-system",
+    "name": "My Project Name",
+    "overview": "This text shows up at the top of the README.md.",
+    "repository": {
+      "github": "{{#if repository.github}}{{repository.github}}{{else}}https://github.com/{{profile.github}}/{{repository.prefix.github}}{{slug}}{{/if}}",
+      "gitlab": "{{#if repository.gitlab}}{{repository.gitlab}}{{else}}{{repository.gitlabBaseUrl}}/{{group}}/{{subgroup}}/{{slug}}{{/if}}"
+    },
+    "slug": "my-project",
+    "title": "Title of the README.md"
+  },
+  "bugs": {
+    "email": "{{email.help}}",
+    "url": "{{#if repository.gitlab}}{{repository.gitlab}}{{else}}{{repository.gitlabBaseUrl}}/{{group}}/{{subgroup}}/{{slug}}{{/if}}{{repository.location.issues.gitlab}}"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-emoji"
+    }
+  },
+  "dependencies": {
+    "tslib": "^2.3.1"
+  },
+  "description": "{{description}}",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.2.0",
+    "commitlint-config-gitmoji": "^2.2.5",
+    "glob": "^7.2.0",
+    "handlebars-helpers": "^0.10.0",
+    "semantic-release": "^18.0.0"
+  },
+  "engines": {
+    "node": ">=14.18.0"
+  },
+  "eslintConfig": {
+    "extends": "@mblabs/eslint-config"
+  },
+  "funding": [
+    {
+      "type": "opencollective",
+      "url": "{{profile_link.opencollective}}/{{profile.opencollective}}"
+    },
+    {
+      "type": "patreon",
+      "url": "{{profile_link.patreon}}/{{profile.patreon}}"
+    }
+  ],
+  "homepage": "{{link.home}}",
+  "keywords": [
+    "ansible",
+    "ansible-role",
+    "archlinux",
+    "centos",
+    "debian",
+    "doctor",
+    "fedora",
+    "install",
+    "installdoc",
+    "installdoctor",
+    "macos",
+    "mblabs",
+    "megabytelabs",
+    "molecule",
+    "professormanhattan",
+    "role",
+    "ubuntu",
+    "windows"
+  ],
+  "license": "{{license}}",
+  "lint-staged": {
+    "**/*": [
+      "blocklint --wordlist blacklist,slave,whitelist",
+      "check-merge-conflict",
+      "check-added-large-files",
+      "check-symlinks",
+      "destroyed-symlinks"
+    ],
+    "**/*.(css|html|less|md|mjml|php|scss|sh|xml)": [
+      "task fix:prettier --"
+    ],
+    "**/*.(jpg|png)": [
+      "task image:compress --"
+    ],
+    "**/*.(js|jsx|ts|tsx)": [
+      "task fix:js --",
+      "task lint:js --"
+    ],
+    "**/*.json": [
+      "task fix:json --"
+    ],
+    "**/*.py": [
+      "task fix:python --",
+      "task lint:python --"
+    ],
+    "**/*.sh": [
+      "task fix:shell --",
+      "task lint:shell --"
+    ],
+    "**/*.toml": [
+      "task lint:toml --"
+    ],
+    "**/*.xml": [
+      "task fix:xml --",
+      "task lint:xml --"
+    ],
+    "**/*.yml": [
+      "task fix:yaml --",
+      "task lint:yaml --"
+    ],
+    "**/*vault.yml": [
+      "task ansible:vault:lint:file --"
+    ],
+    "logo.png": [
+      "task image:resize -- 200 200",
+      "task image:compress --"
+    ]
+  },
+  "name": "{{#if customPackageName}}{{customPackageName}}{{else}}@{{profile.npmjs_organization}}/{{repository.prefix.github}}{{slug}}{{/if}}",
+  "optionalDependencies": {
+    "chalk": "^4.1.2",
+    "inquirer": "^8.2.0",
+    "signale": "^1.4.0",
+    "string-break": "^1.2.0"
+  },
+  "prettier": "@mblabs/prettier-config",
+  "private": true,
+  "publishConfig": {
+    "access": "{{npm_publish_config_access}}"
+  },
+  "release": {
+    "branches": [
+      "master",
+      "next"
+    ],
+    "extends": "@mblabs/release-config"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+{{#if repository.github}}{{repository.github}}{{else}}https://github.com/{{profile.github}}/{{repository.prefix.github}}{{slug}}{{/if}}.git"
+  },
+  "scripts": {
+    "help": "{{npm_scripts_help}}",
+    "prepare": "{{npm_scripts_prepare}}",
+    "repair": "bash <(curl -sS https://install.doctor/repair)",
+    "start": "{{npm_scripts_start}}"
+  },
+  "type": "{{npm_type}}",
+  "version": "{{version}}"
+}
