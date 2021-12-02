@@ -23,7 +23,7 @@ tasks:
         GREP="$(echo $GREP | sed 's/\\|$//')"
         if ! ls -la | grep "$GREP" &> /dev/null; then
           true info "Adding boilerplate code since there are no overlapping files"
-          cp -rT .boilerplate .
+          cp -rf .boilerplate/ .
           true success "Added boilerplate code"
         fi
       - rm -rf .boilerplate
@@ -40,8 +40,8 @@ tasks:
 
   copy:
     cmds:
-      - cp -rT {{.SHARED_FOLDER}}/_generated_/common .
-      - cp -rT {{.SHARED_FOLDER}}/_generated_/{{.REPOSITORY_SUBTYPE}} .
+      - cp -rf {{.SHARED_FOLDER}}/_generated_/common/ .
+      - cp -rf {{.SHARED_FOLDER}}/_generated_/{{.REPOSITORY_SUBTYPE}}/ .
       - task: :common:husky:permissions
       - task: save:common:keywords
 

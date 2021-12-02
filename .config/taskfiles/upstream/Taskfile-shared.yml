@@ -9,7 +9,7 @@ tasks:
   copy:
     cmds:
       - mv .gitlab-ci.yml .gitlab-ci.yml.bak
-      - cp -rT ./{{.SHARED_COMMON_FOLDER}}/ .
+      - cp -rf ./{{.SHARED_COMMON_FOLDER}}/ .
       - mv .gitlab-ci.yml.bak .gitlab-ci.yml
       - task: :common:husky:permissions
 

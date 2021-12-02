@@ -50,21 +50,21 @@ tasks:
 
   copy:common:
     cmds:
-      - cp -rT ./{{.SHARED_FOLDER}}/common/ .
+      - cp -rf ./{{.SHARED_FOLDER}}/common/ .
       - task: :common:husky:permissions
 
   copy:project:
     cmds:
-      - cp -rT ./{{.SHARED_FOLDER}}/common ./{{.COMMON_FOLDER}}
+      - cp -rf ./{{.SHARED_FOLDER}}/common/ ./{{.COMMON_FOLDER}}
       - if [ ! -d project ]; then mkdir project; fi
-      - cp -rT project ./{{.COMMON_FOLDER}}
+      - cp -rf project/ ./{{.COMMON_FOLDER}}
 
   copy:project:subtype:
     cmds:
       - |
         for FOLDER in project-*/; do
           SUBTYPE="$(echo "$FOLDER" | sed 's/project-\(.*\)\//\1/')"
-          cp -rT "$FOLDER" "./{{.COMMON_FOLDER}}-$SUBTYPE" &
+          cp -rf "$FOLDER/" "./{{.COMMON_FOLDER}}-$SUBTYPE" &
         done
         wait
 

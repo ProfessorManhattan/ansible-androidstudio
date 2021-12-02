@@ -100,7 +100,7 @@ tasks:
     cmds:
       - xcode-select --install
     status:
-      - xcode-select -p 2&>1 /dev/null
+      - xcode-select -p 1> /dev/null
 
   common:linux:
     vars:

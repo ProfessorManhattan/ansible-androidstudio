@@ -16,7 +16,7 @@ tasks:
 
   copy:
     cmds:
-      - cp -rT ./{{.COMMON_FOLDER}}/common/ .
+      - cp -rf ./{{.COMMON_FOLDER}}/common/ .
       - task: :common:husky:permissions
       - mv {{.COMMON_FOLDER}}/.gitlab-ci.yml .gitlab-ci.yml
 
