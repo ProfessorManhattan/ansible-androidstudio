@@ -22,6 +22,6 @@ You can, of course, disable deploying these apps. However, we include them becau
 
 #### HTPC
 
-We do not maintain any of the host applications except the ones listed above. However, we do provide the capability of marking a computer being provisioned as an HTPC. Doing this will include a suite of web applications with powerful auto-downloading, organizing, tagging, and media-serving capabilities. Since most people will probably be stepping outside the confines of the law for this, it is not recommended. If you still want to experiment then you can find descriptions of the applications below. The applications are intended to be hosted on a single computer via Docker Compose.
+We do not maintain any of the host applications except the ones listed above. However, we do provide the capability of marking a computer being provisioned as an HTPC. Doing this will include a suite of web applications with powerful auto-downloading, organizing, tagging, and media-serving capabilities. Since most people will probably be stepping outside the confines of the law for this, it is not recommended. If you still want to experiment then you can find descriptions of the applications below. The applications are intended to be hosted on a single computer via Docker Compose. The backend for Kodi is included but you should still use the regular installation method for Plex and the front-end of Kodi to view your media collection.
 
 {{ htpc_var_chart }}
