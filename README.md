@@ -252,7 +252,7 @@ If you are incorporating this role into a pre-existing playbook, then it might b
 
 ### Real World Example
 
-You can find an example of a playbook that incorporates this role in our main playbook (a.k.a. [Gas Station](https://gitlab.com/InstallDoc/ansible-playbook-boilerplate)). The playbook is an excellent example for someone learning how to use Ansible. It also incorporates a lot of well-thought out build tools that more advanced Ansible users can appreciate. And people who could care less about Ansible can also benefit from it because it allows you to more or less turn your computer (and network) into the ultimate development enivornment. The bottom line is that it is an awesome project that developers should know about!
+You can find an example of a playbook that incorporates this role in our main playbook (a.k.a. [Gas Station](https://github.com/ProfessorManhattan/Gas-Station)). The playbook is an excellent example for someone learning how to use Ansible. It also incorporates a lot of well-thought out build tools that more advanced Ansible users can appreciate. And people who could care less about Ansible can also benefit from it because it allows you to more or less turn your computer (and network) into the ultimate development enivornment. The bottom line is that it is an awesome project that developers should know about!
 
 <a href="#contributing" style="width:100%"><img style="width:100%" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 

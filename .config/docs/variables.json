@@ -137,8 +137,8 @@
       "cryptocurrency_path": "megabyte-labs/cryptocurrency",
       "docker_compose": "https://gitlab.com/megabyte-labs/docker-compose",
       "docker_compose_path": "megabyte-labs/docker-compose",
-      "dockerfile": "https://gitlab.com/megabyte-labs/dockerfile",
-      "dockerfile_path": "megabyte-labs/dockerfile",
+      "dockerfile": "https://gitlab.com/megabyte-labs/docker",
+      "dockerfile_path": "megabyte-labs/docker",
       "documentation": "https://gitlab.com/megabyte-labs/documentation",
       "documentation_path": "megabyte-labs/documentation",
       "kubernetes": "https://gitlab.com/megabyte-labs/kubernetes",
@@ -148,6 +148,7 @@
       "packer": "https://gitlab.com/megabyte-labs/packer",
       "packer_path": "megabyte-labs/packer",
       "python": "https://gitlab.com/megabyte-labs/python",
+      "python_cli_path": "megabyte-labs/python/cli",
       "python_path": "megabyte-labs/python",
       "software": "https://gitlab.com/megabyte-labs/software",
       "software_path": "megabyte-labs/software",
@@ -194,7 +195,7 @@
     "project": {
       "assets": "https://gitlab.com/megabyte-labs/assets/-/raw/master",
       "autodoc": "https://github.com/AndresBott/ansible-autodoc",
-      "playbooks": "https://gitlab.com/InstallDoc/ansible-playbook-boilerplate",
+      "playbooks": "https://github.com/ProfessorManhattan/Gas-Station",
       "wrangler": "https://gitlab.com/megabyte-labs/wrangler"
     }
   },
