@@ -6,7 +6,7 @@ driver:
     ansible_connection_options:
       ansible_connection: local
 platforms:
-  - instance
+  - name: instance
 provisioner:
   connection_options:
     ansible_password: ansible
