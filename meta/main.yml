@@ -12,10 +12,8 @@ galaxy_info:
     - name: Debian
       versions:
         - buster
-        - buster
     - name: Ubuntu
       versions:
-        - bionic
         - bionic
         - focal
         - hirsute

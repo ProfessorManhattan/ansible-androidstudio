@@ -97,7 +97,7 @@
     ["Package", "Description", "Required"],
     [
       "<b><a href=\"https://pypi.org/project/ansible/\" title=\"ansible on PyPi.org\" target=\"_blank\">ansible</a></b>",
-      "",
+      "A configuration management system that can remotely configure computers",
       "<div align=\"center\">✔️</div>"
     ],
     [
@@ -141,8 +141,8 @@
       ""
     ],
     [
-      "<b><a href=\"https://pypi.org/project/mod-ansible-autodoc/\" title=\"mod-ansible-autodoc on PyPi.org\" target=\"_blank\">mod-ansible-autodoc</a></b>)",
-      "Custom fork of ansible-autodoc which allows us to auto-generate documentation based on comments in the role's YAML files",
+      "<b><a href=\"https://pypi.org/project/mod-ansible-autodoc/\" title=\"mod-ansible-autodoc on PyPi.org\" target=\"_blank\">mod-ansible-autodoc</a></b>",
+      "Custom fork of [ansible-autodoc](https://pypi.org/project/ansible-autodoc/0.5.1.1/) which allows us to auto-generate documentation based on comments in the role's YAML files",
       ""
     ],
     [
