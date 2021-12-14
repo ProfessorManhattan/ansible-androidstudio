@@ -29,11 +29,11 @@
   <a title="Windows 11 test status on GitHub" href="{{ repository.github }}/actions/workflows/Windows.yml" target="_blank">
     <img alt="Windows 11 test status" src="https://img.shields.io/github/workflow/status/{{ profile.github }}/{{ repository.prefix.github }}{{ galaxy_info.role_name }}/Windows%20Ansible%20Role%20Test/master?color=cyan&label=windows&logo=windows&style={{ alt_badge_style }}">
   </a>
-  <a title="macOS test status on GitHub" href="{{ repository.github }}/actions/workflows/macOS.yml" target="_blank">
-    <img alt="macOS test status" src="https://img.shields.io/github/workflow/status/{{ profile.github }}/{{ repository.prefix.github }}{{ galaxy_info.role_name }}/macOS%20Ansible%20Role%20Test/master?label=mac&logo=apple&style={{ alt_badge_style }}">
+  <a title="macOS test status on GitLab" href="{{ repository.gitlab }}{{ repository.location.commits.gitlab }}" target="_blank">
+    <img alt="macOS test status" src="https://img.shields.io/gitlab/pipeline-status/{{ repository.group.ansible_roles_path }}/{{ galaxy_info.role_name }}?branch=test%2Fdarwin&label=osx&logo=apple&style={{ alt_badge_style }}">
   </a>
   <a title="Linux Molecule test status on GitLab" href="{{ repository.gitlab }}{{ repository.location.commits.gitlab }}" target="_blank">
-    <img alt="Linux Molecule test status" src="https://img.shields.io/gitlab/pipeline-status/{{ repository.group.ansible_roles_path }}/{{ galaxy_info.role_name }}?branch=linux&label=linux&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAElBMVEUAAAAwPEEuOEIxOzswPj7///91+pI+AAAABXRSTlMANRkNJejDPNcAAAB+SURBVCjPddHBDYAgDIXhGtMRHMG7S3hvTP79VxFIQVq1wOVLm7wU8QIJpSThC2wGwwJoPQFKRdiAAIhGsAykZNSZAOVNMx4BMjwtpySgr6CDJdB/MAdJwAvSiFoE5aABHUb0ch0WHNQq+KPAOgCgrbEnbjAHArjGz3jr3hpumrQpvwi66rkAAAAASUVORK5CYII=&style={{ alt_badge_style }}">
+    <img alt="Linux Molecule test status" src="https://img.shields.io/gitlab/pipeline-status/{{ repository.group.ansible_roles_path }}/{{ galaxy_info.role_name }}?branch=test%2Flinux&label=linux&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAElBMVEUAAAAwPEEuOEIxOzswPj7///91+pI+AAAABXRSTlMANRkNJejDPNcAAAB+SURBVCjPddHBDYAgDIXhGtMRHMG7S3hvTP79VxFIQVq1wOVLm7wU8QIJpSThC2wGwwJoPQFKRdiAAIhGsAykZNSZAOVNMx4BMjwtpySgr6CDJdB/MAdJwAvSiFoE5aABHUb0ch0WHNQq+KPAOgCgrbEnbjAHArjGz3jr3hpumrQpvwi66rkAAAAASUVORK5CYII=&style={{ alt_badge_style }}">
   </a>
   <a title="Ansible Galaxy quality score (out of 5)" href="{{ profile_link.galaxy }}/{{ profile.galaxy }}/{{ galaxy_info.role_name }}" target="_blank">
     <img alt="Ansible Galaxy quality score" src="https://img.shields.io/ansible/quality/{{ ansible_galaxy_project_id }}?logo=ansible&style={{ alt_badge_style }}" />
