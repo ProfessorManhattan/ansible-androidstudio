@@ -262,6 +262,13 @@ tasks:
         vars:
           FORMULAE: go
 
+  grype:
+    run: once
+    cmds:
+      - task: brew:formulae
+        vars:
+          FORMULAE: anchore/grype/grype
+
   jq:
     run: once
     cmds:

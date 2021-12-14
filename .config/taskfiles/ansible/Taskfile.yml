@@ -29,9 +29,6 @@ tasks:
       - |
         jq --arg collections "$COLLECTIONS" '.{{.COLLECTION_DEPS}} = ($collections | fromjson)' '{{.VARIABLES_PATH}}' > "$TMP"
         mv "$TMP" '{{.VARIABLES_PATH}}'
-    sources:
-      - '{{.VARIABLES_PATH}}'
-      - '{{.REQUIREMENTS_PATH}}'
 
   collection-dependencies:markdown:
     deps:

@@ -517,6 +517,11 @@
       "command": "bash .config/scripts/vscode.sh && task security:gitleaks"
     },
     {
+      "label": "(security:grype): Scan container images and file systems for security issues using Grype",
+      "type": "shell",
+      "command": "bash .config/scripts/vscode.sh && task security:grype"
+    },
+    {
       "label": "(security:private-keys): Scan for private keys",
       "type": "shell",
       "command": "bash .config/scripts/vscode.sh && task security:private-keys"

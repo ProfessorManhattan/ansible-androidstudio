@@ -83,7 +83,8 @@ vars:
   NPM_PROGRAM_LOCAL: pnpm
   NPX_HANDLE: 'pnpx '
   NPX_PACKAGE: pnpx
-  PYTHON_HANDLE: 'poetry run '
+  PYTHON_HANDLE:
+    sh: if [ -z "$GITLAB_CI" ]; then echo 'poetry run '; fi
   REPOSITORY_SUBTYPE: role
   REPOSITORY_TYPE: ansible
   TIMEZONE: America/New_York

@@ -69,6 +69,21 @@ tasks:
           gitleaks -p . -v
         {{end}}
 
+  grype:
+    deps:
+      - :install:software:grype
+    desc: Scan container images and file systems for security issues using Grype
+    summary: |
+      # Scan containers and file systems using Grype
+
+      Grype is a container and file system security scanner. This task is simply an alias for
+      the `grype` command that will first ensure it is installed before running the command.
+
+      **Example usage:**
+      `task grype -- ubuntu:latest --fail-on medium`
+    cmds:
+      - grype {{.CLI_ARGS}}
+
   private-keys:
     deps:
       - :install:python:requirements

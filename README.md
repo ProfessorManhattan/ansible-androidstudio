@@ -6,7 +6,7 @@
   </center>
 </div>
 <div align="center">
-  <center><h1 align="center">Ansible Role: Android Studio - An IDE for Android Development<i></i></h1></center>
+  <center><h1 align="center"><i></i>Android Studio - An IDE for Android Development<i></i></h1></center>
   <center><h4 style="color: #18c3d1;">An Ansible role brought to you by <a href="https://megabyte.space" target="_blank">Megabyte Labs</a></h4><i></i></center>
 </div>
 
@@ -83,6 +83,7 @@
     - [`user_configs`](#user_configs)
 - [Supported Operating Systems](#supported-operating-systems)
 - [Dependencies](#dependencies)
+  - [Python Dependencies](#python-dependencies)
   - [Galaxy Roles](#galaxy-roles)
   - [Galaxy Collections](#galaxy-collections)
 - [Example Playbook](#example-playbook)
@@ -208,6 +209,12 @@ ansible-galaxy install -r requirements.yml
 ```
 
 Alternatively, you can simply run `bash .config/scripts/start.sh` if you are new to Ansible and do not mind the development requirements also being installed.
+
+### Python Dependencies
+
+Although the only tool necessary to run this play on a standard machine is Ansible (a Python package), we include several other Python dependencies that are required for specialized use cases and development. The table below details these packages:
+
+python_role_dependencies
 
 ### Galaxy Roles
 
