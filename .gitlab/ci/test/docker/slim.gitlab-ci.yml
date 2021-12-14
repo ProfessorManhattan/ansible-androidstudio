@@ -1,5 +1,6 @@
 ---
 test:dockerslim:
+  stage: test
   image:
     name: megabytelabs/yamllint:slim
     entrypoint: ['']
@@ -8,9 +9,8 @@ test:dockerslim:
       when: never
     - exists:
         - '*slim.config.json'
+  variables:
+    GIT_DEPTH: 1
   script:
     - set -eo pipefail
     - yamllint -c .config/yamllint.yml -s .
-  stage: test
-  variables:
-    GIT_DEPTH: 1

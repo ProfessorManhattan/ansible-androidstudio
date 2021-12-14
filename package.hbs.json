@@ -77,45 +77,17 @@
       "check-symlinks",
       "destroyed-symlinks"
     ],
-    "**/*.(css|html|less|md|mjml|php|scss|sh|xml)": [
-      "task fix:prettier --"
-    ],
-    "**/*.(jpg|png)": [
-      "task image:compress --"
-    ],
-    "**/*.(js|jsx|ts|tsx)": [
-      "task fix:js --",
-      "task lint:js --"
-    ],
-    "**/*.json": [
-      "task fix:json --"
-    ],
-    "**/*.py": [
-      "task fix:python --",
-      "task lint:python --"
-    ],
-    "**/*.sh": [
-      "task fix:shell --",
-      "task lint:shell --"
-    ],
-    "**/*.toml": [
-      "task lint:toml --"
-    ],
-    "**/*.xml": [
-      "task fix:xml --",
-      "task lint:xml --"
-    ],
-    "**/*.yml": [
-      "task fix:yaml --",
-      "task lint:yaml --"
-    ],
-    "**/*vault.yml": [
-      "task ansible:vault:lint:file --"
-    ],
-    "logo.png": [
-      "task image:resize -- 200 200",
-      "task image:compress --"
-    ]
+    "**/*.(css|html|less|md|mjml|php|scss|sh|xml)": ["task fix:prettier --"],
+    "**/*.(jpg|png)": ["task image:compress --"],
+    "**/*.(js|jsx|ts|tsx)": ["task fix:js --", "task lint:js --"],
+    "**/*.json": ["task fix:json --"],
+    "**/*.py": ["task fix:python --", "task lint:python --"],
+    "**/*.sh": ["task fix:shell --", "task lint:shell --"],
+    "**/*.toml": ["task lint:toml --"],
+    "**/*.xml": ["task fix:xml --", "task lint:xml --"],
+    "**/*.yml": ["task fix:yaml --", "task lint:yaml --"],
+    "**/*vault.yml": ["task ansible:vault:lint:file --"],
+    "logo.png": ["task image:resize -- 200 200", "task image:compress --"]
   },
   "name": "{{#if customPackageName}}{{customPackageName}}{{else}}@{{profile.npmjs_organization}}/{{repository.prefix.github}}{{slug}}{{/if}}",
   "optionalDependencies": {
@@ -130,10 +102,7 @@
     "access": "{{npm_publish_config_access}}"
   },
   "release": {
-    "branches": [
-      "master",
-      "next"
-    ],
+    "branches": ["master", "next"],
     "extends": "@mblabs/release-config"
   },
   "repository": {

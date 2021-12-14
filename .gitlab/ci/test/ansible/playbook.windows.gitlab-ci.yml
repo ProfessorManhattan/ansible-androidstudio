@@ -1,7 +1,10 @@
 ---
 test:molecule:windows:
-  allow_failure: true
+  stage: test
   image: megabytelabs/molecule:latest
+  services:
+    - docker:dind
+  allow_failure: true
   rules:
     - if: $DO_CI == 'false'
       when: never
@@ -11,14 +14,11 @@ test:molecule:windows:
         - main.yml
     - if: $CI_PIPELINE_SOURCE == 'schedule' || $CI_PIPELINE_SOURCE == 'web'
     - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == 'master'
-  script:
-    - set -eo pipefail
-  services:
-    - docker:dind
-  stage: test
   variables:
     DOCKER_CERT_PATH: $DOCKER_TLS_CERTDIR/client
     DOCKER_HOST: tcp://docker:2376
     DOCKER_TLS_CERTDIR: /certs
     DOCKER_TLS_VERIFY: 1
     GIT_DEPTH: 1
+  script:
+    - set -eo pipefail

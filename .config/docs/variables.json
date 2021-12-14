@@ -1,4 +1,5 @@
 {
+  "SPACE": "",
   "alt_badge_style": "flat-square",
   "author": {
     "email": "brian@megabyte.space",
@@ -20,6 +21,7 @@
       "This variable should be a description of what the role installs. You can usually find a good description by Googling, \"What is Android Studio,\" for example if you were populating this variable for the [Android Studio role]({{ repository.group.ansible_roles }}/androidstudio). This text is shown at the top of the README, right below the header section and before the table of contents. Whenever possible, key products/terms should be linked to using markdown. You can see an example of us hyperlinking in this variable by checking out the [Android Studio role]({{ repository.group.ansible_roles }}/androidstudio). The idea is to make it as easy as possible for our users to figure out exactly what the role does."
     ]
   ],
+  "commit_help_url": "https://megabyte.space/docs/contributing/commit-guidelines",
   "company": "Megabyte LLC",
   "copyright": "2020-2021",
   "description_emojis": "👨🏻‍💻 🩺",
@@ -34,7 +36,20 @@
   "email": {
     "help": "help@megabyte.space"
   },
+  "emoji_beginnings": ["🚀 ", "🔥👉 ", "👉 ", "😉 ", "🆓 ", "🐴 ", "👀 ", "🎉 ", "", "", "", "", "", "", "", ""],
+  "emoji_endings": [" 🚀", " 🔥🔥🔥", " 👏", " 😉", " 🐙", " 🐴", " 👀", " 🎟", " 🎉🎉", "", "", "", "", "", "", ""],
   "github_prefix": "<i></i>",
+  "gitlab_pipelines": [
+    {
+      "active": true,
+      "cron": "0 5 1 * *",
+      "description": "Monthly Repository Update",
+      "ref": "synchronize",
+      "variable": {
+        "REPOSITORY_UPDATE": true
+      }
+    }
+  ],
   "group": "ansible",
   "hostapp_var_chart": [
     ["App", "Description"],

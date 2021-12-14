@@ -31,23 +31,21 @@ tasks:
           mkdir -p "$DIR_NAME"
           if [ -d "$REPO_PATH" ]; then
             cd "$REPO_PATH"
-            git reset --hard HEAD
-            git clean -fxd
-            git pull origin master
+            git pull origin master || continue
             cd "$BASE_PWD"
           else
             git clone --depth=1 "$REPO_URL" "$REPO_PATH"
           fi
-          . .config/log info "Running bash command on $REPO_PATH"
+          .config/log info "Running bash command on $REPO_PATH"
           (
             cd "$REPO_PATH"
             {{trimPrefix "'" (trimSuffix "'" (index (splitList " ---- " .CLI_ARGS) 1))}}
             cd "$BASE_PWD"
           )
-          . .info/log info "Finished running bash command on $REPO_PATH"
+          .config/log info "Finished running bash command on $REPO_PATH"
         }
         cat {{.REPOSITORY_LIST}} | while IFS= read -r REPO_DETAILS; do
-          . .config/log info "Executing logic on $REPO_DETAILS"
+          .config/log info "Executing logic on $REPO_DETAILS"
           execRepo "$REPO_DETAILS" &
         done
         wait

@@ -1,8 +1,11 @@
 ---
 test:molecule:linux:
+  stage: test
   image:
     name: megabytelabs/molecule:slim
     entrypoint: ['']
+  services:
+    - docker:20.10.7-dind
   parallel:
     matrix:
       - OPERATING_SYSTEM: archlinux
@@ -23,6 +26,12 @@ test:molecule:linux:
         - pyproject.toml
         - requirements.yml
     - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == 'master'
+  variables:
+    DOCKER_CERT_PATH: $DOCKER_TLS_CERTDIR/client
+    DOCKER_HOST: tcp://docker:2376
+    DOCKER_TLS_CERTDIR: /certs
+    DOCKER_TLS_VERIFY: 1
+    GIT_DEPTH: 1
   script:
     - task
     - SCENARIO="ci-docker-$OPERATING_SYSTEM"
@@ -30,12 +39,3 @@ test:molecule:linux:
     - if [ "$SNAP_REFERENCES" ]; then SCENARIO="ci-docker-$OPERATING_SYSTEM-snap"; fi
     - echo "***Molecule Scenario*** ---> $SCENARIO"
     - if [ -d "molecule/$SCENARIO" ]; then molecule test -s "$SCENARIO"; fi
-  services:
-    - docker:20.10.7-dind
-  stage: test
-  variables:
-    DOCKER_CERT_PATH: $DOCKER_TLS_CERTDIR/client
-    DOCKER_HOST: tcp://docker:2376
-    DOCKER_TLS_CERTDIR: /certs
-    DOCKER_TLS_VERIFY: 1
-    GIT_DEPTH: 1

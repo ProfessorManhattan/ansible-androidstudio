@@ -6,9 +6,10 @@
     - windows-1809
 
 test:molecule:windows:
-  allow_failure: true
+  stage: test
   extends:
     - .shared_windows_runners
+  allow_failure: true
   rules:
     - if: $DO_CI == 'false'
       when: never
@@ -24,4 +25,3 @@ test:molecule:windows:
     - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == 'master'
   script:
     - docker run -it ubuntu echo "Hello World from Docker Ubuntu!"
-  stage: test

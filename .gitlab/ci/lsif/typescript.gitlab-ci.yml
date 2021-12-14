@@ -1,14 +1,14 @@
 ---
 lsif:typescript:
-  allow_failure: true
-  artifacts:
-    reports:
-      lsif: dump.lsif
+  stage: lsif
   image: sourcegraph/lsif-node:latest
-  needs: []
+  allow_failure: true
   rules:
     - if: $DO_CI == 'false'
       when: never
+  needs: []
   script:
     - lsif-tsc -p .
-  stage: lsif
+  artifacts:
+    reports:
+      lsif: dump.lsif

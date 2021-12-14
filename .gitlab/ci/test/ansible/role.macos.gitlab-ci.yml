@@ -4,9 +4,10 @@
     - shared-macos-amd64
 
 test:molecule:darwin:
-  allow_failure: true
+  stage: test
   extends:
     - .shared_macos_runners
+  allow_failure: true
   rules:
     - if: $DO_CI == 'false'
       when: never
@@ -22,4 +23,3 @@ test:molecule:darwin:
     - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == 'master'
   script:
     - bash test/darwin/test.sh
-  stage: test

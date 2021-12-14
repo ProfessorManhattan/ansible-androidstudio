@@ -121,7 +121,7 @@ tasks:
   common:linux:archlinux:
     interactive: true
     cmds:
-      - true warn "Archlinux support for Homebrew is not very well documented.. if this does not work and you can get it working, please open a PR :)"
+      - .config/log warn "Archlinux support for Homebrew is not very well documented.. if this does not work and you can get it working, please open a PR :)"
       - |
         sudo pacman update
         sudo pacman -S base-devel curl file git procps-ng
@@ -136,8 +136,8 @@ tasks:
     interactive: true
     cmds:
       - |
-        sudo apt-get update
-        sudo apt-get install build-essential curl file git procps
+        sudo apt-get -y update
+        sudo apt-get install -y build-essential curl file git procps
     status:
       - type curl &> /dev/null || [[ "${container:=}" == "docker" ]]
       - type git &> /dev/null || [[ "${container:=}" == "docker" ]]
@@ -148,30 +148,49 @@ tasks:
   common:linux:redhat:
     interactive: true
     cmds:
+      - mkdir -p .cache
       - |
-        sudo yum groupinstall 'Development Tools'
-        sudo yum install curl file git procps-ng
+        if [ ! -f '.cache/yum-devtools-check-ran' ]; then
+          yum grouplist 'Development Tools' &> .cache/yum-devtools-check
+          DEV_TOOLS_NOT_INSTALLED="$(grep 'No groups match' < .cache/yum-devtools-check > /dev/null)"
+          if [ "$DEV_TOOLS_NOT_INSTALLED" == '0' ]; then
+            sudo yum groupinstall -y 'Development Tools'
+          fi
+          touch .cache/yum-devtools-check-ran
+        fi
+        if ! rpm --quiet --query curl file git procps-ng; then
+          sudo yum install -y curl file git procps-ng
+        fi
         if [ -f '/etc/os-release' ]; then
           source /etc/os-release
           if [ "$ID" == 'fedora' ] && [ "$VERSION_ID" -gt "29" ]; then
-            sudo yum install libxcrypt-compat
+            if ! rpm --quiet --query libxcrypt-compat; then
+              sudo yum -y install libxcrypt-compat
+            fi
           fi
         fi
-    status:
-      - type curl &> /dev/null || [[ "${container:=}" == "docker" ]]
-      - type git &> /dev/null || [[ "${container:=}" == "docker" ]]
-      - ldconfig -p | grep file || [[ "${container:=}" == "docker" ]]
-      - ldconfig -p | grep procps-ng || [[ "${container:=}" == "docker" ]]
 
   common:linux:unknown:
     cmds:
-      - true warn 'You are using an operating system that we do not directly support. Please make sure
+      - .config/log warn 'You are using an operating system that we do not directly support. Please make sure
         the equivalent of `build-essential`, `curl`, `file`, `git`, and `procps` are installed.'
 
   common:windows:
     cmds:
-      - true error "Windows is not supported. Try using a Windows WSL environment."
+      - .config/log error "Windows is not supported. Try using a Windows WSL environment."
       - exit 1
+
+  coreutils:
+    deps:
+      - brew
+    run: once
+    cmds:
+      - |
+        if [ '{{OS}}' == 'darwin' ] && ! type gsed > /dev/null; then
+          brew install coreutils
+        fi
+    status:
+      - '[ "{{OS}}" == "darwin" ] || type gsed > /dev/null'
 
   docker:
     run: once

@@ -7,14 +7,19 @@ tasks:
       - ':{{if eq .REPOSITORY_TYPE "packer"}}packer:update:descriptions{{else}}donothing{{end}}'
       - files
       - :git:remotes
+      - :install:tslib
       - :python:requirementstxt
     cmds:
       - task: all:docs
 
   all:docs:
-    deps:
-      - contributing
-      - readme
+    cmds:
+      - |
+        {{if eq .REPOSITORY_TYPE "common"}}{{else}}{{if eq .REPOSITORY_TYPE "documentation"}}{{else}}
+        task common:update:contributing &
+        task common:update:readme &
+        wait
+        {{end}}{{end}}
 
   ansible:
     deps:
@@ -80,6 +85,7 @@ tasks:
       - :install:npm:remark
       - :install:npm:prettier
       - :install:npm:readme
+    # @desc_when [common/Taskfile-update.yml] subtype.cli
     desc: Build `man` page from the README.md file
     vars:
       MAN_TEMPLATE: '{{.REPOSITORY_SUBTYPE}}-blueprint-man.md'
@@ -181,19 +187,9 @@ tasks:
       - task: project
 
   services:
-    deps:
-      - update
-    label: update:services
-    desc: Update elements of the repository that require API access
-    summary: |
-      # Update elements of the repository that require API access
-
-      This task will ensure that the git repositories and other services related to the
-      project are updated with the configurations.
-
-      **Example usage:**
-      `task common:update:services`
     cmds:
+      - task: :{{if eq .REPOSITORY_TYPE "project"}}donothing{{else}}start{{end}}
+      - task: update
       - task: services:repos
 
   services:repos:

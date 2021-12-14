@@ -43,7 +43,7 @@ tasks:
 
   copy:common:
     cmds:
-      - cp -rf ./{{.COMMON_FOLDER}}/common/ .
+      - cp {{if eq OS "darwin"}}-rf{{else}}-rT{{end}} ./{{.COMMON_FOLDER}}/common/ .
       - task: :common:husky:permissions
 
   copy:shared:

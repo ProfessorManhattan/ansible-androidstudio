@@ -1,14 +1,14 @@
 ---
 lint:tflint:
+  stage: lint
   image:
     name: megabytelabs/tflint:slim
     entrypoint: ['']
   rules:
     - if: $DO_CI == 'false'
       when: never
+  variables:
+    GIT_DEPTH: 1
   script:
     - set -eo pipefail
     - tflint
-  stage: lint
-  variables:
-    GIT_DEPTH: 1

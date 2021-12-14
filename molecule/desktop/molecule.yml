@@ -1,9 +1,4 @@
 ---
-dependency:
-  name: galaxy
-  options:
-    requirements-file: requirements.yml
-    role-file: requirements.yml
 driver:
   name: vagrant
   provider:
@@ -81,9 +76,9 @@ provisioner:
   inventory:
     group_vars:
       all:
-        ansible_become_user: vagrant
-        ansible_password: vagrant
-        ansible_user: vagrant
+        ansible_become_user: ${TEST_USER:-vagrant}
+        ansible_password: ${TEST_PASSWORD:-vagrant}
+        ansible_user: ${TEST_USER:-vagrant}
         virtualbox_molecule_test: true
       windows:
         ansible_become_method: runas
@@ -94,11 +89,3 @@ provisioner:
       Windows-10:
         ansible_host: 127.0.0.1
         ansible_port: 55985
-  name: ansible
-  options:
-    vvv: true
-  playbooks:
-    converge: ../converge.yml
-    prepare: ../prepare.yml
-verifier:
-  name: ansible

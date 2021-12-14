@@ -12,8 +12,10 @@ galaxy_info:
     - name: Debian
       versions:
         - buster
+        - buster
     - name: Ubuntu
       versions:
+        - bionic
         - bionic
         - focal
         - hirsute
@@ -33,10 +35,10 @@ galaxy_info:
     - npm
     - package
     - platformtools
-    - professormanhattan
     - role
     - snap
     - ubuntu
+    - washingtondc
     - windows
 dependencies:
   - role: professormanhattan.snapd

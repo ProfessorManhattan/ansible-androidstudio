@@ -128,9 +128,9 @@ provisioner:
   inventory:
     group_vars:
       all:
-        ansible_become_user: vagrant
-        ansible_password: vagrant
-        ansible_user: vagrant
+        ansible_become_user: ${TEST_USER:-vagrant}
+        ansible_password: ${TEST_PASSWORD:-vagrant}
+        ansible_user: ${TEST_USER:-vagrant}
       windows:
         ansible_become_method: runas
         ansible_connection: winrm

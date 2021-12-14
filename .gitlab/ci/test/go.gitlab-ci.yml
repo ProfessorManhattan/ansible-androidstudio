@@ -1,18 +1,18 @@
 ---
 test:gotest:
-  artifacts:
-    reports:
-      junit: report.xml
-    when: always
+  stage: test
   image: megabytelabs/gotest:slim
-  needs: []
   rules:
     - if: $DO_CI == 'false'
       when: never
     - exists:
         - '**/*_test.go'
-  script:
-    - task go:test:ci
-  stage: test
+  needs: []
   variables:
     GIT_DEPTH: 1
+  script:
+    - task go:test:ci
+  artifacts:
+    reports:
+      junit: report.xml
+    when: always
