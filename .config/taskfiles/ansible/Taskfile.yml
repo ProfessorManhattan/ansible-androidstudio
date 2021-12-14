@@ -117,6 +117,11 @@ tasks:
       - task fix:yaml:dashes -- meta/main.yml
 
   mod-ansible-autodoc:
+    cmds:
+      - task: mod-ansible-autodoc:generate
+      - task: mod-ansible-autodoc:variables
+
+  mod-ansible-autodoc:generate:
     deps:
       - :install:python:requirements
       - :install:software:jq
@@ -135,7 +140,6 @@ tasks:
         --tags-title '### Tags' --tags-description "$TAGS_DESCRIPTION" --todo-title '### TODO'
         --todo-description "$TODO_DESCRIPTION" --variables-title '## Variables' --variables-description
         "$VARIABLES_DESCRIPTION" --variable-example-comment-prefix '#💬'
-      - task: mod-ansible-autodoc:variables
       - mkdir -p .autodoc
       - mv ansible_actions.md ansible_tags.md ansible_todo.md ansible_variables.json ansible_variables.md .autodoc
     sources:
@@ -145,9 +149,11 @@ tasks:
       - vars/**/*.yml
 
   mod-ansible-autodoc:variables:
+    deps:
+      - :install:software:jq
     cmds:
       - |
-        ROLE_VARIABLES="$(jq -r '.role_variables' ansible_variables.json)"
+        ROLE_VARIABLES="$(jq -r '.role_variables' .autodoc/ansible_variables.json)"
         TMP="$(mktemp)"
         jq --arg vars "$ROLE_VARIABLES" '.role_variables = ($vars | fromjson)' '{{.VARIABLES_PATH}}' > "$TMP"
         mv "$TMP" '{{.VARIABLES_PATH}}'
