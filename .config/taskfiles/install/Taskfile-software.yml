@@ -180,6 +180,32 @@ tasks:
       - .config/log error "Windows is not supported. Try using a Windows WSL environment."
       - exit 1
 
+  container-structure-test:
+    run: once
+    cmds:
+      - task: container-structure-test:{{OS}}
+
+  container-structure-test:darwin:
+    cmds:
+      - task: brew:formulae
+        vars:
+          FORMULAE: container-structure-test
+
+  container-structure-test:linux:
+    cmds:
+      - curl -LO https://storage.googleapis.com/container-structure-test/latest/container-structure-test-linux-amd64
+      - chmod +x container-structure-test-linux-amd64
+      - mkdir -p $HOME/.local/bin
+      - export PATH=$PATH:$HOME/.local/bin
+      - mv container-structure-test-linux-amd64 $HOME/.local/bin/container-structure-test
+    status:
+      - type container-structure-test > /dev/null
+
+  container-structure-test:windows:
+    cmds:
+      - .config/log error "Windows is not supported. Try using a Windows WSL environment."
+      - exit 1
+
   coreutils:
     deps:
       - brew

@@ -122,6 +122,11 @@
       "command": "bash .config/scripts/vscode.sh && task docker:build:slim"
     },
     {
+      "label": "(docker:test:container-structure-test): Runs ContainerStructureTest for Dockerfile build",
+      "type": "shell",
+      "command": "bash .config/scripts/vscode.sh && task docker:test:container-structure-test"
+    },
+    {
       "label": "(fix:eslint): Fix JavaScript/TypeScript errors automatically",
       "type": "shell",
       "command": "bash .config/scripts/vscode.sh && task fix:eslint"
