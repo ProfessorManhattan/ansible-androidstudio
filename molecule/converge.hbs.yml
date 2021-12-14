@@ -1,4 +1,0 @@
----
-- name: Converge
-  roles:
-    - role: '{{galaxy_info.namespace}}.{{galaxy_info.role_name}}'
