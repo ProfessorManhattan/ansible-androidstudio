@@ -31,13 +31,13 @@ async function promptForDesktop() {
  */
 async function run() {
   logInstructions(
-    'Ansible Molecule Test via VirtualBox',
-    'Choose a desktop environment below to run the Ansible play on.' +
-      ' After choosing, a VirtualBox VM will be created. Then, the Ansible play will run on the VM.' +
-      ' After it is done, the VM will be left open for inspection. Please do get carried away' +
-      ' ensuring everything is working as expected and looking for configuration optimizations that' +
-      ' can be made. The operating systems should all be the latest stable release but might not always' +
-      ' be the latest version.'
+    'Ansible Molecule Test via Docker',
+    'Choose a container group from the options below to begin the Molecule test.' +
+      ' The choices should be mostly self-explanatory. The `Snap` group is a special group' +
+      ' that should be used to test roles that contain `snap` logic. Only recent versions of Debian' +
+      ' and Ubuntu support snap installations inside a Docker container. Docker tests are a quick way' +
+      ' to test Ansible plays without consuming a large amount of system resources. Granted, to fully' +
+      ' test an Ansible play, a VirtualBox method should be used instead.'
   )
   const environment = await promptForDesktop()
   execSync(`task ansible:test:molecule:virtualbox:converge:cli -- ${environment}`, { stdio: 'inherit' })

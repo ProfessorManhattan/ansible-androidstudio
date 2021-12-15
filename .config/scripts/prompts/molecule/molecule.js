@@ -31,13 +31,13 @@ async function promptForDesktop() {
  */
 async function run() {
   logInstructions(
-    'Ansible Molecule Test via VirtualBox',
-    'Choose a desktop environment below to run the Ansible play on.' +
-      ' After choosing, a VirtualBox VM will be created. Then, the Ansible play will run on the VM.' +
-      ' After it is done, the VM will be left open for inspection. Please do get carried away' +
-      ' ensuring everything is working as expected and looking for configuration optimizations that' +
-      ' can be made. The operating systems should all be the latest stable release but might not always' +
-      ' be the latest version.'
+    'Molecule Test',
+    'There are currently five different options for running Molecule tests.\n\n' +
+      '1. \n' +
+      '2. \n' +
+      '3. \n' +
+      '4. \n' +
+      '5. '
   )
   const environment = await promptForDesktop()
   execSync(`task ansible:test:molecule:virtualbox:converge:cli -- ${environment}`, { stdio: 'inherit' })

@@ -31,13 +31,12 @@ async function promptForDesktop() {
  */
 async function run() {
   logInstructions(
-    'Ansible Molecule Test via VirtualBox',
-    'Choose a desktop environment below to run the Ansible play on.' +
-      ' After choosing, a VirtualBox VM will be created. Then, the Ansible play will run on the VM.' +
-      ' After it is done, the VM will be left open for inspection. Please do get carried away' +
-      ' ensuring everything is working as expected and looking for configuration optimizations that' +
-      ' can be made. The operating systems should all be the latest stable release but might not always' +
-      ' be the latest version.'
+    'Ansible Molecule Test via Headless VirtualBox Instances',
+    'This particular type of test is the best method for testing Ansible plays. It uses VirtualBox' +
+      ' and utilizes headless images. Despite that, running the test across all the supported' +
+      ' operating systems is RAM intensive. Ideally, you should have at least 16GB of RAM to run' +
+      ' all the tests at once. This type of test is used to generate the compatibility chart so the results' +
+      ' of this type of test have the final say.'
   )
   const environment = await promptForDesktop()
   execSync(`task ansible:test:molecule:virtualbox:converge:cli -- ${environment}`, { stdio: 'inherit' })

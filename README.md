@@ -7,7 +7,7 @@
 </div>
 <div align="center">
   <center><h1 align="center"><i></i>Android Studio - An IDE for Android Development<i></i></h1></center>
-  <center><h4 style="color: #18c3d1;">An Ansible role brought to you by <a href="https://megabyte.space" target="_blank">Megabyte Labs</a></h4><i></i></center>
+  <center><h4 style="color: #18c3d1;">Crafted by <a href="https://megabyte.space" target="_blank">Megabyte Labs</a></h4><i></i></center>
 </div>
 
 <div align="center">

@@ -10,10 +10,11 @@ test:molecule:windows:
       when: never
     - if: $CI_COMMIT_TITLE =~ /^(automation|chore).*/
       when: never
-    - changes:
-        - main.yml
+    - if: $CI_COMMIT_BRANCH == 'test/windows'
     - if: $CI_PIPELINE_SOURCE == 'schedule' || $CI_PIPELINE_SOURCE == 'web'
     - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == 'master'
+      changes:
+        - main.yml
   variables:
     DOCKER_CERT_PATH: $DOCKER_TLS_CERTDIR/client
     DOCKER_HOST: tcp://docker:2376

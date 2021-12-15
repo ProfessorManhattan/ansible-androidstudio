@@ -31,13 +31,11 @@ async function promptForDesktop() {
  */
 async function run() {
   logInstructions(
-    'Desktop Ansible Molecule Test via VirtualBox',
-    'Choose a desktop environment below to run the Ansible play on.' +
-      ' After choosing, a VirtualBox VM will be created. Then, the Ansible play will run on the VM.' +
-      ' After it is done, the VM will be left open for inspection. Please do get carried away' +
-      ' ensuring everything is working as expected and looking for configuration optimizations that' +
-      ' can be made. The operating systems should all be the latest stable release but might not always' +
-      ' be the latest version.'
+    'Remote Ansible Molecule Test via SSH',
+    'This testing option is provided for cases where you would like to remotely test the Ansible play' +
+      ' on remote machines via SSH. The prompts will ask you for the host IP address or FQDN, user, and' +
+      ' and password. Before running this test, you should ensure that you can already connect to the machine' +
+      ' via SSH (i.e. the ~/.ssh keys should already be set up).'
   )
   const environment = await promptForDesktop()
   execSync(`task ansible:test:molecule:virtualbox:converge:cli -- ${environment}`, { stdio: 'inherit' })

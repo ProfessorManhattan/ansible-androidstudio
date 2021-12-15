@@ -1,16 +1,23 @@
 ---
+description: Test on full desktop VirtualBox images (useful for UAT)
 driver:
   name: vagrant
   provider:
     name: virtualbox
-lint: |
-  task lint:all
+groups:
+  Archlinux: Test on Archlinux desktop
+  CentOS: Test on CentOS Stream desktop
+  Debian: Test on Debian desktop
+  Fedora: Test on Fedora desktop
+  Ubuntu: Test on Ubuntu desktop
+  Windows: Test on Windows desktop
+lint: task lint:all
 platforms:
   - box: Megabyte/Archlinux-Desktop
     cpus: 2
     groups:
-      - archlinux
-      - linux
+      - Archlinux
+      - Linux
     memory: 4096
     name: Archlinux-Latest
     provider_raw_config_args:
@@ -18,9 +25,9 @@ platforms:
   - box: Megabyte/CentOS-Desktop
     cpus: 2
     groups:
-      - centos
-      - linux
-      - redhat-flavor
+      - CentOS
+      - Linux
+      - RedHat-Flavor
     memory: 4096
     name: CentOS-Stream-8
     provider_raw_config_args:
@@ -28,9 +35,9 @@ platforms:
   - box: Megabyte/Debian-Desktop
     cpus: 2
     groups:
-      - debian
-      - debian-flavor
-      - linux
+      - Debian
+      - Debian-Flavor
+      - Linux
     memory: 4096
     name: Debian-10-Buster
     provider_raw_config_args:
@@ -38,27 +45,28 @@ platforms:
   - box: Megabyte/Fedora-Desktop
     cpus: 2
     groups:
-      - fedora
-      - linux
-      - redhat-flavor
+      - Fedora
+      - Linux
+      - RedHat-Flavor
     memory: 4096
     name: Fedora-34
     provider_raw_config_args:
       - "customize [ 'modifyvm', :id, '--natdnshostresolver1', 'on' ]"
-  - box: Megabyte/macOS-Desktop
-    cpus: 2
-    groups:
-      - macos
-    memory: 4096
-    name: macOS-11-Big-Sur
-    provider_raw_config_args:
-      - "customize [ 'modifyvm', :id, '--natdnshostresolver1', 'on' ]"
+  # Coming soon...
+  # - box: Megabyte/macOS-Desktop
+  #   cpus: 2
+  #   groups:
+  #     - macos
+  #   memory: 4096
+  #   name: macOS-11-Big-Sur
+  #   provider_raw_config_args:
+  #     - "customize [ 'modifyvm', :id, '--natdnshostresolver1', 'on' ]"
   - box: Megabyte/Ubuntu-Desktop
     cpus: 2
     groups:
-      - debian-flavor
-      - linux
-      - ubuntu
+      - Debian-Flavor
+      - Linux
+      - Ubuntu
     memory: 4096
     name: Ubuntu-21.04-Hirsute-Hippo
     provider_raw_config_args:
@@ -66,7 +74,7 @@ platforms:
   - box: Megabyte/Windows-Desktop
     cpus: 2
     groups:
-      - windows
+      - Windows
     memory: 4096
     name: Windows-10
     provider_raw_config_args:
