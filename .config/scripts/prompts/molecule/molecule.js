@@ -20,7 +20,6 @@ async function promptForTestType() {
         descriptionMap[index].padEnd(MENU_ENTRY_TITLE_WIDTH) + chalk.gray(description.slice(1, -1))
     )
   const choicesDecorated = choices.map((choice) => decorateSystem(choice))
-
   const response = await inquirer.prompt([
     {
       choices: choicesDecorated,
