@@ -185,6 +185,7 @@ tasks:
   gitlab:branches:
     deps:
       - :install:software:glab
+      - gitlab:create
     vars:
       REPO_ID:
         sh: glab api projects/:fullpath | jq '.id'
