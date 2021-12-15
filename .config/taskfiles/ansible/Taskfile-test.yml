@@ -56,6 +56,14 @@ tasks:
         fi
         MOLECULE_GROUP="$SCENARIO" {{.PYTHON_HANDLE}}molecule test -s docker
 
+  molecule:docker:cli:
+    deps:
+      - :install:python:requirements
+      - :install:software:docker
+      - :install:software:sshpass
+    cmds:
+      - MOLECULE_GROUP="{{.CLI_ARGS}}" {{.PYTHON_HANDLE}}molecule test -s docker
+
   molecule:docker:matrix:
     deps:
       - :install:python:requirements
@@ -72,6 +80,25 @@ tasks:
           SCENARIO="Snap"
         fi
         PY_COLORS=0 MOLECULE_GROUP="$SCENARIO" {{.PYTHON_HANDLE}}molecule test -s "$SCENARIO" 2>&1 | tee "molecule/.results/{{.MOLECULE_DATE}}-$SCENARIO.txt"
+
+  molecule:docker:prompt:
+    interactive: true
+    deps:
+      - :install:modules:local
+    cmds:
+      - node .config/scripts/prompts/molecule/docker.js
+
+  molecule:ssh:cli:
+    deps:
+      - :install:python:requirements
+    cmds:
+      - molecule test -s remote
+
+  molecule:ssh:prompt:
+    deps:
+      - :install:local:modules
+    cmds:
+      - node .config/scripts/prompts/molecule/ssh.js
 
   molecule:virtualbox:
     deps:
@@ -99,6 +126,15 @@ tasks:
     cmds:
       - |
         {{.PYTHON_HANDLE}}molecule test
+
+  molecule:virtualbox:cli:
+    deps:
+      - :install:python:requirements
+      - :install:software:sshpass
+      - :install:software:vagrant
+      - :install:software:virtualbox
+    cmds:
+      - MOLECULE_GROUP="{{.CLI_ARGS}}" {{.PYTHON_HANDLE}}molecule test
 
   molecule:virtualbox:converge:
     deps:
@@ -159,6 +195,18 @@ tasks:
     cmds:
       - mkdir -p molecule/.results
       - PY_COLORS=0 {{.PYTHON_HANDLE}}molecule test | tee 'molecule/.results/{{.MOLECULE_DATE}}-default.txt'
+
+  molecule:virtualbox:prompt:
+    deps:
+      - :install:modules:local
+    cmds:
+      - node .config/scripts/prompts/molecule/virtualbox.js
+
+  prompt:
+    deps:
+      - :install:modules:local
+    cmds:
+      - node .config/scripts/prompts/molecule/molecule.js
 
   vagrant:
     deps:

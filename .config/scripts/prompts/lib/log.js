@@ -89,7 +89,8 @@ const funcs = {
 const LOG_TYPE_INDEX = 2
 const LOG_MESSAGE_INDEX = 3
 
-if (process.argv.length > LOG_TYPE_INDEX) {
+// eslint-disable-next-line security/detect-object-injection
+if (process.argv.length > LOG_TYPE_INDEX && typeof funcs[process.argv[LOG_TYPE_INDEX]] === 'function') {
   // eslint-disable-next-line security/detect-object-injection
   funcs[process.argv[LOG_TYPE_INDEX]](process.argv[LOG_MESSAGE_INDEX])
 }

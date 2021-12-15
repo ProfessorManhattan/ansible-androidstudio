@@ -560,6 +560,11 @@
       "label": "(symlink:role): Symlink the current role to ~/.ansible/roles/.",
       "type": "shell",
       "command": "bash .config/scripts/vscode.sh && task symlink:role"
+    },
+    {
+      "label": "(test): Open an interactive dialog to select and run a Molecule test",
+      "type": "shell",
+      "command": "bash .config/scripts/vscode.sh && task test"
     }
   ]
 }

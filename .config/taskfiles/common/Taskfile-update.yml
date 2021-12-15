@@ -6,20 +6,28 @@ tasks:
     deps:
       - ':{{if eq .REPOSITORY_TYPE "packer"}}packer:update:descriptions{{else}}donothing{{end}}'
       - files
-      - :git:remotes
       - :install:tslib
       - :python:requirementstxt
     cmds:
-      - task: all:docs
+      - task: all:continue
+
+  all:continue:
+    deps:
+      - :git:remotes
+      - all:docs
 
   all:docs:
     cmds:
       - |
         {{if eq .REPOSITORY_TYPE "common"}}{{else}}{{if eq .REPOSITORY_TYPE "documentation"}}{{else}}
-        task common:update:contributing &
-        task common:update:readme &
+        task common:update:all:docs:generate
         wait
         {{end}}{{end}}
+
+  all:docs:generate:
+    deps:
+      - contributing
+      - readme
 
   ansible:
     deps:

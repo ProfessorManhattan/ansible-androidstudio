@@ -144,3 +144,8 @@ tasks:
       `task start`
     cmds:
       - task: upstream:project
+  test:
+    interactive: true
+    desc: Open an interactive dialog to select and run a Molecule test
+    cmds:
+      - task: ansible:test:prompt

@@ -236,7 +236,7 @@ tasks:
           KEYWORDS="$(jq -r '.keywords | tostring' package.json | sed 's/\[//' | sed 's/\]//')"
           if [ ! -z "$GITLAB_TOKEN" ] && test -e .git && ! glab repo view '{{.GITLAB_PATH}}' > /dev/null; then
             glab repo create '{{.GITLAB_PATH}}' --group '{{.GITLAB_GROUP}}' --description '{{.EMOJI_START}}{{.DESCRIPTION}}{{.EMOJI_END}}' --name '{{.NAME}}' \
-              {{.PROJECT_TYPE}} --tag '$KEYWORDS'
+              {{.PROJECT_TYPE}} --tag "$KEYWORDS"
           fi
         ignore_error: true
     sources:
@@ -252,6 +252,7 @@ tasks:
     deps:
       - :install:software:glab
       - :install:software:jq
+      - gitlab:create
     cmds:
       - |
         API_RES="$(glab api projects/:fullpath)"
@@ -264,8 +265,10 @@ tasks:
 
   gitlab:integrations:
     deps:
-      - gitlab:integrations:github
+      - gitlab:create
     run: once
+    cmds:
+      - task: gitlab:integrations:github
 
   gitlab:integrations:github:
     deps:
@@ -455,6 +458,7 @@ tasks:
       GITLAB_REPO:
         sh: jq -r '.blueprint.repository.gitlab' package.json | sed 's/^https:\/\//git@/' | sed 's/gitlab.com\//gitlab.com:/'
     cmds:
+      - git init
       - |
         if [ ! -z "$GITLAB_REPO" ]; then
           if git config remote.origin.url > /dev/null; then

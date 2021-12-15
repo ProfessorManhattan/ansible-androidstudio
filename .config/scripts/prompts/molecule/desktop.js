@@ -1,7 +1,10 @@
+import chalk from 'chalk'
 import inquirer from 'inquirer'
 import { execSync } from 'node:child_process'
 import { decorateSystem } from '../lib/decorate-system.js'
 import { logInstructions, LOG_DECORATOR_REGEX } from '../lib/log.js'
+
+const MENU_ENTRY_TITLE_WIDTH = 24
 
 /**
  * Prompts the user for the operating system they wish to launch and test the
@@ -10,7 +13,9 @@ import { logInstructions, LOG_DECORATOR_REGEX } from '../lib/log.js'
  * @returns {string} The operating system string, lowercased
  */
 async function promptForDesktop() {
-  const choices = ['Archlinux', 'CentOS', 'Debian', 'Fedora', 'macOS', 'Ubuntu', 'Windows']
+  const groups = JSON.parse(execSync("yq eval -o=j '.groups' molecule/desktop/molecule.yml"))
+  // eslint-disable-next-line security/detect-object-injection
+  const choices = Object.keys(groups).map((key) => key.padEnd(MENU_ENTRY_TITLE_WIDTH) + chalk.gray(groups[key]))
   const choicesDecorated = choices.map((choice) => decorateSystem(choice))
   const response = await inquirer.prompt([
     {
@@ -23,7 +28,7 @@ async function promptForDesktop() {
 
   const DECORATION_LENGTH = 2
 
-  return response.operatingSystem.replace(LOG_DECORATOR_REGEX, '').toLowerCase().slice(DECORATION_LENGTH)
+  return response.operatingSystem.replace(LOG_DECORATOR_REGEX, '').toLowerCase().slice(DECORATION_LENGTH).split(' ')[0]
 }
 
 /**

@@ -132,6 +132,8 @@ rm -f molecule/default/prepare.yml
 rm -f molecule/docker/converge.yml
 rm -f molecule/docker/prepare.yml
 rm -f .github/workflows/macOS.yml
+rm -f .config/docs/CODE_OF_CONDUCT.md
+rm -f .config/docs/CONTRIBUTING.md
 if test -d .config/docs; then
   cd .config/docs || exit
   rm -rf .git .config .github .gitlab .vscode .editorconfig .gitignore .gitlab-ci.yml
