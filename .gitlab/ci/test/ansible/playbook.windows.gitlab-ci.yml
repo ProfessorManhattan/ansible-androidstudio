@@ -1,9 +1,6 @@
 ---
 test:molecule:windows:
   stage: test
-  image: megabytelabs/molecule:latest
-  services:
-    - docker:dind
   allow_failure: true
   rules:
     - if: $DO_CI == 'false'
@@ -16,10 +13,10 @@ test:molecule:windows:
       changes:
         - main.yml
   variables:
-    DOCKER_CERT_PATH: $DOCKER_TLS_CERTDIR/client
-    DOCKER_HOST: tcp://docker:2376
-    DOCKER_TLS_CERTDIR: /certs
-    DOCKER_TLS_VERIFY: 1
     GIT_DEPTH: 1
+  tags:
+    - shared-windows
+    - windows
+    - windows-1809
   script:
     - set -eo pipefail

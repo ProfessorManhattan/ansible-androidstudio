@@ -1,10 +1,7 @@
 ---
 test:molecule:darwin:
   stage: test
-  image: macos-10.15-xcode-11
-  services:
-    - docker:dind
-  allow_failure: true
+  image: macos-11-xcode-12
   rules:
     - if: $DO_CI == 'false'
       when: never
@@ -16,10 +13,6 @@ test:molecule:darwin:
       changes:
         - main.yml
   variables:
-    DOCKER_CERT_PATH: $DOCKER_TLS_CERTDIR/client
-    DOCKER_HOST: tcp://docker:2376
-    DOCKER_TLS_CERTDIR: /certs
-    DOCKER_TLS_VERIFY: 1
     GIT_DEPTH: 1
   tags:
     - shared-macos-amd64

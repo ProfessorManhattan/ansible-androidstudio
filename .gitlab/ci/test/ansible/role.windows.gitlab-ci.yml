@@ -1,14 +1,6 @@
 ---
-.shared_windows_runners:
-  tags:
-    - shared-windows
-    - windows
-    - windows-1809
-
 test:molecule:windows:
   stage: test
-  extends:
-    - .shared_windows_runners
   allow_failure: true
   rules:
     - if: $DO_CI == 'false'
@@ -24,5 +16,9 @@ test:molecule:windows:
         - poetry.lock
         - pyproject.toml
         - requirements.yml
+  tags:
+    - shared-windows
+    - windows
+    - windows-1809
   script:
-    - docker run -it ubuntu echo "Hello World from Docker Ubuntu!"
+    - winpty docker run -it ubuntu echo "Hello World from Docker Ubuntu!"

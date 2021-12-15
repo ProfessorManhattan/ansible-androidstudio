@@ -1,13 +1,7 @@
 ---
-.shared_macos_runners:
-  tags:
-    - shared-macos-amd64
-
 test:molecule:darwin:
   stage: test
-  extends:
-    - .shared_macos_runners
-  allow_failure: true
+  image: macos-11-xcode-12
   rules:
     - if: $DO_CI == 'false'
       when: never
@@ -22,5 +16,7 @@ test:molecule:darwin:
         - poetry.lock
         - pyproject.toml
         - requirements.yml
+  tags:
+    - shared-macos-amd64
   script:
     - bash test/darwin/test.sh
