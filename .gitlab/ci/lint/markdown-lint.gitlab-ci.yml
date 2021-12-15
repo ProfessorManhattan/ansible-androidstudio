@@ -5,6 +5,8 @@ lint:markdown:
   rules:
     - if: $DO_CI == 'false'
       when: never
+    - if: $CI_COMMIT_BRANCH == 'synchronize'
+      when: never
     - exists:
         - '**/*.md'
   variables:

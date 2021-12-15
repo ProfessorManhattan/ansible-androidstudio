@@ -9,6 +9,8 @@ publish:dockerhub:
       when: never
     - if: $CI_COMMIT_TITLE =~ /^(automation|chore).*/
       when: never
+    - if: $CI_COMMIT_BRANCH == 'synchronize'
+      when: never
     - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
       changes:
         - Dockerfile

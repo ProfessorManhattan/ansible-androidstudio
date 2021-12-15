@@ -7,6 +7,8 @@ update:renovate:
   rules:
     - if: $DO_CI == 'false'
       when: never
+    - if: $CI_COMMIT_BRANCH == 'synchronize'
+      when: never
     - if: '$CI_PIPELINE_SOURCE == "schedule"'
   variables:
     RENOVATE_DRY_RUN: 'false'

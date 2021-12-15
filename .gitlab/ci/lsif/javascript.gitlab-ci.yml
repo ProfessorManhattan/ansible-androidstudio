@@ -6,6 +6,8 @@ lsif:javascript:
   rules:
     - if: $DO_CI == 'false'
       when: never
+    - if: $CI_COMMIT_BRANCH == 'synchronize'
+      when: never
   needs: []
   script:
     - lsif-tsc **/*.js --AllowJs --checkJs
