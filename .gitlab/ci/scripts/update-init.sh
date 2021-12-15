@@ -105,6 +105,8 @@ rm -f .update.sh
 rm -f .yamllint
 rm -f requirements.txt
 rm -f .config/eslintcache
+rm -f CODE_OF_CONDUCT.md
+rm -f CONTRIBUTING.md
 rm -rf .common
 rm -rf .config/esbuild
 rm -rf .pnpm-store
