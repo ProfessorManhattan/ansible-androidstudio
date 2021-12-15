@@ -10,20 +10,22 @@ import { logInstructions, LOG_DECORATOR_REGEX } from '../lib/log.js'
  * @returns {string} The operating system string, lowercased
  */
 async function promptForDesktop() {
-  const choices = ['Archlinux', 'CentOS', 'Debian', 'Fedora', 'macOS', 'Ubuntu', 'Windows']
+  const choices = execSync(`yq eval -o=j '.description' molecule/*/molecule.yml`)
+    .split('\n')
+    .map((description) => description.slice(1, -1))
   const choicesDecorated = choices.map((choice) => decorateSystem(choice))
   const response = await inquirer.prompt([
     {
       choices: choicesDecorated,
-      message: 'Which desktop operating system would you like to test the Ansible play against?',
-      name: 'operatingSystem',
+      message: 'What type of test would you like to perform?',
+      name: 'testType',
       type: 'list'
     }
   ])
 
   const DECORATION_LENGTH = 2
 
-  return response.operatingSystem.replace(LOG_DECORATOR_REGEX, '').toLowerCase().slice(DECORATION_LENGTH)
+  return response.testType.replace(LOG_DECORATOR_REGEX, '').toLowerCase().slice(DECORATION_LENGTH)
 }
 
 /**
