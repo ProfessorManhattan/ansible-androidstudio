@@ -125,6 +125,11 @@ rm -rf molecule/fedora-desktop
 rm -rf molecule/macos-desktop
 rm -rf molecule/ubuntu-desktop
 rm -rf molecule/windows-desktop
+rm -f molecule/default/converge.yml
+rm -f molecule/default/prepare.yml
+rm -f molecule/docker/converge.yml
+rm -f molecule/docker/prepare.yml
+rm -f .github/workflows/macOS.yml
 if test -d .config/docs; then
   cd .config/docs || exit
   rm -rf .git .config .github .gitlab .vscode .editorconfig .gitignore .gitlab-ci.yml
