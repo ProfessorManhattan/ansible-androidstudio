@@ -78,6 +78,10 @@ if [ "$(jq -r '.blueprint.group' package.json)" == 'documentation' ]; then
   TMP="$(mktemp)" && jq '.eslintConfig.rules["import/no-extraneous-dependencies"] = "off"' package.json > "$TMP" && mv "$TMP" package.json
 fi
 
+if [ -f meta/main.yml ]; then
+  yq eval -i '.galaxy_info.min_ansible_version = 2.10' meta/main.yml
+fi
+
 # @description Re-generate the Taskfile.yml if it has invalid includes
 echo "Ensuring Taskfile is properly configured"
 task donothing || EXIT_CODE=$?
