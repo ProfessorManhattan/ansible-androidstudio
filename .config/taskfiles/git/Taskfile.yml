@@ -89,7 +89,7 @@ tasks:
           TMP="$(mktemp)"
           if [ ! -z "$GITHUB_TOKEN" ] && test -e .git && ! gh repo view {{.GITHUB_ORG}}/{{.GITHUB_SLUG}} > /dev/null; then
             gh repo create "{{.GITHUB_SLUG}}" --enable-wiki={{.GITHUB_WIKI}} -y --description "{{.EMOJI_START}}{{.DESCRIPTION}}{{.EMOJI_END}}" \
-              --homepage "{{.HOMEPAGE}}" --remote master {{.PROJECT_TYPE}} > /dev/null
+              --homepage "{{.HOMEPAGE}}" {{.PROJECT_TYPE}} > /dev/null
             .config/log success 'Created a GitHub repository for {{.GITHUB_SLUG}}'
             git add --all
             SKIP=prepare-commit-msg git commit -m "🎂 Birth" --no-verify
