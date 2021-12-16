@@ -49,7 +49,8 @@ tasks:
       - task: markdown:scrub
         vars:
           SCRUB_FILE: docs/CONTRIBUTING.md
-      - '{{.NPX_HANDLE}}prettier --write docs/CONTRIBUTING.md'
+      - '{{.NPX_HANDLE}}prettier --write docs/CONTRIBUTING.md > /dev/null'
+      - .config/log success 'Successfully generated `docs/CONTRIBUTING.md`'
     sources:
       - docs/CONTRIBUTING.md
       - .config/docs/**/*
@@ -101,7 +102,8 @@ tasks:
       - |
         if test -f ".config/docs/{{.MAN_TEMPLATE}}"; then
           {{.NPX_HANDLE}}readme generate --headingPrefix '{}' --silent --config .variables.json --input ".config/docs/{{.MAN_TEMPLATE}}" --output MAN.md
-          {{.NPX_HANDLE}}prettier --write MAN.md
+          {{.NPX_HANDLE}}prettier --write MAN.md > /dev/null
+          .config/log success 'Successfully generated the MAN.md'
           mkdir -p dist
           {{.NPX_HANDLE}}remark --use man MAN.md --output dist/man
           rm MAN.md
@@ -177,7 +179,8 @@ tasks:
         vars:
           SCRUB_FILE: README.md
       - task: ':{{if eq .REPOSITORY_TYPE "packer"}}packer:update:readme{{else}}donothing{{end}}'
-      - '{{.NPX_HANDLE}}prettier --write README.md'
+      - '{{.NPX_HANDLE}}prettier --write README.md > /dev/null'
+      - .config/log success 'Successfully generated the README.md'
     sources:
       - .autodoc/*
       - .config/docs/**/*
