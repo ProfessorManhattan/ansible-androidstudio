@@ -106,17 +106,23 @@ tasks:
 
   global:library:
     env:
-      LIST_GREP:
-        sh: if npm list -g | grep '{{.NPM_PACKAGE}}'; then echo "0"; else echo "1"; fi
+      PACKAGE_EXISTS:
+        sh: |
+          PACKAGE_PATH="$(echo $NODE_PATH | sed 's/^://' | sed 's/:.*$//')/{{.NPM_PACKAGE}}/package.json"
+          if [ -f "$PACKAGE_PATH" ]; then
+            echo 'true'
+          else
+            echo 'false'
+          fi
     run: once
     cmds:
       - |
-        if [ "$LIST_GREP" == '1' ]; then
+        if [ "$PACKAGE_EXISTS" == 'false' ]; then
           . .config/log info "Installing _NPM library_ package `{{.NPM_PACKAGE}}` globally"
           {{.NPM_PROGRAM}} install -g {{.NPM_PACKAGE}}
         fi
     status:
-      - '[ "$LIST_GREP" != "1" ]'
+      - '[ "$PACKAGE_EXISTS" == "true" ]'
 
   global:package-manager:
     deps:
