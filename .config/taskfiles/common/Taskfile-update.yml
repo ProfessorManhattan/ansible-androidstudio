@@ -205,8 +205,7 @@ tasks:
 
   services:repos:
     deps:
-      - :git:gitlab:update
-      - :git:github:update
+      - :git:update
 
   start:
     deps:
@@ -241,14 +240,9 @@ tasks:
 
   update:git:
     cmds:
-      - task: update:git:proceed
+      - task: :git:update
     status:
       - '[[ "${container:=}" == "docker" ]]'
-
-  update:git:proceed:
-    deps:
-      - :git:github:update
-      - :git:gitlab:update
 
   variables:
     deps:

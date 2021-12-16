@@ -120,12 +120,6 @@ tasks:
 
   github:update:
     deps:
-      - github:create
-    cmds:
-      - task: github:update:continue
-
-  github:update:continue:
-    deps:
       - github:update:meta
       - github:ids
       - github:variables
@@ -152,7 +146,7 @@ tasks:
         if [ ! -z "$GITHUB_TOKEN" ]; then
           gh api -X PATCH repos/{owner}/{repo} -f description="{{.EMOJI_START}}{{.DESCRIPTION}}{{.EMOJI_END}}" -f homepage="{{.HOMEPAGE}}" \
             -f has_issues={{.GITHUB_ISSUES}} -f has_wiki={{.GITHUB_WIKI}} -f private="{{.PRIVATE}}" --silent
-          .config/log info 'Ensured GitHub metadata is up-to-date'
+          .config/log success 'Ensured GitHub metadata is up-to-date'
           RESULT="$TOPICS"
           if [ "$TOPICS_LENGTH" -gt 20 ]; then
             function updateList() {
@@ -384,12 +378,6 @@ tasks:
 
   gitlab:update:
     deps:
-      - gitlab:create
-    cmds:
-      - task: gitlab:update:continue
-
-  gitlab:update:continue:
-    deps:
       - gitlab:branches
       - gitlab:mirror
       - gitlab:integrations
@@ -580,3 +568,14 @@ tasks:
         else
           .config/log info 'This task does not run unless there is a `.gitmodules` file in the current directory'
         fi
+
+  update:
+    cmds:
+      - task: gitlab:create
+      - task: github:create
+      - task: update:continue
+
+  update:continue:
+    deps:
+      - gitlab:update
+      - github:update
