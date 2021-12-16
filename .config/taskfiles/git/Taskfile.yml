@@ -92,7 +92,7 @@ tasks:
               --homepage "{{.HOMEPAGE}}" {{.PROJECT_TYPE}} > /dev/null
             .config/log success 'Created a GitHub repository for {{.GITHUB_SLUG}}'
             git add --all
-            SKIP=prepare-commit-msg git commit -m "🎂 Birth" --no-verify
+            git commit -m "🎂 Birth" -n
             git push github master
           fi
         ignore_error: true
@@ -252,7 +252,7 @@ tasks:
               --description '{{.EMOJI_START}}{{.DESCRIPTION}}{{.EMOJI_END}}' --name '{{.NAME}}' \
               {{.PROJECT_TYPE}} --tag "$KEYWORDS"
             git add --all
-            SKIP=prepare-commit-msg git commit -m "🎂 Birth" --no-verify
+            git commit -m "🎂 Birth" -n
             git push gitlab master
           fi
         ignore_error: true
