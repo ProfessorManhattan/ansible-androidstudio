@@ -201,26 +201,26 @@ tasks:
     cmds:
       - |
         if [ "$(glab api projects/:fullpath/protected_branches/master | jq '.code_owner_approval_required')" == 'false' ]; then
-          glab api projects/:fullpath/protected_branches/master -X DELETE > /dev/null
-          glab api projects/:fullpath/protected_branches -X POST -f name=master -f code_owner_approval_required=true > /dev/null
+          glab api projects/:fullpath/protected_branches/master -X DELETE > /dev/null &
+          glab api projects/:fullpath/protected_branches -X POST -f name=master -f code_owner_approval_required=true > /dev/null &
         fi
-      - |
         if [ '{{.REPOSITORY_TYPE}}' == 'ansible' ]; then
-          glab api projects/:fullpath/repository/branches -X POST -f id={{.REPO_ID}} -f branch=test/linux -f ref=master > /dev/null
-          glab api projects/:fullpath/protected_branches -X POST -f name=test/linux -f code_owner_approval_required=true > /dev/null
-          glab api projects/:fullpath/repository/branches -X POST -f id={{.REPO_ID}} -f branch=test/darwin -f ref=master > /dev/null
-          glab api projects/:fullpath/protected_branches -X POST -f name=test/darwin -f code_owner_approval_required=true > /dev/null
-          glab api projects/:fullpath/repository/branches -X POST -f id={{.REPO_ID}} -f branch=test/windows -f ref=master > /dev/null
-          glab api projects/:fullpath/protected_branches -X POST -f name=test/windows -f code_owner_approval_required=true > /dev/null
+          glab api projects/:fullpath/repository/branches -X POST -f id={{.REPO_ID}} -f branch=test/linux -f ref=master > /dev/null &
+          glab api projects/:fullpath/protected_branches -X POST -f name=test/linux -f code_owner_approval_required=true > /dev/null &
+          glab api projects/:fullpath/repository/branches -X POST -f id={{.REPO_ID}} -f branch=test/darwin -f ref=master > /dev/null &
+          glab api projects/:fullpath/protected_branches -X POST -f name=test/darwin -f code_owner_approval_required=true > /dev/null &
+          glab api projects/:fullpath/repository/branches -X POST -f id={{.REPO_ID}} -f branch=test/windows -f ref=master > /dev/null &
+          glab api projects/:fullpath/protected_branches -X POST -f name=test/windows -f code_owner_approval_required=true > /dev/null &
         fi
-      - glab api projects/:fullpath/repository/branches -X POST -f id={{.REPO_ID}} -f branch=main -f ref=master > /dev/null
-      - glab api projects/:fullpath/protected_branches -X POST -f name=main -f code_owner_approval_required=true > /dev/null
-      - glab api projects/:fullpath/repository/branches -X POST -f id={{.REPO_ID}} -f branch=next -f ref=master > /dev/null
-      - glab api projects/:fullpath/protected_branches -X POST -f name=next -f code_owner_approval_required=true > /dev/null
-      - glab api projects/:fullpath/protected_branches -X POST -f name=protected/* -f code_owner_approval_required=true > /dev/null
-      - glab api projects/:fullpath/repository/branches -X POST -f id={{.REPO_ID}} -f branch=synchronize -f ref=master > /dev/null
-      - glab api projects/:fullpath/protected_branches -X POST -f name=synchronize -f code_owner_approval_required=true > /dev/null
-      - .config/log success "Successfully set up GitLab protected branches"
+        glab api projects/:fullpath/repository/branches -X POST -f id={{.REPO_ID}} -f branch=main -f ref=master > /dev/null &
+        glab api projects/:fullpath/protected_branches -X POST -f name=main -f code_owner_approval_required=true > /dev/null &
+        glab api projects/:fullpath/repository/branches -X POST -f id={{.REPO_ID}} -f branch=next -f ref=master > /dev/null &
+        glab api projects/:fullpath/protected_branches -X POST -f name=next -f code_owner_approval_required=true > /dev/null &
+        glab api projects/:fullpath/protected_branches -X POST -f name=protected/* -f code_owner_approval_required=true > /dev/null &
+        glab api projects/:fullpath/repository/branches -X POST -f id={{.REPO_ID}} -f branch=synchronize -f ref=master > /dev/null &
+        glab api projects/:fullpath/protected_branches -X POST -f name=synchronize -f code_owner_approval_required=true > /dev/null &
+        wait
+        .config/log success "Successfully set up GitLab protected branches"
 
   gitlab:create:
     deps:
