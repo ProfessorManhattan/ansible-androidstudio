@@ -37,7 +37,7 @@ tasks:
       - |
         if [[ $(git status --porcelain) ]]; then
           git commit -m "⤵️ automation(synchronize) Applying changes from upstream repository."
-          git push -o ci.variable="PIPELINE_SOURCE=${PIPELINE_SOURCE}" origin master
+          git push -o ci.skip origin master
         fi
 
   commit:config:
