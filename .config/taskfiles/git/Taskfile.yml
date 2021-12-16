@@ -120,6 +120,12 @@ tasks:
 
   github:update:
     deps:
+      - github:create
+    cmds:
+      - task: github:update:continue
+
+  github:update:continue:
+    deps:
       - github:update:meta
       - github:ids
       - github:variables
@@ -312,9 +318,6 @@ tasks:
             glab api projects/:fullpath/remote_mirrors --method POST --header "Content-Type: application/json" \
               -f "url=https://{{.GITHUB_USER}}:$GITHUB_TOKEN@github.com/{{.GITHUB_ORG}}/{{.GITHUB_SLUG}}.git" \
               -f 'enabled=true' > /dev/null
-            glab api projects/:fullpath/remote_mirrors --method POST --header "Content-Type: application/json" \
-              -f "url=https://root:$GITHUB_TOKEN@github.com/{{.GITHUB_ORG}}/{{.GITHUB_SLUG}}.git" \
-              -f 'enabled=true' > /dev/null
           fi
           curl -s -H 'Content-Type: application/json' -H "Authorization: Bearer $GITLAB_TOKEN" -X PUT --data \
             "{\"mirror\": true, \"import_url\": \"https://{{.GITHUB_USER}}:$GITHUB_TOKEN@github.com/{{.GITHUB_ORG}}/{{.GITHUB_SLUG}}.git\"}" \
@@ -373,6 +376,12 @@ tasks:
         msg: The `GITLAB_TOKEN` environment variable must be set to run this task
 
   gitlab:update:
+    deps:
+      - gitlab:create
+    cmds:
+      - task: gitlab:update:continue
+
+  gitlab:update:continue:
     deps:
       - gitlab:branches
       - gitlab:mirror
