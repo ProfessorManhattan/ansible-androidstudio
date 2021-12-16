@@ -34,6 +34,17 @@ export function logInstructions(title, message) {
 }
 
 /**
+ * Logs a message that is limited in width
+ *
+ * @param {string} message - Message to ensure max-width on
+ */
+export function logRaw(message) {
+  const formattedMessage =
+    process.stdout.columns > MESSAGE_MAX_WIDTH ? stringBreak(message, MESSAGE_MAX_WIDTH).join('\n') : message
+  console.log(`${formattedMessage}\n`)
+}
+
+/**
  * Logs a regular message
  *
  * @param {string} message - The message

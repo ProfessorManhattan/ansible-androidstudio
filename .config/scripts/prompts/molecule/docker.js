@@ -12,10 +12,17 @@ const MENU_ENTRY_TITLE_WIDTH = 24
  * @returns {string} The operating system string, lowercased
  */
 async function promptForGroup() {
+  const DECORATION_LENGTH = 2
+
   const groups = JSON.parse(execSync("yq eval -o=j '.groups' molecule/docker/molecule.yml"))
-  // eslint-disable-next-line security/detect-object-injection
-  const choices = Object.keys(groups).map((key) => key.padEnd(MENU_ENTRY_TITLE_WIDTH) + chalk.gray(groups[key]))
-  const choicesDecorated = choices.map((choice) => decorateSystem(choice))
+  const choices = Object.keys(groups).map((key) =>
+    // eslint-disable-next-line security/detect-object-injection
+    decorateSystem(key.padEnd(MENU_ENTRY_TITLE_WIDTH) + chalk.gray(groups[key]))
+  )
+  const choicesDecorated = choices.map((choice) => ({
+    name: choice,
+    short: choice.replace(LOG_DECORATOR_REGEX, '').toLowerCase().slice(DECORATION_LENGTH).split(' ')[0]
+  }))
   const response = await inquirer.prompt([
     {
       choices: choicesDecorated,
@@ -24,8 +31,6 @@ async function promptForGroup() {
       type: 'list'
     }
   ])
-
-  const DECORATION_LENGTH = 2
 
   return response.group.replace(LOG_DECORATOR_REGEX, '').toLowerCase().slice(DECORATION_LENGTH).split(' ')[0]
 }

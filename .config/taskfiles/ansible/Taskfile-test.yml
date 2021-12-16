@@ -16,7 +16,7 @@ tasks:
 
   local:test:
     deps:
-      - :ansible:symlink:{{.REPOSITORY_SUBTYPE}}
+      - :symlink:{{.REPOSITORY_SUBTYPE}}
       - :install:python:requirements
     cmds:
       - .config/log info "Testing Ansible playbook locally"
