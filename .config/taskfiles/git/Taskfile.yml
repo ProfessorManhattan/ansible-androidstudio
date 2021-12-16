@@ -300,7 +300,7 @@ tasks:
         GITHUB_REPO="$(jq -r '.blueprint.repository.github' package.json)"
         if [ ! -z "$GITLAB_TOKEN" ] && [ ! -z "$GITHUB_TOKEN" ]; then
           glab api projects/:fullpath/integrations/github -X PUT -f token="$GITHUB_TOKEN" -f repository_url="$GITHUB_REPO" --silent
-          .config/log 'Ensured GitLab\'s GitHub integration is activated'
+          .config/log success 'Ensured GitLab'\''s GitHub integration is activated'
         fi
 
   gitlab:mirror:
@@ -457,7 +457,7 @@ tasks:
       - |
         if [ ! -z "$GITLAB_TOKEN" ]; then
           glab api projects/:fullpath/services/external-wiki -X PUT -f external_wiki_url="{{.DOCS_URL}}" --silent
-          .config/log success 'Ensured GitLab\'s wiki settings are up-to-date'
+          .config/log success 'Ensured GitLab'\''s wiki settings are up-to-date'
         else
           .config/log warn 'The `GITLAB_TOKEN` environment variable is not set so the GitLab repository external wiki cannot be updated via the API.'
         fi
