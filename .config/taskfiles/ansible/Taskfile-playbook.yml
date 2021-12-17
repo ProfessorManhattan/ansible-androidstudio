@@ -154,7 +154,7 @@ tasks:
               git remote add "$ROLE_FOLDER" "$ROLE_SSH_REPO"
             fi
           else
-            .config/log warn "`${ROLE_RELATIVE_PATH}/package.json` is missing!"
+            .config/log warn "${ROLE_RELATIVE_PATH}/package.json is missing!"
           fi
         done
-        .config/log success 'Added git remotes for all the roles in the ./roles folder'
+        .config/log success 'Finished adding git remotes for the roles in the ./roles folder'
