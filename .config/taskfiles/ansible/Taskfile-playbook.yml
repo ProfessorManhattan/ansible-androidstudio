@@ -28,7 +28,7 @@ tasks:
             fi
             LINK="$(echo $COMMENT | sed 's/ - .*//')"
             DESCRIPTION="$(echo $COMMENT | sed 's/.* - //')"
-            CHART="${CHART}[\"**$LINK\**",\"$DESCRIPTION\"]"
+            CHART="${CHART}[\\"**$LINK\**",\\"$DESCRIPTION\\"]"
           done
           CHART="${CHART}]"
           TMP="$(mktemp)"
@@ -121,3 +121,27 @@ tasks:
     preconditions:
       - sh: test -d roles
         msg: The `roles/` folder is missing. Is the project set up right?
+
+  remotes:
+    deps:
+      - :install:software:git
+      - :install:software:jq
+    summary: |
+      # Ensures each role is added as a remote
+
+      This task cycles through all the roles in the `/roles` folder and ensures
+      they are added as remotes. This helps with managing the git trees used
+      for combining the many role repositories into the playbook mono-repository.
+
+      It also adds a remote for a private submodule that is intended to store
+      files that are not meant to be shared. The remote is named `private`.
+    run: once
+    cmds:
+      - git init
+      - |
+        for ROLE_RELATIVE_PATH in roles/*/*; do
+          ROLE_FOLDER="$(basename $ROLE_RELATIVE_PATH)"
+          ROLE_HTTPS_REPO="$(jq -r '.blueprint.repository.gitlab' $ROLE_RELATIVE_PATH/package.json)"
+          ROLE_SSH_REPO="$(echo $ROLE_HTTPS_REPO | sed 's/https:\/\/gitlab.com\//git@gitlab.com:/' | sed 's/$/.git/')"
+          git remote add "$ROLE_FOLDER" "$ROLE_SSH_REPO"
+        done
