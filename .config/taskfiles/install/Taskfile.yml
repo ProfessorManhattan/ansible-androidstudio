@@ -33,14 +33,14 @@ tasks:
       - |
         PKGS="$(yq eval '.tasks[].cmds[0].vars.NPM_PACKAGE' .config/taskfiles/install/Taskfile-npm.yml | tr '\n' ' ')"
         for PKG in $PKGS; do
-          if ! type "$PKG" > /dev/null; then
+          if [ -f "$(echo $NODE_PATH | sed 's/^://' | sed 's/:.*//')/$PKG" ]; then
             LIST="$LIST $PKG"
-          else
-            .config/log info "$PKG is already installed"
           fi
         done
-        .config/log info "Installing the following NPM packages globally - $LIST"
-        npm install -g $LIST
+        if [ -n "$LIST" ]; then
+          .config/log info "Installing the following NPM packages globally - $LIST"
+          npm install -g $LIST
+        fi
         .config/log success 'Finished preloading global NPM packages'
     status:
       - '[[ "${container:=}" == "docker" ]]'
