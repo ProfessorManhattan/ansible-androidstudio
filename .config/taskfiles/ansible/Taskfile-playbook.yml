@@ -20,23 +20,23 @@ tasks:
     cmds:
       - |
         function populateChartVar() {
-          CHART='[["Package", "Description"],'
+          CHART='[["Package", "Description"]'
           jq --arg tag "$(echo $2 | tr '[a-z]' '[A-Z]')" -r '.[] | select(.tag == $tag) | .
           | del(. ["file", "ref", "line", "tag"]) | .text' "$1" | while read COMMENT; do
             if [ "$CHART" != '[' ]; then
               CHART="${CHART},"
             fi
             LINK="$(echo $COMMENT | sed 's/ - .*//')"
-            DESCRIPTION="$(echo $COMMENT | sed 's/.* - //')"
-            CHART="${CHART}[\\"**$LINK\**",\\"$DESCRIPTION\\"]"
+            DESCRIPTION="$(echo $COMMENT | sed 's/.* - //' | sed 's/\"/\\\"/g')"
+            CHART="${CHART}[\"**$LINK**\",\"$DESCRIPTION\"]"
           done
           CHART="${CHART}]"
-          TMP="$(mktemp)"
-          jq --arg chart "$CHART" --arg key "${2}_var_chart" '.[$key] = ($chart | fromjson)' .variables.json > "$TMP"
-          mv "$TMP" .variables.json
+          TMP_CHART="$(mktemp)"
+          jq --arg chart "$CHART" --arg key "${2}_var_chart" '.[$key] = ($chart | fromjson)' .variables.json > "$TMP_CHART"
+          mv "$TMP_CHART" .variables.json
         }
         TMP="$(mktemp)"
-        leasot --tags '{{.DOC_IDS}}' --reporter json './environments/prod/group_vars/**/*.yml' > "$TMP"
+        leasot --tags '{{.DOC_IDS}}' --reporter json './environments/prod/group_vars/**/*.yml' > "$TMP" || true
         VARIABLES_JSON="$(jq '.' .variables.json)"
         for ID in {{replace "," " " .DOC_IDS}}; do
           populateChartVar "$TMP" "$ID"
