@@ -182,7 +182,7 @@ tasks:
   common:linux:redhat:
     interactive: true
     cmds:
-      - mkdir -p .cache
+      - mkdir -p "$HOME/.config/mblabs"
       - |
         if [ ! -f "$HOME/.config/mblabs/yum-devtools-check-ran" ]; then
           yum grouplist 'Development Tools' &> "$HOME/.config/mblabs/yum-devtools-check-ran"
