@@ -32,7 +32,7 @@ tasks:
     cmds:
       - |
         PKGS="$(yq eval '.tasks[].cmds[0].vars.NPM_PACKAGE' .config/taskfiles/install/Taskfile-npm.yml | tr '\n' ' ')"
-        for PKG in "$PKGS"; do
+        for PKG in $PKGS; do
           if ! type "$PKG" > /dev/null; then
             LIST="$LIST $PKG"
           else
