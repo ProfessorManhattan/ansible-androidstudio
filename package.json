@@ -2,7 +2,7 @@
   "private": false,
   "name": "@installdoc/ansible-androidstudio",
   "version": "1.1.14",
-  "description": "Installs Android Studio and sets up Android SDKs on nearly any OS ",
+  "description": "Installs Android Studio and sets up Android SDKs on nearly any OS",
   "license": "MIT",
   "author": "Brian Zalewski <brian@megabyte.space> (https://megabyte.space)",
   "homepage": "https://megabyte.space",
