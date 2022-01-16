@@ -60,6 +60,7 @@ function ensureLocalPath() {
   if [[ "$OSTYPE" == 'darwin'* ]] || [[ "$OSTYPE" == 'linux-gnu'* ]]; then
     # shellcheck disable=SC2016
     local PATH_STRING='PATH="$HOME/.local/bin:$PATH"'
+    mkdir -p "$HOME/.local/bin"
     if grep -L "$PATH_STRING" "$SHELL_PROFILE"; then
       echo -e "export ${PATH_STRING}\n" >> "$SHELL_PROFILE"
       echo "$SHELL_PROFILE" > "$TMP_PROFILE_PATH"
@@ -93,7 +94,7 @@ if [ "$GITLAB_CI" != 'true' ] || ! type task &> /dev/null; then
   SHELL_PROFILE_PATH="$(cat "$TMP_PROFILE_PATH")"
   if [ -n "$SHELL_PROFILE_PATH" ]; then
     # shellcheck disable=SC1090
-    source "$SHELL_PROFILE_PATH"
+    . "$SHELL_PROFILE_PATH"
   fi
 fi
 
@@ -101,16 +102,16 @@ fi
 case "${SHELL}" in
   */bash*)
     if [[ -r "${HOME}/.bash_profile" ]]; then
-      source "${HOME}/.bash_profile"
+      . "${HOME}/.bash_profile"
     else
-      source "${HOME}/.profile"
+      . "${HOME}/.profile"
     fi
     ;;
   */zsh*)
-    source "${HOME}/.zshrc"
+    . "${HOME}/.zshrc"
     ;;
   *)
-    source "${HOME}/.profile"
+    . "${HOME}/.profile"
     ;;
 esac
 
@@ -123,6 +124,6 @@ if [ -z "$GITLAB_CI" ]; then
   task start
   if [ -f .config/log ] && [ -n "$SHELL_PROFILE_PATH" ]; then
     .config/log info 'There may have been changes to your PATH variable. You may have to run:\n'
-    .config/log info '`source '"$SHELL_PROFILE_PATH"'`'
+    .config/log info '`. '"$SHELL_PROFILE_PATH"'`'
   fi
 fi
