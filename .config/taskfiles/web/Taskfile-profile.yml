@@ -21,3 +21,7 @@ tasks:
     cmds:
       - |
         {{.NPX_HANDLE}}fuite {{.CLI_ARGS}}
+    log:
+      error: Failed to run `{{.NPX_HANDLE}}fuite {{.CLI_ARGS}}`
+      start: Running `{{.NPX_HANDLE}}fuite {{.CLI_ARGS}}`
+      success: Successfully ran `{{.NPX_HANDLE}}fuite {{.CLI_ARGS}}`

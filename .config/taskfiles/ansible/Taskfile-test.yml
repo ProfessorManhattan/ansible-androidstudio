@@ -17,6 +17,10 @@ tasks:
       - cp -rf allure-reports/history/ molecule/.results/junit/
       - allure open allure-reports
 
+    log:
+      error: Failed to generate and/or open the unit test report
+      start: Generating and opening unit test report
+      success: Successfully generated and opened unit test report
   local:
     desc: Run the Ansible play on the local machine (or via WSL - see task summary)
     summary: |
@@ -34,7 +38,6 @@ tasks:
       - :symlink:{{.REPOSITORY_SUBTYPE}}
       - :install:python:requirements
     cmds:
-      - .config/log info "Testing Ansible playbook locally"
       - cp test/{{OS}}/inventory inventory
       - if [ ! -f ansible.cfg.bak ]; then cp ansible.cfg ansible.cfg.bak; fi
       - cp test/{{OS}}/ansible.cfg ansible.cfg
@@ -44,6 +47,10 @@ tasks:
       - mv ansible.cfg.bak ansible.cfg
       - rm inventory
 
+    log:
+      error: Encountered error while testing the Ansible playbook locally
+      start: Testing the Ansible playbook locally
+      success: Successfully tested the Ansible playbook locally
   molecule:dependencies:
     deps:
       - :install:python:requirements
@@ -51,6 +58,10 @@ tasks:
       - '{{.PYTHON_HANDLE}} ansible-galaxy install --ignore-errors -r requirements.yml'
       - task: :symlink:{{.REPOSITORY_SUBTYPE}}
 
+    log:
+      error: Encountered error while installing Ansible Galaxy requirements defined in `requirements.yml`
+      start: Installing Ansible Galaxy requirements defined in `requirements.yml`
+      success: Installed Ansible Galaxy requirements defined in `requirements.yml`
   molecule:docker:
     desc: Runs a Docker Molecule test
     summary: |
@@ -77,16 +88,12 @@ tasks:
       - :install:software:sshpass
     cmds:
       - |
-        .config/log info 'Running Docker Molecule test on containers in the `{{.CLI_ARGS}}` group'
-        EXIT_CODE=0
-        {{.MOLECULE_TEST_OPTIONS}} MOLECULE_GROUP="{{.CLI_ARGS}}" {{.PYTHON_HANDLE}}molecule test -s docker -- --skip-tags skipdockertest || EXIT_CODE=$?
-        if [ "$EXIT_CODE" != '0' ]; then
-          .config/log error 'The `{{.CLI_ARGS}}` Docker Molecule test finished with errors'
-          exit 1
-        else
-          .config/log success 'Successfully ran the `{{.CLI_ARGS}}` Docker Molecule test'
-        fi
+        {{.MOLECULE_TEST_OPTIONS}} MOLECULE_GROUP="{{.CLI_ARGS}}" {{.PYTHON_HANDLE}}molecule test -s docker -- --skip-tags skipdockertest
 
+    log:
+      error: The `{{.CLI_ARGS}}` Docker Molecule test finished with errors
+      start: Running Docker Molecule test on containers in the `{{.CLI_ARGS}}` group
+      success: Successfully ran the `{{.CLI_ARGS}}` Docker Molecule test
   molecule:docker:matrix:
     deps:
       - molecule:dependencies
@@ -102,20 +109,14 @@ tasks:
         if grep -Ril 'community.general.snap:' ./tasks; then
           SCENARIO="Snap"
           .config/log warn 'Running Docker Molecule tests on the Docker containers that are compatible with `snap` since the role has references to `snap`'
-        else
-          .config/log info 'Running full Docker Molecule test'
         fi
-        .config/log info 'Piping results to `{{.MOLECULE_LOGS_PATH}}/{{.MOLECULE_DATE}}-$SCENARIO.txt` for compatibility chart data'
-        EXIT_CODE=0
         PY_COLORS=0 {{.MOLECULE_TEST_OPTIONS}} MOLECULE_GROUP="$SCENARIO" {{.PYTHON_HANDLE}}molecule test -s docker -- --skip-tags skipdockertest 2>&1 | \
-          tee "{{.MOLECULE_LOGS_PATH}}/{{.MOLECULE_DATE}}-$SCENARIO.txt" || EXIT_CODE=$?
-        if [ "$EXIT_CODE" != '0' ]; then
-          .config/log error 'There were errors while running the test - results are available at `{{.MOLECULE_LOGS_PATH}}/{{.MOLECULE_DATE}}-$SCENARIO.txt`'
-          exit 1
-        else
-          .config/log success 'Finished running the test - results are available at `{{.MOLECULE_LOGS_PATH}}/{{.MOLECULE_DATE}}-$SCENARIO.txt`'
-        fi
+          tee "{{.MOLECULE_LOGS_PATH}}/{{.MOLECULE_DATE}}-$SCENARIO.txt"
 
+    log:
+      error: There were errors while running the test (results were logged to `{{.MOLECULE_LOGS_PATH}}/{{.MOLECULE_DATE}}-$SCENARIO.txt`)
+      start: Running Docker Molecule test with results teed to `{{.MOLECULE_LOGS_PATH}}/{{.MOLECULE_DATE}}-$SCENARIO.txt`
+      success: Finished running the test (results were logged to `{{.MOLECULE_LOGS_PATH}}/{{.MOLECULE_DATE}}-$SCENARIO.txt`)
   molecule:docker:prompt:
     interactive: true
     deps:
@@ -131,16 +132,12 @@ tasks:
     cmds:
       - task: molecule:gcp:preconditions
       - |
-        .config/log info 'Running Google Cloud Platform Molecule test'
-        EXIT_CODE=0
-        {{.PYTHON_HANDLE}}molecule test -s gcp || EXIT_CODE=$?
-        if [ "$EXIT_CODE" != '0' ]; then
-          .config/log error 'Finished running the Google Cloud Platform Molecule test (with errors)'
-          exit 1
-        else
-          .config/log success 'Finished running Google Cloud Platform Molecule test'
-        fi
+        {{.PYTHON_HANDLE}}molecule test -s gcp
 
+    log:
+      error: Encountered error(s) while running the Google Cloud Platform Molecule test
+      start: Running Google Cloud Platform Molecule test
+      success: Finished running Google Cloud Platform Molecule test
   molecule:gcp:matrix:
     deps:
       - molecule:dependencies
@@ -153,14 +150,12 @@ tasks:
       - task: molecule:gcp:preconditions
       - mkdir -p {{.MOLECULE_LOGS_PATH}}
       - |
-        .config/log info 'Piping results to `{{.MOLECULE_LOGS_PATH}}/{{.MOLECULE_DATE}}-gcp.txt` for compatibility chart data'
         EXIT_CODE=0
         PY_COLORS=0 {{.PYTHON_HANDLE}}molecule test -s gcp 2>&1 | tee "{{.MOLECULE_LOGS_PATH}}/{{.MOLECULE_DATE}}-gcp.txt" || EXIT_CODE=$?
         if [ "$EXIT_CODE" != '0' ]; then
-          .config/log error 'Errors encountered while running the test - results are available at `{{.MOLECULE_LOGS_PATH}}/{{.MOLECULE_DATE}}-gcp.txt`'
           exit 1
         else
-          .config/log success 'Finished running the test - results are available at `{{.MOLECULE_LOGS_PATH}}/{{.MOLECULE_DATE}}-gcp.txt`'
+          .config/log success 'Finished running the test (results were logged to `{{.MOLECULE_LOGS_PATH}}/{{.MOLECULE_DATE}}-gcp.txt`)'
         fi
       - |
         RESULTS="{{.MOLECULE_LOGS_PATH}}/{{.MOLECULE_DATE}}-gcp.txt"
@@ -173,6 +168,10 @@ tasks:
           INDEX=$((INDEX+1))
         done
 
+    log:
+      error: An error occurred while running the Google Cloud Platform Molecule test sequence
+      start: Running Docker Molecule test with results teed to `{{.MOLECULE_LOGS_PATH}}/{{.MOLECULE_DATE}}-$SCENARIO.txt`
+      success: Finished running and formatting the results of the Google Cloud Platform molecule test
   molecule:gcp:preconditions:
     preconditions:
       - sh: '[ -n "$GCE_SERVICE_ACCOUNT_EMAIL" ]'
@@ -212,17 +211,13 @@ tasks:
       - molecule:dependencies
     cmds:
       - |
-        .config/log info 'Running Molecule test locally'
-        EXIT_CODE=0
         PATH="$(poetry env info | grep 'Python:   /' | sed 's/Python:   //' | sed 's/$/\/bin/'):$PATH" \
         {{.MOLECULE_TEST_OPTIONS}} {{.PYTHON_HANDLE}}molecule test -s local || EXIT_CODE=$?
-        if [ "$EXIT_CODE" != '0' ]; then
-          .config/log error 'There was an error while running the Molecule test locally'
-          exit 1
-        else
-          .config/log success 'The local Molecule test was successful!'
-        fi
 
+    log:
+      error: There was an error while running the Molecule test locally
+      start: Running the Molecule test locally
+      success: The local Molecule test was successfully run
   molecule:ssh:
     desc: Runs a Molecule test over SSH
     summary: |
@@ -240,17 +235,12 @@ tasks:
     deps:
       - molecule:dependencies
     cmds:
-      - |
-        .config/log info 'Running Molecule test over SSH'
-        EXIT_CODE=0
-        {{.MOLECULE_TEST_OPTIONS}} {{.PYTHON_HANDLE}}molecule test -s remote || EXIT_CODE=$?
-        if [ "$EXIT_CODE" != '0' ]; then
-          .config/log error 'Errors encountered while running the remote Molecule test'
-          exit 1
-        else
-          .config/log success 'Successfully ran the Molecule test on the SSH target'
-        fi
+      - '{{.MOLECULE_TEST_OPTIONS}} {{.PYTHON_HANDLE}}molecule test -s remote'
 
+    log:
+      error: Errors encountered while running the SSH Molecule test
+      start: Running the Molecule test over SSH
+      success: Successfully ran the Molecule test over SSH
   molecule:ssh:prompt:
     interactive: true
     deps:
@@ -286,17 +276,12 @@ tasks:
       # yamllint disable-line rule:truthy
       OBJC_DISABLE_INITIALIZE_FORK_SAFETY: YES
     cmds:
-      - |
-        .config/log info 'Running VirtualBox Molecule test on platforms in the `{{.CLI_ARGS}}` group'
-        EXIT_CODE=0
-        {{.MOLECULE_TEST_OPTIONS}} MOLECULE_GROUP="{{.CLI_ARGS}}" {{.PYTHON_HANDLE}}molecule test || EXIT_CODE=$?
-        if [ "$EXIT_CODE" != '0' ]; then
-          .config/log error 'Errors encountered while running the `{{.CLI_ARGS}}` VirtualBox Molecule test'
-          exit 1
-        else
-          .config/log success 'Finished running `{{.CLI_ARGS}}` VirtualBox Molecule test'
-        fi
+      - '{{.MOLECULE_TEST_OPTIONS}} MOLECULE_GROUP="{{.CLI_ARGS}}" {{.PYTHON_HANDLE}}molecule test'
 
+    log:
+      error: Errors encountered while running the `{{.CLI_ARGS}}` VirtualBox Molecule test
+      start: Running a VirtualBox Molecule test on platforms in the `{{.CLI_ARGS}}` group
+      success: Finished running the `{{.CLI_ARGS}}` VirtualBox Molecule test
   molecule:virtualbox:converge:
     desc: Provisions a desktop VirtualBox VM and then runs a Molecule test
     summary: |
@@ -333,17 +318,12 @@ tasks:
       # yamllint disable-line rule:truthy
       OBJC_DISABLE_INITIALIZE_FORK_SAFETY: YES
     cmds:
-      - |
-        .config/log info 'Running `{{.CLI_ARGS}}` VirtualBox Molecule converge play - this will leave the VirtualBox instance open for inspection'
-        EXIT_CODE=0
-        {{.MOLECULE_TEST_OPTIONS}} MOLECULE_GROUP={{.CLI_ARGS}} {{.PYTHON_HANDLE}}molecule converge -s desktop || EXIT_CODE=$?
-        if [ "$EXIT_CODE" != '0' ]; then
-          .config/log error 'Errors were encountered while running the `{{.CLI_ARGS}}` VirtualBox Molecule converge play'
-          exit 1
-        else
-          .config/log success 'Finished running the `{{.CLI_ARGS}}` VirtualBox Molecule converge play - you are encouraged to inspect the VM'
-        fi
+      - '{{.MOLECULE_TEST_OPTIONS}} MOLECULE_GROUP={{.CLI_ARGS}} {{.PYTHON_HANDLE}}molecule converge -s desktop'
 
+    log:
+      error: Errors were encountered while running the `{{.CLI_ARGS}}` VirtualBox Molecule converge play
+      start: Running the `{{.CLI_ARGS}}` VirtualBox Molecule converge play (this will leave the VirtualBox instance open for inspection)
+      success: Finished running the `{{.CLI_ARGS}}` VirtualBox Molecule converge play (you are encouraged to inspect the VM)
   molecule:virtualbox:converge:prompt:
     interactive: true
     deps:
@@ -366,16 +346,12 @@ tasks:
     cmds:
       - mkdir -p {{.MOLECULE_LOGS_PATH}}
       - |
-        .config/log info 'Running full E2E test with VirtualBox - results will be saved to `{{.MOLECULE_LOGS_PATH}}/{{.MOLECULE_DATE}}-default.txt`'
-        EXIT_CODE=0
-        PY_COLORS=0 {{.MOLECULE_TEST_OPTIONS}} {{.PYTHON_HANDLE}}molecule test | tee '{{.MOLECULE_LOGS_PATH}}/{{.MOLECULE_DATE}}-default.txt' || EXIT_CODE=$?
-        if [ "$EXIT_CODE" != '0' ]; then
-          .config/log error 'Errors were encountered while running the full E2E test - see `{{.MOLECULE_LOGS_PATH}}/{{.MOLECULE_DATE}}-default.txt` for details'
-          exit 1
-        else
-          .config/log success 'Finished running full E2E test - `{{.MOLECULE_LOGS_PATH}}/{{.MOLECULE_DATE}}-default.txt` contains the results'
-        fi
+        PY_COLORS=0 {{.MOLECULE_TEST_OPTIONS}} {{.PYTHON_HANDLE}}molecule test | tee '{{.MOLECULE_LOGS_PATH}}/{{.MOLECULE_DATE}}-default.txt'
 
+    log:
+      error: Errors were encountered while running the full E2E test (see `{{.MOLECULE_LOGS_PATH}}/{{.MOLECULE_DATE}}-default.txt` for details)
+      start: Running a full E2E test with VirtualBox (results will be saved to `{{.MOLECULE_LOGS_PATH}}/{{.MOLECULE_DATE}}-default.txt`)
+      success: Finished running the full E2E test (results are in `{{.MOLECULE_LOGS_PATH}}/{{.MOLECULE_DATE}}-default.txt`)
   molecule:virtualbox:prompt:
     interactive: true
     deps:
@@ -432,10 +408,12 @@ tasks:
       - :install:software:vagrant
       - :install:software:virtualbox
     cmds:
-      - |
-        .config/log info 'Running `vagrant up {{.CLI_ARGS}}`'
-        vagrant up {{.CLI_ARGS}}
+      - vagrant up {{.CLI_ARGS}}
 
+    log:
+      error: Encountered error when running `vagrant up {{.CLI_ARGS}}`
+      start: Running `vagrant up {{.CLI_ARGS}}`
+      success: Successfully ran `vagrant up {{.CLI_ARGS}}`
   vagrant:prompt:
     interactive: true
     deps:

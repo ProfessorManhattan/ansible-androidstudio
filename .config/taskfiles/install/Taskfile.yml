@@ -7,22 +7,26 @@ tasks:
       - :install:software:brew
     cmds:
       - |
-        .config/log info 'Installing software bundle defined in `.config/Brewfile`'
         brew tap Homebrew/bundle
         cd .config
         brew bundle
-        .config/log success 'Successfully installed common dependencies defined in `.config/Brewfile`'
         .config/log warn 'A reboot is recommended'
-        .config/log info 'Some of the software you may have installed might require a reboot'
 
+    log:
+      error: Encountered error while installing Homebrew software bundle defined in `.config/Brewfile`
+      start: Installing Homebrew software bundle defined in `.config/Brewfile`
+      success: Successfully installed Homebrew software bundle defined in `.config/Brewfile`
   install-doctor:
     cmds:
       - |
         if ! type {{.SOFTWARE}} &> /dev/null; then
-          .config/log info 'Installing `{{.SOFTWARE}}` via `curl -sS https://install.doctor/{{.SOFTWARE}} | bash`'
+          .config/log info 'Installing `{{.SOFTWARE}}` by running `curl -sS https://install.doctor/{{.SOFTWARE}} | bash`'
           curl -sS https://install.doctor/{{.SOFTWARE}} | bash
           .config/log success 'Successfully installed `{{.SOFTWARE}}`'
         fi
+    log:
+      error: Error encountered while installing {{.SOFTWARE}} via https://install.doctor
+      start: Ensuring {{.SOFTWARE}} is installed
     status:
       - type {{.SOFTWARE}} &> /dev/null || [[ "${container:=}" == "docker" ]]
 
@@ -69,7 +73,7 @@ tasks:
         function updateAvailable() {
           LATEST="$(npm view $1 version)"
           LOCAL="$(jq -r '.version' ./node_modules/$1/package.json)"
-          if ! printf '%s\n%s\n' "$LATEST" "$LOCAL" | sort -V -c; then
+          if ! printf '%s\n%s\n' "$LATEST" "$LOCAL" | sort -V -c > /dev/null; then
             .config/log info "Version $LATEST is available for $1 (currently version $LOCAL)"
             echo "true" > "$TMP_REFRESH"
           fi

@@ -7,3 +7,7 @@ tasks:
       - :install:npm:ionic
     cmds:
       - ionic config set -g npmClient {{.NPM_PROGRAM_LOCAL}}
+    log:
+      error: Failed to configure Ionic
+      start: Configuring Ionic
+      success: Configured Ionic

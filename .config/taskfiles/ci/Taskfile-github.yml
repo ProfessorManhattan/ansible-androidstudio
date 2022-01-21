@@ -9,3 +9,7 @@ tasks:
     desc: Locally test the on-push GitHub Action event (only works for Linux containers)
     cmds:
       - act
+    log:
+      error: Error encountered while testing GitHub Actions locally with `act`
+      start: Testing GitHub Actions locally with `act`
+      success: Completed local GitHub Actions test

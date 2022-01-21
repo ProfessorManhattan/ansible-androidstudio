@@ -21,6 +21,9 @@ tasks:
         vars:
           CLI_ARGS: '{{.REQUIREMENTS_PATH}}'
 
+    log:
+      error: Failed to auto-populate the `{{.KEY}}` collection
+      start: Determining if the `{{.KEY}}` collection should be added to the `{{.REQUIREMENTS_PATH}}`
   collection:force:
     deps:
       - :install:software:yq
@@ -35,6 +38,9 @@ tasks:
         vars:
           CLI_ARGS: '{{.REQUIREMENTS_PATH}}'
 
+    log:
+      error: Failed to forcefully auto-populate the `{{.KEY}}` collection
+      start: Determining if the `{{.KEY}}` collection should be added to the `{{.REQUIREMENTS_PATH}}` (forcefully)
   dependencies:
     # @desc_when [ansible/Taskfile-populate.yml] ansible/role
     desc: 'Attempt to automatically populate `{{.META_PATH}}` and `{{.REQUIREMENTS_PATH}}`'
@@ -108,6 +114,9 @@ tasks:
           VAL: >-
             {"role": "professormanhattan.startmenu", "when": "ansible_system == 'Windows'"}
       - task: :ansible:sync:requirements
+    log:
+      start: Auto-populating the `{{.META_PATH}}` and `{{.REQUIREMENTS_PATH}}` with common dependencies (when appropriate)
+      success: Auto-populated the `{{.META_PATH}}` and `{{.REQUIREMENTS_PATH}}` with common dependencies
     sources:
       - '{{.META_PATH}}'
       - '{{.REQUIREMENTS_PATH}}'
@@ -129,6 +138,9 @@ tasks:
       - task: :fix:yaml:dashes
         vars:
           CLI_ARGS: '{{ .META_PATH }}'
+    log:
+      error: Failed to auto-populate the `{{.KEY}}` role
+      start: Determining if the `{{.KEY}}` role should be added to the `{{.META_PATH}}`
     status:
       - '[[ "$DEPENDENCIES" =~ "{{.ROLE}}" ]] || [ ! "$REFERENCES" ]'
 
@@ -147,6 +159,10 @@ tasks:
         jq --arg a '{{.DESCRIPTION}}' --arg b '{{.GALAXY_ROLE_NAME}}' '.blueprint.description = $a | .blueprint.slug = $b' package.json > "$TMP"
         mv "$TMP" package.json
       - '{{.NPX_HANDLE}}prettier --write package.json'
+    log:
+      error: Failed to synchronize `package.json` with `{{.META_PATH}}`
+      start: Updating `package.json` blueprint description and slug using values present in `{{.META_PATH}}`
+      success: Ensured `package.json` is synchronized with `{{.META_PATH}}`
     sources:
       - meta/main.yml
       - package.json

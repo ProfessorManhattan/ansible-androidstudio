@@ -41,6 +41,10 @@ tasks:
         fi
       - task: update:taskfile
 
+    log:
+      error: Error occurred while validating/prompting for blueprint settings
+      start: Ensuring required fields in the blueprint section of `package.json` are present
+      succes: Successfully ensured `package.json` minimum blueprint requirements are present
   clean:
     deps:
       - :install:software:jq
@@ -54,6 +58,10 @@ tasks:
         jq 'del(."lint-staged")' package.json > "$TMP"
         mv "$TMP" package.json
 
+    log:
+      error: Failed to clean `package.json`
+      start: Cleaning `package.json`
+      success: Cleaned `package.json`
   prime:package:
     deps:
       - :install:software:jq
@@ -75,12 +83,15 @@ tasks:
         .config/log success 'Successfully "primed" package.json'
       - rm package-reference.json
 
+    log:
+      error: Failed to merge shared `package.json` settings
+      start: Ensuring `package.json` has shared settings
+      success: Successfully merged shared `package.json` settings
   update:taskfile:
     deps:
       - :install:software:yq
     cmds:
       - |
-        .config/log info 'Ensuring Taskfile.yml has correct variables'
         GROUP="$(jq -r '.blueprint.group' package.json)"
         SUBGROUP="$(jq -r '.blueprint.subgroup' package.json)"
         TASK_GROUP="$(yq eval '.vars.REPOSITORY_TYPE' Taskfile.yml)"
@@ -102,4 +113,7 @@ tasks:
           UPSTREAM='upstream:docs'
         fi
         yq e -i ".tasks.start.cmds[0].task = \"$UPSTREAM\"" Taskfile.yml
-        .config/log success 'Successfully ensured Taskfile.yml has correct variables'
+    log:
+      error: Error encountered while ensuring `Taskfile.yml` has correct settings
+      start: Ensuring `Taskfile.yml` has correct settings
+      success: Successfully applied `Taskfile.yml` assurances
