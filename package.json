@@ -28,13 +28,11 @@
       "path": "node_modules/cz-emoji-conventional"
     }
   },
-  "dependencies": {},
-  "optionalDependencies": {},
   "devDependencies": {
     "@washingtondc/development": "^1.0.2",
     "@washingtondc/prettier": "^1.0.0",
     "@washingtondc/release": "^0.0.2",
-    "eslint-config-strict-mode": "^1.0.0",
+    "eslint-config-strict-mode": "^1.0.11",
     "sleekfast": "^0.0.1"
   },
   "keywords": [
