@@ -4,6 +4,10 @@ version: '3'
 tasks:
   check:package:
     interactive: true
+    log:
+      start: Ensuring required fields in the blueprint section of `package.json` are present
+      succes: Successfully ensured `package.json` minimum blueprint requirements are present
+      error: Error occurred while validating/prompting for blueprint settings
     deps:
       - :install:modules:local
       - :install:software:jq
@@ -41,13 +45,13 @@ tasks:
         fi
       - task: update:taskfile
 
-    log:
-      error: Error occurred while validating/prompting for blueprint settings
-      start: Ensuring required fields in the blueprint section of `package.json` are present
-      succes: Successfully ensured `package.json` minimum blueprint requirements are present
   clean:
     deps:
       - :install:software:jq
+    log:
+      start: Cleaning `package.json`
+      success: Cleaned `package.json`
+      error: Failed to clean `package.json`
     cmds:
       - |
         TMP="$(mktemp)"
@@ -58,13 +62,13 @@ tasks:
         jq 'del(."lint-staged")' package.json > "$TMP"
         mv "$TMP" package.json
 
-    log:
-      error: Failed to clean `package.json`
-      start: Cleaning `package.json`
-      success: Cleaned `package.json`
   prime:package:
     deps:
       - :install:software:jq
+    log:
+      start: Ensuring `package.json` has shared settings
+      success: Successfully merged shared `package.json` settings
+      error: Failed to merge shared `package.json` settings
     cmds:
       - curl -s https://gitlab.com/megabyte-labs/common/shared/-/raw/master/package.json > package-reference.json
       - |
@@ -83,13 +87,13 @@ tasks:
         .config/log success 'Successfully "primed" package.json'
       - rm package-reference.json
 
-    log:
-      error: Failed to merge shared `package.json` settings
-      start: Ensuring `package.json` has shared settings
-      success: Successfully merged shared `package.json` settings
   update:taskfile:
     deps:
       - :install:software:yq
+    log:
+      start: Ensuring `Taskfile.yml` has correct settings
+      success: Successfully applied `Taskfile.yml` assurances
+      error: Error encountered while ensuring `Taskfile.yml` has correct settings
     cmds:
       - |
         GROUP="$(jq -r '.blueprint.group' package.json)"
@@ -113,7 +117,3 @@ tasks:
           UPSTREAM='upstream:docs'
         fi
         yq e -i ".tasks.start.cmds[0].task = \"$UPSTREAM\"" Taskfile.yml
-    log:
-      error: Error encountered while ensuring `Taskfile.yml` has correct settings
-      start: Ensuring `Taskfile.yml` has correct settings
-      success: Successfully applied `Taskfile.yml` assurances

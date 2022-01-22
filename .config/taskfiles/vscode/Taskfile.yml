@@ -12,6 +12,10 @@ tasks:
       - :install:npm:prettier
       - :install:software:jq
       - :install:software:yq
+    log:
+      start: Generating `.vscode/extensions.json`
+      success: Generated `.vscode/extensions.json`
+      error: Failed to generate `.vscode/extensions.json`
     summary: |
       # Generates the `.vscode/extensions.json` file for VS Code auto plugin recommendations
 
@@ -32,10 +36,6 @@ tasks:
       - |
         {{.NPX_HANDLE}}prettier --write '{{.EXTENSIONS_FILE}}' > /dev/null
 
-    log:
-      error: Failed to generate `.vscode/extensions.json`
-      start: Generating `.vscode/extensions.json`
-      success: Generated `.vscode/extensions.json`
   generate:
     deps:
       - extensions
@@ -45,6 +45,10 @@ tasks:
     deps:
       - :install:npm:prettier
       - :install:software:jq
+    log:
+      start: Generating `.vscode/tasks.json`
+      success: Generated `.vscode/extensions.json`
+      error: Failed to generate `.vscode/extensions.json`
     summary: |
       # Populate the `.vscode/tasks.json` file
 
@@ -73,7 +77,3 @@ tasks:
         jq --arg tasks "${TASKS%?}]" '.tasks = ($tasks | fromjson)' "$TMP" > '{{.TASKS_FILE}}'
       - |
         {{.NPX_HANDLE}}prettier --write '{{.TASKS_FILE}}' > /dev/null
-    log:
-      error: Failed to generate `.vscode/extensions.json`
-      start: Generating `.vscode/tasks.json`
-      success: Generated `.vscode/extensions.json`

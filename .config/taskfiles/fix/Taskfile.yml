@@ -7,6 +7,8 @@ vars:
 
 tasks:
   all:
+    log:
+      start: Running all stable fixers in parallel
     deps:
       - eslint
       - misc
@@ -17,8 +19,6 @@ tasks:
     cmds:
       - task: yaml:dashes
 
-    log:
-      start: Running all stable fixers in parallel
   eslint:
     deps:
       - :install:modules:local
@@ -36,14 +36,14 @@ tasks:
 
       **Example fixing all JS/TS files in a project:**
       `task fix:js`
+    log:
+      start: Auto-fixing with ESLint
+      success: ESLint fixing appears to have corrected all the issues {{if .CLI_ARGS}}in `{{.CLI_ARGS}}`{{else}}in the project{{end}}
+      error: ESLint found some issues that need to be fixed manually
     cmds:
       - '{{.NPX_HANDLE}}eslint -c package.json --no-eslintrc --format pretty --cache --cache-location .cache/eslintcache
         --fix {{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}.{{end}}'
 
-    log:
-      error: ESLint found some issues that need to be fixed manually
-      start: Auto-fixing with ESLint
-      success: ESLint fixing appears to have corrected all the issues {{if .CLI_ARGS}}in `{{.CLI_ARGS}}`{{else}}in the project{{end}}
   js:
     cmds:
       - task: eslint
@@ -64,14 +64,14 @@ tasks:
 
       **Example looping through project:**
       `task fix:json`
+    log:
+      start: Linting JSON with ESLint
+      success: ESLint has fixed all of the JSON issues {{if .CLI_ARGS}}in `{{.CLI_ARGS}}`{{else}}in the project{{end}}
+      error: '{{if .CLI_ARGS}}Manual fixing is still required for `{{.CLI_ARGS}}`{{else}}Failed to fix all project JSON issues with ESLint{{end}}'
     cmds:
       - '{{.NPX_HANDLE}}eslint -c package.json --no-eslintrc --cache --cache-location .cache/eslintcache --fix
         --format pretty --ext .json {{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}.{{end}}'
 
-    log:
-      error: '{{if .CLI_ARGS}}Manual fixing is still required for `{{.CLI_ARGS}}`{{else}}Failed to fix all project JSON issues with ESLint{{end}}'
-      start: Linting JSON with ESLint
-      success: ESLint has fixed all of the JSON issues {{if .CLI_ARGS}}in `{{.CLI_ARGS}}`{{else}}in the project{{end}}
   misc:
     deps:
       - :install:python:requirements
@@ -90,6 +90,10 @@ tasks:
 
       **Example applying fixes to single file:**
       `task fix:misc -- singlefile.js`
+    log:
+      start: Performing miscellaneous fixes such as removing BOM and ensuring LF line endings
+      success: Finished performing miscellaneous fixes{{if .CLI_ARGS}} on `{{.CLI_ARGS}}`{{end}}
+      error: Encountered an error while performing miscellaneous fixes{{if .CLI_ARGS}} on `{{.CLI_ARGS}}`{{end}}
     cmds:
       - |
         function misc() {
@@ -123,6 +127,10 @@ tasks:
       `task fix:packer -- mytemplate.json`
 
       For more information on `packer fix`, see [Packer's website](https://www.packer.io/docs/commands/fix).
+    log:
+      start: Attempting to fix Packer template{{if .CLI_ARGS}}{{else}}s{{end}}
+      success: Successfully ran `packer fix` on the template(s)
+      stop: Error running `packer fix`
     cmds:
       - |
         function packerFix() {
@@ -162,6 +170,8 @@ tasks:
       `task fix:formatting -- path/filename.ext`
 
       For more information, see [Prettier's website](https://prettier.io/).
+    log:
+      start: Running Prettier on {{if .CLI_ARGS}}`{{.CLI_ARGS}}`{{else}}project{{end}}
     cmds:
       - '{{.NPX_HANDLE}}prettier --ignore-path {{.PRETTIERIGNORE_CONFIG}} --write {{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}.{{end}}'
 
@@ -183,6 +193,10 @@ tasks:
       `task fix:python -- myfile.py`
 
       For more information, see [Black's GitHub page](https://github.com/psf/black).
+    log:
+      start: Fixing Python with `black`
+      success: Fixed {{if .CLI_ARGS}}`{{.CLI_ARGS}}`{{else}}project{{end}} with `black`
+      error: Error while running `black` auto-fixer
     cmds:
       - |
         {{if .CLI_ARGS}}
@@ -224,6 +238,10 @@ tasks:
       `task fix:scripts -- myfile.sh`
 
       For more information, see [Shellcheck's GitHub page](https://github.com/koalaman/shellcheck).
+    log:
+      start: Running `shellcheck` auto-fixer
+      success: Autofixed {{if .CLI_ARGS}}`{{.CLI_ARGS}}`{{else}}project{{end}} with `shellcheck`
+      error: Encountered an error while linting with `shellcheck` on {{if .CLI_ARGS}}`{{.CLI_ARGS}}`{{else}}project{{end}}
     cmds:
       - |
         .config/log warn 'This is an experimental fix method - please manually inspect and test the scripts'

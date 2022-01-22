@@ -8,12 +8,12 @@ tasks:
     vars:
       GROUP_URL:
         sh: jq -r '.repository.group.dockerfile' .variables.json
-    cmds:
-      - task: update:labels:add
-      - task: update:labels:{{OS}}
     log:
       start: Ensuring `Dockerfile` labels are up-to-date
       success: '`Dockerfile` labels are up-to-date'
+    cmds:
+      - task: update:labels:add
+      - task: update:labels:{{OS}}
     sources:
       - .variables.json
       - Dockerfile
@@ -38,6 +38,10 @@ tasks:
         sh: jq -r '.organization' .variables.json
       URL:
         sh: jq -r '.link.home' .variables.json
+    log:
+      start: Ensuring default Dockerfile labels are present (e.g. `org.opencontainers.image` tags)
+      success: Successfully injected `org.opencontainers.image` labels into Dockerfile
+      error: Failed to add Dockerfile labels
     cmds:
       - |
         echo 'ARG BUILD_DATE' >> Dockerfile
@@ -57,14 +61,12 @@ tasks:
         echo 'LABEL org.opencontainers.image.version=$VERSION' >> Dockerfile
         echo 'LABEL space.megabyte.type="{{.REPOSITORY_SUBTYPE}}"' >> Dockerfile
         echo '' >> Dockerfile
-    log:
-      error: Failed to add Dockerfile labels
-      start: Ensuring default Dockerfile labels are present (e.g. `org.opencontainers.image` tags)
-      success: Successfully injected `org.opencontainers.image` labels into Dockerfile
     status:
       - grep 'org.opencontainers.image.documentation' Dockerfile
 
   labels:darwin:
+    log:
+      error: Encountered error while updating `Dockerfile` labels
     vars:
       GROUP_URL:
         sh: jq -r '.repository.group.dockerfile' .variables.json
@@ -76,12 +78,12 @@ tasks:
         sed -i .bak "s^.*org.opencontainers.image.description.*^LABEL org.opencontainers.image.description=${DESCRIPTION}^g" Dockerfile && rm Dockerfile.bak
       - sed -i .bak "s^.*org.opencontainers.image.documentation.*^LABEL org.opencontainers.image.documentation=\"{{.GROUP_URL}}/{{.REPOSITORY_SUBTYPE}}/{{.SLUG}}/-/blob/master/README.md\"^g" Dockerfile && rm Dockerfile.bak
       - sed -i .bak "s^.*org.opencontainers.image.source.*^LABEL org.opencontainers.image.source=\"{{.GROUP_URL}}/{{.REPOSITORY_SUBTYPE}}/{{.SLUG}}.git\"^g" Dockerfile && rm Dockerfile.bak
-    log:
-      error: Encountered error while updating `Dockerfile` labels
       # yamllint enable rule:line-length eslint-enable max-lens
       # eslint-enable max-len
 
   labels:linux:
+    log:
+      error: Encountered error while updating `Dockerfile` labels
     vars:
       GROUP_URL:
         sh: jq -r '.repository.group.dockerfile' .variables.json
@@ -95,7 +97,5 @@ tasks:
         sed -i "s^.*org.opencontainers.image.description.*^LABEL org.opencontainers.image.description=${DESCRIPTION}^g" Dockerfile
       - sed -i "s^.*org.opencontainers.image.documentation.*^LABEL org.opencontainers.image.documentation={{.GROUP_URL}}/{{.REPOSITORY_SUBTYPE}}/{{.SLUG}}/-/blob/master/README.md\"^g" Dockerfile
       - sed -i "s^.*org.opencontainers.image.source.\*^LABEL org.opencontainers.image.source={{.GROUP_URL}}/{{.REPOSITORY_SUBTYPE}}/{{.SLUG}}.git\"^g" Dockerfile
-    log:
-      error: Encountered error while updating `Dockerfile` labels
       # yamllint enable rule:line-length
       # eslint-enable max-len

@@ -17,6 +17,10 @@ tasks:
       CLEAN_TARGETS: .autodoc .task .venv node_modules
       RANDOM_STRING:
         sh: openssl rand -hex 14
+    log:
+      start: Removing `{{.CLEAN_TARGETS}}`
+      success: Removed `{{.CLEAN_TARGETS}}`
+      error: Error removing `{{.CLEAN_TARGETS}}`
     cmds:
       - mkdir -p '/tmp/{{.RANDOM_STRING}}'
       - mkdir -p '/tmp/{{.RANDOM_STRING}}-empty'
@@ -29,10 +33,6 @@ tasks:
         done
         wait
 
-    log:
-      error: Error removing `{{.CLEAN_TARGETS}}`
-      start: Removing `{{.CLEAN_TARGETS}}`
-      success: Removed `{{.CLEAN_TARGETS}}`
   commit:
     deps:
       - :install:modules:local
@@ -40,6 +40,8 @@ tasks:
       - :install:npm:commitlint
       - :install:python:requirements
     desc: Lint staged files, report spelling errors, and open a _required_ commit dialoge
+    log:
+      start: Initiating commit dialog
     summary: |
       # Commit code
 
@@ -56,8 +58,6 @@ tasks:
       - . ./.config/husky/pre-commit
       - exec < /dev/tty && git cz --hook || true
 
-    log:
-      start: Initiating commit dialog
   husky:
     deps:
       - :install:modules:local
@@ -79,6 +79,9 @@ tasks:
   husky:install:
     deps:
       - :install:npm:husky
+    log:
+      start: Installing Husky git hooks
+      error: Error installing Husky git hooks
     cmds:
       - |
         if [ -d .git ] && [ "${container:=}" != 'docker' ]; then
@@ -87,13 +90,14 @@ tasks:
         else
           .config/log warn 'Cannot run `husky install` because there is no `.git/` folder (or this is a Docker container)'
         fi
-    log:
-      error: Error installing Husky git hooks
-      start: Installing Husky git hooks
     status:
       - '[ ! -d .git ] || [[ "${container:=} == "docker" ]]'
 
   husky:permissions:
+    log:
+      start: Ensuring git hook scripts are executable
+      success: Ensured git hook scripts are executable
+      error: Encountered error while ensuring git hook scripts have the appropriate permissions
     cmds:
       - |
         chmod +x .config/log
@@ -103,10 +107,6 @@ tasks:
         done < <(find ./.config/husky/* -maxdepth 0 -type f)
         .config/log success 'Ensured git hook scripts are executable'
 
-    log:
-      error: Encountered error while ensuring git hook scripts have the appropriate permissions
-      start: Ensuring git hook scripts are executable
-      success: Ensured git hook scripts are executable
   prepare-release:
     deps:
       - :install:npm:standard-version
@@ -160,6 +160,10 @@ tasks:
     deps:
       - software:git
     desc: 'Aggressively reset the project (**WARNING** This will wipe uncommitted work)'
+    log:
+      start: Forcing project to reset aggressively
+      success: Successfully reset project back to its HEAD
+      error: Failed to reset project back to its HEAD
     summary: |
       # Aggressively reset the project
 
@@ -174,10 +178,6 @@ tasks:
       - git pull origin master --no-rebase
       - bash .config/scripts/start.sh
 
-    log:
-      error: Failed to reset project back to its HEAD
-      start: Forcing project to reset aggressively
-      success: Successfully reset project back to its HEAD
   shell:
     deps:
       - :install:software:docker
@@ -188,13 +188,13 @@ tasks:
     vars:
       WORKDIR:
         sh: basename $PWD
+    log:
+      start: Starting a Docker container for `{{.CLI_ARGS}}` and attaching to `/bin/bash`
     cmds:
       - .config/log info 'Running `docker run -it -v "$PWD:/{{.WORKDIR}}" -w /{{.WORKDIR}} --rm megabytelabs/ansible-molecule-{{.CLI_ARGS}}:latest /bin/bash`'
       - cmd: docker run -it -v "$PWD:/{{.WORKDIR}}" -w /{{.WORKDIR}} --rm megabytelabs/ansible-molecule-{{.CLI_ARGS}}:latest /bin/bash
         ignore_error: true
 
-    log:
-      start: Starting a Docker container for `{{.CLI_ARGS}}` and attaching to `/bin/bash`
   shell:prompt:
     deps:
       - :install:modules:local

@@ -17,6 +17,10 @@ tasks:
       ```
     vars:
       DOC_IDS: '@binary,@brew,@cask,@chrome,@firefox,@gem,@helm,@npm,@pypi,@vscode'
+    log:
+      start: Scanning and acquiring package information in comments via `leasot`
+      success: Acquired package information from comments
+      error: Failed to acquire package information from comments via `leasot`
     cmds:
       - |
         function populateChartVar() {
@@ -43,10 +47,6 @@ tasks:
           populateChartVar "$TMP" "$ID"
         done
 
-    log:
-      error: Failed to acquire package information from comments via `leasot`
-      start: Scanning and acquiring package information in comments via `leasot`
-      success: Acquired package information from comments
   environment:
     # @desc_when [ansible/Taskfile-playbook.yml] ansible/playbook
     desc: Prompts for which environment to use and then symlinks to it
@@ -67,6 +67,12 @@ tasks:
       - task: environment:{{if .CLI_ARGS}}cli{{else}}prompt{{end}}
 
   environment:cli:
+    log:
+      start: Switching environment to `{{.CLI_ARGS}}`
+      success: Successfully switched environment to `{{.CLI_ARGS}}`
+      error:
+        default: Encountered an error while switching environments to `{{.CLI_ARGS}}`
+        69: A CLI argument must be passed in!
     cmds:
       - |
         {{if .CLI_ARGS}}
@@ -80,12 +86,6 @@ tasks:
           exit 69
         {{end}}
 
-    log:
-      error:
-        default: Encountered an error while switching environments to `{{.CLI_ARGS}}`
-        69: A CLI argument must be passed in!
-      start: Switching environment to `{{.CLI_ARGS}}`
-      success: Successfully switched environment to `{{.CLI_ARGS}}`
   environment:prompt:
     deps:
       - :install:modules:local
@@ -110,15 +110,15 @@ tasks:
 
       The example above will look through all the folders two levels deep (e.g. `./roles/tools/nmap`,
       `./roles/system/snapd`) in the roles folder and display any roles that are missing the file.
+    log:
+      start: Determining which roles in the `/roles/*` folders are missing `{{.CLI_ARGS}}`
+      success: Finished scanning for roles missing `{{.CLI_ARGS}}` (if there are any then they should be listed above)
+      error: Failed to scan the `/roles/*` folders for roles missing `{{.CLI_ARGS}}`
     cmds:
       - |
         FILES=$(find ./roles -mindepth 2 -maxdepth 2 -type d '!' -exec test -e "{}/{{.CLI_ARGS}}" ';' -print)
         .config/log info 'Found '"$(echo "$FILES" | wc -l | xargs)"' roles missing {{.CLI_ARGS}}'
         echo "$FILES"
-    log:
-      error: Failed to scan the `/roles/*` folders for roles missing `{{.CLI_ARGS}}`
-      start: Determining which roles in the `/roles/*` folders are missing `{{.CLI_ARGS}}`
-      success: Finished scanning for roles missing `{{.CLI_ARGS}}` (if there are any then they should be listed above)
     preconditions:
       - sh: test -d roles
         msg: The `roles/` folder is missing. Is the project set up right?
@@ -138,6 +138,10 @@ tasks:
       It also adds a remote for a private submodule that is intended to store
       files that are not meant to be shared. The remote is named `private`.
     run: once
+    log:
+      start: Adding git remotes for all of the roles in the `/roles/*` folders
+      success: Successfully added git remotes for all of the roles in the `/roles/*` folders
+      error: Failed to set remotes for one or more of the roles in the `/roles/*` folders
     cmds:
       - git init -q
       - |
@@ -156,10 +160,6 @@ tasks:
           fi
         done
 
-    log:
-      error: Failed to set remotes for one or more of the roles in the `/roles/*` folders
-      start: Adding git remotes for all of the roles in the `/roles/*` folders
-      success: Successfully added git remotes for all of the roles in the `/roles/*` folders
   run:
     cmds:
       - task: run:{{if .CLI_ARGS}}cli{{else}}prompt{{end}}
@@ -168,13 +168,13 @@ tasks:
     deps:
       - :install:python:requirements
       - :symlink:playbook
+    log:
+      start: Running `ansible-playbook -i inventories/{{.CLI_ARGS}} --ask-vault-pass main.yml`
+      success: Successfully ran `ansible-playbook -i inventories/{{.CLI_ARGS}} --ask-vault-pass main.yml`
+      error: Error encounted while running `ansible-playbook -i inventories/{{.CLI_ARGS}} --ask-vault-pass main.yml`
     cmds:
       - ansible-playbook -i inventories/{{.CLI_ARGS}} --ask-vault-pass main.yml
 
-    log:
-      error: Error encounted while running `ansible-playbook -i inventories/{{.CLI_ARGS}} --ask-vault-pass main.yml`
-      start: Running `ansible-playbook -i inventories/{{.CLI_ARGS}} --ask-vault-pass main.yml`
-      success: Successfully ran `ansible-playbook -i inventories/{{.CLI_ARGS}} --ask-vault-pass main.yml`
   run:prompt:
     deps:
       - :install:modules:local

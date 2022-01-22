@@ -1,7 +1,43 @@
 ---
 version: '3'
 
+output: interleaved
+
+vars:
+  DOCKERHUB_PROFILE: megabytelabs
+  DOCKERHUB_USER: professormanhattan
+  ESLINT_FORMATTER: pretty
+  ESLINT_FORMATTER_OPTIONS: git-log pretty summary
+  GALAXY_NAMESPACE:
+    sh: "if [ -f meta/main.yml ]; then grep namespace < meta/main.yml | sed 's/.*namespace: \\(.*\\)$/\\1/g'; fi"
+  GALAXY_ROLE_NAME:
+    sh: "if [ -f meta/main.yml ]; then grep role_name < meta/main.yml | sed 's/.*role_name: \\(.*\\)$/\\1/g'; fi"
+  GITHUB_ORG: ProfessorManhattan
+  GITHUB_USER: ProfessorManhattan
+  IGNORE_FOLDERS: -path './.autodoc/*' -o -path './.cache/*' -o -path './.common*' -o -path './.config/*' -o -path './.git/*'
+    -o -path './.github/*' -o -path './.gitlab/*' -o -path './.husky/*' -o -path './.modules/*' -o -path './.npm/*'
+    -o -path './.pnpm-store/*' -o -path './.shared/*' -o -path './.task/*' -o -path './.venv/*' -o -path './.vscode/*'
+    -o -path './build/*' -o -path './dist/*' -o -path './node_modules/*' -o -path './roles/*' -o -name pnpm-lock.yaml
+    -o -name package-lock.json -o -name poetry.lock -o -name '.variables.json'
+  INIT_SCRIPT: https://gitlab.com/megabyte-labs/common/shared/-/raw/master/common/.gitlab/ci/scripts/update-init.sh
+  LOG_FIX:
+    sh: chmod +x .config/log && echo "heyhey"
+  NPM_KEEP_UPDATED: '@washingtondc/* eslint-config-strict-mode sleekfast'
+  NPM_PROGRAM: npm
+  NPM_PROGRAM_LOCAL: pnpm
+  NPX_HANDLE: 'pnpx '
+  NPX_PACKAGE: pnpx
+  PYTHON_HANDLE:
+    sh: if [ -z "$GITLAB_CI" ] || [[ "$OPTIMIZED_IMAGE" == 'false' ]]; then echo 'poetry run '; fi
+  PYTHON_VIRTUALENV: true
+  REPOSITORY_SUBTYPE: role
+  REPOSITORY_TYPE: ansible
+  TIMEZONE: America/New_York
+
 includes:
+  project:
+    taskfile: Taskfile-project.yml
+    optional: true
   ansible: ./.config/taskfiles/ansible/Taskfile.yml
   ansible:ansibler: ./.config/taskfiles/ansible/Taskfile-ansibler.yml
   ansible:playbook: ./.config/taskfiles/ansible/Taskfile-playbook.yml
@@ -11,9 +47,6 @@ includes:
   ci: ./.config/taskfiles/ci/Taskfile.yml
   ci:github: ./.config/taskfiles/ci/Taskfile-github.yml
   common: ./.config/taskfiles/common/Taskfile.yml
-  project:
-    taskfile: Taskfile-project.yml
-    optional: true
   common:code: ./.config/taskfiles/common/Taskfile-code.yml
   common:update: ./.config/taskfiles/common/Taskfile-update.yml
   docker: ./.config/taskfiles/docker/Taskfile.yml
@@ -67,39 +100,6 @@ includes:
   web:ionic: ./.config/taskfiles/web/Taskfile-ionic.yml
   web:nx: ./.config/taskfiles/web/Taskfile-nx.yml
   web:profile: ./.config/taskfiles/web/Taskfile-profile.yml
-
-output: interleaved
-
-vars:
-  DOCKERHUB_PROFILE: megabytelabs
-  DOCKERHUB_USER: professormanhattan
-  ESLINT_FORMATTER: pretty
-  ESLINT_FORMATTER_OPTIONS: git-log pretty summary
-  GALAXY_NAMESPACE:
-    sh: "if [ -f meta/main.yml ]; then grep namespace < meta/main.yml | sed 's/.*namespace: \\(.*\\)$/\\1/g'; fi"
-  GALAXY_ROLE_NAME:
-    sh: "if [ -f meta/main.yml ]; then grep role_name < meta/main.yml | sed 's/.*role_name: \\(.*\\)$/\\1/g'; fi"
-  GITHUB_ORG: ProfessorManhattan
-  GITHUB_USER: ProfessorManhattan
-  IGNORE_FOLDERS: -path './.autodoc/*' -o -path './.cache/*' -o -path './.common*' -o -path './.config/*' -o -path './.git/*'
-    -o -path './.github/*' -o -path './.gitlab/*' -o -path './.husky/*' -o -path './.modules/*' -o -path './.npm/*'
-    -o -path './.pnpm-store/*' -o -path './.shared/*' -o -path './.task/*' -o -path './.venv/*' -o -path './.vscode/*'
-    -o -path './build/*' -o -path './dist/*' -o -path './node_modules/*' -o -path './roles/*' -o -name pnpm-lock.yaml
-    -o -name package-lock.json -o -name poetry.lock -o -name '.variables.json'
-  INIT_SCRIPT: https://gitlab.com/megabyte-labs/common/shared/-/raw/master/common/.gitlab/ci/scripts/update-init.sh
-  LOG_FIX:
-    sh: chmod +x .config/log && echo "heyhey"
-  NPM_KEEP_UPDATED: '@washingtondc/* eslint-config-strict-mode sleekfast'
-  NPM_PROGRAM: npm
-  NPM_PROGRAM_LOCAL: pnpm
-  NPX_HANDLE: 'pnpx '
-  NPX_PACKAGE: pnpx
-  PYTHON_HANDLE:
-    sh: if [ -z "$GITLAB_CI" ] || [[ "$OPTIMIZED_IMAGE" == 'false' ]]; then echo 'poetry run '; fi
-  PYTHON_VIRTUALENV: true
-  REPOSITORY_SUBTYPE: role
-  REPOSITORY_TYPE: ansible
-  TIMEZONE: America/New_York
 
 profile: |
   PATH="$PATH:$HOME/.local/bin:$HOME/.poetry/bin"
@@ -255,6 +255,8 @@ tasks:
 
       **Example using `task --watch`:**
       `task --watch mytask`
+    log:
+      start: Starting `nodemon` live-reload session
     cmds:
       - |
         if [ ! -f Taskfile-project.yml ]; then
@@ -262,8 +264,7 @@ tasks:
         fi
       - nodemon --config {{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}.config/nodemon.json{{end}}
 
-    log:
-      start: Starting `nodemon` live-reload session
+
   preload:
     deps:
       - install:brewfile

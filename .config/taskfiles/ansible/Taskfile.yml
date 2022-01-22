@@ -16,6 +16,10 @@ tasks:
     deps:
       - :install:software:jq
       - :install:software:yq
+    log:
+      start: Generating documentation variable for collection dependencies
+      success: Generated documentation variable for collection dependencies
+      error: Failed to generate documentation variable for collection dependencies
     env:
       COLLECTIONS:
         sh: jq --arg collections "$(yq eval -o=json '.collections' {{.REQUIREMENTS_PATH}})" '.{{.COLLECTION_DEPS}} = ($collections | fromjson) |
@@ -30,10 +34,6 @@ tasks:
         jq --arg collections "$COLLECTIONS" '.{{.COLLECTION_DEPS}} = ($collections | fromjson)' '{{.VARIABLES_PATH}}' > "$TMP"
         mv "$TMP" '{{.VARIABLES_PATH}}'
 
-    log:
-      error: Failed to generate documentation variable for collection dependencies
-      start: Generating documentation variable for collection dependencies
-      success: Generated documentation variable for collection dependencies
   collection-dependencies:markdown:
     deps:
       - :install:software:jq
@@ -46,6 +46,10 @@ tasks:
         The collections along with a links to their source are listed below.\n\n{{\"{{\"}}{{.COLLECTION_DEPS}}{{\"}}\"}}"
       SINGLE_COLLECTION_TEXT: "### Galaxy Collection\n\nThis role is dependent on the following Ansible Galaxy
         collection:\n\n{{\"{{\"}}{{.COLLECTION_DEPS}}{{\"}}\"}}"
+    log:
+      start: Generating documentation partial for collection dependencies
+      success: Generated documentation partial for collection dependencies
+      error: Failed to generate documentation partial for collection dependencies
     cmds:
       - mkdir -p '{{dir .FILE_PATH}}'
       - |
@@ -56,23 +60,19 @@ tasks:
         {{else}}
           echo "$MULTIPLE_COLLECTION_TEXT" > '{{.FILE_PATH}}'
         {{end}}
-    log:
-      error: Failed to generate documentation partial for collection dependencies
-      start: Generating documentation partial for collection dependencies
-      success: Generated documentation partial for collection dependencies
     sources:
       - '{{.FILE_PATH}}'
       - '{{.VARIABLES_PATH}}'
 
   galaxy:import:
+    log:
+      start: Triggering Ansible Galaxy import
+      success: Successfully imported role on Ansible Galaxy
+      error: Error occurred while importing Ansible Galaxy role
     cmds:
       - |
         GITHUB_ROLE_SLUG="$(jq -r '.blueprint.repository.github' package.json | sed 's/.*\///')"
         {{.PYTHON_HANDLE}} ansible-galaxy role import --token "$ANSIBLE_GALAXY_TOKEN" {{.GITHUB_ORG}} "$GITHUB_ROLE_SLUG"
-    log:
-      error: Error occurred while importing Ansible Galaxy role
-      start: Triggering Ansible Galaxy import
-      success: Successfully imported role on Ansible Galaxy
     status:
       - '[ -z "$ANSIBLE_GALAXY_TOKEN" ]'
 
@@ -87,13 +87,13 @@ tasks:
         msg: The requirements.yml file is missing! It should be present even if it is empty (which should almost never be the case).
 
   galaxy:requirements:install:
+    log:
+      start: Installing the Ansible Galaxy requirements specified in `requirements.yml`
+      success: Installed the Ansible Galaxy requirements specified in `requirements.yml`
+      error: Error encountered while installing the Ansible Galaxy requirements specified in `requirements.yml`
     cmds:
       - cmd: '{{.PYTHON_HANDLE}} ansible-galaxy install -r requirements.yml --ignore-errors'
         ignore_error: true
-    log:
-      error: Error encountered while installing the Ansible Galaxy requirements specified in `requirements.yml`
-      start: Installing the Ansible Galaxy requirements specified in `requirements.yml`
-      success: Installed the Ansible Galaxy requirements specified in `requirements.yml`
     status:
       - '[[ "${container:=}" == "docker" ]]'
 
@@ -102,6 +102,10 @@ tasks:
       - :install:npm:prettier
       - :install:software:jq
       - :install:software:yq
+    log:
+      start: Synchronizing the keywords in `package.json` and `meta/main.yml`
+      success: Synchronized the keywords in `package.json` and `meta/main.yml`
+      error: Error encountered while running the `package.json` / `meta/main.yml` synchronization logic
     summary: |
       # Sync Galaxy Tags with `package.json` Keywords
 
@@ -139,10 +143,6 @@ tasks:
         vars:
           CLI_ARGS: meta/main.yml
 
-    log:
-      error: Error encountered while running the `package.json` / `meta/main.yml` synchronization logic
-      start: Synchronizing the keywords in `package.json` and `meta/main.yml`
-      success: Synchronized the keywords in `package.json` and `meta/main.yml`
   mod-ansible-autodoc:
     cmds:
       - task: mod-ansible-autodoc:generate
@@ -162,6 +162,10 @@ tasks:
       - :install:python:requirements
       - :install:software:jq
       - mod-ansible-autodoc:ansible-autodoc-fork
+    log:
+      start: Compiling `mod-ansible-autodoc` documentation from comments in the play *.yml files
+      success: Successfully generated documentation partials with `mod-ansible-autodoc`
+      error: Error encountered while generating documentation partials with `mod-ansible-autodoc`
     env:
       ACTIONS_DESCRIPTION:
         sh: jq -r '.autodoc_actions_description' '{{.VARIABLES_PATH}}'
@@ -181,10 +185,6 @@ tasks:
         "$VARIABLES_DESCRIPTION" --variable-example-comment-prefix '#💬'
       - mkdir -p .autodoc
       - mv ansible_actions.md ansible_tags.md ansible_todo.md ansible_variables.json ansible_variables.md .autodoc
-    log:
-      error: Error encountered while generating documentation partials with `mod-ansible-autodoc`
-      start: Compiling `mod-ansible-autodoc` documentation from comments in the play *.yml files
-      success: Successfully generated documentation partials with `mod-ansible-autodoc`
     sources:
       - '{{.VARIABLES_PATH}}'
       - defaults/**/*.yml
@@ -194,6 +194,10 @@ tasks:
   mod-ansible-autodoc:variables:
     deps:
       - :install:software:jq
+    log:
+      start: Merging `.autodoc/ansible_variables.json` into `.variables.json`
+      success: Successfully merged `.autodoc/ansible_variables.json` into `.variables.json`
+      error: Failed to merge `.autodoc/ansible_variables.json` into `.variables.json`
     cmds:
       - |
         ROLE_VARIABLES="$(jq -r '.role_variables' .autodoc/ansible_variables.json)"
@@ -201,14 +205,14 @@ tasks:
         jq --arg vars "$ROLE_VARIABLES" '.role_variables = ($vars | fromjson)' '{{.VARIABLES_PATH}}' > "$TMP"
         mv "$TMP" '{{.VARIABLES_PATH}}'
 
-    log:
-      error: Failed to merge `.autodoc/ansible_variables.json` into `.variables.json`
-      start: Merging `.autodoc/ansible_variables.json` into `.variables.json`
-      success: Successfully merged `.autodoc/ansible_variables.json` into `.variables.json`
   quickstart:
     deps:
       - :ansible:symlink:{{.REPOSITORY_SUBTYPE}}
       - :install:python:requirements
+    log:
+      start: Running the Ansible play locally
+      success: Successfully ran the Ansible play locally
+      error: Error occurred while running the Ansible play
     vars:
       INSTALLING:
         sh: if test -f install_in_progress; then echo 'true'; else echo 'false'; fi
@@ -223,14 +227,14 @@ tasks:
       - if [ -f ansible.cfg.bak ]; then mv ansible.cfg.bak ansible.cfg; fi
       - if [ -f inventory ]; then rm inventory; fi
 
-    log:
-      error: Error occurred while running the Ansible play
-      start: Running the Ansible play locally
-      success: Successfully ran the Ansible play locally
   sync:requirements:
     deps:
       - :install:software:jq
       - :install:software:yq
+    log:
+      start: Ensuring role dependencies in `{{.META_PATH}}` are also listed in `{{.REQUIREMENTS_PATH}}`
+      success: Successfully ensured role dependencies in `{{.META_PATH}}` are also listed in `{{.REQUIREMENTS_PATH}}`
+      error: Failed to synchronize role dependencies in `{{.META_PATH}}` to `{{.REQUIREMENTS_PATH}}`
     cmds:
       - |
         ROLES="$(yq eval '.roles' '{{.REQUIREMENTS_PATH}}')"
@@ -243,11 +247,11 @@ tasks:
         vars:
           CLI_ARGS: '{{.REQUIREMENTS_PATH}}'
 
-    log:
-      error: Failed to synchronize role dependencies in `{{.META_PATH}}` to `{{.REQUIREMENTS_PATH}}`
-      start: Ensuring role dependencies in `{{.META_PATH}}` are also listed in `{{.REQUIREMENTS_PATH}}`
-      success: Successfully ensured role dependencies in `{{.META_PATH}}` are also listed in `{{.REQUIREMENTS_PATH}}`
   update:galaxy-id:
+    log:
+      start: Adding Ansible Galaxy project ID to `package.json` (if available)
+      success: Successfully ensured Ansible Galaxy project ID is in `package.json` (if the project is on Ansible Galaxy)
+      error: Failed to look up or inject the Ansible Galaxy project ID into `package.json`
     cmds:
       - |
         TMP="$(mktemp)"
@@ -256,10 +260,6 @@ tasks:
           jq --arg a "$PROJECT_ID" '.blueprint.ansible_galaxy_project_id = $a' package.json > "$TMP"
           mv "$TMP" package.json
         fi
-    log:
-      error: Failed to look up or inject the Ansible Galaxy project ID into `package.json`
-      start: Adding Ansible Galaxy project ID to `package.json` (if available)
-      success: Successfully ensured Ansible Galaxy project ID is in `package.json` (if the project is on Ansible Galaxy)
     status:
       - jq -e 'has("blueprint.ansible_galaxy_project_id")' package.json
 
@@ -285,14 +285,14 @@ tasks:
       SUBHEADER: '{{.SUBHEADER_PREFIX}} {{.DESCRIPTION_LOWER}}'
       TMP:
         sh: mktemp
+    log:
+      start: Injecting description variables into `.variables.json`
+      success: Successfully updated `.variables.json` with description variables
+      error: Failed to inject `.variables.json` with description variables
     cmds:
       - jq -S --arg alt "$ALT" --arg galaxyinfo "$GALAXY_INFO" --arg subheader "$SUBHEADER" '.alternative_description = $alt |
         .galaxy_info = ($galaxyinfo | fromjson) | .subheader_description = $subheader' '{{.VARIABLES_PATH}}' > "$TMP"
       - mv "$TMP" '{{.VARIABLES_PATH}}'
-    log:
-      error: Failed to inject `.variables.json` with description variables
-      start: Injecting description variables into `.variables.json`
-      success: Successfully updated `.variables.json` with description variables
     sources:
       - '.common/variables.{{.REPOSITORY_SUBTYPE}}.json'
       - '{{.META_PATH}}'
@@ -313,6 +313,10 @@ tasks:
       - task: :ansible:playbook:docs
 
   vault:lint:file:
+    log:
+      start: Checking if `{{.CLI_ARGS}}` is encrypted with `ansible-vault`
+      success: Ensured `{{.CLI_ARGS}}` is encrypted
+      error: '`{{.CLI_ARGS}}` is not encrypted! All files matching `**/*vault.yml` must be encrypted by `ansible-vault`.'
     summary: |
       # Check for unencrypted Ansible Vault files
 
@@ -325,7 +329,3 @@ tasks:
             exit 1
           fi
         }
-    log:
-      error: '`{{.CLI_ARGS}}` is not encrypted! All files matching `**/*vault.yml` must be encrypted by `ansible-vault`.'
-      start: Checking if `{{.CLI_ARGS}}` is encrypted with `ansible-vault`
-      success: Ensured `{{.CLI_ARGS}}` is encrypted
