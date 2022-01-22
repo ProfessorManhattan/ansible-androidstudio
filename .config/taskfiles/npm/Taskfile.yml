@@ -320,9 +320,10 @@ tasks:
     desc: Debug tests with DevTools in `watch` mode
     cmds:
       - |
-        .config/log info 'Running `{{.NPX_HANDLE}}ndb nodemon --config .common/nodemon-jest.json` to enable debugging with DevTools in watch mode'
-        {{.NPX_HANDLE}}ndb nodemon --config .common/nodemon-jest.json
+        {{.NPX_HANDLE}}ndb nodemon --config .config/nodemon-jest.json
 
+    log:
+      start: Running `{{.NPX_HANDLE}}ndb nodemon --config .config/nodemon-jest.json` to enable debugging with Chrome DevTools in watch mode
   typesync:
     deps:
       - :install:npm:typesync

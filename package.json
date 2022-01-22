@@ -169,8 +169,15 @@
   "prettier": "@washingtondc/prettier",
   "release": {
     "branches": [
-      "master",
-      "next"
+      "next",
+      {
+        "name": "beta",
+        "prerelease": true
+      },
+      {
+        "name": "alpha",
+        "prerelease": true
+      }
     ],
     "extends": "@washingtondc/release"
   }

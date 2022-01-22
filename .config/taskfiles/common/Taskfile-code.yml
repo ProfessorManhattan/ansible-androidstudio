@@ -9,6 +9,9 @@ tasks:
     cmds:
       - tokei . --exclude .common .modules
 
+    log:
+      error: Encountered error while running `tokei . --exclude .common .modules`
+      start: Analyzing project for code-language statistics
   find:todo:
     deps:
       - :install:npm:leasot
@@ -17,3 +20,6 @@ tasks:
       LEASOT_IGNORE: .common .modules .venv node_modules venv
     cmds:
       - '{{.NPX_HANDLE}}leasot --ignore {{.LEASOT_IGNORE}} {{.CLI_ARGS}}'
+    log:
+      error: Encountered error while running `{{.NPX_HANDLE}}leasot --ignore {{.LEASOT_IGNORE}} {{.CLI_ARGS}}`
+      start: Scanning project for TODOs and FIXMEs

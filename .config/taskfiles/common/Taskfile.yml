@@ -29,6 +29,10 @@ tasks:
         done
         wait
 
+    log:
+      error: Error removing `{{.CLEAN_TARGETS}}`
+      start: Removing `{{.CLEAN_TARGETS}}`
+      success: Removed `{{.CLEAN_TARGETS}}`
   commit:
     deps:
       - :install:modules:local
@@ -50,9 +54,10 @@ tasks:
       to your regular `git commit -m` command to bypass the pre-commit hook.
     cmds:
       - . ./.config/husky/pre-commit
-      - .config/log info "Initiating the commit dialog"
       - exec < /dev/tty && git cz --hook || true
 
+    log:
+      start: Initiating commit dialog
   husky:
     deps:
       - :install:modules:local
@@ -78,10 +83,13 @@ tasks:
       - |
         if [ -d .git ] && [ "${container:=}" != 'docker' ]; then
           {{.NPX_HANDLE}}husky install .config/husky > /dev/null
-          .config/log success 'Installed husky git hooks'
+          .config/log success 'Installed Husky git hooks'
         else
           .config/log warn 'Cannot run `husky install` because there is no `.git/` folder (or this is a Docker container)'
         fi
+    log:
+      error: Error installing Husky git hooks
+      start: Installing Husky git hooks
     status:
       - '[ ! -d .git ] || [[ "${container:=} == "docker" ]]'
 
@@ -95,6 +103,10 @@ tasks:
         done < <(find ./.config/husky/* -maxdepth 0 -type f)
         .config/log success 'Ensured git hook scripts are executable'
 
+    log:
+      error: Encountered error while ensuring git hook scripts have the appropriate permissions
+      start: Ensuring git hook scripts are executable
+      success: Ensured git hook scripts are executable
   prepare-release:
     deps:
       - :install:npm:standard-version
@@ -162,6 +174,10 @@ tasks:
       - git pull origin master --no-rebase
       - bash .config/scripts/start.sh
 
+    log:
+      error: Failed to reset project back to its HEAD
+      start: Forcing project to reset aggressively
+      success: Successfully reset project back to its HEAD
   shell:
     deps:
       - :install:software:docker
@@ -173,9 +189,12 @@ tasks:
       WORKDIR:
         sh: basename $PWD
     cmds:
+      - .config/log info 'Running `docker run -it -v "$PWD:/{{.WORKDIR}}" -w /{{.WORKDIR}} --rm megabytelabs/ansible-molecule-{{.CLI_ARGS}}:latest /bin/bash`'
       - cmd: docker run -it -v "$PWD:/{{.WORKDIR}}" -w /{{.WORKDIR}} --rm megabytelabs/ansible-molecule-{{.CLI_ARGS}}:latest /bin/bash
         ignore_error: true
 
+    log:
+      start: Starting a Docker container for `{{.CLI_ARGS}}` and attaching to `/bin/bash`
   shell:prompt:
     deps:
       - :install:modules:local

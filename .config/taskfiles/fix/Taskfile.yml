@@ -17,6 +17,8 @@ tasks:
     cmds:
       - task: yaml:dashes
 
+    log:
+      start: Running all stable fixers in parallel
   eslint:
     deps:
       - :install:modules:local
@@ -38,6 +40,10 @@ tasks:
       - '{{.NPX_HANDLE}}eslint -c package.json --no-eslintrc --format pretty --cache --cache-location .cache/eslintcache
         --fix {{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}.{{end}}'
 
+    log:
+      error: ESLint found some issues that need to be fixed manually
+      start: Auto-fixing with ESLint
+      success: ESLint fixing appears to have corrected all the issues {{if .CLI_ARGS}}in `{{.CLI_ARGS}}`{{else}}in the project{{end}}
   js:
     cmds:
       - task: eslint
@@ -62,6 +68,10 @@ tasks:
       - '{{.NPX_HANDLE}}eslint -c package.json --no-eslintrc --cache --cache-location .cache/eslintcache --fix
         --format pretty --ext .json {{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}.{{end}}'
 
+    log:
+      error: '{{if .CLI_ARGS}}Manual fixing is still required for `{{.CLI_ARGS}}`{{else}}Failed to fix all project JSON issues with ESLint{{end}}'
+      start: Linting JSON with ESLint
+      success: ESLint has fixed all of the JSON issues {{if .CLI_ARGS}}in `{{.CLI_ARGS}}`{{else}}in the project{{end}}
   misc:
     deps:
       - :install:python:requirements

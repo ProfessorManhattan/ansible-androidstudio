@@ -43,7 +43,6 @@ tasks:
       CONTRIB_TEMPLATE: .config/docs/blueprint-contributing.md
     cmds:
       - mkdir -p docs
-      - .config/log info 'Generating `docs/CONTRIBUTING.md` using document partials'
       - >
         {{.NPX_HANDLE}}readme generate --silent --headingPrefix '{}' --config .variables.json
         --input "{{.CONTRIB_TEMPLATE}}" --output docs/CONTRIBUTING.md
@@ -51,7 +50,10 @@ tasks:
         vars:
           SCRUB_FILE: docs/CONTRIBUTING.md
       - '{{.NPX_HANDLE}}prettier --write docs/CONTRIBUTING.md > /dev/null'
-      - .config/log success 'Successfully generated `docs/CONTRIBUTING.md`'
+    log:
+      error: Encountered error while generating `docs/CONTRIBUTING.md`
+      start: Generating `docs/CONTRIBUTING.md` using document partials
+      success: Successfully generated `docs/CONTRIBUTING.md`
     sources:
       - docs/CONTRIBUTING.md
       - .config/docs/**/*
@@ -81,12 +83,19 @@ tasks:
       - task: :common:{{if eq .CONTAINER "docker"}}husky:ci{{else}}husky{{end}}
       - task: :{{if eq .REPOSITORY_SUBTYPE "role"}}ansible:keywords:sync{{else}}donothing{{end}}
 
+    log:
+      error: Encountered error while updating miscellaneous files
+      start: Updating miscellaneous files
+      success: Updated miscellaneous files
   init:
     cmds:
       - |
         if ! test -f package.json; then
           echo '{"blueprint": {}}' > package.json
         fi
+    log:
+      error: Encountered error while initializing project
+      start: Ensuring project is initialized
     status:
       - test -f package.json
 
@@ -136,7 +145,6 @@ tasks:
   modules:
     deps:
       - :install:software:git
-    label: update:modules
     summary: |
       # Ensure all submodules in `.modules/` are updated
 
@@ -157,6 +165,10 @@ tasks:
           done
           .config/log success 'Ensured submodules in the `.modules` folder are pointing to the master branch'
         fi
+    log:
+      error: Failed to ensure submodules in the `.modules/` folder are up-to-date
+      start: Ensuring submodules in the `.modules/` folder are up-to-date
+      success: Successfully ensured submodules in the `.modules/` folder are up-to-date
     status:
       - '! ls .modules/*/ > /dev/null 2>&1'
 
@@ -167,6 +179,8 @@ tasks:
           git pull origin master --no-rebase || true
         fi
 
+    log:
+      start: Pulling `master` if `origin` is defined
   readme:
     deps:
       - ':{{if eq .REPOSITORY_TYPE "ansible"}}ansible:collection-dependencies:markdown{{else}}donothing{{end}}'
@@ -184,7 +198,10 @@ tasks:
           SCRUB_FILE: README.md
       - task: ':{{if eq .REPOSITORY_TYPE "packer"}}packer:update:readme{{else}}donothing{{end}}'
       - '{{.NPX_HANDLE}}prettier --write README.md > /dev/null'
-      - .config/log success 'Generated README.md successfully'
+    log:
+      error: Error encountered while generating `README.md`
+      start: Generating `README.md`
+      success: Generated README.md successfully
     sources:
       - .autodoc/*
       - .config/docs/**/*
@@ -222,7 +239,6 @@ tasks:
       - ':{{if eq .REPOSITORY_TYPE "packer"}}packer:latestos{{else}}donothing{{end}}'
       - init
       - repositories
-    label: update
     summary: |
       # Refresh project with latest upstream code and ensure project files are up-to-date
 

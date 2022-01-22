@@ -24,11 +24,12 @@ tasks:
       VERSION:
         sh: jq -r '.version' package.json
     cmds:
-      - |
-        .config/log info 'Building Docker container `{{.DOCKERHUB_PROFILE}}/{{.SLUG}}:{{.VERSION}}` (also tagged as latest)'
-        docker build --build-arg BUILD_DATE="{{.BUILD_DATE}}" --build-arg REVISION="{{.REVISION}}" --build-arg VERSION="{{.VERSION}}"
+      - docker build --build-arg BUILD_DATE="{{.BUILD_DATE}}" --build-arg REVISION="{{.REVISION}}" --build-arg VERSION="{{.VERSION}}"
         --tag {{.DOCKERHUB_PROFILE}}/{{.SLUG}}:latest --tag {{.DOCKERHUB_PROFILE}}/{{.SLUG}}:{{.VERSION}} .
-        .config/log success 'Successfully built Docker container named `{{.DOCKERHUB_PROFILE}}/{{.SLUG}}:{{.VERSION}}`'
+    log:
+      error: Error building `{{.DOCKERHUB_PROFILE}}/{{.SLUG}}:{{.VERSION}}`
+      start: Building Docker container `{{.DOCKERHUB_PROFILE}}/{{.SLUG}}:{{.VERSION}}` (also tagged as latest)
+      success: Successfully built Docker container named `{{.DOCKERHUB_PROFILE}}/{{.SLUG}}:{{.VERSION}}`
     sources:
       - Dockerfile
       - package.json
@@ -62,10 +63,11 @@ tasks:
       SLUG:
         sh: jq -r '.blueprint.slug' package.json
     cmds:
-      - |
-        .config/log info 'Building Docker container named `{{.DOCKERHUB_PROFILE}}/{{.SLUG}}:slim`'
-        docker-slim build --tag '{{.DOCKERHUB_PROFILE}}/{{.SLUG}}:slim' {{.SLIM_COMMAND}} '{{.DOCKERHUB_PROFILE}}/{{.SLUG}}:latest'
-        .config/log success 'Successfully built Docker container named `{{.DOCKERHUB_PROFILE}}/{{.SLUG}}:slim`'
+      - docker-slim build --tag '{{.DOCKERHUB_PROFILE}}/{{.SLUG}}:slim' {{.SLIM_COMMAND}} '{{.DOCKERHUB_PROFILE}}/{{.SLUG}}:latest'
+    log:
+      error: Error building `{{.DOCKERHUB_PROFILE}}/{{.SLUG}}:slim` with `docker-slim`
+      start: Building Docker container named `{{.DOCKERHUB_PROFILE}}/{{.SLUG}}:slim`
+      success: Successfully built Docker container named `{{.DOCKERHUB_PROFILE}}/{{.SLUG}}:slim`
     sources:
       - Dockerfile
       - package.json
@@ -80,6 +82,10 @@ tasks:
       - :install:npm:prettier
     cmds:
       - '{{.NPX_HANDLE}}prettier --write slim.report.json > /dev/null'
+    log:
+      error: Failed to format `slim.report.json` with Prettier
+      start: Formatting `slim.report.json` with Prettier
+      success: Formatted `slim.report.json` with Prettier
     sources:
       - slim.report.json
 
@@ -102,5 +108,8 @@ tasks:
         jq --arg a "{{.SLIM_SIZE}}" '.blueprint.slim_size = $a' package.json > "$TMP"
         mv "$TMP" package.json
       - task: :common:update:update
+    log:
+      error: Failed to acquire / inject `:slim` image file size information into `package.json` blueprint data
+      start: Injecting `:slim` image file size into `package.json` blueprint data
     status:
       - '[[ "{{.PREVIOUS_SLIM_SIZE}}" == "{{.SLIM_SIZE}}" ]]'

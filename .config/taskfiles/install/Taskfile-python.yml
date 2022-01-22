@@ -91,3 +91,25 @@ tasks:
             .config/log warn '`gcc` is missing.'
           fi
         fi
+
+  venv:node:
+    deps:
+      - :install:software:python
+    cmds:
+      - |
+        REQUIREMENTS_PATH="$PWD/requirements.txt"
+        cd "$INIT_CWD" || exit
+        if [ ! -d .venv ]; then
+          python3 -m venv .env
+        else
+          .config/log warn 'The `.venv` folder is already present so a fresh virtualenv cannot be installed'
+        fi
+        . .venv/bin/activate
+        pip3 install -U pip setuptools
+        pip3 install -r "$REQUIREMENTS_PATH"
+    log:
+      error: Encountered error while setting up `.venv` environment
+      start: Setting up a Python 3 `.venv`
+      success: Finished setting up `.venv`. Run `. .venv/bin/activate` to load the environment into your shell.
+    sources:
+      - requirements.txt
