@@ -42,6 +42,7 @@ tasks:
       error: Encountered error while pushing changes to master
       start: Bypassing git hooks and pushing changes to master (if there are any changes)
     cmds:
+      - task donothing
       - task: commit:config
       - git add --all
       - git diff --cached "*"
