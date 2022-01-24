@@ -103,7 +103,7 @@ tasks:
     cmds:
       - task: :install:software:python
       - |
-        REQUIREMENTS_PATH="$PWD/.config/requirements.txt"
+        REQUIREMENTS_PATH="$PWD/src/requirements.txt"
         cd "$INIT_CWD" || exit
         if [ ! -f venv/bin/activate ]; then
           python3 -m venv venv || exit 0
@@ -112,4 +112,4 @@ tasks:
         pip3 install -U pip setuptools || exit 0
         pip3 install -r "$REQUIREMENTS_PATH" || exit 0
     sources:
-      - requirements.txt
+      - src/requirements.txt

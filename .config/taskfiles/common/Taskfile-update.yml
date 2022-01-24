@@ -80,6 +80,8 @@ tasks:
             cp .config/initctl initctl
             .config/log info 'Added initctl faker file to repository root'
           fi
+        {{else}}
+          true
         {{end}}
       - task: :common:{{if eq .CONTAINER "docker"}}husky:ci{{else}}husky{{end}}
       - task: :{{if eq .REPOSITORY_SUBTYPE "role"}}ansible:keywords:sync{{else}}donothing{{end}}
