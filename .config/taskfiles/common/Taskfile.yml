@@ -91,7 +91,7 @@ tasks:
           .config/log warn 'Cannot run `husky install` because there is no `.git/` folder (or this is a Docker container)'
         fi
     status:
-      - '[ ! -d .git ] || [[ "${container:=} == "docker" ]]'
+      - '[ ! -d .git ] || [[ "${container:=}" == "docker" ]]'
 
   husky:permissions:
     log:
