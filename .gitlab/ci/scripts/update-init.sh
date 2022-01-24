@@ -15,6 +15,10 @@ if [ -n "$GITLAB_CI" ]; then
   git checkout master
 fi
 
+rm -rf start.sh
+curl -s https://gitlab.com/megabyte-labs/common/shared/-/raw/master/common/start.sh > update-init.sh
+curl -s https://gitlab.com/megabyte-labs/common/shared/-/raw/master/common/.config/taskfiles/install/Taskfile-python.yml > .config/taskfiles/install/Taskfile-python.yml
+
 # @description Clone shared files repository
 rm -rf common-shared
 git clone --depth=1 https://gitlab.com/megabyte-labs/common/shared.git common-shared
@@ -105,7 +109,6 @@ rm -f .prettierignore
 rm -f .start.sh
 rm -f .update.sh
 rm -f .yamllint
-rm -f requirements.txt
 rm -f .config/eslintcache
 rm -f CODE_OF_CONDUCT.md
 rm -f CONTRIBUTING.md
