@@ -2947,10 +2947,6 @@ packages:
       lodash: 4.17.21
     dev: true
 
-  /async/3.2.2:
-    resolution: {integrity: sha512-H0E+qZaDEfx/FY4t7iLRv1W2fFI6+pyCeTw1uN20AQPiwqwM6ojPxHxdLv4z8hi2DtnW9BOckSspLucW7pIE5g==}
-    dev: true
-
   /async/3.2.3:
     resolution: {integrity: sha512-spZRyzKL5l5BZQrr/6m/SqFdBN0q3OCI0f9rjfBzCMBIP4p75P620rR3gTmaksNOhmzgdxcaxdNfMy6anrbM0g==}
     dev: true
@@ -6747,23 +6743,11 @@ packages:
       boxen: 5.1.2
       chalk: 4.1.2
       detect-newline: 3.1.0
-      git-raw-commits: 2.0.10
+      git-raw-commits: 2.0.11
       meow: 9.0.0
       simple-git: 2.48.0
     transitivePeerDependencies:
       - supports-color
-    dev: true
-
-  /git-raw-commits/2.0.10:
-    resolution: {integrity: sha512-sHhX5lsbG9SOO6yXdlwgEMQ/ljIn7qMpAbJZCGfXX2fq5T8M5SrDnpYk9/4HswTildcIqatsWa91vty6VhWSaQ==}
-    engines: {node: '>=10'}
-    hasBin: true
-    dependencies:
-      dargs: 7.0.0
-      lodash: 4.17.21
-      meow: 8.1.2
-      split2: 3.2.2
-      through2: 4.0.2
     dev: true
 
   /git-raw-commits/2.0.11:
@@ -8501,7 +8485,7 @@ packages:
     engines: {node: '>=12'}
     hasBin: true
     dependencies:
-      async: 3.2.2
+      async: 3.2.3
       chalk: 4.1.2
       commander: 7.2.0
       eol: 0.9.1

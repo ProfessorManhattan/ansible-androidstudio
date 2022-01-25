@@ -68,7 +68,7 @@ rich = "*"
 
 [[package]]
 name = "ansibler"
-version = "0.2.3"
+version = "0.2.4"
 description = "Generate JSON data that describes the dependencies of an Ansible playbook/role. Also, automatically generate OS compatibility charts using Molecule."
 category = "dev"
 optional = false
@@ -1286,7 +1286,7 @@ ansible-lint = [
     {file = "ansible_lint-4.3.7-py2.py3-none-any.whl", hash = "sha256:300e841f690b556a08d44902d6414283dc101079b27909e3a892f1cf1d10d7ff"},
 ]
 ansibler = [
-    {file = "ansibler-0.2.3.tar.gz", hash = "sha256:0481922ad8a2bb0131dd448e98831c5fc9e994bb4408d6f4df417bb5947e0b1d"},
+    {file = "ansibler-0.2.4.tar.gz", hash = "sha256:80e23abe1cf99741d51ab55ea4dfb62afdf99424cc8afdbee6978526a2ca408c"},
 ]
 apache-libcloud = [
     {file = "apache-libcloud-3.4.1.tar.gz", hash = "sha256:88f18da0cf3fac0af723e743fb741d9d1be251881edab7a5a0d1629955b5011b"},

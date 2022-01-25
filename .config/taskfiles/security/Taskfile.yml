@@ -149,6 +149,10 @@ tasks:
       `task security:snyk -- namespace/image:tag`
 
       For more information, see [Snyk's website](https://snyk.io/what-is-snyk/).
+    log:
+      error: '`snyk` reported security errors!'
+      start: Scanning {{if .CLI_ARGS}}`{{.CLI_ARGS}}`{{else}}all tags of the Dockerfile{{end}} with `snyk`
+      success: Passed `snyk` security test
     cmds:
       - task: snyk:login
       - |
