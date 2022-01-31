@@ -202,7 +202,7 @@ tasks:
     cmds:
       - |
         if [[ "$(jq -r '.dependencies.tslib' package.json)" == 'null' ]]; then
-          if [ "$(jq -r '.compilerOptions.importHelpers')" != 'true' ]; then
+          if [ "$(jq -r '.compilerOptions.importHelpers' tsconfig.json)" != 'true' ]; then
             .config/log info '{{.TSLIB_MSG}}'
           else
             .config/log info 'Automatically installing `tslib` since `importHelpers` is set to true in tsconfig.json'
@@ -210,7 +210,7 @@ tasks:
             .config/log success 'Successfully installed `tslib`'
           fi
         else
-          task install:modules:local:sync -- "tslib"
+          task install:modules:local:sync -- tslib
         fi
     status:
       - '[ ! -f tsconfig.json ]'
