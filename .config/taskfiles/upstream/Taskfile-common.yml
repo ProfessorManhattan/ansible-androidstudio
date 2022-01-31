@@ -43,6 +43,9 @@ tasks:
         rm -rf docs common.json pnpm-lock.yaml
 
   combine:
+    log:
+      error: Error combining generated files
+      start: Combining generated files
     cmds:
       - mkdir -p _generated_
       - mv .common* _generated_

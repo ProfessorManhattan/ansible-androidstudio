@@ -39,5 +39,4 @@ tasks:
       start: Releasing with `semantic-release`..
       success: Finished running `semantic-release`
     cmds:
-      - git pull origin master
       - semantic-release -r "$(git remote get-url origin)"{{if .CLI_ARGS}} {{.CLI_ARGS}}{{end}}
