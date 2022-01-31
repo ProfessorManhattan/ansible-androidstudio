@@ -191,7 +191,7 @@ tasks:
         fi
 
   tslib:
-    env:
+    vars:
       TSLIB_MSG: You can potentially optimize your bundle by setting `importHelpers` in compilerOptions
         in tsconfig.json to `true`. After importHelpers is set to true, the taskfiles will automatically
         install tslib.
@@ -206,7 +206,7 @@ tasks:
             .config/log info '{{.TSLIB_MSG}}'
           else
             .config/log info 'Automatically installing `tslib` since `importHelpers` is set to true in tsconfig.json'
-            {{.NPM_PROGRAM}} install --save tslib@latest
+            {{.NPM_PROGRAM_LOCAL}} install --save tslib@latest
             .config/log success 'Successfully installed `tslib`'
           fi
         else

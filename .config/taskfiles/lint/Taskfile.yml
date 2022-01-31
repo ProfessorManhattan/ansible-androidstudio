@@ -205,7 +205,7 @@ tasks:
           TMP="$(mktemp)";
           ESLINT_RULE="$(echo "$LINE" | grep 'errors ' | sed 's/.*rule:\ //')";
           if [ -n "$ESLINT_RULE" ]; then
-            jq --arg rule "$ESLINT_RULE" '.eslintConfig.rules[$rule] - "warn"' package.json > "$TMP";
+            jq --arg rule "$ESLINT_RULE" '.eslintConfig.rules[$rule] = "warn"' package.json > "$TMP";
             mv "$TMP" package.json;
           fi;
         done < "$ESLINT_TMP"
