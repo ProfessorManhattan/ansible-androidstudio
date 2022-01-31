@@ -266,6 +266,7 @@ tasks:
     cmds:
       - task: molecule:virtualbox:{{if .CLI_ARGS}}cli{{else}}prompt{{end}}
 
+  # yamllint disable rule:truthy
   molecule:virtualbox:cli:
     deps:
       - molecule:dependencies
@@ -273,7 +274,6 @@ tasks:
       - :install:software:vagrant
       - :install:software:virtualbox
     env:
-      # yamllint disable-line rule:truthy
       OBJC_DISABLE_INITIALIZE_FORK_SAFETY: YES
     log:
       error: Errors encountered while running the `{{.CLI_ARGS}}` VirtualBox Molecule test
@@ -315,7 +315,6 @@ tasks:
       - :install:software:vagrant
       - :install:software:virtualbox
     env:
-      # yamllint disable-line rule:truthy
       OBJC_DISABLE_INITIALIZE_FORK_SAFETY: YES
     log:
       error: Errors were encountered while running the `{{.CLI_ARGS}}` VirtualBox Molecule converge play
@@ -341,7 +340,6 @@ tasks:
     vars:
       MOLECULE_DATE:
         sh: date '+%Y-%m-%d'
-      # yamllint disable-line rule:truthy
       OBJC_DISABLE_INITIALIZE_FORK_SAFETY: YES
     log:
       error: Errors were encountered while running the full E2E test (see `{{.MOLECULE_LOGS_PATH}}/{{.MOLECULE_DATE}}-default.txt` for details)
@@ -352,6 +350,7 @@ tasks:
       - |
         PY_COLORS=0 {{.MOLECULE_TEST_OPTIONS}} {{.PYTHON_HANDLE}}molecule test | tee '{{.MOLECULE_LOGS_PATH}}/{{.MOLECULE_DATE}}-default.txt'
 
+  # yamllint enable rule:truthy
   molecule:virtualbox:prompt:
     interactive: true
     deps:
