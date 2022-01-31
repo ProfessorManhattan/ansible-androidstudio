@@ -57,6 +57,8 @@ tasks:
         done
 
   copy:
+    log:
+      start: Removing `.config/`
     cmds:
       - rm -rf .config
       - task: copy:begin
@@ -70,6 +72,9 @@ tasks:
   copy:common:
     deps:
       - :install:software:coreutils
+    log:
+      error: Error copying common files
+      start: Copying common files
     cmds:
       - |
         PATH="$(brew --prefix)/opt/coreutils/libexec/gnubin:$PATH"
@@ -79,6 +84,9 @@ tasks:
   copy:project:
     deps:
       - :install:software:coreutils
+    log:
+      error: Error copying project files
+      start: Copying project files
     cmds:
       - |
         PATH="$(brew --prefix)/opt/coreutils/libexec/gnubin:$PATH"
@@ -89,6 +97,9 @@ tasks:
   copy:project:subtype:
     deps:
       - :install:software:coreutils
+    log:
+      error: Error copying project sub-type files
+      start: Copying project sub-type files
     cmds:
       - |
         PATH="$(brew --prefix)/opt/coreutils/libexec/gnubin:$PATH"
