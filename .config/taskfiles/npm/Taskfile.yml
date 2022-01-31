@@ -35,7 +35,6 @@ tasks:
       success: Finished running `esbuild` (config -> ./.config/esbuild/bundled.js)
     cmds:
       - node .config/esbuild/bundled.js
-        .config/log success 'Finished running `esbuild` with bundle script'
 
   build:esbuild:minified:
     deps:
@@ -46,17 +45,14 @@ tasks:
       start: Running `esbuild` with minify script (config -> ./.config/esbuild/minified.js)
       success: Finished running `esbuild with minify script (config -> ./.config/esbuild/minified.js)
     cmds:
-      - |
-        .config/log info 'Running `esbuild` with minify script (`./.config/esbuild/minified.js`)'
-        node .config/esbuild/minified.js
-        .config/log success 'Finished running `esbuild` with minify script'
+      - node .config/esbuild/minified.js
 
   build:fpm:
     deps:
       - :install:software:jq
     vars:
       NPM_PACKAGE_NAME:
-        sh: jq -r '.blueprint.bin_name' package.json
+        sh: jq -r '.blueprint.binName' package.json
       NPM_PACKAGE_VERSION:
         sh: jq -r '.version' package.json
     cmds:
