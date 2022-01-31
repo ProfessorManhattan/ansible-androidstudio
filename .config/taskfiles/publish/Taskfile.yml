@@ -41,5 +41,6 @@ tasks:
       start: Releasing with `semantic-release`..
       success: Finished running `semantic-release`
     cmds:
+      - task install:modules:local:sync -- {{.SEMANTIC_CONFIG}}
       - task: :common:update:variables
-      - semantic-release -r "$(git remote get-url origin)"{{if .CLI_ARGS}} {{.CLI_ARGS}}{{end}}
+      - GIT_CREDENTIALS="gitlab-ci-token:$CI_BUILD_TOKEN" semantic-release -r "$(git remote get-url origin)"{{if .CLI_ARGS}} {{.CLI_ARGS}}{{end}}
