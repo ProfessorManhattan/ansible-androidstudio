@@ -84,7 +84,7 @@
     "ansible_galaxy_project_id": "56329",
     "description": "Installs Android Studio and sets up Android SDKs on nearly any OS",
     "github_id": "MDEwOlJlcG9zaXRvcnk0MDczNDE1MDk=",
-    "gitlab_group_id": "12261670",
+    "gitlab_group_id": "",
     "gitlab_project_id": "24464026",
     "group": "ansible",
     "name": "Android Studio",
