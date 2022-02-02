@@ -162,6 +162,12 @@ tasks:
       - :common:update:man-page
       - build:pkg
 
+  build:none:
+    log:
+      start: Skipping build step because project does not need building
+    cmds:
+      - task: :donothing
+
   build:pkg:
     deps:
       - :install:modules:local
@@ -174,6 +180,17 @@ tasks:
       - '{{.NPX_HANDLE}}pkg package.json'
 
   build:release: 'true'
+
+  build:tsconfig:
+    deps:
+      - :install:npm:typescript
+    log:
+      error: Error building with `tsconfig.json`
+      start: Removing `dist/` folder and running `tsc -p tsconfig.json`
+      success: Successfully built project
+    cmds:
+      - rm -rf dist
+      - tsc -p tsconfig.json
 
   clean:
     deps:
@@ -369,6 +386,12 @@ tasks:
       success: Successfully ran `{{.NPX_HANDLE}}ndb nodemon --config .config/nodemon-jest.json`
     cmds:
       - '{{.NPX_HANDLE}}ndb nodemon --config .config/nodemon-jest.json'
+
+  test:none:
+    log:
+      start: No tests have been set up for this project
+    cmds:
+      - task: :donothing
 
   typesync:
     deps:

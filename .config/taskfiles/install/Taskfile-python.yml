@@ -50,8 +50,6 @@ tasks:
       - task: requirements:poetry:prereqs
       - task: requirements:poetry
       - task: :{{if eq .REPOSITORY_TYPE "ansible"}}ansible:galaxy:requirements{{else}}donothing{{end}}
-    status:
-      - '[[ "$OPTIMIZED_IMAGE" == "true" ]]'
 
   requirements:poetry:
     run: once
@@ -97,13 +95,13 @@ tasks:
 
   venv:node:
     log:
-      error: Encountered error while setting up `.venv` environment.. Is Python 3 installed?
-      start: Setting up a Python 3 `.venv`
-      success: Finished setting up `.venv`. Run `. .venv/bin/activate` to load the environment into your shell.
+      error: Encountered error while setting up `venv` environment.. Is Python 3 installed?
+      start: Setting up a Python 3 `venv`
+      success: Finished setting up `venv`. Run `. venv/bin/activate` to load the environment into your shell.
     cmds:
       - task: :install:software:python
       - |
-        REQUIREMENTS_PATH="$PWD/src/requirements.txt"
+        REQUIREMENTS_PATH="$PWD/lib/requirements.txt"
         cd "$INIT_CWD" || exit
         if [ ! -f venv/bin/activate ]; then
           python3 -m venv venv || exit 0

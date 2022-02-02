@@ -21,6 +21,12 @@ tasks:
       - cp -rf allure-reports/history/ molecule/.results/junit/
       - allure open allure-reports
 
+  default:
+    log:
+      start: Running default Ansible test
+    cmds:
+      - task: molecule:docker:matrix
+
   local:
     desc: Run the Ansible play on the local machine (or via WSL - see task summary)
     summary: |

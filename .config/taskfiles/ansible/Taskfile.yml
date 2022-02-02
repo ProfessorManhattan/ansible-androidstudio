@@ -12,6 +12,12 @@ vars:
   VARIABLES_PATH: .variables.json
 
 tasks:
+  build:none:
+    log:
+      start: Skipping build stage because Ansible project's do not require building
+    cmds:
+      - task: :donothing
+
   collection-dependencies:
     deps:
       - :install:software:jq
@@ -158,8 +164,6 @@ tasks:
       - task: :install:python:pipx
         vars:
           PACKAGE: ansible-autodoc-fork
-    status:
-      - '[[ "$OPTIMIZED_IMAGE" == "true" ]]'
 
   mod-ansible-autodoc:generate:
     deps:
