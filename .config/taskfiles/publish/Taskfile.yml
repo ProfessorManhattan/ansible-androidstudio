@@ -65,8 +65,6 @@ tasks:
       project that needs to run in environment with access to the `python-semantic`
       extras defined in `pyproject.toml`.
     vars:
-      CURRENT_TAG:
-        sh: jq -r '.blueprint.currentBuildTag' package.json
       RELEASE_PREFIX:
         sh: if [ -f setup.cfg ]; then echo 'poetry run '; else echo ''; fi
     log:
@@ -85,10 +83,6 @@ tasks:
         fi
       - |
         export GIT_CREDENTIALS="gitlab-ci-token:$CI_BUILD_TOKEN"
-        export GOVERSION="$(go version)"
-        if [ '{{.CURRENT_TAG}}' != 'null' ]; then
-          export GORELEASER_CURRENT_TAG={{.CURRENT_TAG}}
-        fi
         {{.RELEASE_PREFIX}}semantic-release -r "$(git remote get-url origin)"{{if .CLI_ARGS}} {{.CLI_ARGS}}{{end}}
 
   version:tag:
