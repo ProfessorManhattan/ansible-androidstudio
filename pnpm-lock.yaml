@@ -6,7 +6,7 @@ neverBuiltDependencies:
   - highlight.js
 
 specifiers:
-  '@commitlint/config-conventional': ^16.2.1
+  '@commitlint/config-conventional': ^16.0.0
   '@washingtondc/development': latest
   cz-emoji-conventional: ^1.0.1
   eslint-config-strict-mode: latest
@@ -350,7 +350,6 @@ packages:
   /@commitlint/load/15.0.0:
     resolution: {integrity: sha512-Ak1YPeOhvxmY3ioe0o6m1yLGvUAYb4BdfGgShU8jiTCmU3Mnmms0Xh/kfQz8AybhezCC3AmVTyBLaBZxOHR8kg==}
     engines: {node: '>=v12'}
-    requiresBuild: true
     dependencies:
       '@commitlint/execute-rule': 15.0.0
       '@commitlint/resolve-extends': 15.0.0

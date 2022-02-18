@@ -20,7 +20,7 @@
     "bump": "npm run build && npm version patch --no-commit-hooks --no-git-tag-version --force && npm publish",
     "help": "task --menu",
     "info": "task --list",
-    "prepare": "task common:husky",
+    "prepare": "npm run start && task common:husky",
     "repair": "bash <(curl -sS https://install.doctor/repair)",
     "start": "bash start.sh",
     "test": "[[ $- == *i* ]] && task ansible:test:prompt || task ansible:test:default"
@@ -41,7 +41,8 @@
     "glob": "^7.2.0",
     "handlebars-helpers": "^0.10.0",
     "prettier-config-sexy-mode": "latest",
-    "semantic-release-config": "latest"
+    "semantic-release-config": "latest",
+    "typescript": "^4.5.5"
   },
   "keywords": [
     "adb",
@@ -231,6 +232,11 @@
     }
   },
   "pnpm": {
+    "allowedVersions": {
+      "@typescript-eslint/eslint-plugin": "5",
+      "eslint": "8",
+      "typescript": "4"
+    },
     "neverBuiltDependencies": [
       "core-js",
       "core-js-pure",
