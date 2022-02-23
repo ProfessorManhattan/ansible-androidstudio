@@ -1585,8 +1585,6 @@ packages:
       typescript: 4.5.5
       yarnhook: 0.5.1
     transitivePeerDependencies:
-      - '@swc/core'
-      - '@swc/wasm'
       - supports-color
     dev: true
 
@@ -2762,6 +2760,8 @@ packages:
       semantic-release: 19.0.2
       tslib: 2.3.1
     transitivePeerDependencies:
+      - '@swc/core'
+      - '@swc/wasm'
       - encoding
       - supports-color
     dev: true
@@ -4878,6 +4878,9 @@ packages:
       commitizen: 4.2.4
       tslib: 2.3.1
       word-wrap: 1.2.3
+    transitivePeerDependencies:
+      - '@swc/core'
+      - '@swc/wasm'
     dev: true
 
   /git-log-parser/1.2.0:
@@ -8416,6 +8419,8 @@ packages:
       tslib: 2.3.1
       yaml: 1.10.2
     transitivePeerDependencies:
+      - '@swc/core'
+      - '@swc/wasm'
       - encoding
       - supports-color
     dev: true
