@@ -129,7 +129,7 @@ tasks:
         fi
       - |
         if [ "$(yq e '.galaxy_info.description' meta/main.yml)" == 'null' ]; then
-          BP_DESC="$($(jq -r '.blueprint.description' package.json)"
+          BP_DESC="$(jq -r '.blueprint.description' package.json)"
           if [ "$BP_DESC" == 'null' ]; then
             .config/log error 'The `description` in `meta/main.yml` is missing. It must be present.'
             .config/log info 'For an example `meta/main.yml` file see `https://gitlab.com/megabyte-labs/ansible-roles/androidstudio`.'

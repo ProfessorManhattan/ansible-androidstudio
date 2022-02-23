@@ -139,9 +139,6 @@
     }
   ],
   "lint-staged": {
-    "(.dockerignore|.editorconfig|.eslintignore|.gitattributes|.gitconfig|.gitignore|.gitmodules|.nodemonignore|.npmignore|.prettierignore)": [
-      "task fix:prettier --"
-    ],
     "(Brewfile|composer.lock|Gemfile|Gopkg.lock|Pipfile.lock)": [
       "task fix:prettier --"
     ],
@@ -158,15 +155,8 @@
       "task fix:js --",
       "task lint:js --"
     ],
-    "**/*.(css|html|less|md|mjml|php|scss|sh|xml)": [
-      "task fix:prettier --"
-    ],
     "**/*.(json|webapp|webmanifest)": [
       "task fix:json --"
-    ],
-    "**/*.(js|jsx|ts|tsx)": [
-      "task fix:js --",
-      "task lint:js --"
     ],
     "**/*.(yml|yaml)": [
       "task fix:yaml --",
@@ -175,9 +165,6 @@
     "**/*.go": [
       "task fix:go --",
       "task lint:go --"
-    ],
-    "**/*.json": [
-      "task fix:json --"
     ],
     "**/*.php": [
       "task fix:php --",
@@ -199,10 +186,6 @@
     "**/*.xml": [
       "task fix:xml --",
       "task lint:xml --"
-    ],
-    "**/*.yml": [
-      "task fix:yaml --",
-      "task lint:yaml --"
     ],
     "**/*vault.yml": [
       "task ansible:vault:lint:file --"
