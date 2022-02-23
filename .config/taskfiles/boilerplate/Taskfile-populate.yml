@@ -111,6 +111,7 @@ tasks:
         NAME="$(jq -r '.blueprint.name' package.json)"
         if [ "$NAME" != 'null' ]; then
           if [ "$(jq -r '.blueprint.title' package.json)" == 'null' ]; then
+            .config/log info 'Populating the `blueprint.title` in package.json using the `blueprint.name` value'
             TMP="$(mktemp)" && jq --arg title "$NAME Ansible Role" '.blueprint.title = $title' package.json > "$TMP" && mv "$TMP" package.json
           fi
         fi
