@@ -128,7 +128,8 @@ tasks:
           yq e -i '.galaxy_info.issue_tracker_url = env(ISSUE_TRACKER)' meta/main.yml
         fi
       - |
-        if [ "$(yq e '.galaxy_info.description' meta/main.yml)" == 'null' ]; then
+        DESC="$(yq e '.galaxy_info.description' meta/main.yml)"
+        if [ "$DESC" == 'null' ]; then
           BP_DESC="$(jq -r '.blueprint.description' package.json)"
           if [ "$BP_DESC" == 'null' ]; then
             .config/log error 'The `description` in `meta/main.yml` is missing. It must be present.'
@@ -137,6 +138,10 @@ tasks:
           else
             yq e -i '.galaxy_info.description = env(BP_DESC)' meta/main.yml
             .config/log info '`meta/main.yml` description populated using value from `package.json` `blueprint.description`'
+          fi
+        else
+          if [ "$(jq -r '.blueprint.description' package.json)" == 'null' ]; then
+            TMP="$(mktemp)" && jq --arg desc "$DESC" '.blueprint.description = $desc' package.json > "$TMP" && mv "$TMP" package.json
           fi
         fi
 
