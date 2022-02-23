@@ -108,6 +108,13 @@ tasks:
           yq e -i '.galaxy_info.issue_tracker_url = env(ISSUE_TRACKER)' meta/main.yml
         fi
       - |
+        NAME="$(jq -r '.blueprint.name' package.json)"
+        if [ "$NAME" != 'null' ]; then
+          if [ "$(jq -r '.blueprint.title' package.json)" == 'null' ]; then
+            TMP="$(mktemp)" && jq --arg title "$NAME Ansible Role" '.blueprint.title = $title' package.json > "$TMP" && mv "$TMP" package.json
+          fi
+        fi
+      - |
         DESC="$(yq e '.galaxy_info.description' meta/main.yml)"
         if [ "$DESC" == 'null' ]; then
           BP_DESC="$(jq -r '.blueprint.description' package.json)"
