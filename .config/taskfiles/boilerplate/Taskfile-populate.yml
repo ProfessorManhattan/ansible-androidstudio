@@ -133,7 +133,11 @@ tasks:
           fi
         fi
 
+  common: 'true'
+
   docker: 'true'
+
+  documentation: 'true'
 
   go: 'true'
 
