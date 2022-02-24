@@ -1,29 +1,41 @@
 {
-  "private": false,
-  "name": "@installdoc/ansible-androidstudio",
-  "version": "1.1.14",
-  "description": "Installs Android Studio and sets up Android SDKs on nearly any OS",
-  "license": "MIT",
   "author": "Brian Zalewski <brian@megabyte.space> (https://megabyte.space)",
-  "homepage": "https://megabyte.space",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ProfessorManhattan/ansible-androidstudio.git"
+  "blueprint": {
+    "ansible_galaxy_project_id": "56329",
+    "description": "Installs Android Studio and sets up Android SDKs on nearly any OS",
+    "github_id": "MDEwOlJlcG9zaXRvcnk0MDczNDE1MDk=",
+    "gitlab_group_id": "12261670",
+    "gitlab_project_id": "24464026",
+    "group": "ansible",
+    "name": "Android Studio",
+    "overview": "[Android Studio](https://developer.android.com/studio) is the official integrated development environment for Google's Android operating system, built on JetBrains' IntelliJ IDEA software and designed specifically for Android development. This role installs Android Studio on nearly any operating system and also ensures a configurable list of command-line tools and SDKs are installed and seamlessly integrated with the system (i.e. the role adds the appropriate items to the `PATH` environment variable).",
+    "repository": {
+      "github": "https://github.com/ProfessorManhattan/ansible-androidstudio",
+      "gitlab": "https://gitlab.com/megabyte-labs/ansible-roles/androidstudio"
+    },
+    "slug": "androidstudio",
+    "subgroup": "role",
+    "title": "Android Studio - An IDE for Android Development"
   },
   "bugs": {
     "email": "help@megabyte.space",
     "url": "https://gitlab.com/megabyte-labs/ansible-roles/androidstudio/-/issues"
   },
-  "type": "module",
-  "scripts": {
-    "build": "task ansible:build:none",
-    "bump": "npm run build && npm version patch --no-commit-hooks --no-git-tag-version --force && npm publish",
-    "help": "task --menu",
-    "info": "task --list",
-    "prepare": "npm run start && (test -f Taskfile.yml && task common:husky) || true",
-    "repair": "bash <(curl -sS https://install.doctor/repair)",
-    "start": "bash start.sh",
-    "test": "[ -z \"$PS1\" ] && task ansible:test:prompt || task ansible:test:default"
+  "changelog": {
+    "displayTypes": [
+      "feat",
+      "fix",
+      "perf",
+      "refactor",
+      "revert"
+    ],
+    "showAuthor": true
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ],
+    "helpUrl": "https://megabyte.space/docs/contributing/commits"
   },
   "config": {
     "commitizen": {
@@ -31,7 +43,7 @@
     }
   },
   "dependencies": {},
-  "optionalDependencies": {},
+  "description": "Installs Android Studio and sets up Android SDKs on nearly any OS",
   "devDependencies": {
     "@commitlint/config-conventional": "^16.0.0",
     "@washingtondc/development": "latest",
@@ -44,6 +56,28 @@
     "semantic-release-config": "latest",
     "typescript": "^4.5.5"
   },
+  "engines": {
+    "node": ">=14.18.0"
+  },
+  "eslintConfig": {
+    "extends": "eslint-config-strict-mode",
+    "rules": {
+      "import/no-extraneous-dependencies": "warn",
+      "max-len": "warn",
+      "max-lines": "warn"
+    }
+  },
+  "funding": [
+    {
+      "type": "opencollective",
+      "url": "https://opencollective.com/megabytelabs"
+    },
+    {
+      "type": "patreon",
+      "url": "https://www.patreon.com/ProfessorManhattan"
+    }
+  ],
+  "homepage": "https://megabyte.space",
   "keywords": [
     "adb",
     "android",
@@ -80,64 +114,7 @@
     "washingtondc",
     "windows"
   ],
-  "engines": {
-    "node": ">=14.18.0"
-  },
-  "publishConfig": {
-    "@megabyte:registry": "https://gitlab.com/api/v4/projects/24464026/packages/npm/",
-    "access": "public"
-  },
-  "blueprint": {
-    "ansible_galaxy_project_id": "56329",
-    "description": "Installs Android Studio and sets up Android SDKs on nearly any OS",
-    "github_id": "MDEwOlJlcG9zaXRvcnk0MDczNDE1MDk=",
-    "gitlab_group_id": "12261670",
-    "gitlab_project_id": "24464026",
-    "group": "ansible",
-    "name": "Android Studio",
-    "overview": "[Android Studio](https://developer.android.com/studio) is the official integrated development environment for Google's Android operating system, built on JetBrains' IntelliJ IDEA software and designed specifically for Android development. This role installs Android Studio on nearly any operating system and also ensures a configurable list of command-line tools and SDKs are installed and seamlessly integrated with the system (i.e. the role adds the appropriate items to the `PATH` environment variable).",
-    "repository": {
-      "github": "https://github.com/ProfessorManhattan/ansible-androidstudio",
-      "gitlab": "https://gitlab.com/megabyte-labs/ansible-roles/androidstudio"
-    },
-    "slug": "androidstudio",
-    "subgroup": "role",
-    "title": "Android Studio - An IDE for Android Development"
-  },
-  "changelog": {
-    "displayTypes": [
-      "feat",
-      "fix",
-      "perf",
-      "refactor",
-      "revert"
-    ],
-    "showAuthor": true
-  },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ],
-    "helpUrl": "https://megabyte.space/docs/contributing/commits"
-  },
-  "eslintConfig": {
-    "extends": "eslint-config-strict-mode",
-    "rules": {
-      "import/no-extraneous-dependencies": "warn",
-      "max-len": "warn",
-      "max-lines": "warn"
-    }
-  },
-  "funding": [
-    {
-      "type": "opencollective",
-      "url": "https://opencollective.com/megabytelabs"
-    },
-    {
-      "type": "patreon",
-      "url": "https://www.patreon.com/ProfessorManhattan"
-    }
-  ],
+  "license": "MIT",
   "lint-staged": {
     "(Brewfile|composer.lock|Gemfile|Gopkg.lock|Pipfile.lock)": [
       "task fix:prettier --"
@@ -204,6 +181,7 @@
       "task image:compress --"
     ]
   },
+  "name": "@installdoc/ansible-androidstudio",
   "ntl": {
     "descriptions": {
       "build": "Builds the project using the build command specified under scripts in package.json",
@@ -215,6 +193,7 @@
       "test": "Runs the appropriate test logic by running the test command defined under scripts in package.json"
     }
   },
+  "optionalDependencies": {},
   "pnpm": {
     "allowedVersions": {
       "@typescript-eslint/eslint-plugin": "5",
@@ -234,6 +213,11 @@
     }
   },
   "prettier": "prettier-config-sexy-mode",
+  "private": false,
+  "publishConfig": {
+    "@megabyte:registry": "https://gitlab.com/api/v4/projects/24464026/packages/npm/",
+    "access": "public"
+  },
   "release": {
     "branches": [
       "main",
@@ -249,5 +233,21 @@
       }
     ],
     "extends": "semantic-release-config"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ProfessorManhattan/ansible-androidstudio.git"
+  },
+  "scripts": {
+    "build": "task ansible:build:none",
+    "bump": "npm run build && npm version patch --no-commit-hooks --no-git-tag-version --force && npm publish",
+    "help": "task --menu",
+    "info": "task --list",
+    "prepare": "npm run start && (test -f Taskfile.yml && task common:husky) || true",
+    "repair": "bash <(curl -sS https://install.doctor/repair)",
+    "start": "bash start.sh",
+    "test": "[ -z \"$PS1\" ] && task ansible:test:prompt || task ansible:test:default"
+  },
+  "type": "module",
+  "version": "1.1.14"
 }

@@ -343,7 +343,7 @@ tasks:
         fi
       - task: post:molecule:log
         vars:
-          RESULTS_FILE: '{{.MOLECULE_LOGS_PATH}}/{{.MOLECULE_DATE}}-gcp.txt'
+          RESULTS_FILE: "{{.MOLECULE_LOGS_PATH}}/{{.MOLECULE_DATE}}-gcp.txt"
       - |
         RESULTS="{{.MOLECULE_LOGS_PATH}}/{{.MOLECULE_DATE}}-gcp.txt"
         PLATFORM_LENGTH="$(yq e '.platforms | length' molecule/gcp/molecule.yml)"
@@ -426,13 +426,13 @@ tasks:
   molecule:local:test:
     deps:
       - molecule:dependencies
-    vars:
-      MOLECULE_DATE:
-        sh: date '+%Y-%m-%d'
     log:
       error: There was an error while running the Molecule test locally
       start: Running the Molecule test locally
       success: The local Molecule test was successfully run
+    vars:
+      MOLECULE_DATE:
+        sh: date '+%Y-%m-%d'
     cmds:
       - |
         set -o pipefail
@@ -711,6 +711,7 @@ tasks:
         vars:
           RESULTS_FILE: '{{.MOLECULE_LOGS_PATH}}/{{.MOLECULE_DATE}}-default.txt'
 
+
   # yamllint enable rule:truthy
   molecule:virtualbox:prompt:
     vars:
@@ -760,14 +761,21 @@ tasks:
       - task: ansifilter
         vars:
           RESULTS_FILE: '{{.RESULTS_FILE}}'
-      - task: :ci:commit:config
-      - git pull --ff-only origin master
-      - git add '{{.RESULTS_FILE}}'
-      - |
-        HUSKY=0 git commit -m "📝 docs(test results): new molecule test results added [ci skip]" -n
-      - git push origin master
+      - task: post:molecule:log:commit:ci
+      - cmd: |
+          git pull --ff-only origin master
+          git add '{{.RESULTS_FILE}}'
+          HUSKY=0 git commit -m "📝 docs(test results): new molecule test results added [ci skip]" -n
+          git push origin master
+        ignore_error: true
     status:
-      - '[ "{{.RESULTS_FILE}}" == "debug.log" ]'
+      - '[ "{{.RESULTS_FILE}}" == "debug.log" ] || [ ! -d .git ]'
+
+  post:molecule:log:commit:ci:
+    cmds:
+      - task: :ci:commit:config
+    status:
+      - '[ -z "$GITLAB_CI" ]'
 
   prompt:
     vars:
