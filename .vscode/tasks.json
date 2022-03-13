@@ -132,9 +132,14 @@
       "command": "bash .config/scripts/start.sh && task fix"
     },
     {
-      "label": "(fix:eslint): Fix JavaScript/TypeScript errors automatically",
+      "label": "(fix:eslint): Fix ESLint errors automatically",
       "type": "shell",
       "command": "bash .config/scripts/start.sh && task fix:eslint"
+    },
+    {
+      "label": "(fix:eslint:staged): Auto-fix only modified files with ESLint",
+      "type": "shell",
+      "command": "bash .config/scripts/start.sh && task fix:eslint:staged"
     },
     {
       "label": "(fix:go): Fix Go with all available Go fixers",
@@ -145,6 +150,11 @@
       "label": "(fix:json): Format and sort JSON",
       "type": "shell",
       "command": "bash .config/scripts/start.sh && task fix:json"
+    },
+    {
+      "label": "(fix:markdown): Auto-fixes markdown files",
+      "type": "shell",
+      "command": "bash .config/scripts/start.sh && task fix:markdown"
     },
     {
       "label": "(fix:packer): Automatically fix and format Packer templates",
@@ -172,6 +182,11 @@
       "command": "bash .config/scripts/start.sh && task fix:shellcheck"
     },
     {
+      "label": "(fix:spelling:markdown): Auto-fix spelling errors in markdown files using `misspell`",
+      "type": "shell",
+      "command": "bash .config/scripts/start.sh && task fix:spelling:markdown"
+    },
+    {
       "label": "(fix:toml): Format `.toml` files by alphabetizing and flattening",
       "type": "shell",
       "command": "bash .config/scripts/start.sh && task fix:toml"
@@ -180,6 +195,11 @@
       "label": "(fix:yaml): Auto-format and sort YML files",
       "type": "shell",
       "command": "bash .config/scripts/start.sh && task fix:yaml"
+    },
+    {
+      "label": "(get:links): Log useful links such as the current",
+      "type": "shell",
+      "command": "bash .config/scripts/start.sh && task get:links"
     },
     {
       "label": "(git:remotes): Configure the the `origin`, `gitlab`, `github`, and `all` git remotes",
@@ -237,9 +257,19 @@
       "command": "bash .config/scripts/start.sh && task lint:docker"
     },
     {
+      "label": "(lint:dockerfilelint): Lint a Dockerfile with `dockerfilelint`",
+      "type": "shell",
+      "command": "bash .config/scripts/start.sh && task lint:dockerfilelint"
+    },
+    {
       "label": "(lint:eslint): Lint with ESLint",
       "type": "shell",
       "command": "bash .config/scripts/start.sh && task lint:eslint"
+    },
+    {
+      "label": "(lint:eslint:staged): Lint only modified files with ESLint",
+      "type": "shell",
+      "command": "bash .config/scripts/start.sh && task lint:eslint:staged"
     },
     {
       "label": "(lint:eslint:warn-all): Convert ESLint errors into warnings by saving the modified configuration inside `package.json`",
@@ -297,6 +327,11 @@
       "command": "bash .config/scripts/start.sh && task lint:spelling"
     },
     {
+      "label": "(lint:spelling:markdown): Run `misspell` (a spell-checker) on all markdown files",
+      "type": "shell",
+      "command": "bash .config/scripts/start.sh && task lint:spelling:markdown"
+    },
+    {
       "label": "(lint:vagrant): Validate the Vagrantfile",
       "type": "shell",
       "command": "bash .config/scripts/start.sh && task lint:vagrant"
@@ -315,6 +350,11 @@
       "label": "(nest:benchmark): Initiate a web server benchmarking session (with `clinic`)",
       "type": "shell",
       "command": "bash .config/scripts/start.sh && task nest:benchmark"
+    },
+    {
+      "label": "(new:project): Create a new project",
+      "type": "shell",
+      "command": "bash .config/scripts/start.sh && task new:project"
     },
     {
       "label": "(npm:build): Build the application",
@@ -402,9 +442,9 @@
       "command": "bash .config/scripts/start.sh && task npm:typesync"
     },
     {
-      "label": "(packer:build:all): Build Packer images for all platforms (default setting uses `template.json`)",
+      "label": "(packer:build): Build Packer images for all available platforms",
       "type": "shell",
-      "command": "bash .config/scripts/start.sh && task packer:build:all"
+      "command": "bash .config/scripts/start.sh && task packer:build"
     },
     {
       "label": "(packer:build:kvm): Build a Packer image for KVM",
@@ -425,6 +465,11 @@
       "label": "(packer:build:vmware): Build a Packer image for VMWare",
       "type": "shell",
       "command": "bash .config/scripts/start.sh && task packer:build:vmware"
+    },
+    {
+      "label": "(packer:install:platforms): Install all available virtualization providers",
+      "type": "shell",
+      "command": "bash .config/scripts/start.sh && task packer:install:platforms"
     },
     {
       "label": "(preload): Set up your workstation in advance by installing commonly used programs",
@@ -495,6 +540,11 @@
       "label": "(publish:opera:release): Publishes Opera extension",
       "type": "shell",
       "command": "bash .config/scripts/start.sh && task publish:opera:release"
+    },
+    {
+      "label": "(pull:upstream): Pull from upstream repositories",
+      "type": "shell",
+      "command": "bash .config/scripts/start.sh && task pull:upstream"
     },
     {
       "label": "(python:build): Build the project",
@@ -605,6 +655,16 @@
       "label": "(test): Open an interactive dialog to select and run a Molecule test",
       "type": "shell",
       "command": "bash .config/scripts/start.sh && task test"
+    },
+    {
+      "label": "(update): Update the repository",
+      "type": "shell",
+      "command": "bash .config/scripts/start.sh && task update"
+    },
+    {
+      "label": "(vagrant:up): Select which virtualization platform to run the image on using an interactive prompt",
+      "type": "shell",
+      "command": "bash .config/scripts/start.sh && task vagrant:up"
     }
   ]
 }

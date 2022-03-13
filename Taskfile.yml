@@ -47,12 +47,11 @@ env:
       LIBC=$(ldd /bin/ls | grep 'musl' | head -1 | cut -d ' ' -f1)
       if [ -n "$LIBC" ]; then LINUX_FLAVOR='linux-musl'; fi{{end}}
       echo "{{if (eq OS "linux")}}$LINUX_FLAVOR{{else}}darwin{{end}}"
+  RECORD_INSTALL:
+    sh: test -n "$CI" && echo "true" || true
   SENTRY_DSN: ''
 
 includes:
-  project:
-    taskfile: ./local/Taskfile-project.yml
-    optional: true
   ansible: ./.config/taskfiles/ansible/Taskfile.yml
   ansible:ansibler: ./.config/taskfiles/ansible/Taskfile-ansibler.yml
   ansible:playbook: ./.config/taskfiles/ansible/Taskfile-playbook.yml
@@ -97,6 +96,7 @@ includes:
   log: ./.config/taskfiles/log/Taskfile.yml
   nest: ./.config/taskfiles/nest/Taskfile.yml
   npm: ./.config/taskfiles/npm/Taskfile.yml
+  npm:bundle: ./.config/taskfiles/npm/Taskfile-bundle.yml
   npm:cov: ./.config/taskfiles/npm/Taskfile-cov.yml
   npm:doc: ./.config/taskfiles/npm/Taskfile-doc.yml
   packer: ./.config/taskfiles/packer/Taskfile.yml
@@ -116,12 +116,14 @@ includes:
   release: ./.config/taskfiles/release/Taskfile.yml
   security: ./.config/taskfiles/security/Taskfile.yml
   symlink: ./.config/taskfiles/symlink/Taskfile.yml
+  update: ./.config/taskfiles/update/Taskfile.yml
   upstream: ./.config/taskfiles/upstream/Taskfile.yml
   upstream:common: ./.config/taskfiles/upstream/Taskfile-common.yml
   upstream:commondocs: ./.config/taskfiles/upstream/Taskfile-commondocs.yml
   upstream:docs: ./.config/taskfiles/upstream/Taskfile-docs.yml
   upstream:project: ./.config/taskfiles/upstream/Taskfile-project.yml
   upstream:shared: ./.config/taskfiles/upstream/Taskfile-shared.yml
+  vagrant: ./.config/taskfiles/vagrant/Taskfile.yml
   vscode: ./.config/taskfiles/vscode/Taskfile.yml
   web: ./.config/taskfiles/web/Taskfile.yml
   web:ionic: ./.config/taskfiles/web/Taskfile-ionic.yml
@@ -263,6 +265,19 @@ tasks:
     cmds:
       - task: fix:all
 
+  get:links:
+    deps:
+      - install:software:jq
+    desc: Log useful links such as the current project's git repository link
+    vars:
+      GITHUB_URL:
+        sh: jq -r '.blueprint.repository.github' package.json
+      GITLAB_URL:
+        sh: jq -r '.blueprint.repository.gitlab' package.json
+    cmds:
+      - .config/log info 'GitHub -----> `{{.GITHUB_URL}}`'
+      - .config/log info 'GitLab -----> `{{.GITLAB_URL}}`'
+
   group:exec:
     desc: Execute group commands on any GitLab group (including repositories in sub-groups)
     summary: |
@@ -325,7 +340,8 @@ tasks:
         else
           bash <(curl -sSL {{.INIT_SCRIPT}})
         fi
-      - git push origin master
+      - task: ci:commit
+      - task: ci:synchronize
 
   lint:
     desc: Lints the project using all linters
@@ -380,6 +396,11 @@ tasks:
           .config/log error '`Taskfile-project.yml` must exist and have a `livereload` task to use with `nodemon`' && exit 1
         fi
       - nodemon --config {{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}.config/nodemon.json{{end}}
+
+  new:project:
+    desc: Create a new project
+    cmds:
+      - task: prepare
 
   publish:
     desc: Publish a semantic release via `semantic-release`
@@ -516,6 +537,19 @@ tasks:
       - task: boilerplate:check:package
       - task: boilerplate:clean
 
+  repair:
+    cmds:
+      - |
+        TMP="$(mktemp)" && curl -sSL {{.MODEL_TASKFILE}} > "$TMP"
+        .config/log info 'Ensuring new additions to the model `Taskfile.yml` are present in the project `Taskfile.yml`'
+        yq eval-all -i 'select(fileIndex == 0) * select(fileIndex == 1)' "$TMP" Taskfile.yml
+      - |
+        if [ -n "$UPDATE_INIT_SCRIPT" ]; then
+          bash <(curl -sSL "$UPDATE_INIT_SCRIPT")
+        else
+          bash <(curl -sSL {{.INIT_SCRIPT}})
+        fi
+
   reset:
     desc: Resets the project by removing all caches and then re-generating templated files
     summary: |
@@ -527,6 +561,23 @@ tasks:
       updates, it re-generates any templated files.
     cmds:
       - task: common:reset
+
+  pull:upstream:
+    desc: Pull from upstream repositories
+    summary: |
+      # Pull Changes from Upstream Repositories
+
+      This task will do a `git pull` on each repository defined in `.blueprint.upstreamRemotes`.
+      The variable should be an array of objects where each object has the `remote`, `url`, and `branch` keys.
+
+      **Sample value of `.blueprint.upstreamRemotes`:**
+      `[{ "remote": "ionic", "url": "git@github.com:ionic-team/ionic-docs.git", "branch": "main" }]`
+    log:
+      error: Encountered error while running `git pull` on each of the `upstreamRemotes`
+      start: Running `git pull` on each of the `upstreamRemotes`
+      success: Successfully pulled from `upstreamRemotes`
+    cmds:
+      - task: common:update:upstream:remotes:pull
 
   reset:force:
     desc: 'Aggressively reset the project (**WARNING** This will wipe uncommitted work)'
@@ -635,6 +686,7 @@ tasks:
 
   test:
     deps:
+      - install:software:jq
       - install:software:node
     interactive: true
     desc: Open an interactive dialog to select and run a Molecule test
@@ -662,3 +714,19 @@ tasks:
         else
           [[ $- == *i* ]] && task prepare || (.config/log error '{{.NONINTERACTIVE_MISSING_TEST_CMD}}' && exit 1)
         fi
+
+  update:
+    desc: Update the repository
+    log:
+      error: Failed to update the repository
+      start: Updating the repository..
+      success: Finished updating the repository
+    cmds:
+      - task: :install:software:brew
+      - |
+        . "$HOME/.profile"
+        task update:prereqs
+        . "$HOME/.profile"
+        task update:init
+        task prepare
+        task update:finish
