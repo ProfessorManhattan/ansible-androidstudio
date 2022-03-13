@@ -151,6 +151,7 @@ tasks:
       start: Generating files from `liquid` template files
       success: Successfully generated files from templates
     cmds:
+      - mkdir -p local
       - |
         if [[ '{{.REPOSITORY_TYPE}}' == 'python' ]] && [ -f '.config/brew/python.rb.liquid' ]; then
           BINARY_NAME="$(jq -r '.customPyPiPackageName' .variables.json)"
