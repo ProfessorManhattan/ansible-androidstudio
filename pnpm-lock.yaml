@@ -1800,7 +1800,7 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001314
+      caniuse-lite: 1.0.30001315
       electron-to-chromium: 1.4.82
       escalade: 3.1.1
       node-releases: 2.0.2
@@ -1914,8 +1914,8 @@ packages:
     dev: true
     optional: true
 
-  /caniuse-lite/1.0.30001314:
-    resolution: {integrity: sha512-0zaSO+TnCHtHJIbpLroX7nsD+vYuOVjl3uzFbJO1wMVbuveJA0RK2WcQA9ZUIOiO0/ArMiMgHJLxfEZhQiC0kw==}
+  /caniuse-lite/1.0.30001315:
+    resolution: {integrity: sha512-5v7LFQU4Sb/qvkz7JcZkvtSH1Ko+1x2kgo3ocdBeMGZSOFpuE1kkm0kpTwLtWeFrw5qw08ulLxJjVIXIS8MkiQ==}
     dev: true
 
   /cardinal/2.1.1:

@@ -289,9 +289,12 @@ tasks:
       - |
         COUNT="$(jq -r '.blueprint.upstreamRemotes | length' package.json)"
         for i in $(seq $COUNT); do
-          REMOTE="$(jq --arg count "$i" '.blueprint.upstreamRemotes[$count].remote' package.json)"
-          URL="$(jq --arg count "$i" '.blueprint.upstreamRemotes[$count].url' package.json)"
+          REMOTE="$(jq -r --arg count "$(("$i" - 1))" '.blueprint.upstreamRemotes[($count | tonumber)].remote' package.json)"
+          URL="$(jq -r --arg count "$(("$i" - 1))" '.blueprint.upstreamRemotes[($count | tonumber)].url' package.json)"
           if [ "$REMOTE" != 'null' ] && [ "$URL" != 'null' ]; then
+            if git remote -v | grep '"'"$REMOTE"'"'; then
+              git remote remove "$REMOTE"
+            fi
             git remote add "$REMOTE" "$URL"
           else
             .config/log warn '`blueprint.upstreamRemotes` objects should have the `remote`, `url`, and `branch` keys'
@@ -309,10 +312,13 @@ tasks:
       - |
         COUNT="$(jq -r '.blueprint.upstreamRemotes | length' package.json)"
         for i in $(seq $COUNT); do
-          REMOTE="$(jq --arg count "$i" '.blueprint.upstreamRemotes[$count].remote' package.json)"
-          URL="$(jq --arg count "$i" '.blueprint.upstreamRemotes[$count].url' package.json)"
-          BRANCH="$(jq --arg count "$i" '.blueprint.upstreamRemotes[$count].branch' package.json)"
+          REMOTE="$(jq -r --arg count "$(("$i" - 1))" '.blueprint.upstreamRemotes[($count | tonumber)].remote' package.json)"
+          URL="$(jq -r --arg count "$(("$i" - 1))" '.blueprint.upstreamRemotes[($count | tonumber)].url' package.json)"
+          BRANCH="$(jq -r --arg count "$(("$i" - 1))" '.blueprint.upstreamRemotes[($count | tonumber)].branch' package.json)"
           if [ "$REMOTE" != 'null' ] && [ "$URL" != 'null' ] && [ "$BRANCH" != 'null' ]; then
+            if git remote -v | grep '"'"$REMOTE"'"'; then
+              git remote remove "$REMOTE"
+            fi
             git remote add "$REMOTE" "$URL"
             git pull "$REMOTE" "$BRANCH"
           else
