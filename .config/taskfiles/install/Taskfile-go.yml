@@ -18,6 +18,15 @@ tasks:
       - goreleaser
       - nfpm
 
+  goconvey:
+    run: once
+    cmds:
+      - task: install
+        vars:
+          BIN: goconvey
+          INSTALL_TASK: '{{.TASK}}'
+          PACKAGE: github.com/smartystreets/goconvey@latest
+
   goofys:
     run: once
     cmds:

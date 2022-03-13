@@ -553,6 +553,14 @@ tasks:
           FORMULAE: go
           INSTALL_TASK: '{{.TASK}}'
 
+  golangci-lint:
+    run: once
+    cmds:
+      - task: brew:formulae
+        vars:
+          FORMULAE: golangci-lint
+          INSTALL_TASK: '{{.TASK}}'
+
   grype:
     run: once
     cmds:

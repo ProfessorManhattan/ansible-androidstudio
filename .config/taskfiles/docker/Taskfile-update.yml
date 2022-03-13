@@ -122,15 +122,15 @@ tasks:
       success: Finished software version acquisition sequence
     cmds:
       - |
-        VERSION="$({{.VERSION_COMMAND}})" | EXIT_CODE=$?
+        VERSION="$({{.VERSION_COMMAND}})" || EXIT_CODE=$?
         if [ -n "$EXIT_CODE" ]; then
           .config/log warn 'Failed to run version command (`{{.VERSION_COMMAND}}`) - will retry after images are finished building'
         else
           CURR_VERSION="$(jq -r '.version' package.json)"
           TMP="$(mktemp)"
-          jq --arg version "$VERSION" '.version = $version' package.json > "$TMP"
+          jq --arg version "$(jq --arg v "$VERSION" '$v' package.json | sed 's/^"//' | sed 's/\\r"//')" '.version = $version' package.json > "$TMP"
           mv "$TMP" package.json
-          if [ "$CURR_VERSION" != "$VERSION" ]; then
+          if [ "$CURR_VERSION" != "$(jq -r '.version' package.json)" ]; then
             .config/log info 'Updating documentation with new software version'
             task common:update:update
           fi

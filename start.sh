@@ -412,7 +412,7 @@ function sha256() {
 #   ensureTaskfiles
 function ensureTaskfiles() {
   # shellcheck disable=SC2030
-  task donothing | BOOTSTRAP_EXIT_CODE=$?
+  task donothing || BOOTSTRAP_EXIT_CODE=$?
   # shellcheck disable=SC2031
   if [ -n "$BOOTSTRAP_EXIT_CODE" ]; then
     curl -sSL https://gitlab.com/megabyte-labs/common/shared/-/archive/master/shared-master.tar.gz > shared-master.tar.gz

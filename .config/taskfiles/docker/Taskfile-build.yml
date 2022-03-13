@@ -59,8 +59,8 @@ tasks:
           DOCKER_IMAGE: '{{.DOCKER_IMAGE}}'
           NEW_VERSION:
             sh: jq -r '.version' package.json
-
           PREV_VERSION: '{{.VERSION}}'
+
   slim:
     deps:
       - :install:software:docker
