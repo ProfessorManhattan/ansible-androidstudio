@@ -5,8 +5,6 @@ tasks:
   clear:
     deps:
       - :install:software:virtualbox
-    vars:
-      DEFAULT_PATTERN: default_
     summary: |
       # Remove All VMs / Reset
 
@@ -21,6 +19,8 @@ tasks:
 
       **Example resetting all VMs matching a pattern:**
       `task app:virtualbox:clear -- 'macOS'`
+    vars:
+      DEFAULT_PATTERN: default_
     cmds:
       - cmd: killall -9 VBoxHeadless
         ignore_error: true
