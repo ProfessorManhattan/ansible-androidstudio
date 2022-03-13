@@ -57,9 +57,7 @@
   "eslintConfig": {
     "extends": "eslint-config-strict-mode",
     "rules": {
-      "import/no-extraneous-dependencies": "warn",
-      "max-len": "warn",
-      "max-lines": "warn"
+      "import/no-extraneous-dependencies": "warn"
     }
   },
   "funding": [
