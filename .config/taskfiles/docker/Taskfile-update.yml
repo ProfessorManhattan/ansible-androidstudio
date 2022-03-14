@@ -96,23 +96,6 @@ tasks:
   # yamllint enable rule:line-length
   # eslint-enable max-len
 
-  retag:
-    vars:
-      MAJOR_VERSION:
-        sh: echo '{{.NEW_VERSION}}' | sed 's/\..*\..*$//'
-      TAG_POST: '{{if (contains "codeclimate" .CLI_ARGS)}}-codeclimate{{end}}'
-    log:
-      error: Error retagging Docker container
-      start: Retagging Docker container
-      success: Successfully retagged Docker container
-    cmds:
-      - docker tag {{.DOCKER_IMAGE}}:latest {{.DOCKER_IMAGE}}:{{.NEW_VERSION}}{{.TAG_POST}}
-      - docker tag {{.DOCKER_IMAGE}}:latest {{.DOCKER_IMAGE}}:{{.MAJOR_VERSION}}-latest{{.TAG_POST}}
-      - docker rmi {{.DOCKER_IMAGE}}:{{.PREV_VERSION}}{{.TAG_POST}}
-      - docker rmi {{.DOCKER_IMAGE}}:{{.MAJOR_VERSION}}-latest{{.TAG_POST}}
-    status:
-      - '[ "{{.PREV_VERSION}}" == "{{.NEW_VERSION}}" ]'
-
   version:
     vars:
       VERSION_COMMAND:
