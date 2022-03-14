@@ -26,6 +26,7 @@ tasks:
         sh: git rev-parse HEAD
       SLUG:
         sh: jq -r '.blueprint.slug' package.json
+      TAG_POST: '{{if (contains "codeclimate" .CLI_ARGS)}}-codeclimate{{end}}'
       VERSION:
         sh: jq -r '.version' package.json
     run: when_changed
@@ -37,12 +38,14 @@ tasks:
       success: Successfully built Docker container named `{{.DOCKER_IMAGE}}:{{.VERSION}}`
     cmds:
       - .config/log info 'Running `docker build --build-arg BUILD_DATE={{.BUILD_DATE}} --build-arg REVISION={{.REVISION}} --build-arg VERSION={{.VERSION}}
-        --tag {{.DOCKER_IMAGE}}:latest --tag {{.DOCKER_IMAGE}}:{{.VERSION}} --tag {{.DOCKER_IMAGE}}:{{.MAJOR_VERSION}}-latest
-        {{if (contains "codeclimate" .CLI_ARGS)}} --tag codeclimate/codeclimate-{{.SLUG}}:latest{{end}}{{if .CLI_ARGS}}
+        --tag {{.DOCKER_IMAGE}}:latest{{.TAG_POST}} --tag {{.DOCKER_IMAGE}}:{{.VERSION}}{{.TAG_POST}}
+        --tag {{.DOCKER_IMAGE}}:{{.MAJOR_VERSION}}-latest{{.TAG_POST}}
+        {{if (contains "codeclimate" .CLI_ARGS)}} --tag codeclimate/codeclimate-{{.SLUG}}{{end}}{{if .CLI_ARGS}}
         --target {{.CLI_ARGS}}{{end}} .`'
       - docker build --build-arg BUILD_DATE={{.BUILD_DATE}} --build-arg REVISION={{.REVISION}} --build-arg VERSION={{.VERSION}}
-        --tag {{.DOCKER_IMAGE}}:latest --tag {{.DOCKER_IMAGE}}:{{.VERSION}} --tag {{.DOCKER_IMAGE}}:{{.MAJOR_VERSION}}-latest
-        {{if (contains "codeclimate" .CLI_ARGS)}} --tag codeclimate/codeclimate-{{.SLUG}}:latest{{end}}
+        --tag {{.DOCKER_IMAGE}}:latest{{.TAG_POST}} --tag {{.DOCKER_IMAGE}}:{{.VERSION}}{{.TAG_POST}}
+        --tag {{.DOCKER_IMAGE}}:{{.MAJOR_VERSION}}-latest{{.TAG_POST}}
+        {{if (contains "codeclimate" .CLI_ARGS)}} --tag codeclimate/codeclimate-{{.SLUG}}{{end}}
         {{if .CLI_ARGS}} --target {{.CLI_ARGS}}{{end}} .
       - task: :docker:update:version
       - task: :docker:update:retag
@@ -91,6 +94,7 @@ tasks:
           fi
       SLUG:
         sh: jq -r '.blueprint.slug' package.json
+      TAG_POST: '{{if (contains "codeclimate" .CLI_ARGS)}}-codeclimate{{end}}'
       VERSION:
         sh: jq -r '.version' package.json
     log:
@@ -99,13 +103,14 @@ tasks:
       success: Successfully built Docker container named `{{.DOCKER_IMAGE}}:slim`
     cmds:
       - >
-        .config/log info 'Running `docker-slim build --tag {{.DOCKER_IMAGE}}:slim --tag {{.DOCKER_IMAGE}}:{{.VERSION}}-slim --tag
-        {{.DOCKER_IMAGE}}:{{.MAJOR_VERSION}}-slim {{if (contains "codeclimate" .CLI_ARGS)}}--tag codeclimate/codeclimate-{{.SLUG}}:slim {{end}}
-        {{.SLIM_COMMAND | replace "'" "\""}} {{.DOCKER_IMAGE}}:latest`'
+        .config/log info 'Running `docker-slim build --tag {{.DOCKER_IMAGE}}:slim{{.TAG_POST}} --tag {{.DOCKER_IMAGE}}:{{.VERSION}}-slim{{.TAG_POST}} --tag
+        {{.DOCKER_IMAGE}}:{{.MAJOR_VERSION}}-slim{{.TAG_POST}} {{if (contains "codeclimate" .CLI_ARGS)}}--tag codeclimate/codeclimate-{{.SLUG}}:slim {{end}}
+        {{.SLIM_COMMAND | replace "'" "\""}} {{.DOCKER_IMAGE}}:latest{{.TAG_POST}}`'
       - >
-        docker-slim build --tag {{.DOCKER_IMAGE}}:slim --tag {{.DOCKER_IMAGE}}:{{.VERSION}}-slim --tag {{.DOCKER_IMAGE}}:{{.MAJOR_VERSION}}-slim
+        docker-slim build --tag {{.DOCKER_IMAGE}}:slim{{.TAG_POST}} --tag {{.DOCKER_IMAGE}}:{{.VERSION}}-slim{{.TAG_POST}}
+        --tag {{.DOCKER_IMAGE}}:{{.MAJOR_VERSION}}-slim{{.TAG_POST}}
         {{if (contains "codeclimate" .CLI_ARGS)}}--tag codeclimate/codeclimate-{{.SLUG}}:slim {{end}}
-        {{.SLIM_COMMAND | replace "'" "\""}} {{.DOCKER_IMAGE}}:latest
+        {{.SLIM_COMMAND | replace "'" "\""}} {{.DOCKER_IMAGE}}:latest{{.TAG_POST}}
 
   slim:finish:
     deps:
