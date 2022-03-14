@@ -63,8 +63,17 @@ tasks:
       - task: global
         vars:
           INSTALL_TASK: '{{.TASK}}'
-
           NPM_PACKAGE: depcheck
+
+  devcontainer:
+    run: once
+    cmds:
+      - task: global
+        vars:
+          INSTALL_TASK: '{{.TASK}}'
+          NPM_PACKAGE: '@vscode/dev-container-cli'
+          NPM_PACKAGE_BIN: devcontainer
+
   dockerfilelint:
     run: once
     cmds:

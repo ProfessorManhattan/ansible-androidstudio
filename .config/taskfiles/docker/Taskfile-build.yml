@@ -19,22 +19,13 @@ tasks:
       BUILD_DATE:
         sh: git show -s --format=%cI
       DOCKER_IMAGE:
-        sh: echo "{{.DOCKERHUB_PROFILE}}/{{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}$(jq -r '.blueprint.slug' package.json){{end}}"
+        sh: echo "{{.DOCKERHUB_PROFILE}}/$(jq -r '.blueprint.slug' package.json)"
       MAJOR_VERSION:
         sh: jq -r '.version' package.json | sed 's/\..*\..*$//'
       REVISION:
         sh: git rev-parse HEAD
       SLUG:
-        sh: |
-          {{if .CLI_ARGS}}
-          if echo '{{.CLI_ARGS}}' | grep 'codeclimate-' > /dev/null; then
-            echo '{{.CLI_ARGS}}'
-          else
-            echo 'false'
-          fi
-          {{else}}
-          echo "codeclimate-$(jq -r '.blueprint.slug' package.json)"
-          {{end}}
+        sh: jq -r '.blueprint.slug' package.json
       VERSION:
         sh: jq -r '.version' package.json
     run: when_changed
@@ -47,11 +38,11 @@ tasks:
     cmds:
       - .config/log info 'Running `docker build --build-arg BUILD_DATE={{.BUILD_DATE}} --build-arg REVISION={{.REVISION}} --build-arg VERSION={{.VERSION}}
         --tag {{.DOCKER_IMAGE}}:latest --tag {{.DOCKER_IMAGE}}:{{.VERSION}} --tag {{.DOCKER_IMAGE}}:{{.MAJOR_VERSION}}-latest
-        {{if eq .REPOSITORY_SUBTYPE "codeclimate"}}{{if ne .SLUG "false"}} --tag codeclimate/{{.SLUG}}:latest{{end}}{{end}}{{if .CLI_ARGS}}
+        {{if (contains "codeclimate" .CLI_ARGS)}} --tag codeclimate/codeclimate-{{.SLUG}}:latest{{end}}{{if .CLI_ARGS}}
         --target {{.CLI_ARGS}}{{end}} .`'
       - docker build --build-arg BUILD_DATE={{.BUILD_DATE}} --build-arg REVISION={{.REVISION}} --build-arg VERSION={{.VERSION}}
         --tag {{.DOCKER_IMAGE}}:latest --tag {{.DOCKER_IMAGE}}:{{.VERSION}} --tag {{.DOCKER_IMAGE}}:{{.MAJOR_VERSION}}-latest
-        {{if eq .REPOSITORY_SUBTYPE "codeclimate"}}{{if ne .SLUG "false"}} --tag codeclimate/{{.SLUG}}:latest{{end}}{{end}}
+        {{if (contains "codeclimate" .CLI_ARGS)}} --tag codeclimate/codeclimate-{{.SLUG}}:latest{{end}}
         {{if .CLI_ARGS}} --target {{.CLI_ARGS}}{{end}} .
       - task: :docker:update:version
       - task: :docker:update:retag
@@ -85,9 +76,7 @@ tasks:
   slim:command:
     vars:
       DOCKER_IMAGE:
-        sh: echo "{{.DOCKERHUB_PROFILE}}/{{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}$(jq -r '.blueprint.slug' package.json){{end}}"
-      IMAGE_TYPE:
-        sh: echo "{{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}$(jq -r '.blueprint.slug' package.json){{end}}"
+        sh: echo "{{.DOCKERHUB_PROFILE}}/$(jq -r '.blueprint.slug' package.json)"
       MAJOR_VERSION:
         sh: jq -r '.version' package.json | sed 's/\..*\..*$//'
       SLIM_COMMAND:
@@ -109,11 +98,11 @@ tasks:
     cmds:
       - >
         .config/log info 'Running `docker-slim build --tag {{.DOCKER_IMAGE}}:slim --tag {{.DOCKER_IMAGE}}:{{.VERSION}}-slim --tag
-        {{.DOCKER_IMAGE}}:{{.MAJOR_VERSION}}-slim {{if eq .REPOSITORY_SUBTYPE "codeclimate"}}--tag codeclimate/codeclimate-{{.SLUG}}:slim {{end}}
+        {{.DOCKER_IMAGE}}:{{.MAJOR_VERSION}}-slim {{if (contains "codeclimate" .CLI_ARGS)}}--tag codeclimate/codeclimate-{{.SLUG}}:slim {{end}}
         {{.SLIM_COMMAND | replace "'" "\""}} {{.DOCKER_IMAGE}}:latest`'
       - >
         docker-slim build --tag {{.DOCKER_IMAGE}}:slim --tag {{.DOCKER_IMAGE}}:{{.VERSION}}-slim --tag {{.DOCKER_IMAGE}}:{{.MAJOR_VERSION}}-slim
-        {{if eq .REPOSITORY_SUBTYPE "codeclimate"}}--tag codeclimate/codeclimate-{{.SLUG}}:slim {{end}}
+        {{if (contains "codeclimate" .CLI_ARGS)}}--tag codeclimate/codeclimate-{{.SLUG}}:slim {{end}}
         {{.SLIM_COMMAND | replace "'" "\""}} {{.DOCKER_IMAGE}}:latest
 
   slim:finish:
