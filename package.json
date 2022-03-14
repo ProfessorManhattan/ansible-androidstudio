@@ -41,16 +41,13 @@
   "dependencies": {},
   "optionalDependencies": {},
   "devDependencies": {
-    "@commitlint/config-conventional": "latest",
-    "@washingtondc/development": "latest",
-    "cz-emoji-conventional": "^1.0.1",
     "eslint-config-strict-mode": "latest",
     "git-cz-emoji": "latest",
-    "glob": "^7.2.0",
-    "handlebars-helpers": "latest",
     "prettier-config-sexy-mode": "latest",
     "semantic-release-config": "latest",
-    "typescript": "^4.5.5"
+    "typescript": "^4.5.5",
+    "@commitlint/config-conventional": "latest",
+    "handlebars-helpers": "latest"
   },
   "keywords": [
     "adb",
@@ -123,17 +120,13 @@
     "showAuthor": true
   },
   "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ],
+    "extends": [],
     "helpUrl": "https://megabyte.space/docs/contributing/commits"
   },
   "eslintConfig": {
     "extends": "eslint-config-strict-mode",
     "rules": {
-      "import/no-extraneous-dependencies": "warn",
-      "max-len": "warn",
-      "max-lines": "warn"
+      "import/no-extraneous-dependencies": "warn"
     }
   },
   "funding": [
