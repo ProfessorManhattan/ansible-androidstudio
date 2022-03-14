@@ -105,12 +105,12 @@ tasks:
       - >
         .config/log info 'Running `docker-slim build --tag {{.DOCKER_IMAGE}}:slim{{.TAG_POST}} --tag {{.DOCKER_IMAGE}}:{{.VERSION}}-slim{{.TAG_POST}} --tag
         {{.DOCKER_IMAGE}}:{{.MAJOR_VERSION}}-slim{{.TAG_POST}} {{if (contains "codeclimate" .CLI_ARGS)}}--tag codeclimate/codeclimate-{{.SLUG}}:slim {{end}}
-        {{.SLIM_COMMAND | replace "'" "\""}} {{.DOCKER_IMAGE}}:latest`'
+        {{.SLIM_COMMAND | replace "'" "\""}} {{.DOCKER_IMAGE}}:latest{{.TAG_POST}}`'
       - >
         docker-slim build --tag {{.DOCKER_IMAGE}}:slim{{.TAG_POST}} --tag {{.DOCKER_IMAGE}}:{{.VERSION}}-slim{{.TAG_POST}}
         --tag {{.DOCKER_IMAGE}}:{{.MAJOR_VERSION}}-slim{{.TAG_POST}}
         {{if (contains "codeclimate" .CLI_ARGS)}}--tag codeclimate/codeclimate-{{.SLUG}}:slim {{end}}
-        {{.SLIM_COMMAND | replace "'" "\""}} {{.DOCKER_IMAGE}}:latest
+        {{.SLIM_COMMAND | replace "'" "\""}} {{.DOCKER_IMAGE}}:latest{{.TAG_POST}}
 
   slim:finish:
     deps:
