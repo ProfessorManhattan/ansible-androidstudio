@@ -19,6 +19,12 @@ tasks:
           brew bundle install --file local/Brewfile
         fi
 
+  extras:
+    cmds:
+      - task: :install:software:gcc
+      - task: :install:software:sshfs
+      - task: :install:software:gcloud
+
   install-doctor:
     log:
       error: Error encountered while installing {{.SOFTWARE}} via https://install.doctor

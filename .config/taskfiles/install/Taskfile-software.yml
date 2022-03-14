@@ -206,11 +206,11 @@ tasks:
       - |
         if [ "$USER" == "root" ]; then
           pacman update
-          pacman -S base-devel curl file git gzip procps-ng
+          pacman -S base-devel curl file gcc git gzip procps-ng
         elif type sudo &> /dev/null; then
           .config/log info 'Attempting to run `sudo pacman update` (for Homebrew dependencies)'
           sudo pacman update
-          .config/log info 'Attempting to run `sudo pacman -S base-devel curl file git gzip procps-ng` (for Homebrew dependencies)'
+          .config/log info 'Attempting to run `sudo pacman -S base-devel curl gcc file git gzip procps-ng` (for Homebrew dependencies)'
           sudo pacman -S base-devel curl file git gzip procps-ng
         fi
     status:
@@ -227,11 +227,11 @@ tasks:
       - |
         if [ "$USER" == "root" ]; then
           apt-get -y update
-          apt-get install -y build-essential curl file git gzip procps
+          apt-get install -y build-essential curl file gcc git gzip procps
         elif type sudo &> /dev/null; then
           .config/log info 'Attempting to run `sudo apt-get -y update` (for Homebrew dependencies)'
           sudo apt-get -y update
-          .config/log info 'Attempting to run `sudo apt-get install -y build-essential curl file git procps` (Homebrew dependencies)'
+          .config/log info 'Attempting to run `sudo apt-get install -y build-essential curl file gcc git procps` (Homebrew dependencies)'
           sudo apt-get install -y build-essential curl file git gzip procps
         fi
     status:
@@ -260,12 +260,12 @@ tasks:
           fi
           touch "$HOME/.config/bodega/yum-devtools-check-ran"
         fi
-        if ! rpm --quiet --query curl file git gzip procps-ng; then
+        if ! rpm --quiet --query curl file gcc git gzip procps-ng; then
           if [ "$USER" == "root" ]; then
             yum install -y curl file git gzip procps-ng
           elif type sudo &> /dev/null; then
             .config/log info 'Attempting to run `sudo yum install -y curl file git procps-ng`'
-            sudo yum install -y curl file git gzip procps-ng
+            sudo yum install -y curl file gcc git gzip procps-ng
           fi
         fi
         if [ -f '/etc/os-release' ]; then
@@ -450,6 +450,15 @@ tasks:
     status:
       - type expect > /dev/null
 
+  gcc:
+    run: once
+    cmds:
+      - task: system
+        vars:
+          PACKAGE: gcc
+    status:
+      - type gcc > /dev/null
+
   gcloud:
     run: once
     cmds:
@@ -467,9 +476,7 @@ tasks:
 
   gcloud:linux:
     cmds:
-      - task: :install:install-doctor
-        vars:
-          SOFTWARE: googlecloudsdk
+      - curl -sSL https://sdk.cloud.google.com | bash
 
   gcloud:windows:
     cmds:
@@ -756,6 +763,13 @@ tasks:
           FORMULAE: snapcraft
           INSTALL_TASK: '{{.TASK}}'
 
+  sshfs:
+    run: once
+    cmds:
+      - task: system
+        vars:
+          PACKAGE: sshfs
+
   sshpass:
     run: once
     cmds:
@@ -791,6 +805,9 @@ tasks:
         vars:
           PACKAGE: '{{.PACKAGE}}'
       - task: system:yum
+        vars:
+          PACKAGE: '{{.PACKAGE}}'
+      - task: system:macos
         vars:
           PACKAGE: '{{.PACKAGE}}'
     status:
@@ -853,6 +870,14 @@ tasks:
         fi
     status:
       - '[ -z "$(which dnf)" ]'
+
+  system:macos:
+    vars:
+      PACKAGE: '{{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}{{.PACKAGE}}{{end}}'
+    cmds:
+      - brew install {{.PACKAGE}}
+    status:
+      - '[ "{{OS}}" != "darwin" ]'
 
   system:pacman:
     vars:
