@@ -52,6 +52,10 @@
     "vue",
     "yaml"
   ],
+  "go.lintTool":"golangci-lint",
+  "go.lintFlags": [
+    "--fast"
+  ],
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "typescript.implementationsCodeLens.enabled": true,
   "typescript.referencesCodeLens.enabled": true,

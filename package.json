@@ -22,7 +22,7 @@
     "fix": "bash start.sh && task fix",
     "help": "bash start.sh && task --menu",
     "info": "task --list",
-    "lint": "bash start.sh && task list",
+    "lint": "bash start.sh && task lint",
     "preload": "bash start.sh && task preload",
     "prepare": "bash start.sh && (test -f Taskfile.yml && task npm:prepare) || true",
     "prepublishOnly": "test -z $SKIP_PREPUB && bash start.sh && task npm:bundle:create || true",
@@ -50,7 +50,7 @@
     "handlebars-helpers": "latest",
     "prettier-config-sexy-mode": "latest",
     "semantic-release-config": "latest",
-    "typescript": "latest"
+    "typescript": "^4.5.5"
   },
   "keywords": [
     "adb",
