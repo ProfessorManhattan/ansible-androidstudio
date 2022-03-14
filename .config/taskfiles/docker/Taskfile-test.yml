@@ -16,16 +16,16 @@ tasks:
       - :install:software:docker
     log:
       error: '`container-structure-test` reported error(s) when testing
-        `{{.DOCKERHUB_PROFILE}}/{{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}{{.SLUG}}{{end}}:latest`'
-      start: Testing the `{{.DOCKERHUB_PROFILE}}/{{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}{{.SLUG}}{{end}}:latest`
+        `{{.DOCKERHUB_PROFILE}}/{{.SLUG}}:latest`'
+      start: Testing the `{{.DOCKERHUB_PROFILE}}/{{.SLUG}}:latest`
         Docker image with `container-structure-test`
-      success: '`{{.DOCKERHUB_PROFILE}}/{{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}{{.SLUG}}{{end}}:latest` was
+      success: '`{{.DOCKERHUB_PROFILE}}/{{.SLUG}}:latest` was
         successfully validated by `container-structure-test`'
     cmds:
-      - container-structure-test test --image {{.DOCKERHUB_PROFILE}}/{{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}{{.SLUG}}{{end}}:latest
+      - container-structure-test test --image {{.DOCKERHUB_PROFILE}}/{{.SLUG}}:latest
         --config Docker{{if .CLI_ARGS}}.{{.CLI_ARGS}}{{end}}.test.yml
     status:
-      - '[[ "$(docker images -q {{.DOCKERHUB_PROFILE}}/{{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}{{.SLUG}}{{end}}:latest 2>/dev/null)" == "" ]]'
+      - '[[ "$(docker images -q {{.DOCKERHUB_PROFILE}}/{{.SLUG}}:latest 2>/dev/null)" == "" ]]'
 
   container-structure-test:slim:
     deps:
@@ -33,16 +33,16 @@ tasks:
       - :install:software:docker
     log:
       error: '`container-structure-test` reported error(s) when testing
-        `{{.DOCKERHUB_PROFILE}}/{{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}{{.SLUG}}{{end}}:slim`'
-      start: Testing the `{{.DOCKERHUB_PROFILE}}/{{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}{{.SLUG}}{{end}}:slim`
+        `{{.DOCKERHUB_PROFILE}}/{{.SLUG}}:slim`'
+      start: Testing the `{{.DOCKERHUB_PROFILE}}/{{.SLUG}}:slim`
         Docker image with `container-structure-test`
-      success: '`{{.DOCKERHUB_PROFILE}}/{{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}{{.SLUG}}{{end}}:slim` was
+      success: '`{{.DOCKERHUB_PROFILE}}/{{.SLUG}}:slim` was
         successfully validated by `container-structure-test`'
     cmds:
-      - container-structure-test test --image {{.DOCKERHUB_PROFILE}}/{{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}{{.SLUG}}{{end}}:slim
+      - container-structure-test test --image {{.DOCKERHUB_PROFILE}}/{{.SLUG}}:slim
         --config Docker{{if .CLI_ARGS}}.{{.CLI_ARGS}}{{end}}.test.yml
     status:
-      - '[[ "$(docker images -q {{.DOCKERHUB_PROFILE}}/{{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}{{.SLUG}}{{end}}:slim 2> /dev/null)" == "" ]]'
+      - '[[ "$(docker images -q {{.DOCKERHUB_PROFILE}}/{{.SLUG}}:slim 2> /dev/null)" == "" ]]'
 
   gitlab-runner:
     deps:
@@ -84,7 +84,7 @@ tasks:
       If both of the command's outputs match, then that is a good indicator that the slim image is
       behaiving like the latest image. The test is performed on each project folder in the `test-output/` folder.
     vars:
-      IMAGE_NAME: '{{.DOCKERHUB_PROFILE}}/{{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}{{.SLUG}}{{end}}'
+      IMAGE_NAME: '{{.DOCKERHUB_PROFILE}}/{{.SLUG}}'
     hide:
       sh: '[ ! -d test-output ]'
     log:

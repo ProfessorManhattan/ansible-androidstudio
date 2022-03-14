@@ -92,11 +92,9 @@ tasks:
             task docker:publish:images -- "$TEST_IMAGE_SLUG"
           fi
         done
+      - task: pushrm
 
   publish:image:
-    vars:
-      SLUG:
-        sh: echo "{{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}$(jq -r '.blueprint.slug' package.json){{end}}"
     log:
       error: Failed to tag / push `{{.DOCKER_IMAGE}}:{{.TARGET_TAG}}`
       start: Tagging and pushing `{{.DOCKER_IMAGE}}:{{.TARGET_TAG}}`
@@ -104,14 +102,6 @@ tasks:
     cmds:
       - docker tag {{.DOCKER_IMAGE}}:{{.SOURCE_TAG}} {{.DOCKER_IMAGE}}:{{.TARGET_TAG}}
       - docker push {{.DOCKER_IMAGE}}:{{.TARGET_TAG}}
-      - |
-        if [ '{{.REPOSITORY_SUBTYPE}}' == 'codeclimate' ] && echo '{{.SLUG}}' | grep 'codeclimate-'; then
-          .config/log info 'Uploading to tag `{{.TARGET_TAG}}-codeclimate` since this is a codeclimate repository'
-          TARGET_IMAGE="$(echo '{{.SLUG}}' | sed 's/^codeclimate-//')"
-          docker tag {{.DOCKER_IMAGE}}:{{.SOURCE_TAG}} "{{.DOCKERHUB_PROFILE}}/${TARGET_IMAGE}:{{.TARGET_TAG}}-codeclimate"
-          docker push "{{.DOCKERHUB_PROFILE}}/${TARGET_IMAGE}:{{.TARGET_TAG}}-codeclimate"
-          .config/log success 'Uploaded tag `{{.TARGET_TAG}}-codeclimate` successfully'
-        fi
     status:
       - if [[ '{{.SOURCE_TAG}}' == 'slim' ]]; then [[ '{{.SLIM_ENABLED}}' == 'false' ]]; fi
 
@@ -119,6 +109,7 @@ tasks:
     vars:
       MAJOR_VERSION:
         sh: jq -r '.version' package.json | sed 's/\..*\..*$//'
+      TAG_POST: '{{if (contains "codeclimate" .CLI_ARGS)}}-codeclimate{{end}}'
       VERSION:
         sh: jq -r ".version" package.json
     log:
@@ -128,29 +119,28 @@ tasks:
     cmds:
       - task: publish:image
         vars:
-          SOURCE_TAG: latest
-          TARGET_TAG: '{{.VERSION}}'
+          SOURCE_TAG: latest{{.TAG_POST}}
+          TARGET_TAG: '{{.VERSION}}{{.TAG_POST}}'
       - task: publish:image
         vars:
-          SOURCE_TAG: latest
-          TARGET_TAG: '{{.MAJOR_VERSION}}-latest'
+          SOURCE_TAG: latest{{.TAG_POST}}
+          TARGET_TAG: '{{.MAJOR_VERSION}}-latest{{.TAG_POST}}'
       - task: publish:image
         vars:
-          SOURCE_TAG: latest
-          TARGET_TAG: latest
+          SOURCE_TAG: latest{{.TAG_POST}}
+          TARGET_TAG: latest{{.TAG_POST}}
       - task: publish:image
         vars:
-          SOURCE_TAG: slim
-          TARGET_TAG: '{{.VERSION}}-slim'
+          SOURCE_TAG: slim{{.TAG_POST}}
+          TARGET_TAG: '{{.VERSION}}-slim{{.TAG_POST}}'
       - task: publish:image
         vars:
-          SOURCE_TAG: slim
-          TARGET_TAG: '{{.MAJOR_VERSION}}-slim'
+          SOURCE_TAG: slim{{.TAG_POST}}
+          TARGET_TAG: '{{.MAJOR_VERSION}}-slim{{.TAG_POST}}'
       - task: publish:image
         vars:
-          SOURCE_TAG: slim
-          TARGET_TAG: slim
-      - task: pushrm
+          SOURCE_TAG: slim{{.TAG_POST}}
+          TARGET_TAG: slim{{.TAG_POST}}
 
   pushrm:
     deps:

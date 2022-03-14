@@ -24,7 +24,8 @@ tasks:
         type -f /usr/local/lib/docker/cli-plugins/docker-pushrm ||
         type -f /usr/local/libexec/docker/cli-plugins/docker-pushrm ||
         type -f /usr/lib/docker/cli-plugins/docker-pushrm ||
-        type -f /usr/libexec/docker/cli-plugins/docker-pushrm
+        type -f /usr/libexec/docker/cli-plugins/docker-pushrm ||
+        type -f "$HOME/.local/go/bin/docker-pushrm"
 
   fusion:
     run: once
