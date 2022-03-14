@@ -77,6 +77,8 @@ tasks:
     vars:
       DOCKER_IMAGE:
         sh: echo "{{.DOCKERHUB_PROFILE}}/$(jq -r '.blueprint.slug' package.json)"
+      IMAGE_TYPE:
+        sh: echo "{{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}$(jq -r '.blueprint.slug' package.json){{end}}"
       MAJOR_VERSION:
         sh: jq -r '.version' package.json | sed 's/\..*\..*$//'
       SLIM_COMMAND:
