@@ -516,6 +516,9 @@ if [ -d .git ] && type git &> /dev/null; then
   if [ "$TIME_DIFF" -gt 900 ] || [ "$TIME_DIFF" -lt 5 ]; then
     date +%s > .cache/start.sh/git-pull-time
     HTTPS_VERSION="$(git remote get-url origin | sed 's/git@gitlab.com:/https:\/\/gitlab.com\//')"
+    if [ "$(git rev-parse --abbrev-ref HEAD)" == 'synchronize' ]; then
+      git reset --hard master
+    fi
     git pull "$HTTPS_VERSION" master --ff-only
     ROOT_DIR="$PWD"
     if ls .modules/*/ > /dev/null 2>&1; then
