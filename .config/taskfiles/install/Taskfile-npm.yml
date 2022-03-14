@@ -221,7 +221,6 @@ tasks:
       - task: global
         vars:
           INSTALL_TASK: '{{.TASK}}'
-
           NPM_PACKAGE: liquidjs
   majestic:
     run: once
