@@ -13,10 +13,10 @@ tasks:
     cmds:
       - |
         function dockerGet() {
-          if ! docker images {{.DOCKERHUB_PROFILE}}/codeclimate-$1 | grep ' slim ' > /dev/null; then
-            docker pull "{{.DOCKERHUB_PROFILE}}/$1:codeclimate-slim"
+          if ! docker images {{.DOCKERHUB_PROFILE}}/$1 | grep ' slim-codeclimate ' > /dev/null; then
+            docker pull "{{.DOCKERHUB_PROFILE}}/$1:slim-codeclimate"
           fi
-          docker tag "{{.DOCKERHUB_PROFILE}}/$1:codeclimate-slim" "codeclimate/codeclimate-$1:latest"
+          docker tag "{{.DOCKERHUB_PROFILE}}/$1:slim-codeclimate" "codeclimate/codeclimate-$1:latest"
         }
         for ENGINE in $CUSTOM_ENGINES; do
           if [ "$(yq e -o=j '.' .codeclimate.yml | jq --arg engine $ENGINE -r '.plugins[$engine].enabled')" == 'true' ]; then
