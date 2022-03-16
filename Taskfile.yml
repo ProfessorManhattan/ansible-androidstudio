@@ -1,5 +1,6 @@
 ---
 version: '3'
+
 includes:
   ansible: ./.config/taskfiles/ansible/Taskfile.yml
   ansible:ansibler: ./.config/taskfiles/ansible/Taskfile-ansibler.yml
@@ -80,7 +81,9 @@ includes:
   web:ionic: ./.config/taskfiles/web/Taskfile-ionic.yml
   web:nx: ./.config/taskfiles/web/Taskfile-nx.yml
   web:profile: ./.config/taskfiles/web/Taskfile-profile.yml
+
 output: interleaved
+
 vars:
   DOCKERHUB_PROFILE: megabytelabs
   DOCKERHUB_USER: professormanhattan
@@ -101,7 +104,12 @@ vars:
   GITHUB_ORG: ProfessorManhattan
   GITHUB_USER: ProfessorManhattan
   GROUP_EXEC_ASYNC: 'false'
-  IGNORE_FOLDERS: -path './.autodoc/*' -o -path './.cache/*' -o -path './.common*' -o -path './.config/*' -o -path './.git/*' -o -path './.github/*' -o -path './.gitlab/*' -o -path './.husky/*' -o -path './.modules/*' -o -path './.npm/*' -o -path './.pnpm-store/*' -o -path './.shared/*' -o -path './.task/*' -o -path './.venv/*' -o -path './.vscode/*' -o -path './build/*' -o -path './dist/*' -o -path './node_modules/*' -o -path './roles/*' -o -name pnpm-lock.yaml -o -name package-lock.json -o -name poetry.lock -o -name '.variables.json'
+  IGNORE_FOLDERS: >
+    -path './.autodoc/*' -o -path './.cache/*' -o -path './.common*' -o -path './.config/*' -o -path './.git/*'
+    -o -path './.github/*' -o -path './.gitlab/*' -o -path './.husky/*' -o -path './.modules/*' -o -path './.npm/*'
+    -o -path './.pnpm-store/*' -o -path './.shared/*' -o -path './.task/*' -o -path './.venv/*' -o -path './.vscode/*'
+    -o -path './build/*' -o -path './dist/*' -o -path './node_modules/*' -o -path './roles/*' -o -name pnpm-lock.yaml
+    -o -name package-lock.json -o -name poetry.lock -o -name '.variables.json'
   INIT_SCRIPT: https://gitlab.com/megabyte-labs/gitlab-ci/-/raw/master/scripts/update-init.sh
   LOG_FIX:
     sh: chmod +x .config/log
@@ -114,9 +122,7 @@ vars:
   # yamllint disable rule:line-length
   PROJECT_TYPE:
     sh: |
-      # yamllint disable-line rule:line-length
       if type jq &> /dev/null && [ -f package.json ]; then VER="$(jq -r '.blueprint.group' package.json)"; if [ "$VER" == 'null' ]; then echo TYPE="ansible"; else TYPE="$VER"; fi; else TYPE="ansible"; fi
-      # yamllint disable-line rule:line-length
       if type jq &> /dev/null && [ -f package.json ]; then VER="$(jq -r '.blueprint.subgroup' package.json)"; if [ "$VER" == 'null' ]; then SUBTYPE="role"; else SUBTYPE="$VER"; fi; else SUBTYPE="role"; fi
       if [ "$TYPE" == 'common' ] && [ "$SUBTYPE" == 'shared' ]; then
         echo 'shared'
@@ -133,11 +139,24 @@ vars:
   PYTHON_HANDLE: 'poetry run '
   PYTHON_VIRTUALENV: true
   REPOSITORY_SUBTYPE:
-    sh: if type jq &> /dev/null && [ -f package.json ]; then VER="$(jq -r .blueprint.subgroup package.json)"; if [ "$VER" == null ]; then echo "documentation"; else echo "$VER"; fi; else echo "documentation"; fi
+    sh: |
+      if type jq &> /dev/null && [ -f package.json ]; then
+        VER="$(jq -r '.blueprint.subgroup' package.json)"
+        if [ "$VER" == 'null' ]; then echo "role"; else echo "$VER"; fi
+      else
+        echo "role"
+      fi
   REPOSITORY_TYPE:
-    sh: if type jq &> /dev/null && [ -f package.json ]; then VER="$(jq -r .blueprint.group package.json)"; if [ "$VER" == null ]; then echo "documentation"; else echo "$VER"; fi; else echo "documentation"; fi
+    sh: |
+      if type jq &> /dev/null && [ -f package.json ]; then
+        VER="$(jq -r '.blueprint.group' package.json)"
+        if [ "$VER" == 'null' ]; then echo "ansible"; else echo "$VER"; fi
+      else
+        echo "ansible"
+      fi
   SEMANTIC_CONFIG: semantic-release-config
   TIMEZONE: America/New_York
+
 env:
   OSTYPE:
     sh: |
@@ -151,6 +170,7 @@ env:
     sh: |
       DSN="$(jq -r '.blueprint.sentryDSN' package.json)"
       if [ "$DSN" != 'null' ]; then echo "$DSN"; fi
+
 profile: |
   PATH="$PATH:$HOME/.local/bin:$HOME/.poetry/bin"
   if [[ "$OSTYPE" == 'linux-gnu'* ]] || [[ "$OSTYPE" == 'linux-musl'* ]]; then
@@ -170,6 +190,7 @@ profile: |
   if [ -f .venv/bin/activate ]; then
     . .venv/bin/activate
   fi
+
 tasks:
   build:
     deps:
@@ -194,6 +215,7 @@ tasks:
         else
           [[ $- == *i* ]] && task prepare || (.config/log error '{{.NONINTERACTIVE_MISSING_BUILD_CMD}}' && exit 1)
         fi
+
   clean:
     desc: Removes optional folders that are cached during various tasks
     summary: |
@@ -204,11 +226,13 @@ tasks:
       which will re-generate the project from scratch. Ideally, this task and the reset task
       should never be necessary. The `start` task should be used instead.
     vars:
-      CLEAN_TARGETS: .autodoc .cache .task .venv node_modules tsconfig.tsbuildinfo venv .variables.json
+      CLEAN_TARGETS: .autodoc .cache .task .venv node_modules tsconfig.tsbuildinfo venv
+        .variables.json
     cmds:
       - task: common:clean
         vars:
           CLEAN_TARGETS: '{{.CLEAN_TARGETS}}'
+
   commit:
     desc: Lint staged files, report spelling errors, and open a _required_ commit dialoge
     summary: |
@@ -225,6 +249,7 @@ tasks:
       to your regular `git commit -m` command to bypass the pre-commit hook.
     cmds:
       - task: common:commit
+
   commit:all:
     deps:
       - install:software:git
@@ -260,16 +285,20 @@ tasks:
         git add --all
         git commit
         {{end}}
+
   commit:quick:
     cmds:
       - git add --all
-      - "HUSKY=0 git commit -m '\U0001F527 chore(tweak)": quick minor update' --no-verify
+      - HUSKY=0 git commit -m '🔧 chore(tweak): quick minor update' --no-verify
       - git push origin master
+
   devcontainer:
     deps:
       - install:npm:devcontainer
       - install:software:docker
+
   donothing: 'true'
+
   fix:
     desc: Run code auto-fixers / auto-formatters
     summary: |
@@ -280,6 +309,7 @@ tasks:
       an error so the auto-fixes still have to be validated.
     cmds:
       - task: fix:all
+
   get:links:
     deps:
       - install:software:jq
@@ -292,6 +322,7 @@ tasks:
     cmds:
       - .config/log info 'GitHub -----> `{{.GITHUB_URL}}`'
       - .config/log info 'GitLab -----> `{{.GITLAB_URL}}`'
+
   group:exec:
     desc: Execute group commands on any GitLab group (including repositories in sub-groups)
     summary: |
@@ -312,6 +343,7 @@ tasks:
       Be sure to wrap the command in quotes or you might observe some odd behavior.
     cmds:
       - task: git:gitlab:group:exec
+
   init:
     deps:
       - install:software:jq
@@ -345,6 +377,7 @@ tasks:
       - task: repair
       - task: ci:commit
       - task: ci:synchronize
+
   lint:
     desc: Lints the project using all linters
     summary: |
@@ -358,6 +391,7 @@ tasks:
       `task lint`
     cmds:
       - task: lint:all
+
   livereload:
     deps:
       - install:npm:nodemon
@@ -397,10 +431,12 @@ tasks:
           .config/log error '`Taskfile-project.yml` must exist and have a `livereload` task to use with `nodemon`' && exit 1
         fi
       - nodemon --config {{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}.config/nodemon.json{{end}}
+
   new:project:
     desc: Create a new project
     cmds:
       - task: prepare
+
   preload:
     desc: Set up your workstation in advance by installing commonly used programs
     summary: |
@@ -443,6 +479,7 @@ tasks:
       - task: install:pipx:bundle
       - task: install:python:requirements
       - task: install:modules:local
+
   prepare:
     desc: Prepares the project for the normal start command
     summary: |
@@ -459,6 +496,7 @@ tasks:
     cmds:
       - task: boilerplate:check:package
       - task: boilerplate:clean
+
   publish:
     desc: Publish a semantic release via `semantic-release`
     summary: |
@@ -506,6 +544,7 @@ tasks:
       success: Successfully ran `semantic-release` via `task publish`
     cmds:
       - task: publish:semantic-release
+
   publish:force:
     desc: Force a `semantic-release` even if there are no new eligible commits
     summary: |
@@ -531,8 +570,10 @@ tasks:
       start: Publishing `semantic-release` update via `task publish:force`
       success: Successfully published update via `task publish:force`
     cmds:
-      - "HUSKY=0 git commit -a --allow-empty -m '\U0001F528 build(version bump): semantic-release {{.UPDATE_LEVEL}}' -n\n"
+      - |
+        HUSKY=0 git commit -a --allow-empty -m '🔨 build(version bump): semantic-release {{.UPDATE_LEVEL}}' -n
       - task: publish
+
   pull:upstream:
     desc: Pull from upstream repositories
     summary: |
@@ -549,6 +590,7 @@ tasks:
       success: Successfully pulled from `upstreamRemotes`
     cmds:
       - task: common:update:upstream:remotes:pull
+
   repair:
     cmds:
       - |
@@ -561,6 +603,7 @@ tasks:
         else
           bash <(curl -sSL {{.INIT_SCRIPT}})
         fi
+
   reset:
     desc: Resets the project by removing all caches and then re-generating templated files
     summary: |
@@ -572,6 +615,7 @@ tasks:
       updates, it re-generates any templated files.
     cmds:
       - task: common:reset
+
   reset:force:
     desc: 'Aggressively reset the project (**WARNING** This will wipe uncommitted work)'
     summary: |
@@ -590,6 +634,7 @@ tasks:
       answer:
         cmds:
           - task: common:reset:force
+
   scripts:
     interactive: true
     deps:
@@ -607,6 +652,7 @@ tasks:
       start: Running `NTL_RUNNER={{.NPM_PROGRAM}} {{.NPX_HANDLE}}ntl`
     cmds:
       - NTL_RUNNER={{.NPM_PROGRAM}} {{.NPX_HANDLE}}ntl
+
   services:
     desc: Update elements of the repository that require API access
     summary: |
@@ -619,6 +665,7 @@ tasks:
       - task: common:update:services
     status:
       - '[ -n "$GITLAB_CI" ] && [ "$REPOSITORY_UPDATE" != "true" ]'
+
   shell:
     desc: Start a terminal session using Docker with any Linux operating system
     compile: |
@@ -652,6 +699,7 @@ tasks:
       * ubuntu-21.04
     cmds:
       - task: common:shell
+
   start:
     desc: Set up the project and refresh it with the latest changes
     summary: |
@@ -672,6 +720,7 @@ tasks:
       success: Successfully synchronized the project with upstream file changes and also bootstrapped the project
     cmds:
       - task: upstream:{{.PROJECT_TYPE}}
+
   template:
     deps:
       - install:npm:liquidjs
@@ -693,6 +742,7 @@ tasks:
     preconditions:
       - sh: test -f .variables.json
         msg: This task requires that you have already spun up the project by running `task start`
+
   test:
     deps:
       - install:software:jq
@@ -723,6 +773,7 @@ tasks:
         else
           [[ $- == *i* ]] && task prepare || (.config/log error '{{.NONINTERACTIVE_MISSING_TEST_CMD}}' && exit 1)
         fi
+
   update:
     desc: Update the repository
     log:
@@ -730,11 +781,15 @@ tasks:
       start: Updating the repository..
       success: Finished updating the repository
     cmds:
-      - task: :install:software:brew
       - |
-        . "$HOME/.profile"
-        task update:prereqs
-        . "$HOME/.profile"
+        if ! type brew > /dev/null; then
+          task install:software:brew
+          . "$HOME/.profile"
+        fi
+        if ! type jq > /dev/null || ! type yq > /dev/null || ! type node > /dev/null || ! type go > /dev/null || ! type poetry > /dev/null; then
+          task update:prereqs
+          . "$HOME/.profile"
+        fi
         task update:init
         task prepare
         task update:finish
