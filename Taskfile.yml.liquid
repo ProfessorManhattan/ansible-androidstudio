@@ -23,8 +23,7 @@ vars:
   GITHUB_ORG: {{profile.github}}
   GITHUB_USER: {{profile.github}}
   GROUP_EXEC_ASYNC: 'false'
-  IGNORE_FOLDERS: >-
-    -path './.autodoc/*' -o -path './.cache/*' -o -path './.common*' -o -path './.config/*' -o -path './.git/*' -o
+  IGNORE_FOLDERS: -path './.autodoc/*' -o -path './.cache/*' -o -path './.common*' -o -path './.config/*' -o -path './.git/*' -o
     -path './.github/*' -o -path './.gitlab/*' -o -path './.husky/*' -o -path './.modules/*' -o -path './.npm/*' -o
     -path './.pnpm-store/*' -o -path './.shared/*' -o -path './.task/*' -o -path './.venv/*' -o -path './.vscode/*' -o
     -path './build/*' -o -path './dist/*' -o -path './node_modules/*' -o -path './roles/*' -o -name pnpm-lock.yaml -o
@@ -41,10 +40,8 @@ vars:
   # yamllint disable rule:line-length
   PROJECT_TYPE:
     sh: |
-      # yamllint disable-line rule:line-length
-      if type jq &> /dev/null && [ -f package.json ]; then VER="$(jq -r '.blueprint.group' package.json)"; if [ "$VER" == 'null' ]; then echo TYPE="{{group}}"; else TYPE="$VER"; fi; else TYPE="{{group}}"; fi
-      # yamllint disable-line rule:line-length
-      if type jq &> /dev/null && [ -f package.json ]; then VER="$(jq -r '.blueprint.subgroup' package.json)"; if [ "$VER" == 'null' ]; then SUBTYPE="{{subgroup}}"; else SUBTYPE="$VER"; fi; else SUBTYPE="{{subgroup}}"; fi
+      if type jq &> /dev/null && [ -f package.json ]; then VER="$(jq -r '.blueprint.group' package.json)"; if [ "$VER" == 'null' ]; then echo TYPE="$GROUP_TYPE"; else TYPE="$VER"; fi; else TYPE="$GROUP_TYPE"; fi
+      if type jq &> /dev/null && [ -f package.json ]; then VER="$(jq -r '.blueprint.subgroup' package.json)"; if [ "$VER" == 'null' ]; then SUBTYPE="$REPOSITORY_TYPE"; else SUBTYPE="$VER"; fi; else SUBTYPE="$REPOSITORY_TYPE"; fi
       if [ "$TYPE" == 'common' ] && [ "$SUBTYPE" == 'shared' ]; then
         echo 'shared'
       elif [ "$TYPE" == 'common' ]; then
@@ -61,19 +58,21 @@ vars:
   PYTHON_VIRTUALENV: true
   REPOSITORY_SUBTYPE:
     sh: |
+      if [ -n "$REPOSITORY_TYPE" ]; then REPO_SUBTYPE="$REPOSITORY_TYPE"; fi
       if type jq &> /dev/null && [ -f package.json ]; then
         VER="$(jq -r '.blueprint.subgroup' package.json)"
-        if [ "$VER" == 'null' ]; then echo "{{subgroup}}"; else echo "$VER"; fi
+        if [ "$VER" == 'null' ]; then echo "$REPO_SUBTYPE"; else echo "$VER"; fi
       else
-        echo "{{subgroup}}"
+        echo "$REPO_SUBTYPE"
       fi
   REPOSITORY_TYPE:
     sh: |
+      if [ -n "$GROUP_TYPE" ]; then REPO_TYPE="$GROUP_TYPE"; fi
       if type jq &> /dev/null && [ -f package.json ]; then
         VER="$(jq -r '.blueprint.group' package.json)"
-        if [ "$VER" == 'null' ]; then echo "{{group}}"; else echo "$VER"; fi
+        if [ "$VER" == 'null' ]; then echo "$REPO_TYPE"; else echo "$VER"; fi
       else
-        echo "{{group}}"
+        echo "$REPO_TYPE"
       fi
   SEMANTIC_CONFIG: semantic-release-config
   TIMEZONE: America/New_York
