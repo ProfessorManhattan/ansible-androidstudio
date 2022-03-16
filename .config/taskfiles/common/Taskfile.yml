@@ -29,7 +29,6 @@ tasks:
       - :install:modules:local
       - :install:npm:commitizen
       - :install:npm:commitlint
-      - :install:python:requirements
     log:
       start: Initiating commit dialog
     cmds:
@@ -106,18 +105,13 @@ tasks:
 
   requirements:
     deps:
-      - :install:modules:global
       - :install:modules:local
       - :install:python:requirements
     summary: |
-      # Ensure dependencies are installed
+      # Ensure local dependencies are installed
 
-      This task ensures that packages in various languages (Node.js, Python, etc.) are installed.
-      At the very minimum, it will install the Node.js requirements by running `npm install`
-      (or `pnpm install`, if configured to do so), install the NPM global dependencies, and
-      then install the Python requirements by running `poetry update`. In some types of projects,
-      additional types of requirements are installed (e.g. Ansible projects also install Ansible
-      Galaxy requirements).
+      This task ensures local dependencies are installed. These include dependencies defined in `package.json`
+      and `pyproject.toml` (if the project is a Python project).
     run: once
 
   reset:

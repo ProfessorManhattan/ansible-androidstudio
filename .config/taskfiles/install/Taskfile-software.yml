@@ -22,16 +22,16 @@ tasks:
       - task: install:software
         vars:
           INSTALL_TASK: '{{.TASK}}'
-
           PACKAGE: act
+
   allure:
     run: once
     cmds:
       - task: install:software
         vars:
           INSTALL_TASK: '{{.TASK}}'
-
           PACKAGE: allure
+
   ansifilter:
     run: once
     tags:
@@ -40,8 +40,8 @@ tasks:
       - task: install:software
         vars:
           INSTALL_TASK: '{{.TASK}}'
-
           PACKAGE: ansifilter
+
   brew:
     tags:
       - update
@@ -181,7 +181,7 @@ tasks:
             echo "redhat"
           elif [ -f "/etc/arch-release" ]; then
             echo "archlinux"
-          else if type apk &> /dev/null; then
+          else [ -f "/etc/alpine-release" ]; then
             echo "alpine"
           else
             echo "unknown"
@@ -444,8 +444,8 @@ tasks:
       - task: install:software
         vars:
           INSTALL_TASK: '{{.TASK}}'
-
           PACKAGE: container-structure-test
+
   coreutils:
     cmds:
       - task: install:software
@@ -462,8 +462,8 @@ tasks:
       - task: install:software
         vars:
           INSTALL_TASK: '{{.TASK}}'
-
           PACKAGE: dasel
+
   docker:
     run: once
     cmds:
@@ -477,8 +477,8 @@ tasks:
       - task: install:software
         vars:
           INSTALL_TASK: '{{.TASK}}'
-
           PACKAGE: docker-slim
+
   docker:darwin:
     run: once
     cmds:
@@ -510,8 +510,8 @@ tasks:
       - task: install:software
         vars:
           INSTALL_TASK: '{{.TASK}}'
-
           PACKAGE: goodwithtech/r/dockle
+
   exiftool:
     run: once
     cmds:
@@ -588,8 +588,8 @@ tasks:
       - task: install:software
         vars:
           INSTALL_TASK: '{{.TASK}}'
-
           PACKAGE: gh
+
   git:
     run: once
     cmds:
@@ -606,24 +606,24 @@ tasks:
       - task: install:software
         vars:
           INSTALL_TASK: '{{.TASK}}'
-
           PACKAGE: gitlab-runner
+
   gitleaks:
     run: once
     cmds:
       - task: install:software
         vars:
           INSTALL_TASK: '{{.TASK}}'
-
           PACKAGE: gitleaks
+
   glab:
     run: once
     cmds:
       - task: install:software
         vars:
           INSTALL_TASK: '{{.TASK}}'
-
           PACKAGE: glab
+
   go:
     run: once
     cmds:
@@ -658,24 +658,24 @@ tasks:
       - task: install:software
         vars:
           INSTALL_TASK: '{{.TASK}}'
-
           PACKAGE: go
+
   golangci-lint:
     run: once
     cmds:
       - task: install:software
         vars:
           INSTALL_TASK: '{{.TASK}}'
-
           PACKAGE: golangci-lint
+
   grype:
     run: once
     cmds:
       - task: install:software
         vars:
           INSTALL_TASK: '{{.TASK}}'
-
           PACKAGE: anchore/grype/grype
+
   gzip:
     run: once
     cmds:
@@ -741,16 +741,16 @@ tasks:
       - task: install:software
         vars:
           INSTALL_TASK: '{{.TASK}}'
-
           PACKAGE: node
+
   packer:
     run: once
     cmds:
       - task: install:software
         vars:
           INSTALL_TASK: '{{.TASK}}'
-
           PACKAGE: packer
+
   parallels:
     run: once
     cmds:
@@ -807,16 +807,16 @@ tasks:
       - task: install:software
         vars:
           INSTALL_TASK: '{{.TASK}}'
-
           PACKAGE: poetry
+
   poetry:linux:
     run: once
     cmds:
       - task: install:software
         vars:
           INSTALL_TASK: '{{.TASK}}'
-
           PACKAGE: poetry
+
   poetry:windows:
     log:
       error: These scripts are not currently compatible with Windows. Try using WSL.
@@ -878,8 +878,8 @@ tasks:
       - task: install:software
         vars:
           INSTALL_TASK: '{{.TASK}}'
-
           PACKAGE: rust
+
   sentry:
     cmds:
       - task: :install:github:sentry
@@ -890,8 +890,8 @@ tasks:
       - task: install:software
         vars:
           INSTALL_TASK: '{{.TASK}}'
-
           PACKAGE: snapcraft
+
   sshfs:
     run: once
     cmds:
@@ -905,8 +905,8 @@ tasks:
       - task: install:software
         vars:
           INSTALL_TASK: '{{.TASK}}'
-
           PACKAGE: hudochenkov/sshpass/sshpass
+
   subrepo:
     run: once
     cmds:
@@ -1050,16 +1050,16 @@ tasks:
       - task: install:software
         vars:
           INSTALL_TASK: '{{.TASK}}'
-
           PACKAGE: tokei
+
   trivy:
     run: once
     cmds:
       - task: install:software
         vars:
           INSTALL_TASK: '{{.TASK}}'
-
           PACKAGE: aquasecurity/trivy/trivy
+
   vagrant:
     cmds:
       - task: vagrant:{{OS}}
@@ -1130,8 +1130,8 @@ tasks:
       - task: install:software
         vars:
           INSTALL_TASK: '{{.TASK}}'
-
           PACKAGE: yarn
+
   yq:
     tags:
       - update

@@ -38,8 +38,8 @@ tasks:
         vars:
           BIN_NAME: fusion
           INSTALL_TASK: '{{.TASK}}'
-
           PACKAGE: github.com/edgelaboratories/fusion
+
   install:github:
     deps:
       - :install:software:jq

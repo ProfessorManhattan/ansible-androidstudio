@@ -29,6 +29,7 @@ tasks:
       start: Running Docker build sequence
       success: Finished running Docker build sequence
     cmds:
+      - task: taskfile:deps
       - |
         if [ -d ./test/structure ]; then
           TESTS="$(find ./test/structure -mindepth 1 -maxdepth 1 -type f -name "*.yml")"
@@ -201,6 +202,17 @@ tasks:
       answer:
         cmds:
           - docker run -v "${PWD}:/work" -w /work -it --entrypoint /bin/sh --rm {{.ANSWER}}
+
+  taskfile:deps:
+    vars:
+      DOCKER_TASKS_TAG:
+        sh: jq -r '.blueprint.dockerTasksTag' package.json
+    cmds:
+      - task: :common:util:task:tag:deps
+        vars:
+          TAG: '{{.DOCKER_TASKS_TAG}}'
+    status:
+      - '[ "{{.DOCKER_TASKS_TAG}}" == "null" ]'
 
   test:
     deps:

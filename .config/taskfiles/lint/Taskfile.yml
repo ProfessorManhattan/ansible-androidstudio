@@ -22,7 +22,7 @@ tasks:
   ansible:
     deps:
       - :symlink:{{.REPOSITORY_SUBTYPE}}
-      - :install:python:requirements
+      - :install:pipx:ansible-lint
     desc: Lint Ansible projects using Ansible Lint
     hide: '{{ne .REPOSITORY_TYPE "ansible"}}'
     summary: |
@@ -46,7 +46,8 @@ tasks:
 
   any:
     deps:
-      - :install:python:requirements
+      - :install:pipx:blocklint
+      - :install:pipx:pre-commit-hooks
     desc: Generic linting of files for things like destroyed-symlinks, merge conflicts, etc.
     log:
       error: Errors were reported by the global linters for `{{.CLI_ARGS}}`
@@ -312,9 +313,8 @@ tasks:
 
   lint-staged:
     deps:
-      - :install:modules:global
       - :install:modules:local
-      - :install:python:requirements
+      - :install:npm:lint-staged
     log:
       error: Errors were encountered when validating the staged files
       start: Linting staged files
@@ -406,7 +406,7 @@ tasks:
 
   python:
     deps:
-      - :install:python:requirements
+      - :install:pipx:flake8
     label: lint:python
     desc: Lint Python files using Flake8
     hide: '{{ne .REPOSITORY_TYPE "python"}}'
@@ -563,7 +563,7 @@ tasks:
 
   toml:
     deps:
-      - :install:python:requirements
+      - :install:pipx:pre-commit-hooks
     summary: |
       # Lint TOML files
 
@@ -605,7 +605,7 @@ tasks:
 
   xml:
     deps:
-      - :install:python:requirements
+      - :install:pipx:pre-commit-hooks
     summary: |
       # Lint XML files
 
@@ -626,7 +626,7 @@ tasks:
 
   yaml:
     deps:
-      - :install:python:requirements
+      - :install:pipx:yamllint
     desc: Lint `.yml` files using YAML Lint
     summary: |
       # Lint YML files using YAML Lint

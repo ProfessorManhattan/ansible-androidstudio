@@ -160,18 +160,10 @@ tasks:
       - task: mod-ansible-autodoc:generate
       - task: mod-ansible-autodoc:variables
 
-  mod-ansible-autodoc:ansible-autodoc-fork:
-    cmds:
-      - task: :install:software:pipx
-      - task: :install:python:pipx
-        vars:
-          PACKAGE: ansible-autodoc-fork
-
   mod-ansible-autodoc:generate:
     deps:
-      - :install:python:requirements
+      - :install:pipx:mod-ansible-autodoc
       - :install:software:jq
-      - mod-ansible-autodoc:ansible-autodoc-fork
     env:
       ACTIONS_DESCRIPTION:
         sh: jq -r '.autodoc_actions_description' '{{.VARIABLES_PATH}}'

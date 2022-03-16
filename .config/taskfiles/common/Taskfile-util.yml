@@ -1,13 +1,14 @@
 ---
 version: '3'
 
+vars:
+  MAP_FILE: .cache/task-map/Taskfile.json
+
 tasks:
   task:map:generate:
     deps:
       - :install:software:jq
       - :install:software:yq
-    vars:
-      MAP_FILE: .cache/task-map/Taskfile.json
     log:
       error: Encountered error while generating Taskfile task map array
       start: Generating Taskfile task map array
@@ -39,7 +40,6 @@ tasks:
     deps:
       - task:map:generate
     vars:
-      MAP_FILE: '{{if .MAP_FILE}}{{.MAP_FILE}}{{else}}Taskfile.json{{end}}'
       TAG: '{{if .TAG}}{{.TAG}}{{else}}{{.CLI_ARGS}}{{end}}'
       TEMPLATE: 'task $i && '
     log:
@@ -61,17 +61,22 @@ tasks:
     deps:
       - task:map:generate
     vars:
-      MAP_FILE: '{{if .MAP_FILE}}{{.MAP_FILE}}{{else}}Taskfile.json{{end}}'
       TAG: '{{if .TAG}}{{.TAG}}{{else}}{{.CLI_ARGS}}{{end}}'
       TEMPLATE: '      - $i\n'
     log:
       error: Encountered error while building Taskfile task deps file from tag named `{{.TAG}}`
       start: Selecting by Taskfile task tag named `{{.TAG}}` for deps file
-      success: Updated `Taskfile.yml` with deps list task named `deps:{{.TAG}}`
+      success: Completed `Taskfile.yml` update logic for deps task named `deps:{{.TAG}}`
     cmds:
       - |
         RESULT="  deps:{{.TAG}}:\n    deps:\n"
+        COUNT="0"
         jq -cr '(.. | select(.tags?[]? == "{{.TAG}}")) | ._task' {{.MAP_FILE}} | while read i; do
+          COUNT="$(("$COUNT" + 1))"
           RESULT="$RESULT{{.TEMPLATE}}"
         done
-        echo -e "$RESULT" > Taskfile.yml
+        if [ "$COUNT" -gt 0 ]; then
+          echo -e "$RESULT" >> Taskfile.yml
+        else
+          .config/log warn 'There were no results so nothing was added to the `Taskfile.yml`'
+        fi

@@ -104,11 +104,14 @@ function ensureRootPackageInstalled() {
   if ! type "$1" &> /dev/null; then
     if [[ "$OSTYPE" == 'linux'* ]]; then
       if [ -f "/etc/redhat-release" ]; then
-        yum update
-        yum install -y "$1"
+        if type dnf &> /dev/null; then
+          dnf install -y "$1"
+        else
+          yum install -y "$1"
+        fi
       elif [ -f "/etc/lsb-release" ]; then
-        apt update
-        apt install -y "$1"
+        apt-get update
+        apt-get install -y "$1"
       elif [ -f "/etc/arch-release" ]; then
         pacman update
         pacman -S "$1"
@@ -126,7 +129,7 @@ if [ "$USER" == "root" ] && [ -z "$INIT_CWD" ] && type useradd &> /dev/null; the
   # shellcheck disable=SC2016
   logger info 'Running as root - creating seperate user named `megabyte` to run script with'
   echo "megabyte ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
-  useradd -m -s "$(which bash)" -c "Megabyte Labs Homebrew Account" megabyte > /dev/null || ROOT_EXIT_CODE=$?
+  useradd -m -s "$(which bash)" --gecos "" --disabled-login -c "Megabyte Labs" megabyte > /dev/null || ROOT_EXIT_CODE=$?
   if [ -n "$ROOT_EXIT_CODE" ]; then
     # shellcheck disable=SC2016
     logger info 'User `megabyte` already exists'
@@ -182,37 +185,29 @@ function ensurePackageInstalled() {
       brew install "$1"
     elif [[ "$OSTYPE" == 'linux'* ]]; then
       if [ -f "/etc/redhat-release" ]; then
-        if [ "$USER" == "root" ]; then
-          yum install -y "$1"
-        elif type sudo &> /dev/null && sudo -n true; then
-          sudo yum install -y "$1"
-        elif type sudo &> /dev/null; then
-          sudo yum install -y "$1"
+        if type sudo &> /dev/null; then
+          if type dnf &> /dev/null; then
+            sudo dnf install -y "$1"
+          else
+            sudo yum install -y "$1"
+          fi
         else
-          yum install -y "$1"
+          if type dnf &> /dev/null; then
+            dnf install -y "$1"
+          else
+            yum install -y "$1"
+          fi
         fi
       elif [ -f "/etc/lsb-release" ]; then
-        if [ "$USER" == "root" ]; then
-          apt-get update
-          apt-get install -y "$1"
-        elif type sudo &> /dev/null && sudo -n true; then
-          sudo apt update
-          sudo apt install -y "$1"
-        elif type sudo &> /dev/null; then
-          sudo apt update
-          sudo apt install -y "$1"
+        if type sudo &> /dev/null; then
+          sudo apt-get update
+          sudo apt-get install -y "$1"
         else
           apt-get update
           apt-get install -y "$1"
         fi
       elif [ -f "/etc/arch-release" ]; then
-        if [ "$USER" == "root" ]; then
-          pacman update
-          pacman -S "$1"
-        elif type sudo &> /dev/null && sudo -n true; then
-          sudo pacman update
-          sudo pacman -S "$1"
-        elif type sudo &> /dev/null; then
+        if type sudo &> /dev/null; then
           sudo pacman update
           sudo pacman -S "$1"
         else
@@ -220,11 +215,7 @@ function ensurePackageInstalled() {
           pacman -S "$1"
         fi
       elif [ -f "/etc/alpine-release" ]; then
-        if [ "$USER" == "root" ]; then
-          apk --no-cache add "$1"
-        elif type sudo &> /dev/null && sudo -n true; then
-          sudo apk --no-cache add "$1"
-        elif type sudo &> /dev/null; then
+        if type sudo &> /dev/null; then
           sudo apk --no-cache add "$1"
         else
           apk --no-cache add "$1"

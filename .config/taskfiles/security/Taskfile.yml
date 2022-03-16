@@ -108,7 +108,7 @@ tasks:
 
   private-keys:
     deps:
-      - :install:python:requirements
+      - :install:pipx:pre-commit-hooks
     desc: Scan for private keys
     summary: |
       # Scan for private keys

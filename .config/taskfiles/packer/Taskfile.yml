@@ -80,7 +80,7 @@ tasks:
 
   latestos:
     deps:
-      - :install:python:requirements
+      - :install:pipx:latestos
       - :install:software:jq
     vars:
       TAG:

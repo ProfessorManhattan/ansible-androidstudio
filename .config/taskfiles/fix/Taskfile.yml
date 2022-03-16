@@ -159,7 +159,7 @@ tasks:
 
   misc:
     deps:
-      - :install:python:requirements
+      - :install:pipx:pre-commit-hooks
     summary: |
       # Miscellaneous fixes
 
@@ -284,7 +284,7 @@ tasks:
 
   python:
     deps:
-      - :install:python:requirements
+      - :install:pipx:black
     desc: Automatically format Python files using Black
     hide: '{{ne .REPOSITORY_TYPE "python"}}'
     summary: |
@@ -378,7 +378,7 @@ tasks:
 
   toml:
     deps:
-      - :install:python:requirements
+      - :install:pipx:toml-sort
     desc: Format `.toml` files by alphabetizing and flattening
     summary: |
       # Automatically format `.toml` files
