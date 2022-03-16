@@ -17,11 +17,9 @@
   "type": "module",
   "scripts": {
     "build": "bash start.sh && task ansible:build:none",
-    "bump": "npm run build && npm version patch --no-commit-hooks --no-git-tag-version --force && npm publish",
     "commit": "bash start.sh && task commit",
     "fix": "bash start.sh && task fix",
     "help": "bash start.sh && task --menu",
-    "info": "task --list",
     "lint": "bash start.sh && task lint",
     "preload": "bash start.sh && task preload",
     "prepare": "bash start.sh && (test -f Taskfile.yml && task npm:prepare) || true",
@@ -50,40 +48,10 @@
     "typescript": "^4.5.5"
   },
   "keywords": [
-    "adb",
-    "android",
-    "androidsdk",
-    "androidstudio",
-    "ansible",
-    "ansible-role",
-    "apps",
-    "archlinux",
-    "awesome",
-    "centos",
-    "debian",
-    "desktop",
-    "development",
-    "doctor",
-    "fedora",
-    "google",
-    "ide",
-    "install",
-    "installdoc",
-    "installdoctor",
-    "java",
-    "macos",
     "mblabs",
     "megabytelabs",
-    "molecule",
-    "npm",
-    "package",
-    "platformtools",
     "professormanhattan",
-    "role",
-    "snap",
-    "ubuntu",
-    "washingtondc",
-    "windows"
+    "washingtondc"
   ],
   "engines": {
     "node": ">=14.18.0"
@@ -93,21 +61,10 @@
     "access": "public"
   },
   "blueprint": {
-    "ansible_galaxy_project_id": "56329",
-    "description": "Installs Android Studio and sets up Android SDKs on nearly any OS",
-    "github_id": "MDEwOlJlcG9zaXRvcnk0MDczNDE1MDk=",
-    "gitlab_group_id": "12261670",
-    "gitlab_project_id": "24464026",
-    "group": "ansible",
-    "name": "Android Studio",
-    "overview": "[Android Studio](https://developer.android.com/studio) is the official integrated development environment for Google's Android operating system, built on JetBrains' IntelliJ IDEA software and designed specifically for Android development. This role installs Android Studio on nearly any operating system and also ensures a configurable list of command-line tools and SDKs are installed and seamlessly integrated with the system (i.e. the role adds the appropriate items to the `PATH` environment variable).",
     "repository": {
       "github": "https://github.com/ProfessorManhattan/ansible-androidstudio",
       "gitlab": "https://gitlab.com/megabyte-labs/ansible-roles/androidstudio"
-    },
-    "slug": "androidstudio",
-    "subgroup": "role",
-    "title": "Android Studio - An IDE for Android Development"
+    }
   },
   "changelog": {
     "displayTypes": [
@@ -120,14 +77,13 @@
     "showAuthor": true
   },
   "commitlint": {
-    "extends": [],
+    "extends": [
+      "@commitlint/config-conventional"
+    ],
     "helpUrl": "https://megabyte.space/docs/contributing/commits"
   },
   "eslintConfig": {
-    "extends": "eslint-config-strict-mode",
-    "rules": {
-      "import/no-extraneous-dependencies": "warn"
-    }
+    "extends": "eslint-config-strict-mode"
   },
   "funding": [
     {
@@ -139,10 +95,76 @@
       "url": "https://www.patreon.com/ProfessorManhattan"
     }
   ],
+  "lint-staged": {
+    "(Brewfile|composer.lock|Gemfile|Gopkg.lock|Pipfile.lock)": [
+      "task fix:prettier --"
+    ],
+    "**/!(logo).(jpg|png)": [
+      "task image:compress --"
+    ],
+    "**/*": [
+      "task lint:any --"
+    ],
+    "**/*!(template).(json|webapp|webmanifest)": [
+      "task fix:json --"
+    ],
+    "**/*.(bash|cfg|cgi|command|css|env|env.*|handlebars|hbs|html|less|fcgi|java|md|mdx|mjml|php|phtml|properties|reg|scss|tmpl|tmux|tool|tpl|zsh)": [
+      "task fix:prettier --"
+    ],
+    "**/*.(cjs|js|jsx|mjs|ts|tsx)": [
+      "task fix:js --",
+      "task lint:js --"
+    ],
+    "**/*.(yml|yaml)": [
+      "task fix:yaml --",
+      "task lint:yaml --"
+    ],
+    "**/*.go": [
+      "task fix:go --",
+      "task lint:go --"
+    ],
+    "**/*.md": [
+      "task fix:markdown --",
+      "task lint:spelling:markdown --"
+    ],
+    "**/*.php": [
+      "task fix:php --",
+      "task lint:php --"
+    ],
+    "**/*.py": [
+      "task fix:python --",
+      "task lint:python --"
+    ],
+    "**/*.sh": [
+      "task fix:prettier --",
+      "task fix:shell --",
+      "task lint:shell --"
+    ],
+    "**/*.toml": [
+      "task fix:toml --",
+      "task fix:prettier --",
+      "task lint:toml --"
+    ],
+    "**/*.xml": [
+      "task fix:xml --",
+      "task lint:xml --"
+    ],
+    "Dockerfile": [
+      "task fix:prettier --",
+      "task lint:docker --"
+    ],
+    "Vagrantfile": [
+      "task fix:prettier --",
+      "task lint:vagrant"
+    ],
+    "logo.png": [
+      "task image:resize -- 200 200",
+      "task image:compress --"
+    ]
+  },
   "ntl": {
     "descriptions": {
       "build": "Builds the project using the build command specified under scripts in package.json",
-      "bump": "Used to quickly build, increase the package.json version, and publish the package",
       "commit": "If unsure, use this task to commit your code so that it adheres to our commit rules",
       "fix": "Run auto-fixing with all available auto-fixers",
       "help": "Display the Bodega Taskfile.yml interactive help menu",
@@ -160,7 +182,6 @@
   "pnpm": {
     "allowedVersions": {
       "@typescript-eslint/eslint-plugin": "5",
-      "eslint": "8",
       "typescript": "4"
     },
     "neverBuiltDependencies": [
