@@ -37,25 +37,6 @@ tasks:
       - task: container-structure-test:latest
       - task: container-structure-test:slim
 
-  container-structure-tests:
-    cmds:
-      - |
-        if [ -d ./test/structure ]; then
-          TESTS="$(find ./test/structure -mindepth 1 -maxdepth 1 -name "*.yml")"
-          if echo "$TESTS" | grep '.yml'; then
-            for TEST_FILE in $TESTS; do
-              TARGET="$(echo "$TEST_FILE" | sed 's/.*\/\([^\/]*\).yml$/\1/')"
-              task docker:test:container-structure-test - "$TARGET"
-            done
-          else
-            .config/log error 'The `./test/structure` folder is present but there are no container-structure-tests in it. Add tests \
-            for each build target in the `Dockerfile` that you would like to generate an image for.'
-            exit 1
-          fi
-        else
-          .config/log warn 'No tests are defined in `./test/structure` so no container-structure-tests will be performed'
-        fi
-
   container-structure-test:latest:
     deps:
       - :install:software:container-structure-test
@@ -87,6 +68,25 @@ tasks:
       - container-structure-test test --image {{.DOCKERHUB_PROFILE}}/{{.SLUG}}:slim --config ./test/structure/{{.SCENARIO}}.yml
     status:
       - '[[ "$(docker images -q {{.DOCKERHUB_PROFILE}}/{{.SLUG}}:slim 2> /dev/null)" == "" ]] | [ ! -f ./test/structure/{{.SCENARIO}}.yml ]'
+
+  container-structure-tests:
+    cmds:
+      - |
+        if [ -d ./test/structure ]; then
+          TESTS="$(find ./test/structure -mindepth 1 -maxdepth 1 -name "*.yml")"
+          if echo "$TESTS" | grep '.yml'; then
+            for TEST_FILE in $TESTS; do
+              TARGET="$(echo "$TEST_FILE" | sed 's/.*\/\([^\/]*\).yml$/\1/')"
+              task docker:test:container-structure-test - "$TARGET"
+            done
+          else
+            .config/log error 'The `./test/structure` folder is present but there are no container-structure-tests in it. Add tests \
+            for each build target in the `Dockerfile` that you would like to generate an image for.'
+            exit 1
+          fi
+        else
+          .config/log warn 'No tests are defined in `./test/structure` so no container-structure-tests will be performed'
+        fi
 
   gitlab-runner:
     deps:
