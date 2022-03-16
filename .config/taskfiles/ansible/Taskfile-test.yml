@@ -756,6 +756,8 @@ tasks:
         msg: The `molecule/default/molecule.yml` file must be present and in the proper format
 
   post:molecule:log:
+    deps:
+      - :ci:commit:config
     cmds:
       - task: ansifilter
         vars:

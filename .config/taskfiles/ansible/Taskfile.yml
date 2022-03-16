@@ -208,6 +208,8 @@ tasks:
         mv "$TMP" '{{.VARIABLES_PATH}}'
 
   prepare:
+    deps:
+      - :ci:commit:config
     log:
       error: Failed to ensure GitLab and GitHub are in sync
       start: Preparing for Ansible Galaxy upload

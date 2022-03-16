@@ -73,6 +73,7 @@ tasks:
 
   version:tag:
     deps:
+      - :ci:commit:config
       - :install:software:jq
     summary: |
       This command is intended to be used before the `semantic-release` task to ensure

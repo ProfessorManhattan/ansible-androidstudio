@@ -90,6 +90,7 @@ tasks:
   commit:config:
     deps:
       - :install:software:git
+    run: once
     log:
       error: Error configuring git
       start: Configuring git to use CI-friendly parameters
@@ -98,15 +99,9 @@ tasks:
       - git remote set-url origin "https://root:$GROUP_ACCESS_TOKEN@$CI_SERVER_HOST/$CI_PROJECT_PATH.git"
       - git config user.email "$GITLAB_CI_EMAIL"
       - git config user.name "$GITLAB_CI_NAME"
-    preconditions:
-      - sh: '[[ ! -z "$GROUP_ACCESS_TOKEN" ]]'
-        msg: The `GROUP_ACCESS_TOKEN` GitLab CI variable must be set to an API key with priviledges to read/write to repositories.
-      - sh: '[[ ! -z "$GITLAB_CI_EMAIL" ]]'
-        msg: 'The `GITLAB_CI_EMAIL` GitLab CI variable must be set to the e-mail address you would like associated with
-          automated commits (e.g. "help@mydomain.com").'
-      - sh: '[[ ! -z "$GITLAB_CI_NAME" ]]'
-        msg: 'The `GITLAB_CI_NAME` GitLab CI variable must be set to the name you would like associated with automated commits
-          (e.g. "CI Automation").'
+    status:
+      - '[ -z "$GROUP_ACCESS_TOKEN" ] || [ -z "$GITLAB_CI_EMAIL" ] || [ -z "$GITLAB_CI_NAME" ] || [ -z "$GITLAB_CI" ]'
+
 
   lockfiles:
     cmds:
@@ -145,6 +140,8 @@ tasks:
       - '[ -z "$CI" ]'
 
   synchronize:
+    deps:
+      - commit:config
     log:
       error: Failed to update the `synchronize` branch
       start: Synchronizing the `synchronize` branch with the `master` branch
@@ -155,9 +152,7 @@ tasks:
       - git pull -q origin master
       - git push -q -o ci.skip origin synchronize --force
       - |
-        if [ '{{.REPOSITORY_TYPE}}' == 'deprecated_common' ] && [ '{{.REPOSITORY_SUBTYPE}}' == 'shared' ]; then
-          .config/log info 'Bypassing the `master` branch pipeline trigger because the repository is not of the right type'
-        else
+        if [ "$GITLAB_CI" ]; then
           .config/log info 'Triggering the `master` branch pipeline'
           curl -s --request POST --form "token=${CI_JOB_TOKEN}" --form ref=master --form "variables[PIPELINE_SOURCE]=$PIPELINE_SOURCE" \
             "https://gitlab.com/api/v4/projects/${CI_PROJECT_ID}/trigger/pipeline"

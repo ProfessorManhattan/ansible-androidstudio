@@ -514,6 +514,7 @@ if [ -d .git ] && type git &> /dev/null; then
   if [ "$TIME_DIFF" -gt 900 ] || [ "$TIME_DIFF" -lt 5 ]; then
     date +%s > .cache/start.sh/git-pull-time
     HTTPS_VERSION="$(git remote get-url origin | sed 's/git@gitlab.com:/https:\/\/gitlab.com\//')"
+    logger info 'Current branch is `'"$(git rev-parse --abbrev-ref HEAD)"'`'
     if [ "$(git rev-parse --abbrev-ref HEAD)" == 'synchronize' ]; then
       git reset --hard master
     fi
