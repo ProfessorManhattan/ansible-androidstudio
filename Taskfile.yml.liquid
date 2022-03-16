@@ -208,16 +208,20 @@ tasks:
     cmds:
       - |
         \{{if .CLI_ARGS}}
+        task --list > /dev/null || (echo "ERROR: Invalid Taskfiles!" && exit 1)
         git add --all
         HUSKY=0 git commit -m "\{{.CLI_ARGS}}" --no-verify
         \{{else}}
+        task --list > /dev/null || (echo "ERROR: Invalid Taskfiles!" && exit 1)
         git add --all
         git commit
         \{{end}}
 
   commit:quick:
     cmds:
-      - git add --all
+      - |
+        task --list > /dev/null || (echo "ERROR: Invalid Taskfiles!" && exit 1)
+        git add --all
       - HUSKY=0 git commit -m '🔧 chore(tweak): quick minor update' --no-verify
       - git push origin master
 
@@ -225,7 +229,6 @@ tasks:
     deps:
       - install:npm:devcontainer
       - install:software:docker
-
 
   donothing: 'true'
 
