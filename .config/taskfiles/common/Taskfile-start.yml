@@ -152,8 +152,16 @@ tasks:
       - task: init
       - task: :common:util:task:tag:deps
         vars:
-          TAG: '{{.REPOSITORY_TYPE}}'
-      - task deps:run:parallel
+          TAG:
+            sh: if [ -n "$SETUP_TAG" ]; then echo "$SETUP_TAG"; else echo "update"; fi
+      - |
+        if ! type yq &> /dev/null; then
+          . "$HOME/.profile" &> /dev/null
+          FIRST_TASK="$(TASK_NAME="deps:run:parallel" yq e '.tasks[env(TASK_NAME)].cmds[0]' Taskfile.yml)"
+          if [ "$FIRST_TASK" != 'null' ]; then
+            task deps:run:parallel
+          fi
+        fi
       - task: prepare
       - task: update
       - task: commit
