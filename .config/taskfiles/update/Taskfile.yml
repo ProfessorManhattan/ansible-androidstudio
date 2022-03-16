@@ -8,7 +8,7 @@ tasks:
       start: Continuing the update process
       success: Finished the final stage of the update process
     cmds:
-      - task: :start
+      - task: :upstream:{{.PROJECT_TYPE}}
       - task: :ci:commit
       - task: :ci:synchronize
 
