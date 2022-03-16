@@ -24,6 +24,8 @@ tasks:
       - pnpm config set store-dir .pnpm-store
 
   checkout:
+    deps:
+      - :install:software:git
     log:
       error: Failed to pull latest changes
       start: Pulling latest changes
