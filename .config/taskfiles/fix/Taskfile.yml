@@ -398,7 +398,9 @@ tasks:
     cmds:
       - |
         {{if .CLI_ARGS}}
+        if [ -f '{{.CLI_ARGS}}' ]; then
           {{.PYTHON_HANDLE}}toml-sort -i --all {{.CLI_ARGS}}
+        fi
         {{else}}
           while read PATHH; do
             {{.PYTHON_HANDLE}}toml-sort -i --all "$PATHH"

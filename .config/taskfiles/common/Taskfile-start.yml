@@ -19,7 +19,7 @@ tasks:
     cmds:
       - task: setup
     status:
-      - '[ -z "$CI" ]'
+      - '[ -n "$CI" ]'
 
   commit:
     cmds:
@@ -46,13 +46,13 @@ tasks:
     cmds:
       - task: setup
     status:
-      - '[ -n "$CI" ] && [ -f /.dockerenv ]'
+      - '[ -z "$CI" ] && [ -f /.dockerenv ]'
 
   docker:
     cmds:
       - task: docker:taskfile
     status:
-      - '[ -n "$CI" ] && [ ! -f /.dockerenv ]'
+      - '[ -z "$CI" ] || [ ! -f /.dockerenv ]'
 
   docker:taskfile:
     cmds:
