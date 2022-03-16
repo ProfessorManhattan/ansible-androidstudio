@@ -31,7 +31,7 @@ tasks:
     cmds:
       - |
         if [ -d ./test/structure ]; then
-          TESTS="$(find ./test/structure -mindepth 1 -maxdepth 1 -type -f -name "*.yml")"
+          TESTS="$(find ./test/structure -mindepth 1 -maxdepth 1 -type f -name "*.yml")"
           if echo "$TESTS" | grep '.yml'; then
             for TEST_FILE in $TESTS; do
               TARGET="$(echo "$TEST_FILE" | sed 's/.*\/\([^\/]*\).yml$/\1/')"
@@ -94,7 +94,7 @@ tasks:
     cmds:
       - |
         if [ -d ./test/structure ]; then
-          TESTS="$(find ./test/structure -mindepth 1 -maxdepth 1 -type -f -name "*.yml")"
+          TESTS="$(find ./test/structure -mindepth 1 -maxdepth 1 -type f -name "*.yml")"
           if echo "$TESTS" | grep '.yml'; then
             for TEST_FILE in $TESTS; do
               TARGET="$(echo "$TEST_FILE" | sed 's/.*\/\([^\/]*\).yml$/\1/')"

@@ -9,7 +9,7 @@ tasks:
     cmds:
       - |
         if [ -d ./test ]; then
-          TEST_FOLDERS="$(find ./test -mindepth 1 -maxdepth 1 -type -d)"
+          TEST_FOLDERS="$(find ./test -mindepth 1 -maxdepth 1 -type d)"
           if echo "$TEST_FOLDERS" | grep '/test/'; then
             CURR_DIR="$PWD"
             for TEST_DIR in $TEST_FOLDERS; do
@@ -36,6 +36,25 @@ tasks:
     cmds:
       - task: container-structure-test:latest
       - task: container-structure-test:slim
+
+  container-structure-tests:
+    cmds:
+      - |
+        if [ -d ./test/structure ]; then
+          TESTS="$(find ./test/structure -mindepth 1 -maxdepth 1 -name "*.yml")"
+          if echo "$TESTS" | grep '.yml'; then
+            for TEST_FILE in $TESTS; do
+              TARGET="$(echo "$TEST_FILE" | sed 's/.*\/\([^\/]*\).yml$/\1/')"
+              task docker:test:container-structure-test - "$TARGET"
+            done
+          else
+            .config/log error 'The `./test/structure` folder is present but there are no container-structure-tests in it. Add tests \
+            for each build target in the `Dockerfile` that you would like to generate an image for.'
+            exit 1
+          fi
+        else
+          .config/log warn 'No tests are defined in `./test/structure` so no container-structure-tests will be performed'
+        fi
 
   container-structure-test:latest:
     deps:
@@ -68,25 +87,6 @@ tasks:
       - container-structure-test test --image {{.DOCKERHUB_PROFILE}}/{{.SLUG}}:slim --config ./test/structure/{{.SCENARIO}}.yml
     status:
       - '[[ "$(docker images -q {{.DOCKERHUB_PROFILE}}/{{.SLUG}}:slim 2> /dev/null)" == "" ]] | [ ! -f ./test/structure/{{.SCENARIO}}.yml ]'
-
-  container-structure-tests:
-    cmds:
-      - |
-        if [ -d ./test/structure ]; then
-          TESTS="$(find ./test/structure -mindepth 1 -maxdepth 1 -name "*.yml")"
-          if echo "$TESTS" | grep '.yml'; then
-            for TEST_FILE in $TESTS; do
-              TARGET="$(echo "$TEST_FILE" | sed 's/.*\/\([^\/]*\).yml$/\1/')"
-              task docker:test:container-structure-test - "$TARGET"
-            done
-          else
-            .config/log error 'The `./test/structure` folder is present but there are no container-structure-tests in it. Add tests \
-            for each build target in the `Dockerfile` that you would like to generate an image for.'
-            exit 1
-          fi
-        else
-          .config/log warn 'No tests are defined in `./test/structure` so no container-structure-tests will be performed'
-        fi
 
   gitlab-runner:
     deps:
@@ -130,7 +130,7 @@ tasks:
     vars:
       MOUNT_PATH: '{{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}${PWD}{{end}}'
     hide:
-      sh: '! find ./test -mindepth 1 -maxdepth 1 -type -d | grep output'
+      sh: '! find ./test -mindepth 1 -maxdepth 1 -type d | grep output'
     log:
       error: There was an error while comparing `latest` and `slim` image outputs for `{{.DOCKER_IMAGE}}`
       start: Comparing outputs of the `latest` and `slim` images for `{{.DOCKER_IMAGE}}`
@@ -159,7 +159,7 @@ tasks:
     cmds:
       - |
         if [ -d test ]; then
-          TESTS="$(find ./test -mindepth 1 -maxdepth 1 -type -d -name "output-")"
+          TESTS="$(find ./test -mindepth 1 -maxdepth 1 -type d -name "output-")"
           if echo "$TESTS" | grep 'output'; then
             for TEST_FILE in $TESTS; do
               TARGET="$(echo "$TEST_FILE" | sed 's/.*\/\([^\/]*\).yml$/\1/')"
