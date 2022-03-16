@@ -218,6 +218,8 @@ tasks:
         \{{end}}
 
   commit:quick:
+    deps:
+      - ci:commit:config
     cmds:
       - |
         task --list > /dev/null || (echo "ERROR: Invalid Taskfiles!" && exit 1)
