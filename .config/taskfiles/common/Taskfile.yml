@@ -189,6 +189,7 @@ tasks:
                 sh: echo '{{.ANSWER}}' | sed 's/ /-/g' | tr '[:upper:]' '[:lower:]'
 
   start:
+    run: once
     cmds:
       - task: :common:start:docker
       - task: :common:start:ci

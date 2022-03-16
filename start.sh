@@ -545,7 +545,7 @@ if [ -z "$CI" ] && [ -z "$START" ] && [ -z "$INIT_CWD" ]; then
   . "$HOME/.profile"
   ensureProjectBootstrapped
   if task donothing &> /dev/null; then
-    task start
+    task -vvv start
   else
     logger info 'Ensuring Taskfile.yml files are all in good standing'
     ensureTaskfiles
