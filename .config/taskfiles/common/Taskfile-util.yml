@@ -82,7 +82,7 @@ tasks:
           RESULT="$RESULT{{.TEMPLATE}}"
         done
         if [ "$COUNT" -gt 0 ]; then
-          ARR="$(echo -e "$RESULT")" yq e -e '.tasks["deps:run:parallel"].cmds = env(ARR)' Taskfile.yml
+          ARR="$(echo -e "$RESULT")" yq e -i '.tasks["deps:run:parallel"].cmds = env(ARR)' Taskfile.yml
         else
           .config/log warn 'There were no results so nothing was added to the `Taskfile.yml`'
         fi

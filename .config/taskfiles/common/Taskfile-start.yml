@@ -135,7 +135,6 @@ tasks:
     cmds:
       - task: setup:start:ci
       - task: setup:start:dev
-      - task: finish
 
   setup:start:ci:
     cmds:
