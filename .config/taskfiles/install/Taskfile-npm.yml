@@ -35,20 +35,20 @@ tasks:
     cmds:
       - task: install:npm
         vars:
+          BIN_NAME: git-cz
+
           FORCE_INSTALL: true
           INSTALL_TASK: '{{.TASK}}'
           PACKAGE: commitizen
-          BIN_NAME: git-cz
-
   commitlint:
     run: once
     cmds:
       - task: install:npm
         vars:
-          INSTALL_TASK: '{{.TASK}}'
-          PACKAGE: '@commitlint/cli'
           BIN_NAME: commitlint
 
+          INSTALL_TASK: '{{.TASK}}'
+          PACKAGE: '@commitlint/cli'
   cspell:
     run: once
     cmds:
@@ -70,10 +70,10 @@ tasks:
     cmds:
       - task: install:npm
         vars:
-          INSTALL_TASK: '{{.TASK}}'
-          PACKAGE: '@vscode/dev-container-cli'
           BIN_NAME: devcontainer
 
+          INSTALL_TASK: '{{.TASK}}'
+          PACKAGE: '@vscode/dev-container-cli'
   dockerfilelint:
     run: once
     cmds:
@@ -124,28 +124,6 @@ tasks:
           INSTALL_TASK: '{{.TASK}}'
           PACKAGE: git-notify
 
-  install:npm:
-    deps:
-      - global:package-manager
-    vars:
-      BIN: '{{if .BIN_NAME}}{{.BIN_NAME}}{{else}}{{.PACKAGE}}{{end}}'
-      INSTALL_RECORD:
-        sh: |
-          if [ -n "$RECORD_INSTALL" ]; then
-            mkdir -p local/slim
-            echo '{{.PACKAGE_BIN}}' >> local/slim/exe.txt
-            echo '{{.INSTALL_TASK}}' >> local/slim/install.txt
-          fi
-    run: when_changed
-    log:
-      error: Failed to install NPM package `{{.PACKAGE}}` globally
-      start: Installing NPM package `{{.PACKAGE}}` globally
-      success: Installed NPM package `{{.PACKAGE}}` globally
-    cmds:
-      - '{{.NPM_PROGRAM}} install -g {{.PACKAGE}}'
-    status:
-      - type {{.BIN}} > /dev/null
-
   global:library:
     deps:
       - global:package-manager
@@ -188,15 +166,37 @@ tasks:
           INSTALL_TASK: '{{.TASK}}'
           PACKAGE: husky
 
+  install:npm:
+    deps:
+      - global:package-manager
+    vars:
+      BIN: '{{if .BIN_NAME}}{{.BIN_NAME}}{{else}}{{.PACKAGE}}{{end}}'
+      INSTALL_RECORD:
+        sh: |
+          if [ -n "$RECORD_INSTALL" ]; then
+            mkdir -p local/slim
+            echo '{{.PACKAGE_BIN}}' >> local/slim/exe.txt
+            echo '{{.INSTALL_TASK}}' >> local/slim/install.txt
+          fi
+    run: when_changed
+    log:
+      error: Failed to install NPM package `{{.PACKAGE}}` globally
+      start: Installing NPM package `{{.PACKAGE}}` globally
+      success: Installed NPM package `{{.PACKAGE}}` globally
+    cmds:
+      - '{{.NPM_PROGRAM}} install -g {{.PACKAGE}}'
+    status:
+      - type {{.BIN}} > /dev/null
+
   ionic:
     run: once
     cmds:
       - task: install:npm
         vars:
-          INSTALL_TASK: '{{.TASK}}'
-          PACKAGE: '@ionic/cli'
           BIN_NAME: ionic
 
+          INSTALL_TASK: '{{.TASK}}'
+          PACKAGE: '@ionic/cli'
   jest:
     run: once
     cmds:
@@ -230,9 +230,9 @@ tasks:
     cmds:
       - task: install:npm
         vars:
+          BIN_NAME: hbs
           INSTALL_TASK: '{{.TASK}}'
           PACKAGE: hbs-cli
-          BIN_NAME: hbs
       - task: liquidjs:install
 
   liquidjs:install:
@@ -273,10 +273,10 @@ tasks:
     cmds:
       - task: install:npm
         vars:
-          INSTALL_TASK: '{{.TASK}}'
-          PACKAGE: modclean@2
           BIN_NAME: modclean
 
+          INSTALL_TASK: '{{.TASK}}'
+          PACKAGE: modclean@2
   ndb:
     run: once
     cmds:
@@ -290,10 +290,10 @@ tasks:
     cmds:
       - task: install:npm
         vars:
-          INSTALL_TASK: '{{.TASK}}'
-          PACKAGE: '@nestjs/cli'
           BIN_NAME: nest
 
+          INSTALL_TASK: '{{.TASK}}'
+          PACKAGE: '@nestjs/cli'
   nodemon:
     run: once
     cmds:
@@ -405,10 +405,10 @@ tasks:
     cmds:
       - task: install:npm
         vars:
-          INSTALL_TASK: '{{.TASK}}'
-          PACKAGE: '@appnest/readme'
           BIN_NAME: readme
 
+          INSTALL_TASK: '{{.TASK}}'
+          PACKAGE: '@appnest/readme'
   remark:
     run: once
     tags:
@@ -416,10 +416,10 @@ tasks:
     cmds:
       - task: install:npm
         vars:
-          INSTALL_TASK: '{{.TASK}}'
-          PACKAGE: remark-cli
           BIN_NAME: remark
 
+          INSTALL_TASK: '{{.TASK}}'
+          PACKAGE: remark-cli
   semantic-release:
     run: once
     cmds:
@@ -433,10 +433,10 @@ tasks:
     cmds:
       - task: install:npm
         vars:
-          INSTALL_TASK: '{{.TASK}}'
-          PACKAGE: sharp-cli
           BIN_NAME: sharp
 
+          INSTALL_TASK: '{{.TASK}}'
+          PACKAGE: sharp-cli
   shellcheck:
     run: once
     cmds:
@@ -484,10 +484,10 @@ tasks:
     cmds:
       - task: install:npm
         vars:
-          INSTALL_TASK: '{{.TASK}}'
-          PACKAGE: tinypng-cli
           BIN_NAME: tinypng
 
+          INSTALL_TASK: '{{.TASK}}'
+          PACKAGE: tinypng-cli
   ts-node:
     run: once
     cmds:
@@ -509,10 +509,10 @@ tasks:
     cmds:
       - task: install:npm
         vars:
-          INSTALL_TASK: '{{.TASK}}'
-          PACKAGE: typescript
           BIN_NAME: tsc
 
+          INSTALL_TASK: '{{.TASK}}'
+          PACKAGE: typescript
   typesync:
     run: once
     cmds:

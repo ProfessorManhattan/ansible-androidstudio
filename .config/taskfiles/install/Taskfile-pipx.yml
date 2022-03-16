@@ -79,7 +79,6 @@ tasks:
     status:
       - type {{.BIN}} > /dev/null
 
-
   mod-ansible-autodoc:
     run: once
     cmds:

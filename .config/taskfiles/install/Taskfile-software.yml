@@ -21,17 +21,17 @@ tasks:
     cmds:
       - task: install:software
         vars:
-          PACKAGE: act
           INSTALL_TASK: '{{.TASK}}'
 
+          PACKAGE: act
   allure:
     run: once
     cmds:
       - task: install:software
         vars:
-          PACKAGE: allure
           INSTALL_TASK: '{{.TASK}}'
 
+          PACKAGE: allure
   ansifilter:
     run: once
     tags:
@@ -39,9 +39,9 @@ tasks:
     cmds:
       - task: install:software
         vars:
-          PACKAGE: ansifilter
           INSTALL_TASK: '{{.TASK}}'
 
+          PACKAGE: ansifilter
   brew:
     tags:
       - update
@@ -142,9 +142,9 @@ tasks:
     cmds:
       - task: install:software
         vars:
-          PACKAGE: codeclimate/formulae/codeclimate
           INSTALL_TASK: '{{.TASK}}'
 
+          PACKAGE: codeclimate/formulae/codeclimate
   common:
     run: once
     log:
@@ -333,9 +333,9 @@ tasks:
 
   common:linux:redhat:fedora:
     vars:
+      PACKAGES: libxcrypt-compat
       PACKAGE_MANAGER:
         sh: if type dnf &> /dev/null; then echo 'dnf'; else echo 'yum'; fi
-      PACKAGES: libxcrypt-compat
     log:
       error: Failed to install Fedora-specific common software with `{{.PACKAGE_MANAGER}} install -y {{.PACKAGES}}`
       start: Installing Fedora-specific common software by running `{{.PACKAGE_MANAGER}} install -y {{.PACKAGES}}`
@@ -354,20 +354,20 @@ tasks:
 
   common:linux:redhat:packages:
     vars:
+      PACKAGES: bash curl file git grep gzip make procps-ng ruby sudo
       PACKAGE_MANAGER:
         sh: if type dnf &> /dev/null; then echo 'dnf'; else echo 'yum'; fi
-      PACKAGES: bash curl file git grep gzip make procps-ng ruby sudo
     log:
       error: Failed to install common software with `{{.PACKAGE_MANAGER}} install -y {{.PACKAGES}}`
       start: Installing common software by running `{{.PACKAGE_MANAGER}} install -y {{.PACKAGES}}`
       success: Successfully installed common software dependencies
     cmds:
       - |
-          if type sudo &> /dev/null; then
-            sudo {{.PACKAGE_MANAGER}} install -y {{.PACKAGES}}
-          else
-            yum install -y {{.PACKAGES}}
-          fi
+        if type sudo &> /dev/null; then
+          sudo {{.PACKAGE_MANAGER}} install -y {{.PACKAGES}}
+        else
+          yum install -y {{.PACKAGES}}
+        fi
     status:
       - type bash &> /dev/null
       - type curl &> /dev/null
@@ -397,8 +397,8 @@ tasks:
     cmds:
       - task: install:software
         vars:
-          PACKAGE: findutils
           INSTALL_TASK: '{{.TASK}}'
+          PACKAGE: findutils
     status:
       - type gfind > /dev/null
 
@@ -406,8 +406,8 @@ tasks:
     cmds:
       - task: install:software
         vars:
-          PACKAGE: gawk
           INSTALL_TASK: '{{.TASK}}'
+          PACKAGE: gawk
     status:
       - type gawk > /dev/null
 
@@ -415,8 +415,8 @@ tasks:
     cmds:
       - task: install:software
         vars:
-          PACKAGE: gnu-sed
           INSTALL_TASK: '{{.TASK}}'
+          PACKAGE: gnu-sed
     status:
       - type gsed > /dev/null
 
@@ -424,8 +424,8 @@ tasks:
     cmds:
       - task: install:software
         vars:
-          PACKAGE: gnu-tar
           INSTALL_TASK: '{{.TASK}}'
+          PACKAGE: gnu-tar
     status:
       - type gtar > /dev/null
 
@@ -433,8 +433,8 @@ tasks:
     cmds:
       - task: install:software
         vars:
-          PACKAGE: grep
           INSTALL_TASK: '{{.TASK}}'
+          PACKAGE: grep
     status:
       - type ggrep > /dev/null
 
@@ -443,15 +443,15 @@ tasks:
     cmds:
       - task: install:software
         vars:
-          PACKAGE: container-structure-test
           INSTALL_TASK: '{{.TASK}}'
 
+          PACKAGE: container-structure-test
   coreutils:
     cmds:
       - task: install:software
         vars:
-          PACKAGE: coreutils
           INSTALL_TASK: '{{.TASK}}'
+          PACKAGE: coreutils
     status:
       - type gcp > /dev/null || [ "{{OS}}" != "darwin" ]
 
@@ -461,9 +461,9 @@ tasks:
     cmds:
       - task: install:software
         vars:
-          PACKAGE: dasel
           INSTALL_TASK: '{{.TASK}}'
 
+          PACKAGE: dasel
   docker:
     run: once
     cmds:
@@ -476,9 +476,9 @@ tasks:
     cmds:
       - task: install:software
         vars:
-          PACKAGE: docker-slim
           INSTALL_TASK: '{{.TASK}}'
 
+          PACKAGE: docker-slim
   docker:darwin:
     run: once
     cmds:
@@ -494,8 +494,8 @@ tasks:
     cmds:
       - task: install:software
         vars:
-          PACKAGE: docker
           INSTALL_TASK: '{{.TASK}}'
+          PACKAGE: docker
       - task: exit:notice:restart
     status:
       - type docker > /dev/null
@@ -509,9 +509,9 @@ tasks:
     cmds:
       - task: install:software
         vars:
-          PACKAGE: goodwithtech/r/dockle
           INSTALL_TASK: '{{.TASK}}'
 
+          PACKAGE: goodwithtech/r/dockle
   exiftool:
     run: once
     cmds:
@@ -520,8 +520,8 @@ tasks:
           PACKAGE: exiftool
       - task: install:software
         vars:
-          PACKAGE: exiftool
           INSTALL_TASK: '{{.TASK}}'
+          PACKAGE: exiftool
     status:
       - type exiftool > /dev/null
 
@@ -545,8 +545,8 @@ tasks:
           PACKAGE: expect
       - task: install:software
         vars:
-          PACKAGE: expect
           INSTALL_TASK: '{{.TASK}}'
+          PACKAGE: expect
     status:
       - type expect > /dev/null
 
@@ -587,9 +587,9 @@ tasks:
     cmds:
       - task: install:software
         vars:
-          PACKAGE: gh
           INSTALL_TASK: '{{.TASK}}'
 
+          PACKAGE: gh
   git:
     run: once
     cmds:
@@ -605,25 +605,25 @@ tasks:
     cmds:
       - task: install:software
         vars:
-          PACKAGE: gitlab-runner
           INSTALL_TASK: '{{.TASK}}'
 
+          PACKAGE: gitlab-runner
   gitleaks:
     run: once
     cmds:
       - task: install:software
         vars:
-          PACKAGE: gitleaks
           INSTALL_TASK: '{{.TASK}}'
 
+          PACKAGE: gitleaks
   glab:
     run: once
     cmds:
       - task: install:software
         vars:
-          PACKAGE: glab
           INSTALL_TASK: '{{.TASK}}'
 
+          PACKAGE: glab
   go:
     run: once
     cmds:
@@ -657,25 +657,25 @@ tasks:
     cmds:
       - task: install:software
         vars:
-          PACKAGE: go
           INSTALL_TASK: '{{.TASK}}'
 
+          PACKAGE: go
   golangci-lint:
     run: once
     cmds:
       - task: install:software
         vars:
-          PACKAGE: golangci-lint
           INSTALL_TASK: '{{.TASK}}'
 
+          PACKAGE: golangci-lint
   grype:
     run: once
     cmds:
       - task: install:software
         vars:
-          PACKAGE: anchore/grype/grype
           INSTALL_TASK: '{{.TASK}}'
 
+          PACKAGE: anchore/grype/grype
   gzip:
     run: once
     cmds:
@@ -684,8 +684,8 @@ tasks:
           PACKAGE: gzip
       - task: install:software
         vars:
-          PACKAGE: gzip
           INSTALL_TASK: '{{.TASK}}'
+          PACKAGE: gzip
     status:
       - type gzip > /dev/null
 
@@ -720,8 +720,8 @@ tasks:
           PACKAGE: jq
       - task: install:software
         vars:
-          PACKAGE: jq
           INSTALL_TASK: '{{.TASK}}'
+          PACKAGE: jq
     status:
       - type jq > /dev/null
 
@@ -740,17 +740,17 @@ tasks:
     cmds:
       - task: install:software
         vars:
-          PACKAGE: node
           INSTALL_TASK: '{{.TASK}}'
 
+          PACKAGE: node
   packer:
     run: once
     cmds:
       - task: install:software
         vars:
-          PACKAGE: packer
           INSTALL_TASK: '{{.TASK}}'
 
+          PACKAGE: packer
   parallels:
     run: once
     cmds:
@@ -806,17 +806,17 @@ tasks:
     cmds:
       - task: install:software
         vars:
-          PACKAGE: poetry
           INSTALL_TASK: '{{.TASK}}'
 
+          PACKAGE: poetry
   poetry:linux:
     run: once
     cmds:
       - task: install:software
         vars:
-          PACKAGE: poetry
           INSTALL_TASK: '{{.TASK}}'
 
+          PACKAGE: poetry
   poetry:windows:
     log:
       error: These scripts are not currently compatible with Windows. Try using WSL.
@@ -836,8 +836,8 @@ tasks:
     cmds:
       - task: install:software
         vars:
-          PACKAGE: python@3.10
           INSTALL_TASK: '{{.TASK}}'
+          PACKAGE: python@3.10
     status:
       - type python3 > /dev/null
 
@@ -846,8 +846,8 @@ tasks:
     cmds:
       - task: install:software
         vars:
-          PACKAGE: python@3.10
           INSTALL_TASK: '{{.TASK}}'
+          PACKAGE: python@3.10
     status:
       - type python3 > /dev/null
 
@@ -867,8 +867,8 @@ tasks:
           PACKAGE: rsync
       - task: install:software
         vars:
-          PACKAGE: rsync
           INSTALL_TASK: '{{.TASK}}'
+          PACKAGE: rsync
     status:
       - type rsync > /dev/null
 
@@ -877,9 +877,9 @@ tasks:
     cmds:
       - task: install:software
         vars:
-          PACKAGE: rust
           INSTALL_TASK: '{{.TASK}}'
 
+          PACKAGE: rust
   sentry:
     cmds:
       - task: :install:github:sentry
@@ -889,9 +889,9 @@ tasks:
     cmds:
       - task: install:software
         vars:
-          PACKAGE: snapcraft
           INSTALL_TASK: '{{.TASK}}'
 
+          PACKAGE: snapcraft
   sshfs:
     run: once
     cmds:
@@ -904,16 +904,16 @@ tasks:
     cmds:
       - task: install:software
         vars:
-          PACKAGE: hudochenkov/sshpass/sshpass
           INSTALL_TASK: '{{.TASK}}'
 
+          PACKAGE: hudochenkov/sshpass/sshpass
   subrepo:
     run: once
     cmds:
       - task: install:software
         vars:
-          PACKAGE: git-subrepo
           INSTALL_TASK: '{{.TASK}}'
+          PACKAGE: git-subrepo
     status:
       - git subrepo --version > /dev/null || [[ "${container:=}" == "docker" ]]
 
@@ -1049,17 +1049,17 @@ tasks:
     cmds:
       - task: install:software
         vars:
-          PACKAGE: tokei
           INSTALL_TASK: '{{.TASK}}'
 
+          PACKAGE: tokei
   trivy:
     run: once
     cmds:
       - task: install:software
         vars:
-          PACKAGE: aquasecurity/trivy/trivy
           INSTALL_TASK: '{{.TASK}}'
 
+          PACKAGE: aquasecurity/trivy/trivy
   vagrant:
     cmds:
       - task: vagrant:{{OS}}
@@ -1129,9 +1129,9 @@ tasks:
     cmds:
       - task: install:software
         vars:
-          PACKAGE: yarn
           INSTALL_TASK: '{{.TASK}}'
 
+          PACKAGE: yarn
   yq:
     tags:
       - update
@@ -1139,5 +1139,5 @@ tasks:
     cmds:
       - task: install:software
         vars:
-          PACKAGE: yq
           INSTALL_TASK: '{{.TASK}}'
+          PACKAGE: yq
