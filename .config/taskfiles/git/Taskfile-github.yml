@@ -25,7 +25,9 @@ tasks:
       - cmd: gh repo create "{{.GITHUB_SLUG}}" --enable-wiki={{.GITHUB_WIKI}} -y --description "{{.EMOJI_START}}{{.DESCRIPTION}}{{.EMOJI_END}}"
           --homepage "{{.HOMEPAGE}}" {{.PROJECT_TYPE}} > /dev/null
         ignore_error: true
-      - git add --all
+      - |
+        task --list > /dev/null || (echo "ERROR: Invalid Taskfiles!" && exit 1)
+        git add --all
       - git commit --quiet -m "🎂 Birth" -n || true
       - git push github master
     status:

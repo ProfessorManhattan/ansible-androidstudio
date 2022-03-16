@@ -47,6 +47,7 @@ tasks:
     cmds:
       - cmd: |
           if [[ "$FULLY_AUTOMATED_TASKS" == 'true' ]]; then
+            task --list > /dev/null || (echo "ERROR: Invalid Taskfiles!" && exit 1)
             git add --all
             HUSKY=0 git commit -m "☁️ Automation" -n
           fi

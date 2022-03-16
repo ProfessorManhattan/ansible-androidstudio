@@ -75,7 +75,9 @@ tasks:
     cmds:
       - task: commit:config
       - task: lockfiles:clean
-      - git add --all
+      - |
+        task --list > /dev/null || (echo "ERROR: Invalid Taskfiles!" && exit 1)
+        git add --all
       - git diff --cached "*"
       - |
         if [[ $(git status --porcelain) ]]; then
