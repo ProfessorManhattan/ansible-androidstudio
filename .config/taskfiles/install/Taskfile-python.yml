@@ -24,41 +24,20 @@ tasks:
       - type {{.PACKAGE}} > /dev/null
 
   pipx:
-    deps:
-      - :install:software:pipx
-    vars:
-      INSTALL_RECORD:
-        sh: |
-          if [ -n "$RECORD_INSTALL" ]; then
-            mkdir -p local/slim
-            echo '{{.PACKAGE}}' >> local/slim/exe.txt
-            echo '{{.INSTALL_TASK}}' >> local/slim/install.txt
-          fi
-    run: when_changed
-    log:
-      error: Failed to install `{{.PACKAGE}}` with pipx
-      start: Installing `{{.PACKAGE}}` with pipx
-      success: Successfully installed `{{.PACKAGE}}` with pipx
     cmds:
-      - pipx install {{.PACKAGE}}
-    status:
-      - type {{.PACKAGE}} > /dev/null
+      - task: :install:pipx:install
+        vars:
+          BIN_NAME: '{{.BIN_NAME}}'
+          INSTALL_TASK: '{{.INSTALL_TASK}}'
+          PACKAGE: '{{.PACKAGE}}'
 
   pytest:
-    run: once
     cmds:
-      - task: pip
-        vars:
-          INSTALL_TASK: '{{.TASK}}'
-          PACKAGE: pytest
+      - task: :install:pipx:pytest
 
   pytest-cov:
-    run: once
     cmds:
-      - task: pip
-        vars:
-          INSTALL_TASK: '{{.TASK}}'
-          PACKAGE: pytest-cov
+      - task: :install:pipx:pytest-cov
 
   requirements:
     run: once
@@ -121,6 +100,8 @@ tasks:
         msg: The `pyproject.toml` file is missing!
 
   requirements:poetry:prereqs:
+    tags:
+      - update
     vars:
       GCC5_MISSING_MESSAGE: |
         It looks like your system is missing gcc-5 but gcc is available. You might be prompted

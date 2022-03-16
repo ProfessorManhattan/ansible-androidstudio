@@ -132,8 +132,10 @@ vars:
   # yamllint enable rule:line-length
   PYTHON_HANDLE: 'poetry run '
   PYTHON_VIRTUALENV: true
-  REPOSITORY_SUBTYPE: role
-  REPOSITORY_TYPE: ansible
+  REPOSITORY_SUBTYPE:
+    sh: if type jq &> /dev/null && [ -f package.json ]; then VER="$(jq -r .blueprint.subgroup package.json)"; if [ "$VER" == null ]; then echo "documentation"; else echo "$VER"; fi; else echo "documentation"; fi
+  REPOSITORY_TYPE:
+    sh: if type jq &> /dev/null && [ -f package.json ]; then VER="$(jq -r .blueprint.group package.json)"; if [ "$VER" == null ]; then echo "documentation"; else echo "$VER"; fi; else echo "documentation"; fi
   SEMANTIC_CONFIG: semantic-release-config
   TIMEZONE: America/New_York
 env:

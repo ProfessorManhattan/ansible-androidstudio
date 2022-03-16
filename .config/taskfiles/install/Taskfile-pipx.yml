@@ -1,0 +1,129 @@
+---
+version: '3'
+
+tasks:
+  ansible:
+    tags:
+      - update
+    run: once
+    cmds:
+      - task: install:pipx
+        vars:
+          BIN_NAME: ansible
+          INSTALL_TASK: '{{.TASK}}'
+          PACKAGE: ansible-base
+
+  ansible-lint:
+    run: once
+    cmds:
+      - task: install:pipx
+        vars:
+          INSTALL_TASK: '{{.TASK}}'
+          PACKAGE: ansible-lint
+
+  ansibler:
+    tags:
+      - update
+    run: once
+    cmds:
+      - task: install:pipx
+        vars:
+          INSTALL_TASK: '{{.TASK}}'
+          PACKAGE: ansibler
+
+  black:
+    tags:
+      - update
+    run: once
+    cmds:
+      - task: install:pipx
+        vars:
+          INSTALL_TASK: '{{.TASK}}'
+          PACKAGE: black
+
+  blocklint:
+    run: once
+    cmds:
+      - task: install:pipx
+        vars:
+          INSTALL_TASK: '{{.TASK}}'
+          PACKAGE: blocklint
+
+  flake8:
+    run: once
+    cmds:
+      - task: install:pipx
+        vars:
+          INSTALL_TASK: '{{.TASK}}'
+          PACKAGE: flake8
+
+  install:pipx:
+    deps:
+      - :install:software:pipx
+    vars:
+      BIN: '{{if .BIN_NAME}}{{.BIN_NAME}}{{else}}{{.PACKAGE}}{{end}}'
+      INSTALL_RECORD:
+        sh: |
+          if [ -n "$RECORD_INSTALL" ]; then
+            mkdir -p local/slim
+            echo '{{.BIN}}' >> local/slim/exe.txt
+            echo '{{.INSTALL_TASK}}' >> local/slim/install.txt
+          fi
+    run: when_changed
+    log:
+      error: Failed to install `{{.PACKAGE}}` with pipx
+      start: Installing `{{.PACKAGE}}` with pipx
+      success: Successfully installed `{{.PACKAGE}}` with pipx
+    cmds:
+      - pipx install {{.PACKAGE}}
+    status:
+      - type {{.BIN}} > /dev/null
+
+
+  mod-ansible-autodoc:
+    run: once
+    cmds:
+      - task: install:pipx
+        vars:
+          INSTALL_TASK: '{{.TASK}}'
+          PACKAGE: mod-ansible-autodoc
+
+  molecule:
+    run: once
+    cmds:
+      - task: install:pipx
+        vars:
+          INSTALL_TASK: '{{.TASK}}'
+          PACKAGE: molecule
+
+  pre-commit-hooks:
+    run: once
+    cmds:
+      - task: install:pipx
+        vars:
+          INSTALL_TASK: '{{.TASK}}'
+          PACKAGE: pre-commit-hooks
+
+  proselint:
+    run: once
+    cmds:
+      - task: install:pipx
+        vars:
+          INSTALL_TASK: '{{.TASK}}'
+          PACKAGE: proselint
+
+  pytest:
+    run: once
+    cmds:
+      - task: install:pipx
+        vars:
+          INSTALL_TASK: '{{.TASK}}'
+          PACKAGE: pytest
+
+  pytest-cov:
+    run: once
+    cmds:
+      - task: install:pipx
+        vars:
+          INSTALL_TASK: '{{.TASK}}'
+          PACKAGE: pytest-cov

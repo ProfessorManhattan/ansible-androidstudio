@@ -205,11 +205,15 @@ tasks:
       - task: pipx:global
 
   pipx:global:
+    todo: Remove once task --tag is implemented
     deps:
       - :install:software:pipx
       - :install:software:yq
     vars:
-      PIPX_PACKAGES: ansible-base ansible-lint ansibler black blocklint docker flake8
+      PIPX_PACKAGES: ansible-base ansible-lint ansibler black blocklint flake8
+        mod-ansible-autodoc molecule pre-commit-hooks
+        proselint
+      PIPX_PACKAGES__: ansible-base ansible-lint ansibler black blocklint docker flake8
         mod-ansible-autodoc molecule molecule-docker molecule-vagrant pre-commit-hooks
         proselint python-vagrant pywinrm
     log:

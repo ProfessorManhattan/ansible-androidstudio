@@ -9,16 +9,17 @@ tasks:
   catfs:
     run: once
     cmds:
-      - task: install
+      - task: install:rust
         vars:
-          BIN: catfs
+          BIN_NAME: catfs
           INSTALL_TASK: '{{.TASK}}'
           PACKAGE: catfs
 
-  install:
+  install:rust:
     deps:
       - :install:software:rust
     vars:
+      BIN: '{{if .BIN_NAME}}{{.BIN_NAME}}{{else}}{{.PACKAGE}}{{end}}'
       INSTALL_RECORD:
         sh: |
           if [ -n "$RECORD_INSTALL" ]; then

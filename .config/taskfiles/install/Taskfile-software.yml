@@ -19,28 +19,32 @@ tasks:
       `act -j test`
     run: once
     cmds:
-      - task: brew:formulae
+      - task: install:software
         vars:
-          FORMULAE: act
+          PACKAGE: act
           INSTALL_TASK: '{{.TASK}}'
 
   allure:
     run: once
     cmds:
-      - task: brew:formulae
+      - task: install:software
         vars:
-          FORMULAE: allure
+          PACKAGE: allure
           INSTALL_TASK: '{{.TASK}}'
 
   ansifilter:
     run: once
+    tags:
+      - update
     cmds:
-      - task: brew:formulae
+      - task: install:software
         vars:
-          FORMULAE: ansifilter
+          PACKAGE: ansifilter
           INSTALL_TASK: '{{.TASK}}'
 
   brew:
+    tags:
+      - update
     run: once
     log:
       error: Failed to install or load Homebrew
@@ -83,24 +87,12 @@ tasks:
       - type brew &> /dev/null
 
   brew:formulae:
-    vars:
-      INSTALL_RECORD:
-        sh: |
-          if [ -n "$RECORD_INSTALL" ]; then
-            mkdir -p local/slim
-            echo '{{last (splitList "/" .FORMULAE)}}' >> local/slim/exe.txt
-            echo '{{.INSTALL_TASK}}' >> local/slim/install.txt
-          fi
-    run: when_changed
-    log:
-      error: Failed to install `{{.FORMULAE}}`
-      start: Ensuring the `{{.FORMULAE}}` Homebrew formulae is installed
-      success: Successfully installed `{{.FORMULAE}}`
     cmds:
-      - task: brew
-      - brew install {{.FORMULAE}}
-    status:
-      - type {{last (splitList "/" .FORMULAE)}} &> /dev/null || [ -n "$NO_INSTALL_HOMEBREW" ]
+      - task: install:software
+        vars:
+          BIN_NAME: '{{.BIN_NAME}}'
+          INSTALL_TASK: '{{.INSTALL_TASK}}'
+          PACKAGE: '{{.PACKAGE}}'
 
   brew:linux:
     run: once
@@ -148,9 +140,9 @@ tasks:
 
   codeclimate:
     cmds:
-      - task: brew:formulae
+      - task: install:software
         vars:
-          FORMULAE: codeclimate/formulae/codeclimate
+          PACKAGE: codeclimate/formulae/codeclimate
           INSTALL_TASK: '{{.TASK}}'
 
   common:
@@ -189,6 +181,8 @@ tasks:
             echo "redhat"
           elif [ -f "/etc/arch-release" ]; then
             echo "archlinux"
+          else if type apk &> /dev/null; then
+            echo "alpine"
           else
             echo "unknown"
           fi
@@ -199,45 +193,97 @@ tasks:
     cmds:
       - task: common:linux:{{.LINUX_FAMILY}}
 
+  common:linux:alpine:
+    vars:
+      APK_INFO:
+        sh: apk info
+      PACKAGES: bash coreutils curl file g++ grep git libc6-compat make ruby ruby-bigdecimal ruby-etc ruby-irb ruby-json ruby-test-unit sudo
+    log:
+      error: Failed to run `apk --no-cache add {{.PACKAGES}}`
+      start: Installing common dependencies by running `apk --no-cache add {{.PACKAGES}}`
+      success: Successfully installed common dependencies
+    cmds:
+      - |
+        if type sudo &> /dev/null; then
+          sudo apk --no-cache add {{.PACKAGES}}
+        else
+          apk --no-cache add {{.PACKAGES}}
+        fi
+    status:
+      - type bash &> /dev/null
+      - type curl &> /dev/null
+      - type git &> /dev/null
+      - type grep &> /dev/null
+      - type gzip &> /dev/null
+      - type make &> /dev/null
+      - type ruby &> /dev/null
+      - type sudo &> /dev/null
+      - '{{.APK_INFO}} | grep coreutils'
+      - '{{.APK_INFO}} | grep g++'
+      - '{{.APK_INFO}} | grep libc6-compat'
+      - '{{.APK_INFO}} | grep ruby-bigdecimal'
+      - '{{.APK_INFO}} | grep ruby-etc'
+      - '{{.APK_INFO}} | grep ruby-irb'
+      - '{{.APK_INFO}} | grep ruby-json'
+      - '{{.APK_INFO}} | grep ruby-test-unit'
+
   common:linux:archlinux:
     interactive: true
+    vars:
+      PACKAGES: base-devel bash curl file gcc git grep gzip make procps-ng ruby sudo
+    log:
+      error: Failed to run `pacman -S {{.PACKAGES}}`
+      start: Installing common software by running `pacman -S {{.PACKAGES}}`
+      success: Successfully installed common software dependencies
     cmds:
       - .config/log warn "Archlinux support for Homebrew is not very well documented.. if this does not work and you can get it working, please open a PR :)"
       - |
-        if [ "$USER" == "root" ]; then
-          pacman update
-          pacman -S base-devel curl file gcc git gzip procps-ng
-        elif type sudo &> /dev/null; then
-          .config/log info 'Attempting to run `sudo pacman update` (for Homebrew dependencies)'
+        if type sudo &> /dev/null; then
           sudo pacman update
-          .config/log info 'Attempting to run `sudo pacman -S base-devel curl gcc file git gzip procps-ng` (for Homebrew dependencies)'
-          sudo pacman -S base-devel curl file git gzip procps-ng
+          sudo pacman -S {{.PACKAGES}}
+        else
+          pacman update
+          pacman -S base-devel {{.PACKAGES}}
         fi
     status:
+      - type bash &> /dev/null
       - type curl &> /dev/null
       - type git &> /dev/null
+      - type grep &> /dev/null
       - type gzip &> /dev/null
+      - type make &> /dev/null
+      - type ruby &> /dev/null
+      - type sudo &> /dev/null
       - ldconfig -p | grep base-devel
       - ldconfig -p | grep file
       - ldconfig -p | grep procps-ng
 
   common:linux:debian:
     interactive: true
+    vars:
+      PACKAGES: bash build-essential curl file gcc git grep gzip make procps ruby sudo
+    log:
+      error: Failed to install common software with `apt-get install -y {{.PACKAGES}}`
+      start: Installing common software by running `apt-get install -y {{.PACKAGES}}`
+      success: Successfully installed common software dependencies
     cmds:
       - |
-        if [ "$USER" == "root" ]; then
-          apt-get -y update
-          apt-get install -y build-essential curl file gcc git gzip procps
-        elif type sudo &> /dev/null; then
-          .config/log info 'Attempting to run `sudo apt-get -y update` (for Homebrew dependencies)'
-          sudo apt-get -y update
-          .config/log info 'Attempting to run `sudo apt-get install -y build-essential curl file gcc git procps` (Homebrew dependencies)'
-          sudo apt-get install -y build-essential curl file git gzip procps
+        if type sudo &> /dev/null; then
+          sudo apt-get update
+          sudo apt-get install -y {{.PACKAGES}}
+        else
+          apt-get update
+          apt-get install -y {{.PACKAGES}}
         fi
     status:
+      - type bash &> /dev/null
       - type curl &> /dev/null
       - type git &> /dev/null
+      - type grep &> /dev/null
       - type gzip &> /dev/null
+      - type make &> /dev/null
+      - type ruby &> /dev/null
+      - type sudo &> /dev/null
       - dpkg-query -l build-essential &> /dev/null
       - dpkg-query -l file &> /dev/null
       - dpkg-query -l procps &> /dev/null
@@ -245,42 +291,94 @@ tasks:
   common:linux:redhat:
     interactive: true
     cmds:
+      - task: common:linux:redhat:packages
+      - task: common:linux:redhat:devtools
+      - task: common:linux:redhat:fedora
+
+  common:linux:redhat:devtools:
+    vars:
+      PACKAGE_MANAGER:
+        sh: if type dnf &> /dev/null; then echo 'dnf'; else echo 'yum'; fi
+    log:
+      error: Failed to install the "Development Tools" group with {{.PACKAGE_MANAGER}}
+      start: Installing the "Development Tools" group
+      success: Successfully installed the "Development Tools" group
+    cmds:
       - mkdir -p "$HOME/.config/bodega"
       - |
         if [ ! -f "$HOME/.config/bodega/yum-devtools-check-ran" ]; then
-          yum grouplist 'Development Tools' &> "$HOME/.config/bodega/yum-devtools-check-ran"
+          if type dnf &> /dev/null; then
+            dnf groupinfo 'Development Tools' &> "$HOME/.config/bodega/dnf-devtools-check-ran"
+          else
+            yum grouplist 'Development Tools' &> "$HOME/.config/bodega/yum-devtools-check-ran"
+          fi
           DEV_TOOLS_NOT_INSTALLED="$(grep 'No groups match' < "$HOME/.config/bodega/yum-devtools-check-ran" > /dev/null)"
           if [[ "$DEV_TOOLS_NOT_INSTALLED" == '0' ]]; then
-            if [ "$USER" == "root" ]; then
-              yum groupinstall -y 'Development Tools'
-            elif type sudo &> /dev/null; then
-              .config/log info 'Attempting to run `sudo yum groupinstall -y "Development Tools"`'
-              sudo yum groupinstall -y 'Development Tools'
+            if type sudo &> /dev/null; then
+              if type dnf &> /dev/null; then
+                sudo dnf groupinfo 'Development Tools'
+              else
+                sudo yum groupinstall -y 'Development Tools'
+              fi
+            else
+              if type dnf  &> /dev/null; then
+                dnf group install -y 'Development Tools'
+              else
+                yum groupinstall -y 'Development Tools'
+              fi
             fi
           fi
           touch "$HOME/.config/bodega/yum-devtools-check-ran"
         fi
-        if ! rpm --quiet --query curl file gcc git gzip procps-ng; then
-          if [ "$USER" == "root" ]; then
-            yum install -y curl file git gzip procps-ng
-          elif type sudo &> /dev/null; then
-            .config/log info 'Attempting to run `sudo yum install -y curl file git procps-ng`'
-            sudo yum install -y curl file gcc git gzip procps-ng
+
+  common:linux:redhat:fedora:
+    vars:
+      PACKAGE_MANAGER:
+        sh: if type dnf &> /dev/null; then echo 'dnf'; else echo 'yum'; fi
+      PACKAGES: libxcrypt-compat
+    log:
+      error: Failed to install Fedora-specific common software with `{{.PACKAGE_MANAGER}} install -y {{.PACKAGES}}`
+      start: Installing Fedora-specific common software by running `{{.PACKAGE_MANAGER}} install -y {{.PACKAGES}}`
+      success: Successfully installed Fedora-specific common software dependencies
+    cmds:
+      - |
+        if ! rpm --quiet --query {{.PACKAGES}}; then
+          if type sudo &> /dev/null; then
+            sudo {{.PACKAGE_MANAGER}} -y install {{.PACKAGES}}
+          else
+            {{.PACKAGE_MANAGER}} install -y {{.PACKAGES}}
           fi
         fi
-        if [ -f '/etc/os-release' ]; then
-          source /etc/os-release
-          if [[ "$ID" == 'fedora' ]] && [ "$VERSION_ID" -gt "29" ]; then
-            if ! rpm --quiet --query libxcrypt-compat; then
-              if [ "$USER" == "root" ]; then
-                yum install -y libxcrypt-compat
-              elif type sudo &> /dev/null; then
-                .config/log info 'Attempting to run `sudo yum -y install libxcrypt-compat` (Homebrew dependencies)'
-                sudo yum -y install libxcrypt-compat
-              fi
-            fi
+    status:
+      - '[ -f /etc/os-release ] && source /etc/os-release && [[ "$ID" == "fedora" ]] && [ "$VERSION_ID" -gt "29" ]'
+
+  common:linux:redhat:packages:
+    vars:
+      PACKAGE_MANAGER:
+        sh: if type dnf &> /dev/null; then echo 'dnf'; else echo 'yum'; fi
+      PACKAGES: bash curl file git grep gzip make procps-ng ruby sudo
+    log:
+      error: Failed to install common software with `{{.PACKAGE_MANAGER}} install -y {{.PACKAGES}}`
+      start: Installing common software by running `{{.PACKAGE_MANAGER}} install -y {{.PACKAGES}}`
+      success: Successfully installed common software dependencies
+    cmds:
+      - |
+          if type sudo &> /dev/null; then
+            sudo {{.PACKAGE_MANAGER}} install -y {{.PACKAGES}}
+          else
+            yum install -y {{.PACKAGES}}
           fi
-        fi
+    status:
+      - type bash &> /dev/null
+      - type curl &> /dev/null
+      - type git &> /dev/null
+      - type grep &> /dev/null
+      - type gzip &> /dev/null
+      - type make &> /dev/null
+      - type ruby &> /dev/null
+      - type sudo &> /dev/null
+      - rpm -q | grep file
+      - rpm -q | grep procps-ng
 
   common:linux:unknown:
     log:
@@ -297,45 +395,45 @@ tasks:
 
   compatibility:findutils:
     cmds:
-      - task: brew:formulae
+      - task: install:software
         vars:
-          FORMULAE: findutils
+          PACKAGE: findutils
           INSTALL_TASK: '{{.TASK}}'
     status:
       - type gfind > /dev/null
 
   compatibility:gawk:
     cmds:
-      - task: brew:formulae
+      - task: install:software
         vars:
-          FORMULAE: gawk
+          PACKAGE: gawk
           INSTALL_TASK: '{{.TASK}}'
     status:
       - type gawk > /dev/null
 
   compatibility:gnu-sed:
     cmds:
-      - task: brew:formulae
+      - task: install:software
         vars:
-          FORMULAE: gnu-sed
+          PACKAGE: gnu-sed
           INSTALL_TASK: '{{.TASK}}'
     status:
       - type gsed > /dev/null
 
   compatibility:gnu-tar:
     cmds:
-      - task: brew:formulae
+      - task: install:software
         vars:
-          FORMULAE: gnu-tar
+          PACKAGE: gnu-tar
           INSTALL_TASK: '{{.TASK}}'
     status:
       - type gtar > /dev/null
 
   compatibility:grep:
     cmds:
-      - task: brew:formulae
+      - task: install:software
         vars:
-          FORMULAE: grep
+          PACKAGE: grep
           INSTALL_TASK: '{{.TASK}}'
     status:
       - type ggrep > /dev/null
@@ -343,25 +441,27 @@ tasks:
   container-structure-test:
     run: once
     cmds:
-      - task: brew:formulae
+      - task: install:software
         vars:
-          FORMULAE: container-structure-test
+          PACKAGE: container-structure-test
           INSTALL_TASK: '{{.TASK}}'
 
   coreutils:
     cmds:
-      - task: brew:formulae
+      - task: install:software
         vars:
-          FORMULAE: coreutils
+          PACKAGE: coreutils
           INSTALL_TASK: '{{.TASK}}'
     status:
       - type gcp > /dev/null || [ "{{OS}}" != "darwin" ]
 
   dasel:
+    tags:
+      - update
     cmds:
-      - task: brew:formulae
+      - task: install:software
         vars:
-          FORMULAE: dasel
+          PACKAGE: dasel
           INSTALL_TASK: '{{.TASK}}'
 
   docker:
@@ -374,9 +474,9 @@ tasks:
   docker-slim:
     run: once
     cmds:
-      - task: brew:formulae
+      - task: install:software
         vars:
-          FORMULAE: docker-slim
+          PACKAGE: docker-slim
           INSTALL_TASK: '{{.TASK}}'
 
   docker:darwin:
@@ -392,9 +492,9 @@ tasks:
   docker:linux:
     run: once
     cmds:
-      - task: brew:formulae
+      - task: install:software
         vars:
-          FORMULAE: docker
+          PACKAGE: docker
           INSTALL_TASK: '{{.TASK}}'
       - task: exit:notice:restart
     status:
@@ -407,9 +507,9 @@ tasks:
   dockle:
     run: once
     cmds:
-      - task: brew:formulae
+      - task: install:software
         vars:
-          FORMULAE: goodwithtech/r/dockle
+          PACKAGE: goodwithtech/r/dockle
           INSTALL_TASK: '{{.TASK}}'
 
   exiftool:
@@ -418,9 +518,9 @@ tasks:
       - task: system
         vars:
           PACKAGE: exiftool
-      - task: brew:formulae
+      - task: install:software
         vars:
-          FORMULAE: exiftool
+          PACKAGE: exiftool
           INSTALL_TASK: '{{.TASK}}'
     status:
       - type exiftool > /dev/null
@@ -443,9 +543,9 @@ tasks:
       - task: system
         vars:
           PACKAGE: expect
-      - task: brew:formulae
+      - task: install:software
         vars:
-          FORMULAE: expect
+          PACKAGE: expect
           INSTALL_TASK: '{{.TASK}}'
     status:
       - type expect > /dev/null
@@ -485,9 +585,9 @@ tasks:
   gh:
     run: once
     cmds:
-      - task: brew:formulae
+      - task: install:software
         vars:
-          FORMULAE: gh
+          PACKAGE: gh
           INSTALL_TASK: '{{.TASK}}'
 
   git:
@@ -503,25 +603,25 @@ tasks:
   gitlab-runner:
     run: once
     cmds:
-      - task: brew:formulae
+      - task: install:software
         vars:
-          FORMULAE: gitlab-runner
+          PACKAGE: gitlab-runner
           INSTALL_TASK: '{{.TASK}}'
 
   gitleaks:
     run: once
     cmds:
-      - task: brew:formulae
+      - task: install:software
         vars:
-          FORMULAE: gitleaks
+          PACKAGE: gitleaks
           INSTALL_TASK: '{{.TASK}}'
 
   glab:
     run: once
     cmds:
-      - task: brew:formulae
+      - task: install:software
         vars:
-          FORMULAE: glab
+          PACKAGE: glab
           INSTALL_TASK: '{{.TASK}}'
 
   go:
@@ -555,25 +655,25 @@ tasks:
   go:install:
     run: once
     cmds:
-      - task: brew:formulae
+      - task: install:software
         vars:
-          FORMULAE: go
+          PACKAGE: go
           INSTALL_TASK: '{{.TASK}}'
 
   golangci-lint:
     run: once
     cmds:
-      - task: brew:formulae
+      - task: install:software
         vars:
-          FORMULAE: golangci-lint
+          PACKAGE: golangci-lint
           INSTALL_TASK: '{{.TASK}}'
 
   grype:
     run: once
     cmds:
-      - task: brew:formulae
+      - task: install:software
         vars:
-          FORMULAE: anchore/grype/grype
+          PACKAGE: anchore/grype/grype
           INSTALL_TASK: '{{.TASK}}'
 
   gzip:
@@ -582,22 +682,45 @@ tasks:
       - task: system
         vars:
           PACKAGE: gzip
-      - task: brew:formulae
+      - task: install:software
         vars:
-          FORMULAE: gzip
+          PACKAGE: gzip
           INSTALL_TASK: '{{.TASK}}'
     status:
       - type gzip > /dev/null
 
+  install:software:
+    vars:
+      BIN: '{{if .BIN_NAME}}{{.BIN_NAME}}{{else}}{{last (splitList "/" .PACKAGE)}}{{end}}'
+      INSTALL_RECORD:
+        sh: |
+          if [ -n "$RECORD_INSTALL" ]; then
+            mkdir -p local/slim
+            echo '{{if .BIN_NAME}}{{.BIN_NAME}}{{else}}{{last (splitList "/" .PACKAGE)}}{{end}}' >> local/slim/exe.txt
+            echo '{{.INSTALL_TASK}}' >> local/slim/install.txt
+          fi
+    run: when_changed
+    log:
+      error: Failed to install `{{.PACKAGE}}`
+      start: Ensuring the `{{.PACKAGE}}` Homebrew formulae is installed
+      success: Successfully installed `{{.PACKAGE}}`
+    cmds:
+      - task: brew
+      - brew install {{.PACKAGE}}
+    status:
+      - type {{.BIN}} &> /dev/null || [ -n "$NO_INSTALL_HOMEBREW" ]
+
   jq:
+    tags:
+      - update
     run: once
     cmds:
       - task: system
         vars:
           PACKAGE: jq
-      - task: brew:formulae
+      - task: install:software
         vars:
-          FORMULAE: jq
+          PACKAGE: jq
           INSTALL_TASK: '{{.TASK}}'
     status:
       - type jq > /dev/null
@@ -615,17 +738,17 @@ tasks:
   node:
     run: once
     cmds:
-      - task: brew:formulae
+      - task: install:software
         vars:
-          FORMULAE: node
+          PACKAGE: node
           INSTALL_TASK: '{{.TASK}}'
 
   packer:
     run: once
     cmds:
-      - task: brew:formulae
+      - task: install:software
         vars:
-          FORMULAE: packer
+          PACKAGE: packer
           INSTALL_TASK: '{{.TASK}}'
 
   parallels:
@@ -638,6 +761,8 @@ tasks:
       - '[ "{{OS}}" != "darwin" ] || ! mdfind -name "Parallels Desktop.app" &> /dev/null'
 
   pipx:
+    tags:
+      - update
     run: once
     log:
       error: Failed to ensure `pipx` is installed
@@ -667,6 +792,8 @@ tasks:
       - exit 1
 
   poetry:
+    tags:
+      - update
     run: once
     cmds:
       - task: poetry:{{OS}}
@@ -677,17 +804,17 @@ tasks:
   poetry:darwin:
     run: once
     cmds:
-      - task: brew:formulae
+      - task: install:software
         vars:
-          FORMULAE: poetry
+          PACKAGE: poetry
           INSTALL_TASK: '{{.TASK}}'
 
   poetry:linux:
     run: once
     cmds:
-      - task: brew:formulae
+      - task: install:software
         vars:
-          FORMULAE: poetry
+          PACKAGE: poetry
           INSTALL_TASK: '{{.TASK}}'
 
   poetry:windows:
@@ -707,9 +834,9 @@ tasks:
   python:darwin:
     run: once
     cmds:
-      - task: brew:formulae
+      - task: install:software
         vars:
-          FORMULAE: python@3.10
+          PACKAGE: python@3.10
           INSTALL_TASK: '{{.TASK}}'
     status:
       - type python3 > /dev/null
@@ -717,9 +844,9 @@ tasks:
   python:linux:
     run: once
     cmds:
-      - task: brew:formulae
+      - task: install:software
         vars:
-          FORMULAE: python@3.10
+          PACKAGE: python@3.10
           INSTALL_TASK: '{{.TASK}}'
     status:
       - type python3 > /dev/null
@@ -731,14 +858,16 @@ tasks:
       - exit 1
 
   rsync:
+    tags:
+      - update
     run: once
     cmds:
       - task: system
         vars:
           PACKAGE: rsync
-      - task: brew:formulae
+      - task: install:software
         vars:
-          FORMULAE: rsync
+          PACKAGE: rsync
           INSTALL_TASK: '{{.TASK}}'
     status:
       - type rsync > /dev/null
@@ -746,9 +875,9 @@ tasks:
   rust:
     run: once
     cmds:
-      - task: brew:formulae
+      - task: install:software
         vars:
-          FORMULAE: rust
+          PACKAGE: rust
           INSTALL_TASK: '{{.TASK}}'
 
   sentry:
@@ -758,9 +887,9 @@ tasks:
   snapcraft:
     run: once
     cmds:
-      - task: brew:formulae
+      - task: install:software
         vars:
-          FORMULAE: snapcraft
+          PACKAGE: snapcraft
           INSTALL_TASK: '{{.TASK}}'
 
   sshfs:
@@ -773,17 +902,17 @@ tasks:
   sshpass:
     run: once
     cmds:
-      - task: brew:formulae
+      - task: install:software
         vars:
-          FORMULAE: hudochenkov/sshpass/sshpass
+          PACKAGE: hudochenkov/sshpass/sshpass
           INSTALL_TASK: '{{.TASK}}'
 
   subrepo:
     run: once
     cmds:
-      - task: brew:formulae
+      - task: install:software
         vars:
-          FORMULAE: git-subrepo
+          PACKAGE: git-subrepo
           INSTALL_TASK: '{{.TASK}}'
     status:
       - git subrepo --version > /dev/null || [[ "${container:=}" == "docker" ]]
@@ -918,17 +1047,17 @@ tasks:
   tokei:
     run: once
     cmds:
-      - task: brew:formulae
+      - task: install:software
         vars:
-          FORMULAE: tokei
+          PACKAGE: tokei
           INSTALL_TASK: '{{.TASK}}'
 
   trivy:
     run: once
     cmds:
-      - task: brew:formulae
+      - task: install:software
         vars:
-          FORMULAE: aquasecurity/trivy/trivy
+          PACKAGE: aquasecurity/trivy/trivy
           INSTALL_TASK: '{{.TASK}}'
 
   vagrant:
@@ -994,17 +1123,21 @@ tasks:
           SOFTWARE: vmware
 
   yarn:
+    tags:
+      - update
     run: once
     cmds:
-      - task: brew:formulae
+      - task: install:software
         vars:
-          FORMULAE: yarn
+          PACKAGE: yarn
           INSTALL_TASK: '{{.TASK}}'
 
   yq:
+    tags:
+      - update
     run: once
     cmds:
-      - task: brew:formulae
+      - task: install:software
         vars:
-          FORMULAE: yq
+          PACKAGE: yq
           INSTALL_TASK: '{{.TASK}}'
