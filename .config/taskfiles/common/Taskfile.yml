@@ -188,6 +188,12 @@ tasks:
               DC:
                 sh: echo '{{.ANSWER}}' | sed 's/ /-/g' | tr '[:upper:]' '[:lower:]'
 
+  start:
+    cmds:
+      - task: :common:start:docker
+      - task: :common:start:ci
+      - task: :common:start:dev
+
   update:
     deps:
       - :common:update:update

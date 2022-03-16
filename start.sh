@@ -11,6 +11,13 @@
 
 set -eo pipefail
 
+# @description Ensure permissions in CI environments
+if [ -n "$CI" ]; then
+  if type sudo &> /dev/null; then
+    sudo chown -R "$(whoami):$(whoami)" .
+  fi
+fi
+
 # @description Ensure .config/log is present
 if [ ! -f .config/log ]; then
   mkdir -p .config

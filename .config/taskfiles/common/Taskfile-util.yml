@@ -9,6 +9,11 @@ tasks:
     deps:
       - :install:software:jq
       - :install:software:yq
+    vars:
+      MAP_FILE_QUERY: >-
+        [.includes | with_entries(select(.value.optional == true)) | to_entries | .[] |
+        { "key": .key, "value": .value.taskfile }] + (.includes | with_entries(select(.value.optional == null)) |
+        to_entries) + { "key": "", "value": "Taskfile.yml" }
     log:
       error: Encountered error while generating Taskfile task map array
       start: Generating Taskfile task map array
@@ -20,7 +25,7 @@ tasks:
         TMP_COMBINED="$(mktemp)"
         TMP_JQ="$(mktemp)"
         TMP_YQ="$(mktemp)"
-        yq -o=j '[.includes | with_entries(select(.value.optional == true)) | to_entries | .[] | { "key": .key, "value": .value.taskfile }] + (.includes | with_entries(select(.value.optional == null)) | to_entries) + { "key": "", "value": "Taskfile.yml" }' Taskfile.yml > "{{.MAP_FILE}}"
+        yq -o=j '{{.MAP_FILE_QUERY}}' Taskfile.yml > "{{.MAP_FILE}}"
         jq -c '.[]' "{{.MAP_FILE}}" | while read i; do
           PREFIX="$(jq -r '.key' < "$i")"
           FILE="$(jq -r '.value' "$i")"
@@ -69,7 +74,7 @@ tasks:
       success: Completed `Taskfile.yml` update logic for deps task named `deps:{{.TAG}}`
     cmds:
       - |
-        RESULT="  deps:{{.TAG}}:\n    deps:\n"
+        RESULT="  deps:run:parallel:\n    deps:\n"
         COUNT="0"
         jq -cr '(.. | select(.tags?[]? == "{{.TAG}}")) | ._task' {{.MAP_FILE}} | while read i; do
           COUNT="$(("$COUNT" + 1))"

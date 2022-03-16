@@ -1,0 +1,181 @@
+---
+version: '3'
+
+vars:
+  ENV_GOBIN:
+    sh: mktemp
+  ENV_GOROOT:
+    sh: mktemp
+  ENV_PATH:
+    sh: mktemp
+
+env:
+  AUTO_COMMIT: 'false'
+  AUTO_COMMIT_MESSAGE: 'false'
+  PREPARE_PROJECT: 'true'
+  UPDATE_GIT_REPOS: 'true'
+
+tasks:
+  ci:
+    cmds:
+      - task: setup
+    status:
+      - '[ -z $CI ]'
+
+  commit:
+    cmds:
+      - task: commit:auto
+      - task: commit:manual
+    status:
+      - '[ -z "$AUTO_COMMIT" ]'
+
+  commit:auto:
+    cmds:
+      - task: :commit:quick
+      - task: :ci:synchronize
+    status:
+      - '[ "$AUTO_COMMIT_MESSAGE" != "true" ]'
+
+  commit:manual:
+    cmds:
+      - task: :commit:all
+      - task: :ci:synchronize
+    status:
+      - '[ "$AUTO_COMMIT_MESSAGE" == "true" ]'
+
+  dev:
+    cmds:
+      - task: setup
+    status:
+      - '[ -n $CI ] || [ -f /.dockerenv ]'
+
+  docker:
+    cmds:
+      - task: docker:taskfile
+    status:
+      - '[ -n $CI ]'
+      - '[ ! -f /.dockerenv ]'
+
+  docker:taskfile:
+    cmds:
+      - task: :deps:run:parallel
+    status:
+      - '[ ! -f Taskfile.yml ]'
+
+  init:
+    log:
+      error: Error encountered while initializing the update process
+      start: Initializing the update process
+      success: Finished initializing the update process
+    cmds:
+      - task: :ci:before
+      - task: :ci:submodules
+      - task: :repair
+
+  prepare:
+    cmds:
+      - task: :prepare
+    status:
+      - '[ "$PREPARE_PROJECT" != "true" ]'
+
+  prereqs:
+    env:
+      PATH:
+        sh: |
+          if type brew &> /dev/null; then
+            echo "$PATH"
+          else
+            . "$HOME/.profile"
+            echo "$PATH"
+          fi
+    log:
+      error: Error encountered while installing pre-requisite software
+      start: Ensuring pre-requisite software is installed and added to the PATH
+      success: Pre-requisite software is installed
+    cmds:
+      - task: :install:software:jq
+      - task: :install:software:yq
+      - task: :install:software:node
+      - task: :install:software:poetry
+      - task: :install:software:go
+
+  register:env:
+    cmds:
+      - |
+        . "$HOME/.profile"
+        echo "$PATH" > '{{.ENV_PATH}}'
+        echo "$GOBIN" > '{{.ENV_GOBIN}}'
+        echo "$GOROOT" > '{{.ENV_GOROOT}}'
+    status:
+      - type jq &> /dev/null
+      - type yq &> /dev/null
+      - type node &> /dev/null
+      - type go &> /dev/null
+      - type poetry &> /dev/null
+      - '[ -n "$GOBIN" ]'
+      - '[ -n "$GOROOT" ]'
+
+  setup:
+    cmds:
+      - task: install:software:brew
+      - task: prereqs
+      - task: register:env
+        vars:
+          ENV_GOBIN: '{{.ENV_GOBIN}}'
+          ENV_GOROOT: '{{.ENV_GOROOT}}'
+          ENV_PATH: '{{.ENV_PATH}}'
+      - task: setup:start
+        env:
+          GOBIN:
+            sh: cat '{{.ENV_GOBIN}}'
+          GOROOT:
+            sh: cat '{{.ENV_GOROOT}}'
+          PATH:
+            sh: cat '{{.ENV_PATH}}'
+
+  setup:start:
+    cmds:
+      - task: setup:start:ci
+      - task: setup:start:dev
+      - task: finish
+
+  setup:start:ci:
+    cmds:
+      - task: init
+      - task: prepare
+      - task: update
+      - task: :ci:commit
+      - task: :ci:synchronize
+    status:
+      - '[ -z "$CI" ]'
+
+  setup:start:dev:
+    cmds:
+      - task: init
+      - task: :common:util:task:tag:deps
+        vars:
+          TAG: '{{.REPOSITORY_TYPE}}'
+      - task deps:run:parallel
+      - task: prepare
+      - task: update
+      - task: commit
+    status:
+      - '[ -n "$CI" ]'
+
+  update:
+    log:
+      error: Failed to finish update process
+      start: Continuing the update process
+      success: Finished the final stage of the update process
+    cmds:
+      - task: :upstream:{{.PROJECT_TYPE}}
+      - task: update:git
+    status:
+      - '[ "$UPDATE_PROJECT" == "true" ]'
+
+  update:git:
+    cmds:
+      - task: :git:update
+    status:
+      - '[ -n "$CI" ]'
+      - '[ "$UPDATE_GIT_REPOS" == "false" ]'

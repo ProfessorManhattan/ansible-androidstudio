@@ -233,16 +233,6 @@ tasks:
       - task: modules
       - task: project
 
-  services:
-    cmds:
-      - task: :{{if eq .REPOSITORY_TYPE "project"}}donothing{{else}}start{{end}}
-      - task: update
-      - task: services:repos
-
-  services:repos:
-    deps:
-      - :git:update
-
   start:
     deps:
       - :common:requirements
@@ -270,13 +260,6 @@ tasks:
       - task: start
       - task: all
       - task: ':{{if eq .REPOSITORY_TYPE "docker"}}docker:update:labels{{else}}donothing{{end}}'
-      - task: update:git
-
-  update:git:
-    cmds:
-      - task: :git:update
-    status:
-      - '[[ "${container:=}" == "docker" ]] || [[ "$SKIP_UPLOADING" == "true" ]]'
 
   upstream:remotes:
     deps:

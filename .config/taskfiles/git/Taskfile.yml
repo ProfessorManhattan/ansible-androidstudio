@@ -268,9 +268,3 @@ tasks:
     deps:
       - :git:gitlab:update
       - :git:github:update
-    cmds:
-      - |
-        if ! git push -u origin master; then
-          git pull origin master --allow-unrelated-histories
-          git push origin -u origin master
-        fi

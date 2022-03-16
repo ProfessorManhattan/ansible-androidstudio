@@ -115,7 +115,7 @@ tasks:
           {{.PROJECT_TYPE}} --tag "$(jq -r '.keywords | tostring' package.json | sed 's/\[//' | sed 's/\]//')"
           git add --all
           HUSKY=0 git commit --quiet -m "🎂 Birth" -n || true
-          git push --quiet -u --no-progress gitlab master
+          git push gitlab master
         ignore_error: true
     status:
       - '[ -z "$GITLAB_TOKEN" ] || (test -d .git && glab repo view "{{.GITLAB_PATH}}" > /dev/null)'
