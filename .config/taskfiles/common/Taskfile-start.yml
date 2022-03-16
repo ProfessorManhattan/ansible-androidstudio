@@ -83,7 +83,6 @@ tasks:
       - '[ "$PREPARE_PROJECT" != "true" ]'
 
   prereqs:
-    run: once
     env:
       PATH:
         sh: |
@@ -93,6 +92,7 @@ tasks:
             . "$HOME/.profile" &> /dev/null
             echo "$PATH"
           fi
+    run: once
     log:
       error: Error encountered while installing pre-requisite software
       start: Ensuring pre-requisite software is installed and added to the PATH
