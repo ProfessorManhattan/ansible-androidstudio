@@ -38,6 +38,7 @@ tasks:
       - task: :git:push:all
 
   docs:
+    todo: Remove the git:commit:automated tasks
     log:
       error: Error updating document repository
       start: Updating document repository
@@ -198,12 +199,13 @@ tasks:
       - task: template:pyproject
 
   template:pyproject:
-    deps:
-      - :install:github:fusion
     cmds:
+      - task: :install:github:fusion
       - task: template:pyproject:config
       - task: template:pyproject:local
       - task: template:pyproject:fix
+    status:
+      - '[ ! -f pyproject.toml ]'
 
   template:pyproject:config:
     log:

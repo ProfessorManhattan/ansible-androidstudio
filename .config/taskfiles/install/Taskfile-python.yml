@@ -43,11 +43,17 @@ tasks:
     run: once
     cmds:
       - task: :install:software:python
-      - task: requirements:poetry:prereqs
       - task: requirements:poetry
       - task: :{{if eq .REPOSITORY_TYPE "ansible"}}ansible:galaxy:requirements{{else}}donothing{{end}}
 
   requirements:poetry:
+    cmds:
+      - task: requirements:poetry:prereqs
+      - task: requirements:poetry:install
+    status:
+      - '[ ! -f pyproject.toml ]'
+
+  requirements:poetry:install:
     summary: |
       # Poetry Requirements
 
@@ -95,9 +101,6 @@ tasks:
         fi
     sources:
       - pyproject.toml
-    preconditions:
-      - sh: test -f pyproject.toml
-        msg: The `pyproject.toml` file is missing!
 
   requirements:poetry:prereqs:
     tags:

@@ -36,19 +36,19 @@ tasks:
       - task: install:npm
         vars:
           BIN_NAME: git-cz
-
           FORCE_INSTALL: true
           INSTALL_TASK: '{{.TASK}}'
           PACKAGE: commitizen
+
   commitlint:
     run: once
     cmds:
       - task: install:npm
         vars:
           BIN_NAME: commitlint
-
           INSTALL_TASK: '{{.TASK}}'
           PACKAGE: '@commitlint/cli'
+
   cspell:
     run: once
     cmds:
@@ -71,19 +71,21 @@ tasks:
       - task: install:npm
         vars:
           BIN_NAME: devcontainer
-
           INSTALL_TASK: '{{.TASK}}'
           PACKAGE: '@vscode/dev-container-cli'
+
   dockerfilelint:
     run: once
     cmds:
       - task: install:npm
         vars:
           INSTALL_TASK: '{{.TASK}}'
-
           PACKAGE: dockerfilelint
+
   esbuild:
     run: once
+    tags:
+      - semantic
     cmds:
       - task: install:npm
         vars:
@@ -190,21 +192,23 @@ tasks:
 
   ionic:
     run: once
+    tags:
+      - semantic
     cmds:
       - task: install:npm
         vars:
           BIN_NAME: ionic
-
           INSTALL_TASK: '{{.TASK}}'
           PACKAGE: '@ionic/cli'
+
   jest:
     run: once
     cmds:
       - task: install:npm
         vars:
           INSTALL_TASK: '{{.TASK}}'
-
           PACKAGE: jest
+
   leasot:
     run: once
     tags:
@@ -270,13 +274,15 @@ tasks:
 
   modclean:
     run: once
+    tags:
+      - semantic
     cmds:
       - task: install:npm
         vars:
           BIN_NAME: modclean
-
           INSTALL_TASK: '{{.TASK}}'
           PACKAGE: modclean@2
+
   ndb:
     run: once
     cmds:
@@ -287,21 +293,23 @@ tasks:
 
   nest:
     run: once
+    tags:
+      - semantic
     cmds:
       - task: install:npm
         vars:
           BIN_NAME: nest
-
           INSTALL_TASK: '{{.TASK}}'
           PACKAGE: '@nestjs/cli'
+
   nodemon:
     run: once
     cmds:
       - task: install:npm
         vars:
           INSTALL_TASK: '{{.TASK}}'
-
           PACKAGE: nodemon
+
   npm:
     run: once
     cmds:
@@ -320,6 +328,8 @@ tasks:
 
   nx:
     run: once
+    tags:
+      - semantic
     cmds:
       - task: install:npm
         vars:
@@ -352,6 +362,8 @@ tasks:
 
   pkg:
     run: once
+    tags:
+      - semantic
     cmds:
       - task: install:npm
         vars:
@@ -360,6 +372,8 @@ tasks:
 
   pnpm:
     run: once
+    tags:
+      - update
     cmds:
       - task: install:npm
         vars:
@@ -417,11 +431,13 @@ tasks:
       - task: install:npm
         vars:
           BIN_NAME: remark
-
           INSTALL_TASK: '{{.TASK}}'
           PACKAGE: remark-cli
+
   semantic-release:
     run: once
+    tags:
+      - semantic
     cmds:
       - task: install:npm
         vars:
@@ -434,9 +450,9 @@ tasks:
       - task: install:npm
         vars:
           BIN_NAME: sharp
-
           INSTALL_TASK: '{{.TASK}}'
           PACKAGE: sharp-cli
+
   shellcheck:
     run: once
     cmds:
@@ -485,9 +501,9 @@ tasks:
       - task: install:npm
         vars:
           BIN_NAME: tinypng
-
           INSTALL_TASK: '{{.TASK}}'
           PACKAGE: tinypng-cli
+
   ts-node:
     run: once
     cmds:
@@ -498,6 +514,8 @@ tasks:
 
   typedoc:
     run: once
+    tags:
+      - semantic
     cmds:
       - task: install:npm
         vars:
@@ -506,21 +524,23 @@ tasks:
 
   typescript:
     run: once
+    tags:
+      - semantic
     cmds:
       - task: install:npm
         vars:
           BIN_NAME: tsc
-
           INSTALL_TASK: '{{.TASK}}'
           PACKAGE: typescript
+
   typesync:
     run: once
     cmds:
       - task: install:npm
         vars:
           INSTALL_TASK: '{{.TASK}}'
-
           PACKAGE: typesync
+
   yarnhook:
     run: once
     cmds:

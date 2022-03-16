@@ -40,6 +40,8 @@ env:
 
 tasks:
   commit:automated:
+    deps:
+      - remotes
     log:
       start: Running automated commit
     cmds:

@@ -538,7 +538,7 @@ fi
 ensureTaskInstalled
 
 # @description Run the start logic, if appropriate
-if [ -z "$CI" ] && [ -z "$INIT_CWD" ]; then
+if [-z "$CI" ] && [ -z "$SKIP_START" ] && [ -z "$INIT_CWD" ]; then
   # shellcheck disable=SC1091
   . "$HOME/.profile"
   ensureProjectBootstrapped

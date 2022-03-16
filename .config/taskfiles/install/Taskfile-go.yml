@@ -38,6 +38,8 @@ tasks:
 
   goreleaser:
     run: once
+    tags:
+      - semantic
     cmds:
       - task: install:go
         vars:
@@ -86,6 +88,8 @@ tasks:
 
   nfpm:
     run: once
+    tags:
+      - semantic
     cmds:
       - task: install:go
         vars:
@@ -95,6 +99,8 @@ tasks:
 
   node-prune:
     run: once
+    tags:
+      - semantic
     cmds:
       - task: install:go
         vars:

@@ -82,6 +82,7 @@ includes:
   web:ionic: ./.config/taskfiles/web/Taskfile-ionic.yml
   web:nx: ./.config/taskfiles/web/Taskfile-nx.yml
   web:profile: ./.config/taskfiles/web/Taskfile-profile.yml
+  common:start: ./.config/taskfiles/common/Taskfile-start.yml
 output: interleaved
 vars:
   DOCKERHUB_PROFILE: megabytelabs
@@ -134,10 +135,14 @@ vars:
   # yamllint enable rule:line-length
   PYTHON_HANDLE: 'poetry run '
   PYTHON_VIRTUALENV: true
-  REPOSITORY_SUBTYPE: role
-  REPOSITORY_TYPE: ansible
+  REPOSITORY_SUBTYPE:
+    sh: if type jq &> /dev/null && [ -f package.json ]; then VER="$(jq -r .blueprint.subgroup package.json)"; if [ "$VER" == null ]; then echo "$REPOSITORY_TYPE"; else echo "$VER"; fi; else echo "$REPOSITORY_TYPE"; fi
+  REPOSITORY_TYPE:
+    sh: if type jq &> /dev/null && [ -f package.json ]; then VER="$(jq -r .blueprint.group package.json)"; if [ "$VER" == null ]; then echo "$GROUP_TYPE"; else echo "$VER"; fi; else echo "$GROUP_TYPE"; fi
   SEMANTIC_CONFIG: semantic-release-config
   TIMEZONE: America/New_York
+  includes:
+    common:start: ./.config/taskfiles/common/Taskfile-start.yml
 env:
   OSTYPE:
     sh: |
@@ -730,15 +735,6 @@ tasks:
       start: Updating the repository..
       success: Finished updating the repository
     cmds:
-      - |
-        if ! type brew > /dev/null; then
-          task install:software:brew
-          . "$HOME/.profile"
-        fi
-        if ! type jq > /dev/null || ! type yq > /dev/null || ! type node > /dev/null || ! type go > /dev/null || ! type poetry > /dev/null; then
-          task update:prereqs
-          . "$HOME/.profile"
-        fi
-        task update:init
-        task prepare
-        task update:finish
+      - task: common:start
+        env:
+          UPDATE_PROJECT: "true"

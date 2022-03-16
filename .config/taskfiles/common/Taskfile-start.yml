@@ -10,7 +10,6 @@ vars:
     sh: mktemp
 
 env:
-  AUTO_COMMIT: 'false'
   AUTO_COMMIT_MESSAGE: 'false'
   PREPARE_PROJECT: 'true'
   UPDATE_GIT_REPOS: 'true'
@@ -20,7 +19,7 @@ tasks:
     cmds:
       - task: setup
     status:
-      - '[ -z $CI ]'
+      - '[ -z "$CI" ]'
 
   commit:
     cmds:
@@ -47,14 +46,13 @@ tasks:
     cmds:
       - task: setup
     status:
-      - '[ -n $CI ] || [ -f /.dockerenv ]'
+      - '[ -n "$CI" ] && [ -f /.dockerenv ]'
 
   docker:
     cmds:
       - task: docker:taskfile
     status:
-      - '[ -n $CI ]'
-      - '[ ! -f /.dockerenv ]'
+      - '[ -n "$CI" ] && [ ! -f /.dockerenv ]'
 
   docker:taskfile:
     cmds:
@@ -85,7 +83,7 @@ tasks:
           if type brew &> /dev/null; then
             echo "$PATH"
           else
-            . "$HOME/.profile"
+            . "$HOME/.profile" &> /dev/null
             echo "$PATH"
           fi
     log:
@@ -102,7 +100,7 @@ tasks:
   register:env:
     cmds:
       - |
-        . "$HOME/.profile"
+        . "$HOME/.profile" &> /dev/null
         echo "$PATH" > '{{.ENV_PATH}}'
         echo "$GOBIN" > '{{.ENV_GOBIN}}'
         echo "$GOROOT" > '{{.ENV_GOROOT}}'
@@ -117,7 +115,7 @@ tasks:
 
   setup:
     cmds:
-      - task: install:software:brew
+      - task: :install:software:brew
       - task: prereqs
       - task: register:env
         vars:
@@ -163,10 +161,6 @@ tasks:
       - '[ -n "$CI" ]'
 
   update:
-    log:
-      error: Failed to finish update process
-      start: Continuing the update process
-      success: Finished the final stage of the update process
     cmds:
       - task: :upstream:{{.PROJECT_TYPE}}
       - task: update:git

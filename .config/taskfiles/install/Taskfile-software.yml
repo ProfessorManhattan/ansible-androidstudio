@@ -43,8 +43,6 @@ tasks:
           PACKAGE: ansifilter
 
   brew:
-    tags:
-      - update
     run: once
     log:
       error: Failed to install or load Homebrew
@@ -473,6 +471,8 @@ tasks:
 
   docker-slim:
     run: once
+    tags:
+      - docker-build
     cmds:
       - task: install:software
         vars:
@@ -745,6 +745,8 @@ tasks:
 
   packer:
     run: once
+    tags:
+      - semantic-packer
     cmds:
       - task: install:software
         vars:
@@ -886,6 +888,8 @@ tasks:
 
   snapcraft:
     run: once
+    tags:
+      - semantic
     cmds:
       - task: install:software
         vars:

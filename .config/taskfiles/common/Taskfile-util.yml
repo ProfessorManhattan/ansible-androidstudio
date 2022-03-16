@@ -25,6 +25,7 @@ tasks:
         TMP_COMBINED="$(mktemp)"
         TMP_JQ="$(mktemp)"
         TMP_YQ="$(mktemp)"
+        mkdir -p "$(dirname '{{.MAP_FILE}}')"
         yq -o=j '{{.MAP_FILE_QUERY}}' Taskfile.yml > "{{.MAP_FILE}}"
         jq -c '.[]' "{{.MAP_FILE}}" | while read i; do
           PREFIX="$(jq -r '.key' < "$i")"
