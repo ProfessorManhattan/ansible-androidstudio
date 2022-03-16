@@ -30,24 +30,35 @@ tasks:
       success: Finished running Docker build sequence
     cmds:
       - |
-        if [ -f Docker.test.yml ]; then
-          task docker:build:fat
-          if [ "$(jq -r '.blueprint.dockerSlimCommand' package.json)" != 'null' ]; then
+        if [ -d ./test/structure ]; then
+          TESTS="$(find ./test/structure -mindepth 1 -maxdepth 1 -type -f -name "*.yml")"
+          if echo "$TESTS" | grep '.yml'; then
+            for TEST_FILE in $TESTS; do
+              TARGET="$(echo "$TEST_FILE" | sed 's/.*\/\([^\/]*\).yml$/\1/')"
+              if [ "$(jq --arg slug "$TARGET" '.blueprint.dockerSlimCommand[$slug]' package.json)" != 'null' ]; then
+                task docker:build:slim -- "$TARGET"
+              else
+                .config/log warn 'The `.blueprint.dockerSlimCommand` is missing - skipping slim build and building just a regular image'
+                task docker:build:fat -- "$TARGET"
+              fi
+            done
+          else
+            .config/log error 'The `./test/structure` folder is present but there are no container-structure-tests in it. Add tests \
+            for each build target in the `Dockerfile` that you would like to generate an image for.'
+            exit 1
+          fi
+        else
+          .config/log info 'No `./test/structure` folder is present so assuming there is only one build target'
+          if [ "$(jq -r '.blueprint.dockerSlimCommand' package.json)" != null ]; then
+            .config/log info '`.blueprint.dockerSlimCommand` is present in `package.json` so building both a `latest` and `slim` image'
             task docker:build:slim
+          else
+            task docker:build:fat
           fi
         fi
-      - |
-        for TESTFILE in Docker.*.test.yml; do
-          if [ "$TESTFILE" != 'Docker.*.test.yml' ]; then
-            TEST_IMAGE_SLUG="$(echo $TESTFILE | sed 's/^Docker.//' | sed 's/.test.yml$//')"
-            if [ "$(jq --arg slug "$TEST_IMAGE_SLUG" '.blueprint.dockerSlimCommand[$slug]' package.json)" != 'null' ]; then
-              task docker:build:slim -- "$TEST_IMAGE_SLUG"
-            else
-              .config/log warn 'The `.blueprint.dockerSlimCommand` is missing - skipping slim build and building just a regular image'
-              task docker:build:fat -- "$TEST_IMAGE_SLUG"
-            fi
-          fi
-        done
+    preconditions:
+      - sh: test -f Dockerfile
+        msg: The `Dockerfile` must be present in order to build it
 
   login:
     deps:
@@ -82,16 +93,22 @@ tasks:
       a `Docker.build1.test.yml` and `Docker.build2.test.yml` container-structure-test.
     cmds:
       - |
-        if [ -f Docker.test.yml ]; then
+        if [ -d ./test/structure ]; then
+          TESTS="$(find ./test/structure -mindepth 1 -maxdepth 1 -type -f -name "*.yml")"
+          if echo "$TESTS" | grep '.yml'; then
+            for TEST_FILE in $TESTS; do
+              TARGET="$(echo "$TEST_FILE" | sed 's/.*\/\([^\/]*\).yml$/\1/')"
+              task docker:publish:images -- "$TARGET"
+            done
+          else
+            .config/log error 'The `./test/structure` folder is present but there are no container-structure-tests in it. Add tests \
+            for each build target in the `Dockerfile` that you would like to generate an image for.'
+            exit 1
+          fi
+        else
+          .config/log info 'No `./test/structure` folder is present so assuming there is only one build target'
           task docker:publish:images
         fi
-      - |
-        for TESTFILE in Docker.*.test.yml; do
-          if [ "$TESTFILE" != 'Docker.*.test.yml' ]; then
-            TEST_IMAGE_SLUG="$(echo $TESTFILE | sed 's/^Docker.//' | sed 's/.test.yml$//')"
-            task docker:publish:images -- "$TEST_IMAGE_SLUG"
-          fi
-        done
       - task: pushrm
 
   publish:image:
@@ -239,34 +256,9 @@ tasks:
       start: Initiating Docker test sequence
       success: Successfully completed Docker test sequence
     cmds:
-      - |
-        if [ -f Docker.test.yml ]; then
-          task docker:test:container-structure-test
-          if [ -d test-output ]; then
-            task docker:test:output
-          fi
-        fi
-      - |
-        for TESTFILE in Docker.*.test.yml; do
-          if [ "$TESTFILE" != 'Docker.*.test.yml' ]; then
-            TEST_IMAGE_SLUG="$(echo $TESTFILE | sed 's/^Docker.//' | sed 's/.test.yml$//')"
-            task docker:test:container-structure-test -- "$TEST_IMAGE_SLUG"
-          fi
-        done
-      - |
-        for FOLDER in test/codeclimate*/; do
-          if [ "$FOLDER" != 'test/codeclimate*/' ]; then
-            task lint:codeclimate -- " $FOLDER"
-          fi
-        done
-      - |
-        if [ -d test-output ]; then
-          for TESTFILE in Docker.*.test.yml; do
-            if [ "$TESTFILE" != 'Docker.*.test.yml' ]; then
-              task docker:test:output -- "$TEST_IMAGE_SLUG"
-            fi
-          done
-        fi
+      - task: :docker:test:container-structure-tests
+      - task: :docker:test:output
+      - task: :docker:test:codeclimate
       - task: :docker:test:gitlab-runner
 
   verify:
