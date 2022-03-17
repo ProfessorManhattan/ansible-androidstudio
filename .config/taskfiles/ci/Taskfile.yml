@@ -151,10 +151,16 @@ tasks:
       start: Synchronizing the `synchronize` branch with the `master` branch
       success: Successfully updated the `synchronize` branch
     cmds:
+      - git fetch origin
       - git checkout -b synchronize || git checkout synchronize
       - git reset --hard HEAD
       - git pull -q origin master
-      - git push -q -o ci.skip origin synchronize --force
+      - |
+        git push -q -o ci.skip origin synchronize --force || FAILED_SYNC=$?
+        if [ -n "$FAILED_SYNC" ]; then
+          task git:gitlab:protected:off -- "synchronize"
+          git push -q -o ci.skip origin synchronize --force
+        fi
       - task: synchronize:gitlab
       - git checkout master
 
