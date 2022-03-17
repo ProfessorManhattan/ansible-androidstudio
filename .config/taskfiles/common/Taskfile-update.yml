@@ -66,7 +66,7 @@ tasks:
   files:
     vars:
       CONTAINER:
-        sh: if [[ "${container:=}" == "docker" ]]; then echo "docker"; fi
+        sh: if [ "{{.DOCKER_ENVIRONMENT}}" == "true" ]; then echo "docker"; fi
       FIRST_LINE:
         sh: if [ -f Dockerfile ]; then head -n 1 Dockerfile; fi
     log:

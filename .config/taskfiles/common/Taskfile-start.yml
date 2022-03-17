@@ -191,5 +191,5 @@ tasks:
     cmds:
       - task: :git:update
     status:
-      - '[ -n "$CI" ]'
-      - '[ "$UPDATE_GIT_REPOS" == "false" ]'
+      - '[ -n "$CI" ] || [ "{{.DOCKER_BUILDING}}" == "true" ]'
+      - '[ "$UPDATE_GIT_REPOS" == "false" ] || [ "{{.DOCKER_BUILDING}}" == "true" ]]'

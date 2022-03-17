@@ -1,6 +1,31 @@
 ---
 version: '3'
 
+vars:
+  DOCKER_BUILDING:
+    sh: |
+      if [ -f /.dockerenv ] || [ "$container" == 'docker' ]; then
+        if [ -n "$BUILD_DATE" ]; then
+          echo "true"
+        fi
+      fi
+  DOCKER_ENVIRONMENT:
+    sh: |
+      if [ -f /.dockerenv ] || [ "$container" == 'docker' ]; then
+        echo "true"
+      fi
+  ENVIRONMENT_TYPE:
+    sh: |
+      if [ -f /.dockerenv ] || [ "$container" == 'docker' ]; then
+        if [ -n "$BUILD_DATE" ]; then
+          echo "docker-build"
+        else
+          echo "docker"
+        fi
+      else
+        echo "unknown"
+      fi
+
 tasks:
   clean:
     deps:
@@ -45,13 +70,13 @@ tasks:
       - task: husky:install
       - task: husky:permissions
     status:
-      - '[[ "${container:=}" == "docker" ]]'
+      - '[ "{{.DOCKER_ENVIRONMENT}}" == "true" ]'
 
   husky:ci:
     cmds:
       - task: husky:permissions
     status:
-      - '[[ "${container:=}" != "docker" ]]'
+      - '[ "{{.DOCKER_ENVIRONMENT}}" != "true" ]'
 
   husky:install:
     deps:
@@ -68,7 +93,7 @@ tasks:
           .config/log warn 'Cannot run `husky install` because there is no `.git/` folder (or this is a Docker container)'
         fi
     status:
-      - '[ ! -d .git ] || [[ "${container:=}" == "docker" ]]'
+      - '[ ! -d .git ] || [ "{{.DOCKER_ENVIRONMENT}}" == "true" ]'
 
   husky:permissions:
     log:

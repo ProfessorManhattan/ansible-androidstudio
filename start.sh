@@ -11,6 +11,8 @@
 
 set -eo pipefail
 
+ENSURED_TASKFILES=""
+
 # @description Ensure permissions in CI environments
 if [ -n "$CI" ]; then
   if type sudo &> /dev/null; then
@@ -409,37 +411,40 @@ function sha256() {
 # @example
 #   ensureTaskfiles
 function ensureTaskfiles() {
-  # shellcheck disable=SC2030
-  task donothing || BOOTSTRAP_EXIT_CODE=$?
-  mkdir -p "$HOME/.cache/megabyte/start.sh"
-  if [ -f "$HOME/.cache/megabyte/start.sh/ensure-taskfiles" ]; then
-    TASK_UPDATE_TIME="$(cat "$HOME/.cache/megabyte/start.sh/ensure-taskfiles")"
-  else
-    TASK_UPDATE_TIME="$(date +%s)"
-    echo "$TASK_UPDATE_TIME" > "$HOME/.cache/megabyte/start.sh/ensure-taskfiles"
-  fi
-  TIME_DIFF="$(($(date +%s) - "$TASK_UPDATE_TIME"))"
-  # Only run if it has been at least 15 minutes since last attempt
-  if [ -n "$BOOTSTRAP_EXIT_CODE" ] || [ "$TIME_DIFF" -gt 900 ] || [ "$TIME_DIFF" -lt 5 ] || [ -n "$FORCE_TASKFILE_UPDATE" ]; then
-    logger info 'Grabbing latest Taskfiles by downloading shared-master.tar.gz'
-    # shellcheck disable=SC2031
-    date +%s > "$HOME/.cache/megabyte/start.sh/ensure-taskfiles"
-    if [ -d common/.config/taskfiles ]; then
-      if [[ "$OSTYPE" == 'darwin'* ]]; then
-        cp -rf common/.config/taskfiles/ .config/taskfiles
-      else
-        cp -rT common/.config/taskfiles/ .config/taskfiles
-      fi
+  if [ -z "$ENSURED_TASKFILES" ]; then
+    # shellcheck disable=SC2030
+    task donothing || BOOTSTRAP_EXIT_CODE=$?
+    mkdir -p "$HOME/.cache/megabyte/start.sh"
+    if [ -f "$HOME/.cache/megabyte/start.sh/ensure-taskfiles" ]; then
+      TASK_UPDATE_TIME="$(cat "$HOME/.cache/megabyte/start.sh/ensure-taskfiles")"
     else
-      mkdir -p .config/taskfiles
-      curl -sSL https://gitlab.com/megabyte-labs/common/shared/-/archive/master/shared-master.tar.gz > shared-master.tar.gz
-      tar -xzvf shared-master.tar.gz
-      rm shared-master.tar.gz
-      rm -rf .config/taskfiles
-      mv shared-master/common/.config/taskfiles .config/taskfiles
-      mv shared-master/common/.editorconfig .editorconfig
-      mv shared-master/common/.gitignore .gitignore
-      rm -rf shared-master
+      TASK_UPDATE_TIME="$(date +%s)"
+      echo "$TASK_UPDATE_TIME" > "$HOME/.cache/megabyte/start.sh/ensure-taskfiles"
+    fi
+    TIME_DIFF="$(($(date +%s) - "$TASK_UPDATE_TIME"))"
+    # Only run if it has been at least 15 minutes since last attempt
+    if [ -n "$BOOTSTRAP_EXIT_CODE" ] || [ "$TIME_DIFF" -gt 900 ] || [ "$TIME_DIFF" -lt 5 ] || [ -n "$FORCE_TASKFILE_UPDATE" ]; then
+      logger info 'Grabbing latest Taskfiles by downloading shared-master.tar.gz'
+      # shellcheck disable=SC2031
+      date +%s > "$HOME/.cache/megabyte/start.sh/ensure-taskfiles"
+      ENSURED_TASKFILES="true"
+      if [ -d common/.config/taskfiles ]; then
+        if [[ "$OSTYPE" == 'darwin'* ]]; then
+          cp -rf common/.config/taskfiles/ .config/taskfiles
+        else
+          cp -rT common/.config/taskfiles/ .config/taskfiles
+        fi
+      else
+        mkdir -p .config/taskfiles
+        curl -sSL https://gitlab.com/megabyte-labs/common/shared/-/archive/master/shared-master.tar.gz > shared-master.tar.gz
+        tar -xzvf shared-master.tar.gz
+        rm shared-master.tar.gz
+        rm -rf .config/taskfiles
+        mv shared-master/common/.config/taskfiles .config/taskfiles
+        mv shared-master/common/.editorconfig .editorconfig
+        mv shared-master/common/.gitignore .gitignore
+        rm -rf shared-master
+      fi
     fi
   fi
 }
