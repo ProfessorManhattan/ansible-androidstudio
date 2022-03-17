@@ -411,10 +411,25 @@ function sha256() {
 function ensureTaskfiles() {
   # shellcheck disable=SC2030
   task donothing || BOOTSTRAP_EXIT_CODE=$?
-  # shellcheck disable=SC2031
-  if [ -n "$BOOTSTRAP_EXIT_CODE" ]; then
+  mkdir -p "$HOME/.cache/megabyte/start.sh"
+  if [ -f "$HOME/.cache/megabyte/start.sh/ensure-taskfiles" ]; then
+    TASK_UPDATE_TIME="$(cat "$HOME/.cache/megabyte/start.sh/ensure-taskfiles")"
+  else
+    TASK_UPDATE_TIME="$(date +%s)"
+    echo "$TASK_UPDATE_TIME" > "$HOME/.cache/megabyte/start.sh/ensure-taskfiles"
+  fi
+  TIME_DIFF="$(($(date +%s) - "$TASK_UPDATE_TIME"))"
+  # Only run if it has been at least 15 minutes since last attempt
+  if [ -n "$BOOTSTRAP_EXIT_CODE" ] || [ "$TIME_DIFF" -gt 900 ] || [ "$TIME_DIFF" -lt 5 ] || [ -n "$FORCE_TASKFILE_UPDATE" ]; then
+    logger info 'Grabbing latest Taskfiles by downloading shared-master.tar.gz'
+    # shellcheck disable=SC2031
+    date +%s > "$HOME/.cache/megabyte/start.sh/ensure-taskfiles"
     if [ -d common/.config/taskfiles ]; then
-      cp -rT common/.config/taskfiles/ .config/taskfiles
+      if [[ "$OSTYPE" == 'darwin'* ]]; then
+        cp -rf common/.config/taskfiles/ .config/taskfiles
+      else
+        cp -rT common/.config/taskfiles/ .config/taskfiles
+      fi
     else
       curl -sSL https://gitlab.com/megabyte-labs/common/shared/-/archive/master/shared-master.tar.gz > shared-master.tar.gz
       tar -xzvf shared-master.tar.gz
@@ -548,6 +563,10 @@ fi
 # @description Ensures Task is installed and properly configured
 ensureTaskInstalled
 
+# @description Ensures Taskfiles are up-to-date
+logger info 'Ensuring Taskfile.yml files are all in good standing'
+ensureTaskfiles
+
 # @description Run the start logic, if appropriate
 if [ -z "$CI" ] && [ -z "$START" ] && [ -z "$INIT_CWD" ]; then
   # shellcheck disable=SC1091
@@ -556,8 +575,7 @@ if [ -z "$CI" ] && [ -z "$START" ] && [ -z "$INIT_CWD" ]; then
   if task donothing &> /dev/null; then
     task -vvv start
   else
-    logger info 'Ensuring Taskfile.yml files are all in good standing'
-    ensureTaskfiles
+    FORCE_TASKFILE_UPDATE=true ensureTaskfiles
     if task donothing &> /dev/null; then
       task -vvv start
     else

@@ -103,6 +103,20 @@ tasks:
       - task: :lint:all
       - '{{.NPX_HANDLE}}standard-version --no-verify'
 
+  repair:
+    vars:
+      MODEL_TMP:
+        sh: mktemp
+      MODEL_VARS:
+        sh: mktemp
+    cmds:
+      - curl -sSL '{{.MODEL_TASKFILE}}' > '{{.MODEL_TMP}}'
+      - VAR="$(cat '{{.MODEL_TMP}}')" yq '. | .vars = (env(VAR) | .vars)' Taskfile.yml > '{{.MODEL_VARS}}'
+      - mv '{{.MODEL_VARS}}' Taskfile.yml
+      - VAR="$(cat '{{.MODEL_TMP}}')" yq '. | .env = (env(VAR) | .env)' Taskfile.yml > '{{.MODEL_VARS}}'
+      - mv '{{.MODEL_VARS}}' Taskfile.yml
+      - yq eval-all -i 'select(fileIndex == 0) * select(fileIndex == 1)' '{{.MODEL_TMP}}' Taskfile.yml
+
   requirements:
     deps:
       - :install:modules:local

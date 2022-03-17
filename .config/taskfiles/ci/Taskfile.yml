@@ -82,7 +82,12 @@ tasks:
       - |
         if [[ $(git status --porcelain) ]]; then
           git commit -m "⤵️ automation(synchronize) Applying changes from upstream repository."
-          git push -q -o ci.skip origin master
+          git push -q -o ci.skip origin master || FAILED_PUSH=$?
+          if [ -n "$FAILED_PUSH" ]; then
+            git pull origin master
+            task --list &> /dev/null || (echo "ERROR: Invalid Taskfiles!" && exit 1)
+            git push -q -o ci.skip origin master
+          fi
         fi
     status:
       - '[ -z "$CI" ]'
