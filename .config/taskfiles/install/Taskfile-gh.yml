@@ -11,7 +11,8 @@ tasks:
     cmds:
       - rm -rf "$TMP"
       - gh release download -R TomWright/dasel -p "*linux_amd64" -D "$TMP"
-      - mv "$TMP"/dasel* ./bin/dasel
+      - mkdir -p ./bin && mv "$TMP"/dasel* ./bin/dasel
+      - rm -rf "$TMP"
     status:
       - '[ -f ./bin/dasel ]'
 
@@ -23,7 +24,7 @@ tasks:
         sh: mktemp -d
     cmds:
       - gh release download -R christian-korneck/docker-pushrm -p "*linux_amd64" -D "$TMP"
-      - mv "$TMP"/docker-pushrm* ./bin/docker-pushrm*
+      - mkdir -p ./bin && mv "$TMP"/docker-pushrm* ./bin/docker-pushrm*
       - rm -rf "$TMP"
     status:
       - '[ -f ./bin/docker-pushrm ]'
@@ -36,10 +37,10 @@ tasks:
         sh: mktemp -d
     cmds:
       - gh release download -R edgelaboratories/fusion -p "*Linux_arm64" -D "$TMP"
-      - mv "$TMP"/fusion* ./bin/fusion
+      - mkdir -p ./bin && mv "$TMP"/fusion* ./bin/fusion
       - rm -rf "$TMP"
     status:
-     - '[ -f ./bin/fusion ]'
+      - '[ -f ./bin/fusion ]'
 
   gh:
     deps:
@@ -50,7 +51,7 @@ tasks:
     cmds:
       - gh release download -R cli/cli -p "*linux_amd64.tar.gz" -D "$TMP"
       - tar -zxvf "$TMP"/*linux_amd64.tar.gz --strip-component 1 -C "$TMP"
-      - mv "$TMP"/bin/gh ./bin/gh
+      - mkdir -p ./bin && mv "$TMP"/bin/gh ./bin/gh
       - rm -rf "$TMP"
     status:
       - '[ -f ./bin/gh ]'
@@ -64,7 +65,7 @@ tasks:
     cmds:
       - gh release download -R profclems/glab -p "*Linux_arm64.tar.gz" -D "$TMP"
       - tar -zxvf "$TMP"/*Linux_arm64.tar.gz --strip-component 1 -C "$TMP"
-      - mv "$TMP"/glab ./bin/glab
+      - mkdir -p ./bin && mv "$TMP"/glab ./bin/glab
       - rm -rf "$TMP"
     status:
       - '[ -f ./bin/glab ]'
@@ -77,7 +78,7 @@ tasks:
         sh: mktemp -d
     cmds:
       - gh release download -R mikefarah/yq -p "*linux_amd64" -D "$TMP"
-      - mv "$TMP"/yq* ./bin/yq
+      - mkdir -p ./bin && mv "$TMP"/yq* ./bin/yq
       - rm -rf "$TMP"
     status:
       - '[ -f ./bin/yq ]'
