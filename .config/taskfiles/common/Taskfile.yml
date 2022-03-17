@@ -107,14 +107,15 @@ tasks:
     vars:
       MODEL_TMP:
         sh: mktemp
-      MODEL_VARS:
-        sh: mktemp
     cmds:
-      - curl -sSL '{{.MODEL_TASKFILE}}' > '{{.MODEL_TMP}}'
-      - VAR="$(cat '{{.MODEL_TMP}}')" yq '. | .vars = (env(VAR) | .vars)' Taskfile.yml > '{{.MODEL_VARS}}'
-      - mv '{{.MODEL_VARS}}' Taskfile.yml
-      - VAR="$(cat '{{.MODEL_TMP}}')" yq '. | .env = (env(VAR) | .env)' Taskfile.yml > '{{.MODEL_VARS}}'
-      - mv '{{.MODEL_VARS}}' Taskfile.yml
+      - |
+        curl -sSL '{{.MODEL_TASKFILE}}' > '{{.MODEL_TMP}}'
+        TMP_BACKUP="$(mktemp)"
+        cp '{{.MODEL_TMP}}' "$TMP_BACKUP"
+        export ZXXXY="$(yq e '.' {{.MODEL_TMP}})"
+        yq e '. | .vars = (env(ZXXXY) | .vars) | .env = (env(ZXXXY) | .env)' Taskfile.yml > '{{.MODEL_TMP}}'
+        mv '{{.MODEL_TMP}}' Taskfile.yml
+        cp "$TMP_BACKUP" '{{.MODEL_TMP}}'
       - yq eval-all -i 'select(fileIndex == 0) * select(fileIndex == 1)' '{{.MODEL_TMP}}' Taskfile.yml
 
   requirements:

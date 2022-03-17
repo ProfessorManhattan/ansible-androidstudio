@@ -22,12 +22,7 @@ tasks:
       - mv "$(which docker-pushrm)" "$HOME/.docker/cli-plugins/docker-pushrm"
       - chmod +x "$HOME/.docker/cli-plugins/docker-pushrm"
     status:
-      - type -f "$HOME/.docker/cli-plugins/docker-pushrm" ||
-        type -f /usr/local/lib/docker/cli-plugins/docker-pushrm ||
-        type -f /usr/local/libexec/docker/cli-plugins/docker-pushrm ||
-        type -f /usr/lib/docker/cli-plugins/docker-pushrm ||
-        type -f /usr/libexec/docker/cli-plugins/docker-pushrm ||
-        type -f "$HOME/.local/go/bin/docker-pushrm"
+      - type -f "$HOME/.docker/cli-plugins/docker-pushrm"
 
   fusion:
     run: once

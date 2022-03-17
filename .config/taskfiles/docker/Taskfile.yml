@@ -114,8 +114,8 @@ tasks:
     vars:
       SLIM_ENABLED:
         sh: |
-          OBJ="$(jq -r '.blueprint.dockerSlimCommand[0]' package.json)"
-          if [ "$OBJ" == 'null' ]; then
+          TYPE="$(jq -r '.blueprint.dockerSlimCommand | type' package.json)"
+          if [ "$TYPE" != 'object' ]; then
             jq -r '.blueprint.dockerSlimCommand' package.json | sed 's/null/false/'
           else
             TARGET="{{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}{{.TARGET}}{{end}}"
