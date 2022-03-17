@@ -7,9 +7,9 @@ tasks:
     deps:
       - :install:modules:local
       - :install:software:jq
-    run: once
     vars:
       BLUEPRINT_REQUIRED_FIELDS: title description group name overview slug subgroup
+    run: once
     log:
       error: Error occurred while validating/prompting for blueprint settings
       start: Ensuring required fields in the blueprint section of `package.json` are present

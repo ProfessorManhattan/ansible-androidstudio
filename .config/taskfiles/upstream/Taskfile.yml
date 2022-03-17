@@ -100,9 +100,9 @@ tasks:
       - task: :fix:eslint
 
   pull:
-    run: once
     deps:
       - :install:software:git
+    run: once
     log:
       error: Error executing initial `git pull` logic
       start: Determining whether or not to `git pull`
@@ -149,13 +149,13 @@ tasks:
       - :install:modules:local
       - :install:npm:liquidjs
       - :install:software:jq
-    run: once
     vars:
       PYTHON_BREW_NOTICE: In order for this file to be generated, the customPyPiPackageName needs to be specified in the
         blueprint section of package.json and the PyPi package needs to be installed on the system.
     env:
       TMP:
         sh: mktemp
+    run: once
     log:
       error: Error encountered while generating files from `liquid` template files
       start: Generating files from `liquid` template files
@@ -263,7 +263,6 @@ tasks:
       - '[ ! -f local/pyproject.partial.toml ] || [ ! -f pyproject.toml ]'
 
   variables:
-    run: once
     deps:
       - :install:software:jq
     env:
@@ -271,6 +270,7 @@ tasks:
         sh: if [ -f '{{.INPUT_FILE}}' ]; then echo {{.INPUT_FILE}}; else echo ".variables.json"; fi
       TMP:
         sh: mktemp
+    run: once
     log:
       error: Encountered error while injecting `{{.OUTPUT_FILE}}` with variables
       start: Injecting `{{.OUTPUT_FILE}}` with variables

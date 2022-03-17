@@ -271,7 +271,7 @@ tasks:
       - task: update:continue
 
   update:continue:
-    run: once
     deps:
       - :git:gitlab:update
       - :git:github:update
+    run: once
