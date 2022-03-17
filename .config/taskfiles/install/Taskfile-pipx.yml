@@ -10,7 +10,6 @@ tasks:
       - task: install:pipx
         vars:
           BIN_NAME: ansible
-          INSTALL_TASK: '{{.TASK}}'
           PACKAGE: ansible-base
 
   ansible-lint:
@@ -20,7 +19,6 @@ tasks:
     cmds:
       - task: install:pipx
         vars:
-          INSTALL_TASK: '{{.TASK}}'
           PACKAGE: ansible-lint
 
   ansibler:
@@ -30,7 +28,6 @@ tasks:
     cmds:
       - task: install:pipx
         vars:
-          INSTALL_TASK: '{{.TASK}}'
           PACKAGE: ansibler
       - task: ansible
 
@@ -41,7 +38,6 @@ tasks:
     cmds:
       - task: install:pipx
         vars:
-          INSTALL_TASK: '{{.TASK}}'
           PACKAGE: black
 
   blocklint:
@@ -49,7 +45,6 @@ tasks:
     cmds:
       - task: install:pipx
         vars:
-          INSTALL_TASK: '{{.TASK}}'
           PACKAGE: blocklint
 
   flake8:
@@ -57,7 +52,6 @@ tasks:
     cmds:
       - task: install:pipx
         vars:
-          INSTALL_TASK: '{{.TASK}}'
           PACKAGE: flake8
 
   install:pipx:
@@ -65,13 +59,6 @@ tasks:
       - :install:software:pipx
     vars:
       BIN: '{{if .BIN_NAME}}{{.BIN_NAME}}{{else}}{{.PACKAGE}}{{end}}'
-      INSTALL_RECORD:
-        sh: |
-          if [ -n "$RECORD_INSTALL" ]; then
-            mkdir -p local/slim
-            echo '{{.BIN}}' >> local/slim/exe.txt
-            echo '{{.INSTALL_TASK}}' >> local/slim/install.txt
-          fi
     run: when_changed
     log:
       error: Failed to install `{{.PACKAGE}}` with pipx
@@ -89,7 +76,6 @@ tasks:
     cmds:
       - task: install:pipx
         vars:
-          INSTALL_TASK: '{{.TASK}}'
           PACKAGE: mod-ansible-autodoc
 
   molecule:
@@ -97,7 +83,6 @@ tasks:
     cmds:
       - task: install:pipx
         vars:
-          INSTALL_TASK: '{{.TASK}}'
           PACKAGE: molecule
 
   pre-commit-hooks:
@@ -106,7 +91,6 @@ tasks:
       - task: install:pipx
         vars:
           BIN_NAME: check-toml
-          INSTALL_TASK: '{{.TASK}}'
           PACKAGE: pre-commit-hooks
     status:
       - type check-toml &> /dev/null
@@ -116,7 +100,6 @@ tasks:
     cmds:
       - task: install:pipx
         vars:
-          INSTALL_TASK: '{{.TASK}}'
           PACKAGE: proselint
 
   pytest:
@@ -124,7 +107,6 @@ tasks:
     cmds:
       - task: install:pipx
         vars:
-          INSTALL_TASK: '{{.TASK}}'
           PACKAGE: pytest
 
   pytest-cov:
@@ -132,7 +114,6 @@ tasks:
     cmds:
       - task: install:pipx
         vars:
-          INSTALL_TASK: '{{.TASK}}'
           PACKAGE: pytest-cov
 
   toml-sort:
@@ -142,7 +123,6 @@ tasks:
     cmds:
       - task: install:pipx
         vars:
-          INSTALL_TASK: '{{.TASK}}'
           PACKAGE: toml-sort
 
   yamllint:
@@ -150,5 +130,4 @@ tasks:
     cmds:
       - task: install:yamllint
         vars:
-          INSTALL_TASK: '{{.TASK}}'
           PACKAGE: yamllint

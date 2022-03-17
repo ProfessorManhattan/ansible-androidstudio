@@ -16,7 +16,6 @@ tasks:
       - task: install:github
         vars:
           BIN_NAME: docker-pushrm
-          INSTALL_TASK: '{{.TASK}}'
           PACKAGE: github.com/christian-korneck/docker-pushrm
       - mkdir -p "$HOME/.docker/cli-plugins"
       - mv "$(which docker-pushrm)" "$HOME/.docker/cli-plugins/docker-pushrm"
@@ -32,7 +31,6 @@ tasks:
       - task: install:github
         vars:
           BIN_NAME: fusion
-          INSTALL_TASK: '{{.TASK}}'
           PACKAGE: github.com/edgelaboratories/fusion
 
   install:github:
@@ -66,5 +64,4 @@ tasks:
       - task: install:github
         vars:
           BIN_NAME: sentry-cli
-          INSTALL_TASK: '{{.TASK}}'
           PACKAGE: github.com/getsentry/sentry-cli

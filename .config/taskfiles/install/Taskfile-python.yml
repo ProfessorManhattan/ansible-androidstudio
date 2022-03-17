@@ -5,14 +5,6 @@ tasks:
   pip:
     deps:
       - :install:software:python
-    vars:
-      INSTALL_RECORD:
-        sh: |
-          if [ -n "$RECORD_INSTALL" ]; then
-            mkdir -p local/slim
-            echo '{{.PACKAGE}}' >> local/slim/exe.txt
-            echo '{{.INSTALL_TASK}}' >> local/slim/install.txt
-          fi
     run: when_changed
     log:
       error: Failed to install pip3 package `{{.PACKAGE}}`
@@ -28,7 +20,6 @@ tasks:
       - task: :install:pipx:install
         vars:
           BIN_NAME: '{{.BIN_NAME}}'
-          INSTALL_TASK: '{{.INSTALL_TASK}}'
           PACKAGE: '{{.PACKAGE}}'
 
   pytest:
