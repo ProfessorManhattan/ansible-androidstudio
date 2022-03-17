@@ -36,7 +36,7 @@ tasks:
       TMP:
         sh: mktemp -d
     cmds:
-      - gh release download -R edgelaboratories/fusion -p "*Linux_arm64" -D "$TMP"
+      - gh release download -R edgelaboratories/fusion -p "*Linux_amd64" -D "$TMP"
       - mkdir -p ./bin && mv "$TMP"/fusion* ./bin/fusion
       - rm -rf "$TMP"
     status:
@@ -63,8 +63,8 @@ tasks:
       TMP:
         sh: mktemp -d
     cmds:
-      - gh release download -R profclems/glab -p "*Linux_arm64.tar.gz" -D "$TMP"
-      - tar -zxvf "$TMP"/*Linux_arm64.tar.gz --strip-component 1 -C "$TMP"
+      - gh release download -R profclems/glab -p "*Linux_amd64.tar.gz" -D "$TMP"
+      - tar -zxvf "$TMP"/*Linux_amd64.tar.gz --strip-component 1 -C "$TMP"
       - mkdir -p ./bin && mv "$TMP"/glab ./bin/glab
       - rm -rf "$TMP"
     status:
