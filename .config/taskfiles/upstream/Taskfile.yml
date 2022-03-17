@@ -121,6 +121,8 @@ tasks:
         ignore_error: true
       - cmd: git config --unset url."https://gitlab.com/".insteadOf
         ignore_error: true
+    status:
+      - '[ ! -d .git ]'
 
   shared:
     run: once
