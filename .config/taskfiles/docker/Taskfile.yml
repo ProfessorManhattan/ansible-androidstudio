@@ -34,11 +34,19 @@ tasks:
           if echo "$TESTS" | grep '.yml'; then
             for TEST_FILE in $TESTS; do
               TARGET="$(echo "$TEST_FILE" | sed 's/.*\/\([^\/]*\).yml$/\1/')"
-              if [ "$(jq --arg slug "$TARGET" '.blueprint.dockerSlimCommand[$slug]' package.json)" != 'null' ]; then
-                task docker:build:slim -- "$TARGET"
+              if [ "$(jq --arg slug "$TARGET" '.blueprint.dockerSlimCommand | type' package.json)" == 'object' ]; then
+                if [ "$(jq --arg slug "$TARGET" '.blueprint.dockerSlimCommand[$slug]' package.json)" != 'null' ]; then
+                  task docker:build:slim -- "$TARGET"
+                else
+                  .config/log warn 'The `.blueprint.dockerSlimCommand` is missing - skipping slim build and building just a regular image'
+                  task docker:build:fat -- "$TARGET"
+                fi
               else
-                .config/log warn 'The `.blueprint.dockerSlimCommand` is missing - skipping slim build and building just a regular image'
-                task docker:build:fat -- "$TARGET"
+                if [ "$(jq --arg slug "$TARGET" '.blueprint.dockerSlimCommand' package.json)" != 'null' ]; then
+                  task docker:build:slim -- "$TARGET"
+                else
+                  task docker:build:fat -- "$TARGET"
+                fi
               fi
             done
           else
