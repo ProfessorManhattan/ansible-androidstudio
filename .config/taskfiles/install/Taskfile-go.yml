@@ -17,6 +17,14 @@ tasks:
       - goreleaser
       - nfpm
 
+  gitomatic:
+    run: once
+    cmds:
+      - task: install:go
+        vars:
+          BIN_NAME: gitomatic
+          PACKAGE: github.com/muesli/gitomatic@latest
+
   goconvey:
     run: once
     cmds:
