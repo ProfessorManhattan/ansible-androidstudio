@@ -162,6 +162,8 @@ tasks:
           .config/log error 'Either `blueprint.group` in `package.json` or `vars.REPOSITORY_TYPE` in `Taskfile.yml` must be defined'
         fi
 
+  misc: 'true'
+
   npm: 'true'
 
   packer: 'true'
