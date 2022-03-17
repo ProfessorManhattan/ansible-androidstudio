@@ -56,7 +56,7 @@ tasks:
     cmds:
       - task: docker:taskfile
     status:
-      - '([ -z "$CI" ] || [ ! -f /.dockerenv ])'
+      - '[ "{{.DOCKER_BUILDING}}" != "true" ]'
 
   docker:taskfile:
     cmds:
