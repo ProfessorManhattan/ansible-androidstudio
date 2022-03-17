@@ -189,6 +189,4 @@ tasks:
 
   type:
     cmds:
-      - task '{{.REPOSITORY_TYPE}}' || true
-
-
+      - 'true'
