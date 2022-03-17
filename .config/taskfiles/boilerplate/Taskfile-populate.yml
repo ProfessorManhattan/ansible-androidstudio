@@ -186,3 +186,9 @@ tasks:
         elif [ "$SUBGROUP" == 'null' ] && [ "$TASK_SUBGROUP" == 'null' ]; then
           .config/log error 'Either `blueprint.subgroup` in `package.json` or `vars.REPOSITORY_SUBTYPE` in `Taskfile.yml` must be defined'
         fi
+
+  type:
+    cmds:
+      - task '{{.REPOSITORY_TYPE}}' || true
+
+
