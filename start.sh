@@ -413,14 +413,18 @@ function ensureTaskfiles() {
   task donothing || BOOTSTRAP_EXIT_CODE=$?
   # shellcheck disable=SC2031
   if [ -n "$BOOTSTRAP_EXIT_CODE" ]; then
-    curl -sSL https://gitlab.com/megabyte-labs/common/shared/-/archive/master/shared-master.tar.gz > shared-master.tar.gz
-    tar -xzvf shared-master.tar.gz
-    rm shared-master.tar.gz
-    rm -rf .config/taskfiles
-    mv shared-master/common/.config/taskfiles .config/taskfiles
-    mv shared-master/common/.editorconfig .editorconfig
-    mv shared-master/common/.gitignore .gitignore
-    rm -rf shared-master
+    if [ -d common/.config/taskfiles ]; then
+      cp -rT common/.config/taskfiles/ .config/taskfiles
+    else
+      curl -sSL https://gitlab.com/megabyte-labs/common/shared/-/archive/master/shared-master.tar.gz > shared-master.tar.gz
+      tar -xzvf shared-master.tar.gz
+      rm shared-master.tar.gz
+      rm -rf .config/taskfiles
+      mv shared-master/common/.config/taskfiles .config/taskfiles
+      mv shared-master/common/.editorconfig .editorconfig
+      mv shared-master/common/.gitignore .gitignore
+      rm -rf shared-master
+    fi
   fi
 }
 
@@ -503,6 +507,11 @@ fi
 
 # @description Attempts to pull the latest changes if the folder is a git repository.
 if [ -d .git ] && type git &> /dev/null; then
+  if [ -n "$GROUP_ACCESS_TOKEN" ] && [ -n "$GITLAB_CI_EMAIL" ] && [ -n "$GITLAB_CI_NAME" ] && [ -n "$GITLAB_CI" ]; then
+    git remote set-url origin "https://root:$GROUP_ACCESS_TOKEN@$CI_SERVER_HOST/$CI_PROJECT_PATH.git"
+    git config user.email "$GITLAB_CI_EMAIL"
+    git config user.name "$GITLAB_CI_NAME"
+  fi
   mkdir -p .cache/start.sh
   if [ -f .cache/start.sh/git-pull-time ]; then
     GIT_PULL_TIME="$(cat .cache/start.sh/git-pull-time)"
@@ -550,7 +559,7 @@ if [ -z "$CI" ] && [ -z "$START" ] && [ -z "$INIT_CWD" ]; then
     logger info 'Ensuring Taskfile.yml files are all in good standing'
     ensureTaskfiles
     if task donothing &> /dev/null; then
-      task start
+      task -vvv start
     else
       # shellcheck disable=SC2016
       logger warn 'Something appears to be wrong with the main `Taskfile.yml` - resetting to shared common version'

@@ -50,13 +50,13 @@ tasks:
     cmds:
       - task: setup
     status:
-      - '[ -z "$CI" ] && [ -f /.dockerenv ]'
+      - '([ -z "$CI" ] && [ -f /.dockerenv ])'
 
   docker:
     cmds:
       - task: docker:taskfile
     status:
-      - '[ -z "$CI" ] || [ ! -f /.dockerenv ]'
+      - '([ -z "$CI" ] || [ ! -f /.dockerenv ])'
 
   docker:taskfile:
     cmds:

@@ -86,6 +86,7 @@ tasks:
         wait
 
   create:
+    run: once
     deps:
       - :install:software:glab
       - :install:software:jq
@@ -103,7 +104,6 @@ tasks:
         sh: if [[ $(jq -r '.private' package.json) == 'true' ]]; then echo '--private'; else echo '--public'; fi
       TMP:
         sh: mktemp
-    run: once
     log:
       error: Encountered error while creating GitLab repository
       start: Ensuring GitLab repository has been created
@@ -331,6 +331,7 @@ tasks:
         msg: The `GITLAB_TOKEN` environment variable must be set to run this task
 
   update:
+    run: once
     deps:
       - access-token
       - branches

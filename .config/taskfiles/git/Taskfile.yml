@@ -264,12 +264,14 @@ tasks:
         fi
 
   update:
+    run: once
     cmds:
       - task: :git:gitlab:create
       - task: :git:github:create
       - task: update:continue
 
   update:continue:
+    run: once
     deps:
       - :git:gitlab:update
       - :git:github:update

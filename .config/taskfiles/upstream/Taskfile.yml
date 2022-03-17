@@ -3,6 +3,7 @@ version: '3'
 
 tasks:
   common:
+    run: once
     log:
       error: Error updating common repository
       start: Updating common repository
@@ -22,6 +23,7 @@ tasks:
       - task: :git:push:all
 
   commondocs:
+    run: once
     log:
       error: Error updating common documents repository
       start: Updating common documents repository
@@ -38,6 +40,7 @@ tasks:
       - task: :git:push:all
 
   docs:
+    run: once
     todo: Remove the git:commit:automated tasks
     log:
       error: Error updating document repository
@@ -56,6 +59,7 @@ tasks:
       - task: :git:push:all
 
   project:
+    run: once
     log:
       error: Error updating project repository
       start: Running project update logic
@@ -77,6 +81,7 @@ tasks:
       - task: :{{if eq .REPOSITORY_SUBTYPE "role"}}ansible:galaxy:import{{else}}donothing{{end}}
 
   project:scaffold-only:
+    run: once
     log:
       error: Error scaffolding project
       start: Scaffolding project
@@ -95,6 +100,7 @@ tasks:
       - task: :fix:eslint
 
   pull:
+    run: once
     deps:
       - :install:software:git
     log:
@@ -117,6 +123,7 @@ tasks:
         ignore_error: true
 
   shared:
+    run: once
     log:
       error: Error running shared repository update logic
       start: Running shared repository update logic
@@ -133,6 +140,7 @@ tasks:
       - task: :git:push:all
 
   template:
+    run: once
     cmds:
       - task: template:liquidjs
 
@@ -141,6 +149,7 @@ tasks:
       - :install:modules:local
       - :install:npm:liquidjs
       - :install:software:jq
+    run: once
     vars:
       PYTHON_BREW_NOTICE: In order for this file to be generated, the customPyPiPackageName needs to be specified in the
         blueprint section of package.json and the PyPi package needs to be installed on the system.
@@ -199,6 +208,7 @@ tasks:
       - task: template:pyproject
 
   template:pyproject:
+    run: once
     cmds:
       - task: :install:github:fusion
       - task: template:pyproject:config
@@ -253,6 +263,7 @@ tasks:
       - '[ ! -f local/pyproject.partial.toml ] || [ ! -f pyproject.toml ]'
 
   variables:
+    run: once
     deps:
       - :install:software:jq
     env:

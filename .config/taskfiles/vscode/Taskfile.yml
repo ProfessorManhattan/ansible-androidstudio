@@ -9,6 +9,7 @@ vars:
 
 tasks:
   extensions:
+    run: once
     deps:
       - :install:npm:prettier
       - :install:software:jq
@@ -39,6 +40,7 @@ tasks:
           CLI_ARGS: '{{.EXTENSIONS_FILE}}'
 
   extensions:devcontainer:
+    run: once
     deps:
       - :install:npm:prettier
       - :install:software:jq
@@ -61,6 +63,7 @@ tasks:
           CLI_ARGS: '{{.DEVCONTAINER_CONFIG}}'
 
   generate:
+    run: once
     deps:
       - extensions
       - tasks

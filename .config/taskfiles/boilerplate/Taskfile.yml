@@ -7,6 +7,7 @@ tasks:
     deps:
       - :install:modules:local
       - :install:software:jq
+    run: once
     vars:
       BLUEPRINT_REQUIRED_FIELDS: title description group name overview slug subgroup
     log:
@@ -38,6 +39,7 @@ tasks:
         mv "$TMP" package.json
 
   ensure:gitlab-ci:
+    run: once
     cmds:
       - |
         if [ ! -f .gitlab-ci.yml ]; then
@@ -50,6 +52,7 @@ tasks:
   prime:package:
     deps:
       - :install:software:jq
+    run: once
     log:
       error: Failed to merge shared `package.json` settings
       start: Ensuring `package.json` has shared settings
@@ -79,6 +82,7 @@ tasks:
   prime:package:ensure-deps:
     deps:
       - :install:software:jq
+    run: once
     cmds:
       - |
         if [ "$(jq -r '.dependencies' {{.PKG_FILE}})" == 'null' ]; then
@@ -102,6 +106,7 @@ tasks:
   update:taskfile:
     deps:
       - :install:software:yq
+    run: once
     log:
       error: Error encountered while ensuring `Taskfile.yml` has correct settings
       start: Ensuring `Taskfile.yml` has correct settings
