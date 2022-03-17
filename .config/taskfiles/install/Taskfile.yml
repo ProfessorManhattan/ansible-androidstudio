@@ -71,9 +71,7 @@ tasks:
     deps:
       - :install:npm:{{.NPM_PROGRAM_LOCAL}}
       - :install:software:jq
-    env:
-      DEPS:
-        sh: jq -r -S '.dependencies + .devDependencies + .optionalDependencies + .peerDependencies' package.json
+    vars:
       PREVIOUS_DEPS:
         sh: |
           if [ -f .task/npm-deps ]; then
@@ -81,11 +79,16 @@ tasks:
           else
             echo ""
           fi
+    env:
+      DEPS:
+        sh: jq -r -S '.dependencies + .devDependencies + .optionalDependencies + .peerDependencies' package.json
+      PREVIOUS_DEPS: '{{.PREVIOUS_DEPS}}'
       SEMANTIC_PYTHON_POST_INSTALL: '{{if eq .SEMANTIC_RELEASE "true"}}true{{else}}false{{end}}'
     log:
       error: Encountered error while installing local NPM dependencies
       start: Installing local NPM dependencies
       success: Successfully installed local NPM dependencies
+    run: when_changed
     cmds:
       - task: tslib
       - |
