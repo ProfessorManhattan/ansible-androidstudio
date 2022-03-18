@@ -147,7 +147,13 @@ vars:
       elif type npm &> /dev/null; then
         echo 'npm'
       fi
-  NPM_PROGRAM_LOCAL: pnpm
+  NPM_PROGRAM_LOCAL:
+    sh: |
+      if type pnpm &> /dev/null; then
+        echo 'pnpm'
+      elif type npm &> /dev/null; then
+        echo 'npm'
+      fi
   NPX_HANDLE:
     sh: |
       if type pnpx &> /dev/null; then
