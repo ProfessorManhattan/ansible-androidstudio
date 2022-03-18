@@ -766,7 +766,7 @@ tasks:
       - task: poetry:{{OS}}
       - task: exit:notice:reload
     status:
-      - type poetry > /dev/null
+      - type poetry > /dev/null || [ -n "$NO_INSTALL_POETRY" ]
 
   poetry:darwin:
     run: once

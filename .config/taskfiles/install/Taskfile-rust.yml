@@ -15,8 +15,6 @@ tasks:
           PACKAGE: catfs
 
   install:rust:
-    deps:
-      - :install:software:rust
     vars:
       BIN: '{{if .BIN_NAME}}{{.BIN_NAME}}{{else}}{{.PACKAGE}}{{end}}'
     run: when_changed
@@ -25,6 +23,7 @@ tasks:
       start: Installing Cargo crate `{{.PACKAGE}}`
       success: Installed Cargo crate `{{.PACKAGE}}`
     cmds:
+      - task: :install:software:rust
       - cargo install {{.PACKAGE}}
     status:
       - type {{.BIN}} > /dev/null

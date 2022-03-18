@@ -42,7 +42,7 @@ tasks:
       - task: requirements:poetry:prereqs
       - task: requirements:poetry:install
     status:
-      - '[ ! -f pyproject.toml ] || ([ -n "$BUILD_DATE" ] && [ -f /.dockerenv ])'
+      - '[ ! -f pyproject.toml ] || [ -n "$NO_INSTALL_POETRY" ]'
 
   requirements:poetry:install:
     summary: |

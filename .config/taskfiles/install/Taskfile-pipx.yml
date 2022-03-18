@@ -55,8 +55,6 @@ tasks:
           PACKAGE: flake8
 
   install:pipx:
-    deps:
-      - :install:software:pipx
     vars:
       BIN: '{{if .BIN_NAME}}{{.BIN_NAME}}{{else}}{{.PACKAGE}}{{end}}'
     run: when_changed
@@ -65,6 +63,7 @@ tasks:
       start: Installing `{{.PACKAGE}}` with pipx
       success: Successfully installed `{{.PACKAGE}}` with pipx
     cmds:
+      - task: :install:software:pipx
       - pipx install {{.PACKAGE}}
     status:
       - type {{.BIN}} > /dev/null
