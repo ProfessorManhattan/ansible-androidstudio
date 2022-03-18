@@ -147,13 +147,7 @@ vars:
       elif type npm &> /dev/null; then
         echo 'npm'
       fi
-  NPM_PROGRAM_LOCAL:
-    sh: |
-      if type pnpm &> /dev/null; then
-        echo 'pnpm'
-      elif type npm &> /dev/null; then
-        echo 'npm'
-      fi
+  NPM_PROGRAM_LOCAL: pnpm
   NPX_HANDLE:
     sh: |
       if type pnpx &> /dev/null; then
@@ -193,33 +187,13 @@ vars:
       fi
   PYTHON_VIRTUALENV: true
   REPOSITORY_SUBTYPE:
-    sh: |
-      if [ -n "$REPOSITORY_TYPE" ]; then REPO_SUBTYPE="$REPOSITORY_TYPE"; fi
-      if type jq &> /dev/null && [ -f package.json ]; then
-        VER="$(jq -r '.blueprint.subgroup' package.json)"
-        if [ "$VER" == 'null' ]; then
-          if [ -n "$REPO_SUBTYPE" ]; then echo "$REPO_SUBTYPE"; else echo "misc"; fi
-        else
-          echo "$VER"
-        fi
-      else
-        if [ -n "$REPO_SUBTYPE" ]; then echo "$REPO_SUBTYPE"; else echo "misc"; fi
-      fi
+    sh: if type jq &> /dev/null && [ -f package.json ]; then VER="$(jq -r .blueprint.subgroup package.json)"; if [ "$VER" == null ]; then echo "$REPOSITORY_TYPE"; else echo "$VER"; fi; else echo "$REPOSITORY_TYPE"; fi
   REPOSITORY_TYPE:
-    sh: |
-      if [ -n "$GROUP_TYPE" ]; then REPO_TYPE="$GROUP_TYPE"; fi
-      if type jq &> /dev/null && [ -f package.json ]; then
-        VER="$(jq -r '.blueprint.group' package.json)"
-        if [ "$VER" == 'null' ]; then
-          if [ -n "$REPO_TYPE" ]; then echo "$REPO_TYPE"; else echo "misc"; fi
-        else
-          echo "$VER"
-        fi
-      else
-        if [ -n "$REPO_TYPE" ]; then echo "$REPO_TYPE"; else echo "misc"; fi
-      fi
+    sh: if type jq &> /dev/null && [ -f package.json ]; then VER="$(jq -r .blueprint.group package.json)"; if [ "$VER" == null ]; then echo "$GROUP_TYPE"; else echo "$VER"; fi; else echo "$GROUP_TYPE"; fi
   SEMANTIC_CONFIG: semantic-release-config
   TIMEZONE: America/New_York
+  includes:
+    common:start: ./.config/taskfiles/common/Taskfile-start.yml
 env:
   OSTYPE:
     sh: |
