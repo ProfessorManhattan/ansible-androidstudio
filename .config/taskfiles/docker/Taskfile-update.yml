@@ -119,3 +119,5 @@ tasks:
             task common:update:update
           fi
         fi
+    status:
+      - '[ "{{.VERSION_COMMAND}}" == "null" ]'
