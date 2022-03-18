@@ -75,6 +75,19 @@ tasks:
     status:
       - '[ -f ./bin/glab ]'
 
+  task:
+    deps:
+      - :install:software:gh
+    env:
+      TMP:
+        sh: mktemp -d
+    cmds:
+      - gh release download -R go-task/task -p "*linux_amd64.tar.gz"
+      - tar -zxvf "$TMP"/task_linux_amd64.tar.gz -C "$TMP"
+      - mkdir -p ./bin && mv "$TMP"/task ./bin/task
+      - chmod +x ./bin/task
+      - rm -rf "$TMP"
+
   yq:
     deps:
       - :install:software:gh
