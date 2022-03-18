@@ -4,8 +4,20 @@ version: '3'
 output: interleaved
 
 vars:
-  DOCKERHUB_PROFILE: {{profile.dockerhub}}
-  DOCKERHUB_USER: {{profile.dockerHubUser}}
+  DOCKERHUB_PROFILE:
+    sh: |
+      if [ -f .config/variables.json ] && type jq &> /dev/null; then
+        echo "$(jq -r '.profile.dockerhub' .config/variables.json)"
+      else
+        echo 'megabytelabs'
+      fi
+  DOCKERHUB_USER:
+    sh: |
+      if [ -f .config/variables.json ] && type jq &> /dev/null; then
+        echo "$(jq -r '.profile.dockerHubUser' .config/variables.json)"
+      else
+        echo 'ProfessorManhattan'
+      fi
   ESLINT_FIX_RECURSIVE: 'true'
   ESLINT_FORMATTER: stylish
   ESLINT_FORMATTER_OPTIONS: git-log gitlab pretty summary
@@ -16,12 +28,28 @@ vars:
       if [ -f meta/main.yml ]; then
         grep namespace < meta/main.yml | sed 's/.*namespace: \\(.*\\)$/\\1/g'
       else
-        echo '{{profile.galaxy}}'
+        if [ -f .config/variables.json ] && type jq &> /dev/null; then
+          echo "$(jq -r '.profile.galaxy' .config/variables.json)"
+        else
+          echo 'ProfessorManhattan'
+        fi
       fi
   GALAXY_ROLE_NAME:
     sh: "if [ -f meta/main.yml ]; then grep role_name < meta/main.yml | sed 's/.*role_name: \\(.*\\)$/\\1/g'; fi"
-  GITHUB_ORG: {{profile.github}}
-  GITHUB_USER: {{profile.github}}
+  GITHUB_ORG:
+    sh: |
+      if [ -f .config/variables.json ] && type jq &> /dev/null; then
+         echo "$(jq -r '.profile.github' .config/variables.json)"
+      else
+        echo 'megabytelabs'
+      fi
+  GITHUB_USER:
+    sh: |
+      if [ -f .config/variables.json ] && type jq &> /dev/null; then
+         echo "$(jq -r '.profile.github' .config/variables.json)"
+      else
+        echo 'ProfessorManhattan'
+      fi
   GROUP_EXEC_ASYNC: 'false'
   # yamllint disable rule:line-length
   IGNORE_FOLDERS: >-
@@ -34,11 +62,35 @@ vars:
   LOG_FIX:
     sh: chmod +x .config/log
   MODEL_TASKFILE: https://gitlab.com/megabyte-labs/common/shared/-/raw/master/Taskfile.yml
-  NPM_KEEP_UPDATED: 'glob'
-  NPM_PROGRAM: npm
-  NPM_PROGRAM_LOCAL: pnpm
-  NPX_HANDLE: 'pnpx '
-  NPX_PACKAGE: pnpx
+  NPM_KEEP_UPDATED: ''
+  NPM_PROGRAM:
+    sh: |
+      if type pnpm &> /dev/null; then
+        echo 'pnpm'
+      elif type npm &> /dev/null; then
+        echo 'npm'
+      fi
+  NPM_PROGRAM_LOCAL:
+    sh: |
+      if type pnpm &> /dev/null; then
+        echo 'pnpm'
+      elif type npm &> /dev/null; then
+        echo 'npm'
+      fi
+  NPX_HANDLE:
+    sh: |
+      if type pnpx &> /dev/null; then
+        echo 'pnpx '
+      elif type pnpm &> /dev/null; then
+        echo 'pnpm '
+      fi
+  NPX_PACKAGE:
+    sh: |
+      if type pnpx &> /dev/null; then
+        echo 'pnpx'
+      elif type pnpm &> /dev/null; then
+        echo 'pnpm'
+      fi
   PROJECT_TYPE:
     sh: |
       if type jq &> /dev/null && [ -f package.json ]; then VER="$(jq -r '.blueprint.group' package.json)"; if [ "$VER" == 'null' ]; then echo TYPE="$GROUP_TYPE"; else TYPE="$VER"; fi; else TYPE="$GROUP_TYPE"; fi
@@ -55,25 +107,39 @@ vars:
         echo 'project'
       fi
   # yamllint enable rule:line-length
-  PYTHON_HANDLE: 'poetry run '
+  PYTHON_HANDLE:
+    sh: |
+      if [ -n "$NO_INSTALL_POETRY" ] || ! type poetry > /dev/null; then
+        echo ''
+      else
+        echo 'poetry run '
+      fi
   PYTHON_VIRTUALENV: true
   REPOSITORY_SUBTYPE:
     sh: |
       if [ -n "$REPOSITORY_TYPE" ]; then REPO_SUBTYPE="$REPOSITORY_TYPE"; fi
       if type jq &> /dev/null && [ -f package.json ]; then
         VER="$(jq -r '.blueprint.subgroup' package.json)"
-        if [ "$VER" == 'null' ]; then echo "$REPO_SUBTYPE"; else echo "$VER"; fi
+        if [ "$VER" == 'null' ]; then
+          if [ -n "$REPO_SUBTYPE" ]; then echo "$REPO_SUBTYPE"; else echo "misc"; fi
+        else
+          echo "$VER"
+        fi
       else
-        echo "$REPO_SUBTYPE"
+        if [ -n "$REPO_SUBTYPE" ]; then echo "$REPO_SUBTYPE"; else echo "misc"; fi
       fi
   REPOSITORY_TYPE:
     sh: |
       if [ -n "$GROUP_TYPE" ]; then REPO_TYPE="$GROUP_TYPE"; fi
       if type jq &> /dev/null && [ -f package.json ]; then
         VER="$(jq -r '.blueprint.group' package.json)"
-        if [ "$VER" == 'null' ]; then echo "$REPO_TYPE"; else echo "$VER"; fi
+        if [ "$VER" == 'null' ]; then
+          if [ -n "$REPO_TYPE" ]; then echo "$REPO_TYPE"; else echo "misc"; fi
+        else
+          echo "$VER"
+        fi
       else
-        echo "$REPO_TYPE"
+        if [ -n "$REPO_TYPE" ]; then echo "$REPO_TYPE"; else echo "misc"; fi
       fi
   SEMANTIC_CONFIG: semantic-release-config
   TIMEZONE: America/New_York
