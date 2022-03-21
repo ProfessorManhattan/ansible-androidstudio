@@ -26,7 +26,7 @@ tasks:
         sh: git rev-parse HEAD
       SLUG:
         sh: jq -r '.blueprint.slug' package.json
-      TAG_POST: '{{if (contains "codeclimate" .CLI_ARGS)}}-codeclimate{{end}}'
+      TAG_POST: '{{if ne .DOCKER_BASE_TAG .CLI_ARGS}}{{.CLI_ARGS}}{{end}}'
       VERSION:
         sh: jq -r '.version' package.json
     run: when_changed
@@ -86,7 +86,7 @@ tasks:
           fi
       SLUG:
         sh: jq -r '.blueprint.slug' package.json
-      TAG_POST: '{{if (contains "codeclimate" .CLI_ARGS)}}-codeclimate{{end}}'
+      TAG_POST: '{{if ne .DOCKER_BASE_TAG .CLI_ARGS}}{{.CLI_ARGS}}{{end}}'
       VERSION:
         sh: jq -r '.version' package.json
     log:

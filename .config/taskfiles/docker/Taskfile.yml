@@ -2,6 +2,23 @@
 version: '3'
 
 vars:
+  DOCKER_BASE_TAG:
+    sh: |
+      BASE_TAG="$(jq -r '.blueprint.dockerBaseTag' package.json)"
+      if [ "$BASE_TAG" != 'null' ]; then
+        echo "$BASE_TAG"
+      else
+        if grep -m1 "^FROM .* AS .*" Dockerfile > /dev/null; then
+          FIRST_LINE=$(head -n 1 Dockerfile | sed 's/.* AS \(.*\)/\1/')
+          if [ -n "$FIRST_LINE" ]; then
+            echo "$FIRST_LINE"
+          else
+            echo ""
+          fi
+        else
+          echo ""
+        fi
+      fi
   DOCKER_IMAGE:
     sh: |
       echo "{{.DOCKERHUB_PROFILE}}/{{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}$(jq -r '.blueprint.slug' package.json){{end}}"
@@ -144,7 +161,7 @@ tasks:
     vars:
       MAJOR_VERSION:
         sh: jq -r '.version' package.json | sed 's/\..*\..*$//'
-      TAG_POST: '{{if (contains "codeclimate" .CLI_ARGS)}}-codeclimate{{end}}'
+      TAG_POST: '{{if ne .DOCKER_BASE_TAG .CLI_ARGS}}{{.CLI_ARGS}}{{end}}'
       TARGET: '{{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}{{.TARGET}}{{end}}'
       VERSION:
         sh: jq -r ".version" package.json
