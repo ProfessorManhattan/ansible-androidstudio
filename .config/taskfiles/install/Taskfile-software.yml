@@ -845,6 +845,7 @@ tasks:
     cmds:
       - task: install:software
         vars:
+          BIN_NAME: cargo
           PACKAGE: rust
 
   sentry:
