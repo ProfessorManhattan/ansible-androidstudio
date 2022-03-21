@@ -2,6 +2,8 @@
 version: '2'
 
 plugins:
+  editorconfig:
+    enabled: true
   eslint:
     enabled: true
   yamllint:

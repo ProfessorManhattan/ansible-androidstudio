@@ -1,5 +1,0 @@
----
-- name: Converge
-  hosts: "\{{ lookup('env', 'MOLECULE_GROUP') | default('all', true) }}"
-  roles:
-    - role: '{{galaxy_info.namespace}}.{{galaxy_info.role_name}}'
