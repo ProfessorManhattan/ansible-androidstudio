@@ -24,6 +24,8 @@ tasks:
       success: Installed Cargo crate `{{.PACKAGE}}`
     cmds:
       - task: :install:software:rust
+      - |
+        if [ -n "$CI" ]; then echo "*************** cargo --> {{.PACKAGE}}"; fi
       - cargo install {{.PACKAGE}}
     status:
       - type {{.BIN}} > /dev/null

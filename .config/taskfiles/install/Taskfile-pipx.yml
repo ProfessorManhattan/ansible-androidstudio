@@ -64,6 +64,8 @@ tasks:
       success: Successfully installed `{{.PACKAGE}}` with pipx
     cmds:
       - task: :install:software:pipx
+      - |
+        if [ -n "$CI" ]; then echo "*************** pipx --> {{.PACKAGE}}"; fi
       - pipx install {{.PACKAGE}}
     status:
       - type {{.BIN}} > /dev/null

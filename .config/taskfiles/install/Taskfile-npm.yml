@@ -130,6 +130,8 @@ tasks:
       start: Installing NPM global library `{{.PACKAGE}}` which does not have a CLI
       success: '`{{.PACKAGE}}` has been installed globally'
     cmds:
+      - |
+        if [ -n "$CI" ]; then echo "*************** npm global --> {{.PACKAGE}}"; fi
       - '{{.NPM_PROGRAM}} install -g {{.PACKAGE}}'
     status:
       - '[[ "$PACKAGE_EXISTS" == "true" ]]'
@@ -142,6 +144,8 @@ tasks:
       success: Successfully installed `{{.NPM_PROGRAM}}`
     cmds:
       - task: :install:software:node
+      - |
+        if [ -n "$CI" ]; then echo "*************** npm global --> {{.PACKAGE}}"; fi
       - npm install -g {{.NPM_PROGRAM}}
     status:
       - type {{.NPM_PROGRAM}} > /dev/null
@@ -163,6 +167,8 @@ tasks:
       success: Installed NPM package `{{.PACKAGE}}` globally
     cmds:
       - task: global:package-manager
+      - |
+        if [ -n "$CI" ]; then echo "*************** npm global --> {{.PACKAGE}}"; fi
       - '{{.NPM_PROGRAM}} install -g {{.PACKAGE}}'
     status:
       - type {{.BIN}} > /dev/null

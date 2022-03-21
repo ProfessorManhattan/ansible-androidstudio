@@ -11,6 +11,8 @@ tasks:
       start: Installing pip3 package `{{.PACKAGE}}`
       success: Installed pip3 package `{{.PACKAGE}}`
     cmds:
+      - |
+        if [ -n "$CI" ]; then echo "*************** pip3 --> {{.PACKAGE}}"; fi
       - pip3 install {{.PACKAGE}}
     status:
       - type {{.PACKAGE}} > /dev/null

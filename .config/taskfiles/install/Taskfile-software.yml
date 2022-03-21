@@ -59,6 +59,8 @@ tasks:
       success: Successfully installed `{{.CASK}}`
     cmds:
       - task: brew
+      - |
+        if [ -n "$CI" ]; then echo "*************** brew cask --> {{.CASK}}"; fi
       - brew install --cask {{.CASK}}
     status:
       - type {{.CASK}} &> /dev/null
@@ -674,6 +676,8 @@ tasks:
       success: Successfully installed `{{.PACKAGE}}`
     cmds:
       - task: brew
+      - |
+        if [ -n "$CI" ]; then echo "*************** brew formulae --> {{.PACKAGE}}"; fi
       - brew install {{.PACKAGE}}
     status:
       - type {{.BIN}} &> /dev/null || [ -n "$NO_INSTALL_HOMEBREW" ]

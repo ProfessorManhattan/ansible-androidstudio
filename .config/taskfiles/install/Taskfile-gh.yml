@@ -2,7 +2,15 @@
 version: '3'
 
 tasks:
+  act: echo TODO
+
   dasel:
+    cmds:
+      - task: dasel:{{OS}}
+
+  dasel:darwin: echo TODO
+
+  dasel:linux:
     deps:
       - :install:software:gh
     env:
@@ -10,14 +18,22 @@ tasks:
         sh: mktemp -d
     cmds:
       - rm -rf "$TMP"
-      - gh release download -R TomWright/dasel -p "*linux_amd64" -D "$TMP"
+      - gh release download -R TomWright/dasel -p "{{.PATTERN}}" -D "$TMP"
       - mkdir -p ./bin && mv "$TMP"/dasel* ./bin/dasel
       - chmod +x ./bin/dasel
       - rm -rf "$TMP"
     status:
       - '[ -f ./bin/dasel ]'
 
+  dasel:windows: echo TODO
+
   docker-pushrm:
+    cmds:
+      - task: docker-pushrm:{{OS}}
+
+  docker-pushrm:darwin: echo TODO
+
+  docker-pushrm:linux:
     deps:
       - :install:software:gh
     env:
@@ -31,7 +47,15 @@ tasks:
     status:
       - '[ -f ./bin/docker-pushrm ]'
 
+  docker-pushrm:windows: echo TODO
+
+  fusion:darwin: echo TODO
+
   fusion:
+    cmds:
+      - task: fusion:{{OS}}
+
+  fusion:linux:
     deps:
       - :install:software:gh
     env:
@@ -45,7 +69,15 @@ tasks:
     status:
       - '[ -f ./bin/fusion ]'
 
+  fusion:windows: echo TODO
+
   gh:
+    cmds:
+      - task: gh:{{OS}}
+
+  gh:darwin: echo TODO
+
+  gh:linux:
     deps:
       - :install:software:gh
     env:
@@ -60,7 +92,15 @@ tasks:
     status:
       - '[ -f ./bin/gh ]'
 
+  gh:windows: echo TODO
+
   glab:
+    cmds:
+      - task: glab:{{OS}}
+
+  glab:darwin: echo TODO
+
+  glab:linux:
     deps:
       - :install:software:gh
     env:
@@ -75,7 +115,15 @@ tasks:
     status:
       - '[ -f ./bin/glab ]'
 
+  glab:windows: echo TODO
+
   task:
+    cmds:
+      - task: task:{{OS}}
+
+  task:darwin: echo TODO
+
+  task:linux:
     deps:
       - :install:software:gh
     env:
@@ -88,7 +136,27 @@ tasks:
       - chmod +x ./bin/task
       - rm -rf "$TMP"
 
+  task:windows: echo TODO
+
   yq:
+    cmds:
+      - task: yq:{{OS}}
+
+  yq:darwin:
+    deps:
+      - :install:software:gh
+    env:
+      TMP:
+        sh: mktemp -d
+    cmds:
+      - gh release download -R mikefarah/yq -p "yq_darwin_amd64" -D "$TMP"
+      - mkdir -p ./bin && mv "$TMP"/yq_darwin_amd64 ./bin/yq
+      - chmod +x ./bin/yq
+      - rm -rf "$TMP"
+    status:
+      - '[ -f ./bin/yq ]'
+
+  yq:linux:
     deps:
       - :install:software:gh
     env:
@@ -98,6 +166,20 @@ tasks:
       - gh release download -R mikefarah/yq -p "*linux_amd64" -D "$TMP"
       - mkdir -p ./bin && mv "$TMP"/yq* ./bin/yq
       - chmod +x ./bin/yq
+      - rm -rf "$TMP"
+    status:
+      - '[ -f ./bin/yq ]'
+
+  yq:windows:
+    deps:
+      - :install:software:gh
+    env:
+      TMP:
+        sh: mktemp -d
+    cmds:
+      - gh release download -R mikefarah/yq -p "yq_windows_amd64.exe" -D "$TMP"
+      - mkdir -p ./bin && mv "$TMP"/yq_windows_amd64.exe ./bin/yq.exe
+      - chmod +x ./bin/yq.exe
       - rm -rf "$TMP"
     status:
       - '[ -f ./bin/yq ]'
