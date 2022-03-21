@@ -57,11 +57,11 @@ tasks:
 
   docker-pushrm:windows: echo TODO
 
+  fusion:darwin: echo TODO
+
   fusion:
     cmds:
       - task: fusion:{{OS}}
-
-  fusion:darwin: echo TODO
 
   fusion:linux:
     deps:
