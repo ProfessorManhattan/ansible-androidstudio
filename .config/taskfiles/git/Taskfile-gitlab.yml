@@ -15,7 +15,7 @@ tasks:
         sh: glab api projects/:fullpath | jq '.id'
       REQUEST_DATA: '{ "name":"PROJECT_CI_ACCESS_TOKEN", "scopes":["write_repository", "read_repository"] }'
       TOKEN_STATUS:
-        sh: glab api projects/:fullpath/access_tokens | jq -r '.[] | select(.name=="PROJECT_CI_ACCESS_TOKENX") | .id'
+        sh: type glab > /dev/null && glab api projects/:fullpath/access_tokens | jq -r '.[] | select(.name=="PROJECT_CI_ACCESS_TOKENX") | .id'
     run: once
     log:
       error: Failed to configure project-specific access token
