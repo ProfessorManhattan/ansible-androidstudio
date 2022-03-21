@@ -79,6 +79,7 @@ pytestdebug.log
 snap.login
 .Spotlight-V100
 *.sublime-workspace
+*.tar
 .task/
 .TemporaryItems
 Temporary Items
