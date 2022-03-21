@@ -117,9 +117,12 @@ tasks:
     deps:
       - :install:software:gh
     vars:
+      BIN_FOLDER:
+        sh: echo "${PWD}/bin"
       PATTERNS: -p "Linux_x86_64" -p "*Linux_x86_64.tar.gz" -p "*Linux_amd64.tar.gz" -p "*linux_amd64" -p "*linux_amd64.tar.gz" -p "*linux-amd64" -p "*Linux-64bit.tar.gz" -p "*linux-x64" -p "*linux_x64.tar.gz" -p "*linux-x86_64"
       PATTERNS_GNU: -p "*x86_64-unknown-linux-gnu.tar.gz"
       PATTERNS_MUSL: -p "*x86_64-unknown-linux-musl.tar.gz"
+    env:
       TMP:
         sh: mktemp -d
     cmds:
@@ -142,12 +145,12 @@ tasks:
         done < <(find . -type f)
         rm -rf CHANGELOG.md LICENSE LICENSE* README.md autocomplete completion *.1 *.sh *_autocomplete contrib
         if [ "$(ls 2>/dev/null * | wc -l)" == "1" ]; then
-          mv * "$TMP"/{{.BIN_NAME}}
+          mv * {{.BIN_FOLDER}}/{{.BIN_NAME}}
         else
           if [ -d bin ]; then
             cd bin
             if [ "$(ls 2>/dev/null * | wc -l)" == "1" ]; then
-              mv * "$TMP"/{{.BIN_NAME}}
+              mv * {{.BIN_FOLDER}}/{{.BIN_NAME}}
             else
               {{.COMMANDS}}
             fi
@@ -156,7 +159,7 @@ tasks:
             {{.COMMANDS}}
           fi
         fi
-      - chmod +x "$TMP"/{{.BIN_NAME}}
+      - chmod +x {{.BIN_FOLDER}}/{{.BIN_NAME}}
     status:
       - '[ -f ./bin/{{.BIN_NAME}} ]'
 
