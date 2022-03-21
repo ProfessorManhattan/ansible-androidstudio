@@ -26,7 +26,7 @@ tasks:
         sh: git rev-parse HEAD
       SLUG:
         sh: jq -r '.blueprint.slug' package.json
-      TAG_POST: '{{if ne .DOCKER_BASE_TAG .CLI_ARGS}}{{.CLI_ARGS}}{{end}}'
+      TAG_POST: '{{if ne .DOCKER_BASE_TAG .CLI_ARGS}}-{{.CLI_ARGS}}{{end}}'
       VERSION:
         sh: jq -r '.version' package.json
     run: when_changed
@@ -72,8 +72,6 @@ tasks:
     vars:
       DOCKER_IMAGE:
         sh: echo "{{.DOCKERHUB_PROFILE}}/$(jq -r '.blueprint.slug' package.json)"
-      IMAGE_TYPE:
-        sh: echo "{{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}$(jq -r '.blueprint.slug' package.json){{end}}"
       MAJOR_VERSION:
         sh: jq -r '.version' package.json | sed 's/\..*\..*$//'
       SLIM_COMMAND:
@@ -82,11 +80,14 @@ tasks:
           if [ "$COMMAND_TYPE" == 'string' ]; then
             echo "$(jq -r '.blueprint.dockerSlimCommand' package.json)"
           else
-            echo "$(jq --arg type {{.IMAGE_TYPE}} -r '.blueprint.dockerSlimCommand[$type]' package.json)"
+            COMMAND="$(jq --arg type "$(jq -r '.blueprint.slug' package.json)" -r '.blueprint.dockerSlimCommand[$type]' package.json)"
+            if [ "$COMMAND" != 'null' ]; then
+              echo "$(jq --arg type "$(jq -r '.blueprint.slug' package.json)" -r '.blueprint.dockerSlimCommand[$type]' package.json)"
+            fi
           fi
       SLUG:
         sh: jq -r '.blueprint.slug' package.json
-      TAG_POST: '{{if ne .DOCKER_BASE_TAG .CLI_ARGS}}{{.CLI_ARGS}}{{end}}'
+      TAG_POST: '{{if ne .DOCKER_BASE_TAG .CLI_ARGS}}-{{.CLI_ARGS}}{{end}}'
       VERSION:
         sh: jq -r '.version' package.json
     log:
@@ -113,14 +114,14 @@ tasks:
       - :install:npm:prettier
     vars:
       IMAGE_SLUG:
-        sh: echo "{{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}$(jq -r '.blueprint.slug' package.json){{end}}"
+        sh: jq -r '.blueprint.slug' package.json
     log:
       error: Failed to format `slim.report.json` with Prettier
       start: Formatting `slim.report.json` with Prettier
       success: Formatted `slim.report.json` with Prettier
     cmds:
       - '{{.NPX_HANDLE}}prettier --write slim.report.json > /dev/null'
-      - mv slim.report.json docs/slim.{{.IMAGE_SLUG}}.report.json
+      - mv slim.report.json docs/slim{{if .CLI_ARGS}}.{{.CLI_ARGS}}{{end}}.report.json
 
   slim:sizes:
     cmds:
@@ -134,9 +135,10 @@ tasks:
       - :install:software:gzip
     vars:
       DOCKER_IMAGE:
-        sh: echo "{{.DOCKERHUB_PROFILE}}/{{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}$(jq -r '.blueprint.slug' package.json){{end}}"
+        sh: jq -r '.blueprint.slug' package.json
       SLUG:
         sh: echo "{{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}$(jq -r '.blueprint.slug' package.json){{end}}"
+      TAG_POST: '{{if ne .DOCKER_BASE_TAG .CLI_ARGS}}-{{.CLI_ARGS}}{{end}}'
     log:
       error: Encountered error while generating compressed Docker image tar file
       start: Generating compressed Docker image tar file(s)
@@ -144,8 +146,8 @@ tasks:
     cmds:
       - |
         function zipUp() {
-          docker save "{{.DOCKER_IMAGE}}:$1" > "{{.SLUG}}-$1.tar"
-          gzip -f "{{.SLUG}}-$1.tar"
+          docker save "{{.DOCKER_IMAGE}}:$1{{.TAG_POST}}" > "{{.SLUG}}-$1{{.TAG_POST}}.tar"
+          gzip -f "{{.SLUG}}-$1{{.TAG_POST}}.tar"
         }
         zipUp "latest" &
         zipUp "slim" &
@@ -156,15 +158,15 @@ tasks:
       - :install:software:jq
     vars:
       DOCKER_IMAGE_SLUG:
-        sh: echo "{{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}$(jq -r '.blueprint.slug' package.json){{end}}"
+        sh: jq -r '.blueprint.slug' package.json
       PREVIOUS_REGULAR_SIZE:
         sh: jq --arg slug '{{.DOCKER_IMAGE_SLUG}}' -r '.blueprint.dockerLatestSize[$slug]' package.json
       PREVIOUS_SLIM_SIZE:
         sh: jq --arg slug '{{.DOCKER_IMAGE_SLUG}}' -r '.blueprint.dockerSlimSize[$slug]' package.json
       REGULAR_SIZE:
-        sh: stat -c%s {{.DOCKER_IMAGE_SLUG}}-latest.tar.gz | numfmt --to iec
+        sh: stat -c%s {{.DOCKER_IMAGE_SLUG}}-latest{{if ne .DOCKER_BASE_TAG .CLI_ARGS}}-{{.CLI_ARGS}}{{end}}.tar.gz | numfmt --to iec
       SLIM_SIZE:
-        sh: stat -c%s {{.DOCKER_IMAGE_SLUG}}-slim.tar.gz | numfmt --to iec
+        sh: stat -c%s {{.DOCKER_IMAGE_SLUG}}-slim{{if ne .DOCKER_BASE_TAG .CLI_ARGS}}-{{.CLI_ARGS}}{{end}}.tar.gz | numfmt --to iec
     log:
       error: Failed to acquire / inject `:slim` image file size information into `package.json` blueprint data
       start: Injecting `:slim` image file size into `package.json` blueprint data

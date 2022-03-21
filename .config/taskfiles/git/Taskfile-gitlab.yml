@@ -338,7 +338,7 @@ tasks:
     todo: figure out how to do it without deleteing the protection first
     cmds:
       - glab api projects/:fullpath/protected_branches/{{.BRANCH}} -X DELETE
-      - glab api projects/:fullpath/protected_branches -X POST -f name={{.BRANCH}} -f allow_force_push=false
+      - glab api projects/:fullpath/protected_branches -X POST -f name={{.BRANCH}} -f allow_force_push=true > /dev/null
     status:
       - '[ -z "$GITLAB_TOKEN" ]'
 
@@ -350,7 +350,7 @@ tasks:
     todo: figure out how to do it without deleteing the protection first
     cmds:
       - glab api projects/:fullpath/protected_branches/{{.BRANCH}} -X DELETE
-      - glab api projects/:fullpath/protected_branches -X POST -f name={{.BRANCH}} -f allow_force_push=true
+      - glab api projects/:fullpath/protected_branches -X POST -f name={{.BRANCH}} -f allow_force_push=false > /dev/null
     status:
       - '[ -z "$GITLAB_TOKEN" ]'
 

@@ -2,7 +2,15 @@
 version: '3'
 
 tasks:
-  act: echo TODO
+  act:
+    cmds:
+      - task: act:{{OS}}
+
+  act:darwin: echo TODO
+
+  act:linux: echo TODO
+
+  act:windows: echo TODO
 
   dasel:
     cmds:
