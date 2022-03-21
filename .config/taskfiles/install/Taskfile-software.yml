@@ -573,6 +573,8 @@ tasks:
       - task: install:software
         vars:
           PACKAGE: gh
+    status:
+      - type gh &> /dev/null
 
   git:
     run: once
