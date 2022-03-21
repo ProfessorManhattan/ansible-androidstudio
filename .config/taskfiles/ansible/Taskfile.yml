@@ -156,7 +156,12 @@ tasks:
           CLI_ARGS: meta/main.yml
 
   mod-ansible-autodoc:
+    todo: Add ansible-autodoc-fork to the includes of the package
     cmds:
+      - |
+        if [ -n "$CI" ]; then
+          pip3 install ansible-autodoc-fork
+        fi
       - task: mod-ansible-autodoc:generate
       - task: mod-ansible-autodoc:variables
 

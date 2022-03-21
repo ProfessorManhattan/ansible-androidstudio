@@ -41,6 +41,8 @@ tasks:
     deps:
       - :install:software:container-structure-test
       - :install:software:docker
+    vars:
+      TAG_POST: '{{if ne .DOCKER_BASE_TAG .CLI_ARGS}}-{{.CLI_ARGS}}{{end}}'
     log:
       error: '`container-structure-test` reported error(s) when testing
         `{{.DOCKERHUB_PROFILE}}/{{.SLUG}}:latest`'
@@ -49,7 +51,7 @@ tasks:
       success: '`{{.DOCKERHUB_PROFILE}}/{{.SLUG}}:latest` was
         successfully validated by `container-structure-test`'
     cmds:
-      - container-structure-test test --image {{.DOCKERHUB_PROFILE}}/{{.SLUG}}:latest --config ./test/structure/{{.SCENARIO}}.yml
+      - container-structure-test test --image {{.DOCKERHUB_PROFILE}}/{{.SLUG}}:latest{{.TAG_POST}} --config ./test/structure/{{.SCENARIO}}.yml
     status:
       - '[[ "$(docker images -q {{.DOCKERHUB_PROFILE}}/{{.SLUG}}:latest 2>/dev/null)" == "" ]] | [ ! -f ./test/structure/{{.SCENARIO}}.yml ]'
 
@@ -57,6 +59,8 @@ tasks:
     deps:
       - :install:software:container-structure-test
       - :install:software:docker
+    vars:
+      TAG_POST: '{{if ne .DOCKER_BASE_TAG .CLI_ARGS}}-{{.CLI_ARGS}}{{end}}'
     log:
       error: '`container-structure-test` reported error(s) when testing
         `{{.DOCKERHUB_PROFILE}}/{{.SLUG}}:slim`'
@@ -65,7 +69,7 @@ tasks:
       success: '`{{.DOCKERHUB_PROFILE}}/{{.SLUG}}:slim` was
         successfully validated by `container-structure-test`'
     cmds:
-      - container-structure-test test --image {{.DOCKERHUB_PROFILE}}/{{.SLUG}}:slim --config ./test/structure/{{.SCENARIO}}.yml
+      - container-structure-test test --image {{.DOCKERHUB_PROFILE}}/{{.SLUG}}:slim{{.TAG_POST}} --config ./test/structure/{{.SCENARIO}}.yml
     status:
       - '[[ "$(docker images -q {{.DOCKERHUB_PROFILE}}/{{.SLUG}}:slim 2> /dev/null)" == "" ]] | [ ! -f ./test/structure/{{.SCENARIO}}.yml ]'
 
