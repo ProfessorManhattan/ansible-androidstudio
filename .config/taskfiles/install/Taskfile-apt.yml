@@ -58,8 +58,10 @@ tasks:
 
   python:
     cmds:
+      - sudo apt-get update
+      - sudo apt-get install -y --no-install-recommends software-properties-common
       - sudo add-apt-repository -y ppa:deadsnakes/ppa
-      - apt-get install -y --no-install-recommends python3.10 python3-pip
+      - sudo apt-get update && apt-get install -y --no-install-recommends python3.10 python3-pip
 
   sysbench:
     cmds:
