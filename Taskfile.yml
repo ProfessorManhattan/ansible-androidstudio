@@ -140,13 +140,7 @@ vars:
     sh: chmod +x .config/log
   MODEL_TASKFILE: https://gitlab.com/megabyte-labs/common/shared/-/raw/master/Taskfile.yml
   NPM_KEEP_UPDATED: ''
-  NPM_PROGRAM:
-    sh: |
-      if type pnpm &> /dev/null; then
-        echo 'pnpm'
-      elif type npm &> /dev/null; then
-        echo 'npm'
-      fi
+  NPM_PROGRAM: npm
   NPM_PROGRAM_LOCAL:
     sh: |
       if type pnpm &> /dev/null; then
