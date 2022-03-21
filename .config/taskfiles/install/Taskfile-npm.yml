@@ -9,6 +9,14 @@ tasks:
         vars:
           PACKAGE: autocannon
 
+  bitwarden:
+    run: once
+    cmds:
+      - task: install:npm
+        vars:
+          BIN_NAME: bw
+          PACKAGE: '@bitwarden/cli'
+
   bundle:
     cmds:
       - task: :install:modules:global
