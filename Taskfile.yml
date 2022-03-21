@@ -188,7 +188,7 @@ vars:
   SEMANTIC_CONFIG: semantic-release-config
   TIMEZONE: America/New_York
   NPX_PACKAGE:
-    sh: |-
+    sh: |
       if type pnpx &> /dev/null; then
         echo 'pnpx'
       elif type pnpm &> /dev/null; then
