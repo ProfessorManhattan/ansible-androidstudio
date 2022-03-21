@@ -15,6 +15,7 @@ tasks:
         vars:
           BIN_NAME: bat
           PACKAGE: sharkdp/bat
+          TAR_OPTIONS: ' --strip-component 1'
 
   croc:
     cmds:
@@ -103,6 +104,7 @@ tasks:
         vars:
           BIN_NAME: '{{.BIN_NAME}}'
           PACKAGE: '{{.PACKAGE}}'
+          TAR_OPTIONS: '{{.TAR_OPTIONS}}'
 
   install:gh:darwin:
     deps:
@@ -119,7 +121,9 @@ tasks:
     vars:
       BIN_FOLDER:
         sh: echo "${PWD}/bin"
-      PATTERNS: -p "Linux_x86_64" -p "*Linux_x86_64.tar.gz" -p "*Linux_amd64.tar.gz" -p "*linux_amd64" -p "*linux_amd64.tar.gz" -p "*linux-amd64" -p "*Linux-64bit.tar.gz" -p "*linux-x64" -p "*linux_x64.tar.gz" -p "*linux-x86_64"
+      LOG_SCRIPT:
+        sh: echo "${PWD}/.config/log"
+      PATTERNS: -p "*Linux_x86_64" -p "*Linux_x86_64.tar.gz" -p "*Linux_amd64.tar.gz" -p "*linux_amd64" -p "*linux_amd64.tar.gz" -p "*linux-amd64" -p "*Linux-64bit.tar.gz" -p "*linux-x64" -p "*linux_x64.tar.gz" -p "*linux-x86_64" -p "*linux_x86_64.tar.gz"
       PATTERNS_GNU: -p "*x86_64-unknown-linux-gnu.tar.gz"
       PATTERNS_MUSL: -p "*x86_64-unknown-linux-musl.tar.gz"
     env:
@@ -134,28 +138,33 @@ tasks:
           COUNT=$((COUNT + 1))
           if [ "$COUNT" == "1" ]; then
             if [[ "$FILE" == *.tar.gz ]]; then
-              tar -xzvf{{.TAR_OPTIONS}} "$FILE"
+              tar -xzvf "$FILE"{{.TAR_OPTIONS}}
               rm "$FILE"
             elif [[ "$FILE" == *.zip ]]; then
               echo TODO
             fi
           else
-            rm "$FILE"
+            {{.LOG_SCRIPT}} warn 'Multiple releases have possibly been downloaded'
           fi
         done < <(find . -type f)
+        ls -la
         rm -rf CHANGELOG.md LICENSE LICENSE* README.md autocomplete completion *.1 *.sh *_autocomplete contrib
         if [ "$(ls 2>/dev/null * | wc -l)" == "1" ]; then
+          {{.LOG_SCRIPT}} info 'Moving `{{.BIN_NAME}}` from its default location'
           mv * {{.BIN_FOLDER}}/{{.BIN_NAME}}
         else
           if [ -d bin ]; then
             cd bin
             if [ "$(ls 2>/dev/null * | wc -l)" == "1" ]; then
+              {{.LOG_SCRIPT}} info 'Moving `{{.BIN_NAME}}` from the `bin` folder'
               mv * {{.BIN_FOLDER}}/{{.BIN_NAME}}
             else
+              {{.LOG_SCRIPT}} warn 'Unmatched binary named `{{.BIN_NAME}}` from `*.tar.gz` with a `bin` folder'
               {{.COMMANDS}}
             fi
             cd ..
           else
+            {{.LOG_SCRIPT}} warn 'Unmatched binary named `{{.BIN_NAME}}`'
             {{.COMMANDS}}
           fi
         fi
@@ -217,6 +226,8 @@ tasks:
   up:
     cmds:
       - task: up:{{OS}}
+    status:
+      - '[ -f ./bin/up ]'
 
   up:darwin:
     cmds:
