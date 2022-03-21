@@ -146,8 +146,8 @@ tasks:
     cmds:
       - |
         function zipUp() {
-          docker save "{{.DOCKER_IMAGE}}:$1{{.TAG_POST}}" > "{{.SLUG}}-$1{{.TAG_POST}}.tar"
-          gzip -f "{{.SLUG}}-$1{{.TAG_POST}}.tar"
+          docker save "{{.DOCKER_IMAGE}}:$1{{.TAG_POST}}" > "$1{{.TAG_POST}}.tar"
+          gzip -f "$1{{.TAG_POST}}.tar"
         }
         zipUp "latest" &
         zipUp "slim" &
@@ -164,9 +164,9 @@ tasks:
       PREVIOUS_SLIM_SIZE:
         sh: jq --arg slug '{{.DOCKER_IMAGE_SLUG}}' -r '.blueprint.dockerSlimSize[$slug]' package.json
       REGULAR_SIZE:
-        sh: stat -c%s {{.DOCKER_IMAGE_SLUG}}-latest{{if ne .DOCKER_BASE_TAG .CLI_ARGS}}-{{.CLI_ARGS}}{{end}}.tar.gz | numfmt --to iec
+        sh: stat -c%s {{.DOCKER_IMAGE}}:latest{{if ne .DOCKER_BASE_TAG .CLI_ARGS}}-{{.CLI_ARGS}}{{end}}.tar.gz | numfmt --to iec
       SLIM_SIZE:
-        sh: stat -c%s {{.DOCKER_IMAGE_SLUG}}-slim{{if ne .DOCKER_BASE_TAG .CLI_ARGS}}-{{.CLI_ARGS}}{{end}}.tar.gz | numfmt --to iec
+        sh: stat -c%s {{.DOCKER_IMAGE}}:slim{{if ne .DOCKER_BASE_TAG .CLI_ARGS}}-{{.CLI_ARGS}}{{end}}.tar.gz | numfmt --to iec
     log:
       error: Failed to acquire / inject `:slim` image file size information into `package.json` blueprint data
       start: Injecting `:slim` image file size into `package.json` blueprint data

@@ -21,7 +21,7 @@ vars:
       fi
   DOCKER_IMAGE:
     sh: |
-      echo "{{.DOCKERHUB_PROFILE}}/{{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}$(jq -r '.blueprint.slug' package.json){{end}}"
+      echo "{{.DOCKERHUB_PROFILE}}/$(jq -r '.blueprint.slug' package.json)"
 
 tasks:
   build:
