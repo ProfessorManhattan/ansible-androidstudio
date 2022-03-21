@@ -156,7 +156,7 @@ tasks:
       - :install:software:jq
     vars:
       DOCKER_IMAGE_SLUG:
-        sh: jq -r '.blueprint.slug' package.json
+        sh: echo "{{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}$(jq -r '.blueprint.slug' package.json){{end}}"
       PREVIOUS_REGULAR_SIZE:
         sh: jq --arg slug '{{.DOCKER_IMAGE_SLUG}}' -r '.blueprint.dockerLatestSize[$slug]' package.json
       PREVIOUS_SLIM_SIZE:

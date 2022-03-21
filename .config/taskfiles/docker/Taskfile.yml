@@ -161,7 +161,7 @@ tasks:
     vars:
       MAJOR_VERSION:
         sh: jq -r '.version' package.json | sed 's/\..*\..*$//'
-      TAG_POST: '{{if ne .DOCKER_BASE_TAG .CLI_ARGS}}-{{if (contains"codeclimate" .CLI_ARGS)}}codeclimate{{else}}{{.CLI_ARGS}}{{end}}{{end}}'
+      TAG_POST: '{{if ne .DOCKER_BASE_TAG .CLI_ARGS}}-{{if (contains "codeclimate" .CLI_ARGS)}}codeclimate{{else}}{{.CLI_ARGS}}{{end}}{{end}}'
       TARGET: '{{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}{{.TARGET}}{{end}}'
       VERSION:
         sh: jq -r ".version" package.json
