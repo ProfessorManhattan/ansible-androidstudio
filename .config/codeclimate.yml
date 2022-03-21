@@ -8,6 +8,8 @@ plugins:
     enabled: true
   eslint:
     enabled: true
+  jscpd:
+    enabled: true
   shellcheck:
     enabled: true
   yamllint:
