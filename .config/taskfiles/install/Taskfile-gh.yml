@@ -116,7 +116,7 @@ tasks:
   install:gh:linux:
     deps:
       - :install:software:gh
-    env:
+    vars:
       PATTERNS: -p "Linux_x86_64" -p "*Linux_x86_64.tar.gz" -p "*Linux_amd64.tar.gz" -p "*linux_amd64" -p "*linux_amd64.tar.gz" -p "*linux-amd64" -p "*Linux-64bit.tar.gz" -p "*linux-x64" -p "*linux_x64.tar.gz" -p "*linux-x86_64"
       PATTERNS_GNU: -p "*x86_64-unknown-linux-gnu.tar.gz"
       PATTERNS_MUSL: -p "*x86_64-unknown-linux-musl.tar.gz"
