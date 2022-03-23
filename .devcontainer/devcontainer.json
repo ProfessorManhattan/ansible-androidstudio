@@ -49,7 +49,7 @@
   },
   "mounts": ["source=dind-var-lib-docker,target=/var/lib/docker,type=volume"],
   "name": "Megabyte Labs Development Environment",
-  "postCreateCommand": "type -f start.sh && (bash start.sh || true)",
+  "postCreateCommand": "[ -f start.sh ] && (bash start.sh || true)",
   "remoteUser": "megabyte",
   "runArgs": ["--init", "--privileged", "--shm-size=1g"],
   "settings": {}
