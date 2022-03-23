@@ -29,6 +29,7 @@ body:
     validations:
       required: false
 
+  # yamllint disable rule:line-length
   - type: markdown
     attributes:
       value: |
