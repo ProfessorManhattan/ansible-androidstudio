@@ -130,7 +130,8 @@ tasks:
         sh: echo "${PWD}/bin"
       LOG_SCRIPT:
         sh: echo "${PWD}/.config/log"
-      PATTERNS: -p "*Linux_x86_64" -p "*Linux_x86_64.tar.gz" -p "*Linux_amd64.tar.gz" -p "*linux_amd64" -p "*linux_amd64.tar.gz" -p "*linux-amd64" -p "*Linux-64bit.tar.gz" -p "*linux-x64" -p "*linux_x64.tar.gz" -p "*linux-x86_64" -p "*linux_x86_64.tar.gz"
+      PATTERNS: -p "*Linux_x86_64" -p "*Linux_x86_64.tar.gz" -p "*Linux_amd64.tar.gz" -p "*linux_amd64" -p "*linux_amd64.tar.gz"
+        -p "*linux-amd64" -p "*Linux-64bit.tar.gz" -p "*linux-x64" -p "*linux_x64.tar.gz" -p "*linux-x86_64" -p "*linux_x86_64.tar.gz"
       PATTERNS_GNU: -p "*x86_64-unknown-linux-gnu.tar.gz" -p "*x86_64-unknown-linux-gnu.zip"
       PATTERNS_MUSL: -p "*x86_64-unknown-linux-musl.tar.gz"
     env:
