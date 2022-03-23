@@ -42,7 +42,7 @@ tasks:
       start: Linting project with Ansible Lint
       success: Validated project with Ansible Lint
     cmds:
-      - '{{.PYTHON_HANDLE}}ansible-lint -c {{.ANSIBLE_LINT_CONFIG}}'
+      - ansible-lint -c {{.ANSIBLE_LINT_CONFIG}}
 
   any:
     deps:
@@ -53,11 +53,11 @@ tasks:
       error: Errors were reported by the global linters for `{{.CLI_ARGS}}`
       start: Linting `{{.CLI_ARGS}}` with global linters
     cmds:
-      - '{{.PYTHON_HANDLE}}blocklint --wordlist blacklist,slave,whitelist {{.CLI_ARGS}}'
-      - '{{.PYTHON_HANDLE}}check-merge-conflict {{.CLI_ARGS}}'
-      - '{{.PYTHON_HANDLE}}check-added-large-files {{.CLI_ARGS}}'
-      - '{{.PYTHON_HANDLE}}check-symlinks {{.CLI_ARGS}}'
-      - '{{.PYTHON_HANDLE}}destroyed-symlinks {{.CLI_ARGS}}'
+      - blocklint --wordlist blacklist,slave,whitelist {{.CLI_ARGS}}
+      - check-merge-conflict {{.CLI_ARGS}}
+      - check-added-large-files {{.CLI_ARGS}}
+      - check-symlinks {{.CLI_ARGS}}
+      - destroyed-symlinks {{.CLI_ARGS}}
 
   codeclimate:
     deps:
@@ -91,7 +91,17 @@ tasks:
       start: Running `codeclimate`
       success: Successfully validated the project by running `codeclimate`
     cmds:
-      - CODECLIMATE_DEBUG=1 codeclimate analyze --dev{{if .CLI_ARGS}}{{.CLI_ARGS}}{{end}}
+      - |
+        if [ -z "$CODECLIMATE_INTEGRATION_TEST" ]; then
+          CODECLIMATE_DEBUG=1 codeclimate analyze --dev{{if .CLI_ARGS}}{{.CLI_ARGS}}{{end}}
+        else
+          while read PATHH; do
+            cd "$(dirname $PATHH)" && break
+          done < <(find test -maxdepth 2 -type f -name .codeclimate.yml)
+          task lint:codeclimate:taskfiles:add
+          CODECLIMATE_DEBUG=1 codeclimate analyze --dev
+          task lint:codeclimate:taskfiles:remove
+        fi
 
   commit:
     deps:
@@ -168,11 +178,11 @@ tasks:
     cmds:
       - |
         {{if .CLI_ARGS}}
-          docker run -v "$PWD:/work" -w /work megabytelabs/hadolint:slim {{.CLI_ARGS | replace .PWD ""}}
+          docker run -v "$PWD:/work" -w /work megabytelabs/hadolint:slim -c .config/hadolint.yml {{.CLI_ARGS | replace .PWD ""}}
         {{else}}
           find . -type d \( {{.IGNORE_FOLDERS}} \) -prune -o -type f \( -name Dockerfile -o \
             -name Dockerfile.j2 \) -print0 | xargs -0 -r -n1 docker run -v "$PWD:/work" -w /work \
-            megabytelabs/hadolint:slim
+            megabytelabs/hadolint:slim -c .config/hadolint.yml
         {{end}}
 
   dockerfile:
@@ -320,7 +330,13 @@ tasks:
       start: Linting staged files
       success: The staged files appear to be good!
     cmds:
-      - '{{.NPX_HANDLE}}lint-staged'
+      - |
+        {{.NPX_HANDLE}}lint-staged || LINT_EXIT_CODE="$?"
+        if [ -n "$LINT_EXIT_CODE" ]; then
+          .config/log error 'Linting failed!'
+          .config/log info 'If necessary, you can bypass this pre-commit hook by running `git commit --no-verify`. Please try to fix the errors first.'
+          exit 1
+        fi
 
   packer:
     deps:
@@ -439,9 +455,9 @@ tasks:
     cmds:
       - |
         {{if .CLI_ARGS}}
-          {{.PYTHON_HANDLE}}flake8 --config {{.FLAKE8_CONFIG}} {{.CLI_ARGS}}
+          flake8 --config {{.FLAKE8_CONFIG}} {{.CLI_ARGS}}
         {{else}}
-          {{.PYTHON_HANDLE}}flake8 --config {{.FLAKE8_CONFIG}} .
+          flake8 --config {{.FLAKE8_CONFIG}} .
         {{end}}
 
   shell:
@@ -580,7 +596,7 @@ tasks:
       start: Ensuring {{if .CLI_ARGS}}`{{.CLI_ARGS}}` is valid TOML{{else}}the project'\''s TOML files are valid{{end}}
       success: The TOML appears to be valid!
     cmds:
-      - '{{.PYTHON_HANDLE}}check-toml {{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}.{{end}}'
+      - check-toml {{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}.{{end}}
 
   vagrant:
     deps:
@@ -622,7 +638,7 @@ tasks:
       start: Ensuring {{if .CLI_ARGS}}{{.CLI_ARGS}} is valid XML{{else}}the project contains only valid XML{{end}}
       success: The XML appears to be valid
     cmds:
-      - '{{.PYTHON_HANDLE}}check-xml {{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}.{{end}}'
+      - check-xml {{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}.{{end}}
 
   yaml:
     deps:
@@ -653,4 +669,4 @@ tasks:
       start: Linting {{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}the project{{end}} with `yamllint`
       success: No issues were detected by `yamllint`
     cmds:
-      - '{{.PYTHON_HANDLE}}yamllint -c {{.YAMLLINT_CONFIG}} -s {{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}.{{end}}'
+      - yamllint -c {{.YAMLLINT_CONFIG}} -s {{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}.{{end}}

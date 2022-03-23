@@ -3,6 +3,8 @@ version: '3'
 
 tasks:
   build:
+    deps:
+      - :install:software:jq
     vars:
       BUILD_COMMAND:
         sh: jq -r '.blueprint.build_command' package.json

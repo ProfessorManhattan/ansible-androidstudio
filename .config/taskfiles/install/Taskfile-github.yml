@@ -20,7 +20,7 @@ tasks:
       - mv "$(which docker-pushrm)" "$HOME/.docker/cli-plugins/docker-pushrm"
       - chmod +x "$HOME/.docker/cli-plugins/docker-pushrm"
     status:
-      - type -f "$HOME/.docker/cli-plugins/docker-pushrm"
+      - '[ -f "$HOME/.docker/cli-plugins/docker-pushrm" ]'
 
   fusion:
     run: once

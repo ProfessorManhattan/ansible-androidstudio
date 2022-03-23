@@ -438,7 +438,7 @@ function ensureTaskfiles() {
       else
         mkdir -p .config/taskfiles
         curl -sSL https://gitlab.com/megabyte-labs/common/shared/-/archive/master/shared-master.tar.gz > shared-master.tar.gz
-        tar -xzvf shared-master.tar.gz
+        tar -xzvf shared-master.tar.gz > /dev/null
         rm shared-master.tar.gz
         rm -rf .config/taskfiles
         mv shared-master/common/.config/taskfiles .config/taskfiles

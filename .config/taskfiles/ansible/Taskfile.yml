@@ -8,7 +8,7 @@ vars:
   MOLECULE_RESULTS_PATH: molecule/.results
   REQUIREMENTS_PATH: requirements.yml
   ROLE_NAME: '{{.GALAXY_NAMESPACE}}.{{.GALAXY_ROLE_NAME}}'
-  SAMPLE_PROJECT: https://github.com/ProfessorManhattan/ansible-snapd
+  SAMPLE_PROJECT: https://github.com/megabyte-labs/ansible-snapd
   VARIABLES_PATH: .variables.json
 
 tasks:

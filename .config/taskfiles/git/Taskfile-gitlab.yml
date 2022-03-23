@@ -365,6 +365,8 @@ tasks:
       - update:meta
       - wiki
     run: once
+    status:
+      - '[ -z "$GITLAB_TOKEN" ] || ! type glab &> /dev/null'
 
   update:meta:
     deps:

@@ -162,6 +162,13 @@ tasks:
     status:
       - type {{.NPM_PROGRAM}} > /dev/null
 
+  htmlhint:
+    run: once
+    cmds:
+      - task: install:npm
+        vars:
+          PACKAGE: htmlhint
+
   husky:
     run: once
     cmds:
@@ -404,6 +411,13 @@ tasks:
           BIN_NAME: remark
           PACKAGE: remark-cli
 
+  secretlint:
+    run: once
+    cmds:
+      - task: install:npm
+        vars:
+          PACKAGE: secretlint
+
   semantic-release:
     run: once
     tags:
@@ -448,6 +462,13 @@ tasks:
       - task: install:npm
         vars:
           PACKAGE: standard-version
+
+  stylelint:
+    run: once
+    cmds:
+      - task: install:npm
+        vars:
+          PACKAGE: stylelint
 
   synp:
     run: once

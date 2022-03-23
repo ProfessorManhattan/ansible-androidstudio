@@ -3,6 +3,11 @@ version: '3'
 
 tasks:
   fat:
+    cmds:
+      - task: :docker:update:version
+      - task: fat:build
+
+  fat:build:
     deps:
       - :install:software:docker
       - :install:software:jq
@@ -17,13 +22,9 @@ tasks:
       [Docker's build guide](https://docs.docker.com/engine/reference/commandline/build/).
     vars:
       BUILD_DATE:
-        sh: git show -s --format=%cI
-      DOCKER_IMAGE:
-        sh: echo "{{.DOCKERHUB_PROFILE}}/$(jq -r '.blueprint.slug' package.json)"
-      MAJOR_VERSION:
-        sh: jq -r '.version' package.json | sed 's/\..*\..*$//'
+        sh: type git &> /dev/null && git show -s --format=%cI
       REVISION:
-        sh: git rev-parse HEAD
+        sh: type git &> /dev/null && git rev-parse HEAD
       SLUG:
         sh: jq -r '.blueprint.slug' package.json
       TAG_POST: '{{if ne .DOCKER_BASE_TAG .CLI_ARGS}}-{{.CLI_ARGS}}{{end}}'
@@ -45,7 +46,6 @@ tasks:
         --tag {{.DOCKER_IMAGE}}:latest{{.TAG_POST}}
         {{if (contains "codeclimate" .CLI_ARGS)}} --tag codeclimate/codeclimate-{{.SLUG}}{{end}}
         {{if .CLI_ARGS}} --target {{.CLI_ARGS}}{{end}} .
-      - task: :docker:update:version
 
   slim:
     deps:
@@ -70,37 +70,36 @@ tasks:
 
   slim:command:
     vars:
-      DOCKER_IMAGE:
-        sh: echo "{{.DOCKERHUB_PROFILE}}/$(jq -r '.blueprint.slug' package.json)"
-      MAJOR_VERSION:
-        sh: jq -r '.version' package.json | sed 's/\..*\..*$//'
+      DIND_MOUNT:
+        sh: |
+          if [ "$(jq -r '.blueprint.dockerInDocker' package.json)" == 'true' ]; then
+            echo "--mount {{.DIND_MOUNT_MAPPING}} "
+          fi
       SLIM_COMMAND:
         sh: |
           COMMAND_TYPE="$(jq -r '.blueprint.dockerSlimCommand | type' package.json)"
           if [ "$COMMAND_TYPE" == 'string' ]; then
             echo "$(jq -r '.blueprint.dockerSlimCommand' package.json)"
           else
-            COMMAND="$(jq --arg type "$(jq -r '.blueprint.slug' package.json)" -r '.blueprint.dockerSlimCommand[$type]' package.json)"
+            COMMAND="$(jq --arg type "{{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}$(jq -r '.blueprint.slug' package.json){{end}}" \
+            -r '.blueprint.dockerSlimCommand[$type]' package.json)"
             if [ "$COMMAND" != 'null' ]; then
-              echo "$(jq --arg type "$(jq -r '.blueprint.slug' package.json)" -r '.blueprint.dockerSlimCommand[$type]' package.json)"
+              echo "$(jq --arg type "{{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}$(jq -r '.blueprint.slug' package.json){{end}}" \
+              -r '.blueprint.dockerSlimCommand[$type]' package.json)"
             fi
           fi
-      SLUG:
-        sh: jq -r '.blueprint.slug' package.json
       TAG_POST: '{{if ne .DOCKER_BASE_TAG .CLI_ARGS}}-{{.CLI_ARGS}}{{end}}'
-      VERSION:
-        sh: jq -r '.version' package.json
     log:
       error: Error building `{{.DOCKER_IMAGE}}:slim` with `docker-slim`
       start: Building Docker container named `{{.DOCKER_IMAGE}}:slim`
       success: Successfully built Docker container named `{{.DOCKER_IMAGE}}:slim`
     cmds:
       - >
-        .config/log info 'Running `docker-slim build --tag {{.DOCKER_IMAGE}}:slim{{.TAG_POST}}
+        .config/log info 'Running `docker-slim build {{.DIND_MOUNT}}--tag {{.DOCKER_IMAGE}}:slim{{.TAG_POST}}
         {{if (contains "codeclimate" .CLI_ARGS)}}--tag codeclimate/codeclimate-{{.SLUG}}:slim {{end}}
         {{.SLIM_COMMAND | replace "'" "\""}} {{.DOCKER_IMAGE}}:latest{{.TAG_POST}}`'
       - >
-        docker-slim build --tag {{.DOCKER_IMAGE}}:slim{{.TAG_POST}}
+        docker-slim build {{.DIND_MOUNT}}--tag {{.DOCKER_IMAGE}}:slim{{.TAG_POST}}
         {{if (contains "codeclimate" .CLI_ARGS)}}--tag codeclimate/codeclimate-{{.SLUG}}:slim {{end}}
         {{.SLIM_COMMAND | replace "'" "\""}} {{.DOCKER_IMAGE}}:latest{{.TAG_POST}}
 

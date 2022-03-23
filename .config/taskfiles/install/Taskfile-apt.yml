@@ -55,6 +55,12 @@ tasks:
       - rm /tmp/node_setup.sh
       - sudo apt-get update && sudo apt-get install -y --no-install-recommends nodejs
 
+  packer:
+    cmds:
+      - curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+      - sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+      - sudo apt-get update && sudo apt-get install packer
+
   python:
     cmds:
       - sudo apt-get update
@@ -72,6 +78,12 @@ tasks:
       - curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
       - sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
       - sudo apt-get update && sudo apt-get install -y --no-install-recommends terraform
+
+  vagrant:
+    cmds:
+      - curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+      - sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+      - sudo apt-get update && sudo apt-get install vagrant
 
   waypoint:
     cmds:

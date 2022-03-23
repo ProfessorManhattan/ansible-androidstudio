@@ -2,26 +2,31 @@
 version: '3'
 
 vars:
+  DIND_MOUNT_MAPPING: /var/run/docker.sock:/var/run/docker.sock
   DOCKER_BASE_TAG:
     sh: |
-      BASE_TAG="$(jq -r '.blueprint.dockerBaseTag' package.json)"
-      if [ "$BASE_TAG" != 'null' ]; then
-        echo "$BASE_TAG"
-      else
-        if grep -m1 "^FROM .* AS .*" Dockerfile > /dev/null; then
-          FIRST_LINE=$(head -n 1 Dockerfile | sed 's/.* AS \(.*\)/\1/')
-          if [ -n "$FIRST_LINE" ]; then
-            echo "$FIRST_LINE"
+      if [ -f Dockerfile ] && type jq &> /dev/null; then
+        BASE_TAG="$(jq -r '.blueprint.dockerBaseTag' package.json)"
+        if [ "$BASE_TAG" != 'null' ]; then
+          echo "$BASE_TAG"
+        else
+          if grep -m1 "^FROM .* AS .*" Dockerfile > /dev/null; then
+            FIRST_LINE=$(head -n 1 Dockerfile | sed 's/.* AS \(.*\)/\1/')
+            if [ -n "$FIRST_LINE" ]; then
+              echo "$FIRST_LINE"
+            else
+              echo ""
+            fi
           else
             echo ""
           fi
-        else
-          echo ""
         fi
       fi
   DOCKER_IMAGE:
     sh: |
-      echo "{{.DOCKERHUB_PROFILE}}/$(jq -r '.blueprint.slug' package.json)"
+      if type jq &> /dev/null; then
+        echo "{{.DOCKERHUB_PROFILE}}/$(jq -r '.blueprint.slug' package.json)"
+      fi
 
 tasks:
   build:
@@ -154,7 +159,7 @@ tasks:
       - docker tag {{.DOCKER_IMAGE}}:{{.SOURCE_TAG}} {{.DOCKER_IMAGE}}:{{.TARGET_TAG}}
       - docker push {{.DOCKER_IMAGE}}:{{.TARGET_TAG}}
     status:
-      - '[[ "{{.SOURCE_TAG}}" == "slim" ]]'
+      - '[[ "{{.SOURCE_TAG}}" == "slim"* ]]'
       - '[[ "{{.SLIM_ENABLED}}" == "false" ]]'
 
   publish:images:

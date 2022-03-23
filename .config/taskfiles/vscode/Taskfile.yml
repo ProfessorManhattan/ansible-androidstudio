@@ -27,14 +27,9 @@ tasks:
       success: Generated `{{.EXTENSIONS_FILE}}`
     cmds:
       - mkdir -p .vscode
-      - |
-        TMP="$(mktemp)"
-        curl -s {{.EXTENSIONS_URL}} > "$TMP"
-        TMP_YQ="$(mktemp)"
-        yq e '.vscode_extensions[].name' - < "$TMP" > "$TMP_YQ"
-        TMP_JQ="$(mktemp)"
-        jq -cRrs 'split("\n") | "{ \"recommendations\": \(.) }"' < "$TMP_YQ" > "$TMP_JQ"
-        sed 's/,""//' < "$TMP_JQ" > '{{.EXTENSIONS_FILE}}'
+      - >-
+        curl -s {{.EXTENSIONS_URL}} | yq -o=j '.' | jq '.[] = [(.[][] | select(.types | index("{{.REPOSITORY_TYPE}}") or index("all")))
+        | .name] | . + {"recommendations": .vscode_extensions } | del(.vscode_extensions)' > {{.EXTENSIONS_FILE}}
       - task: :fix:prettier
         vars:
           CLI_ARGS: '{{.EXTENSIONS_FILE}}'
@@ -56,7 +51,7 @@ tasks:
     cmds:
       - |
         TMP="$(mktemp)"
-        jq --arg recommendations "$(jq '.recommendations' {{.EXTENSIONS_FILE}})" '.extensions = ($recommendations | fromjson)' {{.DEVCONTAINER_CONFIG}} > "$TMP"
+        jq --arg recs "$(jq '.recommendations' {{.EXTENSIONS_FILE}})" '.extensions = ($recs | fromjson)' {{.DEVCONTAINER_CONFIG}} > "$TMP"
         mv "$TMP" {{.DEVCONTAINER_CONFIG}}
       - task: :fix:prettier
         vars:

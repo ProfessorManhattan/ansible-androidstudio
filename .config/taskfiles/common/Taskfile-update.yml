@@ -5,6 +5,7 @@ tasks:
   all:
     deps:
       - ':{{if eq .REPOSITORY_TYPE "packer"}}packer:update:descriptions{{else}}donothing{{end}}'
+      - ':{{if eq .REPOSITORY_TYPE "docker"}}docker:update:sort{{else}}donothing{{end}}'
       - files
       - :python:requirementstxt
     cmds:

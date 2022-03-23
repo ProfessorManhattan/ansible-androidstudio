@@ -13,12 +13,18 @@ tasks:
   bundle:
     deps:
       - bin
-      - goofys
+      - golangci-lint
       - goreleaser
       - minio
       - nfpm
       - ots
       - pup
+
+  clean:
+    cmds:
+      - rm -rf "$GOPATH/pkg" "$GOPATH/src"
+    status:
+      - '[ -z "$GOPATH" ]'
 
   gitomatic:
     run: once
@@ -35,6 +41,14 @@ tasks:
         vars:
           BIN_NAME: goconvey
           PACKAGE: github.com/smartystreets/goconvey@latest
+
+  golangci-lint:
+    run: once
+    cmds:
+      - task: install:go
+        vars:
+          BIN_NAME: golangci-lint
+          PACKAGE: github.com/golangci/golangci-lint/cmd/golangci-lint@v1.45.0
 
   goofys:
     run: once

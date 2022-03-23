@@ -4,7 +4,7 @@ version: '3'
 vars:
   DEFAULT_ANSIBLE_LICENSE: license (MIT)
   DEFAULT_NAMESPACE: professormanhattan
-  GITHUB_ROLE_PATH_PREFIX: https://github.com/ProfessorManhattan/ansible-
+  GITHUB_ROLE_PATH_PREFIX: https://github.com/megabyte-labs/ansible-
   GITLAB_ROLE_PATH_PREFIX: https://gitlab.com/megabyte-labs/ansible-roles/
   MIN_ANSIBLE_VERSION: 2.10
 

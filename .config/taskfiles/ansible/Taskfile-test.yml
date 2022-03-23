@@ -11,7 +11,11 @@ vars:
       if [ -n "$CI" ]; then
         echo ''
       else
-        echo 'unbuffer {{.PYTHON_HANDLE}}'
+        if type unbuffer &> /dev/null; then
+          echo 'unbuffer {{.PYTHON_HANDLE}}'
+        else
+          echo '{{.PYTHON_HANDLE}}'
+        fi
       fi
 
 tasks:

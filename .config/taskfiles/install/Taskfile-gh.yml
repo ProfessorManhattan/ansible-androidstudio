@@ -31,6 +31,13 @@ tasks:
           BIN_NAME: dasel
           PACKAGE: TomWright/dasel
 
+  deno:
+    cmds:
+      - task: install:gh
+        vars:
+          BIN_NAME: deno
+          PACKAGE: denoland/deno
+
   direnv:
     cmds:
       - task: install:gh
@@ -124,7 +131,7 @@ tasks:
       LOG_SCRIPT:
         sh: echo "${PWD}/.config/log"
       PATTERNS: -p "*Linux_x86_64" -p "*Linux_x86_64.tar.gz" -p "*Linux_amd64.tar.gz" -p "*linux_amd64" -p "*linux_amd64.tar.gz" -p "*linux-amd64" -p "*Linux-64bit.tar.gz" -p "*linux-x64" -p "*linux_x64.tar.gz" -p "*linux-x86_64" -p "*linux_x86_64.tar.gz"
-      PATTERNS_GNU: -p "*x86_64-unknown-linux-gnu.tar.gz"
+      PATTERNS_GNU: -p "*x86_64-unknown-linux-gnu.tar.gz" -p "*x86_64-unknown-linux-gnu.zip"
       PATTERNS_MUSL: -p "*x86_64-unknown-linux-musl.tar.gz"
     env:
       TMP:
@@ -141,7 +148,8 @@ tasks:
               tar -xzvf "$FILE"{{.TAR_OPTIONS}}
               rm "$FILE"
             elif [[ "$FILE" == *.zip ]]; then
-              echo TODO
+              unzip "$FILE"
+              rm "$FILE"
             fi
           else
             {{.LOG_SCRIPT}} warn 'Multiple releases have possibly been downloaded'

@@ -16,6 +16,10 @@ tasks:
           BIN_NAME: catfs
           PACKAGE: catfs
 
+  clean:
+    cmds:
+      - rm -rf "$HOME/.cargo/registry"
+
   grex:
     run: once
     cmds:
@@ -54,4 +58,4 @@ tasks:
         if [ -n "$CI" ]; then echo "*************** cargo --> {{.PACKAGE}}"; fi
       - cargo install {{.PACKAGE}}
     status:
-      - type {{.BIN}} > /dev/null
+      - type {{.BIN}} > /dev/null || [ -n "$NO_INSTALL_RUST" ]

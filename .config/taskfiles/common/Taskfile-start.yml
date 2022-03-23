@@ -52,6 +52,14 @@ tasks:
     status:
       - '([ -z "$CI" ] && [ -f /.dockerenv ])'
 
+  devcontainer:
+    cmds:
+      - task: :install:modules:local
+      - task: :install:python:requirements:poetry
+      - task: :git:remotes
+    status:
+      - '[ ! -f /.devcontainer ]'
+
   docker:
     cmds:
       - task: docker:taskfile
@@ -80,7 +88,7 @@ tasks:
     cmds:
       - task: :prepare
     status:
-      - '[ "$PREPARE_PROJECT" != "true" ]'
+      - '[ "$PREPARE_PROJECT" != "true" ] || [ -f /.devcontainer ]'
 
   prereqs:
     env:
@@ -163,6 +171,7 @@ tasks:
       - task: prepare
       - task: update
       - task: commit
+      - task: devcontainer
     status:
       - '[ -n "$CI" ]'
 
@@ -172,7 +181,7 @@ tasks:
       - task: :upstream:{{.PROJECT_TYPE}}
       - task: update:git
     status:
-      - '[ "$UPDATE_PROJECT" == "true" ]'
+      - '[ "$UPDATE_PROJECT" == "true" ] || [ -f /.devcontainer ]'
 
   update:git:
     run: once
