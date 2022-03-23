@@ -277,9 +277,9 @@ tasks:
           URL="$(jq -r --arg count "$(("$i" - 1))" '.blueprint.upstreamRemotes[($count | tonumber)].url' package.json)"
           if [ "$REMOTE" != 'null' ] && [ "$URL" != 'null' ]; then
             if git remote | grep "$REMOTE"; then
-              git remote remove "$REMOTE"
+              git remote remove $REMOTE
             fi
-            git remote add "$REMOTE" "$URL"
+            git remote add $REMOTE $URL
           else
             .config/log warn '`blueprint.upstreamRemotes` objects should have the `remote`, `url`, and `branch` keys'
           fi
@@ -301,10 +301,10 @@ tasks:
           BRANCH="$(jq -r --arg count "$(("$i" - 1))" '.blueprint.upstreamRemotes[($count | tonumber)].branch' package.json)"
           if [ "$REMOTE" != 'null' ] && [ "$URL" != 'null' ] && [ "$BRANCH" != 'null' ]; then
             if git remote | grep "$REMOTE"; then
-              git remote remove "$REMOTE"
+              git remote remove $REMOTE
             fi
-            git remote add "$REMOTE" "$URL"
-            git pull "$REMOTE" "$BRANCH"
+            git remote add $REMOTE $URL
+            git pull $REMOTE $BRANCH
           else
             .config/log warn '`blueprint.upstreamRemotes` objects must have the `remote`, `url`, and `branch` keys'
           fi
