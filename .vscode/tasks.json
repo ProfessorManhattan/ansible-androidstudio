@@ -92,9 +92,9 @@
       "command": "bash start.sh && task docker:build"
     },
     {
-      "label": "(docker:build:fat): Build a normal Docker container from the Dockerfile",
+      "label": "(docker:build:fat:build): Build a normal Docker container from the Dockerfile",
       "type": "shell",
-      "command": "bash start.sh && task docker:build:fat"
+      "command": "bash start.sh && task docker:build:fat:build"
     },
     {
       "label": "(docker:build:slim): Build a slim version of the Docker image",
