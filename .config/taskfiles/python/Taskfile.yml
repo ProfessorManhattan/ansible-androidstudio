@@ -47,6 +47,10 @@ tasks:
       - cmd: if type pip3 &> /dev/null; then pip3 uninstall -y -r <(pip3 freeze); fi
         ignore_error: true
 
+  prepare:
+    cmds:
+      - .config/log info 'TODO Build the project'
+
   publish:
     deps:
       - :install:python:requirements
@@ -95,3 +99,7 @@ tasks:
       - task: :fix:python
       - task: :lint:python
       - task: :python:test:pytest
+
+  verify:
+    cmds:
+      - .config/log info 'TODO Verify API key works with pypi.org'
