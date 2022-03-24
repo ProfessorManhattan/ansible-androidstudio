@@ -552,7 +552,7 @@ if [ -d .git ] && type git &> /dev/null; then
       git reset --hard origin/master
       git push --force origin synchronize || FORCE_SYNC_ERR=$?
       if [ -n "$FORCE_SYNC_ERR" ] && type task &> /dev/null; then
-        task ci:synchronize
+        NO_GITLAB_SYNCHRONIZE=true task ci:synchronize
       else
         DELAYED_CI_SYNC=true
       fi
@@ -588,7 +588,7 @@ ensureTaskfiles
 # @description Try synchronizing again (in case Task was not available yet)
 if [ "$DELAYED_CI_SYNC" == 'true' ]; then
   logger info 'Attempting to synchronize CI..'
-  NO_GITLAB_SYNCHRONIZE=true task ci:synchronize
+  task ci:synchronize
 fi
 
 # @description Run the start logic, if appropriate
