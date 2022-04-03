@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ansible-androidstudio"
-version = "1.1.14"
+version = "1.2.0"
 description = "Installs Android Studio and sets up Android SDKs on nearly any OS"
 authors = ["Brian Zalewski <brian@megabyte.space>"]
 license = "MIT"
