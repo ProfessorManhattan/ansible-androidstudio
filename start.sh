@@ -34,10 +34,10 @@ chmod +x .config/log
 
 # @description Acquire unique ID for this script
 if [ -z "$CI" ]; then
-  if type m5sum &> /dev/null; then
+  if type md5sum &> /dev/null; then
     FILE_HASH="$(md5sum "$0" | sed 's/\s.*$//')"
   else
-    FILE_HASH="$(date +%s -r "$0")"
+    FILE_HASH="$(date -r "$0" +%s)"
   fi
 else
   FILE_HASH="none"

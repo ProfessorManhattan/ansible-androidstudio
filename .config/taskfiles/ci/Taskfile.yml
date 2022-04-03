@@ -31,7 +31,8 @@ tasks:
       start: Pulling latest changes
       success: Successfully pulled latest changes
     cmds:
-      - git pull
+      - cmd: git pull
+        ignore_error: true
       - |
         if [ "$CI_COMMIT_REF_NAME" == 'synchronize' ]; then
           git checkout master
