@@ -24,10 +24,10 @@ tasks:
       - :install:modules:local
       - :install:npm:eslint
       - :install:software:unbuffer
+    desc: Fix ESLint errors automatically
     vars:
       ESLINT_LOG:
         sh: mktemp
-    desc: Fix ESLint errors automatically
     summary: |
       # Fix Errors with ESLint Automatically
 
