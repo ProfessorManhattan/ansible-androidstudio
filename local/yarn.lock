@@ -1178,9 +1178,9 @@ prettier-plugin-toml-fixed@^0.3.3:
     prettier "^1.16.0"
 
 semantic-release-config@latest:
-  version "1.3.3"
-  resolved "1.3.3"
-  integrity sha512-xUfg233UgODhYVhuck+Adq1oWCTvS1k7L351fcLs7RfrkYetClthes/K8VTgLDnX0XlAIwLAzC9URnFsOdRhfQ==
+  version "2.3.6"
+  resolved "2.3.6"
+  integrity sha512-rhcbw2TmMcBifY2Z1lqoH4bCu35Jo1r9VZFywAzRzZZFIFHnuxixqlFyzRFEz9Ar+xrYQ66Rw5zPaf/zV29cUA==
   dependencies:
     "@semantic-release/changelog" "^6.0.1"
     "@semantic-release/commit-analyzer" "^9.0.2"
