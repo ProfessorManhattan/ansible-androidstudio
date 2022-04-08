@@ -20,7 +20,7 @@ devDependencies:
   git-cz-emoji: 1.1.24
   handlebars-helpers: 0.10.0
   prettier-config-sexy-mode: 1.1.4_typescript@4.6.3
-  semantic-release-config: 1.1.23
+  semantic-release-config: 1.3.3
   typescript: 4.6.3
 
 packages:
@@ -7693,8 +7693,8 @@ packages:
     engines: {node: '>=0.12.0'}
     dev: true
 
-  /semantic-release-config/1.1.23:
-    resolution: {integrity: sha512-bgDdtXtAjybaJyufh35fRgv/ZkG0OarTc8ayRm8tHtm5NDPbmNRfG1YGHkETlt2M5MS7ocv8DSzMtREOKSQ0dg==}
+  /semantic-release-config/1.3.3:
+    resolution: {integrity: sha512-xUfg233UgODhYVhuck+Adq1oWCTvS1k7L351fcLs7RfrkYetClthes/K8VTgLDnX0XlAIwLAzC9URnFsOdRhfQ==}
     engines: {node: '>=14.18.0'}
     dependencies:
       '@semantic-release/changelog': 6.0.1_semantic-release@19.0.2
