@@ -7707,7 +7707,7 @@ packages:
       conventional-changelog-emoji-config: 1.4.8
       git-cz-emoji: 1.1.24
       semantic-release: 19.0.2
-      semantic-release-gh: 1.0.26
+      semantic-release-gh: 1.0.27
       semantic-release-npm-deprecate-old-versions: 1.3.2
       semantic-release-python: 2.5.30
       tslib: 2.3.1
@@ -7719,8 +7719,8 @@ packages:
       - supports-color
     dev: true
 
-  /semantic-release-gh/1.0.26:
-    resolution: {integrity: sha512-C3Pt7DQrHzRHNIMCaj+Vlrz78lVWBRJi5UVjBBO0Matc8KU+2ITzZ4aaFB1d5a/jAnhJUfJTvHFYt+ucV497Xw==}
+  /semantic-release-gh/1.0.27:
+    resolution: {integrity: sha512-46OckcEu+34tDnJ6h0Yb/sTN7niFAWYBoPt+LqO2jE2GDGT6gStZdhwhOOmu0j/uFlWUB1GIoG2eJp4BUxr4SQ==}
     engines: {node: '>=14.18.0'}
     dependencies:
       '@octokit/rest': 18.12.0
