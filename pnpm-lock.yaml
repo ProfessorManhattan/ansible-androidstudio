@@ -20,7 +20,7 @@ devDependencies:
   git-cz-emoji: 1.1.24
   handlebars-helpers: 0.10.0
   prettier-config-sexy-mode: 1.1.4_typescript@4.6.3
-  semantic-release-config: 2.3.10
+  semantic-release-config: 2.3.6
   typescript: 4.6.3
 
 packages:
@@ -7693,8 +7693,8 @@ packages:
     engines: {node: '>=0.12.0'}
     dev: true
 
-  /semantic-release-config/2.3.10:
-    resolution: {integrity: sha512-cnJ7WSREFCy8aFdOpbNzhSpzAppfXnrf87JFlFclfq0It019KZ4WIfH64aMoKTa5/qwBOeTRRxO+nofZtGWGmg==}
+  /semantic-release-config/2.3.6:
+    resolution: {integrity: sha512-rhcbw2TmMcBifY2Z1lqoH4bCu35Jo1r9VZFywAzRzZZFIFHnuxixqlFyzRFEz9Ar+xrYQ66Rw5zPaf/zV29cUA==}
     engines: {node: '>=14.18.0'}
     dependencies:
       '@semantic-release/changelog': 6.0.1_semantic-release@19.0.2
@@ -7707,7 +7707,7 @@ packages:
       conventional-changelog-emoji-config: 1.4.8
       git-cz-emoji: 1.1.24
       semantic-release: 19.0.2
-      semantic-release-gh: 1.0.28
+      semantic-release-gh: 1.0.29
       semantic-release-npm-deprecate-old-versions: 1.3.2
       semantic-release-python: 2.5.30
       tslib: 2.3.1
@@ -7719,8 +7719,8 @@ packages:
       - supports-color
     dev: true
 
-  /semantic-release-gh/1.0.28:
-    resolution: {integrity: sha512-X9pUcigu995W2IhBL5GdY3zsupZoR75sN8xQ9Ul673zO1Rix5S7RtSgv7dx/lBNNum690G2bffe8IKZQQbUBVA==}
+  /semantic-release-gh/1.0.29:
+    resolution: {integrity: sha512-P7+Bv24p8rV5gvRaySjDIfEDz+xvwSxx6O5jP9J9BUboHZD+wMB41HMsgV70/yv4rg5PouXeiahQnSrJuk4Tug==}
     engines: {node: '>=14.18.0'}
     dependencies:
       '@octokit/rest': 18.12.0
