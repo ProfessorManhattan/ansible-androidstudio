@@ -406,17 +406,17 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.11
     dev: true
 
-  /@microsoft/tsdoc-config/0.16.0:
-    resolution: {integrity: sha512-Xvoh97qbYMsDK5TETcIu+uLeiwU5vtqXhyIkhCQ4GWooEt08qsXGu5F5SPdcwA0ox2EVukYnY5flF26wpFnMjw==}
+  /@microsoft/tsdoc-config/0.16.1:
+    resolution: {integrity: sha512-2RqkwiD4uN6MLnHFljqBlZIXlt/SaUT6cuogU1w2ARw4nKuuppSmR0+s+NC+7kXBQykd9zzu0P4HtBpZT5zBpQ==}
     dependencies:
-      '@microsoft/tsdoc': 0.14.0
+      '@microsoft/tsdoc': 0.14.1
       ajv: 6.12.6
       jju: 1.4.0
       resolve: 1.19.0
     dev: true
 
-  /@microsoft/tsdoc/0.14.0:
-    resolution: {integrity: sha512-AXrYOAL5I2sZlYO/1JOGa5hCUemJ396OgMYR40t7gEjQtMJdJ28kbwJuQdRTKo/bmGFZuq4RsmG13I4L74xNbw==}
+  /@microsoft/tsdoc/0.14.1:
+    resolution: {integrity: sha512-6Wci+Tp3CgPt/B9B0a3J4s3yMgLNSku6w5TV6mN+61C71UqsRBv2FUibBf3tPGlNxebgPHMEUzKpb1ggE8KCKw==}
     dev: true
 
   /@nodelib/fs.scandir/2.1.5:
@@ -2920,7 +2920,7 @@ packages:
       eslint-plugin-sort-keys-fix: 1.1.2
       eslint-plugin-switch-case: 1.1.2
       eslint-plugin-toml: 0.2.0_eslint@8.13.0
-      eslint-plugin-tsdoc: 0.2.15
+      eslint-plugin-tsdoc: 0.2.16
       eslint-plugin-typescript-sort-keys: 2.1.0_0dd9be2ba5ed9805045f3fec8be848f5
       eslint-plugin-unicorn: 37.0.1_eslint@8.13.0
       eslint-plugin-unused-imports: 1.1.5_b4bf5558a2df67ff9c68643b36db2ab2
@@ -3554,11 +3554,11 @@ packages:
       - supports-color
     dev: true
 
-  /eslint-plugin-tsdoc/0.2.15:
-    resolution: {integrity: sha512-CVBX/uyfKTCD5Uho5tJGbrTfdNv+JxoCkz5tWsKp63pEEMWBIo9OGHcx0+kE8NJTv45Kx/zYl6AfbSOM9tp7DA==}
+  /eslint-plugin-tsdoc/0.2.16:
+    resolution: {integrity: sha512-F/RWMnyDQuGlg82vQEFHQtGyWi7++XJKdYNn0ulIbyMOFqYIjoJOUdE6olORxgwgLkpJxsCJpJbTHgxJ/ggfXw==}
     dependencies:
-      '@microsoft/tsdoc': 0.14.0
-      '@microsoft/tsdoc-config': 0.16.0
+      '@microsoft/tsdoc': 0.14.1
+      '@microsoft/tsdoc-config': 0.16.1
     dev: true
 
   /eslint-plugin-typescript-sort-keys/2.1.0_0dd9be2ba5ed9805045f3fec8be848f5:

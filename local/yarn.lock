@@ -768,12 +768,12 @@ eslint-plugin-toml@^0.2.0:
     toml-eslint-parser "^0.2.1"
 
 eslint-plugin-tsdoc@^0.2.14:
-  version "0.2.15"
-  resolved "0.2.15"
-  integrity sha512-CVBX/uyfKTCD5Uho5tJGbrTfdNv+JxoCkz5tWsKp63pEEMWBIo9OGHcx0+kE8NJTv45Kx/zYl6AfbSOM9tp7DA==
+  version "0.2.16"
+  resolved "0.2.16"
+  integrity sha512-F/RWMnyDQuGlg82vQEFHQtGyWi7++XJKdYNn0ulIbyMOFqYIjoJOUdE6olORxgwgLkpJxsCJpJbTHgxJ/ggfXw==
   dependencies:
-    "@microsoft/tsdoc" "0.14.0"
-    "@microsoft/tsdoc-config" "0.16.0"
+    "@microsoft/tsdoc" "0.14.1"
+    "@microsoft/tsdoc-config" "0.16.1"
 
 eslint-plugin-typescript-sort-keys@^2.1.0:
   version "2.1.0"
