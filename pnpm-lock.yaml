@@ -1654,8 +1654,8 @@ packages:
     resolution: {integrity: sha1-nlKHYrSpBmrRY6aWKjZEGOlibs4=}
     dev: true
 
-  /array-includes/3.1.4:
-    resolution: {integrity: sha512-ZTNSQkmWumEbiHO2GF4GmWxYVTiQyJy2XOTa15sdQSrvKn7l+180egQMqlrMOUMCyLMD7pmyQe4mMDUT6Behrw==}
+  /array-includes/3.1.5:
+    resolution: {integrity: sha512-iSDYZMMyTPkiFasVqfuAQnWAYcvO/SeBSCGKePoEthjp4LEMTe4uLc7b025o4jAZpHhihh8xPo99TNWUWWkGDQ==}
     engines: {node: '>= 0.4'}
     dependencies:
       call-bind: 1.0.2
@@ -1829,7 +1829,7 @@ packages:
     hasBin: true
     dependencies:
       caniuse-lite: 1.0.30001335
-      electron-to-chromium: 1.4.131
+      electron-to-chromium: 1.4.132
       escalade: 3.1.1
       node-releases: 2.0.4
       picocolors: 1.0.0
@@ -2743,8 +2743,8 @@ packages:
       sigmund: 1.0.1
     dev: true
 
-  /electron-to-chromium/1.4.131:
-    resolution: {integrity: sha512-oi3YPmaP87hiHn0c4ePB67tXaF+ldGhxvZnT19tW9zX6/Ej+pLN0Afja5rQ6S+TND7I9EuwQTT8JYn1k7R7rrw==}
+  /electron-to-chromium/1.4.132:
+    resolution: {integrity: sha512-JYdZUw/1068NWN+SwXQ7w6Ue0bWYGihvSUNNQwurvcDV/SM7vSiGZ3NuFvFgoEiCs4kB8xs3cX2an3wB7d4TBw==}
     dev: true
 
   /elegant-spinner/1.0.1:
@@ -3209,7 +3209,7 @@ packages:
       eslint:
         optional: true
     dependencies:
-      array-includes: 3.1.4
+      array-includes: 3.1.5
       array.prototype.flat: 1.3.0
       debug: 2.6.9
       doctrine: 2.1.0
