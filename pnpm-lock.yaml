@@ -773,7 +773,7 @@ packages:
       lodash: 4.17.21
       nerf-dart: 1.0.0
       normalize-url: 6.1.0
-      npm: 8.8.0
+      npm: 8.9.0
       rc: 1.2.8
       read-pkg: 5.2.0
       registry-auth-token: 4.2.1
@@ -6490,8 +6490,8 @@ packages:
       path-key: 3.1.1
     dev: true
 
-  /npm/8.8.0:
-    resolution: {integrity: sha512-MDHVaj0zrinLkshylII8pT46VCkAUqQfYRS+pyuuZZtBZRRphH/IG5HC1YbIc77AX5FmLUWGvu23Kah5fscIbw==}
+  /npm/8.9.0:
+    resolution: {integrity: sha512-4mhU5nEv7ktvHmJnM2nmWP2Zk4cCsD26imX+dvZ76HOuFUnIpU6+i1MWuoMg8N/xWHQgB0d2/ybWEGgJR9M/pw==}
     engines: {node: ^12.13.0 || ^14.15.0 || >=16}
     hasBin: true
     dev: true
