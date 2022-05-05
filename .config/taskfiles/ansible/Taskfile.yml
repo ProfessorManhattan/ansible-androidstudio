@@ -253,8 +253,10 @@ tasks:
       VAULT_PASS:
         sh: |
           if [ -f ~/.vault_pass ]; then
-            echo '--'
-          echo '--ask-vault-pass'
+            echo '--vault-pass-file ~/.vault_pass'
+          else
+            echo '--ask-vault-pass'
+          fi
     log:
       error: Error occurred while running the Ansible play
       start: Running the Ansible play locally
@@ -263,10 +265,9 @@ tasks:
       - |
         if [ ! -f .cache/playbook-quickstart-demo-called ]; then
           echo "cd $PWD" >> ~/.config/ansible-playbook-continue-command
-          echo 'task ansible:quickstart:preconfigured -- {{.INVENTORY}}' >> ~/.config/ansible-playbook-continue-command
+          echo 'task ansible:quickstart:cli -- {{.INVENTORY}}' >> ~/.config/ansible-playbook-continue-command
           mkdir .cache && touch .cache/playbook-quickstart-demo-called
-          .config/log info 'Prompting for vault password which is required if you have encrypted / bundled configurations'
-          .config/log info 'If you do not have a vault password, just enter a blank password at the vault password prompt'
+          .config/log info 'Prompting for sudo / vault password'
         fi
       - >
         {{.PYTHON_HANDLE}}ansible-playbook {{.VAULT_PASS}} -i {{.INVENTORY}} {{.PLAY_PARAMS}}
@@ -274,6 +275,8 @@ tasks:
   quickstart:demo:
     cmds:
       - task: quickstart:cli
+        vars:
+          VAULT_PASS: --ask-become-pass
     status:
       - '[ -f files/inventory-map.json ]'
 
