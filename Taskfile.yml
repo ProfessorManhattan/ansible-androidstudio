@@ -396,12 +396,26 @@ vars:
   includes:
     common:start: ./.config/taskfiles/common/Taskfile-start.yml
 env:
+  GOPATH:
+    sh: |
+      if [ -z "$GOPATH" ]; then
+        echo "$HOME/.local/go"
+      else
+        echo "$GOPATH"
+      fi
   OSTYPE:
     sh: |
       {{if (eq OS "linux")}}LINUX_FLAVOR='linux-gnu'
       LIBC=$(ldd /bin/ls | grep 'musl' | head -1 | cut -d ' ' -f1)
       if [ -n "$LIBC" ]; then LINUX_FLAVOR='linux-musl'; fi{{end}}
       echo "{{if (eq OS "linux")}}$LINUX_FLAVOR{{else}}darwin{{end}}"
+  PATH:
+    sh: |
+      PATH="$PATH:$HOME/.local/bin:$HOME/.poetry/bin:$HOME/.gem/bin:$HOME/.asdf/bin"
+      PATH="$PATH:$HOME/.local/go/bin:$HOME/go/bin"
+      PATH="$PATH:/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin"
+      PATH="$PATH:$PWD/bin"
+      echo "$PATH"
   RECORD_INSTALL:
     sh: if [ -n "$CI" ]; then echo 'true'; fi
   SENTRY_DSN:
