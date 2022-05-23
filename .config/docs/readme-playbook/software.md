@@ -6,11 +6,11 @@ This project breaks down software into a role (found in the subdirectories of th
 
 {{ role_var_chart }}
 
-We encourage you to browse through the repositories that are linked to in the table above to learn about the configuration options they support.
+We encourage you to browse through the repositories that are linked to in the table above to learn about the configuration options they support. Some of the roles are included as roles because they support configurations that rely on user-specific variables like API keys.
 
 ### Binaries
 
-A lot of nifty software does not require any configuration other than being added to the `PATH` or being installed with an installer like `brew`. For this kind of software that requires no configuration, we list the software we would like installed by the playbook as a variable in `group_vars/` or `host_vars/` as an array of keys assigned to the `software` variable ([example here](environments/prod/group_vars/desktop/vars.yml)). With those keys, we install the software using the `[professormanhattan.genericinstaller](https://galaxy.ansible.com/professormanhattan/genericinstaller)` role which determines how to install the binaries by looking up the keys against the `software_package` object ([example here](environments/prod/group_vars/all/software.yml)).
+A lot of the nifty software we install by default does not require any configuration other than being added to the `PATH` or being installed with an installer like `brew`. For this kind of software that requires no configuration, we list the software we would like installed by the playbook as a variable in `group_vars/` or `host_vars/` as an array of keys assigned to the `software` variable ([example here](environments/prod/group_vars/desktop/vars.yml)). With those keys, we install the software using the `[professormanhattan.genericinstaller](https://galaxy.ansible.com/professormanhattan/genericinstaller)` role which determines how to install the binaries by looking up the keys against the `software_package` object ([example here](environments/prod/group_vars/all/software.yml)).
 
 For your convienience, we have split the long list of single binary based software into two lists - one for CLIs and one for Applications:
 
