@@ -5855,7 +5855,7 @@ packages:
     dev: true
 
   /longest/2.0.1:
-    resolution: {integrity: sha1-eB4YMpaqlPbU2RbcM10NF676I/g=}
+    resolution: {integrity: sha512-Ajzxb8CM6WAnFjgiloPsI3bF+WCxcvhdIG3KNA2KN962+tdBsHcuQ4k4qX/EcS/2CRkcc0iAkR956Nib6aXU/Q==}
     engines: {node: '>=0.10.0'}
     dev: true
 
