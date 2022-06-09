@@ -2919,7 +2919,7 @@ packages:
       eslint-formatter-summary: 1.1.0
       eslint-plugin-angular: 4.1.0
       eslint-plugin-array-func: 3.1.7_eslint@8.17.0
-      eslint-plugin-diff: 1.0.14_eslint@8.17.0
+      eslint-plugin-diff: 1.0.15_eslint@8.17.0
       eslint-plugin-editorconfig: 3.2.0_c3c2452ec6584fc9ee3ef1d99aca08b9
       eslint-plugin-eslint-comments: 3.2.0_eslint@8.17.0
       eslint-plugin-etc: 2.0.2_eslint@8.17.0+typescript@4.7.3
@@ -3073,8 +3073,8 @@ packages:
       eslint: 8.17.0
     dev: true
 
-  /eslint-plugin-diff/1.0.14_eslint@8.17.0:
-    resolution: {integrity: sha512-koEOpwhIumxeQgTs+U3rEIYi9Hpj9sz22ZPmILsK0q6YxbOCVg8XFOhHQRN4DnGXV33Qe7KbXJtRyXrkMH+g8Q==}
+  /eslint-plugin-diff/1.0.15_eslint@8.17.0:
+    resolution: {integrity: sha512-74TAfyn7OeIS2/VUIQm4U00/A8BAE7JjB+fwr4/azAG08zhBeWSCHsw/HXUfJ/Gz2QjA8Y+p16AW/JY3mYkMqg==}
     engines: {node: '>=12.0.0'}
     peerDependencies:
       eslint: '>=6.7.0'
@@ -8248,7 +8248,7 @@ packages:
     dev: true
 
   /supports-color/2.0.0:
-    resolution: {integrity: sha1-U10EXOa2Nj+kARcIRimZXp3zJMc=}
+    resolution: {integrity: sha512-KKNVtd6pCYgPIKU4cp2733HWYCpplQhddZLBUryaAHou723x+FRzQ5Df824Fj+IyyuiQTRoub4SnIFfIcrp70g==}
     engines: {node: '>=0.8.0'}
     dev: true
     optional: true

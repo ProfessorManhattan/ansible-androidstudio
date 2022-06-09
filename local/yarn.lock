@@ -454,9 +454,9 @@ eslint-plugin-array-func@^3.1.7:
   integrity sha512-fB5TBICjHSTGToNTbCCgR8zsngpUkoCM31EMh/M/NEAyNg90i5rUuG0dnNNBML2n0BzM0nBE3sPvo2SEWf6jlA==
 
 eslint-plugin-diff@^1.0.12:
-  version "1.0.14"
-  resolved "1.0.14"
-  integrity sha512-koEOpwhIumxeQgTs+U3rEIYi9Hpj9sz22ZPmILsK0q6YxbOCVg8XFOhHQRN4DnGXV33Qe7KbXJtRyXrkMH+g8Q==
+  version "1.0.15"
+  resolved "1.0.15"
+  integrity sha512-74TAfyn7OeIS2/VUIQm4U00/A8BAE7JjB+fwr4/azAG08zhBeWSCHsw/HXUfJ/Gz2QjA8Y+p16AW/JY3mYkMqg==
 
 eslint-plugin-editorconfig@^3.2.0:
   version "3.2.0"
