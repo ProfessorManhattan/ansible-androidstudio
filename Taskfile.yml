@@ -360,7 +360,7 @@ vars:
     sh: chmod +x .config/log
   MODEL_TASKFILE: https://gitlab.com/megabyte-labs/common/shared/-/raw/master/Taskfile.yml
   NPM_KEEP_UPDATED: ''
-  NPM_PROGRAM: npm
+  NPM_PROGRAM: pnpm
   NPM_PROGRAM_LOCAL: pnpm
   NPX_HANDLE:
     sh: |
