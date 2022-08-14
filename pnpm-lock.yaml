@@ -10,15 +10,17 @@ specifiers:
   eslint-config-strict-mode: latest
   git-cz-emoji: latest
   handlebars-helpers: latest
+  prettier: ^2.7.1
   prettier-config-sexy-mode: latest
   semantic-release-config: latest
   typescript: ^4.7.4
 
 devDependencies:
   '@commitlint/config-conventional': 17.0.3
-  eslint-config-strict-mode: 1.0.53_typescript@4.7.4
+  eslint-config-strict-mode: 1.0.53_prettier@2.7.1+typescript@4.7.4
   git-cz-emoji: 1.1.24
   handlebars-helpers: 0.10.0
+  prettier: 2.7.1
   prettier-config-sexy-mode: 1.1.4_typescript@4.7.4
   semantic-release-config: 2.3.12
   typescript: 4.7.4
@@ -3056,7 +3058,7 @@ packages:
       eslint: 8.22.0
     dev: true
 
-  /eslint-config-strict-mode/1.0.53_typescript@4.7.4:
+  /eslint-config-strict-mode/1.0.53_prettier@2.7.1+typescript@4.7.4:
     resolution: {integrity: sha512-kCmkfc2arq+YGs6qhK5loPaAuq4vWJHHnF/PFhxjFY+WCH1l/TjdOZML0Wg1AmAiKnNdbCWyw65kbUXmh9iksQ==}
     engines: {node: '>=14.18.0'}
     dependencies:
@@ -3095,7 +3097,7 @@ packages:
       eslint-plugin-node: 11.1.0_eslint@8.22.0
       eslint-plugin-optimize-regex: 1.2.1
       eslint-plugin-prefer-arrow: 1.2.3_eslint@8.22.0
-      eslint-plugin-prettier: 4.2.1_aacfff61fe60ed3574397f9c14d5d962
+      eslint-plugin-prettier: 4.2.1_4684e48c5980d148e4d39aec3317fee1
       eslint-plugin-promise: 5.2.0_eslint@8.22.0
       eslint-plugin-regexp: 1.8.0_eslint@8.22.0
       eslint-plugin-rxjs: 4.0.4_eslint@8.22.0+typescript@4.7.4
@@ -3605,7 +3607,7 @@ packages:
       eslint: 8.22.0
     dev: true
 
-  /eslint-plugin-prettier/4.2.1_aacfff61fe60ed3574397f9c14d5d962:
+  /eslint-plugin-prettier/4.2.1_4684e48c5980d148e4d39aec3317fee1:
     resolution: {integrity: sha512-f/0rXLXUt0oFYs8ra4w49wYZBG5GKZpAYsJSm6rnYL5uVDjd+zowwMwVZHnAjf4edNrKpCDYfXDgmRE/Ak7QyQ==}
     engines: {node: '>=12.0.0'}
     peerDependencies:
@@ -3622,6 +3624,7 @@ packages:
     dependencies:
       eslint: 8.22.0
       eslint-config-prettier: 8.5.0_eslint@8.22.0
+      prettier: 2.7.1
       prettier-linter-helpers: 1.0.0
     dev: true
 
