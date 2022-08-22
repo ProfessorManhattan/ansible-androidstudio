@@ -296,21 +296,27 @@ tasks:
           echo "" > ~/ANSIBLE_PLAYBOOK_CONTINUE.sh
           echo "cd $PWD" >> ~/ANSIBLE_PLAYBOOK_CONTINUE.sh
           echo 'task ansible:quickstart:cli -- {{.INVENTORY}}' >> ~/ANSIBLE_PLAYBOOK_CONTINUE.sh
-          MD_TMP="$(mktemp)"
-          echo "$QUICKSTART_VAULT_SECURITY" > "$MD_TMP"
-          .config/log md "$MD_TMP"
-          .config/log info 'Read about security measures above.'
-          .config/log prompt 'What is your Ansible Vault password?'
-          export VAULT_PASS="$(.config/log password 'Enter Vault password (leave empty if there is not a password)..')"
-          echo "$VAULT_PASS" | openssl enc -aes-256-cbc -out ~/.VAULT_PASS_REMOVE_ME -pass pass:{{.PRE_SHARED_VAULT_KEY}}
+          if [ -z "$ANSIBLE_VAULT_PASS" ]; then
+            MD_TMP="$(mktemp)"
+            echo "$QUICKSTART_VAULT_SECURITY" > "$MD_TMP"
+            .config/log md "$MD_TMP"
+            .config/log info 'Read about security measures above.'
+            .config/log prompt 'What is your Ansible Vault password?'
+            export VAULT_PASS="$(.config/log password 'Enter Vault password (leave empty if there is not a password)..')"
+            echo "$VAULT_PASS" | openssl enc -aes-256-cbc -out ~/.VAULT_PASS_REMOVE_ME -pass pass:{{.PRE_SHARED_VAULT_KEY}}
+          fi
         fi
       - cmd: |
-          export ANSIBLE_VAULT_PASS="$(openssl enc -aes-256-cbc -in ~/.VAULT_PASS_REMOVE_ME -d -pass pass:{{.PRE_SHARED_VAULT_KEY}})"
+          if [ -z "$ANSIBLE_VAULT_PASS" ]; then
+            export ANSIBLE_VAULT_PASS="$(openssl enc -aes-256-cbc -in ~/.VAULT_PASS_REMOVE_ME -d -pass pass:{{.PRE_SHARED_VAULT_KEY}})"
+          else
+            .config/log info 'The `ANSIBLE_VAULT_PASS` is already set'
+          fi
           {{.PYTHON_HANDLE}}ansible-playbook -i {{.INVENTORY}} {{.PLAY_PARAMS}}
         ignore_error: true
       - sleep 5
-      - rm ~/.VAULT_PASS_REMOVE_ME
-      - rm ~/ANSIBLE_PLAYBOOK_CONTINUE.sh
+      - rm -f ~/.VAULT_PASS_REMOVE_ME
+      - rm -f ~/ANSIBLE_PLAYBOOK_CONTINUE.sh
 
   quickstart:demo:
     cmds:
@@ -339,6 +345,8 @@ tasks:
       saved, this task will guide the user through a series of prompts.
 
       {{.MAC_ADDRESS_EXPLANATION}}
+    env:
+      MAC_ADDRESS_EXPLANATION: '{{.MAC_ADDRESS_EXPLANATION}}'
     vars:
       INVENTORY_OPTIONS:
         sh: echo "\"inventories"$(find ./inventories/ -mindepth 1 -maxdepth 1 | sed 's/\.\/inventories\///' | jq -R '[.]' | jq -s -c -r 'add | join("\" \"inventories")')"\""
@@ -378,8 +386,6 @@ tasks:
         This configuration would instruct the script to automatically use the `inventories/workstation.yml`
         inventory. If your MAC address is missing, the script will open an interactive prompt and include
         the ability to save your MAC address to the file for later use.
-    env:
-      MAC_ADDRESS_EXPLANATION: '{{.MAC_ADDRESS_EXPLANATION}}'
     cmds:
       - |
         # MAC_ADDRESS="$(cat /sys/class/net/$(ip route show default | awk '/default/ {print $5}')/address)" # Does not work on macOS
