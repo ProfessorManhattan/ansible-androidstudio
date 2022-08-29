@@ -172,7 +172,7 @@
     semver "^7.3.7"
     tsutils "^3.21.0"
 
-"@typescript-eslint/eslint-plugin@^5.12.0":
+"@typescript-eslint/eslint-plugin@^5.35.1":
   version "5.35.1"
   resolved "5.35.1"
   integrity sha512-RBZZXZlI4XCY4Wzgy64vB+0slT9+yAPQRjj/HSaRwUot33xbDjF1oN9BLwOLTewoOI0jothIltZRe9uJCHf8gg==
@@ -201,7 +201,7 @@
   dependencies:
     "@typescript-eslint/utils" "5.35.1"
 
-"@typescript-eslint/parser@^5.12.0":
+"@typescript-eslint/parser@^5.35.1":
   version "5.35.1"
   resolved "5.35.1"
   integrity sha512-XL2TBTSrh3yWAsMYpKseBYTVpvudNf69rPOWXWVBI08My2JVT5jR66eTt4IgQFHA/giiKJW5dUD4x/ZviCKyGg==
@@ -293,42 +293,41 @@ eslint-ast-utils@^1.0.0:
     lodash.get "^4.4.2"
     lodash.zip "^4.2.0"
 
-eslint-config-prettier@^8.4.0:
+eslint-config-prettier@^8.5.0:
   version "8.5.0"
   resolved "8.5.0"
   integrity sha512-obmWKLUNCnhtQRKc+tmnYuQl0pFU1ibYJQ5BGhTVB08bHe9wC8qUeG7c08dj9XX+AuPj1YSGSQIHl1pnDHZR0Q==
 
 eslint-config-strict-mode@latest:
-  version "1.0.53"
-  resolved "1.0.53"
-  integrity sha512-kCmkfc2arq+YGs6qhK5loPaAuq4vWJHHnF/PFhxjFY+WCH1l/TjdOZML0Wg1AmAiKnNdbCWyw65kbUXmh9iksQ==
+  version "1.2.0"
+  resolved "1.2.0"
+  integrity sha512-J3QsWIqxWvhScst18l7zUjCzvRX6rJ5F/i84YDID1/qybkIAA51OnxRgmRWL7do9ahBetZrgwrYovyixh7N2aQ==
   dependencies:
-    "@typescript-eslint/eslint-plugin" "^5.12.0"
-    "@typescript-eslint/parser" "^5.12.0"
-    eslint "^8.9.0"
-    eslint-config-prettier "^8.4.0"
-    eslint-formatter-git-log "^0.5.3"
+    "@typescript-eslint/eslint-plugin" "^5.35.1"
+    "@typescript-eslint/parser" "^5.35.1"
+    eslint "^8.23.0"
+    eslint-config-prettier "^8.5.0"
+    eslint-formatter-git-log "^0.5.4"
     eslint-formatter-gitlab "^3.0.0"
     eslint-formatter-pretty "^4.1.0"
     eslint-formatter-summary "^1.1.0"
     eslint-plugin-angular "^4.1.0"
     eslint-plugin-array-func "^3.1.7"
-    eslint-plugin-diff "^1.0.12"
+    eslint-plugin-diff "^1.0.15"
     eslint-plugin-editorconfig "^3.2.0"
     eslint-plugin-eslint-comments "^3.2.0"
     eslint-plugin-etc "^2.0.2"
     eslint-plugin-ext "^0.1.0"
     eslint-plugin-filenames "^1.3.2"
     eslint-plugin-fp "^2.3.0"
-    eslint-plugin-functional "^4.2.0"
+    eslint-plugin-functional "^4.2.2"
     eslint-plugin-html "^6.2.0"
-    eslint-plugin-import "^2.25.4"
+    eslint-plugin-import "^2.26.0"
     eslint-plugin-jest "^25.7.0"
     eslint-plugin-jest-async "^1.0.3"
     eslint-plugin-jest-dom "^3.9.4"
     eslint-plugin-jest-formatting "^3.1.0"
-    eslint-plugin-jsdoc "^37.9.4"
-    eslint-plugin-json-schema-validator "^1.2.49"
+    eslint-plugin-jsdoc "^37.9.7"
     eslint-plugin-jsonc "^1.7.0"
     eslint-plugin-no-constructor-bind "^2.0.4"
     eslint-plugin-no-explicit-type-exports "^0.12.1"
@@ -338,24 +337,25 @@ eslint-config-strict-mode@latest:
     eslint-plugin-node "^11.1.0"
     eslint-plugin-optimize-regex "^1.2.1"
     eslint-plugin-prefer-arrow "^1.2.3"
-    eslint-plugin-prettier "^4.0.0"
+    eslint-plugin-prettier "^4.2.1"
     eslint-plugin-promise "^5.2.0"
-    eslint-plugin-regexp "^1.5.1"
+    eslint-plugin-regexp "^1.9.0"
     eslint-plugin-rxjs "^4.0.4"
-    eslint-plugin-security "^1.4.0"
+    eslint-plugin-security "^1.5.0"
     eslint-plugin-sonarjs "^0.10.0"
     eslint-plugin-sort-class-members "^1.14.1"
     eslint-plugin-sort-keys-fix "^1.1.2"
     eslint-plugin-switch-case "^1.1.2"
     eslint-plugin-toml "^0.2.0"
-    eslint-plugin-tsdoc "^0.2.14"
+    eslint-plugin-tsdoc "^0.2.16"
     eslint-plugin-typescript-sort-keys "^2.1.0"
     eslint-plugin-unicorn "^37.0.1"
     eslint-plugin-unused-imports "^1.1.5"
     eslint-plugin-woke "^1.0.1"
     eslint-plugin-yml "^0.10.1"
+    glob "^7.2.3"
     parse-gitignore "^1.0.1"
-    tslib "^2.3.1"
+    tslib latest
     yaml "^1.10.2"
 
 eslint-etc@^5.1.0:
@@ -367,7 +367,7 @@ eslint-etc@^5.1.0:
     tsutils "^3.17.1"
     tsutils-etc "^1.4.1"
 
-eslint-formatter-git-log@^0.5.3:
+eslint-formatter-git-log@^0.5.4:
   version "0.5.4"
   resolved "0.5.4"
   integrity sha512-jNAfbYsNTZgT/P/25+EPV5QjTjyKmlZU9dFR1hTF/woE9ClIyKiBXlhs0k+e5UPL5K0BbtbHoSGseWk6fdGCfQ==
@@ -446,7 +446,7 @@ eslint-plugin-array-func@^3.1.7:
   resolved "3.1.7"
   integrity sha512-fB5TBICjHSTGToNTbCCgR8zsngpUkoCM31EMh/M/NEAyNg90i5rUuG0dnNNBML2n0BzM0nBE3sPvo2SEWf6jlA==
 
-eslint-plugin-diff@^1.0.12:
+eslint-plugin-diff@^1.0.15:
   version "1.0.15"
   resolved "1.0.15"
   integrity sha512-74TAfyn7OeIS2/VUIQm4U00/A8BAE7JjB+fwr4/azAG08zhBeWSCHsw/HXUfJ/Gz2QjA8Y+p16AW/JY3mYkMqg==
@@ -514,7 +514,7 @@ eslint-plugin-fp@^2.3.0:
     lodash "^4.13.1"
     req-all "^0.1.0"
 
-eslint-plugin-functional@^4.2.0:
+eslint-plugin-functional@^4.2.2:
   version "4.2.2"
   resolved "4.2.2"
   integrity sha512-sDz61AoXnR5dIipurwqoxvZ/CHzF1FHVGR5bUR+vJjqYiRNp+Y/m2SXEpyDqYwv8zSdZpBP77g8WR3+ZiJdZpw==
@@ -530,7 +530,7 @@ eslint-plugin-html@^6.2.0:
   dependencies:
     htmlparser2 "^7.1.2"
 
-eslint-plugin-import@^2.25.4:
+eslint-plugin-import@^2.26.0:
   version "2.26.0"
   resolved "2.26.0"
   integrity sha512-hYfi3FXaM8WPLf4S1cikh/r4IxnO6zrhZbEGz2b660EJRbuxgpDS5gkCuYgGWg2xxh2rBuIr4Pvhve/7c31koA==
@@ -577,7 +577,7 @@ eslint-plugin-jest@^25.7.0:
   dependencies:
     "@typescript-eslint/experimental-utils" "^5.0.0"
 
-eslint-plugin-jsdoc@^37.9.4:
+eslint-plugin-jsdoc@^37.9.7:
   version "37.9.7"
   resolved "37.9.7"
   integrity sha512-8alON8yYcStY94o0HycU2zkLKQdcS+qhhOUNQpfONHHwvI99afbmfpYuPqf6PbLz5pLZldG3Te5I0RbAiTN42g==
@@ -590,21 +590,6 @@ eslint-plugin-jsdoc@^37.9.4:
     regextras "^0.8.0"
     semver "^7.3.5"
     spdx-expression-parse "^3.0.1"
-
-eslint-plugin-json-schema-validator@^1.2.49:
-  version "1.2.49"
-  resolved "1.2.49"
-  integrity sha512-Ib7PVrho5a08OI05VyVEkwb2u1jDWeDoHsIngaZFVi4OsnLObcW6gb3xO6VSYHUDvC5CTQans7vVjLUslcCMiA==
-  dependencies:
-    ajv "^8.0.0"
-    debug "^4.3.1"
-    eslint-utils "^3.0.0"
-    json-schema-migrate "^2.0.0"
-    jsonc-eslint-parser "^1.0.0"
-    minimatch "^3.0.4"
-    toml-eslint-parser "^0.2.1"
-    tunnel-agent "^0.6.0"
-    yaml-eslint-parser "^0.4.0"
 
 eslint-plugin-jsonc@^1.7.0:
   version "1.7.0"
@@ -675,7 +660,7 @@ eslint-plugin-prefer-arrow@^1.2.3:
   resolved "1.2.3"
   integrity sha512-J9I5PKCOJretVuiZRGvPQxCbllxGAV/viI20JO3LYblAodofBxyMnZAJ+WGeClHgANnSJberTNoFWWjrWKBuXQ==
 
-eslint-plugin-prettier@^4.0.0:
+eslint-plugin-prettier@^4.2.1:
   version "4.2.1"
   resolved "4.2.1"
   integrity sha512-f/0rXLXUt0oFYs8ra4w49wYZBG5GKZpAYsJSm6rnYL5uVDjd+zowwMwVZHnAjf4edNrKpCDYfXDgmRE/Ak7QyQ==
@@ -687,7 +672,7 @@ eslint-plugin-promise@^5.2.0:
   resolved "5.2.0"
   integrity sha512-SftLb1pUG01QYq2A/hGAWfDRXqYD82zE7j7TopDOyNdU+7SvvoXREls/+PRTY17vUXzXnZA/zfnyKgRH6x4JJw==
 
-eslint-plugin-regexp@^1.5.1:
+eslint-plugin-regexp@^1.9.0:
   version "1.9.0"
   resolved "1.9.0"
   integrity sha512-Che49IZ07w9KcKvrMiqfwBYv44VBunA4NqUo+UTLluYbCos9Du3+pnhkPTLTAx6ZoZ1Rmz7u7o2iC6g6qCuvxw==
@@ -716,7 +701,7 @@ eslint-plugin-rxjs@^4.0.4:
     tsutils "^3.0.0"
     tsutils-etc "^1.4.1"
 
-eslint-plugin-security@^1.4.0:
+eslint-plugin-security@^1.5.0:
   version "1.5.0"
   resolved "1.5.0"
   integrity sha512-hAFVwLZ/UeXrlyVD2TDarv/x00CoFVpaY0IUZhKjPjiFxqkuQVixsK4f2rxngeQOqSxi6OUjzJM/jMwKEVjJ8g==
@@ -760,7 +745,7 @@ eslint-plugin-toml@^0.2.0:
     lodash "^4.17.19"
     toml-eslint-parser "^0.2.1"
 
-eslint-plugin-tsdoc@^0.2.14:
+eslint-plugin-tsdoc@^0.2.16:
   version "0.2.16"
   resolved "0.2.16"
   integrity sha512-F/RWMnyDQuGlg82vQEFHQtGyWi7++XJKdYNn0ulIbyMOFqYIjoJOUdE6olORxgwgLkpJxsCJpJbTHgxJ/ggfXw==
@@ -952,7 +937,7 @@ eslint@^8.0.1:
     strip-json-comments "^3.1.0"
     text-table "^0.2.0"
 
-eslint@^8.9.0:
+eslint@^8.23.0:
   version "8.23.0"
   resolved "8.23.0"
   integrity sha512-pBG/XOn0MsJcKcTRLr27S5HpzQo4kLr+HjLQIyK4EiCsijDl/TB+h5uEuJU6bQ8Edvwz1XWOjpaP2qgnXGpTcA==
@@ -1040,17 +1025,6 @@ handlebars-helpers@latest:
     striptags "^3.1.0"
     to-gfm-code-block "^0.1.1"
     year "^0.2.1"
-
-jsonc-eslint-parser@^1.0.0:
-  version "1.4.1"
-  resolved "1.4.1"
-  integrity sha512-hXBrvsR1rdjmB2kQmUjf1rEIa+TqHBGMge8pwi++C+Si1ad7EjZrJcpgwym+QGK/pqTx+K7keFAtLlVNdLRJOg==
-  dependencies:
-    acorn "^7.4.1"
-    eslint-utils "^2.1.0"
-    eslint-visitor-keys "^1.3.0"
-    espree "^6.0.0"
-    semver "^6.3.0"
 
 jsonc-eslint-parser@^1.4.1:
   version "1.4.1"

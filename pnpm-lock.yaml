@@ -17,7 +17,7 @@ specifiers:
 
 devDependencies:
   '@commitlint/config-conventional': 17.1.0
-  eslint-config-strict-mode: 1.0.53_prettier@2.7.1+typescript@4.8.2
+  eslint-config-strict-mode: 1.2.0_prettier@2.7.1+typescript@4.8.2
   git-cz-emoji: 1.1.24
   handlebars-helpers: 0.10.0
   prettier: 2.7.1
@@ -1438,6 +1438,7 @@ packages:
       require-from-string: 2.0.2
       uri-js: 4.4.1
     dev: true
+    optional: true
 
   /ansi-align/3.0.1:
     resolution: {integrity: sha512-IOfwwBF5iczOjp/WeY4YxyjqAFMQoZufdQWDd19SEExbVLNXqvpzSJ/M7Za4/sCPmQ0+GRquoA7bGcINcxew6w==}
@@ -3078,9 +3079,12 @@ packages:
       eslint: 8.23.0
     dev: true
 
-  /eslint-config-strict-mode/1.0.53_prettier@2.7.1+typescript@4.8.2:
-    resolution: {integrity: sha512-kCmkfc2arq+YGs6qhK5loPaAuq4vWJHHnF/PFhxjFY+WCH1l/TjdOZML0Wg1AmAiKnNdbCWyw65kbUXmh9iksQ==}
+  /eslint-config-strict-mode/1.2.0_prettier@2.7.1+typescript@4.8.2:
+    resolution: {integrity: sha512-J3QsWIqxWvhScst18l7zUjCzvRX6rJ5F/i84YDID1/qybkIAA51OnxRgmRWL7do9ahBetZrgwrYovyixh7N2aQ==}
     engines: {node: '>=14.18.0'}
+    peerDependenciesMeta:
+      eslint:
+        optional: true
     dependencies:
       '@typescript-eslint/eslint-plugin': 5.35.1_796d3a3e9b8f2d761837f1d3f35998a5
       '@typescript-eslint/parser': 5.35.1_eslint@8.23.0+typescript@4.8.2
@@ -3107,7 +3111,6 @@ packages:
       eslint-plugin-jest-dom: 3.9.4_eslint@8.23.0
       eslint-plugin-jest-formatting: 3.1.0_eslint@8.23.0
       eslint-plugin-jsdoc: 37.9.7_eslint@8.23.0
-      eslint-plugin-json-schema-validator: 1.2.49_eslint@8.23.0
       eslint-plugin-jsonc: 1.7.0_eslint@8.23.0
       eslint-plugin-no-constructor-bind: 2.0.4
       eslint-plugin-no-explicit-type-exports: 0.12.1_796d3a3e9b8f2d761837f1d3f35998a5
@@ -3133,6 +3136,7 @@ packages:
       eslint-plugin-unused-imports: 1.1.5_3e9c13309ddbe55923a76dec7052cf71
       eslint-plugin-woke: 1.0.1_eslint@8.23.0
       eslint-plugin-yml: 0.10.1_eslint@8.23.0
+      glob: 7.2.3
       parse-gitignore: 1.0.1
       tslib: 2.4.0
       yaml: 1.10.2
@@ -3490,28 +3494,6 @@ packages:
       regextras: 0.8.0
       semver: 7.3.7
       spdx-expression-parse: 3.0.1
-    transitivePeerDependencies:
-      - supports-color
-    dev: true
-
-  /eslint-plugin-json-schema-validator/1.2.49_eslint@8.23.0:
-    resolution: {integrity: sha512-Ib7PVrho5a08OI05VyVEkwb2u1jDWeDoHsIngaZFVi4OsnLObcW6gb3xO6VSYHUDvC5CTQans7vVjLUslcCMiA==}
-    peerDependencies:
-      eslint: '>=6.0.0'
-    peerDependenciesMeta:
-      eslint:
-        optional: true
-    dependencies:
-      ajv: 8.11.0
-      debug: 4.3.4
-      eslint: 8.23.0
-      eslint-utils: 3.0.0_eslint@8.23.0
-      json-schema-migrate: 2.0.0
-      jsonc-eslint-parser: 1.4.1
-      minimatch: 3.1.2
-      toml-eslint-parser: 0.2.1
-      tunnel-agent: 0.6.0
-      yaml-eslint-parser: 0.4.1
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -5647,12 +5629,6 @@ packages:
     resolution: {integrity: sha512-xyFwyhro/JEof6Ghe2iz2NcXoj2sloNsWr/XsERDK/oiPCfaNhl5ONfp+jQdAZRQQ0IJWNzH9zIZF7li91kh2w==}
     dev: true
 
-  /json-schema-migrate/2.0.0:
-    resolution: {integrity: sha512-r38SVTtojDRp4eD6WsCqiE0eNDt4v1WalBXb9cyZYw9ai5cGtBwzRNWjHzJl38w6TxFkXAIA7h+fyX3tnrAFhQ==}
-    dependencies:
-      ajv: 8.11.0
-    dev: true
-
   /json-schema-traverse/0.4.1:
     resolution: {integrity: sha512-xbbCH5dCYU5T8LcEhhuh7HJ88HXuW3qsI3Y0zOZFKfZEHcpWiHU/Jxzk629Brsab/mMiHQti9wMP+845RPe3Vg==}
     dev: true
@@ -5660,6 +5636,7 @@ packages:
   /json-schema-traverse/1.0.0:
     resolution: {integrity: sha512-NM8/P9n3XjXhIZn1lLhkFaACTOURQXjWhV4BA/RnOv8xvgqtqpAX9IO4mRQxSx1Rlo4tqzeqb0sOlruaOy3dug==}
     dev: true
+    optional: true
 
   /json-schema/0.4.0:
     resolution: {integrity: sha512-es94M3nTIfsEPisRafak+HDLfHXnKBhV3vU5eqPcS3flIWqcxJWgXHXiey3YrpaNsanY5ei1VoYEbOzijuq9BA==}
@@ -7751,6 +7728,7 @@ packages:
     resolution: {integrity: sha512-Xf0nWe6RseziFMu+Ap9biiUbmplq6S9/p+7w7YXP/JBHhrUDDUhwa+vANyubuqfZWTveU//DYVGsDG7RKL/vEw==}
     engines: {node: '>=0.10.0'}
     dev: true
+    optional: true
 
   /requireindex/1.1.0:
     resolution: {integrity: sha512-LBnkqsDE7BZKvqylbmn7lTIVdpx4K/QCduRATpO5R+wtPmky/a8pN1bO2D6wXppn1497AJF9mNjqAXr6bdl9jg==}
@@ -8709,12 +8687,6 @@ packages:
     dependencies:
       tslib: 1.14.1
       typescript: 4.8.2
-    dev: true
-
-  /tunnel-agent/0.6.0:
-    resolution: {integrity: sha512-McnNiV1l8RYeY8tBgEpuodCC1mLUdbSN+CYBL7kJsJNInOP8UjDDEwdk6Mw60vdLLrr5NHKZhMAOSrR2NZuQ+w==}
-    dependencies:
-      safe-buffer: 5.2.1
     dev: true
 
   /type-check/0.4.0:
