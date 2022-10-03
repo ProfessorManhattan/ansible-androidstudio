@@ -17,7 +17,7 @@ specifiers:
 
 devDependencies:
   '@commitlint/config-conventional': 17.1.0
-  eslint-config-strict-mode: 1.2.0_prettier@2.7.1+typescript@4.8.4
+  eslint-config-strict-mode: 1.2.1_prettier@2.7.1+typescript@4.8.4
   git-cz-emoji: 1.1.24
   handlebars-helpers: 0.10.0
   prettier: 2.7.1
@@ -211,7 +211,7 @@ packages:
     resolution: {integrity: sha512-j2vJGnkopRzH+ykJ8h68wrHnEUmtK//E723jjixiAl/PPf6FhqY/vYRcMVlNydRKQjQsTsYEjpx+DZMIvnGk/g==}
     engines: {node: '>=6.9.0'}
     dependencies:
-      core-js-pure: 3.25.3
+      core-js-pure: 3.25.4
       regenerator-runtime: 0.13.9
     dev: true
 
@@ -403,7 +403,7 @@ packages:
     dependencies:
       '@types/istanbul-lib-coverage': 2.0.4
       '@types/istanbul-reports': 3.0.1
-      '@types/node': 18.7.23
+      '@types/node': 18.8.0
       '@types/yargs': 15.0.14
       chalk: 4.1.2
     dev: true
@@ -1051,7 +1051,7 @@ packages:
     dependencies:
       '@types/http-cache-semantics': 4.0.1
       '@types/keyv': 3.1.4
-      '@types/node': 18.7.23
+      '@types/node': 18.8.0
       '@types/responselike': 1.0.0
     dev: true
 
@@ -1103,7 +1103,7 @@ packages:
   /@types/keyv/3.1.4:
     resolution: {integrity: sha512-BQ5aZNSCpj7D6K2ksrRCTmKRLEpnPvWDiLPfoGyhZ++8YtiK9d/3DBKPJgry359X/P1PfruyYwvnvwFjuEiEIg==}
     dependencies:
-      '@types/node': 18.7.23
+      '@types/node': 18.8.0
     dev: true
 
   /@types/mdast/3.0.10:
@@ -1125,8 +1125,8 @@ packages:
     dev: true
     optional: true
 
-  /@types/node/18.7.23:
-    resolution: {integrity: sha512-DWNcCHolDq0ZKGizjx2DZjR/PqsYwAcYUJmfMWqtVU2MBMG5Mo+xFZrhGId5r/O5HOuMPyQEcM6KUBp5lBZZBg==}
+  /@types/node/18.8.0:
+    resolution: {integrity: sha512-u+h43R6U8xXDt2vzUaVP3VwjjLyOJk6uEciZS8OSyziUQGOwmk+l+4drxcsDboHXwyTaqS1INebghmWMRxq3LA==}
     dev: true
 
   /@types/normalize-package-data/2.4.1:
@@ -1140,7 +1140,7 @@ packages:
   /@types/responselike/1.0.0:
     resolution: {integrity: sha512-85Y2BjiufFzaMIlvJDvTTB8Fxl2xfLo4HgmHzVBz08w4wDePCTjYw66PdrolO0kzli3yam/YCgRufyo1DdQVTA==}
     dependencies:
-      '@types/node': 18.7.23
+      '@types/node': 18.8.0
     dev: true
 
   /@types/retry/0.12.0:
@@ -2528,12 +2528,12 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /core-js-pure/3.25.3:
-    resolution: {integrity: sha512-T/7qvgv70MEvRkZ8p6BasLZmOVYKzOaWNBEHAU8FmveCJkl4nko2quqPQOmy6AJIp5MBanhz9no3A94NoRb0XA==}
+  /core-js-pure/3.25.4:
+    resolution: {integrity: sha512-qRbgm0ADrsNTU66UcW47YMJjXm+ShhUP2gkoEoAShT2BHO3cb5gGqLtmWpjnM6Wx9h5hMSF4uZ+jEV/8+4KCsw==}
     dev: true
 
-  /core-js/3.25.3:
-    resolution: {integrity: sha512-y1hvKXmPHvm5B7w4ln1S4uc9eV/O5+iFExSRUimnvIph11uaizFR8LFMdONN8hG3P2pipUfX4Y/fR8rAEtcHcQ==}
+  /core-js/3.25.4:
+    resolution: {integrity: sha512-JDLxg61lFPFYQ7U0HKoyKwVUV63VbbVTb/K73Yf+k4Mf4ZBZxCjfyrWZjTk1ZM7ZrgFSqhSIOmuzYAxG2f/reQ==}
     dev: true
 
   /core-util-is/1.0.3:
@@ -3083,8 +3083,8 @@ packages:
       eslint: 8.24.0
     dev: true
 
-  /eslint-config-strict-mode/1.2.0_prettier@2.7.1+typescript@4.8.4:
-    resolution: {integrity: sha512-J3QsWIqxWvhScst18l7zUjCzvRX6rJ5F/i84YDID1/qybkIAA51OnxRgmRWL7do9ahBetZrgwrYovyixh7N2aQ==}
+  /eslint-config-strict-mode/1.2.1_prettier@2.7.1+typescript@4.8.4:
+    resolution: {integrity: sha512-hlzSWJVrbCYKmHLdbXa278svY3A5K7prJndl2YnkpvH2ED8mzZbd1VXorGCOfolt5JngJal0Tq/WrNIkPj46ZA==}
     engines: {node: '>=14.18.0'}
     peerDependenciesMeta:
       eslint:
@@ -3216,7 +3216,7 @@ packages:
     engines: {node: '>=12'}
     dependencies:
       chalk: 4.1.2
-      core-js: 3.25.3
+      core-js: 3.25.4
     optionalDependencies:
       np: 7.6.2
     transitivePeerDependencies:
