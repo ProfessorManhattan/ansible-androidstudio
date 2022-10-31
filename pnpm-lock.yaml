@@ -299,7 +299,7 @@ packages:
       '@types/node': 14.18.33
       chalk: 4.1.2
       cosmiconfig: 7.0.1
-      cosmiconfig-typescript-loader: 4.1.1_30426e062a60145f33ada27f2111796e
+      cosmiconfig-typescript-loader: 4.2.0_30426e062a60145f33ada27f2111796e
       lodash: 4.17.21
       resolve-from: 5.0.0
       ts-node: 10.9.1_c386e8b7aaca4ce6057194a7156a4f00
@@ -2548,8 +2548,8 @@ packages:
     resolution: {integrity: sha512-ZQBvi1DcpJ4GDqanjucZ2Hj3wEO5pZDS89BWbkcrvdxksJorwUDDZamX9ldFkp9aw2lmBDLgkObEA4DWNJ9FYQ==}
     dev: true
 
-  /cosmiconfig-typescript-loader/4.1.1_30426e062a60145f33ada27f2111796e:
-    resolution: {integrity: sha512-9DHpa379Gp0o0Zefii35fcmuuin6q92FnLDffzdZ0l9tVd3nEobG3O+MZ06+kuBvFTSVScvNb/oHA13Nd4iipg==}
+  /cosmiconfig-typescript-loader/4.2.0_30426e062a60145f33ada27f2111796e:
+    resolution: {integrity: sha512-NkANeMnaHrlaSSlpKGyvn2R4rqUDeE/9E5YHx+b4nwo0R8dZyAqcih8/gxpCZvqWP9Vf6xuLpMSzSgdVEIM78g==}
     engines: {node: '>=12', npm: '>=6'}
     peerDependencies:
       '@types/node': '*'
