@@ -64,7 +64,7 @@
   </a>
 </div>
 
-> </br><h4 align="center">**An Ansible role that installs Android Studio and sets up Android SDKs on nearly any OS**</h4></br>
+> <br/><h4 align="center">**An Ansible role that installs Android Studio and sets up Android SDKs on nearly any OS**</h4><br/>
 
 <!--TERMINALIZE![terminalizer_title](https://gitlab.com/megabyte-labs/ansible-roles/androidstudio* **github**: /raw/master/docs/demo.gif
 * **gitlab**: /-/raw/master/docs/demo.gif)TERMINALIZE-->
