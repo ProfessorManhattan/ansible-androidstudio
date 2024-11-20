@@ -1,0 +1,838 @@
+{
+  "@context": "https://openvex.dev/ns/v0.2.0",
+  "@id": "https://openvex.dev/docs/public/vex-a6f4b841b7d00f336ee97b319a88f68f0b9e5a15bfd48c688e60d49db8450f63",
+  "author": "Unknown Author",
+  "timestamp": "2024-10-07T15:59:09.427334+02:00",
+  "last_updated": "2024-10-07T15:59:11.09445+02:00",
+  "version": 69,
+  "statements": [
+    {
+      "vulnerability": {
+        "name": "CVE-2020-7598"
+      },
+      "timestamp": "2024-10-07T15:59:09.427334+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/minimist@1.2.5"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2020-7753"
+      },
+      "timestamp": "2024-10-07T15:59:09.452593+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/trim@0.0.1"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2021-23337"
+      },
+      "timestamp": "2024-10-07T15:59:09.477602+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/lodash-es@4.5.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2021-23337"
+      },
+      "timestamp": "2024-10-07T15:59:09.503636+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/lodash-template@4.5.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2021-23337"
+      },
+      "timestamp": "2024-10-07T15:59:09.528111+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/lodash.template@4.5.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2021-23337"
+      },
+      "timestamp": "2024-10-07T15:59:09.552344+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/lodash@4.5.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2021-43307"
+      },
+      "timestamp": "2024-10-07T15:59:09.576708+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/semver-regex@3.1.3"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2021-44906"
+      },
+      "timestamp": "2024-10-07T15:59:09.600062+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/minimist@1.2.5"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2022-0624"
+      },
+      "timestamp": "2024-10-07T15:59:09.624338+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/parse-path@4.0.3"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2022-25858"
+      },
+      "timestamp": "2024-10-07T15:59:09.648221+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/terser@4.8.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2022-25858"
+      },
+      "timestamp": "2024-10-07T15:59:09.672436+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/terser@5.12.1"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2022-25881"
+      },
+      "timestamp": "2024-10-07T15:59:09.697394+02:00",
+      "products": [
+        {
+          "@id": "pkg:maven/org.webjars.npm/http-cache-semantics@4.1.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2022-25881"
+      },
+      "timestamp": "2024-10-07T15:59:09.721389+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/http-cache-semantics@4.1.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2022-25883"
+      },
+      "timestamp": "2024-10-07T15:59:09.746051+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/semver@5.7.1"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2022-25883"
+      },
+      "timestamp": "2024-10-07T15:59:09.770093+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/semver@6.3.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2022-25883"
+      },
+      "timestamp": "2024-10-07T15:59:09.794654+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/semver@7.0.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2022-25883"
+      },
+      "timestamp": "2024-10-07T15:59:09.819222+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/semver@7.3.6"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2022-29244"
+      },
+      "timestamp": "2024-10-07T15:59:09.843468+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/npm@8.6.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2022-31051"
+      },
+      "timestamp": "2024-10-07T15:59:09.867522+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/semantic-release@19.0.2"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2022-31129"
+      },
+      "timestamp": "2024-10-07T15:59:09.892012+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/moment@2.29.2"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2022-31129"
+      },
+      "timestamp": "2024-10-07T15:59:09.916917+02:00",
+      "products": [
+        {
+          "@id": "pkg:nuget/Moment.js@2.29.2"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2022-33987"
+      },
+      "timestamp": "2024-10-07T15:59:09.94176+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/got@11.8.3"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2022-37599"
+      },
+      "timestamp": "2024-10-07T15:59:09.966324+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/loader-utils@1.4.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2022-37599"
+      },
+      "timestamp": "2024-10-07T15:59:09.990082+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/loader-utils@2.0.2"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2022-37601"
+      },
+      "timestamp": "2024-10-07T15:59:10.015884+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/loader-utils@1.4.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2022-37601"
+      },
+      "timestamp": "2024-10-07T15:59:10.04067+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/loader-utils@2.0.2"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2022-37603"
+      },
+      "timestamp": "2024-10-07T15:59:10.064935+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/loader-utils@1.4.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2022-37603"
+      },
+      "timestamp": "2024-10-07T15:59:10.089002+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/loader-utils@2.0.2"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2022-38900"
+      },
+      "timestamp": "2024-10-07T15:59:10.114028+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/decode-uri-component@0.2.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2022-41713"
+      },
+      "timestamp": "2024-10-07T15:59:10.138164+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/deep-object-diff@1.1.7"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2022-46175"
+      },
+      "timestamp": "2024-10-07T15:59:10.163275+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/json5@1.0.1"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2022-46175"
+      },
+      "timestamp": "2024-10-07T15:59:10.187586+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/json5@2.2.1"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-22467"
+      },
+      "timestamp": "2024-10-07T15:59:10.2125+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/moment@2.29.2"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-22467"
+      },
+      "timestamp": "2024-10-07T15:59:10.236967+02:00",
+      "products": [
+        {
+          "@id": "pkg:nuget/Moment.js@2.29.2"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-25166"
+      },
+      "timestamp": "2024-10-07T15:59:10.26104+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/@sideway/formula@3.0.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-26115"
+      },
+      "timestamp": "2024-10-07T15:59:10.285186+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/word-wrap@1.2.3"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-26136"
+      },
+      "timestamp": "2024-10-07T15:59:10.309799+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/tough-cookie@2.5.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-26136"
+      },
+      "timestamp": "2024-10-07T15:59:10.334362+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/tough-cookie@3.0.1"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-26136"
+      },
+      "timestamp": "2024-10-07T15:59:10.359477+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/tough-cookie@4.0.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-26159"
+      },
+      "timestamp": "2024-10-07T15:59:10.384374+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/follow-redirects@1.14.9"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-28155"
+      },
+      "timestamp": "2024-10-07T15:59:10.409049+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/@cypress/request@2.88.2"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-28155"
+      },
+      "timestamp": "2024-10-07T15:59:10.432616+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/request@2.88.2"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-42282"
+      },
+      "timestamp": "2024-10-07T15:59:10.456546+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/ip@1.1.5"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-44270"
+      },
+      "timestamp": "2024-10-07T15:59:10.481112+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/postcss@7.0.39"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-45133"
+      },
+      "timestamp": "2024-10-07T15:59:10.505483+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/@babel/traverse@7.17.9"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-45133"
+      },
+      "timestamp": "2024-10-07T15:59:10.531146+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/babel-traverse@7.17.9"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-45857"
+      },
+      "timestamp": "2024-10-07T15:59:10.555128+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/axios@0.25.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-46234"
+      },
+      "timestamp": "2024-10-07T15:59:10.579412+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/browserify-sign@4.2.1"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2024-28849"
+      },
+      "timestamp": "2024-10-07T15:59:10.604239+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/follow-redirects@1.14.9"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2024-28863"
+      },
+      "timestamp": "2024-10-07T15:59:10.629592+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/node-tar@6.1.11"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2024-28863"
+      },
+      "timestamp": "2024-10-07T15:59:10.653551+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/tar@6.1.11"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2024-29041"
+      },
+      "timestamp": "2024-10-07T15:59:10.678558+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/express@4.17.3"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2024-29180"
+      },
+      "timestamp": "2024-10-07T15:59:10.702575+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/webpack-dev-middleware@3.7.3"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2024-29415"
+      },
+      "timestamp": "2024-10-07T15:59:10.726852+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/ip@1.1.5"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2024-37890"
+      },
+      "timestamp": "2024-10-07T15:59:10.751307+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/ws@7.5.7"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2024-37890"
+      },
+      "timestamp": "2024-10-07T15:59:10.77525+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/ws@8.5.0"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2024-4067"
+      },
+      "timestamp": "2024-10-07T15:59:10.799623+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/micromatch@3.1.10"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2024-4067"
+      },
+      "timestamp": "2024-10-07T15:59:10.823919+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/micromatch@4.0.5"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2024-4068"
+      },
+      "timestamp": "2024-10-07T15:59:10.849015+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/braces@2.3.2"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2024-4068"
+      },
+      "timestamp": "2024-10-07T15:59:10.873398+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/braces@3.0.2"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2024-42459"
+      },
+      "timestamp": "2024-10-07T15:59:10.897895+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/elliptic@6.5.4"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2024-42460"
+      },
+      "timestamp": "2024-10-07T15:59:10.921898+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/elliptic@6.5.4"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2024-42461"
+      },
+      "timestamp": "2024-10-07T15:59:10.946406+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/elliptic@6.5.4"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2024-43796"
+      },
+      "timestamp": "2024-10-07T15:59:10.970609+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/express@4.17.3"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2024-43799"
+      },
+      "timestamp": "2024-10-07T15:59:10.995442+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/send@0.17.2"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2024-43800"
+      },
+      "timestamp": "2024-10-07T15:59:11.019553+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/serve-static@1.14.2"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2024-45296"
+      },
+      "timestamp": "2024-10-07T15:59:11.044828+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/path-to-regexp@0.1.7"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2024-45590"
+      },
+      "timestamp": "2024-10-07T15:59:11.069849+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/body-parser@1.19.2"
+        }
+      ],
+      "status": "under_investigation"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2024-47764"
+      },
+      "timestamp": "2024-10-07T15:59:11.094453+02:00",
+      "products": [
+        {
+          "@id": "pkg:npm/cookie@0.4.2"
+        }
+      ],
+      "status": "under_investigation"
+    }
+  ]
+}
